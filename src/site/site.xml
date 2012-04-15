@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="UADetector - detects easily over 190 different browsers" xmlns="http://maven.apache.org/DECORATION/1.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/DECORATION/1.0.0 http://maven.apache.org/xsd/decoration-1.0.0.xsd">
+	<publishDate position="right" />
+	<version position="right" />
+
+	<body>
+		<breadcrumbs>
+			<item name="UADetector" href="http://uadetector.sourceforge.net/" />
+		</breadcrumbs>
+
+		<menu name="Overview">
+			<item name="About" href="index.html" />
+			<item name="Usage" href="usage.html" />
+			<item name="Changes" href="changes.html" />
+			<item name="License" href="license.html" />
+			<item name="Team" href="team-list.html" />
+			<item name="Third Party Licenses" href="third-party-licenses.html" />
+		</menu>
+
+		<menu ref="modules" />
+
+		<menu name="Project Documentation">
+			<item name="Dependency Convergence" href="dependency-convergence.html" />
+			<item name="Dependency Management" href="dependency-management.html" />
+			<item name="Issue Tracking" href="issue-tracking.html" />
+			<item name="Plugin Management" href="plugin-management.html" />
+			<item name="Plugins" href="plugins.html" />
+			<item name="Summary" href="project-summary.html" />
+			<item name="Source Repository" href="source-repository.html" />
+		</menu>
+
+	</body>
+
+	<poweredBy>
+		<logo name="Analyze UA" href="http://user-agent-string.info/" img="http://user-agent-string.info/pub/img/logo.png" />
+		<logo name="Hosted by SourceForge" href="http://www.sourceforge.net/" img="http://sourceforge.net/sflogo.php?group_id=16035&amp;type=1" />
+	</poweredBy>
+
+	<custom>
+		<fluidoSkin>
+			<topBarEnabled>false</topBarEnabled>
+			<googleSearch>
+				<sitesearch />
+			</googleSearch>
+			<sideBarEnabled>true</sideBarEnabled>
+			<searchEnabled>true</searchEnabled>
+			<sourceLineNumbersEnabled>true</sourceLineNumbersEnabled>
+		</fluidoSkin>
+	</custom>
+
+	<skin>
+		<groupId>org.apache.maven.skins</groupId>
+		<artifactId>maven-fluido-skin</artifactId>
+		<version>1.2.1</version>
+	</skin>
+
+</project>

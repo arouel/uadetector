@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="UADetector - detects easily over 190 different browsers" xmlns="http://maven.apache.org/DECORATION/1.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/DECORATION/1.0.0 http://maven.apache.org/xsd/decoration-1.0.0.xsd">
+	<publishDate position="right" />
+	<version position="right" />
+	<body>
+		<breadcrumbs>
+			<item name="UADetector" href="http://uadetector.sourceforge.net/" />
+		</breadcrumbs>
+
+		<menu name="Overview">
+			<item name="About" href="index.html" />
+			<item name="License" href="license.html" />
+			<item name="Team" href="team-list.html" />
+		</menu>
+
+		<menu name="Documentation">
+			<item name="Dependencies" href="dependencies.html" />
+			<item name="JavaDocs" href="apidocs/index.html" />
+			<item name="Source Xref" href="xref/index.html" />
+		</menu>
+
+		<menu name="Reports">
+			<item name="Cobertura" href="cobertura/index.html" />
+			<item name="CPD" href="cpd.html" />
+			<item name="FindBugs" href="findbugs.html" />
+			<item name="PMD" href="pmd.html" />
+		</menu>
+
+	</body>
+
+	<custom>
+		<fluidoSkin>
+			<topBarEnabled>false</topBarEnabled>
+			<googleSearch>
+				<sitesearch />
+			</googleSearch>
+			<sideBarEnabled>true</sideBarEnabled>
+			<searchEnabled>true</searchEnabled>
+			<sourceLineNumbersEnabled>true</sourceLineNumbersEnabled>
+		</fluidoSkin>
+	</custom>
+
+	<skin>
+		<groupId>org.apache.maven.skins</groupId>
+		<artifactId>maven-fluido-skin</artifactId>
+		<version>1.2.1</version>
+	</skin>
+
+</project>

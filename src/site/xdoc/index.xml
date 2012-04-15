@@ -1,0 +1,86 @@
+<?xml version="1.0"?>
+<document xmlns="http://maven.apache.org/XDOC/2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/XDOC/2.0 http://maven.apache.org/xsd/xdoc-2.0.xsd">
+	<properties>
+		<title>About</title>
+		<author>André Rouél</author>
+	</properties>
+	<body>
+
+		<section name="What is UADetector?">
+			<p>
+				UADetector is a library to detect over 190 different desktop and mobile browsers and 130 other User-Agents like
+				feed readers and email clients.
+			</p>
+			<p>
+				The UADetector library is a free, portable Java library to analyze User-Agent strings. The goal of this library is
+				to detect the type and the associated operating system of a client like "Mobile Safari 5.1" on "iOS".
+			</p>
+			<p>
+				UADetector not only detects user-agents such as browser, but also robots as Google Bot or Yahoo Bot.
+			</p>
+			<p>
+				The UADetector library is divided into two modules. The
+				<a href="modules/uadetector-core/index.html">core module</a>
+				includes the API and implementation to read the detection information and the functions to identify User-Agents. The
+				<a href="modules/uadetector-resources/index.html">resources module</a>
+				contains the database with the necessary identification information and a service factory class to get simply
+				preconfigured UserAgentStringParser singletons. This library will be published monthly, is integration-tested
+				against the core module and is guaranteed to run against the defined core.
+			</p>
+		</section>
+		<section name="Features">
+			<div class="feature">
+				<img src="./images/feature.png" alt="Devices" />
+				<span class="title">Detects over 190 different browsers</span>
+				<p>This library detects over 190 different desktop and mobile browsers and 130 other User-Agents like feed readers,
+					multimedia players and email clients.
+				</p>
+			</div>
+			<div class="feature">
+				<img src="./images/feature.png" alt="The Robots" />
+				<span class="title">Identifies over 900 robots</span>
+				<p>On the Internet many robots are on their way to examine sites. A large number of robots can be detected with this
+					library.
+				</p>
+			</div>
+			<div class="feature">
+				<img src="./images/feature.png" alt="Monthly updated" />
+				<span class="title">Monthly updated</span>
+				<p>Each month a new version of the resources module will be published so you can always detect the latest
+					User-Agents.
+				</p>
+			</div>
+			<div class="feature">
+				<img src="./images/feature.png" alt="Extremely tested" />
+				<span class="title">Extremely tested</span>
+				<p>
+					All classes in this library have been especially tested. The unit tests have a 100%
+					<a href="modules/uadetector-core/cobertura/index.html">branch coverage</a>
+					and 98%
+					<a href="modules/uadetector-core/cobertura/index.html">line coverage</a>
+					. In addition, many integration tests performed regularly.
+				</p>
+			</div>
+			<br class="clear" />
+		</section>
+		<section name="How can I help?">
+			<p>
+				UADetector is an open source tool and welcomes contributions.
+			</p>
+			<ul>
+				<li>
+					Report bugs, feature requests and other issues in the
+					<a href="./issue-tracking.html">issue tracking</a>
+					application.
+				</li>
+				<li>Help with the documentation by pointing out areas that are lacking or unclear, and if you are so inclined,
+					submitting patches to correct it. You can quickly contribute rough thoughts by forking this project on GitHub and
+					SourceForge, or you can volunteer to help collate and organize information that is already there.
+				</li>
+			</ul>
+			<p>Your participation in the community is much appreciated!</p>
+		</section>
+
+	</body>
+</document>

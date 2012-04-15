@@ -1,0 +1,50 @@
+.clear {
+	clear: both;
+	margin: 0;
+}
+
+h2 {
+	margin-bottom: 0.5em;
+}
+
+div.section {
+	margin-bottom: 1.5em;
+	max-width: 60em;
+}
+
+div.feature {
+	clear: none;
+	float: left;
+	height: 200px;
+	margin: 5px;
+	width: 380px;
+}
+
+div.feature .title {
+	color: #08C;
+	display: inline-block;
+	font-size: 1.6em;
+	font-weight: bold;
+	height: 25px;
+	margin-left: 7px;
+	margin-right: 7px;
+	width: 366px;
+	font-size: 1.4em;
+}
+
+div.feature img {
+	height: 100px;
+	margin: 0;
+	width: 380px;
+}
+
+div.feature p {
+	display: inline-block;
+	height: 75px;
+	margin-left: 7px;
+	margin-right: 7px;
+}
+
+a.poweredBy {
+	display: block;
+}

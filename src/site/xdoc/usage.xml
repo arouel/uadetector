@@ -79,27 +79,18 @@ public class HelloServlet extends HttpServlet {
 	}
 
 }]]></source>
+			<h3>Demo</h3>
 			<p>
-				A hello world demo can be found under
-				<a href="demo">demo</a>
+				To use the library it must be added to your classpath. With Apache Maven you easily add the following to your
+				<code>pom.xml</code>
 				.
+				<br />
+				You can also find a hello world demo in the Source Content Management System (SCM) under
+				<a target="_blank"
+					href="https://sourceforge.net/p/uadetector/code/ci/b07e03f255e3374e557295279ba90bace2223d55/tree/examples/helloworld/">examples/helloworld</a>
+				. Just try to load the source code from the SCM.
 			</p>
-			<h3>How can I help?</h3>
-			<p>
-				UADetector is an open source tool and welcomes contributions.
-			</p>
-			<ul>
-				<li>
-					Report bugs, feature requests and other issues in the
-					<a href="./issue-tracking.html">issue tracking</a>
-					application.
-				</li>
-				<li>Help with the documentation by pointing out areas that are lacking or unclear, and if you are so inclined,
-					submitting patches to correct it. You can quickly contribute rough thoughts by forking this project on GitHub and
-					Sourceforge, or you can volunteer to help collate and organize information that is already there.
-				</li>
-			</ul>
-			<p>Your participation in the community is much appreciated!</p>
+			<p>Your participation in this project is much appreciated!</p>
 		</section>
 	</body>
 </document>

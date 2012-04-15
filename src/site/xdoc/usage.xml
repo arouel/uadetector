@@ -81,10 +81,6 @@ public class HelloServlet extends HttpServlet {
 }]]></source>
 			<h3>Demo</h3>
 			<p>
-				To use the library it must be added to your classpath. With Apache Maven you easily add the following to your
-				<code>pom.xml</code>
-				.
-				<br />
 				You can also find a hello world demo in the Source Content Management System (SCM) under
 				<a target="_blank"
 					href="https://sourceforge.net/p/uadetector/code/ci/b07e03f255e3374e557295279ba90bace2223d55/tree/examples/helloworld/">examples/helloworld</a>

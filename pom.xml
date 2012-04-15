@@ -44,8 +44,8 @@
 
 	<distributionManagement>
 		<site>
-			<id>uadetector.sf.net</id>
-			<url>sftp://web.sourceforge.net/home/project-web/uadetector/htdocs</url>
+			<id>shell.sourceforge.net</id>
+			<url>scp://shell.sourceforge.net/home/project-web/uadetector/htdocs</url>
 		</site>
 	</distributionManagement>
 
@@ -74,6 +74,7 @@
 		<maven-site-plugin.version>3.0</maven-site-plugin.version>
 		<maven-surefire-plugin.version>2.9</maven-surefire-plugin.version>
 		<maven-toolchains-plugin.version>1.0</maven-toolchains-plugin.version>
+		<wagon-ssh.version>2.2</wagon-ssh.version>
 
 		<!-- Dependencies -->
 		<commons-logging.version>1.1.1</commons-logging.version>
@@ -133,6 +134,14 @@
 	</dependencyManagement>
 
 	<build>
+
+		<extensions>
+			<extension>
+				<groupId>org.apache.maven.wagon</groupId>
+				<artifactId>wagon-ssh</artifactId>
+				<version>${wagon-ssh.version}</version>
+			</extension>
+		</extensions>
 
 		<pluginManagement>
 			<plugins>

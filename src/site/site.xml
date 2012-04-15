@@ -12,7 +12,6 @@
 		<menu name="Overview">
 			<item name="About" href="index.html" />
 			<item name="Usage" href="usage.html" />
-			<item name="Changes" href="changes.html" />
 			<item name="License" href="license.html" />
 			<item name="Team" href="team-list.html" />
 			<item name="Third Party Licenses" href="third-party-licenses.html" />

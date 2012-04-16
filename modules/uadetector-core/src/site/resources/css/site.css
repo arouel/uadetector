@@ -7,6 +7,11 @@ h2 {
 	margin-bottom: 0.5em;
 }
 
+ul.breadcrumb {
+	white-space: nowrap;
+	overflow: hidden;
+}
+
 div.section {
 	margin-bottom: 1.5em;
 	max-width: 60em;

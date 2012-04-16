@@ -2,16 +2,15 @@
 <document xmlns="http://maven.apache.org/XDOC/2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/XDOC/2.0 http://maven.apache.org/xsd/xdoc-2.0.xsd">
 	<properties>
-		<title>Usage</title>
+		<title>Usage of UADetector</title>
 		<author email="andre.rouel@googlemail.com">André Rouél</author>
 	</properties>
 	<body>
 		<section name="Usage">
 			<h3>Requirements</h3>
 			<p>
-				The library depends on the Simple Logging Facade for Java (also known as SLF4J) to allowing the end user to plug
-				in the
-				desired logging framework at deployment time.
+				This library depends on the Simple Logging Facade for Java (also known as SLF4J) to allowing the end user to plug
+				in the desired logging framework at deployment time.
 			</p>
 			<p>
 				This means that if the UADetector library is used also the SLF4J-API must exist in the classpath.

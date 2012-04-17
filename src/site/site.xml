@@ -40,7 +40,7 @@
 		<fluidoSkin>
 			<topBarEnabled>false</topBarEnabled>
 			<googleSearch>
-				<sitesearch />
+				<sitesearch>uadetector.sourceforge.net</sitesearch>
 			</googleSearch>
 			<sideBarEnabled>true</sideBarEnabled>
 			<searchEnabled>true</searchEnabled>

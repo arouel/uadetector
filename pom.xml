@@ -40,7 +40,7 @@
 	<scm>
 		<connection>scm:git://git.code.sf.net/p/uadetector/code</connection>
 		<developerConnection>scm:git:ssh://belor@git.code.sf.net/p/uadetector/code</developerConnection>
-		<url>https://sourceforge.net/p/uadetector/code/commit_browser</url>
+		<url>http://sourceforge.net/p/uadetector/code/?branch=ref%2Fmaster</url>
 	</scm>
 
 	<modules>

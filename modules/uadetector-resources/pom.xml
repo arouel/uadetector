@@ -16,7 +16,7 @@
 	</properties>
 
 	<artifactId>uadetector-resources</artifactId>
-	<version>2012.04</version>
+	<version>2012.04-SNAPSHOT</version>
 
 	<name>UADetector :: Resources</name>
 	<description>This package contains a verified version of the data file from http://user-agent-string.info. During the verification process the data are checked for ability to run against the current implementation. The goal is to provide frequently updated resources for detection of user agents without having to release a new implementation.</description>

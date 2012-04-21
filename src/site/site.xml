@@ -5,6 +5,12 @@
 	<version position="right" />
 
 	<body>
+
+		<head>
+			<meta name="keywords"
+				content="user-agent detection, detect user-agents, detect robots, detect mobile browser, mobile browser detection, mobile phone detection, java" />
+		</head>
+
 		<breadcrumbs>
 			<item name="UADetector" href="http://uadetector.sourceforge.net/" />
 		</breadcrumbs>

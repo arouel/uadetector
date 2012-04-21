@@ -3,7 +3,14 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/DECORATION/1.3.0 http://maven.apache.org/xsd/decoration-1.3.0.xsd">
 	<publishDate position="right" />
 	<version position="right" />
+
 	<body>
+
+		<head>
+			<meta name="keywords"
+				content="user-agent detection, detect user-agents, detect robots, detect mobile browser, mobile browser detection, mobile phone detection, java" />
+		</head>
+
 		<breadcrumbs>
 			<item name="UADetector" href="http://uadetector.sourceforge.net/" />
 		</breadcrumbs>

@@ -132,18 +132,10 @@ public class VersionNumberTest {
 		src.add(new VersionNumber("001", "0", "0"));
 		src.add(new VersionNumber("100"));
 
-		for (VersionNumber versionNumber : src) {
-			System.out.println(versionNumber.toVersionString());
-		}
-		System.out.println("----");
 		final List<VersionNumber> scrambled = Arrays.asList(new VersionNumber[src.size()]);
 		Collections.copy(scrambled, src);
 		Collections.shuffle(scrambled);
 		Collections.sort(scrambled);
-
-		for (VersionNumber versionNumber : scrambled) {
-			System.out.println(versionNumber.toVersionString());
-		}
 
 		Assert.assertEquals(src, scrambled);
 	}

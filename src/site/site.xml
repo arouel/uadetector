@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="UADetector - detects easily over 190 different browsers" xmlns="http://maven.apache.org/DECORATION/1.0.0"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/DECORATION/1.0.0 http://maven.apache.org/xsd/decoration-1.0.0.xsd">
+<project name="UADetector - detects easily over 190 different browsers" xmlns="http://maven.apache.org/DECORATION/1.3.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/DECORATION/1.3.0 http://maven.apache.org/xsd/decoration-1.3.0.xsd">
 	<publishDate position="right" />
 	<version position="right" />
 
@@ -36,9 +36,12 @@
 		<logo name="Hosted by SourceForge" href="http://www.sourceforge.net/" img="http://sourceforge.net/sflogo.php?group_id=16035&amp;type=1" />
 	</poweredBy>
 
+	<googleAnalyticsAccountId>UA-31080371-1</googleAnalyticsAccountId>
+
 	<custom>
 		<fluidoSkin>
 			<topBarEnabled>false</topBarEnabled>
+			<googleAnalytics />
 			<googleSearch>
 				<sitesearch>uadetector.sourceforge.net</sitesearch>
 			</googleSearch>

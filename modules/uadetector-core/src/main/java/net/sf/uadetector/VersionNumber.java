@@ -19,6 +19,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import net.sf.uadetector.internal.util.AlphanumComparator;
 
 /**
  * The {@code VersionNumber} class represents the version number of an operating system or User-Agent.<br>
@@ -30,9 +34,14 @@ import java.util.List;
 public final class VersionNumber implements ReadableVersionNumber {
 
 	/**
+	 * Empty extension of a version number
+	 */
+	public static final String EMPTY_EXTENSION = "";
+
+	/**
 	 * Empty group or category of a version number
 	 */
-	public static final int EMPTY_GROUP = Integer.MIN_VALUE;
+	public static final String EMPTY_GROUP = "";
 
 	/**
 	 * Defines an empty or not set version number
@@ -50,19 +59,68 @@ public final class VersionNumber implements ReadableVersionNumber {
 	private static final int MIN_GROUP_SIZE = 3;
 
 	/**
+	 * Regular expression to parse groups and suffix (extension) of a version number
+	 */
+	private static final Pattern VERSIONNUMBER = Pattern.compile("^((\\d+)((\\.\\d+)+)?)(.*)");
+
+	/**
+	 * Regular expression to find only numerical values ​​in strings
+	 */
+	private static final Pattern NUMERIC = Pattern.compile("\\d+");
+
+	/**
+	 * Checks a string that only numerical values ​​are present. Negative numbers are not included.
+	 * 
+	 * @param text
+	 *            string to be tested
+	 * @return {@code true} if only numeric characters are present, otherwise {@code false}
+	 */
+	private static final boolean isNumeric(final String text) {
+		return NUMERIC.matcher(text).matches();
+	}
+
+	/**
+	 * Interprets a string with version information.
+	 * 
+	 * @param version
+	 *            version as string
+	 * @return an object of {@code VersionNumber}, never {@code null}
+	 */
+	public static VersionNumber parseVersion(final String version) {
+		if (version == null) {
+			throw new IllegalArgumentException("Argument 'version' must not be null.");
+		}
+
+		final VersionNumber result;
+		final Matcher matcher = VERSIONNUMBER.matcher(version);
+		if (matcher.find()) {
+			final String[] split = matcher.group(1).split("\\.");
+			final List<String> segments = new ArrayList<String>(split.length);
+			for (final String element : split) {
+				segments.add(element);
+			}
+			final String ext = matcher.group(5);
+			result = new VersionNumber(segments, ext);
+		} else {
+			result = new VersionNumber(new ArrayList<String>(0), version);
+		}
+		return result;
+	}
+
+	/**
 	 * Replaces all {@code null} values in the given list of groups with {@code VersionNumber#EMPTY_GROUP}.
 	 * 
 	 * @param groups
 	 *            list of numbers of a version number
 	 * @return a new list of groups without {@code null} values
 	 */
-	public static List<Integer> replaceNullValueWithEmptyGroup(final List<Integer> groups) {
+	public static List<String> replaceNullValueWithEmptyGroup(final List<String> groups) {
 		if (groups == null) {
 			throw new IllegalArgumentException("Argument 'groups' must not be null.");
 		}
 
-		final List<Integer> result = new ArrayList<Integer>(groups.size());
-		for (final Integer group : groups) {
+		final List<String> result = new ArrayList<String>(groups.size());
+		for (final String group : groups) {
 			if (group == null) {
 				result.add(EMPTY_GROUP);
 			} else {
@@ -83,17 +141,17 @@ public final class VersionNumber implements ReadableVersionNumber {
 	 *            list of numbers of a version number
 	 * @return a formated version string
 	 */
-	private static String toVersionString(final List<Integer> groups) {
+	private static String toVersionString(final List<String> groups) {
 		final StringBuilder builder = new StringBuilder(6);
 		int count = 0;
-		for (final Integer category : groups) {
-			if (category < 0) {
+		for (final String segment : groups) {
+			if (EMPTY_GROUP.equals(segment)) {
 				break;
 			} else {
 				if (count > 0) {
 					builder.append(SEPARATOR);
 				}
-				builder.append(category);
+				builder.append(segment);
 			}
 			count++;
 		}
@@ -103,7 +161,62 @@ public final class VersionNumber implements ReadableVersionNumber {
 	/**
 	 * Groups, segments or categories of the version number
 	 */
-	private final List<Integer> groups;
+	private final List<String> groups;
+
+	/**
+	 * Extension or suffix of the version number consisting of alphanumeric and special characters
+	 */
+	private final String extension;
+
+	/**
+	 * Constructs a {@code VersionNumber} with the given numeric groups, such as major, minor and bugfix number.
+	 * 
+	 * @param groups
+	 *            list of numbers of a version number
+	 * @throws IllegalArgumentException
+	 *             if the given argument is {@code null}
+	 * @throws IllegalArgumentException
+	 *             if one of the segments of the version number is smaller than 0 and not empty
+	 */
+	public VersionNumber(final List<String> groups) {
+		this(groups, EMPTY_EXTENSION);
+	}
+
+	/**
+	 * Constructs a {@code VersionNumber} with the given numeric groups, such as major, minor and bugfix number and
+	 * extension.
+	 * 
+	 * @param groups
+	 *            list of numbers of a version number
+	 * @param extension
+	 *            extension of a version number
+	 * @throws IllegalArgumentException
+	 *             if one of the given arguments is {@code null}
+	 * @throws IllegalArgumentException
+	 *             if one of the groups of the version number is not empty or a positive number
+	 */
+	public VersionNumber(final List<String> groups, final String extension) {
+		if (groups == null) {
+			throw new IllegalArgumentException("Argument 'groups' must not be null.");
+		}
+		if (extension == null) {
+			throw new IllegalArgumentException("Argument 'extension' must not be null.");
+		}
+
+		final List<String> segments = replaceNullValueWithEmptyGroup(groups);
+		int i = 0;
+		for (final String segment : segments) {
+			if (!EMPTY_GROUP.equals(segment)) {
+				if (!isNumeric(segment)) {
+					throw new IllegalArgumentException("The segment on position " + i + " (" + segment + ") must be a number.");
+				}
+			}
+			i++;
+		}
+
+		this.groups = segments;
+		this.extension = extension;
+	}
 
 	/**
 	 * Constructs a {@code VersionNumber} with the given major number and without a minor and bugfix number.
@@ -113,7 +226,7 @@ public final class VersionNumber implements ReadableVersionNumber {
 	 * @throws IllegalArgumentException
 	 *             if the major segment is smaller than 0 and not empty
 	 */
-	public VersionNumber(final int major) {
+	public VersionNumber(final String major) {
 		this(major, EMPTY_GROUP);
 	}
 
@@ -127,9 +240,21 @@ public final class VersionNumber implements ReadableVersionNumber {
 	 * @throws IllegalArgumentException
 	 *             if the major or minor segment is smaller than 0 and not empty
 	 */
-	public VersionNumber(final int major, final int minor) {
+	public VersionNumber(final String major, final String minor) {
 		this(major, minor, EMPTY_GROUP);
 	}
+
+	// /**
+	// * Constructs a {@code VersionNumber} without a more processable (atomizable) string.
+	// *
+	// * @param extension
+	// * extension of a version number
+	// * @throws IllegalArgumentException
+	// * if the given argument is {@code null}
+	// */
+	// public VersionNumber(final String extension) {
+	// this(EMPTY_GROUP, EMPTY_GROUP, EMPTY_GROUP, extension);
+	// }
 
 	/**
 	 * Constructs a {@code VersionNumber} with the given major, minor and bugfix number.
@@ -143,35 +268,28 @@ public final class VersionNumber implements ReadableVersionNumber {
 	 * @throws IllegalArgumentException
 	 *             if the major, minor or bugfix segment is smaller than 0 and not empty
 	 */
-	public VersionNumber(final int major, final int minor, final int bugfix) {
-		this(Arrays.asList(major, minor, bugfix));
+	public VersionNumber(final String major, final String minor, final String bugfix) {
+		this(major, minor, bugfix, EMPTY_EXTENSION);
 	}
 
 	/**
-	 * Constructs a {@code VersionNumber} with the given numeric groups, such as major, minor and bugfix number.
+	 * Constructs a {@code VersionNumber} with the given major, minor and bugfix number and extension.
 	 * 
-	 * @param groups
-	 *            list of numbers of a version number
+	 * @param major
+	 *            major group of the version number
+	 * @param minor
+	 *            minor group of the version number
+	 * @param bugfix
+	 *            bugfix group of the version number
+	 * @param extension
+	 *            extension of a version number
 	 * @throws IllegalArgumentException
-	 *             if the given argument is {@code null}
+	 *             if the major, minor or bugfix segment is smaller than 0 and not empty
 	 * @throws IllegalArgumentException
-	 *             if one of the segments of the version number is smaller than 0 and not empty
+	 *             if argument 'extension' is {@code null}
 	 */
-	public VersionNumber(final List<Integer> groups) {
-		if (groups == null) {
-			throw new IllegalArgumentException("Argument 'groups' must not be null.");
-		}
-
-		final List<Integer> segments = replaceNullValueWithEmptyGroup(groups);
-		int i = 0;
-		for (final Integer segment : segments) {
-			if (segment != EMPTY_GROUP && segment < 0) {
-				throw new IllegalArgumentException("The segment on position " + i + " in the list must be EMPTY_GROUP, 0 or greater.");
-			}
-			i++;
-		}
-
-		this.groups = segments;
+	public VersionNumber(final String major, final String minor, final String bugfix, final String extension) {
+		this(Arrays.asList(major, minor, bugfix), extension);
 	}
 
 	/**
@@ -190,22 +308,16 @@ public final class VersionNumber implements ReadableVersionNumber {
 			result = -1;
 		} else {
 			final int length = groups.size() < other.getGroups().size() ? groups.size() : other.getGroups().size();
-			int g1;
-			int g2;
-			for (int i = 0; i < length; i++) {
-				g1 = Integer.valueOf(groups.get(i));
-				g2 = Integer.valueOf(other.getGroups().get(i));
-				if (g1 > g2) {
-					result = 1;
-					break;
-				}
-				if (g1 < g2) {
-					result = -1;
-					break;
-				}
-			}
+			final AlphanumComparator comparator = new AlphanumComparator();
+			result = comparator.compare(toVersionString(groups.subList(0, length)), toVersionString(other.getGroups().subList(0, length)));
 			if (result == 0) {
 				result = groups.size() > other.getGroups().size() ? 1 : groups.size() < other.getGroups().size() ? -1 : 0;
+			}
+			if (result == 0) {
+				result = extension.compareTo(other.getExtension());
+			}
+			if (result == 0) {
+				result = comparator.compare(toVersionString(), other.toVersionString());
 			}
 		}
 		return result;
@@ -231,6 +343,9 @@ public final class VersionNumber implements ReadableVersionNumber {
 		if (!groups.equals(other.groups)) {
 			return false;
 		}
+		if (!extension.equals(other.extension)) {
+			return false;
+		}
 		return true;
 	}
 
@@ -238,8 +353,18 @@ public final class VersionNumber implements ReadableVersionNumber {
 	 * Gets the bugfix category of the version number.
 	 */
 	@Override
-	public int getBugfix() {
+	public String getBugfix() {
 		return groups.get(2);
+	}
+
+	/**
+	 * Gets the extension of the version number.
+	 * 
+	 * @return extension of the version number
+	 */
+	@Override
+	public String getExtension() {
+		return extension;
 	}
 
 	/**
@@ -251,7 +376,7 @@ public final class VersionNumber implements ReadableVersionNumber {
 	 * @return an unmodifiable view of the of the version number groups
 	 */
 	@Override
-	public List<Integer> getGroups() {
+	public List<String> getGroups() {
 		return Collections.unmodifiableList(groups);
 	}
 
@@ -259,7 +384,7 @@ public final class VersionNumber implements ReadableVersionNumber {
 	 * Gets the major category of the version number.
 	 */
 	@Override
-	public int getMajor() {
+	public String getMajor() {
 		return groups.get(0);
 	}
 
@@ -267,7 +392,7 @@ public final class VersionNumber implements ReadableVersionNumber {
 	 * Gets the major category of the version number.
 	 */
 	@Override
-	public int getMinor() {
+	public String getMinor() {
 		return groups.get(1);
 	}
 
@@ -276,6 +401,7 @@ public final class VersionNumber implements ReadableVersionNumber {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + groups.hashCode();
+		result = prime * result + extension.hashCode();
 		return result;
 	}
 
@@ -286,7 +412,7 @@ public final class VersionNumber implements ReadableVersionNumber {
 	 */
 	@Override
 	public String toString() {
-		return "VersionNumber [groups=" + groups + "]";
+		return "VersionNumber [groups=" + groups + ", extension=" + extension + "]";
 	}
 
 	/**
@@ -296,7 +422,7 @@ public final class VersionNumber implements ReadableVersionNumber {
 	 */
 	@Override
 	public String toVersionString() {
-		return toVersionString(groups);
+		return toVersionString(groups) + extension;
 	}
 
 }

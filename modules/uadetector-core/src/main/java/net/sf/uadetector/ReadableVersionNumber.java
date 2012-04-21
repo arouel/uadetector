@@ -32,7 +32,14 @@ public interface ReadableVersionNumber extends Comparable<ReadableVersionNumber>
 	 * 
 	 * @return bugfix segment
 	 */
-	int getBugfix();
+	String getBugfix();
+
+	/**
+	 * Gets the extension of the version number.
+	 * 
+	 * @return extension of the version number
+	 */
+	String getExtension();
 
 	/**
 	 * Get all groups (or categories) of this version number. The first element in the list is the major category,
@@ -42,21 +49,21 @@ public interface ReadableVersionNumber extends Comparable<ReadableVersionNumber>
 	 * 
 	 * @return a list of segments of the version number
 	 */
-	List<Integer> getGroups();
+	List<String> getGroups();
 
 	/**
 	 * Gets the major category of the version number.
 	 * 
 	 * @return major segment
 	 */
-	int getMajor();
+	String getMajor();
 
 	/**
 	 * Gets the minor category of the version number.
 	 * 
 	 * @return minor segment
 	 */
-	int getMinor();
+	String getMinor();
 
 	/**
 	 * Gets this version number as string.

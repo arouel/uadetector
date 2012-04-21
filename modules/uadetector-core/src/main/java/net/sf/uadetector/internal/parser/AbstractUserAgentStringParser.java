@@ -20,6 +20,7 @@ import java.util.regex.Matcher;
 
 import net.sf.uadetector.UserAgent;
 import net.sf.uadetector.UserAgentStringParser;
+import net.sf.uadetector.VersionNumber;
 import net.sf.uadetector.internal.data.Data;
 import net.sf.uadetector.internal.data.domain.Browser;
 import net.sf.uadetector.internal.data.domain.BrowserPattern;
@@ -39,6 +40,8 @@ public abstract class AbstractUserAgentStringParser implements UserAgentStringPa
 	 */
 	private static void examineAsBrowser(final String userAgent, final UserAgent.Builder builder, final Data data) {
 		Matcher matcher;
+		VersionNumber version;
+		String formattedVersion;
 		for (final Entry<BrowserPattern, Browser> entry : data.getPatternBrowserMap().entrySet()) {
 			matcher = entry.getKey().getPattern().matcher(userAgent);
 			if (matcher.find()) {
@@ -46,8 +49,9 @@ public abstract class AbstractUserAgentStringParser implements UserAgentStringPa
 				entry.getValue().copyTo(builder);
 
 				// try to get the browser version from the first subgroup
-				final String browserVersion = (matcher.groupCount() > 0) ? matcher.group(1) : "";
-				builder.setName(builder.getFamily() + (browserVersion.isEmpty() ? browserVersion : " " + browserVersion));
+				version = VersionNumber.parseVersion(matcher.groupCount() > 0 ? matcher.group(1) : "");
+				formattedVersion = VersionNumber.UNKNOWN.equals(version) ? "" : " " + version.toVersionString();
+				builder.setName(builder.getFamily() + formattedVersion);
 				break;
 			}
 		}

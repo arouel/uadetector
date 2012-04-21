@@ -3,7 +3,7 @@
 <uasdata>
 	<description>
 		<label>Data (format xml) for UASparser - http://user-agent-string.info/download/UASparser</label>
-		<version>20120417-02</version>
+		<version>20120420-01</version>
 		<checksum type="MD5">http://user-agent-string.info/rpc/get_data.php?format=xml&amp;md5=y</checksum>
 		<checksum type="SHA1">http://user-agent-string.info/rpc/get_data.php?format=xml&amp;sha1=y</checksum>
 	</description>
@@ -3258,6 +3258,16 @@
 				<url_company><![CDATA[http://grt.ge/]]></url_company>
 				<icon>bot.png</icon>
 				<bot_info_url>/list-of-ua/bot-detail?bot=HolmesBot</bot_info_url>
+			</robot>
+			<robot>
+				<id>7380</id>
+				<useragent><![CDATA[Mozilla/5.0 (compatible; HomeTags/1.0; +http://www.hometags.nl/bot)]]></useragent>
+				<family>HomeTags</family>
+				<name>HomeTags/1.0</name>
+				<company><![CDATA[HomeTags.nl]]></company>
+				<url_company><![CDATA[http://www.hometags.nl/]]></url_company>
+				<icon>bot.png</icon>
+				<bot_info_url>/list-of-ua/bot-detail?bot=HomeTags</bot_info_url>
 			</robot>
 			<robot>
 				<id>281</id>
@@ -8694,6 +8704,16 @@
 				<useragent><![CDATA[Y!J-BRW/1.0 crawler (http://help.yahoo.co.jp/help/jp/search/indexing/indexing-15.html)]]></useragent>
 				<family>Yahoo! JAPAN</family>
 				<name>Y!J-BRW/1.0</name>
+				<company><![CDATA[Yahoo! Inc]]></company>
+				<url_company><![CDATA[http://www.yahoo.com/]]></url_company>
+				<icon>bot_yahoo!slurp.png</icon>
+				<bot_info_url>/list-of-ua/bot-detail?bot=Yahoo! JAPAN</bot_info_url>
+			</robot>
+			<robot>
+				<id>7381</id>
+				<useragent><![CDATA[Y!J-BRJ/YATS crawler (http://listing.yahoo.co.jp/support/faq/int/other/other_001.html)]]></useragent>
+				<family>Yahoo! JAPAN</family>
+				<name>Y!J-BRJ/YATS</name>
 				<company><![CDATA[Yahoo! Inc]]></company>
 				<url_company><![CDATA[http://www.yahoo.com/]]></url_company>
 				<icon>bot_yahoo!slurp.png</icon>

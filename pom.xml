@@ -316,6 +316,37 @@
 
 	<profiles>
 		<profile>
+			<id>generate-sitemap</id>
+			<activation>
+				<property>
+					<name>sitemap</name>
+					<value>true</value>
+				</property>
+			</activation>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>net.sf.sitemap-plugin</groupId>
+						<artifactId>sitemap-plugin</artifactId>
+						<version>0.0.2-SNAPSHOT</version>
+						<executions>
+							<execution>
+								<id>generate-sitemap</id>
+								<goals>
+									<goal>sitemap</goal>
+								</goals>
+								<inherited>false</inherited>
+								<configuration>
+									<changeFreq>weekly</changeFreq>
+									<validate>true</validate>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+		<profile>
 			<id>repo-sign-artifacts</id>
 			<activation>
 				<property>

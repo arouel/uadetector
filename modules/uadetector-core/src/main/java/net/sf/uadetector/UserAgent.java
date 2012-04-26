@@ -16,10 +16,8 @@
 package net.sf.uadetector;
 
 /**
- * {@code UserAgent} is an immutable entity that represents the informations
- * about web-based client applications like Web browsers, search engines or
- * crawlers (spiders) as well as mobile phones, screen readers and braille
- * browsers.
+ * {@code UserAgent} is an immutable entity that represents the informations about web-based client applications like
+ * Web browsers, search engines or crawlers (spiders) as well as mobile phones, screen readers and braille browsers.
  * 
  * @author André Rouél
  */
@@ -41,8 +39,10 @@ public final class UserAgent implements ReadableUserAgent {
 
 		private String url = EMPTY.url;
 
+		private VersionNumber versionNumber = VersionNumber.UNKNOWN;
+
 		public UserAgent build() {
-			return new UserAgent(family, name, operatingSystem, producer, producerUrl, type, url);
+			return new UserAgent(family, name, operatingSystem, producer, producerUrl, type, url, versionNumber);
 		}
 
 		@Override
@@ -78,6 +78,11 @@ public final class UserAgent implements ReadableUserAgent {
 		@Override
 		public String getUrl() {
 			return url;
+		}
+
+		@Override
+		public VersionNumber getVersionNumber() {
+			return versionNumber;
 		}
 
 		public Builder setFamily(final String family) {
@@ -144,9 +149,17 @@ public final class UserAgent implements ReadableUserAgent {
 			return this;
 		}
 
+		public Builder setVersionNumber(final VersionNumber versionNumber) {
+			if (versionNumber == null) {
+				throw new IllegalArgumentException("Argument 'versionNumber' must not be null.");
+			}
+			this.versionNumber = versionNumber;
+			return this;
+		}
+
 	}
 
-	public static final UserAgent EMPTY = new UserAgent("unknown", "unknown", OperatingSystem.EMPTY, "", "", "", "");
+	public static final UserAgent EMPTY = new UserAgent("unknown", "unknown", OperatingSystem.EMPTY, "", "", "", "", VersionNumber.UNKNOWN);
 
 	private final String family;
 
@@ -162,8 +175,10 @@ public final class UserAgent implements ReadableUserAgent {
 
 	private final String url;
 
+	private final VersionNumber versionNumber;
+
 	public UserAgent(final String family, final String name, final OperatingSystem operatingSystem, final String producer,
-			final String producerUrl, final String type, final String url) {
+			final String producerUrl, final String type, final String url, final VersionNumber versionNumber) {
 
 		if (family == null) {
 			throw new IllegalArgumentException("Argument 'family' must not be null.");
@@ -186,6 +201,9 @@ public final class UserAgent implements ReadableUserAgent {
 		if (url == null) {
 			throw new IllegalArgumentException("Argument 'url' must not be null.");
 		}
+		if (versionNumber == null) {
+			throw new IllegalArgumentException("Argument 'versionNumber' must not be null.");
+		}
 
 		this.family = family;
 		this.name = name;
@@ -194,6 +212,7 @@ public final class UserAgent implements ReadableUserAgent {
 		this.producerUrl = producerUrl;
 		this.type = type;
 		this.url = url;
+		this.versionNumber = versionNumber;
 	}
 
 	@Override
@@ -227,6 +246,9 @@ public final class UserAgent implements ReadableUserAgent {
 			return false;
 		}
 		if (!url.equals(other.url)) {
+			return false;
+		}
+		if (!versionNumber.equals(other.versionNumber)) {
 			return false;
 		}
 		return true;
@@ -268,6 +290,11 @@ public final class UserAgent implements ReadableUserAgent {
 	}
 
 	@Override
+	public VersionNumber getVersionNumber() {
+		return versionNumber;
+	}
+
+	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
@@ -278,6 +305,7 @@ public final class UserAgent implements ReadableUserAgent {
 		result = prime * result + producerUrl.hashCode();
 		result = prime * result + type.hashCode();
 		result = prime * result + url.hashCode();
+		result = prime * result + versionNumber.hashCode();
 		return result;
 	}
 
@@ -298,6 +326,8 @@ public final class UserAgent implements ReadableUserAgent {
 		builder.append(type);
 		builder.append(", url=");
 		builder.append(url);
+		builder.append(", versionNumber=");
+		builder.append(versionNumber);
 		builder.append("]");
 		return builder.toString();
 	}

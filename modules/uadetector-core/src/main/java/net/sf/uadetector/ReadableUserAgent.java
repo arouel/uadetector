@@ -31,4 +31,6 @@ public interface ReadableUserAgent {
 
 	String getUrl();
 
+	VersionNumber getVersionNumber();
+
 }

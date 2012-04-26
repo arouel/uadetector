@@ -15,6 +15,7 @@
  ******************************************************************************/
 package net.sf.uadetector;
 
+import net.sf.uadetector.internal.data.domain.Robot;
 import net.sf.uadetector.internal.parser.OnlineUserAgentStringParserImpl;
 
 import org.junit.Assert;
@@ -30,24 +31,23 @@ public class OnlineUserAgentStringParserTest {
 			.getOnlineUserAgentStringParser();
 
 	@Test
-	public void testChrome13Parsing() {
-		final UserAgent.Builder builder = new UserAgent.Builder();
-		builder.setProducerUrl("http://www.google.com/");
-		builder.setProducer("Google Inc.");
-		builder.setFamily("Chrome");
-		builder.setName("Chrome 13.0.782.112");
-		builder.setOperatingSystem(new OperatingSystem("Mac OS X", "Mac OS X 10.6 Snow Leopard", "Apple Computer, Inc.",
-				"http://www.apple.com/", "http://www.apple.com/macosx/"));
-		builder.setType("Browser");
-		builder.setUrl("http://www.google.com/chrome");
-		final UserAgent expected = builder.build();
-		final UserAgent unknownAgentString = parser
+	public void parse_CHROME13() throws Exception {
+		final OperatingSystem os = new OperatingSystem("Mac OS X", "Mac OS X 10.6 Snow Leopard", "Apple Computer, Inc.",
+				"http://www.apple.com/", "http://www.apple.com/macosx/");
+		final UserAgent ua = parser
 				.parse("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_6_8) AppleWebKit/535.1 (KHTML, like Gecko) Chrome/13.0.782.112 Safari/535.1");
-		Assert.assertEquals(expected, unknownAgentString);
+		Assert.assertEquals("Chrome", ua.getFamily());
+		Assert.assertEquals("Chrome", ua.getName());
+		Assert.assertEquals(os, ua.getOperatingSystem());
+		Assert.assertEquals("Google Inc.", ua.getProducer());
+		Assert.assertEquals("http://www.google.com/", ua.getProducerUrl());
+		Assert.assertEquals("Browser", ua.getType());
+		Assert.assertEquals("http://www.google.com/chrome", ua.getUrl());
+		Assert.assertEquals("13.0.782.112", ua.getVersionNumber().toVersionString());
 	}
 
 	@Test
-	public void testEmptyUserAgentStringParsing() {
+	public void parse_empty() throws Exception {
 		final UserAgent.Builder builder = new UserAgent.Builder();
 		final UserAgent expected = builder.build();
 		final UserAgent unknownAgentString = parser.parse("");
@@ -55,46 +55,53 @@ public class OnlineUserAgentStringParserTest {
 	}
 
 	@Test
-	public void testGooglebotParsing() {
-		final UserAgent.Builder builder = new UserAgent.Builder();
-		builder.setProducerUrl("http://www.google.com/");
-		builder.setProducer("Google Inc.");
-		builder.setFamily("Googlebot");
-		builder.setName("Googlebot/2.1");
-		builder.setUrl("");
-		final UserAgent expected = builder.build();
-		final UserAgent unknownAgentString = parser.parse("Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)");
-		Assert.assertEquals(expected, unknownAgentString);
+	public void parse_FIREFOX6() throws Exception {
+		final OperatingSystem os = new OperatingSystem("Mac OS X", "Mac OS X 10.7 Lion", "Apple Computer, Inc.", "http://www.apple.com/",
+				"http://www.apple.com/macosx/");
+		final UserAgent ua = parser.parse("Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7; rv:6.0) Gecko/20100101 Firefox/6.0");
+		Assert.assertEquals("Firefox", ua.getFamily());
+		Assert.assertEquals("Firefox", ua.getName());
+		Assert.assertEquals(os, ua.getOperatingSystem());
+		Assert.assertEquals("Mozilla Foundation", ua.getProducer());
+		Assert.assertEquals("http://www.mozilla.org/", ua.getProducerUrl());
+		Assert.assertEquals("Browser", ua.getType());
+		Assert.assertEquals("http://www.firefox.com/", ua.getUrl());
+		Assert.assertEquals("6.0", ua.getVersionNumber().toVersionString());
 	}
 
 	@Test
-	public void testSiteSuckerParsing() {
-		final UserAgent.Builder builder = new UserAgent.Builder();
-		builder.setProducerUrl("");
-		builder.setProducer("Rick Cranisky");
-		builder.setFamily("SiteSucker");
-		builder.setName("SiteSucker 1.6.9");
-		builder.setOperatingSystem(new OperatingSystem("Mac OS", "Mac OS", "Apple Computer, Inc.", "http://www.apple.com/",
-				"http://en.wikipedia.org/wiki/Mac_OS"));
-		builder.setType("Offline Browser");
-		builder.setUrl("http://www.sitesucker.us/");
-		final UserAgent expected = builder.build();
-		final UserAgent unknownAgentString = parser.parse("SiteSucker/1.6.9");
-		Assert.assertEquals(expected, unknownAgentString);
+	public void parse_GOOGLEBOT() throws Exception {
+		final UserAgent ua = parser.parse("Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)");
+		Assert.assertEquals("Googlebot", ua.getFamily());
+		Assert.assertEquals("Googlebot/2.1", ua.getName());
+		Assert.assertEquals(OperatingSystem.EMPTY, ua.getOperatingSystem());
+		Assert.assertEquals("Google Inc.", ua.getProducer());
+		Assert.assertEquals("http://www.google.com/", ua.getProducerUrl());
+		Assert.assertEquals(Robot.TYPENAME, ua.getType());
+		Assert.assertEquals("", ua.getUrl());
+		Assert.assertEquals("2.1", ua.getVersionNumber().toVersionString());
 	}
 
 	@Test
-	public void testUnknownUserAgentStringParsing() throws InterruptedException {
-		final long firstLastUpdateCheck = parser.getLastUpdateCheck();
+	public void parse_SITESUCKER() throws Exception {
+		final OperatingSystem os = new OperatingSystem("Mac OS", "Mac OS", "Apple Computer, Inc.", "http://www.apple.com/",
+				"http://en.wikipedia.org/wiki/Mac_OS");
+		final UserAgent ua = parser.parse("SiteSucker/1.6.9");
+		Assert.assertEquals("SiteSucker", ua.getFamily());
+		Assert.assertEquals("SiteSucker", ua.getName());
+		Assert.assertEquals(os, ua.getOperatingSystem());
+		Assert.assertEquals("Rick Cranisky", ua.getProducer());
+		Assert.assertEquals("", ua.getProducerUrl());
+		Assert.assertEquals("Offline Browser", ua.getType());
+		Assert.assertEquals("http://www.sitesucker.us/", ua.getUrl());
+		Assert.assertEquals("1.6.9", ua.getVersionNumber().toVersionString());
+	}
 
-		final UserAgent.Builder builder = new UserAgent.Builder();
-		final UserAgent expected = builder.build();
+	@Test
+	public void parse_unknown() throws Exception {
 		final UserAgent unknownAgentString = parser.parse("qwertzuiopasdfghjklyxcvbnm");
-		Assert.assertEquals(expected, unknownAgentString);
-
-		// Check update mechanism
-		final long currentLastUpdateCheck = parser.getLastUpdateCheck();
-		Assert.assertTrue(firstLastUpdateCheck == currentLastUpdateCheck);
+		Assert.assertEquals(UserAgent.EMPTY, unknownAgentString);
+		Assert.assertEquals(OperatingSystem.EMPTY, unknownAgentString.getOperatingSystem());
 	}
 
 	@Test

@@ -18,6 +18,7 @@ package net.sf.uadetector;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
+import net.sf.uadetector.internal.data.domain.Robot;
 import net.sf.uadetector.internal.parser.OnlineUserAgentStringParserImpl;
 
 import org.apache.commons.csv.CSVParser;
@@ -71,7 +72,7 @@ public class UserAgentStringParserIntegrationTest {
 				if (line.length == 3) {
 					final UserAgent agent = parser.parse(line[2]);
 					Assert.assertEquals(line[1], agent.getFamily());
-					final String type = "robot".equals(line[0]) ? "" : line[0];
+					final String type = "robot".equals(line[0]) ? Robot.TYPENAME : line[0];
 					Assert.assertEquals(type, agent.getType());
 				} else {
 					LOG.warn("Not enough fields: " + line.length);

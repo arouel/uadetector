@@ -27,6 +27,7 @@ import net.sf.uadetector.internal.data.domain.BrowserPattern;
 import net.sf.uadetector.internal.data.domain.OperatingSystem;
 import net.sf.uadetector.internal.data.domain.OperatingSystemPattern;
 import net.sf.uadetector.internal.data.domain.Robot;
+import net.sf.uadetector.internal.util.VersionParser;
 
 public abstract class AbstractUserAgentStringParser implements UserAgentStringParser {
 
@@ -41,7 +42,6 @@ public abstract class AbstractUserAgentStringParser implements UserAgentStringPa
 	private static void examineAsBrowser(final String userAgent, final UserAgent.Builder builder, final Data data) {
 		Matcher matcher;
 		VersionNumber version;
-		String formattedVersion;
 		for (final Entry<BrowserPattern, Browser> entry : data.getPatternBrowserMap().entrySet()) {
 			matcher = entry.getKey().getPattern().matcher(userAgent);
 			if (matcher.find()) {
@@ -49,9 +49,9 @@ public abstract class AbstractUserAgentStringParser implements UserAgentStringPa
 				entry.getValue().copyTo(builder);
 
 				// try to get the browser version from the first subgroup
-				version = VersionNumber.parseVersion(matcher.groupCount() > 0 ? matcher.group(1) : "");
-				formattedVersion = VersionNumber.UNKNOWN.equals(version) ? "" : " " + version.toVersionString();
-				builder.setName(builder.getFamily() + formattedVersion);
+				version = VersionParser.parseVersion(matcher.groupCount() > 0 ? matcher.group(1) : "");
+				builder.setVersionNumber(version);
+
 				break;
 			}
 		}
@@ -68,10 +68,16 @@ public abstract class AbstractUserAgentStringParser implements UserAgentStringPa
 	 */
 	private static boolean examineAsRobot(final String userAgent, final UserAgent.Builder builder, final Data data) {
 		boolean isRobot = false;
+		VersionNumber version;
 		for (final Robot robot : data.getRobots()) {
 			if (robot.getUserAgentString().equals(userAgent)) {
 				isRobot = true;
 				robot.copyTo(builder);
+
+				// try to get the version from the last found group
+				version = VersionParser.parseLastVersionNumber(userAgent);
+				builder.setVersionNumber(version);
+
 				break;
 			}
 		}

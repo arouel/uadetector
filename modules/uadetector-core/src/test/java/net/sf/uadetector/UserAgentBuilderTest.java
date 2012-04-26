@@ -15,6 +15,8 @@
  ******************************************************************************/
 package net.sf.uadetector;
 
+import net.sf.uadetector.internal.util.VersionParser;
+
 import org.easymock.EasyMock;
 import org.junit.Assert;
 import org.junit.Test;
@@ -26,7 +28,15 @@ public class UserAgentBuilderTest {
 		final OperatingSystem os = new OperatingSystem("family", "name", "producer", "producer url", "url");
 
 		final UserAgent.Builder b = new UserAgent.Builder();
-		b.setFamily("f1").setName("n1").setOperatingSystem(os).setProducer("p1").setProducerUrl("pu1").setType("t1").setUrl("u1");
+		Assert.assertSame(b, b.setFamily("f1"));
+		Assert.assertSame(b, b.setName("n1"));
+		Assert.assertSame(b, b.setOperatingSystem(os));
+		Assert.assertSame(b, b.setProducer("p1"));
+		Assert.assertSame(b, b.setProducerUrl("pu1"));
+		Assert.assertSame(b, b.setType("t1"));
+		Assert.assertSame(b, b.setUrl("u1"));
+		Assert.assertSame(b, b.setVersionNumber(VersionParser.parseVersion("1.0.0")));
+
 		Assert.assertEquals("f1", b.getFamily());
 		Assert.assertEquals("n1", b.getName());
 		Assert.assertEquals(os, b.getOperatingSystem());
@@ -34,6 +44,7 @@ public class UserAgentBuilderTest {
 		Assert.assertEquals("pu1", b.getProducerUrl());
 		Assert.assertEquals("t1", b.getType());
 		Assert.assertEquals("u1", b.getUrl());
+		Assert.assertEquals("1.0.0", b.getVersionNumber().toVersionString());
 
 		final UserAgent ua = b.build();
 		Assert.assertNotNull(ua);
@@ -44,6 +55,7 @@ public class UserAgentBuilderTest {
 		Assert.assertEquals("pu1", ua.getProducerUrl());
 		Assert.assertEquals("t1", ua.getType());
 		Assert.assertEquals("u1", ua.getUrl());
+		Assert.assertEquals("1.0.0", ua.getVersionNumber().toVersionString());
 	}
 
 	@Test
@@ -56,6 +68,7 @@ public class UserAgentBuilderTest {
 		Assert.assertEquals(UserAgent.EMPTY.getProducerUrl(), b.getProducerUrl());
 		Assert.assertEquals(UserAgent.EMPTY.getType(), b.getType());
 		Assert.assertEquals(UserAgent.EMPTY.getUrl(), b.getUrl());
+		Assert.assertEquals(VersionNumber.UNKNOWN, b.getVersionNumber());
 		Assert.assertEquals(UserAgent.EMPTY, b.build());
 
 		final UserAgent ua = b.build();
@@ -66,6 +79,7 @@ public class UserAgentBuilderTest {
 		Assert.assertEquals(UserAgent.EMPTY.getProducerUrl(), ua.getProducerUrl());
 		Assert.assertEquals(UserAgent.EMPTY.getType(), ua.getType());
 		Assert.assertEquals(UserAgent.EMPTY.getUrl(), ua.getUrl());
+		Assert.assertEquals(VersionNumber.UNKNOWN, ua.getVersionNumber());
 		Assert.assertEquals(UserAgent.EMPTY, b.build());
 	}
 
@@ -131,6 +145,11 @@ public class UserAgentBuilderTest {
 	@Test(expected = IllegalArgumentException.class)
 	public void setUrl_null() {
 		new UserAgent.Builder().setUrl(null);
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void setVersionNumber_null() {
+		new UserAgent.Builder().setVersionNumber(null);
 	}
 
 }

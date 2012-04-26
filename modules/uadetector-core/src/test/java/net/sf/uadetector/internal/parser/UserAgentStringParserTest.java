@@ -17,6 +17,8 @@ package net.sf.uadetector.internal.parser;
 
 import net.sf.uadetector.OperatingSystem;
 import net.sf.uadetector.UserAgent;
+import net.sf.uadetector.VersionNumber;
+import net.sf.uadetector.internal.data.domain.Robot;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -58,11 +60,12 @@ public class UserAgentStringParserTest {
 
 		// check user agent informations
 		Assert.assertEquals("Chrome", agent.getFamily());
-		Assert.assertEquals("Chrome 13.0.782.112", agent.getName());
+		Assert.assertEquals("Chrome", agent.getName());
 		Assert.assertEquals("Google Inc.", agent.getProducer());
 		Assert.assertEquals("http://www.google.com/", agent.getProducerUrl());
 		Assert.assertEquals("Browser", agent.getType());
 		Assert.assertEquals("http://www.google.com/chrome", agent.getUrl());
+		Assert.assertEquals("13.0.782.112", agent.getVersionNumber().toVersionString());
 
 		// check operating system informations
 		final OperatingSystem os = agent.getOperatingSystem();
@@ -108,11 +111,12 @@ public class UserAgentStringParserTest {
 
 		// check user agent informations
 		Assert.assertEquals("SiteSucker", agent.getFamily());
-		Assert.assertEquals("SiteSucker 1.6.9", agent.getName());
+		Assert.assertEquals("SiteSucker", agent.getName());
 		Assert.assertEquals("Rick Cranisky", agent.getProducer());
 		Assert.assertEquals("", agent.getProducerUrl());
 		Assert.assertEquals("Offline Browser", agent.getType());
 		Assert.assertEquals("http://www.sitesucker.us/", agent.getUrl());
+		Assert.assertEquals("1.6.9", agent.getVersionNumber().toVersionString());
 
 		// check operating system informations
 		final OperatingSystem os = agent.getOperatingSystem();
@@ -133,11 +137,12 @@ public class UserAgentStringParserTest {
 
 		// check user agent informations
 		Assert.assertEquals("Skyfire", agent.getFamily());
-		Assert.assertEquals("Skyfire 2.0", agent.getName());
+		Assert.assertEquals("Skyfire", agent.getName());
 		Assert.assertEquals("Skyfire Labs, Inc.", agent.getProducer());
 		Assert.assertEquals("http://www.skyfire.com/about", agent.getProducerUrl());
 		Assert.assertEquals("Mobile Browser", agent.getType());
 		Assert.assertEquals("http://www.skyfire.com/", agent.getUrl());
+		Assert.assertEquals("2.0", agent.getVersionNumber().toVersionString());
 
 		// check operating system informations
 		final OperatingSystem os = agent.getOperatingSystem();
@@ -158,11 +163,12 @@ public class UserAgentStringParserTest {
 
 		// check user agent informations
 		Assert.assertEquals("Skyfire", agent.getFamily());
-		Assert.assertEquals("Skyfire 2.0", agent.getName());
+		Assert.assertEquals("Skyfire", agent.getName());
 		Assert.assertEquals("Skyfire Labs, Inc.", agent.getProducer());
 		Assert.assertEquals("http://www.skyfire.com/about", agent.getProducerUrl());
 		Assert.assertEquals("Mobile Browser", agent.getType());
 		Assert.assertEquals("http://www.skyfire.com/", agent.getUrl());
+		Assert.assertEquals("2.0", agent.getVersionNumber().toVersionString());
 	}
 
 	@Test
@@ -177,6 +183,7 @@ public class UserAgentStringParserTest {
 		Assert.assertEquals(e.getProducerUrl(), agent.getProducerUrl());
 		Assert.assertEquals(e.getType(), agent.getType());
 		Assert.assertEquals(e.getUrl(), agent.getUrl());
+		Assert.assertEquals(VersionNumber.UNKNOWN, agent.getVersionNumber());
 
 		Assert.assertEquals(OperatingSystem.EMPTY, agent.getOperatingSystem());
 	}
@@ -194,8 +201,9 @@ public class UserAgentStringParserTest {
 		Assert.assertEquals("Googlebot/2.1", agent.getName());
 		Assert.assertEquals("Google Inc.", agent.getProducer());
 		Assert.assertEquals("http://www.google.com/", agent.getProducerUrl());
-		Assert.assertEquals("", agent.getType());
+		Assert.assertEquals(Robot.TYPENAME, agent.getType());
 		Assert.assertEquals("", agent.getUrl());
+		Assert.assertEquals("2.1", agent.getVersionNumber().toVersionString());
 	}
 
 	@Test
@@ -211,8 +219,9 @@ public class UserAgentStringParserTest {
 		Assert.assertEquals("OOZBOT/0.20 b", agent.getName());
 		Assert.assertEquals("SETU Software Systems P. Ltd.", agent.getProducer());
 		Assert.assertEquals("http://www.setusoftware.com/", agent.getProducerUrl());
-		Assert.assertEquals("", agent.getType());
+		Assert.assertEquals(Robot.TYPENAME, agent.getType());
 		Assert.assertEquals("", agent.getUrl());
+		Assert.assertEquals("0.20", agent.getVersionNumber().toVersionString());
 	}
 
 	@Test
@@ -227,6 +236,7 @@ public class UserAgentStringParserTest {
 		Assert.assertEquals(e.getProducerUrl(), agent.getProducerUrl());
 		Assert.assertEquals(e.getType(), agent.getType());
 		Assert.assertEquals(e.getUrl(), agent.getUrl());
+		Assert.assertEquals(VersionNumber.UNKNOWN, agent.getVersionNumber());
 
 		Assert.assertEquals(OperatingSystem.EMPTY, agent.getOperatingSystem());
 	}

@@ -19,7 +19,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import net.sf.uadetector.internal.util.AlphanumComparator;
@@ -59,11 +58,6 @@ public final class VersionNumber implements ReadableVersionNumber {
 	private static final int MIN_GROUP_SIZE = 3;
 
 	/**
-	 * Regular expression to parse groups and suffix (extension) of a version number
-	 */
-	private static final Pattern VERSIONNUMBER = Pattern.compile("^((\\d+)((\\.\\d+)+)?)(.*)");
-
-	/**
 	 * Regular expression to find only numerical values ​​in strings
 	 */
 	private static final Pattern NUMERIC = Pattern.compile("\\d+");
@@ -77,34 +71,6 @@ public final class VersionNumber implements ReadableVersionNumber {
 	 */
 	private static final boolean isNumeric(final String text) {
 		return NUMERIC.matcher(text).matches();
-	}
-
-	/**
-	 * Interprets a string with version information.
-	 * 
-	 * @param version
-	 *            version as string
-	 * @return an object of {@code VersionNumber}, never {@code null}
-	 */
-	public static VersionNumber parseVersion(final String version) {
-		if (version == null) {
-			throw new IllegalArgumentException("Argument 'version' must not be null.");
-		}
-
-		final VersionNumber result;
-		final Matcher matcher = VERSIONNUMBER.matcher(version);
-		if (matcher.find()) {
-			final String[] split = matcher.group(1).split("\\.");
-			final List<String> segments = new ArrayList<String>(split.length);
-			for (final String element : split) {
-				segments.add(element);
-			}
-			final String ext = matcher.group(5);
-			result = new VersionNumber(segments, ext);
-		} else {
-			result = new VersionNumber(new ArrayList<String>(0), version);
-		}
-		return result;
 	}
 
 	/**

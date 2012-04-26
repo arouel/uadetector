@@ -310,6 +310,7 @@ public final class Browser {
 	 */
 	public void copyTo(final UserAgent.Builder builder) {
 		builder.setFamily(family);
+		builder.setName(family);
 		builder.setProducer(producer);
 		builder.setProducerUrl(producerUrl);
 		builder.setType(type.getName());

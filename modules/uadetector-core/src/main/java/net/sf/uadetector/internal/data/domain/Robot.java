@@ -163,6 +163,11 @@ public final class Robot {
 
 	}
 
+	/**
+	 * Identification of the User-Agent type
+	 */
+	public static final String TYPENAME = "Robot";
+
 	private final String family;
 	private final String icon;
 	private final int id;
@@ -221,6 +226,7 @@ public final class Robot {
 		builder.setProducer(producer);
 		builder.setProducerUrl(producerUrl);
 		builder.setUrl(url);
+		builder.setType(TYPENAME);
 	}
 
 	@Override

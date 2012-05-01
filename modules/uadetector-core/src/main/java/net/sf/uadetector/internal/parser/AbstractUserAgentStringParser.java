@@ -75,7 +75,7 @@ public abstract class AbstractUserAgentStringParser implements UserAgentStringPa
 				robot.copyTo(builder);
 
 				// try to get the version from the last found group
-				version = VersionParser.parseLastVersionNumber(userAgent);
+				version = VersionParser.parseLastVersionNumber(robot.getName());
 				builder.setVersionNumber(version);
 
 				break;

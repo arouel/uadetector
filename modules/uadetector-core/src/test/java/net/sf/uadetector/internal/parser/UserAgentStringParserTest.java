@@ -221,7 +221,7 @@ public class UserAgentStringParserTest {
 		Assert.assertEquals("http://www.setusoftware.com/", agent.getProducerUrl());
 		Assert.assertEquals(Robot.TYPENAME, agent.getType());
 		Assert.assertEquals("", agent.getUrl());
-		Assert.assertEquals("0.20", agent.getVersionNumber().toVersionString());
+		Assert.assertEquals("0.20 b", agent.getVersionNumber().toVersionString());
 	}
 
 	@Test

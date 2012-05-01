@@ -24,6 +24,7 @@ package net.sf.uadetector.internal.util;
  *
  */
 
+import java.io.Serializable;
 import java.util.Comparator;
 
 /**
@@ -36,7 +37,9 @@ import java.util.Comparator;
  * To use this class: Use the static "sort" method from the java.util.Collections class: Collections.sort(your list, new
  * AlphanumComparator());
  */
-public final class AlphanumComparator implements Comparator<String> {
+public final class AlphanumComparator implements Comparator<String>, Serializable {
+
+	private static final long serialVersionUID = 5727692755534146935L;
 
 	protected static int compareDigits(final String s1, final String s2) {
 		int thisMarker = 0;

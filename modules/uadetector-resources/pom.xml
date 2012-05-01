@@ -76,7 +76,7 @@
 						<!-- assume public classes are in the top package, and private classes are under ".internal" -->
 						<Export-Package>${bundle.namespace}.*;version="${project.version}"</Export-Package>
 						<Import-Package>
-							*
+							net.sf.uadetector.internal.util.*;optional:=true, *
 						</Import-Package>
 
 						<!-- each module can override these defaults in their osgi.bnd file -->

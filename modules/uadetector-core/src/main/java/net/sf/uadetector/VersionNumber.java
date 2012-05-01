@@ -172,10 +172,8 @@ public final class VersionNumber implements ReadableVersionNumber {
 		final List<String> segments = replaceNullValueWithEmptyGroup(groups);
 		int i = 0;
 		for (final String segment : segments) {
-			if (!EMPTY_GROUP.equals(segment)) {
-				if (!isNumeric(segment)) {
-					throw new IllegalArgumentException("The segment on position " + i + " (" + segment + ") must be a number.");
-				}
+			if (!EMPTY_GROUP.equals(segment) && !isNumeric(segment)) {
+				throw new IllegalArgumentException("The segment on position " + i + " (" + segment + ") must be a number.");
 			}
 			i++;
 		}

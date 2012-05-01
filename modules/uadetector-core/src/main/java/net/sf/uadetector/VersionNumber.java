@@ -69,7 +69,7 @@ public final class VersionNumber implements ReadableVersionNumber {
 	 *            string to be tested
 	 * @return {@code true} if only numeric characters are present, otherwise {@code false}
 	 */
-	private static final boolean isNumeric(final String text) {
+	private static boolean isNumeric(final String text) {
 		return NUMERIC.matcher(text).matches();
 	}
 

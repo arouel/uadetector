@@ -18,8 +18,8 @@ package net.sf.uadetector;
 import java.io.InputStream;
 import java.net.MalformedURLException;
 
-import net.sf.uadetector.internal.parser.OnlineUserAgentStringParserImpl;
-import net.sf.uadetector.internal.parser.UserAgentStringParserImpl;
+import net.sf.uadetector.parser.OnlineUserAgentStringParserImpl;
+import net.sf.uadetector.parser.UserAgentStringParserImpl;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

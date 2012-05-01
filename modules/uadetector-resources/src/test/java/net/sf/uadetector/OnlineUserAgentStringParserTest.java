@@ -16,7 +16,7 @@
 package net.sf.uadetector;
 
 import net.sf.uadetector.internal.data.domain.Robot;
-import net.sf.uadetector.internal.parser.OnlineUserAgentStringParserImpl;
+import net.sf.uadetector.parser.OnlineUserAgentStringParserImpl;
 
 import org.junit.Assert;
 import org.junit.Test;

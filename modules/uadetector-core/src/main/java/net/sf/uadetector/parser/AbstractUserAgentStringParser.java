@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  ******************************************************************************/
-package net.sf.uadetector.internal.parser;
+package net.sf.uadetector.parser;
 
 import java.util.Map.Entry;
 import java.util.regex.Matcher;

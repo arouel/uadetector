@@ -13,7 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  ******************************************************************************/
-package net.sf.uadetector.internal.parser;
+package net.sf.uadetector.parser;
+
+import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.Properties;
 
 import net.sf.uadetector.OperatingSystem;
 import net.sf.uadetector.UserAgent;
@@ -22,22 +27,54 @@ import net.sf.uadetector.internal.data.domain.Robot;
 
 import org.junit.Assert;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-public class UserAgentStringParserTest {
+public class OnlineUserAgentStringParserTest {
+
+	private static final Logger LOG = LoggerFactory.getLogger(OnlineUserAgentStringParserTest.class);
+
+	private static final OnlineUserAgentStringParserImpl parser = OnlineUserAgentStringParserHolder.getInstance();
 
 	private static final String RESOURCE = "uas_test.xml";
 
-	private static final UserAgentStringParserImpl parser = new UserAgentStringParserImpl(UserAgentStringParserImpl.class.getClassLoader()
-			.getResourceAsStream(RESOURCE));
+	@Test(expected = IllegalArgumentException.class)
+	public void construct_dataUrl_null() throws Exception {
+		final InputStream stream = OnlineUserAgentStringParserTest.class.getClassLoader().getResourceAsStream(RESOURCE);
+		new OnlineUserAgentStringParserImpl(stream, null, new URL("http://localhost/"));
+	}
+
+	@Test(expected = MalformedURLException.class)
+	public void construct_properties_empty() throws Exception {
+		final InputStream stream = OnlineUserAgentStringParserTest.class.getClassLoader().getResourceAsStream(RESOURCE);
+		new OnlineUserAgentStringParserImpl(stream, new Properties());
+	}
+
+	@Test(expected = NullPointerException.class)
+	public void construct_properties_null() throws Exception {
+		final InputStream stream = OnlineUserAgentStringParserTest.class.getClassLoader().getResourceAsStream(RESOURCE);
+		new OnlineUserAgentStringParserImpl(stream, null);
+	}
 
 	@Test(expected = IllegalArgumentException.class)
-	public void construct_stream_null() throws Exception {
-		new UserAgentStringParserImpl(null);
+	public void construct_stream_null_1() throws Exception {
+		new OnlineUserAgentStringParserImpl(null);
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void construct_stream_null_2() throws Exception {
+		new OnlineUserAgentStringParserImpl(null, new URL("http://localhost/"), new URL("http://localhost/"));
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void construct_versionUrl_null() throws Exception {
+		final InputStream stream = OnlineUserAgentStringParserTest.class.getClassLoader().getResourceAsStream(RESOURCE);
+		new OnlineUserAgentStringParserImpl(stream, new URL("http://localhost/"), null);
 	}
 
 	@Test
 	public void getCurrentVersion() {
-		Assert.assertEquals("20120323-01", parser.getCurrentVersion());
+		Assert.assertFalse("20120323-01".equals(parser.getCurrentVersion()));
 	}
 
 	@Test
@@ -183,7 +220,6 @@ public class UserAgentStringParserTest {
 		Assert.assertEquals(e.getProducerUrl(), agent.getProducerUrl());
 		Assert.assertEquals(e.getType(), agent.getType());
 		Assert.assertEquals(e.getUrl(), agent.getUrl());
-		Assert.assertEquals(VersionNumber.UNKNOWN, agent.getVersionNumber());
 
 		Assert.assertEquals(OperatingSystem.EMPTY, agent.getOperatingSystem());
 	}
@@ -207,24 +243,6 @@ public class UserAgentStringParserTest {
 	}
 
 	@Test
-	public void parse_robot_SETOOZ() throws Exception {
-		final String userAgent = "OOZBOT/0.20 ( Setooz výrazný ako say-th-uuz, znamená mosty.  ; http://www.setooz.com/oozbot.html ; agentname at setooz dot_com )";
-		final UserAgent agent = parser.parse(userAgent);
-		Assert.assertNotNull(agent);
-		Assert.assertFalse(UserAgent.EMPTY.equals(agent));
-		Assert.assertTrue(OperatingSystem.EMPTY.equals(agent.getOperatingSystem()));
-
-		// check user agent informations
-		Assert.assertEquals("Setoozbot", agent.getFamily());
-		Assert.assertEquals("OOZBOT/0.20 b", agent.getName());
-		Assert.assertEquals("SETU Software Systems P. Ltd.", agent.getProducer());
-		Assert.assertEquals("http://www.setusoftware.com/", agent.getProducerUrl());
-		Assert.assertEquals(Robot.TYPENAME, agent.getType());
-		Assert.assertEquals("", agent.getUrl());
-		Assert.assertEquals("0.20 b", agent.getVersionNumber().toVersionString());
-	}
-
-	@Test
 	public void parse_unknownString() {
 		final UserAgent agent = parser.parse("qwertzuiopasdfghjklyxcvbnm");
 
@@ -243,9 +261,36 @@ public class UserAgentStringParserTest {
 
 	@Test(expected = IllegalArgumentException.class)
 	public void setData() throws Exception {
-		final UserAgentStringParserImpl parser = new UserAgentStringParserImpl(this.getClass().getClassLoader()
-				.getResourceAsStream(RESOURCE));
+		final InputStream stream = OnlineUserAgentStringParserTest.class.getClassLoader().getResourceAsStream(RESOURCE);
+		final OnlineUserAgentStringParserImpl parser = new OnlineUserAgentStringParserImpl(stream);
 		parser.setData(null);
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void setUpdateInterval_toSmall() throws MalformedURLException {
+		final InputStream stream = OnlineUserAgentStringParserTest.class.getClassLoader().getResourceAsStream(RESOURCE);
+		final OnlineUserAgentStringParserImpl parser = new OnlineUserAgentStringParserImpl(stream);
+		parser.setUpdateInterval(-1l);
+	}
+
+	@Test
+	public void testUpdateMechanismWhileParsing() throws InterruptedException {
+		final long firstLastUpdateCheck = parser.getLastUpdateCheck();
+		LOG.debug("LastUpdateCheck at: " + firstLastUpdateCheck);
+		final long originalInterval = parser.getUpdateInterval();
+
+		// reduce the interval since testing
+		LOG.debug("Reducing the update interval during the test.");
+		parser.setUpdateInterval(10l);
+		// we have to read to activate the update mechanism
+		parser.parse("check for updates");
+
+		Thread.sleep(100l);
+		final long currentLastUpdateCheck = parser.getLastUpdateCheck();
+		LOG.debug("LastUpdateCheck at: " + currentLastUpdateCheck);
+		Assert.assertTrue(firstLastUpdateCheck < currentLastUpdateCheck);
+
+		parser.setUpdateInterval(originalInterval);
 	}
 
 }

@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  ******************************************************************************/
-package net.sf.uadetector.internal.parser;
+package net.sf.uadetector.parser;
 
 import java.net.MalformedURLException;
 
@@ -31,7 +31,8 @@ final class OnlineUserAgentStringParserHolder {
 	public static OnlineUserAgentStringParserImpl getInstance() {
 		if (INSTANCE == null) {
 			try {
-				INSTANCE = new OnlineUserAgentStringParserImpl(OnlineUserAgentStringParserImpl.class.getClassLoader().getResourceAsStream(RESOURCE));
+				INSTANCE = new OnlineUserAgentStringParserImpl(OnlineUserAgentStringParserImpl.class.getClassLoader().getResourceAsStream(
+						RESOURCE));
 			} catch (final MalformedURLException e) {
 				LOG.warn(e.getLocalizedMessage(), e);
 			}

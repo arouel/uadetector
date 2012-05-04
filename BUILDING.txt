@@ -1,0 +1,52 @@
+/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the "License"); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+Building UADetector
+============================
+
+Initial Setup
+-------------
+
+1) Install Java SE 6 JDK, which can be downloaded from 
+   http://www.oracle.com/technetwork/java/javase/downloads/index.html.
+   Use the latest version of Java SE 6 JDK.
+
+2) Make sure that your JAVA_HOME environment variable is set to the newly installed 
+   JDK location, and that your PATH includes %JAVA_HOME%\bin (windows) or 
+   $JAVA_HOME$/bin (unix).
+
+3) Install Maven 3.0.4, which can be downloaded from 
+   http://maven.apache.org/download.html. Make sure that your PATH includes 
+   the MVN_HOME/bin directory. 
+
+
+Building
+--------
+
+1) Change to the top level directory of UADetector source distribution.
+
+2) Run
+         $> mvn package
+   This will compile UADetector and run all of the tests in the 
+   UADetector source distribution. Alternatively, you can run
+   
+   Depending on the load of remote Maven repositories, you may have 
+   to run "mvn clean package" several times until the required dependencies are 
+   all located in your local maven repository. It usually takes some time for 
+   maven to download required dependencies in the first build.
+
+3) The distributions will be available under "distribution/target" directory.

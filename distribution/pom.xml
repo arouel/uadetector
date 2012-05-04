@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<relativePath>../</relativePath>
+		<groupId>net.sf.uadetector</groupId>
+		<artifactId>uadetector-parent</artifactId>
+		<version>0.2.0-SNAPSHOT</version>
+	</parent>
+
+	<artifactId>distribution</artifactId>
+	<packaging>pom</packaging>
+	<name>UADetector :: Distribution</name>
+
+	<!-- NOTE: These dependency declarations are only required to sort this project to the end of the line in the multimodule 
+		build. Since we only include the uadetector-core and uadetector-resources module in our assembly, we only need to ensure 
+		this distribution project builds AFTER that one... -->
+	<dependencies>
+		<dependency>
+			<groupId>net.sf.uadetector</groupId>
+			<artifactId>uadetector-core</artifactId>
+			<version>${project.parent.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>net.sf.uadetector</groupId>
+			<artifactId>uadetector-resources</artifactId>
+			<version>2012.05-SNAPSHOT</version>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<finalName>uadetector-${project.version}</finalName>
+		<plugins>
+			<plugin>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>distro-assembly</id>
+						<phase>package</phase>
+						<goals>
+							<goal>single</goal>
+						</goals>
+						<configuration>
+							<descriptors>
+								<descriptor>src/assemble/unix-bin.xml</descriptor>
+								<descriptor>src/assemble/windows-bin.xml</descriptor>
+							</descriptors>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-antrun-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>checksum</id>
+						<phase>package</phase>
+						<configuration>
+							<target>
+								<fileset id="files-to-check" dir="${project.build.directory}">
+									<include name="${project.build.finalName}-bin.tar.gz" />
+									<include name="${project.build.finalName}-bin.zip" />
+								</fileset>
+								<pathconvert pathsep="${line.separator}" property="files" refid="files-to-check">
+									<mapper type="flatten" />
+								</pathconvert>
+								<echo message="Creating checksums for following files ..." />
+								<echo>${files}</echo>
+								<checksum algorithm="MD5" fileext=".md5" forceoverwrite="true">
+									<fileset refid="files-to-check" />
+								</checksum>
+								<checksum algorithm="SHA1" fileext=".sha1" forceoverwrite="true">
+									<fileset refid="files-to-check" />
+								</checksum>
+							</target>
+						</configuration>
+						<goals>
+							<goal>run</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+
+	<profiles>
+		<profile>
+			<id>publish</id>
+			<activation>
+				<property>
+					<name>publish-via-scp</name>
+					<value>true</value>
+				</property>
+			</activation>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-antrun-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>scp</id>
+								<phase>package</phase>
+								<configuration>
+									<target>
+										<fileset id="files-to-upload" dir="${project.build.directory}">
+											<include name="${project.build.finalName}-bin.tar.gz" />
+											<include name="${project.build.finalName}-bin.tar.gz.asc" />
+											<include name="${project.build.finalName}-bin.tar.gz.md5" />
+											<include name="${project.build.finalName}-bin.tar.gz.sha1" />
+											<include name="${project.build.finalName}-bin.zip" />
+											<include name="${project.build.finalName}-bin.zip.asc" />
+											<include name="${project.build.finalName}-bin.zip.md5" />
+											<include name="${project.build.finalName}-bin.zip.sha1" />
+										</fileset>
+										<pathconvert pathsep="${line.separator}" property="files" refid="files-to-upload">
+											<mapper type="flatten" />
+										</pathconvert>
+										<echo message="Uploading following files ..." />
+										<echo>${files}</echo>
+										<scp todir="${scp.userid}@${scp.host}:${scp.remotedir}" password="${scp.password}" verbose="${scp.verbose}">
+											<fileset refid="files-to-upload" />
+										</scp>
+									</target>
+								</configuration>
+								<goals>
+									<goal>run</goal>
+								</goals>
+							</execution>
+						</executions>
+						<dependencies>
+							<dependency>
+								<groupId>org.apache.ant</groupId>
+								<artifactId>ant-jsch</artifactId>
+								<version>1.8.3</version>
+							</dependency>
+							<dependency>
+								<groupId>com.jcraft</groupId>
+								<artifactId>jsch</artifactId>
+								<version>0.1.48</version>
+							</dependency>
+						</dependencies>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
+
+</project>

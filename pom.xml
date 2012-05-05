@@ -50,7 +50,7 @@
 	</modules>
 
 	<distributionManagement>
-		<downloadUrl>https://sourceforge.net/projects/uadetector/files/</downloadUrl>
+		<downloadUrl>http://sourceforge.net/projects/uadetector/files/</downloadUrl>
 		<site>
 			<id>shell.sourceforge.net</id>
 			<url>scp://shell.sourceforge.net/home/project-web/uadetector/htdocs</url>

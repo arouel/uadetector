@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document xmlns="http://maven.apache.org/XDOC/2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/XDOC/2.0 http://maven.apache.org/xsd/xdoc-2.0.xsd">
+	<properties>
+		<title>Download</title>
+		<author>André Rouél</author>
+	</properties>
+	<body>
+
+		<section name="Maven users">
+			<p>
+				For Maven users there is no need to download files from here, because all artifacts are in
+				<a target="_blank" href="http://search.maven.org/#search|ga|1|g:&quot;net.sf.uadetector&quot;">The Central Repository</a>.
+				See
+				<a href="quickstart.html">the Quick Start with Maven</a>.
+			</p>
+		</section>
+
+		<section name="Releases">
+			<subsection name="Release 2012.04">
+				<table>
+					<tr>
+						<th>Module</th>
+						<th>File</th>
+						<th>MD5 checksum</th>
+					</tr>
+					<tr>
+						<td>UADetector :: Core</td>
+						<td>
+							<a
+								href="http://search.maven.org/remotecontent?filepath=net/sf/uadetector/uadetector-core/0.1.0/uadetector-core-0.1.0.jar">
+								uadetector-core-0.1.0.jar
+							</a>
+						</td>
+						<td>
+							<a
+								href="http://search.maven.org/remotecontent?filepath=net/sf/uadetector/uadetector-core/0.1.0/uadetector-core-0.1.0.jar.md5">
+								uadetector-core-0.1.0.jar.md5
+							</a>
+						</td>
+					</tr>
+					<tr>
+						<td>UADetector :: Resources</td>
+						<td>
+							<a
+								href="http://search.maven.org/remotecontent?filepath=net/sf/uadetector/uadetector-resources/2012.04/uadetector-resources-2012.04.jar">
+								uadetector-resources-2012.04.jar
+							</a>
+						</td>
+						<td>
+							<a
+								href="http://search.maven.org/remotecontent?filepath=net/sf/uadetector/uadetector-resources/2012.04/uadetector-resources-2012.04.jar.md5">
+								uadetector-resources-2012.04.jar.md5
+							</a>
+						</td>
+					</tr>
+				</table>
+			</subsection>
+		</section>
+
+	</body>
+</document>

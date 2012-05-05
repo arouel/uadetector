@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<document xmlns="http://maven.apache.org/XDOC/2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/XDOC/2.0 http://maven.apache.org/xsd/xdoc-2.0.xsd">
+	<properties>
+		<title>Building UADetector</title>
+		<author email="andre.rouel@googlemail.com">André Rouél</author>
+	</properties>
+	<body>
+		<section name="Building UADetector">
+			<h3>Requirements</h3>
+			<p> To build UADetector yourself you need a JDK 1.6 or above and Apache Maven 3.x. To resolve the transitive
+				dependencies you must be online.
+			</p>
+			<h3>Building</h3>
+			<p>To build UADetector you have to run the command</p>
+			<pre>mvn package</pre>
+			<p>in your command-line interface or IDE.</p>
+			<p>This will compile all the Java files, run any tests, and package the deliverable code and resources into</p>
+			<ul>
+				<li>
+					modules/uadetector-core/target/uadetector-core-0.2.0-SNAPSHOT.jar
+				</li>
+				<li>
+					modules/uadetector-core/target/uadetector-resources-2012.05-SNAPSHOT.jar
+				</li>
+				<li>
+					distribution/target/uadetector-2012.05-SNAPSHOT-bin.tar.gz
+				</li>
+				<li>
+					distribution/target/uadetector-2012.05-SNAPSHOT-bin.zip
+				</li>
+			</ul>
+			<p>(assuming the version is 2012.05-SNAPSHOT and 0.2.0-SNAPSHOT.)</p>
+		</section>
+	</body>
+</document>

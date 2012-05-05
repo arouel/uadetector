@@ -8,38 +8,17 @@
 	<body>
 		<section name="Usage">
 			<h3>Requirements</h3>
-			<p>
-				This library depends on the Simple Logging Facade for Java (also known as SLF4J) to allowing the end user to plug
+			<p>This library depends on the Simple Logging Facade for Java (also known as SLF4J) to allowing the end user to plug
 				in the desired logging framework at deployment time.
 			</p>
+			<p>This means that if the UADetector library is used also the SLF4J-API must exist in your classpath.</p>
+			<h3>A simple Servlet</h3>
 			<p>
-				This means that if the UADetector library is used also the SLF4J-API must exist in the classpath.
+				To use the library it must be added to your classpath. With Apache Maven you can start with
+				<a href="quickstart.html">this guide</a>
+				quickly.
 			</p>
-			<p>
-				To build UADetector yourself you need a JDK 1.6 or above and Apache Maven 3.x.
-			</p>
-			<h3>Example</h3>
-			<p>
-				To use the library it must be added to your classpath. With Apache Maven you easily add the following to your
-				<code>pom.xml</code>
-				.
-			</p>
-			<source><![CDATA[<project>
-	...
-	<dependencies>
-		...
-		<dependency>
-			<groupId>net.sf.uadetector</groupId>
-			<artifactId>uadetector-resources</artifactId>
-			<version>2012.04</version>
-		</dependency>
-		...
-	</dependencies>
-	...
-</project>
-]]></source>
-			<p>
-				Then you should have access to the classes of the library. For example, you might want to make a Servlet as the
+			<p>Then you should have access to the classes of the library. For example, you might want to make a Servlet as the
 				following to detect an requesting client.
 			</p>
 			<source><![CDATA[package net.sf.uadetector.example;
@@ -85,7 +64,6 @@ public class HelloServlet extends HttpServlet {
 					href="https://sourceforge.net/p/uadetector/code/ci/b07e03f255e3374e557295279ba90bace2223d55/tree/examples/helloworld/">examples/helloworld</a>
 				. Just try to load the source code from the SCM.
 			</p>
-			<p>Your participation in this project is much appreciated!</p>
 		</section>
 	</body>
 </document>

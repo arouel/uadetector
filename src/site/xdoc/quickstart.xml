@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document xmlns="http://maven.apache.org/XDOC/2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/XDOC/2.0 http://maven.apache.org/xsd/xdoc-2.0.xsd">
+	<properties>
+		<title>Quick Start with Apache Maven</title>
+		<author>André Rouél</author>
+	</properties>
+	<body>
+		<section name="Quick Start with Maven">
+			<p>
+				If you use Apache Maven for your project, it's very easy to start using UADetector, because all artifacts are in
+				<a target="_blank" href="http://search.maven.org/#search|ga|1|g:&quot;net.sf.uadetector&quot;">The Central Repository</a>
+				.
+				This repository is used by default to search for libraries.
+			</p>
+			<p>
+				Just add the following dependency to your Project Object Model (POM). You know, the file called
+				<em>pom.xml</em>
+				.
+			</p>
+			<source><![CDATA[<project>
+	...
+	<dependencies>
+		...
+		<dependency>
+			<groupId>net.sf.uadetector</groupId>
+			<artifactId>uadetector-resources</artifactId>
+			<version>2012.04</version>
+		</dependency>
+		...
+	</dependencies>
+	...
+</project>
+]]></source>
+			<p>
+				Maven will now transitively resolve the dependencies to the
+				<a href="modules/uadetector-core/index.html">core module</a>
+				,
+				<a href="modules/uadetector-resources/index.html">resources module</a>
+				and
+				<a target="_blank" href="http://www.slf4j.org">SLF4J</a>
+				. Now you're good to go with the next example:
+				<a href="usage.html">Usage in a Servlet</a>
+				.
+			</p>
+		</section>
+	</body>
+</document>

@@ -83,6 +83,15 @@
 					</execution>
 				</executions>
 			</plugin>
+			<plugin>
+				<!-- don't generate any report -->
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-site-plugin</artifactId>
+				<configuration>
+					<reportPlugins>
+					</reportPlugins>
+				</configuration>
+			</plugin>
 		</plugins>
 	</build>
 

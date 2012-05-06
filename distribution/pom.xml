@@ -130,7 +130,7 @@
 										</pathconvert>
 										<echo message="Uploading following files ..." />
 										<echo>${files}</echo>
-										<scp todir="${scp.userid}@${scp.host}:${scp.remotedir}" password="${scp.password}" verbose="${scp.verbose}">
+										<scp todir="${scp.userid}@${scp.host}:${scp.remotedir}/${project.version}" password="${scp.password}" verbose="${scp.verbose}">
 											<fileset refid="files-to-upload" />
 										</scp>
 									</target>

@@ -14,7 +14,7 @@
 	<packaging>pom</packaging>
 
 	<name>UADetector</name>
-	<description>UADetector is a library to detect over 190 different desktop and mobile browsers and 130 other User-Agents like feed readers and email clients.</description>
+	<description>UADetector is a library to identify over 190 different desktop and mobile browsers and 130 other User-Agents like feed readers, email clients and multimedia players. In addition, even more than 400 robots like BingBot, Googlebot or Yahoo Bot can be identified.</description>
 	<url>http://uadetector.sourceforge.net/</url>
 	<inceptionYear>2011</inceptionYear>
 

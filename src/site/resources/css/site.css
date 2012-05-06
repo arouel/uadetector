@@ -57,3 +57,7 @@ div.feature p {
 a.poweredBy {
 	display: block;
 }
+
+tt {
+	background-color: #FFF9D9;
+}

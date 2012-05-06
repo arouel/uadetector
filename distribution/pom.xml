@@ -11,8 +11,12 @@
 	</parent>
 
 	<artifactId>distribution</artifactId>
-	<packaging>pom</packaging>
+	<version>2012.05-SNAPSHOT</version>
+
 	<name>UADetector :: Distribution</name>
+	<description>This project is intended to create distributions of the UADetector multimodule project.</description>
+
+	<packaging>pom</packaging>
 
 	<!-- NOTE: These dependency declarations are only required to sort this project to the end of the line in the multimodule 
 		build. Since we only include the uadetector-core and uadetector-resources module in our assembly, we only need to ensure 

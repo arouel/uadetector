@@ -44,9 +44,9 @@
 	</scm>
 
 	<modules>
-		<module>distribution</module>
 		<module>modules/uadetector-core</module>
 		<module>modules/uadetector-resources</module>
+		<module>distribution</module>
 	</modules>
 
 	<distributionManagement>

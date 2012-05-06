@@ -79,9 +79,13 @@
 					<a target="_blank" href="http://sourceforge.net/p/uadetector/tickets/">issue tracking</a>
 					application.
 				</li>
-				<li>Help with the documentation by pointing out areas that are lacking or unclear, and if you are so inclined,
-					submitting patches to correct it. You can quickly contribute rough thoughts by forking this project on GitHub and
-					SourceForge, or you can volunteer to help collate and organize information that is already there.
+				<li>
+					Help with the documentation by pointing out areas that are lacking or unclear, and if you are so inclined,
+					submitting patches to correct it. You can quickly contribute rough thoughts by forking this project on
+					<a target="_blank" href="https://github.com/before/uadetector">GitHub</a>
+					or
+					<a target="_blank" href="http://sourceforge.net/p/uadetector/code/?branch=ref%2Fmaster">SourceForge</a>
+					, or you can volunteer to help collate and organize information that is already there.
 				</li>
 			</ul>
 			<p>Your participation in the project is much appreciated!</p>

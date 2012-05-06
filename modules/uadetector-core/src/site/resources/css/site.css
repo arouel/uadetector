@@ -49,6 +49,15 @@ div.feature p {
 	margin-right: 7px;
 }
 
+#bannerLeft {
+	margin: 0 0 4px 14px;
+	display: inline-block;
+}
+
 a.poweredBy {
 	display: block;
+}
+
+tt {
+	background-color: #FFF9D9;
 }

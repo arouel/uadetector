@@ -34,6 +34,7 @@ public interface ReadableUserAgent {
 	 * 
 	 * @return name of the user agent
 	 */
+	@Deprecated
 	String getFamily();
 
 	/**

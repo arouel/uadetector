@@ -15,16 +15,52 @@
  ******************************************************************************/
 package net.sf.uadetector;
 
+/**
+ * Defines an operating system.<br>
+ * <br>
+ * An operating system (OS) is a set of software that manages the hardware of a computer and provides common services
+ * for programs. Popular examples of modern operating systems are Android, iOS, Linux, Mac OS X and Windows.<br>
+ * <br>
+ * The implementation of this interface may be mutable or immutable. This interface only gives access to retrieve data,
+ * never to change it.
+ * 
+ * @author André Rouél
+ */
 public interface ReadableOperatingSystem {
 
+	/**
+	 * Gets the family of the operating system.
+	 * 
+	 * @return the family of the operating system
+	 */
 	String getFamily();
 
+	/**
+	 * Gets the name of the operating system.
+	 * 
+	 * @return the name of the operating system
+	 */
 	String getName();
 
+	/**
+	 * Returns the manufacturer of the operating system.
+	 * 
+	 * @return the manufacturer
+	 */
 	String getProducer();
 
+	/**
+	 * Returns the URL to the main website of the manufacturer of the operating system.
+	 * 
+	 * @return the URL to the website of the manufacturer
+	 */
 	String getProducerUrl();
 
+	/**
+	 * Returns the URL to the product or information page of the operating system.
+	 * 
+	 * @return the URL to the product page
+	 */
 	String getUrl();
 
 }

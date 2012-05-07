@@ -33,7 +33,7 @@ import net.sf.uadetector.internal.util.AlphanumComparator;
 public final class VersionNumber implements ReadableVersionNumber {
 
 	/**
-	 * Empty extension of a version number
+	 * Empty extension or addition of a version number
 	 */
 	public static final String EMPTY_EXTENSION = "";
 
@@ -322,7 +322,7 @@ public final class VersionNumber implements ReadableVersionNumber {
 	}
 
 	/**
-	 * Gets the extension of the version number.
+	 * Gets the addition or extension of the version number.
 	 * 
 	 * @return extension of the version number
 	 */

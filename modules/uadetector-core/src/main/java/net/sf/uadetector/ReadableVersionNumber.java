@@ -18,7 +18,22 @@ package net.sf.uadetector;
 import java.util.List;
 
 /**
- * Defines a version number of an operating system or User-Agent.<br>
+ * Defines a version number of an operating system or user agent.<br>
+ * <br>
+ * Generally, a version number represents unique states of a software. Version numbers are different versions of a
+ * single software in order to distinguish different versions of development cycles.<br>
+ * <br>
+ * A classic version number is often composed of:
+ * <ul>
+ * <li><strong>Major release</strong><br>
+ * indexes mostly very significant change in the program - for example when the program was completely rewritten or
+ * libraries can be maintained at no interface compatibility.</li>
+ * <li><strong>Minor release</strong><br>
+ * usually referred to a functional extension of a program.</li>
+ * <li><strong>Patch level</strong><br>
+ * contains mostly bug fixes.</li>
+ * </ul>
+ * A version number may also contain additions, for example, to document a development stage of a software.<br>
  * <br>
  * The implementation of this interface may be mutable or immutable. This interface only gives access to retrieve data,
  * never to change it.
@@ -35,7 +50,7 @@ public interface ReadableVersionNumber extends Comparable<ReadableVersionNumber>
 	String getBugfix();
 
 	/**
-	 * Gets the extension of the version number.
+	 * Gets the additions or extension of the version number.
 	 * 
 	 * @return extension of the version number
 	 */

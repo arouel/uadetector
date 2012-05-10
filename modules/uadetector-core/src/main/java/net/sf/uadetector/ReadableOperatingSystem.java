@@ -29,38 +29,45 @@ package net.sf.uadetector;
 public interface ReadableOperatingSystem {
 
 	/**
-	 * Gets the family of the operating system.
+	 * Gets the family of an operating system.
 	 * 
-	 * @return the family of the operating system
+	 * @return the family of an operating system
 	 */
 	String getFamily();
 
 	/**
-	 * Gets the name of the operating system.
+	 * Gets the name of an operating system.
 	 * 
-	 * @return the name of the operating system
+	 * @return the name of an operating system
 	 */
 	String getName();
 
 	/**
-	 * Returns the manufacturer of the operating system.
+	 * Returns the manufacturer of an operating system.
 	 * 
 	 * @return the manufacturer
 	 */
 	String getProducer();
 
 	/**
-	 * Returns the URL to the main website of the manufacturer of the operating system.
+	 * Returns the URL to the main website of the manufacturer of an operating system.
 	 * 
 	 * @return the URL to the website of the manufacturer
 	 */
 	String getProducerUrl();
 
 	/**
-	 * Returns the URL to the product or information page of the operating system.
+	 * Returns the URL to the product or information page of an operating system.
 	 * 
 	 * @return the URL to the product page
 	 */
 	String getUrl();
+
+	/**
+	 * Gets the version number of an operating system.
+	 * 
+	 * @return version number an operating system
+	 */
+	VersionNumber getVersionNumber();
 
 }

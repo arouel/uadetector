@@ -15,6 +15,8 @@
  ******************************************************************************/
 package net.sf.uadetector;
 
+import java.util.Arrays;
+
 import net.sf.uadetector.internal.data.domain.Robot;
 import net.sf.uadetector.parser.OnlineUserAgentStringParserImpl;
 
@@ -33,7 +35,7 @@ public class OnlineUserAgentStringParserTest {
 	@Test
 	public void parse_CHROME13() throws Exception {
 		final OperatingSystem os = new OperatingSystem("Mac OS X", "Mac OS X 10.6 Snow Leopard", "Apple Computer, Inc.",
-				"http://www.apple.com/", "http://www.apple.com/macosx/");
+				"http://www.apple.com/", "http://www.apple.com/macosx/", new VersionNumber(Arrays.asList("10", "6"), " Snow Leopard"));
 		final UserAgent ua = parser
 				.parse("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_6_8) AppleWebKit/535.1 (KHTML, like Gecko) Chrome/13.0.782.112 Safari/535.1");
 		Assert.assertEquals("Chrome", ua.getFamily());
@@ -57,7 +59,7 @@ public class OnlineUserAgentStringParserTest {
 	@Test
 	public void parse_FIREFOX6() throws Exception {
 		final OperatingSystem os = new OperatingSystem("Mac OS X", "Mac OS X 10.7 Lion", "Apple Computer, Inc.", "http://www.apple.com/",
-				"http://www.apple.com/macosx/");
+				"http://www.apple.com/macosx/", new VersionNumber(Arrays.asList("10", "7"), " Lion"));
 		final UserAgent ua = parser.parse("Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7; rv:6.0) Gecko/20100101 Firefox/6.0");
 		Assert.assertEquals("Firefox", ua.getFamily());
 		Assert.assertEquals("Firefox", ua.getName());
@@ -85,7 +87,7 @@ public class OnlineUserAgentStringParserTest {
 	@Test
 	public void parse_SITESUCKER() throws Exception {
 		final OperatingSystem os = new OperatingSystem("Mac OS", "Mac OS", "Apple Computer, Inc.", "http://www.apple.com/",
-				"http://en.wikipedia.org/wiki/Mac_OS");
+				"http://en.wikipedia.org/wiki/Mac_OS", VersionNumber.UNKNOWN);
 		final UserAgent ua = parser.parse("SiteSucker/1.6.9");
 		Assert.assertEquals("SiteSucker", ua.getFamily());
 		Assert.assertEquals("SiteSucker", ua.getName());

@@ -74,6 +74,7 @@ public class UserAgentStringParserTest {
 		Assert.assertEquals("Apple Computer, Inc.", os.getProducer());
 		Assert.assertEquals("http://www.apple.com/", os.getProducerUrl());
 		Assert.assertEquals("http://www.apple.com/macosx/", os.getUrl());
+		Assert.assertEquals("10.6 Snow Leopard", os.getVersionNumber().toVersionString());
 	}
 
 	@Test
@@ -99,6 +100,114 @@ public class UserAgentStringParserTest {
 		Assert.assertEquals("Apple Computer, Inc.", os.getProducer());
 		Assert.assertEquals("http://www.apple.com/", os.getProducerUrl());
 		Assert.assertEquals("http://www.apple.com/macosx/", os.getUrl());
+		Assert.assertEquals("10.6 Snow Leopard", os.getVersionNumber().toVersionString());
+	}
+
+	@Test
+	public void parse_browser_ICEWEASEL() throws Exception {
+		final String userAgent = "Mozilla/5.0 (X11; U; Linux i686; de; rv:1.9.1.5) Gecko/20091112 Iceweasel/3.5.5 (like Firefox/3.5.5; Debian-3.5.5-1)";
+		final UserAgent agent = parser.parse(userAgent);
+		Assert.assertNotNull(agent);
+		Assert.assertFalse(UserAgent.EMPTY.equals(agent));
+		Assert.assertFalse(OperatingSystem.EMPTY.equals(agent.getOperatingSystem()));
+
+		// check user agent informations
+		Assert.assertEquals("IceWeasel", agent.getFamily());
+		Assert.assertEquals("IceWeasel", agent.getName());
+		Assert.assertEquals("Software in the Public Interest, Inc.", agent.getProducer());
+		Assert.assertEquals("http://www.spi-inc.org/", agent.getProducerUrl());
+		Assert.assertEquals("Browser", agent.getType());
+		Assert.assertEquals("http://www.gnu.org/software/gnuzilla/", agent.getUrl());
+		Assert.assertEquals("3.5.5", agent.getVersionNumber().toVersionString());
+
+		// check operating system informations
+		final OperatingSystem os = agent.getOperatingSystem();
+		Assert.assertEquals("Linux", os.getFamily());
+		Assert.assertEquals("Linux (Debian)", os.getName());
+		Assert.assertEquals("Software in the Public Interest, Inc.", os.getProducer());
+		Assert.assertEquals("http://www.spi-inc.org/", os.getProducerUrl());
+		Assert.assertEquals("http://www.debian.org/", os.getUrl());
+		Assert.assertEquals(VersionNumber.UNKNOWN, os.getVersionNumber());
+	}
+
+	@Test
+	public void parse_browser_IE7() throws Exception {
+		final String userAgent = "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 6.1; WOW64; Trident/4.0; GTB6.4; SLCC2; .NET CLR 2.0.50727; .NET CLR 3.5.30729; .NET CLR 3.0.30729; Media Center PC 6.0; OfficeLiveConnector.1.3; OfficeLivePatch.0.0; .NET CLR 1.1.4322)";
+		final UserAgent agent = parser.parse(userAgent);
+		Assert.assertNotNull(agent);
+		Assert.assertFalse(UserAgent.EMPTY.equals(agent));
+		Assert.assertFalse(OperatingSystem.EMPTY.equals(agent.getOperatingSystem()));
+
+		// check user agent informations
+		Assert.assertEquals("IE", agent.getFamily());
+		Assert.assertEquals("IE", agent.getName());
+		Assert.assertEquals("Microsoft Corporation.", agent.getProducer());
+		Assert.assertEquals("http://www.microsoft.com/", agent.getProducerUrl());
+		Assert.assertEquals("Browser", agent.getType());
+		Assert.assertEquals("http://en.wikipedia.org/wiki/Internet_Explorer", agent.getUrl());
+		Assert.assertEquals("7.0", agent.getVersionNumber().toVersionString());
+
+		// check operating system informations
+		final OperatingSystem os = agent.getOperatingSystem();
+		Assert.assertEquals("Windows", os.getFamily());
+		Assert.assertEquals("Windows 7", os.getName());
+		Assert.assertEquals("Microsoft Corporation.", os.getProducer());
+		Assert.assertEquals("http://www.microsoft.com/", os.getProducerUrl());
+		Assert.assertEquals("http://en.wikipedia.org/wiki/Windows_7", os.getUrl());
+		Assert.assertEquals("7", os.getVersionNumber().toVersionString());
+	}
+
+	@Test
+	public void parse_browser_mobile_CHROME() throws Exception {
+		final String userAgent = "Mozilla/5.0 (Linux; U; Android-4.0.3; en-us; Galaxy Nexus Build/IML74K) AppleWebKit/535.7 (KHTML, like Gecko) CrMo/16.0.912.75 Mobile Safari/535.7";
+		final UserAgent agent = parser.parse(userAgent);
+		Assert.assertNotNull(agent);
+		Assert.assertFalse(UserAgent.EMPTY.equals(agent));
+
+		// check user agent informations
+		Assert.assertEquals("Chrome Mobile", agent.getFamily());
+		Assert.assertEquals("Chrome Mobile", agent.getName());
+		Assert.assertEquals("Google Inc.", agent.getProducer());
+		Assert.assertEquals("http://www.google.com/", agent.getProducerUrl());
+		Assert.assertEquals("Mobile Browser", agent.getType());
+		Assert.assertEquals("http://www.google.com/chrome", agent.getUrl());
+		Assert.assertEquals("16.0.912.75", agent.getVersionNumber().toVersionString());
+
+		// check operating system informations
+		final OperatingSystem os = agent.getOperatingSystem();
+		Assert.assertEquals("Android", os.getFamily());
+		Assert.assertEquals("Android 4 Ice Cream Sandwich", os.getName());
+		Assert.assertEquals("Google, Inc.", os.getProducer());
+		Assert.assertEquals("http://www.google.com/", os.getProducerUrl());
+		Assert.assertEquals("http://en.wikipedia.org/wiki/Android_%28operating_system%29", os.getUrl());
+		Assert.assertEquals("4 Ice Cream Sandwich", os.getVersionNumber().toVersionString());
+	}
+
+	@Test
+	public void parse_browser_OPERA() throws Exception {
+		final String userAgent = "Opera/9.80 (Windows NT 5.1; U; cs) Presto/2.2.15 Version/10.00";
+		final UserAgent agent = parser.parse(userAgent);
+		Assert.assertNotNull(agent);
+		Assert.assertFalse(UserAgent.EMPTY.equals(agent));
+		Assert.assertFalse(OperatingSystem.EMPTY.equals(agent.getOperatingSystem()));
+
+		// check user agent informations
+		Assert.assertEquals("Opera", agent.getFamily());
+		Assert.assertEquals("Opera", agent.getName());
+		Assert.assertEquals("Opera Software ASA.", agent.getProducer());
+		Assert.assertEquals("http://www.opera.com/", agent.getProducerUrl());
+		Assert.assertEquals("Browser", agent.getType());
+		Assert.assertEquals("http://www.opera.com/", agent.getUrl());
+		Assert.assertEquals("10.00", agent.getVersionNumber().toVersionString());
+
+		// check operating system informations
+		final OperatingSystem os = agent.getOperatingSystem();
+		Assert.assertEquals("Windows", os.getFamily());
+		Assert.assertEquals("Windows XP", os.getName());
+		Assert.assertEquals("Microsoft Corporation.", os.getProducer());
+		Assert.assertEquals("http://www.microsoft.com/", os.getProducerUrl());
+		Assert.assertEquals("http://en.wikipedia.org/wiki/Windows_XP", os.getUrl());
+		Assert.assertEquals(VersionNumber.UNKNOWN, os.getVersionNumber());
 	}
 
 	@Test
@@ -125,6 +234,7 @@ public class UserAgentStringParserTest {
 		Assert.assertEquals("Apple Computer, Inc.", os.getProducer());
 		Assert.assertEquals("http://www.apple.com/", os.getProducerUrl());
 		Assert.assertEquals("http://en.wikipedia.org/wiki/Mac_OS", os.getUrl());
+		Assert.assertEquals(VersionNumber.UNKNOWN, os.getVersionNumber());
 	}
 
 	@Test
@@ -151,6 +261,7 @@ public class UserAgentStringParserTest {
 		Assert.assertEquals("Apple Computer, Inc.", os.getProducer());
 		Assert.assertEquals("http://www.apple.com/", os.getProducerUrl());
 		Assert.assertEquals("http://www.apple.com/macosx/", os.getUrl());
+		Assert.assertEquals("10.5 Leopard", os.getVersionNumber().toVersionString());
 	}
 
 	@Test

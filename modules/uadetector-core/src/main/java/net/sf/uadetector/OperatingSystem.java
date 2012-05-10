@@ -23,7 +23,7 @@ package net.sf.uadetector;
  */
 public final class OperatingSystem implements ReadableOperatingSystem {
 
-	public static final OperatingSystem EMPTY = new OperatingSystem("unknown", "unknown", "", "", "");
+	public static final OperatingSystem EMPTY = new OperatingSystem("unknown", "unknown", "", "", "", VersionNumber.UNKNOWN);
 
 	private final String family;
 
@@ -35,8 +35,10 @@ public final class OperatingSystem implements ReadableOperatingSystem {
 
 	private final String url;
 
-	public OperatingSystem(final String family, final String name, final String producer, final String producerUrl,
-			final String url) {
+	private final VersionNumber versionNumber;
+
+	public OperatingSystem(final String family, final String name, final String producer, final String producerUrl, final String url,
+			final VersionNumber versionNumber) {
 		if (producer == null) {
 			throw new IllegalArgumentException("Argument 'producer' must not be null");
 		}
@@ -52,12 +54,16 @@ public final class OperatingSystem implements ReadableOperatingSystem {
 		if (url == null) {
 			throw new IllegalArgumentException("Argument 'url' must not be null");
 		}
+		if (versionNumber == null) {
+			throw new IllegalArgumentException("Argument 'versionNumber' must not be null");
+		}
 
 		this.producer = producer;
 		this.producerUrl = producerUrl;
 		this.family = family;
 		this.name = name;
 		this.url = url;
+		this.versionNumber = versionNumber;
 	}
 
 	@Override
@@ -85,6 +91,9 @@ public final class OperatingSystem implements ReadableOperatingSystem {
 			return false;
 		}
 		if (!url.equals(other.url)) {
+			return false;
+		}
+		if (!versionNumber.equals(other.versionNumber)) {
 			return false;
 		}
 		return true;
@@ -116,6 +125,11 @@ public final class OperatingSystem implements ReadableOperatingSystem {
 	}
 
 	@Override
+	public VersionNumber getVersionNumber() {
+		return versionNumber;
+	}
+
+	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
@@ -124,6 +138,7 @@ public final class OperatingSystem implements ReadableOperatingSystem {
 		result = prime * result + producer.hashCode();
 		result = prime * result + producerUrl.hashCode();
 		result = prime * result + url.hashCode();
+		result = prime * result + versionNumber.hashCode();
 		return result;
 	}
 
@@ -140,6 +155,8 @@ public final class OperatingSystem implements ReadableOperatingSystem {
 		builder.append(producerUrl);
 		builder.append(", url=");
 		builder.append(url);
+		builder.append(", versionNumber=");
+		builder.append(versionNumber);
 		builder.append("]");
 		return builder.toString();
 	}

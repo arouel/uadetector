@@ -29,8 +29,7 @@ public class UserAgentTest {
 
 	@Test(expected = IllegalArgumentException.class)
 	public void construct_name_null() {
-		new UserAgent("family", null, OperatingSystem.EMPTY, "producer", "producer url", "type", "url",
-				VersionParser.parseVersion("1"));
+		new UserAgent("family", null, OperatingSystem.EMPTY, "producer", "producer url", "type", "url", VersionParser.parseVersion("1"));
 	}
 
 	@Test(expected = IllegalArgumentException.class)
@@ -50,14 +49,12 @@ public class UserAgentTest {
 
 	@Test(expected = IllegalArgumentException.class)
 	public void construct_type_null() {
-		new UserAgent("family", "name", OperatingSystem.EMPTY, "producer", "producer url", null, "url",
-				VersionParser.parseVersion("1"));
+		new UserAgent("family", "name", OperatingSystem.EMPTY, "producer", "producer url", null, "url", VersionParser.parseVersion("1"));
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void construct_url_null() {
-		new UserAgent("family", "name", OperatingSystem.EMPTY, "producer", "producer url", "type", null,
-				VersionParser.parseVersion("1"));
+		new UserAgent("family", "name", OperatingSystem.EMPTY, "producer", "producer url", "type", null, VersionParser.parseVersion("1"));
 	}
 
 	@Test(expected = IllegalArgumentException.class)
@@ -97,8 +94,8 @@ public class UserAgentTest {
 
 	@Test
 	public void equals_differentOperatingSystem() {
-		final OperatingSystem os1 = new OperatingSystem("family", "name1", "producer", "producer url", "url");
-		final OperatingSystem os2 = new OperatingSystem("family", "name2", "producer", "producer url", "url");
+		final OperatingSystem os1 = new OperatingSystem("family", "name1", "producer", "producer url", "url", new VersionNumber("1"));
+		final OperatingSystem os2 = new OperatingSystem("family", "name2", "producer", "producer url", "url", new VersionNumber("1"));
 		final UserAgent ua1 = new UserAgent("family", "name", os1, "producer", "producer url", "type", "url",
 				VersionParser.parseVersion("1"));
 		final UserAgent ua2 = new UserAgent("family", "name", os2, "producer", "producer url", "type", "url",
@@ -217,10 +214,9 @@ public class UserAgentTest {
 	@Test
 	public void testToString() {
 		// reduces only some noise in coverage report
-		final UserAgent ua = new UserAgent("f1", "n1", OperatingSystem.EMPTY, "p1", "pu1", "t1", "u1",
-				VersionParser.parseVersion("1"));
+		final UserAgent ua = new UserAgent("f1", "n1", OperatingSystem.EMPTY, "p1", "pu1", "t1", "u1", VersionParser.parseVersion("1"));
 		Assert.assertEquals(
-				"UserAgent [family=f1, name=n1, operatingSystem=OperatingSystem [family=unknown, name=unknown, producer=, producerUrl=, url=], producer=p1, producerUrl=pu1, type=t1, url=u1, versionNumber=VersionNumber [groups=[1, , ], extension=]]",
+				"UserAgent [family=f1, name=n1, operatingSystem=OperatingSystem [family=unknown, name=unknown, producer=, producerUrl=, url=, versionNumber=VersionNumber [groups=[, , ], extension=]], producer=p1, producerUrl=pu1, type=t1, url=u1, versionNumber=VersionNumber [groups=[1, , ], extension=]]",
 				ua.toString());
 	}
 

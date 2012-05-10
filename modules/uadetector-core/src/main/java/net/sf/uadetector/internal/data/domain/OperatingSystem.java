@@ -20,6 +20,8 @@ import java.util.SortedSet;
 import java.util.TreeSet;
 
 import net.sf.uadetector.UserAgent;
+import net.sf.uadetector.VersionNumber;
+import net.sf.uadetector.internal.util.VersionParser;
 
 public final class OperatingSystem {
 
@@ -212,6 +214,17 @@ public final class OperatingSystem {
 
 	}
 
+	/**
+	 * Extracts the version number from the operating system name.
+	 * 
+	 * @param name
+	 *            operating system name with version information
+	 * @return extracted version number
+	 */
+	private static VersionNumber parseVersionNumberFromName(final String name) {
+		return VersionParser.parseLastVersionNumber(name);
+	}
+
 	private final String family;
 	private final String icon;
 	private final int id;
@@ -220,6 +233,7 @@ public final class OperatingSystem {
 	private final SortedSet<OperatingSystemPattern> patternSet;
 	private final String producer;
 	private final String producerUrl;
+
 	private final String url;
 
 	public OperatingSystem(final String family, final String icon, final int id, final String infoUrl, final String name,
@@ -264,8 +278,15 @@ public final class OperatingSystem {
 		this.url = url;
 	}
 
+	/**
+	 * Copies all information of the current operating system entry to the given user agent builder.
+	 * 
+	 * @param builder
+	 *            user agent builder
+	 */
 	public void copyTo(final UserAgent.Builder builder) {
-		builder.setOperatingSystem(new net.sf.uadetector.OperatingSystem(family, name, producer, producerUrl, url));
+		final VersionNumber version = parseVersionNumberFromName(name);
+		builder.setOperatingSystem(new net.sf.uadetector.OperatingSystem(family, name, producer, producerUrl, url, version));
 	}
 
 	@Override

@@ -25,7 +25,7 @@ public class UserAgentBuilderTest {
 
 	@Test
 	public void build_custom() {
-		final OperatingSystem os = new OperatingSystem("family", "name", "producer", "producer url", "url");
+		final OperatingSystem os = new OperatingSystem("family", "name", "producer", "producer url", "url", new VersionNumber("1"));
 
 		final UserAgent.Builder b = new UserAgent.Builder();
 		Assert.assertSame(b, b.setFamily("f1"));
@@ -106,6 +106,7 @@ public class UserAgentBuilderTest {
 		EasyMock.expect(os.getProducer()).andReturn("p1").anyTimes();
 		EasyMock.expect(os.getProducerUrl()).andReturn("pu1").anyTimes();
 		EasyMock.expect(os.getUrl()).andReturn("u1").anyTimes();
+		EasyMock.expect(os.getVersionNumber()).andReturn(new VersionNumber("1", "0")).anyTimes();
 		EasyMock.replay(os);
 		new UserAgent.Builder().setOperatingSystem(os);
 	}
@@ -118,6 +119,7 @@ public class UserAgentBuilderTest {
 		EasyMock.expect(os.getProducer()).andReturn("p1").anyTimes();
 		EasyMock.expect(os.getProducerUrl()).andReturn("pu1").anyTimes();
 		EasyMock.expect(os.getUrl()).andReturn("u1").anyTimes();
+		EasyMock.expect(os.getVersionNumber()).andReturn(new VersionNumber("1", "0")).anyTimes();
 		EasyMock.replay(os);
 		new UserAgent.Builder().setOperatingSystem(os);
 	}

@@ -3,22 +3,12 @@
 <uasdata>
 	<description>
 		<label>Data (format xml) for UASparser - http://user-agent-string.info/download/UASparser</label>
-		<version>20120425-05</version>
+		<version>20120509-01</version>
 		<checksum type="MD5">http://user-agent-string.info/rpc/get_data.php?format=xml&amp;md5=y</checksum>
 		<checksum type="SHA1">http://user-agent-string.info/rpc/get_data.php?format=xml&amp;sha1=y</checksum>
 	</description>
 	<data>
 		<robots>
-			<robot>
-				<id>6929</id>
-				<useragent><![CDATA[Mozilla/5.0 (compatible; WASALive-Bot ; http://blog.wasalive.com/wasalive-bots/)]]></useragent>
-				<family> WASALive-Bot</family>
-				<name> WASALive-Bot</name>
-				<company><![CDATA[WASALive]]></company>
-				<url_company><![CDATA[http://www.wasalive.com/]]></url_company>
-				<icon>bot.png</icon>
-				<bot_info_url>/list-of-ua/bot-detail?bot= WASALive-Bot</bot_info_url>
-			</robot>
 			<robot>
 				<id>1490</id>
 				<useragent><![CDATA[192.comAgent]]></useragent>
@@ -46,7 +36,7 @@
 				<name>80legs/0.71</name>
 				<company><![CDATA[Computational Crawling, LP ]]></company>
 				<url_company><![CDATA[http://compucrawl.com/]]></url_company>
-				<icon>bot.png</icon>
+				<icon>bot_80legs.png</icon>
 				<bot_info_url>/list-of-ua/bot-detail?bot=80legs</bot_info_url>
 			</robot>
 			<robot>
@@ -56,7 +46,7 @@
 				<name>80legs/0.83</name>
 				<company><![CDATA[Computational Crawling, LP]]></company>
 				<url_company><![CDATA[http://compucrawl.com/]]></url_company>
-				<icon>bot.png</icon>
+				<icon>bot_80legs.png</icon>
 				<bot_info_url>/list-of-ua/bot-detail?bot=80legs</bot_info_url>
 			</robot>
 			<robot>
@@ -66,7 +56,7 @@
 				<name>80legs/0.83 b</name>
 				<company><![CDATA[Computational Crawling, LP]]></company>
 				<url_company><![CDATA[http://compucrawl.com/]]></url_company>
-				<icon>bot.png</icon>
+				<icon>bot_80legs.png</icon>
 				<bot_info_url>/list-of-ua/bot-detail?bot=80legs</bot_info_url>
 			</robot>
 			<robot>
@@ -192,142 +182,152 @@
 			<robot>
 				<id>1273</id>
 				<useragent><![CDATA[Acoon-Robot 4.0.0RC2 (http://www.acoon.de)]]></useragent>
-				<family>Acoon-Robot</family>
+				<family>Acoon</family>
 				<name>Acoon-Robot 4.0.0RC2</name>
 				<company><![CDATA[Acoon GmbH]]></company>
 				<url_company><![CDATA[http://www.acoon.de/]]></url_company>
-				<icon>bot.png</icon>
-				<bot_info_url>/list-of-ua/bot-detail?bot=Acoon-Robot</bot_info_url>
+				<icon>bot_Acoon.png</icon>
+				<bot_info_url>/list-of-ua/bot-detail?bot=Acoon</bot_info_url>
 			</robot>
 			<robot>
 				<id>1282</id>
 				<useragent><![CDATA[Acoon-Robot 4.0.1 (http://www.acoon.de)]]></useragent>
-				<family>Acoon-Robot</family>
+				<family>Acoon</family>
 				<name>Acoon-Robot 4.0.1</name>
 				<company><![CDATA[Acoon GmbH]]></company>
 				<url_company><![CDATA[http://www.acoon.de/]]></url_company>
-				<icon>bot.png</icon>
-				<bot_info_url>/list-of-ua/bot-detail?bot=Acoon-Robot</bot_info_url>
+				<icon>bot_Acoon.png</icon>
+				<bot_info_url>/list-of-ua/bot-detail?bot=Acoon</bot_info_url>
 			</robot>
 			<robot>
 				<id>1287</id>
 				<useragent><![CDATA[Acoon-Robot 4.0.2 (http://www.acoon.de)]]></useragent>
-				<family>Acoon-Robot</family>
+				<family>Acoon</family>
 				<name>Acoon-Robot 4.0.2</name>
 				<company><![CDATA[Acoon GmbH]]></company>
 				<url_company><![CDATA[http://www.acoon.de/]]></url_company>
-				<icon>bot.png</icon>
-				<bot_info_url>/list-of-ua/bot-detail?bot=Acoon-Robot</bot_info_url>
+				<icon>bot_Acoon.png</icon>
+				<bot_info_url>/list-of-ua/bot-detail?bot=Acoon</bot_info_url>
 			</robot>
 			<robot>
 				<id>1297</id>
 				<useragent><![CDATA[Acoon-Robot 4.0.2.17 (http://www.acoon.de)]]></useragent>
-				<family>Acoon-Robot</family>
+				<family>Acoon</family>
 				<name>Acoon-Robot 4.0.2.17</name>
 				<company><![CDATA[Acoon GmbH]]></company>
 				<url_company><![CDATA[http://www.acoon.de/]]></url_company>
-				<icon>bot.png</icon>
-				<bot_info_url>/list-of-ua/bot-detail?bot=Acoon-Robot</bot_info_url>
+				<icon>bot_Acoon.png</icon>
+				<bot_info_url>/list-of-ua/bot-detail?bot=Acoon</bot_info_url>
 			</robot>
 			<robot>
 				<id>1685</id>
 				<useragent><![CDATA[OpenAcoon v4.1.0 (www.openacoon.de)]]></useragent>
-				<family>Acoon-Robot</family>
+				<family>Acoon</family>
 				<name>OpenAcoon v4.1.0</name>
 				<company><![CDATA[Acoon GmbH]]></company>
 				<url_company><![CDATA[http://www.acoon.de/]]></url_company>
-				<icon>bot.png</icon>
-				<bot_info_url>/list-of-ua/bot-detail?bot=Acoon-Robot</bot_info_url>
+				<icon>bot_Acoon.png</icon>
+				<bot_info_url>/list-of-ua/bot-detail?bot=Acoon</bot_info_url>
 			</robot>
 			<robot>
 				<id>6905</id>
 				<useragent><![CDATA[Acoon v4.1.0 (www.acoon.de)]]></useragent>
-				<family>Acoon-Robot</family>
+				<family>Acoon</family>
 				<name>Acoon v4.1.0</name>
 				<company><![CDATA[Acoon GmbH]]></company>
 				<url_company><![CDATA[http://www.acoon.de/]]></url_company>
-				<icon>bot.png</icon>
-				<bot_info_url>/list-of-ua/bot-detail?bot=Acoon-Robot</bot_info_url>
+				<icon>bot_Acoon.png</icon>
+				<bot_info_url>/list-of-ua/bot-detail?bot=Acoon</bot_info_url>
 			</robot>
 			<robot>
 				<id>7001</id>
 				<useragent><![CDATA[Acoon v4.9.5 (www.acoon.de)]]></useragent>
-				<family>Acoon-Robot</family>
+				<family>Acoon</family>
 				<name>Acoon v4.9.5</name>
 				<company><![CDATA[Acoon GmbH]]></company>
 				<url_company><![CDATA[http://www.acoon.de/]]></url_company>
-				<icon>bot.png</icon>
-				<bot_info_url>/list-of-ua/bot-detail?bot=Acoon-Robot</bot_info_url>
+				<icon>bot_Acoon.png</icon>
+				<bot_info_url>/list-of-ua/bot-detail?bot=Acoon</bot_info_url>
 			</robot>
 			<robot>
 				<id>7009</id>
 				<useragent><![CDATA[Acoon v4.10.1 (www.acoon.de)]]></useragent>
-				<family>Acoon-Robot</family>
+				<family>Acoon</family>
 				<name>Acoon v4.10.1</name>
 				<company><![CDATA[Acoon GmbH]]></company>
 				<url_company><![CDATA[http://www.acoon.de/]]></url_company>
-				<icon>bot.png</icon>
-				<bot_info_url>/list-of-ua/bot-detail?bot=Acoon-Robot</bot_info_url>
+				<icon>bot_Acoon.png</icon>
+				<bot_info_url>/list-of-ua/bot-detail?bot=Acoon</bot_info_url>
 			</robot>
 			<robot>
 				<id>7112</id>
 				<useragent><![CDATA[Acoon v4.10.3 (www.acoon.de)]]></useragent>
-				<family>Acoon-Robot</family>
+				<family>Acoon</family>
 				<name>Acoon v4.10.3</name>
 				<company><![CDATA[Acoon GmbH]]></company>
 				<url_company><![CDATA[http://www.acoon.de/]]></url_company>
-				<icon>bot.png</icon>
-				<bot_info_url>/list-of-ua/bot-detail?bot=Acoon-Robot</bot_info_url>
+				<icon>bot_Acoon.png</icon>
+				<bot_info_url>/list-of-ua/bot-detail?bot=Acoon</bot_info_url>
 			</robot>
 			<robot>
 				<id>7178</id>
 				<useragent><![CDATA[Acoon v4.10.4 (www.acoon.de)]]></useragent>
-				<family>Acoon-Robot</family>
+				<family>Acoon</family>
 				<name>Acoon v4.10.4</name>
 				<company><![CDATA[Acoon GmbH]]></company>
 				<url_company><![CDATA[http://www.acoon.de/]]></url_company>
-				<icon>bot.png</icon>
-				<bot_info_url>/list-of-ua/bot-detail?bot=Acoon-Robot</bot_info_url>
+				<icon>bot_Acoon.png</icon>
+				<bot_info_url>/list-of-ua/bot-detail?bot=Acoon</bot_info_url>
 			</robot>
 			<robot>
 				<id>7265</id>
 				<useragent><![CDATA[Acoon v4.10.5 (www.acoon.de)]]></useragent>
-				<family>Acoon-Robot</family>
+				<family>Acoon</family>
 				<name>Acoon v4.10.5</name>
 				<company><![CDATA[Acoon GmbH]]></company>
 				<url_company><![CDATA[http://www.acoon.de/]]></url_company>
-				<icon>bot.png</icon>
-				<bot_info_url>/list-of-ua/bot-detail?bot=Acoon-Robot</bot_info_url>
+				<icon>bot_Acoon.png</icon>
+				<bot_info_url>/list-of-ua/bot-detail?bot=Acoon</bot_info_url>
 			</robot>
 			<robot>
 				<id>7285</id>
 				<useragent><![CDATA[OpenAcoon v4.10.5 (www.openacoon.de)]]></useragent>
-				<family>Acoon-Robot</family>
+				<family>Acoon</family>
 				<name>OpenAcoon v4.10.5</name>
 				<company><![CDATA[Acoon GmbH]]></company>
 				<url_company><![CDATA[http://www.acoon.de/]]></url_company>
-				<icon>bot.png</icon>
-				<bot_info_url>/list-of-ua/bot-detail?bot=Acoon-Robot</bot_info_url>
+				<icon>bot_Acoon.png</icon>
+				<bot_info_url>/list-of-ua/bot-detail?bot=Acoon</bot_info_url>
 			</robot>
 			<robot>
 				<id>7321</id>
 				<useragent><![CDATA[AcoonBot/4.10.5 (+http://www.acoon.de)]]></useragent>
-				<family>Acoon-Robot</family>
+				<family>Acoon</family>
 				<name>AcoonBot/4.10.5</name>
 				<company><![CDATA[Acoon GmbH]]></company>
 				<url_company><![CDATA[http://www.acoon.de/]]></url_company>
-				<icon>bot.png</icon>
-				<bot_info_url>/list-of-ua/bot-detail?bot=Acoon-Robot</bot_info_url>
+				<icon>bot_Acoon.png</icon>
+				<bot_info_url>/list-of-ua/bot-detail?bot=Acoon</bot_info_url>
 			</robot>
 			<robot>
 				<id>7366</id>
 				<useragent><![CDATA[Mozilla/5.0 (compatible; AcoonBot/4.10.6; +http://www.acoon.de/robot.asp)]]></useragent>
-				<family>Acoon-Robot</family>
+				<family>Acoon</family>
 				<name>AcoonBot/4.10.6</name>
 				<company><![CDATA[Acoon GmbH]]></company>
 				<url_company><![CDATA[http://www.acoon.de/]]></url_company>
-				<icon>bot.png</icon>
-				<bot_info_url>/list-of-ua/bot-detail?bot=Acoon-Robot</bot_info_url>
+				<icon>bot_Acoon.png</icon>
+				<bot_info_url>/list-of-ua/bot-detail?bot=Acoon</bot_info_url>
+			</robot>
+			<robot>
+				<id>7409</id>
+				<useragent><![CDATA[Mozilla/5.0 (compatible; AcoonBot/4.10.7; +http://www.acoon.de/robot.asp)]]></useragent>
+				<family>Acoon</family>
+				<name>AcoonBot/4.10.7</name>
+				<company><![CDATA[Acoon GmbH]]></company>
+				<url_company><![CDATA[http://www.acoon.de/]]></url_company>
+				<icon>bot_Acoon.png</icon>
+				<bot_info_url>/list-of-ua/bot-detail?bot=Acoon</bot_info_url>
 			</robot>
 			<robot>
 				<id>829</id>
@@ -956,7 +956,7 @@
 				<name>Blekkobot</name>
 				<company><![CDATA[Blekko Inc.]]></company>
 				<url_company><![CDATA[http://blekko.com/]]></url_company>
-				<icon>bot.png</icon>
+				<icon>bot_blekkobot.png</icon>
 				<bot_info_url>/list-of-ua/bot-detail?bot=Blekkobot</bot_info_url>
 			</robot>
 			<robot>
@@ -998,6 +998,16 @@
 				<url_company><![CDATA[http://www.nielsen-online.com/]]></url_company>
 				<icon>bot.png</icon>
 				<bot_info_url>/list-of-ua/bot-detail?bot=BlogPulse</bot_info_url>
+			</robot>
+			<robot>
+				<id>7442</id>
+				<useragent><![CDATA[Mozilla/5.0 (compatible; bnf.fr_bot; +http://www.bnf.fr/fr/outils/a.dl_web_capture_robot.html)]]></useragent>
+				<family>bnf.fr_bot</family>
+				<name>bnf.fr_bot</name>
+				<company><![CDATA[Bibliothe`que nationale de France]]></company>
+				<url_company><![CDATA[http://www.bnf.fr/]]></url_company>
+				<icon>bot.png</icon>
+				<bot_info_url>/list-of-ua/bot-detail?bot=bnf.fr_bot</bot_info_url>
 			</robot>
 			<robot>
 				<id>146</id>
@@ -1356,7 +1366,7 @@
 				<name>ChangeDetection</name>
 				<company><![CDATA[FreeFind.com]]></company>
 				<url_company><![CDATA[http://www.freefind.com/]]></url_company>
-				<icon>bot.png</icon>
+				<icon>bot_ChangeDetection.png</icon>
 				<bot_info_url>/list-of-ua/bot-detail?bot=ChangeDetection</bot_info_url>
 			</robot>
 			<robot>
@@ -1730,6 +1740,16 @@
 				<bot_info_url>/list-of-ua/bot-detail?bot=Daumoa</bot_info_url>
 			</robot>
 			<robot>
+				<id>7406</id>
+				<useragent><![CDATA[Mozilla/5.0 (compatible; MSIE or Firefox mutant; not on Windows server; + http://tab.search.daum.net/aboutWebSearch.html) Daumoa/3.0]]></useragent>
+				<family>Daumoa</family>
+				<name>Daumoa/3.0</name>
+				<company><![CDATA[Daum Communications Corp.]]></company>
+				<url_company><![CDATA[http://info.daum.net/]]></url_company>
+				<icon>bot.png</icon>
+				<bot_info_url>/list-of-ua/bot-detail?bot=Daumoa</bot_info_url>
+			</robot>
+			<robot>
 				<id>1530</id>
 				<useragent><![CDATA[Mozilla/5.0 (compatible; DBLBot/1.0; +http://www.dontbuylists.com/)]]></useragent>
 				<family>DBLBot</family>
@@ -1856,7 +1876,7 @@
 				<name>discobot/1.1</name>
 				<company><![CDATA[discoveryengine.com. ]]></company>
 				<url_company><![CDATA[http://www.discoveryengine.com/]]></url_company>
-				<icon>bot.png</icon>
+				<icon>bot_discobot.png</icon>
 				<bot_info_url>/list-of-ua/bot-detail?bot=discobot</bot_info_url>
 			</robot>
 			<robot>
@@ -1866,7 +1886,7 @@
 				<name>discobot/1.0</name>
 				<company><![CDATA[discoveryengine.com. ]]></company>
 				<url_company><![CDATA[http://www.discoveryengine.com/]]></url_company>
-				<icon>bot.png</icon>
+				<icon>bot_discobot.png</icon>
 				<bot_info_url>/list-of-ua/bot-detail?bot=discobot</bot_info_url>
 			</robot>
 			<robot>
@@ -1876,7 +1896,7 @@
 				<name>discobot/2.0</name>
 				<company><![CDATA[discoveryengine.com. ]]></company>
 				<url_company><![CDATA[http://www.discoveryengine.com/]]></url_company>
-				<icon>bot.png</icon>
+				<icon>bot_discobot.png</icon>
 				<bot_info_url>/list-of-ua/bot-detail?bot=discobot</bot_info_url>
 			</robot>
 			<robot>
@@ -2745,7 +2765,7 @@
 				<family>Gaisbot</family>
 				<name>Gaisbot/3.0</name>
 				<company><![CDATA[National Chung Cheng University]]></company>
-				<url_company><![CDATA[http://www.ccu.edu.tw/index_e.htm]]></url_company>
+				<url_company><![CDATA[http://www.ccu.edu.tw/]]></url_company>
 				<icon>bot_gaisbot.png</icon>
 				<bot_info_url>/list-of-ua/bot-detail?bot=Gaisbot</bot_info_url>
 			</robot>
@@ -2755,7 +2775,7 @@
 				<family>Gaisbot</family>
 				<name>Gaisbot/3.0 - 06</name>
 				<company><![CDATA[National Chung Cheng University]]></company>
-				<url_company><![CDATA[http://www.ccu.edu.tw/index_e.htm]]></url_company>
+				<url_company><![CDATA[http://www.ccu.edu.tw/]]></url_company>
 				<icon>bot_gaisbot.png</icon>
 				<bot_info_url>/list-of-ua/bot-detail?bot=Gaisbot</bot_info_url>
 			</robot>
@@ -3518,6 +3538,16 @@
 				<url_company><![CDATA[http://internetmemory.org/]]></url_company>
 				<icon>bot.png</icon>
 				<bot_info_url>/list-of-ua/bot-detail?bot=imbot</bot_info_url>
+			</robot>
+			<robot>
+				<id>7414</id>
+				<useragent><![CDATA[Influencebot/0.9; (Automatic classification of websites; http://www.influencebox.com/; info@influencebox.com)]]></useragent>
+				<family>Influencebot</family>
+				<name>Influencebot/0.9</name>
+				<company><![CDATA[Frank]]></company>
+				<url_company><![CDATA[]]></url_company>
+				<icon>bot.png</icon>
+				<bot_info_url>/list-of-ua/bot-detail?bot=Influencebot</bot_info_url>
 			</robot>
 			<robot>
 				<id>85</id>
@@ -4574,7 +4604,7 @@
 				<useragent><![CDATA[msnbot/1.0 (+http://search.msn.com/msnbot.htm)]]></useragent>
 				<family>MSNBot</family>
 				<name>MSNBot/1.0</name>
-				<company><![CDATA[Microsoft]]></company>
+				<company><![CDATA[Microsoft Corporation]]></company>
 				<url_company><![CDATA[http://www.microsoft.com/]]></url_company>
 				<icon>bot_msnbot.png</icon>
 				<bot_info_url>/list-of-ua/bot-detail?bot=MSNBot</bot_info_url>
@@ -4584,7 +4614,7 @@
 				<useragent><![CDATA[msnbot/2.0b (+http://search.msn.com/msnbot.htm)]]></useragent>
 				<family>MSNBot</family>
 				<name>MSNBot/2.0b</name>
-				<company><![CDATA[Microsoft]]></company>
+				<company><![CDATA[Microsoft Corporation]]></company>
 				<url_company><![CDATA[http://www.microsoft.com/]]></url_company>
 				<icon>bot_msnbot.png</icon>
 				<bot_info_url>/list-of-ua/bot-detail?bot=MSNBot</bot_info_url>
@@ -4594,7 +4624,7 @@
 				<useragent><![CDATA[msnbot/1.1 (+http://search.msn.com/msnbot.htm)]]></useragent>
 				<family>MSNBot</family>
 				<name>MSNBot/1.1</name>
-				<company><![CDATA[Microsoft]]></company>
+				<company><![CDATA[Microsoft Corporation]]></company>
 				<url_company><![CDATA[http://www.microsoft.com/]]></url_company>
 				<icon>bot_msnbot.png</icon>
 				<bot_info_url>/list-of-ua/bot-detail?bot=MSNBot</bot_info_url>
@@ -4604,7 +4634,7 @@
 				<useragent><![CDATA[msnbot-media/1.1 (+http://search.msn.com/msnbot.htm)]]></useragent>
 				<family>MSNBot</family>
 				<name>msnbot-media/1.1</name>
-				<company><![CDATA[Microsoft]]></company>
+				<company><![CDATA[Microsoft Corporation]]></company>
 				<url_company><![CDATA[http://www.microsoft.com/]]></url_company>
 				<icon>bot_msnbot.png</icon>
 				<bot_info_url>/list-of-ua/bot-detail?bot=MSNBot</bot_info_url>
@@ -4614,7 +4644,7 @@
 				<useragent><![CDATA[msnbot/2.0b (+http://search.msn.com/msnbot.htm).]]></useragent>
 				<family>MSNBot</family>
 				<name>MSNBot/2.0b + .</name>
-				<company><![CDATA[Microsoft]]></company>
+				<company><![CDATA[Microsoft Corporation]]></company>
 				<url_company><![CDATA[http://www.microsoft.com/]]></url_company>
 				<icon>bot_msnbot.png</icon>
 				<bot_info_url>/list-of-ua/bot-detail?bot=MSNBot</bot_info_url>
@@ -4624,7 +4654,7 @@
 				<useragent><![CDATA[msnbot/2.0b (+http://search.msn.com/msnbot.htm)._]]></useragent>
 				<family>MSNBot</family>
 				<name>MSNBot/2.0b + ._</name>
-				<company><![CDATA[Microsoft]]></company>
+				<company><![CDATA[Microsoft Corporation]]></company>
 				<url_company><![CDATA[http://www.microsoft.com/]]></url_company>
 				<icon>bot_msnbot.png</icon>
 				<bot_info_url>/list-of-ua/bot-detail?bot=MSNBot</bot_info_url>
@@ -4634,7 +4664,7 @@
 				<useragent><![CDATA[msnbot-NewsBlogs/2.0b (+http://search.msn.com/msnbot.htm)]]></useragent>
 				<family>MSNBot</family>
 				<name>msnbot-NewsBlogs/2.0b</name>
-				<company><![CDATA[Microsoft]]></company>
+				<company><![CDATA[Microsoft Corporation]]></company>
 				<url_company><![CDATA[http://www.microsoft.com/]]></url_company>
 				<icon>bot_msnbot.png</icon>
 				<bot_info_url>/list-of-ua/bot-detail?bot=MSNBot</bot_info_url>
@@ -4644,7 +4674,7 @@
 				<useragent><![CDATA[MSRBOT]]></useragent>
 				<family>MSRBOT</family>
 				<name>MSRBOT</name>
-				<company><![CDATA[Microsoft]]></company>
+				<company><![CDATA[Microsoft Corporation]]></company>
 				<url_company><![CDATA[http://www.microsoft.com/]]></url_company>
 				<icon>bot.png</icon>
 				<bot_info_url>/list-of-ua/bot-detail?bot=MSRBOT</bot_info_url>
@@ -4654,7 +4684,7 @@
 				<useragent><![CDATA[MSRBOT (http://research.microsoft.com/research/sv/msrbot/)]]></useragent>
 				<family>MSRBOT</family>
 				<name>MSRBOT b</name>
-				<company><![CDATA[Microsoft]]></company>
+				<company><![CDATA[Microsoft Corporation]]></company>
 				<url_company><![CDATA[http://www.microsoft.com/]]></url_company>
 				<icon>bot.png</icon>
 				<bot_info_url>/list-of-ua/bot-detail?bot=MSRBOT</bot_info_url>
@@ -4664,7 +4694,7 @@
 				<useragent><![CDATA[MSRBOT (http://research.microsoft.com/research/sv/msrbot)]]></useragent>
 				<family>MSRBOT</family>
 				<name>MSRBOT c</name>
-				<company><![CDATA[Microsoft]]></company>
+				<company><![CDATA[Microsoft Corporation]]></company>
 				<url_company><![CDATA[http://www.microsoft.com/]]></url_company>
 				<icon>bot.png</icon>
 				<bot_info_url>/list-of-ua/bot-detail?bot=MSRBOT</bot_info_url>
@@ -4674,7 +4704,7 @@
 				<useragent><![CDATA[MSRBOT (http://research.microsoft.com/research/sv/msrbot/]]></useragent>
 				<family>MSRBOT</family>
 				<name>MSRBOT d</name>
-				<company><![CDATA[Microsoft]]></company>
+				<company><![CDATA[Microsoft Corporation]]></company>
 				<url_company><![CDATA[http://www.microsoft.com/]]></url_company>
 				<icon>bot.png</icon>
 				<bot_info_url>/list-of-ua/bot-detail?bot=MSRBOT</bot_info_url>
@@ -5056,7 +5086,7 @@
 				<name>Nuhk/2.4</name>
 				<company><![CDATA[Elion]]></company>
 				<url_company><![CDATA[http://www.neti.ee/]]></url_company>
-				<icon>bot.png</icon>
+				<icon>bot_Nuhk.png</icon>
 				<bot_info_url>/list-of-ua/bot-detail?bot=Nuhk</bot_info_url>
 			</robot>
 			<robot>
@@ -5066,7 +5096,7 @@
 				<name>Nuhk/2.4 b</name>
 				<company><![CDATA[Elion]]></company>
 				<url_company><![CDATA[http://www.neti.ee/]]></url_company>
-				<icon>bot.png</icon>
+				<icon>bot_Nuhk.png</icon>
 				<bot_info_url>/list-of-ua/bot-detail?bot=Nuhk</bot_info_url>
 			</robot>
 			<robot>
@@ -5600,6 +5630,16 @@
 				<bot_info_url>/list-of-ua/bot-detail?bot=Panscient web crawler</bot_info_url>
 			</robot>
 			<robot>
+				<id>7437</id>
+				<useragent><![CDATA[Mozilla/5.0 (compatible; PaperLiBot/2.1; http://support.paper.li/entries/20023257-what-is-paper-li)]]></useragent>
+				<family>PaperLiBot</family>
+				<name>PaperLiBot/2.1</name>
+				<company><![CDATA[Paper.li]]></company>
+				<url_company><![CDATA[http://paper.li/]]></url_company>
+				<icon>bot.png</icon>
+				<bot_info_url>/list-of-ua/bot-detail?bot=PaperLiBot</bot_info_url>
+			</robot>
+			<robot>
 				<id>1938</id>
 				<useragent><![CDATA[Mozilla/5.0 (compatible;+ParchBot/1.0;++http://www.parchmenthill.com/search.htm)]]></useragent>
 				<family>ParchBot</family>
@@ -5968,6 +6008,16 @@
 				<url_company><![CDATA[]]></url_company>
 				<icon>bot.png</icon>
 				<bot_info_url>/list-of-ua/bot-detail?bot=Ruky-Roboter</bot_info_url>
+			</robot>
+			<robot>
+				<id>7424</id>
+				<useragent><![CDATA[RyzeCrawler/1.1.1 ( http://www.domain2day.nl/crawler/)]]></useragent>
+				<family>RyzeCrawler</family>
+				<name>RyzeCrawler/1.1.1</name>
+				<company><![CDATA[Domain2day]]></company>
+				<url_company><![CDATA[http://www.domain2day.nl/]]></url_company>
+				<icon>bot.png</icon>
+				<bot_info_url>/list-of-ua/bot-detail?bot=RyzeCrawler</bot_info_url>
 			</robot>
 			<robot>
 				<id>1816</id>
@@ -7780,6 +7830,16 @@
 				<bot_info_url>/list-of-ua/bot-detail?bot=VWBot</bot_info_url>
 			</robot>
 			<robot>
+				<id>6929</id>
+				<useragent><![CDATA[Mozilla/5.0 (compatible; WASALive-Bot ; http://blog.wasalive.com/wasalive-bots/)]]></useragent>
+				<family>WASALive-Bot</family>
+				<name> WASALive-Bot</name>
+				<company><![CDATA[WASALive]]></company>
+				<url_company><![CDATA[http://www.wasalive.com/]]></url_company>
+				<icon>bot.png</icon>
+				<bot_info_url>/list-of-ua/bot-detail?bot=WASALive-Bot</bot_info_url>
+			</robot>
+			<robot>
 				<id>5642</id>
 				<useragent><![CDATA[WatchMouse/18990 (http://watchmouse.com/ ; hk)]]></useragent>
 				<family>WatchMouse</family>
@@ -8038,6 +8098,16 @@
 				<url_company><![CDATA[]]></url_company>
 				<icon>bot.png</icon>
 				<bot_info_url>/list-of-ua/bot-detail?bot=wectar</bot_info_url>
+			</robot>
+			<robot>
+				<id>7438</id>
+				<useragent><![CDATA[WeSEE:Search/0.1 (Alpha, http://www.wesee.com/en/support/bot/)]]></useragent>
+				<family>WeSEE:Search</family>
+				<name>WeSEE:Search/0.1 (Alpha)</name>
+				<company><![CDATA[WeSEE Ltd]]></company>
+				<url_company><![CDATA[http://www.wesee.com/]]></url_company>
+				<icon>bot.png</icon>
+				<bot_info_url>/list-of-ua/bot-detail?bot=WeSEE:Search</bot_info_url>
 			</robot>
 			<robot>
 				<id>5389</id>
@@ -8740,26 +8810,6 @@
 				<bot_info_url>/list-of-ua/bot-detail?bot=Yahoo! JAPAN</bot_info_url>
 			</robot>
 			<robot>
-				<id>7172</id>
-				<useragent><![CDATA[Yandex.Server/2009.5]]></useragent>
-				<family>Yandex.Server</family>
-				<name>Yandex.Server/2009.5</name>
-				<company><![CDATA[Yandex LLC]]></company>
-				<url_company><![CDATA[http://company.yandex.com/]]></url_company>
-				<icon>bot.png</icon>
-				<bot_info_url>/list-of-ua/bot-detail?bot=Yandex.Server</bot_info_url>
-			</robot>
-			<robot>
-				<id>7173</id>
-				<useragent><![CDATA[Yandex.Server/2010.9]]></useragent>
-				<family>Yandex.Server</family>
-				<name>Yandex.Server/2010.9</name>
-				<company><![CDATA[Yandex LLC]]></company>
-				<url_company><![CDATA[http://company.yandex.com/]]></url_company>
-				<icon>bot.png</icon>
-				<bot_info_url>/list-of-ua/bot-detail?bot=Yandex.Server</bot_info_url>
-			</robot>
-			<robot>
 				<id>605</id>
 				<useragent><![CDATA[Yandex/1.01.001 (compatible; Win16; I)]]></useragent>
 				<family>YandexBot</family>
@@ -8904,6 +8954,86 @@
 				<useragent><![CDATA[Mozilla/5.0 (compatible; YandexImageResizer/2.0; +http://yandex.com/bots)]]></useragent>
 				<family>YandexBot</family>
 				<name>YandexImageResizer/2.0</name>
+				<company><![CDATA[Yandex LLC]]></company>
+				<url_company><![CDATA[http://company.yandex.com/]]></url_company>
+				<icon>bot_Yandex.png</icon>
+				<bot_info_url>/list-of-ua/bot-detail?bot=YandexBot</bot_info_url>
+			</robot>
+			<robot>
+				<id>7172</id>
+				<useragent><![CDATA[Yandex.Server/2009.5]]></useragent>
+				<family>YandexBot</family>
+				<name>Yandex.Server/2009.5</name>
+				<company><![CDATA[Yandex LLC]]></company>
+				<url_company><![CDATA[http://company.yandex.com/]]></url_company>
+				<icon>bot_Yandex.png</icon>
+				<bot_info_url>/list-of-ua/bot-detail?bot=YandexBot</bot_info_url>
+			</robot>
+			<robot>
+				<id>7173</id>
+				<useragent><![CDATA[Yandex.Server/2010.9]]></useragent>
+				<family>YandexBot</family>
+				<name>Yandex.Server/2010.9</name>
+				<company><![CDATA[Yandex LLC]]></company>
+				<url_company><![CDATA[http://company.yandex.com/]]></url_company>
+				<icon>bot_Yandex.png</icon>
+				<bot_info_url>/list-of-ua/bot-detail?bot=YandexBot</bot_info_url>
+			</robot>
+			<robot>
+				<id>7426</id>
+				<useragent><![CDATA[Mozilla/5.0 (compatible; YandexFavicons/1.0; +http://yandex.com/bots)]]></useragent>
+				<family>YandexBot</family>
+				<name>YandexFavicons/1.0</name>
+				<company><![CDATA[Yandex LLC]]></company>
+				<url_company><![CDATA[http://company.yandex.com/]]></url_company>
+				<icon>bot_Yandex.png</icon>
+				<bot_info_url>/list-of-ua/bot-detail?bot=YandexBot</bot_info_url>
+			</robot>
+			<robot>
+				<id>7427</id>
+				<useragent><![CDATA[Mozilla/5.0 (compatible; YandexAntivirus/2.0; +http://yandex.com/bots)]]></useragent>
+				<family>YandexBot</family>
+				<name>YandexAntivirus/2.0</name>
+				<company><![CDATA[Yandex LLC]]></company>
+				<url_company><![CDATA[http://company.yandex.com/]]></url_company>
+				<icon>bot_Yandex.png</icon>
+				<bot_info_url>/list-of-ua/bot-detail?bot=YandexBot</bot_info_url>
+			</robot>
+			<robot>
+				<id>7428</id>
+				<useragent><![CDATA[Mozilla/5.0 (compatible; YandexVideo/3.0; +http://yandex.com/bots)]]></useragent>
+				<family>YandexBot</family>
+				<name>YandexVideo/3.0</name>
+				<company><![CDATA[Yandex LLC]]></company>
+				<url_company><![CDATA[http://company.yandex.com/]]></url_company>
+				<icon>bot_Yandex.png</icon>
+				<bot_info_url>/list-of-ua/bot-detail?bot=YandexBot</bot_info_url>
+			</robot>
+			<robot>
+				<id>7429</id>
+				<useragent><![CDATA[Mozilla/5.0 (compatible; YandexMedia/3.0; +http://yandex.com/bots)]]></useragent>
+				<family>YandexBot</family>
+				<name>YandexMedia/3.0</name>
+				<company><![CDATA[Yandex LLC]]></company>
+				<url_company><![CDATA[http://company.yandex.com/]]></url_company>
+				<icon>bot_Yandex.png</icon>
+				<bot_info_url>/list-of-ua/bot-detail?bot=YandexBot</bot_info_url>
+			</robot>
+			<robot>
+				<id>7430</id>
+				<useragent><![CDATA[Mozilla/5.0 (compatible; YandexBlogs/0.99; robot; +http://yandex.com/bots)]]></useragent>
+				<family>YandexBot</family>
+				<name>YandexBlogs/0.99</name>
+				<company><![CDATA[Yandex LLC]]></company>
+				<url_company><![CDATA[http://company.yandex.com/]]></url_company>
+				<icon>bot_Yandex.png</icon>
+				<bot_info_url>/list-of-ua/bot-detail?bot=YandexBot</bot_info_url>
+			</robot>
+			<robot>
+				<id>7433</id>
+				<useragent><![CDATA[Mozilla/5.0 (compatible; YandexZakladki/3.0; +http://yandex.com/bots)]]></useragent>
+				<family>YandexBot</family>
+				<name>YandexZakladki/3.0</name>
 				<company><![CDATA[Yandex LLC]]></company>
 				<url_company><![CDATA[http://company.yandex.com/]]></url_company>
 				<icon>bot_Yandex.png</icon>
@@ -13813,6 +13943,16 @@
 				<icon>podkicker.png</icon>
 				<browser_info_url>/list-of-ua/browser-detail?browser=Podkicker</browser_info_url>
 			</browser>
+			<browser>
+				<id>434</id>
+				<type>5</type>
+				<name>Python-requests</name>
+				<url><![CDATA[http://python-requests.org/]]></url>
+				<company><![CDATA[Kenneth Reitz]]></company>
+				<url_company><![CDATA[http://kennethreitz.com/]]></url_company>
+				<icon>pythonurllib.png</icon>
+				<browser_info_url>/list-of-ua/browser-detail?browser=Python-requests</browser_info_url>
+			</browser>
 		</browsers>
 		<browser_types>
 			<browser_type>
@@ -14034,7 +14174,7 @@
 			<browser_reg>
 				<order>35</order>
 				<browser_id>327</browser_id>
-				<regstring>/^Outlook-Express\/7\.0 \(MSIE 7\.0; Windows/si</regstring>
+				<regstring>/^Outlook-Express\/7\.0 \(MSIE 7\.0.*Windows/si</regstring>
 			</browser_reg>
 			<browser_reg>
 				<order>36</order>
@@ -14049,7 +14189,7 @@
 			<browser_reg>
 				<order>38</order>
 				<browser_id>327</browser_id>
-				<regstring>/^Outlook-Express\/7\.0 \(MSIE 6\.0; Windows/si</regstring>
+				<regstring>/^Outlook-Express\/7\.0 \(MSIE 6\.0.*Windows/si</regstring>
 			</browser_reg>
 			<browser_reg>
 				<order>39</order>
@@ -15838,466 +15978,471 @@
 			</browser_reg>
 			<browser_reg>
 				<order>396</order>
+				<browser_id>434</browser_id>
+				<regstring>/^python-requests\/([0-9\.]+)/si</regstring>
+			</browser_reg>
+			<browser_reg>
+				<order>397</order>
 				<browser_id>323</browser_id>
 				<regstring>/^Mozilla.*MSIE.*TencentTraveler/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>397</order>
+				<order>398</order>
 				<browser_id>41</browser_id>
 				<regstring>/mozilla.*MSIE [0-9a-z\+\-\.]+.*Avant Browser/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>398</order>
+				<order>399</order>
 				<browser_id>45</browser_id>
 				<regstring>/mozilla.*MSIE [0-9a-z\+\-\.]+.*Deepnet Explorer/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>399</order>
+				<order>400</order>
 				<browser_id>22</browser_id>
 				<regstring>/mozilla.*applewebkit\/[0-9a-z\+\-\.]+.*/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>400</order>
+				<order>401</order>
 				<browser_id>3</browser_id>
 				<regstring>/mozilla.*\/[0-9\.]+.*gecko.*firefox.*/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>401</order>
+				<order>402</order>
 				<browser_id>53</browser_id>
 				<regstring>/mozilla.*MSIE [0-9a-z\+\-\.]+.*Maxthon/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>402</order>
+				<order>403</order>
 				<browser_id>153</browser_id>
 				<regstring>/mozilla.*rv:[0-9\.]+.*gecko.*GranParadiso\/([0-9a-z\+\-\.]+).*/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>403</order>
+				<order>404</order>
 				<browser_id>193</browser_id>
 				<regstring>/^MOT.*MIB\/([0-9\.]+)/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>404</order>
+				<order>405</order>
 				<browser_id>17</browser_id>
 				<regstring>/^opera\/([0-9a-z\+\-\.]+).*/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>405</order>
+				<order>406</order>
 				<browser_id>31</browser_id>
 				<regstring>/IBrowse\/([0-9a-z\+\-\.]+).*/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>406</order>
+				<order>407</order>
 				<browser_id>31</browser_id>
 				<regstring>/IBrowse/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>407</order>
+				<order>408</order>
 				<browser_id>29</browser_id>
 				<regstring>/Aweb.*Amiga/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>408</order>
+				<order>409</order>
 				<browser_id>25</browser_id>
 				<regstring>/Lynx/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>409</order>
+				<order>410</order>
 				<browser_id>51</browser_id>
 				<regstring>/libwww\-perl/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>410</order>
+				<order>411</order>
 				<browser_id>17</browser_id>
 				<regstring>/^opera ([0-9a-z\+\-\.]+).*/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>411</order>
+				<order>412</order>
 				<browser_id>151</browser_id>
 				<regstring>/^Samsung-[a-zA-Z09]+.*AU-MIC-[a-zA-Z0-9]+\/([0-9\.]+)/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>412</order>
+				<order>413</order>
 				<browser_id>152</browser_id>
 				<regstring>/^SonyEricsson.*SEMC-Browser\/([0-9\.]+)/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>413</order>
+				<order>414</order>
 				<browser_id>151</browser_id>
 				<regstring>/Browser\/Teleca|Teleca\/.*MIDP/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>414</order>
+				<order>415</order>
 				<browser_id>191</browser_id>
 				<regstring>/^MPlayer\//si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>415</order>
+				<order>416</order>
 				<browser_id>196</browser_id>
 				<regstring>/^Windows\-Media\-Player\/([0-9\.]+)$/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>416</order>
+				<order>417</order>
 				<browser_id>197</browser_id>
 				<regstring>/^VLC media player \- version ([0-9a-z\-\.]+) .* VideoLAN team$/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>417</order>
+				<order>418</order>
 				<browser_id>199</browser_id>
 				<regstring>/^CSE HTML Validator Lite Online/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>418</order>
+				<order>419</order>
 				<browser_id>213</browser_id>
 				<regstring>/^QuickTime\/([0-9\.]+)/</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>419</order>
+				<order>420</order>
 				<browser_id>213</browser_id>
 				<regstring>/^QuickTime.*qtver=([0-9\.a-z]+)/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>420</order>
+				<order>421</order>
 				<browser_id>214</browser_id>
 				<regstring>/^PHPCrawl$/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>421</order>
+				<order>422</order>
 				<browser_id>223</browser_id>
 				<regstring>/http:\/\/code\.google\.com\/appengine/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>422</order>
+				<order>423</order>
 				<browser_id>33</browser_id>
 				<regstring>/^Mozilla.*Danger hiptop/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>423</order>
+				<order>424</order>
 				<browser_id>241</browser_id>
 				<regstring>/^Webkit\/.*Uzbl/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>424</order>
+				<order>425</order>
 				<browser_id>241</browser_id>
 				<regstring>/^Uzbl.*Webkit/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>425</order>
+				<order>426</order>
 				<browser_id>243</browser_id>
 				<regstring>/^Mozilla\/5\.0 \(Sage\)$/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>426</order>
+				<order>427</order>
 				<browser_id>283</browser_id>
 				<regstring>/^Xaldon_WebSpider\/([0-9a-z\.]+)/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>427</order>
+				<order>428</order>
 				<browser_id>283</browser_id>
 				<regstring>/^Xaldon WebSpider ([0-9a-z\.]+)/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>428</order>
+				<order>429</order>
 				<browser_id>4</browser_id>
 				<regstring>/Mozilla\/4.*OS\/2/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>429</order>
+				<order>430</order>
 				<browser_id>363</browser_id>
 				<regstring>/^Netvibes.*http:\/\/www\.netvibes\.com/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>430</order>
+				<order>431</order>
 				<browser_id>365</browser_id>
 				<regstring>/^The Incutio XML-RPC PHP Library/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>431</order>
+				<order>432</order>
 				<browser_id>386</browser_id>
 				<regstring>/\/GoBrowser\/([0-9\.]+)/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>432</order>
+				<order>433</order>
 				<browser_id>388</browser_id>
 				<regstring>/^iGooMap\/([0-9a-z\.]+).*pointworks/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>433</order>
+				<order>434</order>
 				<browser_id>396</browser_id>
 				<regstring>/^ColdFusion \(BookmarkTracker\.com\)$/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>434</order>
+				<order>435</order>
 				<browser_id>397</browser_id>
 				<regstring>/^BinGet\/([0-9a-zA-Z\.]+)/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>435</order>
+				<order>436</order>
 				<browser_id>157</browser_id>
 				<regstring>/^Mozilla.*MSIE ([0-9\.]+).*XBLWP7/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>436</order>
+				<order>437</order>
 				<browser_id>418</browser_id>
 				<regstring>/^MPlayer ([0-9\.]+)/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>437</order>
+				<order>438</order>
 				<browser_id>407</browser_id>
 				<regstring>/^Plex\/([0-9\.]+).*Android/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>438</order>
+				<order>439</order>
 				<browser_id>387</browser_id>
 				<regstring>/^Surf\/([0-9\.]+).*AppleWebKit/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>439</order>
+				<order>440</order>
 				<browser_id>54</browser_id>
 				<regstring>/mozilla.*(rv:[0-9\.]+).*gecko\/[0-9]+.*/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>440</order>
+				<order>441</order>
 				<browser_id>159</browser_id>
 				<regstring>/Polaris\/([0-9\.]+)/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>441</order>
+				<order>442</order>
 				<browser_id>194</browser_id>
 				<regstring>/^Abilon$/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>442</order>
+				<order>443</order>
 				<browser_id>205</browser_id>
 				<regstring>/^webcollage\/([0-9\.]+)$/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>443</order>
+				<order>444</order>
 				<browser_id>205</browser_id>
 				<regstring>/^webcollage\-noporn\/([0-9\.]+)$/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>444</order>
+				<order>445</order>
 				<browser_id>205</browser_id>
 				<regstring>/^webcollage\.[a-z]+\/([0-9\.]+)$/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>445</order>
+				<order>446</order>
 				<browser_id>205</browser_id>
 				<regstring>/^webcollage1\/([0-9\.]+)$/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>446</order>
+				<order>447</order>
 				<browser_id>250</browser_id>
 				<regstring>/^RSS Menu\/([0-9\.]+)/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>447</order>
+				<order>448</order>
 				<browser_id>151</browser_id>
 				<regstring>/.*Obigo Browser ([0-9\.]+)/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>448</order>
+				<order>449</order>
 				<browser_id>315</browser_id>
 				<regstring>/^iVideo ([a-z0-9\.\ ]+).*iPhone OS/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>449</order>
+				<order>450</order>
 				<browser_id>370</browser_id>
 				<regstring>/^Mozilla\/4\.0 \(compatible; Synapse\)$/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>450</order>
+				<order>451</order>
 				<browser_id>372</browser_id>
 				<regstring>/^Mozilla.*SkipStone ([0-9\.]+)/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>451</order>
+				<order>452</order>
 				<browser_id>373</browser_id>
 				<regstring>/^Mozilla\/.*compatible.*Powermarks\/([0-9\.]+)/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>452</order>
+				<order>453</order>
 				<browser_id>389</browser_id>
 				<regstring>/^iTunes\/([0-9\.]+)/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>453</order>
+				<order>454</order>
 				<browser_id>413</browser_id>
 				<regstring>/^Googlebot-richsnippets/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>454</order>
+				<order>455</order>
 				<browser_id>33</browser_id>
 				<regstring>/^DoCoMo\//si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>455</order>
+				<order>456</order>
 				<browser_id>33</browser_id>
 				<regstring>/mozilla.*PlayStation\ Portable.*/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>456</order>
+				<order>457</order>
 				<browser_id>151</browser_id>
 				<regstring>/Obigo.*Profile\/MIDP/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>457</order>
+				<order>458</order>
 				<browser_id>207</browser_id>
 				<regstring>/^Mozilla.*PRTG Network Monitor/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>458</order>
+				<order>459</order>
 				<browser_id>225</browser_id>
 				<regstring>/UCWEB/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>459</order>
+				<order>460</order>
 				<browser_id>246</browser_id>
 				<regstring>/^RSSOwl\/([0-9]\.[0-9]\.[0-9])/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>460</order>
+				<order>461</order>
 				<browser_id>259</browser_id>
 				<regstring>/^Axel ([0-9\.]+)/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>461</order>
+				<order>462</order>
 				<browser_id>271</browser_id>
 				<regstring>/^DownloadStudio\/([0-9\.]+)$/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>462</order>
+				<order>463</order>
 				<browser_id>272</browser_id>
 				<regstring>/^WinPodder.*http:\/\/winpodder\.com/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>463</order>
+				<order>464</order>
 				<browser_id>287</browser_id>
 				<regstring>/^Typhoeus.*http:\/\/github.com\/pauldix\/typhoeus/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>464</order>
+				<order>465</order>
 				<browser_id>291</browser_id>
 				<regstring>/^Azureus ([0-9a-z\.]+)/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>465</order>
+				<order>466</order>
 				<browser_id>303</browser_id>
 				<regstring>/^muCommander-file-API/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>466</order>
+				<order>467</order>
 				<browser_id>305</browser_id>
 				<regstring>/^NFReader\/([0-9\.]+)/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>467</order>
+				<order>468</order>
 				<browser_id>319</browser_id>
 				<regstring>/^SuperBot\/([0-9\.]+)/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>468</order>
+				<order>469</order>
 				<browser_id>33</browser_id>
 				<regstring>/PLAYSTATION 3/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>469</order>
+				<order>470</order>
 				<browser_id>335</browser_id>
 				<regstring>/^Postbox ([0-9a-z\.]+)/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>470</order>
+				<order>471</order>
 				<browser_id>343</browser_id>
 				<regstring>/^SharpReader\/([0-9\.]+)/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>471</order>
+				<order>472</order>
 				<browser_id>344</browser_id>
 				<regstring>/^YeahReader/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>472</order>
+				<order>473</order>
 				<browser_id>359</browser_id>
 				<regstring>/^LeechCraft/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>473</order>
+				<order>474</order>
 				<browser_id>362</browser_id>
 				<regstring>/^SAMSUNG.*Dolfin\/([0-9\.]+)/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>474</order>
+				<order>475</order>
 				<browser_id>364</browser_id>
 				<regstring>/^Chilkat\/([0-9\.]+) \(\+http:\/\/www\.chilkatsoft\.com\/ChilkatHttpUA\.asp\)/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>475</order>
+				<order>476</order>
 				<browser_id>368</browser_id>
 				<regstring>/^iGetter\/([0-9a-z\.]+).*/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>476</order>
+				<order>477</order>
 				<browser_id>375</browser_id>
 				<regstring>/^GoogleFriendConnect\/([0-9\.]+)$/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>477</order>
+				<order>478</order>
 				<browser_id>287</browser_id>
 				<regstring>/^Typhoeus.*http:\/\/github.com\/dbalatero\/typhoeus/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>478</order>
+				<order>479</order>
 				<browser_id>414</browser_id>
 				<regstring>/^HTML2JPG.*http:\/\/www.html2jpg.com/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>479</order>
+				<order>480</order>
 				<browser_id>425</browser_id>
 				<regstring>/^Apache.*internal dummy connection/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>480</order>
+				<order>481</order>
 				<browser_id>151</browser_id>
 				<regstring>/ObigoInternetBrowser/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>481</order>
+				<order>482</order>
 				<browser_id>54</browser_id>
 				<regstring>/mozilla.*(rv:[0-9\.]+).*/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>482</order>
+				<order>483</order>
 				<browser_id>41</browser_id>
 				<regstring>/^Avant Browser/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>483</order>
+				<order>484</order>
 				<browser_id>346</browser_id>
 				<regstring>/^holmes\/([0-9\.]+)/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>484</order>
+				<order>485</order>
 				<browser_id>35</browser_id>
 				<regstring>/^Mozilla\/4.0 \(compatible; MSIE ([0-9\.]+); Windows/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>485</order>
+				<order>486</order>
 				<browser_id>35</browser_id>
 				<regstring>/mozilla\/.*MSIE ([0-9b\.]+).*/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>486</order>
+				<order>487</order>
 				<browser_id>157</browser_id>
 				<regstring>/MSIE ([0-9a-z\+\-\.]+).*windows ce/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>487</order>
+				<order>488</order>
 				<browser_id>4</browser_id>
 				<regstring>/^Mozilla\/([0-9a-z\.\[\] ]+) \([a-z0-9;. \-]+\)/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>488</order>
+				<order>489</order>
 				<browser_id>282</browser_id>
 				<regstring>/WinHttp/si</regstring>
 			</browser_reg>

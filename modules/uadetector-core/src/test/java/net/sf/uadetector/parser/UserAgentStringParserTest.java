@@ -158,6 +158,33 @@ public class UserAgentStringParserTest {
 	}
 
 	@Test
+	public void parse_browser_JVM() throws Exception {
+		final String userAgent = "Java/1.6.0_31";
+		final UserAgent agent = parser.parse(userAgent);
+		Assert.assertNotNull(agent);
+		Assert.assertFalse(UserAgent.EMPTY.equals(agent));
+		Assert.assertFalse(OperatingSystem.EMPTY.equals(agent.getOperatingSystem()));
+
+		// check user agent informations
+		Assert.assertEquals("Java", agent.getFamily());
+		Assert.assertEquals("Java", agent.getName());
+		Assert.assertEquals("Sun Microsystems, Inc.", agent.getProducer());
+		Assert.assertEquals("http://www.sun.com/", agent.getProducerUrl());
+		Assert.assertEquals("Library", agent.getType());
+		Assert.assertEquals("http://www.sun.com/java/", agent.getUrl());
+		Assert.assertEquals("1.6.0_31", agent.getVersionNumber().toVersionString());
+
+		// check operating system informations
+		final OperatingSystem os = agent.getOperatingSystem();
+		Assert.assertEquals("JVM", os.getFamily());
+		Assert.assertEquals("JVM (Java)", os.getName());
+		Assert.assertEquals("Sun Microsystems, Inc.", os.getProducer());
+		Assert.assertEquals("http://en.wikipedia.org/wiki/Sun_Microsystems", os.getProducerUrl());
+		Assert.assertEquals("http://en.wikipedia.org/wiki/Jvm", os.getUrl());
+		Assert.assertEquals("", os.getVersionNumber().toVersionString());
+	}
+
+	@Test
 	public void parse_browser_mobile_CHROME() throws Exception {
 		final String userAgent = "Mozilla/5.0 (Linux; U; Android-4.0.3; en-us; Galaxy Nexus Build/IML74K) AppleWebKit/535.7 (KHTML, like Gecko) CrMo/16.0.912.75 Mobile Safari/535.7";
 		final UserAgent agent = parser.parse(userAgent);

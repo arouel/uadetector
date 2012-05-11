@@ -30,17 +30,17 @@ package net.sf.uadetector;
 public interface ReadableUserAgent {
 
 	/**
-	 * Gets the name of the user agent.
+	 * Gets the name of an user agent.
 	 * 
-	 * @return name of the user agent
+	 * @return name of an user agent
 	 */
 	@Deprecated
 	String getFamily();
 
 	/**
-	 * Gets the name of the user agent.
+	 * Gets the name of an user agent.
 	 * 
-	 * @return name of the user agent
+	 * @return name of an user agent
 	 */
 	String getName();
 
@@ -52,28 +52,28 @@ public interface ReadableUserAgent {
 	OperatingSystem getOperatingSystem();
 
 	/**
-	 * Returns the manufacturer of the user agent.
+	 * Returns the manufacturer of an user agent.
 	 * 
 	 * @return the manufacturer
 	 */
 	String getProducer();
 
 	/**
-	 * Returns the URL to the main website of the manufacturer of the user agent.
+	 * Returns the URL to the main website of the manufacturer of an user agent.
 	 * 
 	 * @return URL to the website of the manufacturer
 	 */
 	String getProducerUrl();
 
 	/**
-	 * Returns the type of user agents, for example, mobile browser or email client.
+	 * Returns the type of an user agent, for example, mobile browser or email client.
 	 * 
-	 * @return the type of user agents
+	 * @return the type of an user agent
 	 */
 	String getType();
 
 	/**
-	 * Returns the URL to the product or information page of the user agent.
+	 * Returns the URL to the product or information page of an user agent.
 	 * 
 	 * @return the URL to the product page
 	 */

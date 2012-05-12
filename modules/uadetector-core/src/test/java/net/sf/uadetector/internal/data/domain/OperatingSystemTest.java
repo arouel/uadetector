@@ -19,6 +19,7 @@ import java.util.SortedSet;
 import java.util.TreeSet;
 import java.util.regex.Pattern;
 
+import net.sf.uadetector.OperatingSystemFamily;
 import net.sf.uadetector.UserAgent;
 
 import org.junit.Assert;
@@ -169,10 +170,11 @@ public class OperatingSystemTest {
 	@Test
 	public void copyTo_successful() {
 		final SortedSet<OperatingSystemPattern> osPatternSet = new TreeSet<OperatingSystemPattern>();
-		final OperatingSystem os = new OperatingSystem("f1", "i1", 1, "iu1", "n1", osPatternSet, "p1", "pu1", "u1");
+		final OperatingSystem os = new OperatingSystem("Linux", "i1", 1, "iu1", "n1", osPatternSet, "p1", "pu1", "u1");
 		final UserAgent.Builder builder = new UserAgent.Builder();
 		os.copyTo(builder);
-		Assert.assertEquals(os.getFamily(), builder.getOperatingSystem().getFamily());
+		Assert.assertEquals(OperatingSystemFamily.LINUX, builder.getOperatingSystem().getFamily());
+		Assert.assertEquals(os.getFamily(), builder.getOperatingSystem().getFamilyName());
 		Assert.assertEquals(os.getName(), builder.getOperatingSystem().getName());
 		Assert.assertEquals(os.getProducer(), builder.getOperatingSystem().getProducer());
 		Assert.assertEquals(os.getProducerUrl(), builder.getOperatingSystem().getProducerUrl());

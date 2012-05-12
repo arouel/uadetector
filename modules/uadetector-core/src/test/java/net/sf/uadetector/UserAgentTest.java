@@ -107,8 +107,9 @@ public class UserAgentTest {
 
 	@Test
 	public void equals_differentOperatingSystem() {
-		final OperatingSystem os1 = new OperatingSystem("family", "name1", "producer", "producer url", "url", new VersionNumber("1"));
-		final OperatingSystem os2 = new OperatingSystem("family", "name2", "producer", "producer url", "url", new VersionNumber("1"));
+		final OperatingSystemFamily linux = OperatingSystemFamily.LINUX;
+		final OperatingSystem os1 = new OperatingSystem(linux, "Gentoo", "name1", "producer", "producer url", "url", new VersionNumber("1"));
+		final OperatingSystem os2 = new OperatingSystem(linux, "Gentoo", "name2", "producer", "producer url", "url", new VersionNumber("1"));
 		final UserAgent ua1 = new UserAgent("family", "name", os1, "producer", "producer url", UserAgentType.BROWSER, "type", "url",
 				VersionParser.parseVersion("1"));
 		final UserAgent ua2 = new UserAgent("family", "name", os2, "producer", "producer url", UserAgentType.BROWSER, "type", "url",
@@ -240,7 +241,9 @@ public class UserAgentTest {
 		final UserAgent ua = new UserAgent("f1", "n1", OperatingSystem.EMPTY, "p1", "pu1", UserAgentType.USERAGENT_ANONYMIZER, "t1", "u1",
 				VersionParser.parseVersion("1"));
 		Assert.assertEquals(
-				"UserAgent [family=f1, name=n1, operatingSystem=OperatingSystem [family=unknown, name=unknown, producer=, producerUrl=, url=, versionNumber=VersionNumber [groups=[, , ], extension=]], producer=p1, producerUrl=pu1, type=USERAGENT_ANONYMIZER, typeName=t1, url=u1, versionNumber=VersionNumber [groups=[1, , ], extension=]]",
+				"UserAgent [family=f1, name=n1, operatingSystem="
+						+ OperatingSystem.EMPTY.toString()
+						+ ", producer=p1, producerUrl=pu1, type=USERAGENT_ANONYMIZER, typeName=t1, url=u1, versionNumber=VersionNumber [groups=[1, , ], extension=]]",
 				ua.toString());
 	}
 

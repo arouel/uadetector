@@ -106,7 +106,7 @@ public class OnlineUserAgentStringParserTest {
 
 		// check operating system informations
 		final OperatingSystem os = agent.getOperatingSystem();
-		Assert.assertEquals("Mac OS X", os.getFamily());
+		Assert.assertEquals("Mac OS X", os.getFamilyName());
 		Assert.assertEquals("Mac OS X 10.6 Snow Leopard", os.getName());
 		Assert.assertEquals("Apple Computer, Inc.", os.getProducer());
 		Assert.assertEquals("http://www.apple.com/", os.getProducerUrl());
@@ -131,7 +131,7 @@ public class OnlineUserAgentStringParserTest {
 
 		// check operating system informations
 		final OperatingSystem os = agent.getOperatingSystem();
-		Assert.assertEquals("Mac OS X", os.getFamily());
+		Assert.assertEquals("Mac OS X", os.getFamilyName());
 		Assert.assertEquals("Mac OS X 10.6 Snow Leopard", os.getName());
 		Assert.assertEquals("Apple Computer, Inc.", os.getProducer());
 		Assert.assertEquals("http://www.apple.com/", os.getProducerUrl());
@@ -157,7 +157,7 @@ public class OnlineUserAgentStringParserTest {
 
 		// check operating system informations
 		final OperatingSystem os = agent.getOperatingSystem();
-		Assert.assertEquals("Mac OS", os.getFamily());
+		Assert.assertEquals("Mac OS", os.getFamilyName());
 		Assert.assertEquals("Mac OS", os.getName());
 		Assert.assertEquals("Apple Computer, Inc.", os.getProducer());
 		Assert.assertEquals("http://www.apple.com/", os.getProducerUrl());
@@ -183,7 +183,7 @@ public class OnlineUserAgentStringParserTest {
 
 		// check operating system informations
 		final OperatingSystem os = agent.getOperatingSystem();
-		Assert.assertEquals("Mac OS X", os.getFamily());
+		Assert.assertEquals("Mac OS X", os.getFamilyName());
 		Assert.assertEquals("Mac OS X 10.5 Leopard", os.getName());
 		Assert.assertEquals("Apple Computer, Inc.", os.getProducer());
 		Assert.assertEquals("http://www.apple.com/", os.getProducerUrl());

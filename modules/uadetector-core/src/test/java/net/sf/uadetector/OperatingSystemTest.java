@@ -22,38 +22,49 @@ public class OperatingSystemTest {
 
 	@Test(expected = IllegalArgumentException.class)
 	public void construct_family_null() {
-		new OperatingSystem(null, "name", "producer", "producer url", "url", new VersionNumber("1"));
+		new OperatingSystem(null, "family", "name", "producer", "producer url", "url", new VersionNumber("1"));
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void construct_familyName_null() {
+		final OperatingSystemFamily linux = OperatingSystemFamily.LINUX;
+		new OperatingSystem(linux, null, "name", "producer", "producer url", "url", new VersionNumber("1"));
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void construct_name_null() {
-		new OperatingSystem("family", null, "producer", "producer url", "url", new VersionNumber("1"));
+		final OperatingSystemFamily linux = OperatingSystemFamily.LINUX;
+		new OperatingSystem(linux, "family", null, "producer", "producer url", "url", new VersionNumber("1"));
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void construct_producer_null() {
-		new OperatingSystem("family", "name", null, "producer url", "url", new VersionNumber("1"));
+		final OperatingSystemFamily linux = OperatingSystemFamily.LINUX;
+		new OperatingSystem(linux, "family", "name", null, "producer url", "url", new VersionNumber("1"));
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void construct_producerUrl_null() {
-		new OperatingSystem("family", "name", "producer", null, "url", new VersionNumber("1"));
+		final OperatingSystemFamily linux = OperatingSystemFamily.LINUX;
+		new OperatingSystem(linux, "family", "name", "producer", null, "url", new VersionNumber("1"));
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void construct_url_null() {
-		new OperatingSystem("family", "name", "producer", "producer url", null, new VersionNumber("1"));
+		final OperatingSystemFamily linux = OperatingSystemFamily.LINUX;
+		new OperatingSystem(linux, "family", "name", "producer", "producer url", null, new VersionNumber("1"));
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void construct_version_null() {
-		new OperatingSystem("family", "name", "producer", "producer url", "url", null);
+		final OperatingSystemFamily linux = OperatingSystemFamily.LINUX;
+		new OperatingSystem(linux, "family", "name", "producer", "producer url", "url", null);
 	}
 
 	@Test
 	public void empty() {
 		final OperatingSystem os = OperatingSystem.EMPTY;
-		Assert.assertEquals("unknown", os.getFamily());
+		Assert.assertEquals("unknown", os.getFamilyName());
 		Assert.assertEquals("unknown", os.getName());
 		Assert.assertEquals("", os.getProducer());
 		Assert.assertEquals("", os.getProducerUrl());
@@ -62,48 +73,68 @@ public class OperatingSystemTest {
 
 	@Test
 	public void equals_differentFamily() {
-		final OperatingSystem os1 = new OperatingSystem("family1", "name", "producer", "producer url", "url", new VersionNumber("1"));
-		final OperatingSystem os2 = new OperatingSystem("family2", "name", "producer", "producer url", "url", new VersionNumber("1"));
+		final OperatingSystemFamily linux = OperatingSystemFamily.LINUX;
+		final OperatingSystemFamily aix = OperatingSystemFamily.AIX;
+		final OperatingSystem os1 = new OperatingSystem(linux, "family", "name", "producer", "producer url", "url", new VersionNumber("1"));
+		final OperatingSystem os2 = new OperatingSystem(aix, "family", "name", "producer", "producer url", "url", new VersionNumber("1"));
+		Assert.assertFalse(os1.equals(os2));
+		Assert.assertFalse(os1.hashCode() == os2.hashCode());
+	}
+
+	@Test
+	public void equals_differentFamilyName() {
+		final OperatingSystemFamily linux = OperatingSystemFamily.LINUX;
+		final OperatingSystem os1 = new OperatingSystem(linux, "family1", "name", "producer", "producer url", "url", new VersionNumber("1"));
+		final OperatingSystem os2 = new OperatingSystem(linux, "family2", "name", "producer", "producer url", "url", new VersionNumber("1"));
 		Assert.assertFalse(os1.equals(os2));
 		Assert.assertFalse(os1.hashCode() == os2.hashCode());
 	}
 
 	@Test
 	public void equals_differentName() {
-		final OperatingSystem os1 = new OperatingSystem("family", "name1", "producer", "producer url", "url", new VersionNumber("1"));
-		final OperatingSystem os2 = new OperatingSystem("family", "name2", "producer", "producer url", "url", new VersionNumber("1"));
+		final OperatingSystemFamily linux = OperatingSystemFamily.LINUX;
+		final OperatingSystem os1 = new OperatingSystem(linux, "family", "name1", "producer", "producer url", "url", new VersionNumber("1"));
+		final OperatingSystem os2 = new OperatingSystem(linux, "family", "name2", "producer", "producer url", "url", new VersionNumber("1"));
 		Assert.assertFalse(os1.equals(os2));
 		Assert.assertFalse(os1.hashCode() == os2.hashCode());
 	}
 
 	@Test
 	public void equals_differentProducer() {
-		final OperatingSystem os1 = new OperatingSystem("family", "name", "producer1", "producer url", "url", new VersionNumber("1"));
-		final OperatingSystem os2 = new OperatingSystem("family", "name", "producer2", "producer url", "url", new VersionNumber("1"));
+		final OperatingSystemFamily linux = OperatingSystemFamily.LINUX;
+		final OperatingSystem os1 = new OperatingSystem(linux, "family", "name", "producer1", "producer url", "url", new VersionNumber("1"));
+		final OperatingSystem os2 = new OperatingSystem(linux, "family", "name", "producer2", "producer url", "url", new VersionNumber("1"));
 		Assert.assertFalse(os1.equals(os2));
 		Assert.assertFalse(os1.hashCode() == os2.hashCode());
 	}
 
 	@Test
 	public void equals_differentProducerUrl() {
-		final OperatingSystem os1 = new OperatingSystem("family", "name", "producer", "producer url 1", "url", new VersionNumber("1"));
-		final OperatingSystem os2 = new OperatingSystem("family", "name", "producer", "producer url 2", "url", new VersionNumber("1"));
+		final OperatingSystemFamily linux = OperatingSystemFamily.LINUX;
+		final OperatingSystem os1 = new OperatingSystem(linux, "family", "name", "producer", "producer url 1", "url",
+				new VersionNumber("1"));
+		final OperatingSystem os2 = new OperatingSystem(linux, "family", "name", "producer", "producer url 2", "url",
+				new VersionNumber("1"));
 		Assert.assertFalse(os1.equals(os2));
 		Assert.assertFalse(os1.hashCode() == os2.hashCode());
 	}
 
 	@Test
 	public void equals_differentUrl() {
-		final OperatingSystem os1 = new OperatingSystem("family", "name", "producer", "producer url", "url1", new VersionNumber("1"));
-		final OperatingSystem os2 = new OperatingSystem("family", "name", "producer", "producer url", "url2", new VersionNumber("1"));
+		final OperatingSystemFamily linux = OperatingSystemFamily.LINUX;
+		final OperatingSystem os1 = new OperatingSystem(linux, "family", "name", "producer", "producer url", "url1", new VersionNumber("1"));
+		final OperatingSystem os2 = new OperatingSystem(linux, "family", "name", "producer", "producer url", "url2", new VersionNumber("1"));
 		Assert.assertFalse(os1.equals(os2));
 		Assert.assertFalse(os1.hashCode() == os2.hashCode());
 	}
 
 	@Test
 	public void equals_differentVersionNumber() {
-		final OperatingSystem os1 = new OperatingSystem("family", "name", "producer", "producer url", "url", new VersionNumber("1", "0"));
-		final OperatingSystem os2 = new OperatingSystem("family", "name", "producer", "producer url", "url", new VersionNumber("1", "1"));
+		final OperatingSystemFamily linux = OperatingSystemFamily.LINUX;
+		final OperatingSystem os1 = new OperatingSystem(linux, "family", "name", "producer", "producer url", "url", new VersionNumber("1",
+				"0"));
+		final OperatingSystem os2 = new OperatingSystem(linux, "family", "name", "producer", "producer url", "url", new VersionNumber("1",
+				"1"));
 		Assert.assertFalse(os1.equals(os2));
 		Assert.assertFalse(os1.hashCode() == os2.hashCode());
 	}
@@ -116,8 +147,9 @@ public class OperatingSystemTest {
 
 	@Test
 	public void equals_identical() {
-		final OperatingSystem os1 = new OperatingSystem("family", "name", "producer", "producer url", "url", new VersionNumber("1"));
-		final OperatingSystem os2 = new OperatingSystem("family", "name", "producer", "producer url", "url", new VersionNumber("1"));
+		final OperatingSystemFamily linux = OperatingSystemFamily.LINUX;
+		final OperatingSystem os1 = new OperatingSystem(linux, "family", "name", "producer", "producer url", "url", new VersionNumber("1"));
+		final OperatingSystem os2 = new OperatingSystem(linux, "family", "name", "producer", "producer url", "url", new VersionNumber("1"));
 		Assert.assertEquals(os1, os2);
 	}
 
@@ -128,14 +160,17 @@ public class OperatingSystemTest {
 
 	@Test
 	public void equals_otherClass() {
-		final OperatingSystem os = new OperatingSystem("family", "name", "producer", "producer url", "url", new VersionNumber("1"));
+		final OperatingSystemFamily linux = OperatingSystemFamily.LINUX;
+		final OperatingSystem os = new OperatingSystem(linux, "family", "name", "producer", "producer url", "url", new VersionNumber("1"));
 		Assert.assertFalse(os.equals(123456));
 	}
 
 	@Test
 	public void testGetters() {
-		final OperatingSystem os = new OperatingSystem("family", "name", "producer", "producer url", "url", new VersionNumber("1"));
-		Assert.assertEquals("family", os.getFamily());
+		final OperatingSystemFamily linux = OperatingSystemFamily.LINUX;
+		final OperatingSystem os = new OperatingSystem(linux, "family", "name", "producer", "producer url", "url", new VersionNumber("1"));
+		Assert.assertEquals(linux, os.getFamily());
+		Assert.assertEquals("family", os.getFamilyName());
 		Assert.assertEquals("name", os.getName());
 		Assert.assertEquals("producer", os.getProducer());
 		Assert.assertEquals("producer url", os.getProducerUrl());
@@ -144,8 +179,9 @@ public class OperatingSystemTest {
 
 	@Test
 	public void testHashCode() {
-		final OperatingSystem os1 = new OperatingSystem("family", "name", "producer", "producer url", "url", new VersionNumber("1"));
-		final OperatingSystem os2 = new OperatingSystem("family", "name", "producer", "producer url", "url", new VersionNumber("1"));
+		final OperatingSystemFamily linux = OperatingSystemFamily.LINUX;
+		final OperatingSystem os1 = new OperatingSystem(linux, "family", "name", "producer", "producer url", "url", new VersionNumber("1"));
+		final OperatingSystem os2 = new OperatingSystem(linux, "family", "name", "producer", "producer url", "url", new VersionNumber("1"));
 		Assert.assertEquals(os1.hashCode(), os2.hashCode());
 	}
 
@@ -157,9 +193,10 @@ public class OperatingSystemTest {
 	@Test
 	public void testToString() {
 		// reduces only some noise in coverage report
-		final OperatingSystem ua = new OperatingSystem("f1", "n1", "p1", "pu1", "u1", new VersionNumber("1", "0", "0", "-stable"));
+		final OperatingSystemFamily linux = OperatingSystemFamily.LINUX;
+		final OperatingSystem ua = new OperatingSystem(linux, "f1", "n1", "p1", "pu1", "u1", new VersionNumber("1", "0", "0", "-stable"));
 		Assert.assertEquals(
-				"OperatingSystem [family=f1, name=n1, producer=p1, producerUrl=pu1, url=u1, versionNumber=VersionNumber [groups=[1, 0, 0], extension=-stable]]",
+				"OperatingSystem [family=LINUX, familyName=f1, name=n1, producer=p1, producerUrl=pu1, url=u1, versionNumber=VersionNumber [groups=[1, 0, 0], extension=-stable]]",
 				ua.toString());
 	}
 

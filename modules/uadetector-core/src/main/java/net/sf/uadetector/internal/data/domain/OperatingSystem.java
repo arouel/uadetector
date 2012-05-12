@@ -19,6 +19,7 @@ import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
+import net.sf.uadetector.OperatingSystemFamily;
 import net.sf.uadetector.UserAgent;
 import net.sf.uadetector.VersionNumber;
 import net.sf.uadetector.internal.util.VersionParser;
@@ -286,7 +287,8 @@ public final class OperatingSystem {
 	 */
 	public void copyTo(final UserAgent.Builder builder) {
 		final VersionNumber version = parseVersionNumberFromName(name);
-		builder.setOperatingSystem(new net.sf.uadetector.OperatingSystem(family, name, producer, producerUrl, url, version));
+		final OperatingSystemFamily family = OperatingSystemFamily.evaluateByFamily(this.family);
+		builder.setOperatingSystem(new net.sf.uadetector.OperatingSystem(family, this.family, name, producer, producerUrl, url, version));
 	}
 
 	@Override

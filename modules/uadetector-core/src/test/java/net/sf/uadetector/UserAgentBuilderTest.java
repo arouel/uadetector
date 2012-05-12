@@ -25,7 +25,8 @@ public class UserAgentBuilderTest {
 
 	@Test
 	public void build_custom() {
-		final OperatingSystem os = new OperatingSystem("family", "name", "producer", "producer url", "url", new VersionNumber("1"));
+		final OperatingSystem os = new OperatingSystem(OperatingSystemFamily.UNKNOWN, "family", "name", "producer", "producer url", "url",
+				new VersionNumber("1"));
 
 		final UserAgent.Builder b = new UserAgent.Builder();
 		Assert.assertSame(b, b.setFamily("f1"));
@@ -102,7 +103,8 @@ public class UserAgentBuilderTest {
 	@Test
 	public void setOperatingSystem_ReadableOperatingSystem() {
 		final ReadableOperatingSystem os = EasyMock.createMock(ReadableOperatingSystem.class);
-		EasyMock.expect(os.getFamily()).andReturn("f1").anyTimes();
+		EasyMock.expect(os.getFamily()).andReturn(OperatingSystemFamily.LINUX).anyTimes();
+		EasyMock.expect(os.getFamilyName()).andReturn("f1").anyTimes();
 		EasyMock.expect(os.getName()).andReturn("n1").anyTimes();
 		EasyMock.expect(os.getProducer()).andReturn("p1").anyTimes();
 		EasyMock.expect(os.getProducerUrl()).andReturn("pu1").anyTimes();
@@ -115,7 +117,8 @@ public class UserAgentBuilderTest {
 	@Test(expected = IllegalArgumentException.class)
 	public void setOperatingSystem_ReadableOperatingSystem_invalidFamily() {
 		final ReadableOperatingSystem os = EasyMock.createMock(ReadableOperatingSystem.class);
-		EasyMock.expect(os.getFamily()).andReturn(null).anyTimes();
+		EasyMock.expect(os.getFamily()).andReturn(OperatingSystemFamily.LINUX).anyTimes();
+		EasyMock.expect(os.getFamilyName()).andReturn(null).anyTimes();
 		EasyMock.expect(os.getName()).andReturn("n1").anyTimes();
 		EasyMock.expect(os.getProducer()).andReturn("p1").anyTimes();
 		EasyMock.expect(os.getProducerUrl()).andReturn("pu1").anyTimes();

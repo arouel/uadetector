@@ -23,9 +23,12 @@ package net.sf.uadetector;
  */
 public final class OperatingSystem implements ReadableOperatingSystem {
 
-	public static final OperatingSystem EMPTY = new OperatingSystem("unknown", "unknown", "", "", "", VersionNumber.UNKNOWN);
+	public static final OperatingSystem EMPTY = new OperatingSystem(OperatingSystemFamily.UNKNOWN, "unknown", "unknown", "", "", "",
+			VersionNumber.UNKNOWN);
 
-	private final String family;
+	private final OperatingSystemFamily family;
+
+	private final String familyName;
 
 	private final String name;
 
@@ -37,19 +40,22 @@ public final class OperatingSystem implements ReadableOperatingSystem {
 
 	private final VersionNumber versionNumber;
 
-	public OperatingSystem(final String family, final String name, final String producer, final String producerUrl, final String url,
-			final VersionNumber versionNumber) {
+	public OperatingSystem(final OperatingSystemFamily family, final String familyName, final String name, final String producer,
+			final String producerUrl, final String url, final VersionNumber versionNumber) {
+		if (family == null) {
+			throw new IllegalArgumentException("Argument 'family' must not be null");
+		}
+		if (familyName == null) {
+			throw new IllegalArgumentException("Argument 'familyName' must not be null");
+		}
+		if (name == null) {
+			throw new IllegalArgumentException("Argument 'name' must not be null");
+		}
 		if (producer == null) {
 			throw new IllegalArgumentException("Argument 'producer' must not be null");
 		}
 		if (producerUrl == null) {
 			throw new IllegalArgumentException("Argument 'producerUrl' must not be null");
-		}
-		if (family == null) {
-			throw new IllegalArgumentException("Argument 'family' must not be null");
-		}
-		if (name == null) {
-			throw new IllegalArgumentException("Argument 'name' must not be null");
 		}
 		if (url == null) {
 			throw new IllegalArgumentException("Argument 'url' must not be null");
@@ -58,10 +64,11 @@ public final class OperatingSystem implements ReadableOperatingSystem {
 			throw new IllegalArgumentException("Argument 'versionNumber' must not be null");
 		}
 
+		this.family = family;
+		this.familyName = familyName;
+		this.name = name;
 		this.producer = producer;
 		this.producerUrl = producerUrl;
-		this.family = family;
-		this.name = name;
 		this.url = url;
 		this.versionNumber = versionNumber;
 	}
@@ -79,6 +86,9 @@ public final class OperatingSystem implements ReadableOperatingSystem {
 		}
 		final OperatingSystem other = (OperatingSystem) obj;
 		if (!family.equals(other.family)) {
+			return false;
+		}
+		if (!familyName.equals(other.familyName)) {
 			return false;
 		}
 		if (!name.equals(other.name)) {
@@ -100,8 +110,13 @@ public final class OperatingSystem implements ReadableOperatingSystem {
 	}
 
 	@Override
-	public String getFamily() {
+	public OperatingSystemFamily getFamily() {
 		return family;
+	}
+
+	@Override
+	public String getFamilyName() {
+		return familyName;
 	}
 
 	@Override
@@ -134,6 +149,7 @@ public final class OperatingSystem implements ReadableOperatingSystem {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + family.hashCode();
+		result = prime * result + familyName.hashCode();
 		result = prime * result + name.hashCode();
 		result = prime * result + producer.hashCode();
 		result = prime * result + producerUrl.hashCode();
@@ -147,6 +163,8 @@ public final class OperatingSystem implements ReadableOperatingSystem {
 		final StringBuilder builder = new StringBuilder();
 		builder.append("OperatingSystem [family=");
 		builder.append(family);
+		builder.append(", familyName=");
+		builder.append(familyName);
 		builder.append(", name=");
 		builder.append(name);
 		builder.append(", producer=");

@@ -33,7 +33,14 @@ public interface ReadableOperatingSystem {
 	 * 
 	 * @return the family of an operating system
 	 */
-	String getFamily();
+	OperatingSystemFamily getFamily();
+
+	/**
+	 * Gets the family name of an operating system.
+	 * 
+	 * @return the family of an operating system
+	 */
+	String getFamilyName();
 
 	/**
 	 * Gets the name of an operating system.

@@ -287,7 +287,7 @@ public final class OperatingSystem {
 	 */
 	public void copyTo(final UserAgent.Builder builder) {
 		final VersionNumber version = parseVersionNumberFromName(name);
-		final OperatingSystemFamily family = OperatingSystemFamily.evaluateByFamily(this.family);
+		final OperatingSystemFamily family = OperatingSystemFamily.evaluateByFamilyName(this.family);
 		builder.setOperatingSystem(new net.sf.uadetector.OperatingSystem(family, this.family, name, producer, producerUrl, url, version));
 	}
 

@@ -15,13 +15,12 @@
  ******************************************************************************/
 package net.sf.uadetector;
 
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.util.Formatter;
+import java.util.List;
 
 import net.sf.uadetector.internal.data.domain.Robot;
 import net.sf.uadetector.parser.OnlineUserAgentStringParserImpl;
 
-import org.apache.commons.csv.CSVParser;
 import org.junit.Assert;
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -29,59 +28,91 @@ import org.slf4j.LoggerFactory;
 
 public class UserAgentStringParserIntegrationTest {
 
-	private static final String CHARSET = "UTF-8";
+	/**
+	 * Output buffer to store informations from the detection process of the examples.
+	 */
+	public static class Output {
+
+		public static final String DEFAULT_FORMAT = "%-30.30s %-20.20s %s";
+
+		public static final char NEWLINE = '\n';
+
+		private final String format;
+
+		private final StringBuilder buffer = new StringBuilder();
+
+		public Output() {
+			this(DEFAULT_FORMAT);
+		}
+
+		public Output(final String format) {
+			this.format = format;
+		}
+
+		public void print(final String name, final VersionNumber version, final String userAgent) {
+			final Formatter formatter = new Formatter(buffer);
+			formatter.format(format, name, version.toVersionString(), userAgent);
+			buffer.append(NEWLINE);
+		}
+
+		@Override
+		public String toString() {
+			return buffer.toString();
+		}
+
+	}
 
 	/**
 	 * Default log
 	 */
 	private static final Logger LOG = LoggerFactory.getLogger(OnlineUserAgentStringParserImpl.class);
 
+	private static final List<OperatingSystemExample> OS_EXAMPLES = OperatingSystemExamplesReader.read();
+
+	private static final List<UserAgentExample> UA_EXAMPLES = UserAgentExamplesReader.read();
+
 	private static final UserAgentStringParser parser = UADetectorServiceFactory.getUserAgentStringParser();
 
 	@Test
 	public void testOperatingSystemExamples() throws Exception {
-		final InputStream stream = this.getClass().getClassLoader().getResourceAsStream("examples/uasOS_example.csv");
-		final CSVParser csvParser = new CSVParser(new InputStreamReader(stream, CHARSET));
-		String[] line = null;
+		final Output out = new Output();
 		int i = 0;
-		do {
-			line = csvParser.getLine();
-			if (line != null) {
-				i++;
-				if (line.length == 2) {
-					final UserAgent agent = parser.parse(line[1]);
-					Assert.assertEquals(line[0], agent.getOperatingSystem().getName());
-				} else {
-					LOG.warn("Not enough fields: " + line.length);
-				}
+		for (OperatingSystemExample example : OS_EXAMPLES) {
+			final UserAgent agent = parser.parse(example.getUserAgentString());
+
+			// comparing the name
+			Assert.assertEquals(example.getName(), agent.getOperatingSystem().getName());
+
+			// check for unknown family
+			if (OperatingSystemFamily.UNKNOWN == agent.getOperatingSystem().getFamily()) {
+				LOG.info("Unknown operating system family found. Please update the enum 'OperatingSystemFamily'.");
 			}
-		} while (line != null);
+
+			// abort if unknown family
+			Assert.assertFalse(OperatingSystemFamily.UNKNOWN == agent.getOperatingSystem().getFamily());
+
+			// save read OS for printing out
+			out.print(agent.getOperatingSystem().getName(), agent.getOperatingSystem().getVersionNumber(), example.getUserAgentString());
+			i++;
+		}
+		LOG.info(Output.NEWLINE + out.toString());
 		LOG.info(i + " operating system examples validated");
 	}
 
 	@Test
 	public void testUserAgentExamples() throws Exception {
-		final InputStream stream = this.getClass().getClassLoader().getResourceAsStream("examples/uas_example.csv");
-		final CSVParser csvParser = new CSVParser(new InputStreamReader(stream, CHARSET));
-		String[] line = null;
+		final Output out = new Output("%-40.40s %-30.30s %s");
 		int i = 0;
-		do {
-			line = csvParser.getLine();
-			if (line != null) {
-				i++;
-				if (line.length == 3) {
-					final UserAgent agent = parser.parse(line[2]);
-					Assert.assertEquals(line[1], agent.getFamily());
-					final String type = "robot".equals(line[0]) ? Robot.TYPENAME : line[0];
-					if (Robot.TYPENAME.equals(type)) {
-						System.out.println(agent.getName() + "    v: " + agent.getVersionNumber().toVersionString());
-					}
-					Assert.assertEquals(type, agent.getType());
-				} else {
-					LOG.warn("Not enough fields: " + line.length);
-				}
+		for (UserAgentExample example : UA_EXAMPLES) {
+			final UserAgent agent = parser.parse(example.getUserAgentString());
+			Assert.assertEquals(example.getName(), agent.getFamily());
+			final String type = "robot".equals(example.getType()) ? Robot.TYPENAME : example.getType();
+			if (Robot.TYPENAME.equals(type)) {
+				out.print(agent.getName(), agent.getVersionNumber(), example.getUserAgentString());
 			}
-		} while (line != null);
+			Assert.assertEquals(type, agent.getTypeName());
+		}
+		LOG.info(Output.NEWLINE + out.toString());
 		LOG.info(i + " User-Agent examples validated");
 	}
 

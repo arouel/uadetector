@@ -16,6 +16,7 @@
 package net.sf.uadetector.internal.data.domain;
 
 import net.sf.uadetector.UserAgent;
+import net.sf.uadetector.UserAgentType;
 
 public final class Robot {
 
@@ -226,7 +227,7 @@ public final class Robot {
 		builder.setProducer(producer);
 		builder.setProducerUrl(producerUrl);
 		builder.setUrl(url);
-		builder.setType(TYPENAME);
+		builder.setType(UserAgentType.ROBOT);
 	}
 
 	@Override

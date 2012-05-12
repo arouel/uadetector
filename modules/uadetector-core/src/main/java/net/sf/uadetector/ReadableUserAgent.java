@@ -70,7 +70,14 @@ public interface ReadableUserAgent {
 	 * 
 	 * @return the type of an user agent
 	 */
-	String getType();
+	UserAgentType getType();
+
+	/**
+	 * Returns the type name of an user agent, for example, mobile browser or email client.
+	 * 
+	 * @return the type name of an user agent
+	 */
+	String getTypeName();
 
 	/**
 	 * Returns the URL to the product or information page of an user agent.

@@ -37,7 +37,7 @@ public class UserAgentStringParserTest {
 		Assert.assertEquals(os, ua.getOperatingSystem());
 		Assert.assertEquals("Google Inc.", ua.getProducer());
 		Assert.assertEquals("http://www.google.com/", ua.getProducerUrl());
-		Assert.assertEquals("Browser", ua.getType());
+		Assert.assertEquals("Browser", ua.getTypeName());
 		Assert.assertEquals("http://www.google.com/chrome", ua.getUrl());
 		Assert.assertEquals("13.0.782.112", ua.getVersionNumber().toVersionString());
 	}
@@ -60,7 +60,7 @@ public class UserAgentStringParserTest {
 		Assert.assertEquals(os, ua.getOperatingSystem());
 		Assert.assertEquals("Mozilla Foundation", ua.getProducer());
 		Assert.assertEquals("http://www.mozilla.org/", ua.getProducerUrl());
-		Assert.assertEquals("Browser", ua.getType());
+		Assert.assertEquals("Browser", ua.getTypeName());
 		Assert.assertEquals("http://www.firefox.com/", ua.getUrl());
 		Assert.assertEquals("6.0", ua.getVersionNumber().toVersionString());
 	}
@@ -73,7 +73,7 @@ public class UserAgentStringParserTest {
 		Assert.assertEquals(OperatingSystem.EMPTY, ua.getOperatingSystem());
 		Assert.assertEquals("Google Inc.", ua.getProducer());
 		Assert.assertEquals("http://www.google.com/", ua.getProducerUrl());
-		Assert.assertEquals(Robot.TYPENAME, ua.getType());
+		Assert.assertEquals(Robot.TYPENAME, ua.getTypeName());
 		Assert.assertEquals("", ua.getUrl());
 		Assert.assertEquals("2.1", ua.getVersionNumber().toVersionString());
 	}
@@ -88,7 +88,7 @@ public class UserAgentStringParserTest {
 		Assert.assertEquals(os, ua.getOperatingSystem());
 		Assert.assertEquals("Rick Cranisky", ua.getProducer());
 		Assert.assertEquals("", ua.getProducerUrl());
-		Assert.assertEquals("Offline Browser", ua.getType());
+		Assert.assertEquals("Offline Browser", ua.getTypeName());
 		Assert.assertEquals("http://www.sitesucker.us/", ua.getUrl());
 		Assert.assertEquals("1.6.9", ua.getVersionNumber().toVersionString());
 	}

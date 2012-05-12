@@ -33,7 +33,8 @@ public class UserAgentBuilderTest {
 		Assert.assertSame(b, b.setOperatingSystem(os));
 		Assert.assertSame(b, b.setProducer("p1"));
 		Assert.assertSame(b, b.setProducerUrl("pu1"));
-		Assert.assertSame(b, b.setType("t1"));
+		Assert.assertSame(b, b.setType(UserAgentType.BROWSER));
+		Assert.assertSame(b, b.setTypeName("t1"));
 		Assert.assertSame(b, b.setUrl("u1"));
 		Assert.assertSame(b, b.setVersionNumber(VersionParser.parseVersion("1.0.0")));
 
@@ -42,7 +43,7 @@ public class UserAgentBuilderTest {
 		Assert.assertEquals(os, b.getOperatingSystem());
 		Assert.assertEquals("p1", b.getProducer());
 		Assert.assertEquals("pu1", b.getProducerUrl());
-		Assert.assertEquals("t1", b.getType());
+		Assert.assertEquals("t1", b.getTypeName());
 		Assert.assertEquals("u1", b.getUrl());
 		Assert.assertEquals("1.0.0", b.getVersionNumber().toVersionString());
 
@@ -53,7 +54,7 @@ public class UserAgentBuilderTest {
 		Assert.assertEquals(os, ua.getOperatingSystem());
 		Assert.assertEquals("p1", ua.getProducer());
 		Assert.assertEquals("pu1", ua.getProducerUrl());
-		Assert.assertEquals("t1", ua.getType());
+		Assert.assertEquals("t1", ua.getTypeName());
 		Assert.assertEquals("u1", ua.getUrl());
 		Assert.assertEquals("1.0.0", ua.getVersionNumber().toVersionString());
 	}
@@ -66,7 +67,7 @@ public class UserAgentBuilderTest {
 		Assert.assertEquals(UserAgent.EMPTY.getOperatingSystem(), b.getOperatingSystem());
 		Assert.assertEquals(UserAgent.EMPTY.getProducer(), b.getProducer());
 		Assert.assertEquals(UserAgent.EMPTY.getProducerUrl(), b.getProducerUrl());
-		Assert.assertEquals(UserAgent.EMPTY.getType(), b.getType());
+		Assert.assertEquals(UserAgent.EMPTY.getTypeName(), b.getTypeName());
 		Assert.assertEquals(UserAgent.EMPTY.getUrl(), b.getUrl());
 		Assert.assertEquals(VersionNumber.UNKNOWN, b.getVersionNumber());
 		Assert.assertEquals(UserAgent.EMPTY, b.build());
@@ -77,7 +78,7 @@ public class UserAgentBuilderTest {
 		Assert.assertEquals(UserAgent.EMPTY.getOperatingSystem(), ua.getOperatingSystem());
 		Assert.assertEquals(UserAgent.EMPTY.getProducer(), ua.getProducer());
 		Assert.assertEquals(UserAgent.EMPTY.getProducerUrl(), ua.getProducerUrl());
-		Assert.assertEquals(UserAgent.EMPTY.getType(), ua.getType());
+		Assert.assertEquals(UserAgent.EMPTY.getTypeName(), ua.getTypeName());
 		Assert.assertEquals(UserAgent.EMPTY.getUrl(), ua.getUrl());
 		Assert.assertEquals(VersionNumber.UNKNOWN, ua.getVersionNumber());
 		Assert.assertEquals(UserAgent.EMPTY, b.build());

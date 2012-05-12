@@ -313,7 +313,7 @@ public final class Browser {
 		builder.setName(family);
 		builder.setProducer(producer);
 		builder.setProducerUrl(producerUrl);
-		builder.setType(type.getName());
+		builder.setTypeName(type.getName());
 		builder.setUrl(url);
 		if (operatingSystem != null) {
 			operatingSystem.copyTo(builder);

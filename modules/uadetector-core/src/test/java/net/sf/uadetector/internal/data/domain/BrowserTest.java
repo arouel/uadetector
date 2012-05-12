@@ -196,7 +196,7 @@ public class BrowserTest {
 		Assert.assertEquals(b.getFamily(), builder.getFamily());
 		Assert.assertEquals(b.getProducer(), builder.getProducer());
 		Assert.assertEquals(b.getProducerUrl(), builder.getProducerUrl());
-		Assert.assertEquals(b.getType().getName(), builder.getType());
+		Assert.assertEquals(b.getType().getName(), builder.getTypeName());
 		Assert.assertEquals(b.getUrl(), builder.getUrl());
 		Assert.assertNotNull(builder.getOperatingSystem());
 	}
@@ -210,7 +210,7 @@ public class BrowserTest {
 		Assert.assertEquals(b.getFamily(), builder.getFamily());
 		Assert.assertEquals(b.getProducer(), builder.getProducer());
 		Assert.assertEquals(b.getProducerUrl(), builder.getProducerUrl());
-		Assert.assertEquals(b.getType().getName(), builder.getType());
+		Assert.assertEquals(b.getType().getName(), builder.getTypeName());
 		Assert.assertEquals(b.getUrl(), builder.getUrl());
 		Assert.assertSame(net.sf.uadetector.OperatingSystem.EMPTY, builder.getOperatingSystem());
 	}

@@ -35,14 +35,16 @@ public final class UserAgent implements ReadableUserAgent {
 
 		private String producerUrl = EMPTY.producerUrl;
 
-		private String type = EMPTY.type;
+		private UserAgentType type = EMPTY.type;
+
+		private String typeName = EMPTY.typeName;
 
 		private String url = EMPTY.url;
 
 		private VersionNumber versionNumber = VersionNumber.UNKNOWN;
 
 		public UserAgent build() {
-			return new UserAgent(family, name, operatingSystem, producer, producerUrl, type, url, versionNumber);
+			return new UserAgent(family, name, operatingSystem, producer, producerUrl, type, typeName, url, versionNumber);
 		}
 
 		@Override
@@ -71,8 +73,13 @@ public final class UserAgent implements ReadableUserAgent {
 		}
 
 		@Override
-		public String getType() {
+		public UserAgentType getType() {
 			return type;
+		}
+
+		@Override
+		public String getTypeName() {
+			return typeName;
 		}
 
 		@Override
@@ -134,11 +141,21 @@ public final class UserAgent implements ReadableUserAgent {
 			return this;
 		}
 
-		public Builder setType(final String type) {
+		public Builder setType(final UserAgentType type) {
 			if (type == null) {
 				throw new IllegalArgumentException("Argument 'type' must not be null.");
 			}
 			this.type = type;
+			this.typeName = type.getName();
+			return this;
+		}
+
+		public Builder setTypeName(final String typeName) {
+			if (typeName == null) {
+				throw new IllegalArgumentException("Argument 'typeName' must not be null.");
+			}
+			this.type = UserAgentType.evaluateByTypeName(typeName);
+			this.typeName = typeName;
 			return this;
 		}
 
@@ -160,7 +177,8 @@ public final class UserAgent implements ReadableUserAgent {
 
 	}
 
-	public static final UserAgent EMPTY = new UserAgent("unknown", "unknown", OperatingSystem.EMPTY, "", "", "", "", VersionNumber.UNKNOWN);
+	public static final UserAgent EMPTY = new UserAgent("unknown", "unknown", OperatingSystem.EMPTY, "", "", UserAgentType.UNKNOWN, "", "",
+			VersionNumber.UNKNOWN);
 
 	private final String family;
 
@@ -172,14 +190,16 @@ public final class UserAgent implements ReadableUserAgent {
 
 	private final String producerUrl;
 
-	private final String type;
+	private final UserAgentType type;
+
+	private final String typeName;
 
 	private final String url;
 
 	private final VersionNumber versionNumber;
 
 	public UserAgent(final String family, final String name, final OperatingSystem operatingSystem, final String producer,
-			final String producerUrl, final String type, final String url, final VersionNumber versionNumber) {
+			final String producerUrl, final UserAgentType type, final String typeName, final String url, final VersionNumber versionNumber) {
 
 		if (family == null) {
 			throw new IllegalArgumentException("Argument 'family' must not be null.");
@@ -199,6 +219,9 @@ public final class UserAgent implements ReadableUserAgent {
 		if (type == null) {
 			throw new IllegalArgumentException("Argument 'type' must not be null.");
 		}
+		if (typeName == null) {
+			throw new IllegalArgumentException("Argument 'typeName' must not be null.");
+		}
 		if (url == null) {
 			throw new IllegalArgumentException("Argument 'url' must not be null.");
 		}
@@ -212,6 +235,7 @@ public final class UserAgent implements ReadableUserAgent {
 		this.producer = producer;
 		this.producerUrl = producerUrl;
 		this.type = type;
+		this.typeName = typeName;
 		this.url = url;
 		this.versionNumber = versionNumber;
 	}
@@ -244,6 +268,9 @@ public final class UserAgent implements ReadableUserAgent {
 			return false;
 		}
 		if (!type.equals(other.type)) {
+			return false;
+		}
+		if (!typeName.equals(other.typeName)) {
 			return false;
 		}
 		if (!url.equals(other.url)) {
@@ -281,8 +308,13 @@ public final class UserAgent implements ReadableUserAgent {
 	}
 
 	@Override
-	public String getType() {
+	public UserAgentType getType() {
 		return type;
+	}
+
+	@Override
+	public String getTypeName() {
+		return typeName;
 	}
 
 	@Override
@@ -305,6 +337,7 @@ public final class UserAgent implements ReadableUserAgent {
 		result = prime * result + producer.hashCode();
 		result = prime * result + producerUrl.hashCode();
 		result = prime * result + type.hashCode();
+		result = prime * result + typeName.hashCode();
 		result = prime * result + url.hashCode();
 		result = prime * result + versionNumber.hashCode();
 		return result;
@@ -325,6 +358,8 @@ public final class UserAgent implements ReadableUserAgent {
 		builder.append(producerUrl);
 		builder.append(", type=");
 		builder.append(type);
+		builder.append(", typeName=");
+		builder.append(typeName);
 		builder.append(", url=");
 		builder.append(url);
 		builder.append(", versionNumber=");

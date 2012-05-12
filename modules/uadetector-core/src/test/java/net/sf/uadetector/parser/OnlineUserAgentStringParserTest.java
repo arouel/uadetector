@@ -100,7 +100,7 @@ public class OnlineUserAgentStringParserTest {
 		Assert.assertEquals("Chrome", agent.getName());
 		Assert.assertEquals("Google Inc.", agent.getProducer());
 		Assert.assertEquals("http://www.google.com/", agent.getProducerUrl());
-		Assert.assertEquals("Browser", agent.getType());
+		Assert.assertEquals("Browser", agent.getTypeName());
 		Assert.assertEquals("http://www.google.com/chrome", agent.getUrl());
 		Assert.assertEquals("13.0.782.112", agent.getVersionNumber().toVersionString());
 
@@ -126,7 +126,7 @@ public class OnlineUserAgentStringParserTest {
 		Assert.assertEquals("Safari", agent.getName());
 		Assert.assertEquals("Apple Inc.", agent.getProducer());
 		Assert.assertEquals("http://www.apple.com/", agent.getProducerUrl());
-		Assert.assertEquals("Browser", agent.getType());
+		Assert.assertEquals("Browser", agent.getTypeName());
 		Assert.assertEquals("http://en.wikipedia.org/wiki/Safari_%28web_browser%29", agent.getUrl());
 
 		// check operating system informations
@@ -151,7 +151,7 @@ public class OnlineUserAgentStringParserTest {
 		Assert.assertEquals("SiteSucker", agent.getName());
 		Assert.assertEquals("Rick Cranisky", agent.getProducer());
 		Assert.assertEquals("", agent.getProducerUrl());
-		Assert.assertEquals("Offline Browser", agent.getType());
+		Assert.assertEquals("Offline Browser", agent.getTypeName());
 		Assert.assertEquals("http://www.sitesucker.us/", agent.getUrl());
 		Assert.assertEquals("1.6.9", agent.getVersionNumber().toVersionString());
 
@@ -177,7 +177,7 @@ public class OnlineUserAgentStringParserTest {
 		Assert.assertEquals("Skyfire", agent.getName());
 		Assert.assertEquals("Skyfire Labs, Inc.", agent.getProducer());
 		Assert.assertEquals("http://www.skyfire.com/about", agent.getProducerUrl());
-		Assert.assertEquals("Mobile Browser", agent.getType());
+		Assert.assertEquals("Mobile Browser", agent.getTypeName());
 		Assert.assertEquals("http://www.skyfire.com/", agent.getUrl());
 		Assert.assertEquals("2.0", agent.getVersionNumber().toVersionString());
 
@@ -203,7 +203,7 @@ public class OnlineUserAgentStringParserTest {
 		Assert.assertEquals("Skyfire", agent.getName());
 		Assert.assertEquals("Skyfire Labs, Inc.", agent.getProducer());
 		Assert.assertEquals("http://www.skyfire.com/about", agent.getProducerUrl());
-		Assert.assertEquals("Mobile Browser", agent.getType());
+		Assert.assertEquals("Mobile Browser", agent.getTypeName());
 		Assert.assertEquals("http://www.skyfire.com/", agent.getUrl());
 		Assert.assertEquals("2.0", agent.getVersionNumber().toVersionString());
 	}
@@ -218,7 +218,7 @@ public class OnlineUserAgentStringParserTest {
 		Assert.assertEquals(e.getName(), agent.getName());
 		Assert.assertEquals(e.getProducer(), agent.getProducer());
 		Assert.assertEquals(e.getProducerUrl(), agent.getProducerUrl());
-		Assert.assertEquals(e.getType(), agent.getType());
+		Assert.assertEquals(e.getTypeName(), agent.getTypeName());
 		Assert.assertEquals(e.getUrl(), agent.getUrl());
 
 		Assert.assertEquals(OperatingSystem.EMPTY, agent.getOperatingSystem());
@@ -237,7 +237,7 @@ public class OnlineUserAgentStringParserTest {
 		Assert.assertEquals("Googlebot/2.1", agent.getName());
 		Assert.assertEquals("Google Inc.", agent.getProducer());
 		Assert.assertEquals("http://www.google.com/", agent.getProducerUrl());
-		Assert.assertEquals(Robot.TYPENAME, agent.getType());
+		Assert.assertEquals(Robot.TYPENAME, agent.getTypeName());
 		Assert.assertEquals("", agent.getUrl());
 		Assert.assertEquals("2.1", agent.getVersionNumber().toVersionString());
 	}
@@ -252,7 +252,7 @@ public class OnlineUserAgentStringParserTest {
 		Assert.assertEquals(e.getName(), agent.getName());
 		Assert.assertEquals(e.getProducer(), agent.getProducer());
 		Assert.assertEquals(e.getProducerUrl(), agent.getProducerUrl());
-		Assert.assertEquals(e.getType(), agent.getType());
+		Assert.assertEquals(e.getTypeName(), agent.getTypeName());
 		Assert.assertEquals(e.getUrl(), agent.getUrl());
 		Assert.assertEquals(VersionNumber.UNKNOWN, agent.getVersionNumber());
 

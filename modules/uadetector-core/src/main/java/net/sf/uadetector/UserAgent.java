@@ -41,7 +41,20 @@ public final class UserAgent implements ReadableUserAgent {
 
 		private String url = EMPTY.url;
 
+		private String userAgentString = "";
+
 		private VersionNumber versionNumber = VersionNumber.UNKNOWN;
+
+		public Builder() {
+			// default constructor
+		}
+
+		public Builder(final String userAgentString) {
+			if (userAgentString == null) {
+				throw new IllegalArgumentException("Argument 'userAgentString' must not be null.");
+			}
+			this.userAgentString = userAgentString;
+		}
 
 		public UserAgent build() {
 			return new UserAgent(family, name, operatingSystem, producer, producerUrl, type, typeName, url, versionNumber);
@@ -85,6 +98,10 @@ public final class UserAgent implements ReadableUserAgent {
 		@Override
 		public String getUrl() {
 			return url;
+		}
+
+		public String getUserAgentString() {
+			return userAgentString;
 		}
 
 		@Override
@@ -165,6 +182,13 @@ public final class UserAgent implements ReadableUserAgent {
 			}
 			this.url = url;
 			return this;
+		}
+
+		public void setUserAgentString(final String userAgentString) {
+			if (userAgentString == null) {
+				throw new IllegalArgumentException("Argument 'userAgentString' must not be null.");
+			}
+			this.userAgentString = userAgentString;
 		}
 
 		public Builder setVersionNumber(final VersionNumber versionNumber) {

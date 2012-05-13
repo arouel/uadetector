@@ -78,7 +78,7 @@ public class UserAgentStringParserTest {
 		Assert.assertEquals("Apple Computer, Inc.", os.getProducer());
 		Assert.assertEquals("http://www.apple.com/", os.getProducerUrl());
 		Assert.assertEquals("http://www.apple.com/macosx/", os.getUrl());
-		Assert.assertEquals("10.6 Snow Leopard", os.getVersionNumber().toVersionString());
+		Assert.assertEquals("10.6.8", os.getVersionNumber().toVersionString());
 	}
 
 	@Test
@@ -106,7 +106,7 @@ public class UserAgentStringParserTest {
 		Assert.assertEquals("Apple Computer, Inc.", os.getProducer());
 		Assert.assertEquals("http://www.apple.com/", os.getProducerUrl());
 		Assert.assertEquals("http://www.apple.com/macosx/", os.getUrl());
-		Assert.assertEquals("10.6 Snow Leopard", os.getVersionNumber().toVersionString());
+		Assert.assertEquals("10.6.8", os.getVersionNumber().toVersionString());
 	}
 
 	@Test
@@ -164,7 +164,7 @@ public class UserAgentStringParserTest {
 		Assert.assertEquals("Microsoft Corporation.", os.getProducer());
 		Assert.assertEquals("http://www.microsoft.com/", os.getProducerUrl());
 		Assert.assertEquals("http://en.wikipedia.org/wiki/Windows_7", os.getUrl());
-		Assert.assertEquals("7", os.getVersionNumber().toVersionString());
+		Assert.assertEquals("6.1", os.getVersionNumber().toVersionString());
 	}
 
 	@Test
@@ -193,7 +193,7 @@ public class UserAgentStringParserTest {
 		Assert.assertEquals("Sun Microsystems, Inc.", os.getProducer());
 		Assert.assertEquals("http://en.wikipedia.org/wiki/Sun_Microsystems", os.getProducerUrl());
 		Assert.assertEquals("http://en.wikipedia.org/wiki/Jvm", os.getUrl());
-		Assert.assertEquals("", os.getVersionNumber().toVersionString());
+		Assert.assertEquals("1.6.0_31", os.getVersionNumber().toVersionString());
 	}
 
 	@Test
@@ -221,7 +221,7 @@ public class UserAgentStringParserTest {
 		Assert.assertEquals("Google, Inc.", os.getProducer());
 		Assert.assertEquals("http://www.google.com/", os.getProducerUrl());
 		Assert.assertEquals("http://en.wikipedia.org/wiki/Android_%28operating_system%29", os.getUrl());
-		Assert.assertEquals("4 Ice Cream Sandwich", os.getVersionNumber().toVersionString());
+		Assert.assertEquals("4.0.3", os.getVersionNumber().toVersionString());
 	}
 
 	@Test
@@ -250,7 +250,36 @@ public class UserAgentStringParserTest {
 		Assert.assertEquals("Microsoft Corporation.", os.getProducer());
 		Assert.assertEquals("http://www.microsoft.com/", os.getProducerUrl());
 		Assert.assertEquals("http://en.wikipedia.org/wiki/Windows_XP", os.getUrl());
-		Assert.assertEquals(VersionNumber.UNKNOWN, os.getVersionNumber());
+		Assert.assertEquals("5.1", os.getVersionNumber().toVersionString());
+	}
+
+	@Test
+	public void parse_browser_SAFARI() throws Exception {
+		final String userAgent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_7_3) AppleWebKit/534.55.3 (KHTML, like Gecko) Version/5.1.5 Safari/534.55.3";
+		final UserAgent agent = parser.parse(userAgent);
+		Assert.assertNotNull(agent);
+		Assert.assertFalse(UserAgent.EMPTY.equals(agent));
+		Assert.assertFalse(OperatingSystem.EMPTY.equals(agent.getOperatingSystem()));
+
+		// check user agent informations
+		Assert.assertEquals("Safari", agent.getFamily());
+		Assert.assertEquals("Safari", agent.getName());
+		Assert.assertEquals("Apple Inc.", agent.getProducer());
+		Assert.assertEquals("http://www.apple.com/", agent.getProducerUrl());
+		Assert.assertEquals(UserAgentType.BROWSER, agent.getType());
+		Assert.assertEquals("Browser", agent.getTypeName());
+		Assert.assertEquals("http://en.wikipedia.org/wiki/Safari_%28web_browser%29", agent.getUrl());
+		Assert.assertEquals("5.1.5", agent.getVersionNumber().toVersionString());
+
+		// check operating system informations
+		final OperatingSystem os = agent.getOperatingSystem();
+		Assert.assertEquals(OperatingSystemFamily.OS_X, os.getFamily());
+		Assert.assertEquals("Mac OS X", os.getFamilyName());
+		Assert.assertEquals("Mac OS X 10.7 Lion", os.getName());
+		Assert.assertEquals("Apple Computer, Inc.", os.getProducer());
+		Assert.assertEquals("http://www.apple.com/", os.getProducerUrl());
+		Assert.assertEquals("http://www.apple.com/macosx/", os.getUrl());
+		Assert.assertEquals("10.7.3", os.getVersionNumber().toVersionString());
 	}
 
 	@Test
@@ -308,7 +337,7 @@ public class UserAgentStringParserTest {
 		Assert.assertEquals("Apple Computer, Inc.", os.getProducer());
 		Assert.assertEquals("http://www.apple.com/", os.getProducerUrl());
 		Assert.assertEquals("http://www.apple.com/macosx/", os.getUrl());
-		Assert.assertEquals("10.5 Leopard", os.getVersionNumber().toVersionString());
+		Assert.assertEquals("10.5.7", os.getVersionNumber().toVersionString());
 	}
 
 	@Test
@@ -373,7 +402,7 @@ public class UserAgentStringParserTest {
 		Assert.assertEquals("Apple Computer, Inc.", os.getProducer());
 		Assert.assertEquals("http://www.apple.com/", os.getProducerUrl());
 		Assert.assertEquals("http://www.apple.com/macosx/", os.getUrl());
-		Assert.assertEquals("10.7 Lion", os.getVersionNumber().toVersionString());
+		Assert.assertEquals("10.7", os.getVersionNumber().toVersionString());
 	}
 
 	@Test

@@ -39,11 +39,11 @@ public abstract class AbstractUserAgentStringParser implements UserAgentStringPa
 	 * @param builder
 	 *            Builder for an user agent information
 	 */
-	private static void examineAsBrowser(final String userAgent, final UserAgent.Builder builder, final Data data) {
+	private static void examineAsBrowser(final UserAgent.Builder builder, final Data data) {
 		Matcher matcher;
 		VersionNumber version;
 		for (final Entry<BrowserPattern, Browser> entry : data.getPatternBrowserMap().entrySet()) {
-			matcher = entry.getKey().getPattern().matcher(userAgent);
+			matcher = entry.getKey().getPattern().matcher(builder.getUserAgentString());
 			if (matcher.find()) {
 
 				entry.getValue().copyTo(builder);
@@ -66,11 +66,11 @@ public abstract class AbstractUserAgentStringParser implements UserAgentStringPa
 	 *            Builder for an user agent information
 	 * @return {@code true} if it is a robot, otherwise {@code false}
 	 */
-	private static boolean examineAsRobot(final String userAgent, final UserAgent.Builder builder, final Data data) {
+	private static boolean examineAsRobot(final UserAgent.Builder builder, final Data data) {
 		boolean isRobot = false;
 		VersionNumber version;
 		for (final Robot robot : data.getRobots()) {
-			if (robot.getUserAgentString().equals(userAgent)) {
+			if (robot.getUserAgentString().equals(builder.getUserAgentString())) {
 				isRobot = true;
 				robot.copyTo(builder);
 
@@ -92,10 +92,10 @@ public abstract class AbstractUserAgentStringParser implements UserAgentStringPa
 	 * @param builder
 	 *            Builder for an user agent information
 	 */
-	private static void examineOperatingSystem(final String userAgent, final UserAgent.Builder builder, final Data data) {
+	private static void examineOperatingSystem(final UserAgent.Builder builder, final Data data) {
 		if (net.sf.uadetector.OperatingSystem.EMPTY.equals(builder.getOperatingSystem())) {
 			for (final Entry<OperatingSystemPattern, OperatingSystem> entry : data.getPatternOsMap().entrySet()) {
-				final Matcher matcher = entry.getKey().getPattern().matcher(userAgent);
+				final Matcher matcher = entry.getKey().getPattern().matcher(builder.getUserAgentString());
 				if (matcher.find()) {
 					entry.getValue().copyTo(builder);
 					break;
@@ -108,14 +108,14 @@ public abstract class AbstractUserAgentStringParser implements UserAgentStringPa
 
 	@Override
 	public UserAgent parse(final String userAgent) {
-		final UserAgent.Builder builder = new UserAgent.Builder();
+		final UserAgent.Builder builder = new UserAgent.Builder(userAgent);
 
 		// work during the analysis always with the same reference of data
 		final Data data = getData();
 
-		if (!examineAsRobot(userAgent, builder, data)) {
-			examineAsBrowser(userAgent, builder, data);
-			examineOperatingSystem(userAgent, builder, data);
+		if (!examineAsRobot(builder, data)) {
+			examineAsBrowser(builder, data);
+			examineOperatingSystem(builder, data);
 		}
 		return builder.build();
 	}

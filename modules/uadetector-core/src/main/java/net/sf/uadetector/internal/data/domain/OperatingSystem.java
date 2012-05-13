@@ -215,17 +215,6 @@ public final class OperatingSystem {
 
 	}
 
-	/**
-	 * Extracts the version number from the operating system name.
-	 * 
-	 * @param name
-	 *            operating system name with version information
-	 * @return extracted version number
-	 */
-	private static VersionNumber parseVersionNumberFromName(final String name) {
-		return VersionParser.parseLastVersionNumber(name);
-	}
-
 	private final String family;
 	private final String icon;
 	private final int id;
@@ -286,8 +275,8 @@ public final class OperatingSystem {
 	 *            user agent builder
 	 */
 	public void copyTo(final UserAgent.Builder builder) {
-		final VersionNumber version = parseVersionNumberFromName(name);
 		final OperatingSystemFamily family = OperatingSystemFamily.evaluateByFamilyName(this.family);
+		final VersionNumber version = VersionParser.parseOperatingSystemVersion(family, builder.getUserAgentString());
 		builder.setOperatingSystem(new net.sf.uadetector.OperatingSystem(family, this.family, name, producer, producerUrl, url, version));
 	}
 

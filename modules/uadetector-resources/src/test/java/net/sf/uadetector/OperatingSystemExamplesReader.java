@@ -10,11 +10,10 @@ import java.util.List;
 import net.sf.uadetector.parser.OnlineUserAgentStringParserImpl;
 
 import org.apache.commons.csv.CSVParser;
-import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class OperatingSystemExamplesReader {
+final class OperatingSystemExamplesReader {
 
 	/**
 	 * Character set of the file
@@ -31,7 +30,6 @@ public class OperatingSystemExamplesReader {
 	 */
 	private static final Logger LOG = LoggerFactory.getLogger(OnlineUserAgentStringParserImpl.class);
 
-	@Test
 	public static List<OperatingSystemExample> read() {
 		final InputStream stream = UserAgentStringParserIntegrationTest.class.getClassLoader().getResourceAsStream(FILE);
 

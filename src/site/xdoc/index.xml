@@ -36,28 +36,28 @@
 		</section>
 		<section name="Features">
 			<div class="feature">
-				<img src="./images/feature.png" alt="Devices" />
+				<img src="./images/browsers.png" alt="Devices" />
 				<span class="title">Detects over 190 different browsers</span>
 				<p>This library detects over 190 different desktop and mobile browsers and 130 other User-Agents like feed readers,
 					multimedia players and email clients.
 				</p>
 			</div>
 			<div class="feature">
-				<img src="./images/feature.png" alt="The Robots" />
+				<img src="./images/robots.png" alt="The Robots" />
 				<span class="title">Identifies over 400 robots</span>
 				<p>On the Internet many robots are on their way to examine sites. A large number of robots can be detected with this
 					library.
 				</p>
 			</div>
 			<div class="feature">
-				<img src="./images/feature.png" alt="Monthly updated" />
+				<img src="./images/kalender.png" alt="Monthly updated" />
 				<span class="title">Monthly updated</span>
 				<p>Each month a new version of the resources module will be published so you can always detect the latest
 					User-Agents.
 				</p>
 			</div>
 			<div class="feature">
-				<img src="./images/feature.png" alt="Extremely tested" />
+				<img src="./images/tested.png" alt="Extremely tested" />
 				<span class="title">Extremely tested</span>
 				<p>
 					All classes in this library have been especially tested. The unit tests have a 100%

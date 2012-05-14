@@ -224,14 +224,14 @@ public final class VersionParser {
 	}
 
 	/**
-	 * Interprets a string with version information. The last version number in the string will be searched and
-	 * processed.
+	 * Interprets a string with version information. The first occurrence of a version number in the string will be
+	 * searched and processed.
 	 * 
 	 * @param text
 	 *            string with version information
 	 * @return an object of {@code VersionNumber}, never {@code null}
 	 */
-	public static VersionNumber parseFirstVersionNumber(final String text) {
+	protected static VersionNumber parseFirstVersionNumber(final String text) {
 		if (text == null) {
 			throw new IllegalArgumentException("Argument 'text' must not be null.");
 		}

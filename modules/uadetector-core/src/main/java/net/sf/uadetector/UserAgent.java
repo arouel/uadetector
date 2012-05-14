@@ -184,11 +184,12 @@ public final class UserAgent implements ReadableUserAgent {
 			return this;
 		}
 
-		public void setUserAgentString(final String userAgentString) {
+		public Builder setUserAgentString(final String userAgentString) {
 			if (userAgentString == null) {
 				throw new IllegalArgumentException("Argument 'userAgentString' must not be null.");
 			}
 			this.userAgentString = userAgentString;
+			return this;
 		}
 
 		public Builder setVersionNumber(final VersionNumber versionNumber) {

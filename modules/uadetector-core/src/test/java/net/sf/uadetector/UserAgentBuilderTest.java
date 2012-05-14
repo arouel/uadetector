@@ -68,6 +68,7 @@ public class UserAgentBuilderTest {
 		Assert.assertEquals(UserAgent.EMPTY.getOperatingSystem(), b.getOperatingSystem());
 		Assert.assertEquals(UserAgent.EMPTY.getProducer(), b.getProducer());
 		Assert.assertEquals(UserAgent.EMPTY.getProducerUrl(), b.getProducerUrl());
+		Assert.assertEquals(UserAgent.EMPTY.getType(), b.getType());
 		Assert.assertEquals(UserAgent.EMPTY.getTypeName(), b.getTypeName());
 		Assert.assertEquals(UserAgent.EMPTY.getUrl(), b.getUrl());
 		Assert.assertEquals(VersionNumber.UNKNOWN, b.getVersionNumber());
@@ -79,10 +80,16 @@ public class UserAgentBuilderTest {
 		Assert.assertEquals(UserAgent.EMPTY.getOperatingSystem(), ua.getOperatingSystem());
 		Assert.assertEquals(UserAgent.EMPTY.getProducer(), ua.getProducer());
 		Assert.assertEquals(UserAgent.EMPTY.getProducerUrl(), ua.getProducerUrl());
+		Assert.assertEquals(UserAgent.EMPTY.getType(), ua.getType());
 		Assert.assertEquals(UserAgent.EMPTY.getTypeName(), ua.getTypeName());
 		Assert.assertEquals(UserAgent.EMPTY.getUrl(), ua.getUrl());
 		Assert.assertEquals(VersionNumber.UNKNOWN, ua.getVersionNumber());
 		Assert.assertEquals(UserAgent.EMPTY, b.build());
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void construct_null() {
+		new UserAgent.Builder(null);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
@@ -149,8 +156,25 @@ public class UserAgentBuilderTest {
 	}
 
 	@Test(expected = IllegalArgumentException.class)
+	public void setTypeName_null() {
+		new UserAgent.Builder().setTypeName(null);
+	}
+
+	@Test(expected = IllegalArgumentException.class)
 	public void setUrl_null() {
 		new UserAgent.Builder().setUrl(null);
+	}
+
+	@Test
+	public void setUserAgentString() {
+		final String userAgentString = "a user agent string";
+		final UserAgent.Builder b = new UserAgent.Builder().setUserAgentString(userAgentString);
+		Assert.assertEquals(userAgentString, b.getUserAgentString());
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void setUserAgentString_null() {
+		new UserAgent.Builder().setUserAgentString(null);
 	}
 
 	@Test(expected = IllegalArgumentException.class)

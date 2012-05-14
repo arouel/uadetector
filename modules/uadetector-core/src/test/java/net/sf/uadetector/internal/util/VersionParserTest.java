@@ -133,6 +133,20 @@ public class VersionParserTest {
 	}
 
 	@Test
+	public void identifyVersionTest_unidentifiable() {
+		final String userAgent = "abcdefghjklmnop";
+		Assert.assertEquals(VersionNumber.UNKNOWN, VersionParser.identifyAndroidVersion(userAgent));
+		Assert.assertEquals(VersionNumber.UNKNOWN, VersionParser.identifyBSDVersion(userAgent));
+		Assert.assertEquals(VersionNumber.UNKNOWN, VersionParser.identifyBadaVersion(userAgent));
+		Assert.assertEquals(VersionNumber.UNKNOWN, VersionParser.identifyIOSVersion(userAgent));
+		Assert.assertEquals(VersionNumber.UNKNOWN, VersionParser.identifyJavaVersion(userAgent));
+		Assert.assertEquals(VersionNumber.UNKNOWN, VersionParser.identifyOSXVersion(userAgent));
+		Assert.assertEquals(VersionNumber.UNKNOWN, VersionParser.identifySymbianVersion(userAgent));
+		Assert.assertEquals(VersionNumber.UNKNOWN, VersionParser.identifyWebOSVersion(userAgent));
+		Assert.assertEquals(VersionNumber.UNKNOWN, VersionParser.identifyWindowsVersion(userAgent));
+	}
+
+	@Test
 	public void identifyWebOSVersion() {
 		final String hpwos305 = "Mozilla/5.0 (hp-tablet; Linux; hpwOS/3.0.5; U; en-US) AppleWebKit/534.6 (KHTML, like Gecko) wOSBrowser/234.83 Safari/534.6 TouchPad/1.0";
 		Assert.assertEquals("3.0.5", VersionParser.identifyWebOSVersion(hpwos305).toVersionString());
@@ -176,6 +190,26 @@ public class VersionParserTest {
 
 		final String windowsPhone7 = "Mozilla/4.0 (compatible; MSIE 7.0; Windows Phone OS 7.0; Trident/3.1; IEMobile/7.0; HTC; 7 Mozart; Orange)";
 		Assert.assertEquals("7.0", VersionParser.identifyWindowsVersion(windowsPhone7).toVersionString());
+	}
+
+	@Test
+	public void parseFirstVersionNumber_emptyString() {
+		final String userAgent = "";
+		final VersionNumber v = VersionParser.parseFirstVersionNumber(userAgent);
+		Assert.assertEquals(VersionNumber.UNKNOWN, v);
+	}
+
+	@Test
+	public void parseFirstVersionNumber_MOZILLA() {
+		final String userAgent = "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)";
+		final String version = "5.0";
+		final VersionNumber v = VersionParser.parseFirstVersionNumber(userAgent);
+		Assert.assertEquals(version, v.toVersionString());
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void parseFirstVersionNumber_null() {
+		VersionParser.parseFirstVersionNumber(null);
 	}
 
 	@Test
@@ -240,6 +274,16 @@ public class VersionParserTest {
 
 		final String windows8 = "Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.2; Trident/6.0)";
 		Assert.assertEquals("6.2", VersionParser.parseOperatingSystemVersion(OperatingSystemFamily.WINDOWS, windows8).toVersionString());
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void parseOperatingSystemVersion_family_null() {
+		VersionParser.parseOperatingSystemVersion(null, "a user agent string");
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void parseOperatingSystemVersion_userAgentString_null() {
+		VersionParser.parseOperatingSystemVersion(OperatingSystemFamily.UNKNOWN, null);
 	}
 
 	@Test(expected = IllegalArgumentException.class)

@@ -3,7 +3,7 @@
 <uasdata>
 	<description>
 		<label>Data (format xml) for UASparser - http://user-agent-string.info/download/UASparser</label>
-		<version>20120509-01</version>
+		<version>20120515-01</version>
 		<checksum type="MD5">http://user-agent-string.info/rpc/get_data.php?format=xml&amp;md5=y</checksum>
 		<checksum type="SHA1">http://user-agent-string.info/rpc/get_data.php?format=xml&amp;sha1=y</checksum>
 	</description>
@@ -182,152 +182,162 @@
 			<robot>
 				<id>1273</id>
 				<useragent><![CDATA[Acoon-Robot 4.0.0RC2 (http://www.acoon.de)]]></useragent>
-				<family>Acoon</family>
+				<family>AcoonBot</family>
 				<name>Acoon-Robot 4.0.0RC2</name>
 				<company><![CDATA[Acoon GmbH]]></company>
 				<url_company><![CDATA[http://www.acoon.de/]]></url_company>
 				<icon>bot_Acoon.png</icon>
-				<bot_info_url>/list-of-ua/bot-detail?bot=Acoon</bot_info_url>
+				<bot_info_url>/list-of-ua/bot-detail?bot=AcoonBot</bot_info_url>
 			</robot>
 			<robot>
 				<id>1282</id>
 				<useragent><![CDATA[Acoon-Robot 4.0.1 (http://www.acoon.de)]]></useragent>
-				<family>Acoon</family>
+				<family>AcoonBot</family>
 				<name>Acoon-Robot 4.0.1</name>
 				<company><![CDATA[Acoon GmbH]]></company>
 				<url_company><![CDATA[http://www.acoon.de/]]></url_company>
 				<icon>bot_Acoon.png</icon>
-				<bot_info_url>/list-of-ua/bot-detail?bot=Acoon</bot_info_url>
+				<bot_info_url>/list-of-ua/bot-detail?bot=AcoonBot</bot_info_url>
 			</robot>
 			<robot>
 				<id>1287</id>
 				<useragent><![CDATA[Acoon-Robot 4.0.2 (http://www.acoon.de)]]></useragent>
-				<family>Acoon</family>
+				<family>AcoonBot</family>
 				<name>Acoon-Robot 4.0.2</name>
 				<company><![CDATA[Acoon GmbH]]></company>
 				<url_company><![CDATA[http://www.acoon.de/]]></url_company>
 				<icon>bot_Acoon.png</icon>
-				<bot_info_url>/list-of-ua/bot-detail?bot=Acoon</bot_info_url>
+				<bot_info_url>/list-of-ua/bot-detail?bot=AcoonBot</bot_info_url>
 			</robot>
 			<robot>
 				<id>1297</id>
 				<useragent><![CDATA[Acoon-Robot 4.0.2.17 (http://www.acoon.de)]]></useragent>
-				<family>Acoon</family>
+				<family>AcoonBot</family>
 				<name>Acoon-Robot 4.0.2.17</name>
 				<company><![CDATA[Acoon GmbH]]></company>
 				<url_company><![CDATA[http://www.acoon.de/]]></url_company>
 				<icon>bot_Acoon.png</icon>
-				<bot_info_url>/list-of-ua/bot-detail?bot=Acoon</bot_info_url>
+				<bot_info_url>/list-of-ua/bot-detail?bot=AcoonBot</bot_info_url>
 			</robot>
 			<robot>
 				<id>1685</id>
 				<useragent><![CDATA[OpenAcoon v4.1.0 (www.openacoon.de)]]></useragent>
-				<family>Acoon</family>
+				<family>AcoonBot</family>
 				<name>OpenAcoon v4.1.0</name>
 				<company><![CDATA[Acoon GmbH]]></company>
 				<url_company><![CDATA[http://www.acoon.de/]]></url_company>
 				<icon>bot_Acoon.png</icon>
-				<bot_info_url>/list-of-ua/bot-detail?bot=Acoon</bot_info_url>
+				<bot_info_url>/list-of-ua/bot-detail?bot=AcoonBot</bot_info_url>
 			</robot>
 			<robot>
 				<id>6905</id>
 				<useragent><![CDATA[Acoon v4.1.0 (www.acoon.de)]]></useragent>
-				<family>Acoon</family>
+				<family>AcoonBot</family>
 				<name>Acoon v4.1.0</name>
 				<company><![CDATA[Acoon GmbH]]></company>
 				<url_company><![CDATA[http://www.acoon.de/]]></url_company>
 				<icon>bot_Acoon.png</icon>
-				<bot_info_url>/list-of-ua/bot-detail?bot=Acoon</bot_info_url>
+				<bot_info_url>/list-of-ua/bot-detail?bot=AcoonBot</bot_info_url>
 			</robot>
 			<robot>
 				<id>7001</id>
 				<useragent><![CDATA[Acoon v4.9.5 (www.acoon.de)]]></useragent>
-				<family>Acoon</family>
+				<family>AcoonBot</family>
 				<name>Acoon v4.9.5</name>
 				<company><![CDATA[Acoon GmbH]]></company>
 				<url_company><![CDATA[http://www.acoon.de/]]></url_company>
 				<icon>bot_Acoon.png</icon>
-				<bot_info_url>/list-of-ua/bot-detail?bot=Acoon</bot_info_url>
+				<bot_info_url>/list-of-ua/bot-detail?bot=AcoonBot</bot_info_url>
 			</robot>
 			<robot>
 				<id>7009</id>
 				<useragent><![CDATA[Acoon v4.10.1 (www.acoon.de)]]></useragent>
-				<family>Acoon</family>
+				<family>AcoonBot</family>
 				<name>Acoon v4.10.1</name>
 				<company><![CDATA[Acoon GmbH]]></company>
 				<url_company><![CDATA[http://www.acoon.de/]]></url_company>
 				<icon>bot_Acoon.png</icon>
-				<bot_info_url>/list-of-ua/bot-detail?bot=Acoon</bot_info_url>
+				<bot_info_url>/list-of-ua/bot-detail?bot=AcoonBot</bot_info_url>
 			</robot>
 			<robot>
 				<id>7112</id>
 				<useragent><![CDATA[Acoon v4.10.3 (www.acoon.de)]]></useragent>
-				<family>Acoon</family>
+				<family>AcoonBot</family>
 				<name>Acoon v4.10.3</name>
 				<company><![CDATA[Acoon GmbH]]></company>
 				<url_company><![CDATA[http://www.acoon.de/]]></url_company>
 				<icon>bot_Acoon.png</icon>
-				<bot_info_url>/list-of-ua/bot-detail?bot=Acoon</bot_info_url>
+				<bot_info_url>/list-of-ua/bot-detail?bot=AcoonBot</bot_info_url>
 			</robot>
 			<robot>
 				<id>7178</id>
 				<useragent><![CDATA[Acoon v4.10.4 (www.acoon.de)]]></useragent>
-				<family>Acoon</family>
+				<family>AcoonBot</family>
 				<name>Acoon v4.10.4</name>
 				<company><![CDATA[Acoon GmbH]]></company>
 				<url_company><![CDATA[http://www.acoon.de/]]></url_company>
 				<icon>bot_Acoon.png</icon>
-				<bot_info_url>/list-of-ua/bot-detail?bot=Acoon</bot_info_url>
+				<bot_info_url>/list-of-ua/bot-detail?bot=AcoonBot</bot_info_url>
 			</robot>
 			<robot>
 				<id>7265</id>
 				<useragent><![CDATA[Acoon v4.10.5 (www.acoon.de)]]></useragent>
-				<family>Acoon</family>
+				<family>AcoonBot</family>
 				<name>Acoon v4.10.5</name>
 				<company><![CDATA[Acoon GmbH]]></company>
 				<url_company><![CDATA[http://www.acoon.de/]]></url_company>
 				<icon>bot_Acoon.png</icon>
-				<bot_info_url>/list-of-ua/bot-detail?bot=Acoon</bot_info_url>
+				<bot_info_url>/list-of-ua/bot-detail?bot=AcoonBot</bot_info_url>
 			</robot>
 			<robot>
 				<id>7285</id>
 				<useragent><![CDATA[OpenAcoon v4.10.5 (www.openacoon.de)]]></useragent>
-				<family>Acoon</family>
+				<family>AcoonBot</family>
 				<name>OpenAcoon v4.10.5</name>
 				<company><![CDATA[Acoon GmbH]]></company>
 				<url_company><![CDATA[http://www.acoon.de/]]></url_company>
 				<icon>bot_Acoon.png</icon>
-				<bot_info_url>/list-of-ua/bot-detail?bot=Acoon</bot_info_url>
+				<bot_info_url>/list-of-ua/bot-detail?bot=AcoonBot</bot_info_url>
 			</robot>
 			<robot>
 				<id>7321</id>
 				<useragent><![CDATA[AcoonBot/4.10.5 (+http://www.acoon.de)]]></useragent>
-				<family>Acoon</family>
+				<family>AcoonBot</family>
 				<name>AcoonBot/4.10.5</name>
 				<company><![CDATA[Acoon GmbH]]></company>
 				<url_company><![CDATA[http://www.acoon.de/]]></url_company>
 				<icon>bot_Acoon.png</icon>
-				<bot_info_url>/list-of-ua/bot-detail?bot=Acoon</bot_info_url>
+				<bot_info_url>/list-of-ua/bot-detail?bot=AcoonBot</bot_info_url>
 			</robot>
 			<robot>
 				<id>7366</id>
 				<useragent><![CDATA[Mozilla/5.0 (compatible; AcoonBot/4.10.6; +http://www.acoon.de/robot.asp)]]></useragent>
-				<family>Acoon</family>
+				<family>AcoonBot</family>
 				<name>AcoonBot/4.10.6</name>
 				<company><![CDATA[Acoon GmbH]]></company>
 				<url_company><![CDATA[http://www.acoon.de/]]></url_company>
 				<icon>bot_Acoon.png</icon>
-				<bot_info_url>/list-of-ua/bot-detail?bot=Acoon</bot_info_url>
+				<bot_info_url>/list-of-ua/bot-detail?bot=AcoonBot</bot_info_url>
 			</robot>
 			<robot>
 				<id>7409</id>
 				<useragent><![CDATA[Mozilla/5.0 (compatible; AcoonBot/4.10.7; +http://www.acoon.de/robot.asp)]]></useragent>
-				<family>Acoon</family>
+				<family>AcoonBot</family>
 				<name>AcoonBot/4.10.7</name>
 				<company><![CDATA[Acoon GmbH]]></company>
 				<url_company><![CDATA[http://www.acoon.de/]]></url_company>
 				<icon>bot_Acoon.png</icon>
-				<bot_info_url>/list-of-ua/bot-detail?bot=Acoon</bot_info_url>
+				<bot_info_url>/list-of-ua/bot-detail?bot=AcoonBot</bot_info_url>
+			</robot>
+			<robot>
+				<id>7458</id>
+				<useragent><![CDATA[Mozilla/5.0 (compatible; AcoonBot/4.10.8; +http://www.acoon.de/robot.asp)]]></useragent>
+				<family>AcoonBot</family>
+				<name>AcoonBot/4.10.8</name>
+				<company><![CDATA[Acoon GmbH]]></company>
+				<url_company><![CDATA[http://www.acoon.de/]]></url_company>
+				<icon>bot_Acoon.png</icon>
+				<bot_info_url>/list-of-ua/bot-detail?bot=AcoonBot</bot_info_url>
 			</robot>
 			<robot>
 				<id>829</id>
@@ -446,6 +456,16 @@
 				<name>aiHitBot/1.1</name>
 				<company><![CDATA[aiHit Ltd.]]></company>
 				<url_company><![CDATA[http://www.aihit.com/]]></url_company>
+				<icon>bot.png</icon>
+				<bot_info_url>/list-of-ua/bot-detail?bot=aiHitBot</bot_info_url>
+			</robot>
+			<robot>
+				<id>7462</id>
+				<useragent><![CDATA[Mozilla/5.0 (compatible; aiHitBot-BP/1.1; +http://www.aihit.com/)]]></useragent>
+				<family>aiHitBot</family>
+				<name>aiHitBot-BP/1.1</name>
+				<company><![CDATA[aiHit Ltd]]></company>
+				<url_company><![CDATA[http://aihit.com/]]></url_company>
 				<icon>bot.png</icon>
 				<bot_info_url>/list-of-ua/bot-detail?bot=aiHitBot</bot_info_url>
 			</robot>

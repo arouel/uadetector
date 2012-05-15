@@ -74,7 +74,7 @@ public class OnlineUserAgentStringParserTest {
 
 	@Test
 	public void getCurrentVersion() {
-		Assert.assertFalse("20120323-01".equals(parser.getCurrentVersion()));
+		Assert.assertFalse("20120509-01".equals(parser.getCurrentVersion()));
 	}
 
 	@Test

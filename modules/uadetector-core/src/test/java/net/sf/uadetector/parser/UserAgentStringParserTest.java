@@ -39,7 +39,7 @@ public class UserAgentStringParserTest {
 
 	@Test
 	public void getCurrentVersion() {
-		Assert.assertEquals("20120323-01", parser.getCurrentVersion());
+		Assert.assertEquals("20120509-01", parser.getCurrentVersion());
 	}
 
 	@Test
@@ -50,35 +50,6 @@ public class UserAgentStringParserTest {
 	@Test
 	public void getDataReader() {
 		Assert.assertNotNull(parser.getDataReader());
-	}
-
-	@Test
-	public void parse_browser_CHROME() throws Exception {
-		final String userAgent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_6_8) AppleWebKit/535.1 (KHTML, like Gecko) Chrome/13.0.782.112 Safari/535.1";
-		final UserAgent agent = parser.parse(userAgent);
-		Assert.assertNotNull(agent);
-		Assert.assertFalse(UserAgent.EMPTY.equals(agent));
-		Assert.assertFalse(OperatingSystem.EMPTY.equals(agent.getOperatingSystem()));
-
-		// check user agent informations
-		Assert.assertEquals("Chrome", agent.getFamily());
-		Assert.assertEquals("Chrome", agent.getName());
-		Assert.assertEquals("Google Inc.", agent.getProducer());
-		Assert.assertEquals("http://www.google.com/", agent.getProducerUrl());
-		Assert.assertEquals(UserAgentType.BROWSER, agent.getType());
-		Assert.assertEquals("Browser", agent.getTypeName());
-		Assert.assertEquals("http://www.google.com/chrome", agent.getUrl());
-		Assert.assertEquals("13.0.782.112", agent.getVersionNumber().toVersionString());
-
-		// check operating system informations
-		final OperatingSystem os = agent.getOperatingSystem();
-		Assert.assertEquals(OperatingSystemFamily.OS_X, os.getFamily());
-		Assert.assertEquals("Mac OS X", os.getFamilyName());
-		Assert.assertEquals("Mac OS X 10.6 Snow Leopard", os.getName());
-		Assert.assertEquals("Apple Computer, Inc.", os.getProducer());
-		Assert.assertEquals("http://www.apple.com/", os.getProducerUrl());
-		Assert.assertEquals("http://www.apple.com/macosx/", os.getUrl());
-		Assert.assertEquals("10.6.8", os.getVersionNumber().toVersionString());
 	}
 
 	@Test
@@ -107,6 +78,93 @@ public class UserAgentStringParserTest {
 		Assert.assertEquals("http://www.apple.com/", os.getProducerUrl());
 		Assert.assertEquals("http://www.apple.com/macosx/", os.getUrl());
 		Assert.assertEquals("10.6.8", os.getVersionNumber().toVersionString());
+	}
+
+	@Test
+	public void parse_browser_CHROME13() throws Exception {
+		final String userAgent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_6_8) AppleWebKit/535.1 (KHTML, like Gecko) Chrome/13.0.782.112 Safari/535.1";
+		final UserAgent agent = parser.parse(userAgent);
+		Assert.assertNotNull(agent);
+		Assert.assertFalse(UserAgent.EMPTY.equals(agent));
+		Assert.assertFalse(OperatingSystem.EMPTY.equals(agent.getOperatingSystem()));
+
+		// check user agent informations
+		Assert.assertEquals("Chrome", agent.getFamily());
+		Assert.assertEquals("Chrome", agent.getName());
+		Assert.assertEquals("Google Inc.", agent.getProducer());
+		Assert.assertEquals("http://www.google.com/", agent.getProducerUrl());
+		Assert.assertEquals(UserAgentType.BROWSER, agent.getType());
+		Assert.assertEquals("Browser", agent.getTypeName());
+		Assert.assertEquals("http://www.google.com/chrome", agent.getUrl());
+		Assert.assertEquals("13.0.782.112", agent.getVersionNumber().toVersionString());
+
+		// check operating system informations
+		final OperatingSystem os = agent.getOperatingSystem();
+		Assert.assertEquals(OperatingSystemFamily.OS_X, os.getFamily());
+		Assert.assertEquals("Mac OS X", os.getFamilyName());
+		Assert.assertEquals("Mac OS X 10.6 Snow Leopard", os.getName());
+		Assert.assertEquals("Apple Computer, Inc.", os.getProducer());
+		Assert.assertEquals("http://www.apple.com/", os.getProducerUrl());
+		Assert.assertEquals("http://www.apple.com/macosx/", os.getUrl());
+		Assert.assertEquals("10.6.8", os.getVersionNumber().toVersionString());
+	}
+
+	@Test
+	public void parse_browser_CHROME19() throws Exception {
+		final String userAgent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_7_4) AppleWebKit/536.5 (KHTML, like Gecko) Chrome/19.0.1084.46 Safari/536.5";
+		final UserAgent agent = parser.parse(userAgent);
+		Assert.assertNotNull(agent);
+		Assert.assertFalse(UserAgent.EMPTY.equals(agent));
+		Assert.assertFalse(OperatingSystem.EMPTY.equals(agent.getOperatingSystem()));
+
+		// check user agent informations
+		Assert.assertEquals("Chrome", agent.getFamily());
+		Assert.assertEquals("Chrome", agent.getName());
+		Assert.assertEquals("Google Inc.", agent.getProducer());
+		Assert.assertEquals("http://www.google.com/", agent.getProducerUrl());
+		Assert.assertEquals(UserAgentType.BROWSER, agent.getType());
+		Assert.assertEquals("Browser", agent.getTypeName());
+		Assert.assertEquals("http://www.google.com/chrome", agent.getUrl());
+		Assert.assertEquals("19.0.1084.46", agent.getVersionNumber().toVersionString());
+
+		// check operating system informations
+		final OperatingSystem os = agent.getOperatingSystem();
+		Assert.assertEquals(OperatingSystemFamily.OS_X, os.getFamily());
+		Assert.assertEquals("Mac OS X", os.getFamilyName());
+		Assert.assertEquals("Mac OS X 10.7 Lion", os.getName());
+		Assert.assertEquals("Apple Computer, Inc.", os.getProducer());
+		Assert.assertEquals("http://www.apple.com/", os.getProducerUrl());
+		Assert.assertEquals("http://www.apple.com/macosx/", os.getUrl());
+		Assert.assertEquals("10.7.4", os.getVersionNumber().toVersionString());
+	}
+
+	@Test
+	public void parse_browser_FIREFOX6() throws Exception {
+		final String userAgent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7; rv:6.0) Gecko/20100101 Firefox/6.0";
+		final UserAgent agent = parser.parse(userAgent);
+		Assert.assertNotNull(agent);
+		Assert.assertFalse(UserAgent.EMPTY.equals(agent));
+		Assert.assertFalse(OperatingSystem.EMPTY.equals(agent.getOperatingSystem()));
+
+		// check user agent informations
+		Assert.assertEquals("Firefox", agent.getFamily());
+		Assert.assertEquals("Firefox", agent.getName());
+		Assert.assertEquals("Mozilla Foundation", agent.getProducer());
+		Assert.assertEquals("http://www.mozilla.org/", agent.getProducerUrl());
+		Assert.assertEquals(UserAgentType.BROWSER, agent.getType());
+		Assert.assertEquals("Browser", agent.getTypeName());
+		Assert.assertEquals("http://www.firefox.com/", agent.getUrl());
+		Assert.assertEquals("6.0", agent.getVersionNumber().toVersionString());
+
+		// check operating system informations
+		final OperatingSystem os = agent.getOperatingSystem();
+		Assert.assertEquals(OperatingSystemFamily.OS_X, os.getFamily());
+		Assert.assertEquals("Mac OS X", os.getFamilyName());
+		Assert.assertEquals("Mac OS X 10.7 Lion", os.getName());
+		Assert.assertEquals("Apple Computer, Inc.", os.getProducer());
+		Assert.assertEquals("http://www.apple.com/", os.getProducerUrl());
+		Assert.assertEquals("http://www.apple.com/macosx/", os.getUrl());
+		Assert.assertEquals("10.7", os.getVersionNumber().toVersionString());
 	}
 
 	@Test
@@ -374,35 +432,6 @@ public class UserAgentStringParserTest {
 		Assert.assertEquals(VersionNumber.UNKNOWN, agent.getVersionNumber());
 
 		Assert.assertEquals(OperatingSystem.EMPTY, agent.getOperatingSystem());
-	}
-
-	@Test
-	public void parse_FIREFOX6() throws Exception {
-		final String userAgent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7; rv:6.0) Gecko/20100101 Firefox/6.0";
-		final UserAgent agent = parser.parse(userAgent);
-		Assert.assertNotNull(agent);
-		Assert.assertFalse(UserAgent.EMPTY.equals(agent));
-		Assert.assertFalse(OperatingSystem.EMPTY.equals(agent.getOperatingSystem()));
-
-		// check user agent informations
-		Assert.assertEquals("Firefox", agent.getFamily());
-		Assert.assertEquals("Firefox", agent.getName());
-		Assert.assertEquals("Mozilla Foundation", agent.getProducer());
-		Assert.assertEquals("http://www.mozilla.org/", agent.getProducerUrl());
-		Assert.assertEquals(UserAgentType.BROWSER, agent.getType());
-		Assert.assertEquals("Browser", agent.getTypeName());
-		Assert.assertEquals("http://www.firefox.com/", agent.getUrl());
-		Assert.assertEquals("6.0", agent.getVersionNumber().toVersionString());
-
-		// check operating system informations
-		final OperatingSystem os = agent.getOperatingSystem();
-		Assert.assertEquals(OperatingSystemFamily.OS_X, os.getFamily());
-		Assert.assertEquals("Mac OS X", os.getFamilyName());
-		Assert.assertEquals("Mac OS X 10.7 Lion", os.getName());
-		Assert.assertEquals("Apple Computer, Inc.", os.getProducer());
-		Assert.assertEquals("http://www.apple.com/", os.getProducerUrl());
-		Assert.assertEquals("http://www.apple.com/macosx/", os.getUrl());
-		Assert.assertEquals("10.7", os.getVersionNumber().toVersionString());
 	}
 
 	@Test

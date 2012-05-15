@@ -47,7 +47,7 @@ public class XmlDataReaderTest {
 	public void testVersionParsing() {
 		final DataReader reader = new XmlDataReader();
 		final Data data = reader.read(getClass().getClassLoader().getResourceAsStream("uas_test.xml"));
-		Assert.assertEquals("20120323-01", data.getVersion());
+		Assert.assertEquals("20120509-01", data.getVersion());
 	}
 
 }

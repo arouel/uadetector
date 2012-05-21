@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
@@ -21,6 +22,19 @@
 	<description>The UADetector core library includes the API and implementation to read the detection information and the functions to identify User-Agents, but not the database (also known as UAS data). The UAS data can be found in the resources module.</description>
 
 	<packaging>bundle</packaging>
+
+	<licenses>
+		<license>
+			<name>The Apache Software License, Version 2.0</name>
+			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+			<distribution>repo</distribution>
+		</license>
+		<license>
+			<name>GNU Lesser General Public License</name>
+			<url>http://www.gnu.org/licenses/lgpl.html</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
 
 	<dependencies>
 
@@ -54,6 +68,19 @@
 	</dependencies>
 
 	<build>
+		<resources>
+			<resource>
+				<directory>${basedir}/src/main/resources</directory>
+			</resource>
+			<resource>
+				<directory>${basedir}</directory>
+				<targetPath>META-INF</targetPath>
+				<includes>
+					<include>LICENSE*.txt</include>
+					<include>NOTICE.txt</include>
+				</includes>
+			</resource>
+		</resources>
 		<plugins>
 			<plugin>
 				<!-- the following instructions build a simple set of public/private classes into an OSGi bundle -->

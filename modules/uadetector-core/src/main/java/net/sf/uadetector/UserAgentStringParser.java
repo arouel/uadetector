@@ -15,8 +15,23 @@
  ******************************************************************************/
 package net.sf.uadetector;
 
+/**
+ * Basic interface for user agent string parsers.
+ * 
+ * @author André Rouél
+ */
 public interface UserAgentStringParser {
 
+	/**
+	 * Detects informations about a network client based on a user agent string.<br>
+	 * <br>
+	 * Typically user agent string will be read by an instance of {@code HttpServletRequest}. With the method
+	 * {@code getHeader("User-Agent")} you can get direct access to this string.
+	 * 
+	 * @param userAgent
+	 *            user agent string
+	 * @return the detected information of an user agent
+	 */
 	UserAgent parse(final String userAgent);
 
 }

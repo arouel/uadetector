@@ -88,11 +88,12 @@ public class UserAgentStringParserIntegrationTest {
 				LOG.info("Unknown operating system family found. Please update the enum 'OperatingSystemFamily'.");
 			}
 
-			// abort if unknown family
+			// abort if family is unknown
 			Assert.assertFalse(OperatingSystemFamily.UNKNOWN == agent.getOperatingSystem().getFamily());
 
 			// save read OS for printing out
 			out.print(agent.getOperatingSystem().getName(), agent.getOperatingSystem().getVersionNumber(), example.getUserAgentString());
+
 			i++;
 		}
 		LOG.info(Output.NEWLINE + out.toString());
@@ -105,12 +106,20 @@ public class UserAgentStringParserIntegrationTest {
 		int i = 0;
 		for (UserAgentExample example : UA_EXAMPLES) {
 			final UserAgent agent = parser.parse(example.getUserAgentString());
+
+			// comparing the name
 			Assert.assertEquals(example.getName(), agent.getFamily());
+
 			final String type = "robot".equals(example.getType()) ? Robot.TYPENAME : example.getType();
 			if (Robot.TYPENAME.equals(type)) {
+				// save read robot for printing out
 				out.print(agent.getName(), agent.getVersionNumber(), example.getUserAgentString());
 			}
+
+			// abort if the type is not the expected one
 			Assert.assertEquals(type, agent.getTypeName());
+
+			i++;
 		}
 		LOG.info(Output.NEWLINE + out.toString());
 		LOG.info(i + " User-Agent examples validated");

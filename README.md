@@ -49,7 +49,7 @@ All classes in this library have been especially tested. The unit tests have a
 tests performed regularly.
 
 
-How can I help?
+How can You help?
 ---------------
 
 UADetector is an open source tool and welcomes contributions.
@@ -64,4 +64,4 @@ UADetector is an open source tool and welcomes contributions.
   or you can volunteer to help collate and organize information that is already
   there.
 
-Your participation in the project is much appreciated!
+Your participation in this project is much appreciated!

@@ -50,7 +50,7 @@ tests performed regularly.
 
 
 How can You help?
----------------
+-----------------
 
 UADetector is an open source tool and welcomes contributions.
 
@@ -65,3 +65,45 @@ UADetector is an open source tool and welcomes contributions.
   there.
 
 Your participation in this project is much appreciated!
+
+
+License
+-------
+
+Please visit the UADetector web site for more information:
+
+  * [http://uadetector.sourceforge.net/](http://uadetector.sourceforge.net/)
+
+Copyright 2012 André Rouél
+
+André Rouél licenses this product to you under the Apache License, version 2.0
+(the "License"); you may not use this product except in compliance with the
+License. You may obtain a copy of the License at:
+
+   [http://www.apache.org/licenses/LICENSE-2.0](http://www.apache.org/licenses/LICENSE-2.0)
+
+Unless required by applicable law or agreed to in writing, software distributed
+under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+CONDITIONS OF ANY KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations under the License.
+
+Also, please refer to each LICENSE.<component>.txt file, which is located in
+the same directory as this file, for the license terms of the components that
+this product depends on.
+
+-------------------------------------------------------------------------------
+This product contains a modified version of Dave Koelle's Alphanum Algorithm,
+which can be obtained at:
+
+  * LICENSE:
+    * LICENSE.alphanum.txt (GNU LGPL 2.1 or above)
+  * HOMEPAGE:
+    * [http://www.davekoelle.com/alphanum.html](http://www.davekoelle.com/alphanum.html)
+
+This product uses a version of Jaroslav Mallat's UAS Data, which can be
+obtained at:
+
+  * LICENSE:
+    * LICENSE.uas.txt (CC BY 3.0)
+  * HOMEPAGE:
+    * [http://user-agent-string.info/](http://user-agent-string.info/)

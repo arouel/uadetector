@@ -67,14 +67,24 @@
 
 	<custom>
 		<fluidoSkin>
-			<topBarEnabled>false</topBarEnabled>
+			<gitHub>
+				<projectId>before/uadetector</projectId>
+				<ribbonOrientation>right</ribbonOrientation>
+				<ribbonColor>black</ribbonColor>
+			</gitHub>
 			<googleAnalytics />
+			<googlePlusOne />
 			<googleSearch>
-				<sitesearch>uadetector.sourceforge.net</sitesearch>
+				<sitesearch />
 			</googleSearch>
-			<sideBarEnabled>true</sideBarEnabled>
+			<ohloh>
+				<projectId>597219</projectId>
+				<widget>users</widget>
+			</ohloh>
 			<searchEnabled>true</searchEnabled>
+			<sideBarEnabled>true</sideBarEnabled>
 			<sourceLineNumbersEnabled>true</sourceLineNumbersEnabled>
+			<topBarEnabled>false</topBarEnabled>
 		</fluidoSkin>
 	</custom>
 

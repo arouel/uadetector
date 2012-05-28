@@ -33,34 +33,8 @@
 				preconfigured UserAgentStringParser singletons. This library will be published monthly, is integration-tested
 				against the core module and is guaranteed to run against the defined core.
 			</p>
-			<script charset="utf-8" src="http://widgets.twimg.com/j/2/widget.js"></script>
-			<script>
-			new TWTR.Widget({
-			  version: 2,
-			  type: 'profile',
-			  rpp: 4,
-			  interval: 30000,
-			  width: 'auto',
-			  height: 150,
-			  theme: {
-			    shell: {
-			      background: '#eeeeee',
-			      color: '#000000'
-			    },
-			    tweets: {
-			      background: '#eeeeee',
-			      color: '#222222',
-			      links: '#0088cc'
-			    }
-			  },
-			  features: {
-			    scrollbar: false,
-			    loop: false,
-			    live: false,
-			    behavior: 'all'
-			  }
-			}).render().setUser('UADetector').start();
-			</script>
+			<script type="text/javascript" charset="utf-8" src="http://widgets.twimg.com/j/2/widget.js"></script>
+			<script type="text/javascript" src="./js/widget.js"></script>
 		</section>
 		<section name="Features">
 			<div class="feature">

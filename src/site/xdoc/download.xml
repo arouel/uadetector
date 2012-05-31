@@ -9,7 +9,8 @@
 
 		<section name="Maven users">
 			<p>
-				For Maven users there is no need to download files from here, because all artifacts are in
+				For Maven users there is no need to download files from here,
+				because all artifacts are in
 				<a target="_blank" href="http://search.maven.org/#search|ga|1|g:&quot;net.sf.uadetector&quot;">The Central Repository</a>.
 				See
 				<a href="quickstart.html">the Quick Start with Maven</a>.
@@ -17,12 +18,65 @@
 		</section>
 
 		<section name="Releases">
+			<subsection name="Release 2012.05">
+				<table>
+					<tr>
+						<th>Module</th>
+						<th>File</th>
+						<th>Checksum</th>
+						<th>Signature</th>
+					</tr>
+					<tr>
+						<td>UADetector :: Core</td>
+						<td>
+							<a
+								href="http://search.maven.org/remotecontent?filepath=net/sf/uadetector/uadetector-core/0.2.0/uadetector-core-0.2.0.jar">
+								uadetector-core-0.2.0.jar
+							</a>
+						</td>
+						<td>
+							<a
+								href="http://search.maven.org/remotecontent?filepath=net/sf/uadetector/uadetector-core/0.2.0/uadetector-core-0.2.0.jar.md5">
+								uadetector-core-0.2.0.jar.md5
+							</a>
+						</td>
+						<td>
+							<a
+								href="http://search.maven.org/remotecontent?filepath=net/sf/uadetector/uadetector-core/0.2.0/uadetector-core-0.2.0.jar.asc">
+								uadetector-core-0.2.0.jar.asc
+							</a>
+						</td>
+					</tr>
+					<tr>
+						<td>UADetector :: Resources</td>
+						<td>
+							<a
+								href="http://search.maven.org/remotecontent?filepath=net/sf/uadetector/uadetector-resources/2012.05/uadetector-resources-2012.05.jar">
+								uadetector-resources-2012.05.jar
+							</a>
+						</td>
+						<td>
+							<a
+								href="http://search.maven.org/remotecontent?filepath=net/sf/uadetector/uadetector-resources/2012.05/uadetector-resources-2012.05.jar.md5">
+								uadetector-resources-2012.05.jar.md5
+							</a>
+						</td>
+						<td>
+							<a
+								href="http://search.maven.org/remotecontent?filepath=net/sf/uadetector/uadetector-resources/2012.05/uadetector-resources-2012.05.jar.asc">
+								uadetector-resources-2012.05.jar.asc
+							</a>
+						</td>
+					</tr>
+				</table>
+			</subsection>
 			<subsection name="Release 2012.04">
 				<table>
 					<tr>
 						<th>Module</th>
 						<th>File</th>
-						<th>MD5 checksum</th>
+						<th>Checksum</th>
+						<th>Signature</th>
 					</tr>
 					<tr>
 						<td>UADetector :: Core</td>
@@ -38,6 +92,12 @@
 								uadetector-core-0.1.0.jar.md5
 							</a>
 						</td>
+						<td>
+							<a
+								href="http://search.maven.org/remotecontent?filepath=net/sf/uadetector/uadetector-core/0.1.0/uadetector-core-0.1.0.jar.asc">
+								uadetector-core-0.1.0.jar.asc
+							</a>
+						</td>
 					</tr>
 					<tr>
 						<td>UADetector :: Resources</td>
@@ -51,6 +111,12 @@
 							<a
 								href="http://search.maven.org/remotecontent?filepath=net/sf/uadetector/uadetector-resources/2012.04/uadetector-resources-2012.04.jar.md5">
 								uadetector-resources-2012.04.jar.md5
+							</a>
+						</td>
+						<td>
+							<a
+								href="http://search.maven.org/remotecontent?filepath=net/sf/uadetector/uadetector-resources/2012.04/uadetector-resources-2012.04.jar.asc">
+								uadetector-resources-2012.04.jar.asc
 							</a>
 						</td>
 					</tr>

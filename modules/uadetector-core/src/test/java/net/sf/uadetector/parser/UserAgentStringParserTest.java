@@ -24,6 +24,8 @@ import net.sf.uadetector.internal.data.domain.Robot;
 
 import org.junit.Assert;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class UserAgentStringParserTest {
 
@@ -31,6 +33,8 @@ public class UserAgentStringParserTest {
 
 	private static final UserAgentStringParserImpl parser = new UserAgentStringParserImpl(UserAgentStringParserImpl.class.getClassLoader()
 			.getResourceAsStream(RESOURCE));
+
+	private static final Logger LOG = LoggerFactory.getLogger(UserAgentStringParserTest.class);
 
 	@Test(expected = IllegalArgumentException.class)
 	public void construct_stream_null() throws Exception {
@@ -280,6 +284,76 @@ public class UserAgentStringParserTest {
 		Assert.assertEquals("http://www.google.com/", os.getProducerUrl());
 		Assert.assertEquals("http://en.wikipedia.org/wiki/Android_%28operating_system%29", os.getUrl());
 		Assert.assertEquals("4.0.3", os.getVersionNumber().toVersionString());
+	}
+
+	@Test
+	public void parse_browser_mobile_SAFARI_IPAD() throws Exception {
+		final String userAgent = "Mozilla/5.0 (iPad; U; CPU OS 4_2_1 like Mac OS X; ja-jp) AppleWebKit/533.17.9 (KHTML, like Gecko) Version/5.0.2 Mobile/8C148 Safari/6533.18.5";
+		final UserAgent agent = parser.parse(userAgent);
+		Assert.assertNotNull(agent);
+		Assert.assertFalse(UserAgent.EMPTY.equals(agent));
+		Assert.assertFalse(OperatingSystem.EMPTY.equals(agent.getOperatingSystem()));
+
+		// check user agent informations
+		Assert.assertEquals("Mobile Safari", agent.getFamily());
+		Assert.assertEquals("Mobile Safari", agent.getName());
+		Assert.assertEquals("Apple Inc.", agent.getProducer());
+		Assert.assertEquals("http://www.apple.com/", agent.getProducerUrl());
+		Assert.assertEquals(UserAgentType.MOBILE_BROWSER, agent.getType());
+		Assert.assertEquals("Mobile Browser", agent.getTypeName());
+		Assert.assertEquals("http://en.wikipedia.org/wiki/Safari_%28web_browser%29", agent.getUrl());
+		Assert.assertEquals("5.0.2", agent.getVersionNumber().toVersionString());
+
+		// check operating system informations
+		final OperatingSystem os = agent.getOperatingSystem();
+		Assert.assertEquals(OperatingSystemFamily.IOS, os.getFamily());
+		Assert.assertEquals("iPhone OS", os.getFamilyName());
+		Assert.assertEquals("iPhone OS", os.getName());
+		Assert.assertEquals("Apple Inc.", os.getProducer());
+		Assert.assertEquals("http://www.apple.com/", os.getProducerUrl());
+		Assert.assertEquals("http://en.wikipedia.org/wiki/IPhone_OS", os.getUrl());
+		Assert.assertEquals("4.2.1", os.getVersionNumber().toVersionString());
+
+		// distinguish as iPad
+		if (OperatingSystemFamily.IOS == agent.getOperatingSystem().getFamily() && userAgent.contains("iPad")) {
+			LOG.debug("I'm an iPad.");
+			Assert.assertTrue(true);
+		}
+	}
+
+	@Test
+	public void parse_browser_mobile_SAFARI_IPHONE() throws Exception {
+		final String userAgent = "Mozilla/5.0 (iPhone; CPU iPhone OS 5_1_1 like Mac OS X) AppleWebKit/534.46 (KHTML, like Gecko) Version/5.1 Mobile/9B206 Safari/7534.48.3";
+		final UserAgent agent = parser.parse(userAgent);
+		Assert.assertNotNull(agent);
+		Assert.assertFalse(UserAgent.EMPTY.equals(agent));
+		Assert.assertFalse(OperatingSystem.EMPTY.equals(agent.getOperatingSystem()));
+
+		// check user agent informations
+		Assert.assertEquals("Mobile Safari", agent.getFamily());
+		Assert.assertEquals("Mobile Safari", agent.getName());
+		Assert.assertEquals("Apple Inc.", agent.getProducer());
+		Assert.assertEquals("http://www.apple.com/", agent.getProducerUrl());
+		Assert.assertEquals(UserAgentType.MOBILE_BROWSER, agent.getType());
+		Assert.assertEquals("Mobile Browser", agent.getTypeName());
+		Assert.assertEquals("http://en.wikipedia.org/wiki/Safari_%28web_browser%29", agent.getUrl());
+		Assert.assertEquals("5.1", agent.getVersionNumber().toVersionString());
+
+		// check operating system informations
+		final OperatingSystem os = agent.getOperatingSystem();
+		Assert.assertEquals(OperatingSystemFamily.IOS, os.getFamily());
+		Assert.assertEquals("iPhone OS", os.getFamilyName());
+		Assert.assertEquals("iPhone OS", os.getName());
+		Assert.assertEquals("Apple Inc.", os.getProducer());
+		Assert.assertEquals("http://www.apple.com/", os.getProducerUrl());
+		Assert.assertEquals("http://en.wikipedia.org/wiki/IPhone_OS", os.getUrl());
+		Assert.assertEquals("5.1.1", os.getVersionNumber().toVersionString());
+
+		// distinguish as iPhone
+		if (OperatingSystemFamily.IOS == agent.getOperatingSystem().getFamily() && userAgent.contains("iPhone")) {
+			LOG.debug("I'm an iPhone.");
+			Assert.assertTrue(true);
+		}
 	}
 
 	@Test

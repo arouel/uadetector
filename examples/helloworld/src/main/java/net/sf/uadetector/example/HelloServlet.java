@@ -39,6 +39,7 @@ public class HelloServlet extends HttpServlet {
 		out.println("<h1>Hello Servlet</h1>");
 		out.println("session=" + request.getSession(true).getId());
 		out.println("<br>");
+		out.println("<br>");
 
 		// Get an UserAgentStringParser and analyze the requesting client
 		UserAgentStringParser parser = UADetectorServiceFactory.getUserAgentStringParser();

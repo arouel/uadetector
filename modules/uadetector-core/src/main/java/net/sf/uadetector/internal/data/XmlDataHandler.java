@@ -219,6 +219,16 @@ public class XmlDataHandler extends DefaultHandler {
 
 	private static final Logger LOG = LoggerFactory.getLogger(XmlDataHandler.class);
 
+	/**
+	 * Path to the internal Document Type Definition (DTD) of UAS data files to be able to work completely offline
+	 */
+	protected static final String UASDATA_DEF = "uadetector/uasxmldata.dtd";
+
+	/**
+	 * URL to the Document Type Definition (DTD) of UAS data files
+	 */
+	protected static final String UASDATA_DEF_URL = "http://user-agent-string.info/rpc/uasxmldata.dtd";
+
 	private Browser.Builder browserBuilder = new Browser.Builder();
 
 	private BrowserOperatingSystemMapping.Builder browserOsMappingBuilder = new BrowserOperatingSystemMapping.Builder();
@@ -226,6 +236,8 @@ public class XmlDataHandler extends DefaultHandler {
 	private BrowserPattern.Builder browserPatternBuilder = new BrowserPattern.Builder();
 
 	private BrowserType.Builder browserTypeBuilder = new BrowserType.Builder();
+
+	private StringBuilder buffer = new StringBuilder();
 
 	private Tag currentTag = null;
 
@@ -250,13 +262,6 @@ public class XmlDataHandler extends DefaultHandler {
 	private OperatingSystemPattern.Builder operatingSystemPatternBuilder = new OperatingSystemPattern.Builder();
 
 	private Robot.Builder robotBuilder = new Robot.Builder();
-
-	private StringBuilder buffer = new StringBuilder();
-
-	/**
-	 * Path to the internal Document Type Definition (DTD) of UAS data files to be able to work completely offline
-	 */
-	private static final String UASDATA_DEF = "uadetector/uasxmldata.dtd";
 
 	public XmlDataHandler(final Data.Builder builder) {
 		if (builder == null) {
@@ -304,7 +309,7 @@ public class XmlDataHandler extends DefaultHandler {
 
 	@Override
 	public InputSource resolveEntity(final String publicId, final String systemId) throws IOException, SAXException {
-		if ("http://user-agent-string.info/rpc/uasxmldata.dtd".equals(systemId)) {
+		if (UASDATA_DEF_URL.equals(systemId)) {
 			final InputStream stream = this.getClass().getClassLoader().getResourceAsStream(UASDATA_DEF);
 			return new InputSource(new InputStreamReader(stream));
 		}

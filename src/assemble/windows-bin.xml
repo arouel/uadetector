@@ -17,6 +17,8 @@
 			<includes>
 				<include>BUILDING*</include>
 				<include>LICENSE*</include>
+				<include>modules/uadetector-core/LICENSE.alphanum.txt</include>
+				<include>modules/uadetector-core/LICENSE.uas.txt</include>
 				<include>NOTICE*</include>
 				<include>README*</include>
 				<include>RELEASE*</include>

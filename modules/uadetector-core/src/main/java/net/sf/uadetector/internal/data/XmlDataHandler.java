@@ -15,6 +15,10 @@
  ******************************************************************************/
 package net.sf.uadetector.internal.data;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+
 import net.sf.uadetector.internal.data.domain.Browser;
 import net.sf.uadetector.internal.data.domain.BrowserOperatingSystemMapping;
 import net.sf.uadetector.internal.data.domain.BrowserPattern;
@@ -26,6 +30,7 @@ import net.sf.uadetector.internal.data.domain.Robot;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.xml.sax.Attributes;
+import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
@@ -248,6 +253,11 @@ public class XmlDataHandler extends DefaultHandler {
 
 	private StringBuilder buffer = new StringBuilder();
 
+	/**
+	 * Path to the internal Document Type Definition (DTD) of UAS data files to be able to work completely offline
+	 */
+	private static final String UASDATA_DEF = "uadetector/uasxmldata.dtd";
+
 	public XmlDataHandler(final Data.Builder builder) {
 		if (builder == null) {
 			throw new IllegalArgumentException("Argument 'builder' must not be null.");
@@ -290,6 +300,15 @@ public class XmlDataHandler extends DefaultHandler {
 		}
 
 		currentTag = null;
+	}
+
+	@Override
+	public InputSource resolveEntity(final String publicId, final String systemId) throws IOException, SAXException {
+		if ("http://user-agent-string.info/rpc/uasxmldata.dtd".equals(systemId)) {
+			final InputStream stream = this.getClass().getClassLoader().getResourceAsStream(UASDATA_DEF);
+			return new InputSource(new InputStreamReader(stream));
+		}
+		throw new SAXException("unable to resolve remote entity, systemId = " + systemId);
 	}
 
 	private void saveAndResetBrowserBuilder() {

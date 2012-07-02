@@ -15,10 +15,10 @@
 			<directory>${basedir}/..</directory>
 			<outputDirectory>/</outputDirectory>
 			<includes>
-				<include>BUILDING</include>
-				<include>LICENSE</include>
-				<include>NOTICE</include>
-				<include>README</include>
+				<include>BUILDING*</include>
+				<include>LICENSE*</include>
+				<include>NOTICE*</include>
+				<include>README*</include>
 				<include>RELEASE*</include>
 			</includes>
 			<lineEnding>unix</lineEnding>

@@ -185,7 +185,7 @@ public enum OperatingSystemFamily {
 	 * iOS (until June 2010 iPhone OS) is the standard operating system of Apple products like iPhone, iPod touch, iPad,
 	 * and the second generation of Apple TV. iOS is based on Mac OS X.
 	 */
-	IOS("iPhone OS"),
+	IOS("iOS"),
 
 	/**
 	 * webOS is a smartphone and tablet operating system from Hewlett-Packard (formerly HP Palm). It represents the

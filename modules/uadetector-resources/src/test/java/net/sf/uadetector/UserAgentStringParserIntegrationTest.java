@@ -19,7 +19,6 @@ import java.util.Formatter;
 import java.util.List;
 
 import net.sf.uadetector.internal.data.domain.Robot;
-import net.sf.uadetector.parser.OnlineUserAgentStringParserImpl;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -65,7 +64,7 @@ public class UserAgentStringParserIntegrationTest {
 	/**
 	 * Default log
 	 */
-	private static final Logger LOG = LoggerFactory.getLogger(OnlineUserAgentStringParserImpl.class);
+	private static final Logger LOG = LoggerFactory.getLogger(UserAgentStringParserIntegrationTest.class);
 
 	private static final List<OperatingSystemExample> OS_EXAMPLES = OperatingSystemExamplesReader.read();
 
@@ -77,7 +76,7 @@ public class UserAgentStringParserIntegrationTest {
 	public void testOperatingSystemExamples() throws Exception {
 		final Output out = new Output();
 		int i = 0;
-		for (OperatingSystemExample example : OS_EXAMPLES) {
+		for (final OperatingSystemExample example : OS_EXAMPLES) {
 			final UserAgent agent = parser.parse(example.getUserAgentString());
 
 			// comparing the name
@@ -85,7 +84,8 @@ public class UserAgentStringParserIntegrationTest {
 
 			// check for unknown family
 			if (OperatingSystemFamily.UNKNOWN == agent.getOperatingSystem().getFamily()) {
-				LOG.info("Unknown operating system family found. Please update the enum 'OperatingSystemFamily'.");
+				LOG.info("Unknown operating system family found. Please update the enum 'OperatingSystemFamily' for '"
+						+ agent.getOperatingSystem().getName() + "'.");
 			}
 
 			// abort if family is unknown
@@ -104,10 +104,13 @@ public class UserAgentStringParserIntegrationTest {
 	public void testUserAgentExamples() throws Exception {
 		final Output out = new Output("%-40.40s %-30.30s %s");
 		int i = 0;
-		for (UserAgentExample example : UA_EXAMPLES) {
+		for (final UserAgentExample example : UA_EXAMPLES) {
 			final UserAgent agent = parser.parse(example.getUserAgentString());
 
 			// comparing the name
+			if (!example.getName().equals(agent.getFamily())) {
+				LOG.info("Unexpected user agent family found. Please check the user agent string '" + example.getUserAgentString() + "'.");
+			}
 			Assert.assertEquals(example.getName(), agent.getFamily());
 
 			final String type = "robot".equals(example.getType()) ? Robot.TYPENAME : example.getType();

@@ -70,14 +70,14 @@ public class UserAgentStringParserIntegrationTest {
 
 	private static final List<UserAgentExample> UA_EXAMPLES = UserAgentExamplesReader.read();
 
-	private static final UserAgentStringParser parser = UADetectorServiceFactory.getUserAgentStringParser();
+	private static final UserAgentStringParser PARSER = UADetectorServiceFactory.getUserAgentStringParser();
 
 	@Test
 	public void testOperatingSystemExamples() throws Exception {
 		final Output out = new Output();
 		int i = 0;
 		for (final OperatingSystemExample example : OS_EXAMPLES) {
-			final UserAgent agent = parser.parse(example.getUserAgentString());
+			final UserAgent agent = PARSER.parse(example.getUserAgentString());
 
 			// comparing the name
 			Assert.assertEquals(example.getName(), agent.getOperatingSystem().getName());
@@ -105,7 +105,7 @@ public class UserAgentStringParserIntegrationTest {
 		final Output out = new Output("%-40.40s %-30.30s %s");
 		int i = 0;
 		for (final UserAgentExample example : UA_EXAMPLES) {
-			final UserAgent agent = parser.parse(example.getUserAgentString());
+			final UserAgent agent = PARSER.parse(example.getUserAgentString());
 
 			// comparing the name
 			if (!example.getName().equals(agent.getFamily())) {

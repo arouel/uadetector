@@ -67,6 +67,11 @@ public final class OnlineUserAgentStringParserImpl extends UserAgentStringParser
 	private static final String MSG_NO_CHECK_NECESSARY = "There is no check necessary because the update interval has not expired.";
 
 	/**
+	 * Message for the log when an online update check is not possible.
+	 */
+	private static final String MSG_NO_UPDATE_CHECK_POSSIBLE = "Can not check for an updated version. Are you sure you have an established internet connection?";
+
+	/**
 	 * Key for the {@code URL} of UAS version information in the configuration properties
 	 */
 	private static final String VERSION_URL_KEY = "version.url";
@@ -241,7 +246,10 @@ public final class OnlineUserAgentStringParserImpl extends UserAgentStringParser
 					LOG.debug("No update available. Current version is '" + getCurrentVersion() + "'.");
 				}
 			} catch (final IOException e) {
-				LOG.info(e.getLocalizedMessage());
+				LOG.info(MSG_NO_UPDATE_CHECK_POSSIBLE);
+				if (LOG.isDebugEnabled()) {
+					LOG.debug("Can not check for an updated version: " + e.getClass().getName() + ": " + e.getLocalizedMessage());
+				}
 			}
 			lastUpdateCheck = System.currentTimeMillis();
 		} else {

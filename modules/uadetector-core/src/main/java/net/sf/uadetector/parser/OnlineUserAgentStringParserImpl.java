@@ -62,6 +62,11 @@ public final class OnlineUserAgentStringParserImpl extends UserAgentStringParser
 	private static final Logger LOG = LoggerFactory.getLogger(OnlineUserAgentStringParserImpl.class);
 
 	/**
+	 * Message for the log when an online update check is not necessary because the time interval isn't reached.
+	 */
+	private static final String MSG_NO_CHECK_NECESSARY = "There is no check necessary because the update interval has not expired.";
+
+	/**
 	 * Key for the {@code URL} of UAS version information in the configuration properties
 	 */
 	private static final String VERSION_URL_KEY = "version.url";
@@ -240,7 +245,7 @@ public final class OnlineUserAgentStringParserImpl extends UserAgentStringParser
 			}
 			lastUpdateCheck = System.currentTimeMillis();
 		} else {
-			LOG.debug("There is no check necessary because the update interval has not expired.");
+			LOG.debug(MSG_NO_CHECK_NECESSARY);
 		}
 		return result;
 	}

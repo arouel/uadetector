@@ -25,14 +25,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * Service factory to create instance of {@code UserAgentStringParser} implementations.
+ * Service factory to get preconfigured instances of {@code UserAgentStringParser} implementations.
  * 
  * @author André Rouél
  */
 public final class UADetectorServiceFactory {
 
 	private static final class OfflineUserAgentStringParserHolder {
-		public static UserAgentStringParser INSTANCE;
+		private static UserAgentStringParser INSTANCE;
 		static {
 			try {
 				final InputStream stream = UADetectorServiceFactory.class.getClassLoader().getResourceAsStream(UASDATA);
@@ -45,7 +45,7 @@ public final class UADetectorServiceFactory {
 	}
 
 	private static final class OnlineUserAgentStringParserHolder {
-		public static UserAgentStringParser INSTANCE;
+		private static UserAgentStringParser INSTANCE;
 		static {
 			try {
 				final InputStream stream = UADetectorServiceFactory.class.getClassLoader().getResourceAsStream(UASDATA);
@@ -59,16 +59,57 @@ public final class UADetectorServiceFactory {
 		}
 	}
 
+	/**
+	 * Corresponding logger for this class
+	 */
 	private static final Logger LOG = LoggerFactory.getLogger(UADetectorServiceFactory.class);
 
+	/**
+	 * Path where the UAS file is stored for the {@code ClassLoader}
+	 */
 	private static final String UASDATA = "net/sf/uadetector/resources/uas.xml";
 
-	public static UserAgentStringParser getUserAgentStringParser() {
-		return OfflineUserAgentStringParserHolder.INSTANCE;
-	}
-
+	/**
+	 * Gets always the same implementation instance of the interface {@code UserAgentStringParser}. This instance has an
+	 * update function so that it checks at regular intervals for new versions of the <em>UAS data</em> (also known as
+	 * database). When a newer database is available, it is automatically loaded and updated.<br>
+	 * <br>
+	 * At initialization time the instance will be loaded with the <em>UAS data</em> of this module (the shipped one
+	 * within the <em>uadetector-resources</em> JAR). The initialization is started only when this method is called the
+	 * first time.<br>
+	 * <br>
+	 * The static class definition {@link OnlineUserAgentStringParserHolder} within this factory class is <em>not</em>
+	 * initialized until the JVM determines that {@link OnlineUserAgentStringParserHolder} must be executed. The static
+	 * class {@code OnlineUserAgentStringParserHolder} is only executed when the static method
+	 * {@code getOnlineUserAgentStringParser} is invoked on the class {@code UADetectorServiceFactory}, and the first
+	 * time this happens the JVM will load and initialize the {@code OnlineUserAgentStringParserHolder} class.<br>
+	 * <br>
+	 * If during the operation the Internet connection gets lost, then this instance continues to work properly (and
+	 * under correct log level settings you will get an corresponding log messages).
+	 * 
+	 * @return always the same implementation instance of the interface {@code UserAgentStringParser} and never
+	 *         {@code null}
+	 */
 	public static UserAgentStringParser getOnlineUserAgentStringParser() {
 		return OnlineUserAgentStringParserHolder.INSTANCE;
+	}
+
+	/**
+	 * Gets always the same implementation instance of the interface {@code UserAgentStringParser}. This instance works
+	 * offline by using the <em>UAS data</em> (also known as database) of this module. The database is loaded once
+	 * during initialization. The initialization is started only when this method is called the first time.<br>
+	 * <br>
+	 * The static class definition {@link OfflineUserAgentStringParserHolder} within this factory class is <em>not</em>
+	 * initialized until the JVM determines that {@link OfflineUserAgentStringParserHolder} must be executed. The static
+	 * class {@code OfflineUserAgentStringParserHolder} is only executed when the static method
+	 * {@code getUserAgentStringParser} is invoked on the class {@code UADetectorServiceFactory}, and the first time
+	 * this happens the JVM will load and initialize the {@code OfflineUserAgentStringParserHolder} class.
+	 * 
+	 * @return always the same implementation instance of the interface {@code UserAgentStringParser} and never
+	 *         {@code null}
+	 */
+	public static UserAgentStringParser getUserAgentStringParser() {
+		return OfflineUserAgentStringParserHolder.INSTANCE;
 	}
 
 	private UADetectorServiceFactory() {

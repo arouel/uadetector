@@ -24,4 +24,16 @@ public class XmlDataHandlerTagTest {
 		XmlDataHandler.Tag.evaluate(null);
 	}
 
+	@Test
+	public void isTag() {
+		XmlDataHandler.Tag.isBrowserOsMappingTag("browser_os");
+		XmlDataHandler.Tag.isBrowserPatternTag("browser_reg");
+		XmlDataHandler.Tag.isBrowserTag("browser");
+		XmlDataHandler.Tag.isBrowserTypeTag("browser_type");
+		XmlDataHandler.Tag.isIdTag("id");
+		XmlDataHandler.Tag.isOperatingSystemPatternTag("os_reg");
+		XmlDataHandler.Tag.isOperatingSystemTag("os");
+		XmlDataHandler.Tag.isRobotTag("robot");
+	}
+
 }

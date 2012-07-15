@@ -216,7 +216,7 @@ public enum OperatingSystemFamily {
 	 * <br>
 	 * This value will be returned if the operating system family cannot be determined.
 	 */
-	UNKNOWN("", Pattern.compile(".*"));
+	UNKNOWN("", Pattern.compile("^$"));
 
 	/**
 	 * This method try to find by the given family name a matching enum value. The family name must match against an

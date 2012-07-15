@@ -15,13 +15,31 @@
  ******************************************************************************/
 package net.sf.uadetector.internal.data;
 
+import java.io.IOException;
+
+import org.junit.Assert;
 import org.junit.Test;
+import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
 
 public class XmlDataHandlerTest {
 
 	@Test(expected = IllegalArgumentException.class)
 	public void constructor_null() {
 		new XmlDataHandler(null);
+	}
+
+	@Test
+	public void resolveEntity_knownUrl() throws IOException, SAXException {
+		final XmlDataHandler handler = new XmlDataHandler(new Data.Builder());
+		final InputSource input = handler.resolveEntity("publicId is irrelevant", XmlDataHandler.UASDATA_DEF_URL);
+		Assert.assertNotNull(input);
+	}
+
+	@Test(expected = SAXException.class)
+	public void resolveEntity_unknownUrl() throws IOException, SAXException {
+		final XmlDataHandler handler = new XmlDataHandler(new Data.Builder());
+		handler.resolveEntity("publicId unknown", "systemId unknown");
 	}
 
 }

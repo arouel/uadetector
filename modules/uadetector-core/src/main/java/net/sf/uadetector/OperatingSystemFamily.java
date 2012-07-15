@@ -236,6 +236,32 @@ public enum OperatingSystemFamily {
 		OperatingSystemFamily result = UNKNOWN;
 
 		// search by name
+		result = evaluateByName(family);
+
+		// search by pattern
+		if (result == UNKNOWN) {
+			result = evaluateByPattern(family);
+		}
+
+		return result;
+	}
+
+	/**
+	 * This method try to find by the given family name a matching enum value. The family name will be evaluated against
+	 * the stored name of an operating system entry.
+	 * 
+	 * @param family
+	 *            name of an operating system family
+	 * @return the matching enum value or {@code OperatingSystemFamily#UNKNOWN}
+	 * @throws IllegalArgumentException
+	 *             if the given argument is {@code null}
+	 */
+	protected static OperatingSystemFamily evaluateByName(final String family) {
+		if (family == null) {
+			throw new IllegalArgumentException("Argument 'family' must not be null.");
+		}
+
+		OperatingSystemFamily result = UNKNOWN;
 		for (final OperatingSystemFamily value : values()) {
 			if (value.getName().equals(family)) {
 				result = value;
@@ -243,14 +269,30 @@ public enum OperatingSystemFamily {
 			}
 		}
 
-		// search by pattern
-		if (result == UNKNOWN) {
-			for (final OperatingSystemFamily value : values()) {
-				final Matcher m = value.getPattern().matcher(family);
-				if (m.matches()) {
-					result = value;
-					break;
-				}
+		return result;
+	}
+
+	/**
+	 * This method try to find by the given family name a matching enum value. The family name will be evaluated against
+	 * the stored regular expression of an operating system entry.
+	 * 
+	 * @param family
+	 *            name of an operating system family
+	 * @return the matching enum value or {@code OperatingSystemFamily#UNKNOWN}
+	 * @throws IllegalArgumentException
+	 *             if the given argument is {@code null}
+	 */
+	protected static OperatingSystemFamily evaluateByPattern(final String family) {
+		if (family == null) {
+			throw new IllegalArgumentException("Argument 'family' must not be null.");
+		}
+
+		OperatingSystemFamily result = UNKNOWN;
+		for (final OperatingSystemFamily value : values()) {
+			final Matcher m = value.getPattern().matcher(family);
+			if (m.matches()) {
+				result = value;
+				break;
 			}
 		}
 

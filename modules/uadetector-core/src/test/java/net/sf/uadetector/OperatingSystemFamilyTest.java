@@ -22,28 +22,70 @@ import org.junit.Test;
 public class OperatingSystemFamilyTest {
 
 	@Test
-	public void evaluateByFamily_emptyString() {
+	public void evaluate_emptyString() {
 		Assert.assertEquals(OperatingSystemFamily.UNKNOWN, OperatingSystemFamily.evaluateByFamilyName(""));
 	}
 
 	@Test
-	public void evaluateByFamily_knownString_LINUX() {
+	public void evaluate_knownString_LINUX() {
 		Assert.assertEquals(OperatingSystemFamily.LINUX, OperatingSystemFamily.evaluateByFamilyName("Linux"));
 	}
 
 	@Test
-	public void evaluateByFamily_knownString_XMB() {
+	public void evaluate_knownString_XMB() {
 		Assert.assertEquals(OperatingSystemFamily.XROSSMEDIABAR, OperatingSystemFamily.evaluateByFamilyName("XrossMediaBar (XMB)"));
 	}
 
 	@Test(expected = IllegalArgumentException.class)
-	public void evaluateByFamily_null() {
+	public void evaluate_null() {
 		OperatingSystemFamily.evaluateByFamilyName(null);
 	}
 
 	@Test
-	public void evaluateByFamily_unknownString() {
+	public void evaluate_unknownString() {
 		Assert.assertEquals(OperatingSystemFamily.UNKNOWN, OperatingSystemFamily.evaluateByFamilyName("abcdefghijklmnopqrstuvw"));
+	}
+
+	@Test
+	public void evaluateByName_emptyString() {
+		Assert.assertEquals(OperatingSystemFamily.UNKNOWN, OperatingSystemFamily.evaluateByName(""));
+	}
+
+	@Test
+	public void evaluateByName_knownString_IOS() {
+		Assert.assertEquals(OperatingSystemFamily.IOS, OperatingSystemFamily.evaluateByName("iOS"));
+		Assert.assertFalse(OperatingSystemFamily.IOS == OperatingSystemFamily.evaluateByName("iPhone OS"));
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void evaluateByName_null() {
+		OperatingSystemFamily.evaluateByName(null);
+	}
+
+	@Test
+	public void evaluateByName_unknownString() {
+		Assert.assertEquals(OperatingSystemFamily.UNKNOWN, OperatingSystemFamily.evaluateByName("abcdefghijklmnopqrstuvw"));
+	}
+
+	@Test
+	public void evaluateByPattern_emptyString() {
+		Assert.assertEquals(OperatingSystemFamily.UNKNOWN, OperatingSystemFamily.evaluateByPattern(""));
+	}
+
+	@Test
+	public void evaluateByPattern_knownString_IOS() {
+		Assert.assertEquals(OperatingSystemFamily.IOS, OperatingSystemFamily.evaluateByPattern("iOS"));
+		Assert.assertEquals(OperatingSystemFamily.IOS, OperatingSystemFamily.evaluateByPattern("iPhone OS"));
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void evaluateByPattern_null() {
+		OperatingSystemFamily.evaluateByPattern(null);
+	}
+
+	@Test
+	public void evaluateByPattern_unknownString() {
+		Assert.assertEquals(OperatingSystemFamily.UNKNOWN, OperatingSystemFamily.evaluateByPattern("abcdefghijklmnopqrstuvw"));
 	}
 
 }

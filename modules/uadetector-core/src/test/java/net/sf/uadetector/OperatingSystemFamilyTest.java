@@ -23,27 +23,27 @@ public class OperatingSystemFamilyTest {
 
 	@Test
 	public void evaluate_emptyString() {
-		Assert.assertEquals(OperatingSystemFamily.UNKNOWN, OperatingSystemFamily.evaluateByFamilyName(""));
+		Assert.assertEquals(OperatingSystemFamily.UNKNOWN, OperatingSystemFamily.evaluate(""));
 	}
 
 	@Test
 	public void evaluate_knownString_LINUX() {
-		Assert.assertEquals(OperatingSystemFamily.LINUX, OperatingSystemFamily.evaluateByFamilyName("Linux"));
+		Assert.assertEquals(OperatingSystemFamily.LINUX, OperatingSystemFamily.evaluate("Linux"));
 	}
 
 	@Test
 	public void evaluate_knownString_XMB() {
-		Assert.assertEquals(OperatingSystemFamily.XROSSMEDIABAR, OperatingSystemFamily.evaluateByFamilyName("XrossMediaBar (XMB)"));
+		Assert.assertEquals(OperatingSystemFamily.XROSSMEDIABAR, OperatingSystemFamily.evaluate("XrossMediaBar (XMB)"));
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void evaluate_null() {
-		OperatingSystemFamily.evaluateByFamilyName(null);
+		OperatingSystemFamily.evaluate(null);
 	}
 
 	@Test
 	public void evaluate_unknownString() {
-		Assert.assertEquals(OperatingSystemFamily.UNKNOWN, OperatingSystemFamily.evaluateByFamilyName("abcdefghijklmnopqrstuvw"));
+		Assert.assertEquals(OperatingSystemFamily.UNKNOWN, OperatingSystemFamily.evaluate("abcdefghijklmnopqrstuvw"));
 	}
 
 	@Test

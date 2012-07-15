@@ -228,7 +228,7 @@ public enum OperatingSystemFamily {
 	 * @throws IllegalArgumentException
 	 *             if the given argument is {@code null}
 	 */
-	public static OperatingSystemFamily evaluateByFamilyName(final String family) {
+	public static OperatingSystemFamily evaluate(final String family) {
 		if (family == null) {
 			throw new IllegalArgumentException("Argument 'family' must not be null.");
 		}

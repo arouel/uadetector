@@ -34,7 +34,7 @@ public class OnlineUserAgentStringParserTest {
 
 	private static final Logger LOG = LoggerFactory.getLogger(OnlineUserAgentStringParserTest.class);
 
-	private static final OnlineUserAgentStringParserImpl parser = OnlineUserAgentStringParserHolder.getInstance();
+	private static final OnlineUserAgentStringParserImpl PARSER = OnlineUserAgentStringParserHolder.getInstance();
 
 	private static final String RESOURCE = "uas_test.xml";
 
@@ -74,23 +74,23 @@ public class OnlineUserAgentStringParserTest {
 
 	@Test
 	public void getCurrentVersion() {
-		Assert.assertFalse("20120509-01".equals(parser.getCurrentVersion()));
+		Assert.assertFalse("20120509-01".equals(PARSER.getCurrentVersion()));
 	}
 
 	@Test
 	public void getData() {
-		Assert.assertNotNull(parser.getData());
+		Assert.assertNotNull(PARSER.getData());
 	}
 
 	@Test
 	public void getDataReader() {
-		Assert.assertNotNull(parser.getDataReader());
+		Assert.assertNotNull(PARSER.getDataReader());
 	}
 
 	@Test
 	public void parse_browser_CHROME() throws Exception {
 		final String userAgent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_6_8) AppleWebKit/535.1 (KHTML, like Gecko) Chrome/13.0.782.112 Safari/535.1";
-		final UserAgent agent = parser.parse(userAgent);
+		final UserAgent agent = PARSER.parse(userAgent);
 		Assert.assertNotNull(agent);
 		Assert.assertFalse(UserAgent.EMPTY.equals(agent));
 		Assert.assertFalse(OperatingSystem.EMPTY.equals(agent.getOperatingSystem()));
@@ -116,7 +116,7 @@ public class OnlineUserAgentStringParserTest {
 	@Test
 	public void parse_browser_CHROME_withoutVersionInfo() throws Exception {
 		final String userAgent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_6_8) AppleWebKit/535.1 (KHTML, like Gecko) Chrome/$ Safari/535.1";
-		final UserAgent agent = parser.parse(userAgent);
+		final UserAgent agent = PARSER.parse(userAgent);
 		Assert.assertNotNull(agent);
 		Assert.assertFalse(UserAgent.EMPTY.equals(agent));
 		Assert.assertFalse(OperatingSystem.EMPTY.equals(agent.getOperatingSystem()));
@@ -141,7 +141,7 @@ public class OnlineUserAgentStringParserTest {
 	@Test
 	public void parse_browser_SITESUCKER() throws Exception {
 		final String userAgent = "SiteSucker/1.6.9";
-		final UserAgent agent = parser.parse(userAgent);
+		final UserAgent agent = PARSER.parse(userAgent);
 		Assert.assertNotNull(agent);
 		Assert.assertFalse(UserAgent.EMPTY.equals(agent));
 		Assert.assertFalse(OperatingSystem.EMPTY.equals(agent.getOperatingSystem()));
@@ -167,7 +167,7 @@ public class OnlineUserAgentStringParserTest {
 	@Test
 	public void parse_browser_SKYFIRE() throws Exception {
 		final String userAgent = "Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_5_7; en-us) AppleWebKit/530.17 (KHTML, like Gecko) Version/4.0 Safari/530.17 Skyfire/2.0";
-		final UserAgent agent = parser.parse(userAgent);
+		final UserAgent agent = PARSER.parse(userAgent);
 		Assert.assertNotNull(agent);
 		Assert.assertFalse(UserAgent.EMPTY.equals(agent));
 		Assert.assertFalse(OperatingSystem.EMPTY.equals(agent.getOperatingSystem()));
@@ -193,7 +193,7 @@ public class OnlineUserAgentStringParserTest {
 	@Test
 	public void parse_browser_SKYFIRE_withoutOperatingSystemInfo() throws Exception {
 		final String userAgent = "Mozilla/5.0 AppleWebKit/530.17 (KHTML, like Gecko) Version/4.0 Safari/530.17 Skyfire/2.0";
-		final UserAgent agent = parser.parse(userAgent);
+		final UserAgent agent = PARSER.parse(userAgent);
 		Assert.assertNotNull(agent);
 		Assert.assertFalse(UserAgent.EMPTY.equals(agent));
 		Assert.assertTrue(OperatingSystem.EMPTY.equals(agent.getOperatingSystem()));
@@ -210,7 +210,7 @@ public class OnlineUserAgentStringParserTest {
 
 	@Test
 	public void parse_emptyString() {
-		final UserAgent agent = parser.parse("");
+		final UserAgent agent = PARSER.parse("");
 
 		// check user agent informations
 		final UserAgent e = UserAgent.EMPTY;
@@ -227,7 +227,7 @@ public class OnlineUserAgentStringParserTest {
 	@Test
 	public void parse_robot_GOOGLEBOT() throws Exception {
 		final String userAgent = "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)";
-		final UserAgent agent = parser.parse(userAgent);
+		final UserAgent agent = PARSER.parse(userAgent);
 		Assert.assertNotNull(agent);
 		Assert.assertFalse(UserAgent.EMPTY.equals(agent));
 		Assert.assertTrue(OperatingSystem.EMPTY.equals(agent.getOperatingSystem()));
@@ -244,7 +244,7 @@ public class OnlineUserAgentStringParserTest {
 
 	@Test
 	public void parse_unknownString() {
-		final UserAgent agent = parser.parse("qwertzuiopasdfghjklyxcvbnm");
+		final UserAgent agent = PARSER.parse("qwertzuiopasdfghjklyxcvbnm");
 
 		// check user agent informations
 		final UserAgent e = UserAgent.EMPTY;
@@ -275,22 +275,31 @@ public class OnlineUserAgentStringParserTest {
 
 	@Test
 	public void testUpdateMechanismWhileParsing() throws InterruptedException {
-		final long firstLastUpdateCheck = parser.getLastUpdateCheck();
+		final long firstLastUpdateCheck = PARSER.getLastUpdateCheck();
 		LOG.debug("LastUpdateCheck at: " + firstLastUpdateCheck);
-		final long originalInterval = parser.getUpdateInterval();
+		final long originalInterval = PARSER.getUpdateInterval();
 
 		// reduce the interval since testing
 		LOG.debug("Reducing the update interval during the test.");
-		parser.setUpdateInterval(10l);
+		PARSER.setUpdateInterval(10l);
 		// we have to read to activate the update mechanism
-		parser.parse("check for updates");
+		PARSER.parse("check for updates");
 
 		Thread.sleep(100l);
-		final long currentLastUpdateCheck = parser.getLastUpdateCheck();
+		final long currentLastUpdateCheck = PARSER.getLastUpdateCheck();
 		LOG.debug("LastUpdateCheck at: " + currentLastUpdateCheck);
 		Assert.assertTrue(firstLastUpdateCheck < currentLastUpdateCheck);
 
-		parser.setUpdateInterval(originalInterval);
+		PARSER.setUpdateInterval(originalInterval);
+	}
+
+	@Test
+	public void testWrongUrl() throws Exception {
+		final InputStream stream = OnlineUserAgentStringParserTest.class.getClassLoader().getResourceAsStream(RESOURCE);
+		final URL unknownUrl = new URL("http://localhost/");
+		final OnlineUserAgentStringParserImpl parser = new OnlineUserAgentStringParserImpl(stream, unknownUrl, unknownUrl);
+		parser.setUpdateInterval(1l);
+		parser.parse("");
 	}
 
 }

@@ -30,9 +30,9 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class OnlineUserAgentStringParserTest {
+public class OnlineUserAgentStringParserImplTest {
 
-	private static final Logger LOG = LoggerFactory.getLogger(OnlineUserAgentStringParserTest.class);
+	private static final Logger LOG = LoggerFactory.getLogger(OnlineUserAgentStringParserImplTest.class);
 
 	private static final OnlineUserAgentStringParserImpl PARSER = OnlineUserAgentStringParserHolder.getInstance();
 
@@ -40,19 +40,19 @@ public class OnlineUserAgentStringParserTest {
 
 	@Test(expected = IllegalArgumentException.class)
 	public void construct_dataUrl_null() throws Exception {
-		final InputStream stream = OnlineUserAgentStringParserTest.class.getClassLoader().getResourceAsStream(RESOURCE);
+		final InputStream stream = OnlineUserAgentStringParserImplTest.class.getClassLoader().getResourceAsStream(RESOURCE);
 		new OnlineUserAgentStringParserImpl(stream, null, new URL("http://localhost/"));
 	}
 
 	@Test(expected = MalformedURLException.class)
 	public void construct_properties_empty() throws Exception {
-		final InputStream stream = OnlineUserAgentStringParserTest.class.getClassLoader().getResourceAsStream(RESOURCE);
+		final InputStream stream = OnlineUserAgentStringParserImplTest.class.getClassLoader().getResourceAsStream(RESOURCE);
 		new OnlineUserAgentStringParserImpl(stream, new Properties());
 	}
 
 	@Test(expected = NullPointerException.class)
 	public void construct_properties_null() throws Exception {
-		final InputStream stream = OnlineUserAgentStringParserTest.class.getClassLoader().getResourceAsStream(RESOURCE);
+		final InputStream stream = OnlineUserAgentStringParserImplTest.class.getClassLoader().getResourceAsStream(RESOURCE);
 		new OnlineUserAgentStringParserImpl(stream, null);
 	}
 
@@ -68,7 +68,7 @@ public class OnlineUserAgentStringParserTest {
 
 	@Test(expected = IllegalArgumentException.class)
 	public void construct_versionUrl_null() throws Exception {
-		final InputStream stream = OnlineUserAgentStringParserTest.class.getClassLoader().getResourceAsStream(RESOURCE);
+		final InputStream stream = OnlineUserAgentStringParserImplTest.class.getClassLoader().getResourceAsStream(RESOURCE);
 		new OnlineUserAgentStringParserImpl(stream, new URL("http://localhost/"), null);
 	}
 
@@ -261,14 +261,14 @@ public class OnlineUserAgentStringParserTest {
 
 	@Test(expected = IllegalArgumentException.class)
 	public void setData() throws Exception {
-		final InputStream stream = OnlineUserAgentStringParserTest.class.getClassLoader().getResourceAsStream(RESOURCE);
+		final InputStream stream = OnlineUserAgentStringParserImplTest.class.getClassLoader().getResourceAsStream(RESOURCE);
 		final OnlineUserAgentStringParserImpl parser = new OnlineUserAgentStringParserImpl(stream);
 		parser.setData(null);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void setUpdateInterval_toSmall() throws MalformedURLException {
-		final InputStream stream = OnlineUserAgentStringParserTest.class.getClassLoader().getResourceAsStream(RESOURCE);
+		final InputStream stream = OnlineUserAgentStringParserImplTest.class.getClassLoader().getResourceAsStream(RESOURCE);
 		final OnlineUserAgentStringParserImpl parser = new OnlineUserAgentStringParserImpl(stream);
 		parser.setUpdateInterval(-1l);
 	}
@@ -295,7 +295,7 @@ public class OnlineUserAgentStringParserTest {
 
 	@Test
 	public void testWrongUrl() throws Exception {
-		final InputStream stream = OnlineUserAgentStringParserTest.class.getClassLoader().getResourceAsStream(RESOURCE);
+		final InputStream stream = OnlineUserAgentStringParserImplTest.class.getClassLoader().getResourceAsStream(RESOURCE);
 		final URL unknownUrl = new URL("http://localhost/");
 		final OnlineUserAgentStringParserImpl parser = new OnlineUserAgentStringParserImpl(stream, unknownUrl, unknownUrl);
 		parser.setUpdateInterval(1l);

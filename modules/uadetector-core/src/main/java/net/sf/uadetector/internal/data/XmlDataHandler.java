@@ -217,6 +217,14 @@ public class XmlDataHandler extends DefaultHandler {
 
 	}
 
+	/**
+	 * Character set to read the internal Document Type Definition (DTD) of UAS data
+	 */
+	private static final String CHARSET = "UTF-8";
+
+	/**
+	 * Corresponding logger for this class
+	 */
 	private static final Logger LOG = LoggerFactory.getLogger(XmlDataHandler.class);
 
 	/**
@@ -311,7 +319,7 @@ public class XmlDataHandler extends DefaultHandler {
 	public InputSource resolveEntity(final String publicId, final String systemId) throws IOException, SAXException {
 		if (UASDATA_DEF_URL.equals(systemId)) {
 			final InputStream stream = this.getClass().getClassLoader().getResourceAsStream(UASDATA_DEF);
-			return new InputSource(new InputStreamReader(stream));
+			return new InputSource(new InputStreamReader(stream, CHARSET));
 		}
 		throw new SAXException("unable to resolve remote entity, systemId = " + systemId);
 	}

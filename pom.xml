@@ -67,7 +67,7 @@
 		<!-- Maven Plugins -->
 		<build-helper-maven-plugin.version>1.7</build-helper-maven-plugin.version>
 		<cobertura-maven-plugin.version>2.5.1</cobertura-maven-plugin.version>
-		<findbugs-maven-plugin.version>2.4.0</findbugs-maven-plugin.version>
+		<findbugs-maven-plugin.version>2.5.1</findbugs-maven-plugin.version>
 		<maven-antrun-plugin.version>1.7</maven-antrun-plugin.version>
 		<maven-assembly-plugin.version>2.3</maven-assembly-plugin.version>
 		<maven-bundle-plugin.version>2.3.7</maven-bundle-plugin.version>

@@ -239,10 +239,12 @@ public final class OnlineUserAgentStringParserImpl extends UserAgentStringParser
 			try {
 				final String version = retrieveRemoteVersion(versionUrl);
 				if (version.compareTo(getCurrentVersion()) > 0) {
-					LOG.debug("An update is available. Current version is '" + getCurrentVersion() + "' and remote version is '" + version
-							+ "'.");
+					if (LOG.isDebugEnabled()) {
+						LOG.debug("An update is available. Current version is '" + getCurrentVersion() + "' and remote version is '"
+								+ version + "'.");
+					}
 					result = true;
-				} else {
+				} else if (LOG.isDebugEnabled()) {
 					LOG.debug("No update available. Current version is '" + getCurrentVersion() + "'.");
 				}
 			} catch (final IOException e) {

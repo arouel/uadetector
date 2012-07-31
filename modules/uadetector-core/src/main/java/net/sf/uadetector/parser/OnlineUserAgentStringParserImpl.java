@@ -82,6 +82,7 @@ public final class OnlineUserAgentStringParserImpl extends UserAgentStringParser
 	 * 
 	 * @return Configuration properties
 	 * @throws IOException
+	 *             if the properties file can not be loaded
 	 */
 	private static Properties readConfigProperties() {
 		final Properties properties = new Properties();
@@ -275,6 +276,8 @@ public final class OnlineUserAgentStringParserImpl extends UserAgentStringParser
 	 * 
 	 * @param updateInterval
 	 *            update interval in milliseconds
+	 * @throws IllegalArgumentException
+	 *             if the given value is less than 0
 	 */
 	public void setUpdateInterval(final long updateInterval) {
 		if (updateInterval < 0l) {

@@ -390,6 +390,9 @@ public class Data {
 
 	private final Set<Robot> robots;
 
+	/**
+	 * Version information of the UAS data
+	 */
 	private final String version;
 
 	private final SortedMap<BrowserPattern, Browser> patternBrowserMap;
@@ -447,6 +450,11 @@ public class Data {
 		return Collections.unmodifiableSet(robots);
 	}
 
+	/**
+	 * Gets the version of the UAS data which are available within this instance.
+	 * 
+	 * @return version of UAS data
+	 */
 	public String getVersion() {
 		return version;
 	}

@@ -15,6 +15,7 @@
  ******************************************************************************/
 package net.sf.uadetector.parser;
 
+import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 
@@ -26,26 +27,38 @@ import org.junit.Test;
 
 public class UpdateServiceTest {
 
-	private final URL DATA_URL = this.getClass().getClassLoader().getResource("uas_newer.xml");
+	private static final URL DATA_URL = UpdateServiceTest.class.getClassLoader().getResource("uas_newer.xml");
 
-	private final URL VERSION_URL = this.getClass().getClassLoader().getResource("uas_newer.version");
+	private static final String UAS_TEST = "uas_test.xml";
+
+	private static final URL VERSION_URL = UpdateServiceTest.class.getClassLoader().getResource("uas_newer.version");
+
+	private static InputStream read(final String resource) {
+		return UpdateServiceTest.class.getClassLoader().getResourceAsStream(resource);
+	}
 
 	@Test
 	public void call() throws MalformedURLException {
-		final UpdateService service = new UpdateService(new SimpleDataStore(Data.EMPTY), DATA_URL, VERSION_URL);
+		final UpdateService service = new UpdateService(new SimpleDataStore(read(UAS_TEST)), DATA_URL, VERSION_URL);
 		service.call();
 	}
 
 	@Test
 	public void call_notReachable() throws MalformedURLException {
 		final URL notReachableUrl = new URL("http://localhost:17171");
-		final UpdateService service = new UpdateService(new SimpleDataStore(Data.EMPTY), notReachableUrl, notReachableUrl);
+		final UpdateService service = new UpdateService(new SimpleDataStore(read(UAS_TEST)), notReachableUrl, notReachableUrl);
+		service.call();
+	}
+
+	@Test
+	public void call_withEmptyData() throws MalformedURLException {
+		final UpdateService service = new UpdateService(new SimpleDataStore(Data.EMPTY), DATA_URL, VERSION_URL);
 		service.call();
 	}
 
 	@Test
 	public void callTriple() throws MalformedURLException {
-		final UpdateService service = new UpdateService(new SimpleDataStore(Data.EMPTY), DATA_URL, VERSION_URL);
+		final UpdateService service = new UpdateService(new SimpleDataStore(read(UAS_TEST)), DATA_URL, VERSION_URL);
 		Assert.assertEquals(0, service.getLastUpdateCheck());
 		final long startTime = System.currentTimeMillis();
 		service.call();
@@ -60,7 +73,7 @@ public class UpdateServiceTest {
 
 	@Test
 	public void callTwice() throws MalformedURLException {
-		final UpdateService service = new UpdateService(new SimpleDataStore(Data.EMPTY), DATA_URL, VERSION_URL);
+		final UpdateService service = new UpdateService(new SimpleDataStore(read(UAS_TEST)), DATA_URL, VERSION_URL);
 		Assert.assertEquals(0, service.getLastUpdateCheck());
 		final long startTime = System.currentTimeMillis();
 		service.call();
@@ -72,7 +85,7 @@ public class UpdateServiceTest {
 
 	@Test(expected = IllegalArgumentException.class)
 	public void construct_dataUrl_null() throws MalformedURLException {
-		new UpdateService(new SimpleDataStore(Data.EMPTY), null, VERSION_URL);
+		new UpdateService(new SimpleDataStore(read(UAS_TEST)), null, VERSION_URL);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
@@ -82,17 +95,17 @@ public class UpdateServiceTest {
 
 	@Test
 	public void construct_successful() throws MalformedURLException {
-		new UpdateService(new SimpleDataStore(Data.EMPTY), DATA_URL, VERSION_URL);
+		new UpdateService(new SimpleDataStore(read(UAS_TEST)), DATA_URL, VERSION_URL);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void construct_versionUrl_null() throws MalformedURLException {
-		new UpdateService(new SimpleDataStore(Data.EMPTY), DATA_URL, null);
+		new UpdateService(new SimpleDataStore(read(UAS_TEST)), DATA_URL, null);
 	}
 
 	@Test
 	public void getLastUpdateCheck() throws MalformedURLException {
-		final UpdateService service = new UpdateService(new SimpleDataStore(Data.EMPTY), DATA_URL, VERSION_URL);
+		final UpdateService service = new UpdateService(new SimpleDataStore(read(UAS_TEST)), DATA_URL, VERSION_URL);
 		Assert.assertEquals(0, service.getLastUpdateCheck());
 		final long startTime = System.currentTimeMillis();
 		service.call();

@@ -15,8 +15,12 @@
  ******************************************************************************/
 package net.sf.uadetector.parser;
 
+import java.io.InputStream;
+
+import net.sf.uadetector.DataStore;
 import net.sf.uadetector.OperatingSystem;
 import net.sf.uadetector.OperatingSystemFamily;
+import net.sf.uadetector.SimpleDataStore;
 import net.sf.uadetector.UserAgent;
 import net.sf.uadetector.UserAgentType;
 import net.sf.uadetector.VersionNumber;
@@ -29,12 +33,16 @@ import org.slf4j.LoggerFactory;
 
 public class UserAgentStringParserTest {
 
+	private static final Logger LOG = LoggerFactory.getLogger(UserAgentStringParserTest.class);
+
+	private static final UserAgentStringParserImpl PARSER = new UserAgentStringParserImpl(setUpDataStore());
+
 	private static final String RESOURCE = "uas_test.xml";
 
-	private static final UserAgentStringParserImpl parser = new UserAgentStringParserImpl(UserAgentStringParserImpl.class.getClassLoader()
-			.getResourceAsStream(RESOURCE));
-
-	private static final Logger LOG = LoggerFactory.getLogger(UserAgentStringParserTest.class);
+	private static DataStore setUpDataStore() {
+		final InputStream stream = UserAgentStringParserTest.class.getClassLoader().getResourceAsStream(RESOURCE);
+		return new SimpleDataStore(stream);
+	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void construct_stream_null() throws Exception {
@@ -43,23 +51,19 @@ public class UserAgentStringParserTest {
 
 	@Test
 	public void getCurrentVersion() {
-		Assert.assertEquals("20120509-01", parser.getCurrentVersion());
+		Assert.assertEquals("20120509-01", PARSER.getDataStore().getData().getVersion());
 	}
 
 	@Test
-	public void getData() {
-		Assert.assertNotNull(parser.getData());
-	}
-
-	@Test
-	public void getDataReader() {
-		Assert.assertNotNull(parser.getDataReader());
+	public void getDataStore() {
+		Assert.assertNotNull(PARSER.getDataStore());
+		Assert.assertNotNull(PARSER.getDataStore().getData());
 	}
 
 	@Test
 	public void parse_browser_CHROME_withoutVersionInfo() throws Exception {
 		final String userAgent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_6_8) AppleWebKit/535.1 (KHTML, like Gecko) Chrome/$ Safari/535.1";
-		final UserAgent agent = parser.parse(userAgent);
+		final UserAgent agent = PARSER.parse(userAgent);
 		Assert.assertNotNull(agent);
 		Assert.assertFalse(UserAgent.EMPTY.equals(agent));
 		Assert.assertFalse(OperatingSystem.EMPTY.equals(agent.getOperatingSystem()));
@@ -87,7 +91,7 @@ public class UserAgentStringParserTest {
 	@Test
 	public void parse_browser_CHROME13() throws Exception {
 		final String userAgent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_6_8) AppleWebKit/535.1 (KHTML, like Gecko) Chrome/13.0.782.112 Safari/535.1";
-		final UserAgent agent = parser.parse(userAgent);
+		final UserAgent agent = PARSER.parse(userAgent);
 		Assert.assertNotNull(agent);
 		Assert.assertFalse(UserAgent.EMPTY.equals(agent));
 		Assert.assertFalse(OperatingSystem.EMPTY.equals(agent.getOperatingSystem()));
@@ -116,7 +120,7 @@ public class UserAgentStringParserTest {
 	@Test
 	public void parse_browser_CHROME19() throws Exception {
 		final String userAgent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_7_4) AppleWebKit/536.5 (KHTML, like Gecko) Chrome/19.0.1084.46 Safari/536.5";
-		final UserAgent agent = parser.parse(userAgent);
+		final UserAgent agent = PARSER.parse(userAgent);
 		Assert.assertNotNull(agent);
 		Assert.assertFalse(UserAgent.EMPTY.equals(agent));
 		Assert.assertFalse(OperatingSystem.EMPTY.equals(agent.getOperatingSystem()));
@@ -145,7 +149,7 @@ public class UserAgentStringParserTest {
 	@Test
 	public void parse_browser_FIREFOX6() throws Exception {
 		final String userAgent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7; rv:6.0) Gecko/20100101 Firefox/6.0";
-		final UserAgent agent = parser.parse(userAgent);
+		final UserAgent agent = PARSER.parse(userAgent);
 		Assert.assertNotNull(agent);
 		Assert.assertFalse(UserAgent.EMPTY.equals(agent));
 		Assert.assertFalse(OperatingSystem.EMPTY.equals(agent.getOperatingSystem()));
@@ -174,7 +178,7 @@ public class UserAgentStringParserTest {
 	@Test
 	public void parse_browser_ICEWEASEL() throws Exception {
 		final String userAgent = "Mozilla/5.0 (X11; U; Linux i686; de; rv:1.9.1.5) Gecko/20091112 Iceweasel/3.5.5 (like Firefox/3.5.5; Debian-3.5.5-1)";
-		final UserAgent agent = parser.parse(userAgent);
+		final UserAgent agent = PARSER.parse(userAgent);
 		Assert.assertNotNull(agent);
 		Assert.assertFalse(UserAgent.EMPTY.equals(agent));
 		Assert.assertFalse(OperatingSystem.EMPTY.equals(agent.getOperatingSystem()));
@@ -203,7 +207,7 @@ public class UserAgentStringParserTest {
 	@Test
 	public void parse_browser_IE7() throws Exception {
 		final String userAgent = "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 6.1; WOW64; Trident/4.0; GTB6.4; SLCC2; .NET CLR 2.0.50727; .NET CLR 3.5.30729; .NET CLR 3.0.30729; Media Center PC 6.0; OfficeLiveConnector.1.3; OfficeLivePatch.0.0; .NET CLR 1.1.4322)";
-		final UserAgent agent = parser.parse(userAgent);
+		final UserAgent agent = PARSER.parse(userAgent);
 		Assert.assertNotNull(agent);
 		Assert.assertFalse(UserAgent.EMPTY.equals(agent));
 		Assert.assertFalse(OperatingSystem.EMPTY.equals(agent.getOperatingSystem()));
@@ -232,7 +236,7 @@ public class UserAgentStringParserTest {
 	@Test
 	public void parse_browser_JVM() throws Exception {
 		final String userAgent = "Java/1.6.0_31";
-		final UserAgent agent = parser.parse(userAgent);
+		final UserAgent agent = PARSER.parse(userAgent);
 		Assert.assertNotNull(agent);
 		Assert.assertFalse(UserAgent.EMPTY.equals(agent));
 		Assert.assertFalse(OperatingSystem.EMPTY.equals(agent.getOperatingSystem()));
@@ -261,7 +265,7 @@ public class UserAgentStringParserTest {
 	@Test
 	public void parse_browser_mobile_CHROME() throws Exception {
 		final String userAgent = "Mozilla/5.0 (Linux; U; Android-4.0.3; en-us; Galaxy Nexus Build/IML74K) AppleWebKit/535.7 (KHTML, like Gecko) CrMo/16.0.912.75 Mobile Safari/535.7";
-		final UserAgent agent = parser.parse(userAgent);
+		final UserAgent agent = PARSER.parse(userAgent);
 		Assert.assertNotNull(agent);
 		Assert.assertFalse(UserAgent.EMPTY.equals(agent));
 
@@ -289,7 +293,7 @@ public class UserAgentStringParserTest {
 	@Test
 	public void parse_browser_mobile_SAFARI_IPAD() throws Exception {
 		final String userAgent = "Mozilla/5.0 (iPad; U; CPU OS 4_2_1 like Mac OS X; ja-jp) AppleWebKit/533.17.9 (KHTML, like Gecko) Version/5.0.2 Mobile/8C148 Safari/6533.18.5";
-		final UserAgent agent = parser.parse(userAgent);
+		final UserAgent agent = PARSER.parse(userAgent);
 		Assert.assertNotNull(agent);
 		Assert.assertFalse(UserAgent.EMPTY.equals(agent));
 		Assert.assertFalse(OperatingSystem.EMPTY.equals(agent.getOperatingSystem()));
@@ -324,7 +328,7 @@ public class UserAgentStringParserTest {
 	@Test
 	public void parse_browser_mobile_SAFARI_IPHONE() throws Exception {
 		final String userAgent = "Mozilla/5.0 (iPhone; CPU iPhone OS 5_1_1 like Mac OS X) AppleWebKit/534.46 (KHTML, like Gecko) Version/5.1 Mobile/9B206 Safari/7534.48.3";
-		final UserAgent agent = parser.parse(userAgent);
+		final UserAgent agent = PARSER.parse(userAgent);
 		Assert.assertNotNull(agent);
 		Assert.assertFalse(UserAgent.EMPTY.equals(agent));
 		Assert.assertFalse(OperatingSystem.EMPTY.equals(agent.getOperatingSystem()));
@@ -359,7 +363,7 @@ public class UserAgentStringParserTest {
 	@Test
 	public void parse_browser_OPERA() throws Exception {
 		final String userAgent = "Opera/9.80 (Windows NT 5.1; U; cs) Presto/2.2.15 Version/10.00";
-		final UserAgent agent = parser.parse(userAgent);
+		final UserAgent agent = PARSER.parse(userAgent);
 		Assert.assertNotNull(agent);
 		Assert.assertFalse(UserAgent.EMPTY.equals(agent));
 		Assert.assertFalse(OperatingSystem.EMPTY.equals(agent.getOperatingSystem()));
@@ -388,7 +392,7 @@ public class UserAgentStringParserTest {
 	@Test
 	public void parse_browser_SAFARI() throws Exception {
 		final String userAgent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_7_3) AppleWebKit/534.55.3 (KHTML, like Gecko) Version/5.1.5 Safari/534.55.3";
-		final UserAgent agent = parser.parse(userAgent);
+		final UserAgent agent = PARSER.parse(userAgent);
 		Assert.assertNotNull(agent);
 		Assert.assertFalse(UserAgent.EMPTY.equals(agent));
 		Assert.assertFalse(OperatingSystem.EMPTY.equals(agent.getOperatingSystem()));
@@ -417,7 +421,7 @@ public class UserAgentStringParserTest {
 	@Test
 	public void parse_browser_SITESUCKER() throws Exception {
 		final String userAgent = "SiteSucker/1.6.9";
-		final UserAgent agent = parser.parse(userAgent);
+		final UserAgent agent = PARSER.parse(userAgent);
 		Assert.assertNotNull(agent);
 		Assert.assertFalse(UserAgent.EMPTY.equals(agent));
 		Assert.assertFalse(OperatingSystem.EMPTY.equals(agent.getOperatingSystem()));
@@ -446,7 +450,7 @@ public class UserAgentStringParserTest {
 	@Test
 	public void parse_browser_SKYFIRE() throws Exception {
 		final String userAgent = "Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_5_7; en-us) AppleWebKit/530.17 (KHTML, like Gecko) Version/4.0 Safari/530.17 Skyfire/2.0";
-		final UserAgent agent = parser.parse(userAgent);
+		final UserAgent agent = PARSER.parse(userAgent);
 		Assert.assertNotNull(agent);
 		Assert.assertFalse(UserAgent.EMPTY.equals(agent));
 		Assert.assertFalse(OperatingSystem.EMPTY.equals(agent.getOperatingSystem()));
@@ -475,7 +479,7 @@ public class UserAgentStringParserTest {
 	@Test
 	public void parse_browser_SKYFIRE_withoutOperatingSystemInfo() throws Exception {
 		final String userAgent = "Mozilla/5.0 AppleWebKit/530.17 (KHTML, like Gecko) Version/4.0 Safari/530.17 Skyfire/2.0";
-		final UserAgent agent = parser.parse(userAgent);
+		final UserAgent agent = PARSER.parse(userAgent);
 		Assert.assertNotNull(agent);
 		Assert.assertFalse(UserAgent.EMPTY.equals(agent));
 		Assert.assertTrue(OperatingSystem.EMPTY.equals(agent.getOperatingSystem()));
@@ -493,7 +497,7 @@ public class UserAgentStringParserTest {
 
 	@Test
 	public void parse_emptyString() {
-		final UserAgent agent = parser.parse("");
+		final UserAgent agent = PARSER.parse("");
 
 		// check user agent informations
 		final UserAgent e = UserAgent.EMPTY;
@@ -511,7 +515,7 @@ public class UserAgentStringParserTest {
 	@Test
 	public void parse_robot_GOOGLEBOT() throws Exception {
 		final String userAgent = "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)";
-		final UserAgent agent = parser.parse(userAgent);
+		final UserAgent agent = PARSER.parse(userAgent);
 		Assert.assertNotNull(agent);
 		Assert.assertFalse(UserAgent.EMPTY.equals(agent));
 		Assert.assertTrue(OperatingSystem.EMPTY.equals(agent.getOperatingSystem()));
@@ -530,7 +534,7 @@ public class UserAgentStringParserTest {
 	@Test
 	public void parse_robot_SETOOZ() throws Exception {
 		final String userAgent = "OOZBOT/0.20 ( Setooz výrazný ako say-th-uuz, znamená mosty.  ; http://www.setooz.com/oozbot.html ; agentname at setooz dot_com )";
-		final UserAgent agent = parser.parse(userAgent);
+		final UserAgent agent = PARSER.parse(userAgent);
 		Assert.assertNotNull(agent);
 		Assert.assertFalse(UserAgent.EMPTY.equals(agent));
 		Assert.assertTrue(OperatingSystem.EMPTY.equals(agent.getOperatingSystem()));
@@ -548,7 +552,7 @@ public class UserAgentStringParserTest {
 
 	@Test
 	public void parse_unknownString() {
-		final UserAgent agent = parser.parse("qwertzuiopasdfghjklyxcvbnm");
+		final UserAgent agent = PARSER.parse("qwertzuiopasdfghjklyxcvbnm");
 
 		// check user agent informations
 		final UserAgent e = UserAgent.EMPTY;
@@ -566,9 +570,8 @@ public class UserAgentStringParserTest {
 
 	@Test(expected = IllegalArgumentException.class)
 	public void setData() throws Exception {
-		final UserAgentStringParserImpl parser = new UserAgentStringParserImpl(this.getClass().getClassLoader()
-				.getResourceAsStream(RESOURCE));
-		parser.setData(null);
+		final UserAgentStringParserImpl parser = new UserAgentStringParserImpl(setUpDataStore());
+		parser.getDataStore().setData(null);
 	}
 
 }

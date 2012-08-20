@@ -35,8 +35,7 @@ public final class UADetectorServiceFactory {
 		private static UserAgentStringParser INSTANCE;
 		static {
 			try {
-				final InputStream stream = UADetectorServiceFactory.class.getClassLoader().getResourceAsStream(UASDATA);
-				INSTANCE = new UserAgentStringParserImpl(stream);
+				INSTANCE = new UserAgentStringParserImpl(readDataIntoStore());
 			} catch (final Exception e) {
 				LOG.error(e.getLocalizedMessage(), e);
 			}
@@ -48,8 +47,7 @@ public final class UADetectorServiceFactory {
 		private static UserAgentStringParser INSTANCE;
 		static {
 			try {
-				final InputStream stream = UADetectorServiceFactory.class.getClassLoader().getResourceAsStream(UASDATA);
-				INSTANCE = new OnlineUserAgentStringParserImpl(stream);
+				INSTANCE = new OnlineUserAgentStringParserImpl(readDataIntoStore());
 			} catch (final MalformedURLException e) {
 				LOG.warn(e.getLocalizedMessage(), e);
 			} catch (final Exception e) {
@@ -60,7 +58,7 @@ public final class UADetectorServiceFactory {
 	}
 
 	/**
-	 * Corresponding logger for this class
+	 * Corresponding default logger for this class
 	 */
 	private static final Logger LOG = LoggerFactory.getLogger(UADetectorServiceFactory.class);
 
@@ -110,6 +108,11 @@ public final class UADetectorServiceFactory {
 	 */
 	public static UserAgentStringParser getUserAgentStringParser() {
 		return OfflineUserAgentStringParserHolder.INSTANCE;
+	}
+
+	private static final DataStore readDataIntoStore() {
+		final InputStream stream = UADetectorServiceFactory.class.getClassLoader().getResourceAsStream(UASDATA);
+		return new SimpleDataStore(stream);
 	}
 
 	private UADetectorServiceFactory() {

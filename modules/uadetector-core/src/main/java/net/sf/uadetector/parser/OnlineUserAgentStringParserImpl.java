@@ -17,13 +17,15 @@ package net.sf.uadetector.parser;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.LineNumberReader;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Properties;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ScheduledFuture;
+import java.util.concurrent.TimeUnit;
 
-import net.sf.uadetector.internal.data.Data;
+import net.sf.uadetector.DataStore;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -37,11 +39,6 @@ import org.slf4j.LoggerFactory;
 public final class OnlineUserAgentStringParserImpl extends UserAgentStringParserImpl {
 
 	/**
-	 * Character set to read remote data
-	 */
-	private static final String CHARSET = "UTF-8";
-
-	/**
 	 * Default configuration properties
 	 */
 	private static final String CONFIG_FILE = "uadetector/config.properties";
@@ -52,24 +49,9 @@ public final class OnlineUserAgentStringParserImpl extends UserAgentStringParser
 	private static final String DATA_URL_KEY = "data.url";
 
 	/**
-	 * The default interval to check for updates is once per day
-	 */
-	private static final long DEFAULT_UPDATE_INTERVAL = 1000 * 60 * 60 * 24; // 1 day
-
-	/**
 	 * Default log
 	 */
 	private static final Logger LOG = LoggerFactory.getLogger(OnlineUserAgentStringParserImpl.class);
-
-	/**
-	 * Message for the log when an online update check is not necessary because the time interval isn't reached.
-	 */
-	private static final String MSG_NO_CHECK_NECESSARY = "There is no check necessary because the update interval has not expired.";
-
-	/**
-	 * Message for the log when an online update check is not possible.
-	 */
-	private static final String MSG_NO_UPDATE_CHECK_POSSIBLE = "Can not check for an updated version. Are you sure you have an established internet connection?";
 
 	/**
 	 * Key for the {@code URL} of UAS version information in the configuration properties
@@ -102,40 +84,14 @@ public final class OnlineUserAgentStringParserImpl extends UserAgentStringParser
 	}
 
 	/**
-	 * Reads the current User-Agent data version from <a
-	 * href="http://user-agent-string.info">http://user-agent-string.info</a>.
-	 * 
-	 * @param url
-	 *            a URL which the version information can be loaded
-	 * @return a version string or {@code null}
-	 * @throws IOException
-	 *             if an I/O exception occurs
-	 */
-	public static String retrieveRemoteVersion(final URL url) throws IOException {
-		final InputStream stream = url.openStream();
-		final InputStreamReader reader = new InputStreamReader(stream, CHARSET);
-		final LineNumberReader lnr = new LineNumberReader(reader);
-		final String line = lnr.readLine();
-		lnr.close();
-		reader.close();
-		stream.close();
-		return line;
-	}
-
-	/**
 	 * The {@code URL} to request the latest UAS data
 	 */
 	private final URL dataUrl;
 
 	/**
-	 * Time of last update check in milliseconds
-	 */
-	private long lastUpdateCheck;
-
-	/**
 	 * Interval to check for updates in milliseconds
 	 */
-	private long updateInterval = DEFAULT_UPDATE_INTERVAL;
+	private long updateInterval = Updater.DEFAULT_UPDATE_INTERVAL;
 
 	/**
 	 * The {@code URL} to request the latest version information of UAS data
@@ -143,26 +99,41 @@ public final class OnlineUserAgentStringParserImpl extends UserAgentStringParser
 	private final URL versionUrl;
 
 	/**
+	 * Current update task of {@link OnlineUserAgentStringParserImpl#scheduler}
+	 */
+	private ScheduledFuture<?> currentUpdateTask;
+
+	/**
+	 * {@link ScheduledExecutorService} to schedule commands to update the UAS data in defined intervals
+	 */
+	private final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
+
+	/**
+	 * Current update service which will be triggered by the {@link OnlineUserAgentStringParserImpl#scheduler}
+	 */
+	private UpdateService updateService;
+
+	/**
 	 * Constructs an instance of {@code OnlineUserAgentStringParser}. During construction new UAS data will be queried
 	 * online by predefined {@code URL}s.
 	 * 
-	 * @param stream
-	 *            {@code InputStream} with reference data used in fallback case
+	 * @param store
+	 *            {@code DataStore} with reference UAS data used in fallback case
 	 * @throws MalformedURLException
 	 *             if on of the read URLs from the default configuration properties is invalid
 	 * @throws IllegalArgumentException
 	 *             if the given argument {@code stream} is {@code null}
 	 */
-	public OnlineUserAgentStringParserImpl(final InputStream stream) throws MalformedURLException {
-		this(stream, readConfigProperties());
+	public OnlineUserAgentStringParserImpl(final DataStore store) throws MalformedURLException {
+		this(store, readConfigProperties());
 	}
 
 	/**
 	 * Constructs an instance of {@code OnlineUserAgentStringParser}. During construction new UAS data will be queried
 	 * online by custom {@code URL}s.
 	 * 
-	 * @param stream
-	 *            {@code InputStream} with reference data used in fallback case
+	 * @param store
+	 *            {@code DataStore} with reference UAS data used in fallback case
 	 * @throws IllegalArgumentException
 	 *             if the given argument {@code stream} is {@code null}
 	 * @throws MalformedURLException
@@ -170,16 +141,16 @@ public final class OnlineUserAgentStringParserImpl extends UserAgentStringParser
 	 * @throws NullPointerException
 	 *             if the given argument {@code configuration} is {@code null}
 	 */
-	public OnlineUserAgentStringParserImpl(final InputStream stream, final Properties configuration) throws MalformedURLException {
-		this(stream, new URL(configuration.getProperty(DATA_URL_KEY)), new URL(configuration.getProperty(VERSION_URL_KEY)));
+	public OnlineUserAgentStringParserImpl(final DataStore store, final Properties configuration) throws MalformedURLException {
+		this(store, new URL(configuration.getProperty(DATA_URL_KEY)), new URL(configuration.getProperty(VERSION_URL_KEY)));
 	}
 
 	/**
 	 * Constructs an instance of {@code OnlineUserAgentStringParser}. During construction new UAS data will be queried
 	 * online by the given {@code URL}s.
 	 * 
-	 * @param stream
-	 *            {@code InputStream} with reference data used in fallback case
+	 * @param store
+	 *            {@code DataStore} with reference UAS data used in fallback case
 	 * @param dataUrl
 	 *            {@code URL} to request the latest UAS data
 	 * @param versionUrl
@@ -187,8 +158,8 @@ public final class OnlineUserAgentStringParserImpl extends UserAgentStringParser
 	 * @throws IllegalArgumentException
 	 *             if one of the given arguments is {@code null}
 	 */
-	public OnlineUserAgentStringParserImpl(final InputStream stream, final URL dataUrl, final URL versionUrl) {
-		super(stream);
+	public OnlineUserAgentStringParserImpl(final DataStore store, final URL dataUrl, final URL versionUrl) {
+		super(store);
 
 		if (dataUrl == null) {
 			throw new IllegalArgumentException("Argument 'dataUrl' must not be null.");
@@ -201,22 +172,8 @@ public final class OnlineUserAgentStringParserImpl extends UserAgentStringParser
 		this.versionUrl = versionUrl;
 
 		// query newer UAS data
-		retrieveRemoteData(dataUrl);
-	}
-
-	@Override
-	protected Data getData() {
-		retrieveRemoteData(dataUrl);
-		return super.getData();
-	}
-
-	/**
-	 * Gets the time of the last update check in milliseconds.
-	 * 
-	 * @return time of the last update check in milliseconds
-	 */
-	public long getLastUpdateCheck() {
-		return lastUpdateCheck;
+		setUpUpdateService();
+		updateService.call();
 	}
 
 	/**
@@ -229,46 +186,12 @@ public final class OnlineUserAgentStringParserImpl extends UserAgentStringParser
 	}
 
 	/**
-	 * Fetches the current version information over HTTP and compares it with the last version of the most recently
-	 * imported data.
+	 * Gets the current {@link UpdateService} of this parser.
 	 * 
-	 * @return {@code true} if an update exists, otherwise {@code false}
+	 * @return current update service of this parser
 	 */
-	private boolean isUpdateAvailable() {
-		boolean result = false;
-		if (lastUpdateCheck == 0 || lastUpdateCheck < System.currentTimeMillis() - getUpdateInterval()) {
-			try {
-				final String version = retrieveRemoteVersion(versionUrl);
-				if (version.compareTo(getCurrentVersion()) > 0) {
-					if (LOG.isDebugEnabled()) {
-						LOG.debug("An update is available. Current version is '" + getCurrentVersion() + "' and remote version is '"
-								+ version + "'.");
-					}
-					result = true;
-				} else if (LOG.isDebugEnabled()) {
-					LOG.debug("No update available. Current version is '" + getCurrentVersion() + "'.");
-				}
-			} catch (final IOException e) {
-				LOG.info(MSG_NO_UPDATE_CHECK_POSSIBLE);
-				if (LOG.isDebugEnabled()) {
-					LOG.debug("Can not check for an updated version: " + e.getClass().getName() + ": " + e.getLocalizedMessage());
-				}
-			}
-			lastUpdateCheck = System.currentTimeMillis();
-		} else {
-			LOG.debug(MSG_NO_CHECK_NECESSARY);
-		}
-		return result;
-	}
-
-	/**
-	 * Loads the UAS data online.
-	 */
-	private void retrieveRemoteData(final URL url) {
-		if (isUpdateAvailable()) {
-			LOG.debug("Reading remote data...");
-			setData(getDataReader().read(url));
-		}
+	public Updater getUpdater() {
+		return updateService;
 	}
 
 	/**
@@ -284,6 +207,18 @@ public final class OnlineUserAgentStringParserImpl extends UserAgentStringParser
 			throw new IllegalArgumentException("Update interval must be not less than 0.");
 		}
 		this.updateInterval = updateInterval;
+		setUpUpdateService();
+	}
+
+	/**
+	 * Set up a new update service to get newer UAS data
+	 */
+	private void setUpUpdateService() {
+		if (currentUpdateTask != null) {
+			currentUpdateTask.cancel(false);
+		}
+		updateService = new UpdateService(getDataStore(), dataUrl, versionUrl);
+		currentUpdateTask = scheduler.scheduleWithFixedDelay(updateService, 0, updateInterval, TimeUnit.MILLISECONDS);
 	}
 
 }

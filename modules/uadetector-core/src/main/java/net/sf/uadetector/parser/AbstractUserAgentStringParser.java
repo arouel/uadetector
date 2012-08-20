@@ -18,6 +18,7 @@ package net.sf.uadetector.parser;
 import java.util.Map.Entry;
 import java.util.regex.Matcher;
 
+import net.sf.uadetector.DataStore;
 import net.sf.uadetector.UserAgent;
 import net.sf.uadetector.UserAgentStringParser;
 import net.sf.uadetector.VersionNumber;
@@ -104,14 +105,19 @@ public abstract class AbstractUserAgentStringParser implements UserAgentStringPa
 		}
 	}
 
-	protected abstract Data getData();
+	/**
+	 * Gets the data store of this parser.
+	 * 
+	 * @return data store of this parser
+	 */
+	protected abstract DataStore getDataStore();
 
 	@Override
 	public UserAgent parse(final String userAgent) {
 		final UserAgent.Builder builder = new UserAgent.Builder(userAgent);
 
 		// work during the analysis always with the same reference of data
-		final Data data = getData();
+		final Data data = getDataStore().getData();
 
 		if (!examineAsRobot(builder, data)) {
 			examineAsBrowser(builder, data);

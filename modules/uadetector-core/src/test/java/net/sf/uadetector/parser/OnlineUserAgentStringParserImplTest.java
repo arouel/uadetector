@@ -20,7 +20,9 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Properties;
 
+import net.sf.uadetector.DataStore;
 import net.sf.uadetector.OperatingSystem;
+import net.sf.uadetector.SimpleDataStore;
 import net.sf.uadetector.UserAgent;
 import net.sf.uadetector.VersionNumber;
 import net.sf.uadetector.internal.data.domain.Robot;
@@ -38,22 +40,24 @@ public class OnlineUserAgentStringParserImplTest {
 
 	private static final String RESOURCE = "uas_test.xml";
 
+	private static DataStore setUpDataStore() {
+		final InputStream stream = OnlineUserAgentStringParserImplTest.class.getClassLoader().getResourceAsStream(RESOURCE);
+		return new SimpleDataStore(stream);
+	}
+
 	@Test(expected = IllegalArgumentException.class)
 	public void construct_dataUrl_null() throws Exception {
-		final InputStream stream = OnlineUserAgentStringParserImplTest.class.getClassLoader().getResourceAsStream(RESOURCE);
-		new OnlineUserAgentStringParserImpl(stream, null, new URL("http://localhost/"));
+		new OnlineUserAgentStringParserImpl(setUpDataStore(), null, new URL("http://localhost/"));
 	}
 
 	@Test(expected = MalformedURLException.class)
 	public void construct_properties_empty() throws Exception {
-		final InputStream stream = OnlineUserAgentStringParserImplTest.class.getClassLoader().getResourceAsStream(RESOURCE);
-		new OnlineUserAgentStringParserImpl(stream, new Properties());
+		new OnlineUserAgentStringParserImpl(setUpDataStore(), new Properties());
 	}
 
 	@Test(expected = NullPointerException.class)
 	public void construct_properties_null() throws Exception {
-		final InputStream stream = OnlineUserAgentStringParserImplTest.class.getClassLoader().getResourceAsStream(RESOURCE);
-		new OnlineUserAgentStringParserImpl(stream, null);
+		new OnlineUserAgentStringParserImpl(setUpDataStore(), null);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
@@ -68,23 +72,18 @@ public class OnlineUserAgentStringParserImplTest {
 
 	@Test(expected = IllegalArgumentException.class)
 	public void construct_versionUrl_null() throws Exception {
-		final InputStream stream = OnlineUserAgentStringParserImplTest.class.getClassLoader().getResourceAsStream(RESOURCE);
-		new OnlineUserAgentStringParserImpl(stream, new URL("http://localhost/"), null);
+		new OnlineUserAgentStringParserImpl(setUpDataStore(), new URL("http://localhost/"), null);
 	}
 
 	@Test
 	public void getCurrentVersion() {
-		Assert.assertFalse("20120509-01".equals(PARSER.getCurrentVersion()));
+		Assert.assertFalse("20120509-01".equals(PARSER.getDataStore().getData().getVersion()));
 	}
 
 	@Test
-	public void getData() {
-		Assert.assertNotNull(PARSER.getData());
-	}
-
-	@Test
-	public void getDataReader() {
-		Assert.assertNotNull(PARSER.getDataReader());
+	public void getDataStore() {
+		Assert.assertNotNull(PARSER.getDataStore());
+		Assert.assertNotNull(PARSER.getDataStore().getData());
 	}
 
 	@Test
@@ -261,43 +260,43 @@ public class OnlineUserAgentStringParserImplTest {
 
 	@Test(expected = IllegalArgumentException.class)
 	public void setData() throws Exception {
-		final InputStream stream = OnlineUserAgentStringParserImplTest.class.getClassLoader().getResourceAsStream(RESOURCE);
-		final OnlineUserAgentStringParserImpl parser = new OnlineUserAgentStringParserImpl(stream);
-		parser.setData(null);
+		final OnlineUserAgentStringParserImpl parser = new OnlineUserAgentStringParserImpl(setUpDataStore());
+		parser.getDataStore().setData(null);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void setUpdateInterval_toSmall() throws MalformedURLException {
-		final InputStream stream = OnlineUserAgentStringParserImplTest.class.getClassLoader().getResourceAsStream(RESOURCE);
-		final OnlineUserAgentStringParserImpl parser = new OnlineUserAgentStringParserImpl(stream);
+		final OnlineUserAgentStringParserImpl parser = new OnlineUserAgentStringParserImpl(setUpDataStore());
 		parser.setUpdateInterval(-1l);
 	}
 
 	@Test
 	public void testUpdateMechanismWhileParsing() throws InterruptedException {
-		final long firstLastUpdateCheck = PARSER.getLastUpdateCheck();
+		final URL dataUrl = OnlineUserAgentStringParserImplTest.class.getClassLoader().getResource("uas_newer.xml");
+		final URL versionUrl = OnlineUserAgentStringParserImplTest.class.getClassLoader().getResource("uas_newer.xml");
+		final OnlineUserAgentStringParserImpl parser = new OnlineUserAgentStringParserImpl(setUpDataStore(), dataUrl, versionUrl);
+		final long firstLastUpdateCheck = parser.getUpdater().getLastUpdateCheck();
 		LOG.debug("LastUpdateCheck at: " + firstLastUpdateCheck);
-		final long originalInterval = PARSER.getUpdateInterval();
+		final long originalInterval = parser.getUpdateInterval();
 
 		// reduce the interval since testing
 		LOG.debug("Reducing the update interval during the test.");
-		PARSER.setUpdateInterval(10l);
+		parser.setUpdateInterval(100l);
 		// we have to read to activate the update mechanism
-		PARSER.parse("check for updates");
+		parser.parse("check for updates");
 
-		Thread.sleep(100l);
-		final long currentLastUpdateCheck = PARSER.getLastUpdateCheck();
+		Thread.sleep(1000l);
+		final long currentLastUpdateCheck = parser.getUpdater().getLastUpdateCheck();
 		LOG.debug("LastUpdateCheck at: " + currentLastUpdateCheck);
 		Assert.assertTrue(firstLastUpdateCheck < currentLastUpdateCheck);
 
-		PARSER.setUpdateInterval(originalInterval);
+		parser.setUpdateInterval(originalInterval);
 	}
 
 	@Test
 	public void testWrongUrl() throws Exception {
-		final InputStream stream = OnlineUserAgentStringParserImplTest.class.getClassLoader().getResourceAsStream(RESOURCE);
 		final URL unknownUrl = new URL("http://localhost/");
-		final OnlineUserAgentStringParserImpl parser = new OnlineUserAgentStringParserImpl(stream, unknownUrl, unknownUrl);
+		final OnlineUserAgentStringParserImpl parser = new OnlineUserAgentStringParserImpl(setUpDataStore(), unknownUrl, unknownUrl);
 		parser.setUpdateInterval(1l);
 		parser.parse("");
 	}

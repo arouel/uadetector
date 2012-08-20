@@ -38,7 +38,7 @@ public class UpdateServiceTest {
 	}
 
 	@Test
-	public void call() throws MalformedURLException {
+	public void call() {
 		final UpdateService service = new UpdateService(new SimpleDataStore(read(UAS_TEST)), DATA_URL, VERSION_URL);
 		service.call();
 	}
@@ -51,13 +51,13 @@ public class UpdateServiceTest {
 	}
 
 	@Test
-	public void call_withEmptyData() throws MalformedURLException {
+	public void call_withEmptyData() {
 		final UpdateService service = new UpdateService(new SimpleDataStore(Data.EMPTY), DATA_URL, VERSION_URL);
 		service.call();
 	}
 
 	@Test
-	public void callTriple() throws MalformedURLException {
+	public void callTriple() {
 		final UpdateService service = new UpdateService(new SimpleDataStore(read(UAS_TEST)), DATA_URL, VERSION_URL);
 		Assert.assertEquals(0, service.getLastUpdateCheck());
 		final long startTime = System.currentTimeMillis();
@@ -72,7 +72,7 @@ public class UpdateServiceTest {
 	}
 
 	@Test
-	public void callTwice() throws MalformedURLException {
+	public void callTwice() {
 		final UpdateService service = new UpdateService(new SimpleDataStore(read(UAS_TEST)), DATA_URL, VERSION_URL);
 		Assert.assertEquals(0, service.getLastUpdateCheck());
 		final long startTime = System.currentTimeMillis();
@@ -84,32 +84,38 @@ public class UpdateServiceTest {
 	}
 
 	@Test(expected = IllegalArgumentException.class)
-	public void construct_dataUrl_null() throws MalformedURLException {
+	public void construct_dataUrl_null() {
 		new UpdateService(new SimpleDataStore(read(UAS_TEST)), null, VERSION_URL);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
-	public void construct_store_null() throws MalformedURLException {
+	public void construct_store_null() {
 		new UpdateService(null, DATA_URL, VERSION_URL);
 	}
 
 	@Test
-	public void construct_successful() throws MalformedURLException {
+	public void construct_successful() {
 		new UpdateService(new SimpleDataStore(read(UAS_TEST)), DATA_URL, VERSION_URL);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
-	public void construct_versionUrl_null() throws MalformedURLException {
+	public void construct_versionUrl_null() {
 		new UpdateService(new SimpleDataStore(read(UAS_TEST)), DATA_URL, null);
 	}
 
 	@Test
-	public void getLastUpdateCheck() throws MalformedURLException {
+	public void getLastUpdateCheck() {
 		final UpdateService service = new UpdateService(new SimpleDataStore(read(UAS_TEST)), DATA_URL, VERSION_URL);
 		Assert.assertEquals(0, service.getLastUpdateCheck());
 		final long startTime = System.currentTimeMillis();
 		service.call();
 		Assert.assertTrue(service.getLastUpdateCheck() >= startTime);
+	}
+
+	@Test
+	public void run() {
+		final UpdateService service = new UpdateService(new SimpleDataStore(read(UAS_TEST)), DATA_URL, VERSION_URL);
+		service.run();
 	}
 
 }

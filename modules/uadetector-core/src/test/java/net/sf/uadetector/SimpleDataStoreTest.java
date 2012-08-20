@@ -60,4 +60,9 @@ public class SimpleDataStoreTest {
 		Assert.assertSame(Data.EMPTY, store.getData());
 	}
 
+	@Test(expected = IllegalArgumentException.class)
+	public void setData_null() {
+		new SimpleDataStore(Data.EMPTY).setData(null);
+	}
+
 }

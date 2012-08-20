@@ -279,6 +279,102 @@ public class XmlDataHandler extends DefaultHandler {
 		dataBuilder = builder;
 	}
 
+	private void addToBrowserBuilder() {
+		if (isBrowser && currentTag == Tag.ID) {
+			browserBuilder.setId(buffer.toString());
+		} else if (isBrowser && currentTag == Tag.BROWSER_TYPE_ID) {
+			browserBuilder.setTypeId(buffer.toString());
+		} else if (isBrowser && currentTag == Tag.NAME) {
+			browserBuilder.setFamily(buffer.toString());
+		} else if (isBrowser && currentTag == Tag.URL) {
+			browserBuilder.setUrl(buffer.toString());
+		} else if (isBrowser && currentTag == Tag.COMPANY) {
+			browserBuilder.setProducer(buffer.toString());
+		} else if (isBrowser && currentTag == Tag.COMPANY_URL) {
+			browserBuilder.setProducerUrl(buffer.toString());
+		} else if (isBrowser && currentTag == Tag.ICON) {
+			browserBuilder.setIcon(buffer.toString());
+		} else if (isBrowser && currentTag == Tag.BROWSER_INFO_URL) {
+			browserBuilder.setInfoUrl(buffer.toString());
+		}
+	}
+
+	private void addToBrowserOsMappingBuilder() {
+		if (isBrowserOsMapping && currentTag == Tag.BROWSER_ID) {
+			browserOsMappingBuilder.setBrowserId(buffer.toString());
+		} else if (isBrowserOsMapping && currentTag == Tag.OPERATING_SYSTEM_ID) {
+			browserOsMappingBuilder.setOperatingSystemId(buffer.toString());
+		}
+	}
+
+	private void addToBrowserPatternBuilder() {
+		if (isBrowserPattern && currentTag == Tag.PATTERN_ORDER) {
+			browserPatternBuilder.setPosition(buffer.toString());
+		} else if (isBrowserPattern && currentTag == Tag.BROWSER_ID) {
+			browserPatternBuilder.setId(buffer.toString());
+		} else if (isBrowserPattern && currentTag == Tag.PATTERN_REGEX) {
+			browserPatternBuilder.setPerlRegularExpression(buffer.toString());
+		}
+	}
+
+	private void addToBrowserTypeBuilder() {
+		if (isBrowserType && currentTag == Tag.ID) {
+			browserTypeBuilder.setId(buffer.toString());
+		} else if (isBrowserType && currentTag == Tag.BROWSER_TYPE_ID) {
+			browserTypeBuilder.setName(buffer.toString());
+		}
+	}
+
+	private void addToOperatingSystemBuilder() {
+		if (isOperatingSystem && currentTag == Tag.ID) {
+			operatingSystemBuilder.setId(buffer.toString());
+		} else if (isOperatingSystem && currentTag == Tag.FAMILY) {
+			operatingSystemBuilder.setFamily(buffer.toString());
+		} else if (isOperatingSystem && currentTag == Tag.NAME) {
+			operatingSystemBuilder.setName(buffer.toString());
+		} else if (isOperatingSystem && currentTag == Tag.URL) {
+			operatingSystemBuilder.setUrl(buffer.toString());
+		} else if (isOperatingSystem && currentTag == Tag.COMPANY) {
+			operatingSystemBuilder.setProducer(buffer.toString());
+		} else if (isOperatingSystem && currentTag == Tag.COMPANY_URL) {
+			operatingSystemBuilder.setProducerUrl(buffer.toString());
+		} else if (isOperatingSystem && currentTag == Tag.ICON) {
+			operatingSystemBuilder.setIcon(buffer.toString());
+		} else if (isOperatingSystem && currentTag == Tag.OPERATING_SYSTEM_INFO_URL) {
+			operatingSystemBuilder.setInfoUrl(buffer.toString());
+		}
+	}
+
+	private void addToOperatingSystemPatternBuilder() {
+		if (isOperatingSystemPattern && currentTag == Tag.PATTERN_ORDER) {
+			operatingSystemPatternBuilder.setPosition(buffer.toString());
+		} else if (isOperatingSystemPattern && currentTag == Tag.OPERATING_SYSTEM_ID) {
+			operatingSystemPatternBuilder.setId(buffer.toString());
+		} else if (isOperatingSystemPattern && currentTag == Tag.PATTERN_REGEX) {
+			operatingSystemPatternBuilder.setPerlRegularExpression(buffer.toString());
+		}
+	}
+
+	private void addToRobotBuilder() {
+		if (isRobot && currentTag == Tag.ID) {
+			robotBuilder.setId(buffer.toString());
+		} else if (isRobot && currentTag == Tag.USERAGENT) {
+			robotBuilder.setUserAgentString(buffer.toString());
+		} else if (isRobot && currentTag == Tag.FAMILY) {
+			robotBuilder.setFamily(buffer.toString());
+		} else if (isRobot && currentTag == Tag.NAME) {
+			robotBuilder.setName(buffer.toString());
+		} else if (isRobot && currentTag == Tag.COMPANY) {
+			robotBuilder.setProducer(buffer.toString());
+		} else if (isRobot && currentTag == Tag.COMPANY_URL) {
+			robotBuilder.setProducerUrl(buffer.toString());
+		} else if (isRobot && currentTag == Tag.ICON) {
+			robotBuilder.setIcon(buffer.toString());
+		} else if (isRobot && currentTag == Tag.ROBOT_INFO_URL) {
+			robotBuilder.setInfoUrl(buffer.toString());
+		}
+	}
+
 	@Override
 	public void characters(final char ch[], final int start, final int length) throws SAXException {
 		buffer.append(new String(ch, start, length));
@@ -401,93 +497,25 @@ public class XmlDataHandler extends DefaultHandler {
 		}
 
 		// robot browser
-		if (isRobot && currentTag == Tag.ID) {
-			robotBuilder.setId(buffer.toString());
-		} else if (isRobot && currentTag == Tag.USERAGENT) {
-			robotBuilder.setUserAgentString(buffer.toString());
-		} else if (isRobot && currentTag == Tag.FAMILY) {
-			robotBuilder.setFamily(buffer.toString());
-		} else if (isRobot && currentTag == Tag.NAME) {
-			robotBuilder.setName(buffer.toString());
-		} else if (isRobot && currentTag == Tag.COMPANY) {
-			robotBuilder.setProducer(buffer.toString());
-		} else if (isRobot && currentTag == Tag.COMPANY_URL) {
-			robotBuilder.setProducerUrl(buffer.toString());
-		} else if (isRobot && currentTag == Tag.ICON) {
-			robotBuilder.setIcon(buffer.toString());
-		} else if (isRobot && currentTag == Tag.ROBOT_INFO_URL) {
-			robotBuilder.setInfoUrl(buffer.toString());
-		}
+		addToRobotBuilder();
 
 		// build browser
-		if (isBrowser && currentTag == Tag.ID) {
-			browserBuilder.setId(buffer.toString());
-		} else if (isBrowser && currentTag == Tag.BROWSER_TYPE_ID) {
-			browserBuilder.setTypeId(buffer.toString());
-		} else if (isBrowser && currentTag == Tag.NAME) {
-			browserBuilder.setFamily(buffer.toString());
-		} else if (isBrowser && currentTag == Tag.URL) {
-			browserBuilder.setUrl(buffer.toString());
-		} else if (isBrowser && currentTag == Tag.COMPANY) {
-			browserBuilder.setProducer(buffer.toString());
-		} else if (isBrowser && currentTag == Tag.COMPANY_URL) {
-			browserBuilder.setProducerUrl(buffer.toString());
-		} else if (isBrowser && currentTag == Tag.ICON) {
-			browserBuilder.setIcon(buffer.toString());
-		} else if (isBrowser && currentTag == Tag.BROWSER_INFO_URL) {
-			browserBuilder.setInfoUrl(buffer.toString());
-		}
+		addToBrowserBuilder();
 
 		// build operating system
-		if (isOperatingSystem && currentTag == Tag.ID) {
-			operatingSystemBuilder.setId(buffer.toString());
-		} else if (isOperatingSystem && currentTag == Tag.FAMILY) {
-			operatingSystemBuilder.setFamily(buffer.toString());
-		} else if (isOperatingSystem && currentTag == Tag.NAME) {
-			operatingSystemBuilder.setName(buffer.toString());
-		} else if (isOperatingSystem && currentTag == Tag.URL) {
-			operatingSystemBuilder.setUrl(buffer.toString());
-		} else if (isOperatingSystem && currentTag == Tag.COMPANY) {
-			operatingSystemBuilder.setProducer(buffer.toString());
-		} else if (isOperatingSystem && currentTag == Tag.COMPANY_URL) {
-			operatingSystemBuilder.setProducerUrl(buffer.toString());
-		} else if (isOperatingSystem && currentTag == Tag.ICON) {
-			operatingSystemBuilder.setIcon(buffer.toString());
-		} else if (isOperatingSystem && currentTag == Tag.OPERATING_SYSTEM_INFO_URL) {
-			operatingSystemBuilder.setInfoUrl(buffer.toString());
-		}
+		addToOperatingSystemBuilder();
 
 		// build browser pattern
-		if (isBrowserPattern && currentTag == Tag.PATTERN_ORDER) {
-			browserPatternBuilder.setPosition(buffer.toString());
-		} else if (isBrowserPattern && currentTag == Tag.BROWSER_ID) {
-			browserPatternBuilder.setId(buffer.toString());
-		} else if (isBrowserPattern && currentTag == Tag.PATTERN_REGEX) {
-			browserPatternBuilder.setPerlRegularExpression(buffer.toString());
-		}
+		addToBrowserPatternBuilder();
 
 		// build browser type
-		if (isBrowserType && currentTag == Tag.ID) {
-			browserTypeBuilder.setId(buffer.toString());
-		} else if (isBrowserType && currentTag == Tag.BROWSER_TYPE_ID) {
-			browserTypeBuilder.setName(buffer.toString());
-		}
+		addToBrowserTypeBuilder();
 
 		// build browser to operating system mapping
-		if (isBrowserOsMapping && currentTag == Tag.BROWSER_ID) {
-			browserOsMappingBuilder.setBrowserId(buffer.toString());
-		} else if (isBrowserOsMapping && currentTag == Tag.OPERATING_SYSTEM_ID) {
-			browserOsMappingBuilder.setOperatingSystemId(buffer.toString());
-		}
+		addToBrowserOsMappingBuilder();
 
 		// build operating system pattern
-		if (isOperatingSystemPattern && currentTag == Tag.PATTERN_ORDER) {
-			operatingSystemPatternBuilder.setPosition(buffer.toString());
-		} else if (isOperatingSystemPattern && currentTag == Tag.OPERATING_SYSTEM_ID) {
-			operatingSystemPatternBuilder.setId(buffer.toString());
-		} else if (isOperatingSystemPattern && currentTag == Tag.PATTERN_REGEX) {
-			operatingSystemPatternBuilder.setPerlRegularExpression(buffer.toString());
-		}
+		addToOperatingSystemPatternBuilder();
 
 		buffer = new StringBuilder();
 	}

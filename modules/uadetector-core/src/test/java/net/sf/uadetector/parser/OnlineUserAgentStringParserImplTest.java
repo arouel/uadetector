@@ -296,9 +296,12 @@ public class OnlineUserAgentStringParserImplTest {
 	@Test
 	public void testWrongUrl() throws Exception {
 		final URL unknownUrl = new URL("http://localhost/");
+		LOG.debug("Testing the update ability with a wrong URL.");
 		final OnlineUserAgentStringParserImpl parser = new OnlineUserAgentStringParserImpl(setUpDataStore(), unknownUrl, unknownUrl);
-		parser.setUpdateInterval(1l);
+		LOG.debug("Reducing the update interval during the test.");
+		parser.setUpdateInterval(10l);
 		parser.parse("");
+		LOG.debug("Testing the update ability with a wrong URL done.");
 	}
 
 }

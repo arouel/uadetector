@@ -273,7 +273,7 @@ public class OnlineUserAgentStringParserImplTest {
 	@Test
 	public void testUpdateMechanismWhileParsing() throws InterruptedException {
 		final URL dataUrl = OnlineUserAgentStringParserImplTest.class.getClassLoader().getResource("uas_newer.xml");
-		final URL versionUrl = OnlineUserAgentStringParserImplTest.class.getClassLoader().getResource("uas_newer.xml");
+		final URL versionUrl = OnlineUserAgentStringParserImplTest.class.getClassLoader().getResource("uas_newer.version");
 		final OnlineUserAgentStringParserImpl parser = new OnlineUserAgentStringParserImpl(setUpDataStore(), dataUrl, versionUrl);
 		final long firstLastUpdateCheck = parser.getUpdater().getLastUpdateCheck();
 		LOG.debug("LastUpdateCheck at: " + firstLastUpdateCheck);

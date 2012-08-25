@@ -22,6 +22,7 @@ import java.util.Properties;
 
 import net.sf.uadetector.DataStore;
 import net.sf.uadetector.OperatingSystem;
+import net.sf.uadetector.OperatingSystemFamily;
 import net.sf.uadetector.SimpleDataStore;
 import net.sf.uadetector.UserAgent;
 import net.sf.uadetector.VersionNumber;
@@ -105,11 +106,12 @@ public class OnlineUserAgentStringParserImplTest {
 
 		// check operating system informations
 		final OperatingSystem os = agent.getOperatingSystem();
-		Assert.assertEquals("Mac OS X", os.getFamilyName());
-		Assert.assertEquals("Mac OS X 10.6 Snow Leopard", os.getName());
+		Assert.assertEquals(OperatingSystemFamily.OS_X, os.getFamily());
+		Assert.assertEquals("OS X", os.getFamilyName());
+		Assert.assertEquals("OS X 10.6 Snow Leopard", os.getName());
 		Assert.assertEquals("Apple Computer, Inc.", os.getProducer());
 		Assert.assertEquals("http://www.apple.com/", os.getProducerUrl());
-		Assert.assertEquals("http://www.apple.com/macosx/", os.getUrl());
+		Assert.assertEquals("http://www.apple.com/osx/", os.getUrl());
 	}
 
 	@Test
@@ -130,11 +132,12 @@ public class OnlineUserAgentStringParserImplTest {
 
 		// check operating system informations
 		final OperatingSystem os = agent.getOperatingSystem();
-		Assert.assertEquals("Mac OS X", os.getFamilyName());
-		Assert.assertEquals("Mac OS X 10.6 Snow Leopard", os.getName());
+		Assert.assertEquals(OperatingSystemFamily.OS_X, os.getFamily());
+		Assert.assertEquals("OS X", os.getFamilyName());
+		Assert.assertEquals("OS X 10.6 Snow Leopard", os.getName());
 		Assert.assertEquals("Apple Computer, Inc.", os.getProducer());
 		Assert.assertEquals("http://www.apple.com/", os.getProducerUrl());
-		Assert.assertEquals("http://www.apple.com/macosx/", os.getUrl());
+		Assert.assertEquals("http://www.apple.com/osx/", os.getUrl());
 	}
 
 	@Test
@@ -156,6 +159,7 @@ public class OnlineUserAgentStringParserImplTest {
 
 		// check operating system informations
 		final OperatingSystem os = agent.getOperatingSystem();
+		Assert.assertEquals(OperatingSystemFamily.MAC_OS, os.getFamily());
 		Assert.assertEquals("Mac OS", os.getFamilyName());
 		Assert.assertEquals("Mac OS", os.getName());
 		Assert.assertEquals("Apple Computer, Inc.", os.getProducer());
@@ -182,11 +186,12 @@ public class OnlineUserAgentStringParserImplTest {
 
 		// check operating system informations
 		final OperatingSystem os = agent.getOperatingSystem();
-		Assert.assertEquals("Mac OS X", os.getFamilyName());
-		Assert.assertEquals("Mac OS X 10.5 Leopard", os.getName());
+		Assert.assertEquals(OperatingSystemFamily.OS_X, os.getFamily());
+		Assert.assertEquals("OS X", os.getFamilyName());
+		Assert.assertEquals("OS X 10.5 Leopard", os.getName());
 		Assert.assertEquals("Apple Computer, Inc.", os.getProducer());
 		Assert.assertEquals("http://www.apple.com/", os.getProducerUrl());
-		Assert.assertEquals("http://www.apple.com/macosx/", os.getUrl());
+		Assert.assertEquals("http://www.apple.com/osx/", os.getUrl());
 	}
 
 	@Test

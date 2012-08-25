@@ -326,6 +326,41 @@ public class UserAgentStringParserTest {
 	}
 
 	@Test
+	public void parse_browser_mobile_SAFARI_IPAD_IOS5() throws Exception {
+		final String userAgent = "Mozilla/5.0 (iPad; CPU OS 5_0 like Mac OS X) AppleWebKit/534.46 (KHTML, like Gecko) Version/5.1 Mobile/9A334 Safari/7534.48.3";
+		final UserAgent agent = PARSER.parse(userAgent);
+		Assert.assertNotNull(agent);
+		Assert.assertFalse(UserAgent.EMPTY.equals(agent));
+		Assert.assertFalse(OperatingSystem.EMPTY.equals(agent.getOperatingSystem()));
+
+		// check user agent informations
+		Assert.assertEquals("Mobile Safari", agent.getFamily());
+		Assert.assertEquals("Mobile Safari", agent.getName());
+		Assert.assertEquals("Apple Inc.", agent.getProducer());
+		Assert.assertEquals("http://www.apple.com/", agent.getProducerUrl());
+		Assert.assertEquals(UserAgentType.MOBILE_BROWSER, agent.getType());
+		Assert.assertEquals("Mobile Browser", agent.getTypeName());
+		Assert.assertEquals("http://en.wikipedia.org/wiki/Safari_%28web_browser%29", agent.getUrl());
+		Assert.assertEquals("5.1", agent.getVersionNumber().toVersionString());
+
+		// check operating system informations
+		final OperatingSystem os = agent.getOperatingSystem();
+		Assert.assertEquals(OperatingSystemFamily.IOS, os.getFamily());
+		Assert.assertEquals("iOS", os.getFamilyName());
+		Assert.assertEquals("iOS 5", os.getName());
+		Assert.assertEquals("Apple Inc.", os.getProducer());
+		Assert.assertEquals("http://www.apple.com/", os.getProducerUrl());
+		Assert.assertEquals("http://en.wikipedia.org/wiki/IOS", os.getUrl());
+		Assert.assertEquals("5.0", os.getVersionNumber().toVersionString());
+
+		// distinguish as iPad
+		if (OperatingSystemFamily.IOS == agent.getOperatingSystem().getFamily() && userAgent.contains("iPad")) {
+			LOG.debug("I'm an iPad.");
+			Assert.assertTrue(true);
+		}
+	}
+
+	@Test
 	public void parse_browser_mobile_SAFARI_IPHONE() throws Exception {
 		final String userAgent = "Mozilla/5.0 (iPhone; CPU iPhone OS 5_1_1 like Mac OS X) AppleWebKit/534.46 (KHTML, like Gecko) Version/5.1 Mobile/9B206 Safari/7534.48.3";
 		final UserAgent agent = PARSER.parse(userAgent);

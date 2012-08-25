@@ -47,7 +47,7 @@ public class SimpleDataStoreTest {
 	public void construct_stream_successful() {
 		final InputStream stream = SimpleDataStoreTest.class.getClassLoader().getResourceAsStream(RESOURCE);
 		final SimpleDataStore store = new SimpleDataStore(stream);
-		Assert.assertEquals("20120509-01", store.getData().getVersion());
+		Assert.assertEquals("20120817-01", store.getData().getVersion());
 	}
 
 	@Test

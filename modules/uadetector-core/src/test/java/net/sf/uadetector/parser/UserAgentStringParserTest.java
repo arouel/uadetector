@@ -51,7 +51,7 @@ public class UserAgentStringParserTest {
 
 	@Test
 	public void getCurrentVersion() {
-		Assert.assertEquals("20120509-01", PARSER.getDataStore().getData().getVersion());
+		Assert.assertEquals("20120817-01", PARSER.getDataStore().getData().getVersion());
 	}
 
 	@Test
@@ -80,11 +80,11 @@ public class UserAgentStringParserTest {
 		// check operating system informations
 		final OperatingSystem os = agent.getOperatingSystem();
 		Assert.assertEquals(OperatingSystemFamily.OS_X, os.getFamily());
-		Assert.assertEquals("Mac OS X", os.getFamilyName());
-		Assert.assertEquals("Mac OS X 10.6 Snow Leopard", os.getName());
+		Assert.assertEquals("OS X", os.getFamilyName());
+		Assert.assertEquals("OS X 10.6 Snow Leopard", os.getName());
 		Assert.assertEquals("Apple Computer, Inc.", os.getProducer());
 		Assert.assertEquals("http://www.apple.com/", os.getProducerUrl());
-		Assert.assertEquals("http://www.apple.com/macosx/", os.getUrl());
+		Assert.assertEquals("http://www.apple.com/osx/", os.getUrl());
 		Assert.assertEquals("10.6.8", os.getVersionNumber().toVersionString());
 	}
 
@@ -109,11 +109,11 @@ public class UserAgentStringParserTest {
 		// check operating system informations
 		final OperatingSystem os = agent.getOperatingSystem();
 		Assert.assertEquals(OperatingSystemFamily.OS_X, os.getFamily());
-		Assert.assertEquals("Mac OS X", os.getFamilyName());
-		Assert.assertEquals("Mac OS X 10.6 Snow Leopard", os.getName());
+		Assert.assertEquals("OS X", os.getFamilyName());
+		Assert.assertEquals("OS X 10.6 Snow Leopard", os.getName());
 		Assert.assertEquals("Apple Computer, Inc.", os.getProducer());
 		Assert.assertEquals("http://www.apple.com/", os.getProducerUrl());
-		Assert.assertEquals("http://www.apple.com/macosx/", os.getUrl());
+		Assert.assertEquals("http://www.apple.com/osx/", os.getUrl());
 		Assert.assertEquals("10.6.8", os.getVersionNumber().toVersionString());
 	}
 
@@ -138,11 +138,11 @@ public class UserAgentStringParserTest {
 		// check operating system informations
 		final OperatingSystem os = agent.getOperatingSystem();
 		Assert.assertEquals(OperatingSystemFamily.OS_X, os.getFamily());
-		Assert.assertEquals("Mac OS X", os.getFamilyName());
-		Assert.assertEquals("Mac OS X 10.7 Lion", os.getName());
+		Assert.assertEquals("OS X", os.getFamilyName());
+		Assert.assertEquals("OS X 10.7 Lion", os.getName());
 		Assert.assertEquals("Apple Computer, Inc.", os.getProducer());
 		Assert.assertEquals("http://www.apple.com/", os.getProducerUrl());
-		Assert.assertEquals("http://www.apple.com/macosx/", os.getUrl());
+		Assert.assertEquals("http://www.apple.com/osx/", os.getUrl());
 		Assert.assertEquals("10.7.4", os.getVersionNumber().toVersionString());
 	}
 
@@ -167,11 +167,11 @@ public class UserAgentStringParserTest {
 		// check operating system informations
 		final OperatingSystem os = agent.getOperatingSystem();
 		Assert.assertEquals(OperatingSystemFamily.OS_X, os.getFamily());
-		Assert.assertEquals("Mac OS X", os.getFamilyName());
-		Assert.assertEquals("Mac OS X 10.7 Lion", os.getName());
+		Assert.assertEquals("OS X", os.getFamilyName());
+		Assert.assertEquals("OS X 10.7 Lion", os.getName());
 		Assert.assertEquals("Apple Computer, Inc.", os.getProducer());
 		Assert.assertEquals("http://www.apple.com/", os.getProducerUrl());
-		Assert.assertEquals("http://www.apple.com/macosx/", os.getUrl());
+		Assert.assertEquals("http://www.apple.com/osx/", os.getUrl());
 		Assert.assertEquals("10.7", os.getVersionNumber().toVersionString());
 	}
 
@@ -276,7 +276,7 @@ public class UserAgentStringParserTest {
 		Assert.assertEquals("http://www.google.com/", agent.getProducerUrl());
 		Assert.assertEquals(UserAgentType.MOBILE_BROWSER, agent.getType());
 		Assert.assertEquals("Mobile Browser", agent.getTypeName());
-		Assert.assertEquals("http://www.google.com/chrome", agent.getUrl());
+		Assert.assertEquals("http://www.google.com/intl/en/chrome/browser/mobile/", agent.getUrl());
 		Assert.assertEquals("16.0.912.75", agent.getVersionNumber().toVersionString());
 
 		// check operating system informations
@@ -311,11 +311,11 @@ public class UserAgentStringParserTest {
 		// check operating system informations
 		final OperatingSystem os = agent.getOperatingSystem();
 		Assert.assertEquals(OperatingSystemFamily.IOS, os.getFamily());
-		Assert.assertEquals("iPhone OS", os.getFamilyName());
-		Assert.assertEquals("iPhone OS", os.getName());
+		Assert.assertEquals("iOS", os.getFamilyName());
+		Assert.assertEquals("iOS", os.getName());
 		Assert.assertEquals("Apple Inc.", os.getProducer());
 		Assert.assertEquals("http://www.apple.com/", os.getProducerUrl());
-		Assert.assertEquals("http://en.wikipedia.org/wiki/IPhone_OS", os.getUrl());
+		Assert.assertEquals("http://en.wikipedia.org/wiki/IOS", os.getUrl());
 		Assert.assertEquals("4.2.1", os.getVersionNumber().toVersionString());
 
 		// distinguish as iPad
@@ -346,11 +346,11 @@ public class UserAgentStringParserTest {
 		// check operating system informations
 		final OperatingSystem os = agent.getOperatingSystem();
 		Assert.assertEquals(OperatingSystemFamily.IOS, os.getFamily());
-		Assert.assertEquals("iPhone OS", os.getFamilyName());
-		Assert.assertEquals("iPhone OS", os.getName());
+		Assert.assertEquals("iOS", os.getFamilyName());
+		Assert.assertEquals("iOS 5", os.getName());
 		Assert.assertEquals("Apple Inc.", os.getProducer());
 		Assert.assertEquals("http://www.apple.com/", os.getProducerUrl());
-		Assert.assertEquals("http://en.wikipedia.org/wiki/IPhone_OS", os.getUrl());
+		Assert.assertEquals("http://en.wikipedia.org/wiki/IOS", os.getUrl());
 		Assert.assertEquals("5.1.1", os.getVersionNumber().toVersionString());
 
 		// distinguish as iPhone
@@ -410,11 +410,11 @@ public class UserAgentStringParserTest {
 		// check operating system informations
 		final OperatingSystem os = agent.getOperatingSystem();
 		Assert.assertEquals(OperatingSystemFamily.OS_X, os.getFamily());
-		Assert.assertEquals("Mac OS X", os.getFamilyName());
-		Assert.assertEquals("Mac OS X 10.7 Lion", os.getName());
+		Assert.assertEquals("OS X", os.getFamilyName());
+		Assert.assertEquals("OS X 10.7 Lion", os.getName());
 		Assert.assertEquals("Apple Computer, Inc.", os.getProducer());
 		Assert.assertEquals("http://www.apple.com/", os.getProducerUrl());
-		Assert.assertEquals("http://www.apple.com/macosx/", os.getUrl());
+		Assert.assertEquals("http://www.apple.com/osx/", os.getUrl());
 		Assert.assertEquals("10.7.3", os.getVersionNumber().toVersionString());
 	}
 
@@ -468,11 +468,11 @@ public class UserAgentStringParserTest {
 		// check operating system informations
 		final OperatingSystem os = agent.getOperatingSystem();
 		Assert.assertEquals(OperatingSystemFamily.OS_X, os.getFamily());
-		Assert.assertEquals("Mac OS X", os.getFamilyName());
-		Assert.assertEquals("Mac OS X 10.5 Leopard", os.getName());
+		Assert.assertEquals("OS X", os.getFamilyName());
+		Assert.assertEquals("OS X 10.5 Leopard", os.getName());
 		Assert.assertEquals("Apple Computer, Inc.", os.getProducer());
 		Assert.assertEquals("http://www.apple.com/", os.getProducerUrl());
-		Assert.assertEquals("http://www.apple.com/macosx/", os.getUrl());
+		Assert.assertEquals("http://www.apple.com/osx/", os.getUrl());
 		Assert.assertEquals("10.5.7", os.getVersionNumber().toVersionString());
 	}
 

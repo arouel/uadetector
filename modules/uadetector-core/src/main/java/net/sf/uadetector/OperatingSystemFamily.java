@@ -124,7 +124,7 @@ public enum OperatingSystemFamily {
 	 * OS X, formerly Mac OS X, is a Unix-based operating systems developed by Apple. It is a proprietary distribution
 	 * of the free Darwin operating system from Apple.
 	 */
-	OS_X("Mac OS X", Pattern.compile("Mac OS X")),
+	OS_X("OS X", Pattern.compile("(Mac OS X|OS X)")),
 
 	/**
 	 * MorphOS is an Amiga-compatible computer operating system. It is a mixed proprietary and open source OS produced

@@ -35,6 +35,11 @@ import org.slf4j.LoggerFactory;
 public class SimpleDataStore implements DataStore {
 
 	/**
+	 * The default data reader to read in UAS data in XML format
+	 */
+	private static final DataReader DEFAULT_DATA_READER = new XmlDataReader();
+
+	/**
 	 * Corresponding default logger for this class
 	 */
 	private static final Logger LOG = LoggerFactory.getLogger(SimpleDataStore.class);
@@ -48,12 +53,14 @@ public class SimpleDataStore implements DataStore {
 	 * @throws IllegalArgumentException
 	 *             if the given argument is {@code null}
 	 */
-	protected static final Data readXmlData(final InputStream stream) {
+	protected static final Data readData(final InputStream stream, final DataReader reader) {
 		if (stream == null) {
 			throw new IllegalArgumentException("Argument 'stream' must not be null.");
 		}
+		if (reader == null) {
+			throw new IllegalArgumentException("Argument 'reader' must not be null.");
+		}
 
-		final DataReader reader = new XmlDataReader();
 		return reader.read(stream);
 	}
 
@@ -63,6 +70,11 @@ public class SimpleDataStore implements DataStore {
 	private Data data;
 
 	/**
+	 * The data reader to read in UAS data
+	 */
+	private final DataReader reader;
+
+	/**
 	 * Constructs an new instance of {@link SimpleDataStore}.
 	 * 
 	 * @param data
@@ -70,11 +82,15 @@ public class SimpleDataStore implements DataStore {
 	 * @throws IllegalArgumentException
 	 *             if the given argument is {@code null}
 	 */
-	public SimpleDataStore(final Data data) {
+	public SimpleDataStore(final Data data, final DataReader reader) {
 		if (data == null) {
 			throw new IllegalArgumentException("Argument 'data' must not be null.");
 		}
+		if (reader == null) {
+			throw new IllegalArgumentException("Argument 'reader' must not be null.");
+		}
 		this.data = data;
+		this.reader = reader;
 	}
 
 	/**
@@ -86,12 +102,17 @@ public class SimpleDataStore implements DataStore {
 	 *             if the given argument is {@code null}
 	 */
 	public SimpleDataStore(final InputStream stream) {
-		this(readXmlData(stream));
+		this(readData(stream, DEFAULT_DATA_READER), DEFAULT_DATA_READER);
 	}
 
 	@Override
 	public Data getData() {
 		return data;
+	}
+
+	@Override
+	public DataReader getDataReader() {
+		return reader;
 	}
 
 	/**

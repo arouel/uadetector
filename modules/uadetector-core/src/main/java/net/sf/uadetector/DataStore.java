@@ -16,6 +16,7 @@
 package net.sf.uadetector;
 
 import net.sf.uadetector.internal.data.Data;
+import net.sf.uadetector.internal.data.DataReader;
 
 /**
  * Defines an interface to store UAS data where ever you want.
@@ -23,6 +24,13 @@ import net.sf.uadetector.internal.data.Data;
  * @author André Rouél
  */
 public interface DataStore {
+
+	/**
+	 * Gets the data reader to read in UAS data.
+	 * 
+	 * @return the data reader to read in UAS data
+	 */
+	DataReader getDataReader();
 
 	/**
 	 * Gets the UAS data which are currently set.

@@ -21,6 +21,7 @@ import java.net.URL;
 
 import net.sf.uadetector.SimpleDataStore;
 import net.sf.uadetector.internal.data.Data;
+import net.sf.uadetector.internal.data.XmlDataReader;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -52,7 +53,7 @@ public class UpdateServiceTest {
 
 	@Test
 	public void call_withEmptyData() {
-		final UpdateService service = new UpdateService(new SimpleDataStore(Data.EMPTY), DATA_URL, VERSION_URL);
+		final UpdateService service = new UpdateService(new SimpleDataStore(Data.EMPTY, new XmlDataReader()), DATA_URL, VERSION_URL);
 		service.call();
 	}
 

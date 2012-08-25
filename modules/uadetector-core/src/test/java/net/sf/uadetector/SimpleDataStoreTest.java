@@ -20,6 +20,7 @@ import java.util.HashSet;
 import java.util.TreeMap;
 
 import net.sf.uadetector.internal.data.Data;
+import net.sf.uadetector.internal.data.XmlDataReader;
 import net.sf.uadetector.internal.data.domain.Browser;
 import net.sf.uadetector.internal.data.domain.BrowserPattern;
 import net.sf.uadetector.internal.data.domain.OperatingSystem;
@@ -35,7 +36,7 @@ public class SimpleDataStoreTest {
 
 	@Test(expected = IllegalArgumentException.class)
 	public void construct_data_null() {
-		new SimpleDataStore((Data) null);
+		new SimpleDataStore((Data) null, new XmlDataReader());
 	}
 
 	@Test(expected = IllegalArgumentException.class)
@@ -54,7 +55,7 @@ public class SimpleDataStoreTest {
 	public void construct_successful() {
 		final Data testData = new Data(new HashSet<Browser>(), new HashSet<OperatingSystem>(), new HashSet<Robot>(0),
 				new TreeMap<BrowserPattern, Browser>(), new TreeMap<OperatingSystemPattern, OperatingSystem>(), "");
-		final SimpleDataStore store = new SimpleDataStore(testData);
+		final SimpleDataStore store = new SimpleDataStore(testData, new XmlDataReader());
 		Assert.assertSame(testData, store.getData());
 		store.setData(Data.EMPTY);
 		Assert.assertSame(Data.EMPTY, store.getData());
@@ -62,7 +63,7 @@ public class SimpleDataStoreTest {
 
 	@Test(expected = IllegalArgumentException.class)
 	public void setData_null() {
-		new SimpleDataStore(Data.EMPTY).setData(null);
+		new SimpleDataStore(Data.EMPTY, new XmlDataReader()).setData(null);
 	}
 
 }

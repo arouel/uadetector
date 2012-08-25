@@ -22,8 +22,6 @@ import java.io.LineNumberReader;
 import java.net.URL;
 
 import net.sf.uadetector.DataStore;
-import net.sf.uadetector.internal.data.DataReader;
-import net.sf.uadetector.internal.data.XmlDataReader;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -73,11 +71,6 @@ final class UpdateService implements Updater, Runnable {
 		stream.close();
 		return line;
 	}
-
-	/**
-	 * Data reader to read a UAS file or stream
-	 */
-	private final DataReader dataReader;
 
 	/**
 	 * The {@code URL} to request the latest UAS data
@@ -141,15 +134,13 @@ final class UpdateService implements Updater, Runnable {
 		this.store = store;
 		this.dataUrl = dataUrl;
 		this.versionUrl = versionUrl;
-
-		dataReader = new XmlDataReader();
 	}
 
 	@Override
 	public void call() {
 		if (isUpdateAvailable()) {
 			LOG.debug("Reading remote data...");
-			this.store.setData(dataReader.read(dataUrl));
+			this.store.setData(store.getDataReader().read(dataUrl));
 		}
 	}
 

@@ -78,7 +78,7 @@ public class SimpleDataStore implements DataStore {
 	}
 
 	/**
-	 * Constructs an {@code SimpleDataStore} reading the given {@link InputStream} as UAS data.
+	 * Constructs an {@code SimpleDataStore} by reading the given {@link InputStream} as UAS data (in XML format).
 	 * 
 	 * @param stream
 	 *            {@code InputStream} with UAS data

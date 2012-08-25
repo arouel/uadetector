@@ -33,7 +33,7 @@ import org.xml.sax.SAXException;
  * Reader for the XML data for UASparser from <a
  * href="http://user-agent-string.info/">http://user-agent-string.info</a>.<br>
  * <br>
- * This reader is safe for use by multiple threads.
+ * This reader is safe when used concurrently by multiple threads.
  * 
  * @author André Rouél
  */

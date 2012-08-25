@@ -195,7 +195,9 @@ public final class OnlineUserAgentStringParserImpl extends UserAgentStringParser
 	}
 
 	/**
-	 * Sets a new update interval in milliseconds.
+	 * Sets a new update interval in milliseconds.<br>
+	 * <br>
+	 * When a new update interval is set, the old update service is removed and a new one will be set.
 	 * 
 	 * @param updateInterval
 	 *            update interval in milliseconds

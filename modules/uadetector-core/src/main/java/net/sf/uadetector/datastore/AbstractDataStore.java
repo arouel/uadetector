@@ -15,7 +15,6 @@
  ******************************************************************************/
 package net.sf.uadetector.datastore;
 
-import java.io.InputStream;
 import java.net.URL;
 
 import net.sf.uadetector.datareader.DataReader;
@@ -41,27 +40,6 @@ public abstract class AbstractDataStore implements DataStore {
 	private static final Logger LOG = LoggerFactory.getLogger(AbstractDataStore.class);
 
 	/**
-	 * This method reads the given {@link InputStream} by using an {@link DataReader}. The new created instance of
-	 * {@link Data} will be returned.
-	 * 
-	 * @param stream
-	 *            {@link InputStream} with <em>UAS data</em>
-	 * @return new created instance of {@code Data} and never {@code null}
-	 * @throws IllegalArgumentException
-	 *             if the given argument is {@code null}
-	 */
-	protected static final Data readData(final InputStream stream, final DataReader reader) {
-		if (stream == null) {
-			throw new IllegalArgumentException("Argument 'stream' must not be null.");
-		}
-		if (reader == null) {
-			throw new IllegalArgumentException("Argument 'reader' must not be null.");
-		}
-
-		return reader.read(stream);
-	}
-
-	/**
 	 * This method reads the given {@link URL} by using an {@link DataReader}. The new created instance of {@link Data}
 	 * will be returned.
 	 * 
@@ -81,7 +59,7 @@ public abstract class AbstractDataStore implements DataStore {
 			throw new IllegalArgumentException("Argument 'reader' must not be null.");
 		}
 
-		return readData(UrlUtil.open(url), reader);
+		return reader.read(url);
 	}
 
 	/**

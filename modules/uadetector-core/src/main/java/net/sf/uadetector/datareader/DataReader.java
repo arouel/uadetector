@@ -28,15 +28,6 @@ import net.sf.uadetector.internal.data.Data;
 public interface DataReader {
 
 	/**
-	 * Reads the data of an {@code InputStream}.
-	 * 
-	 * @param inputStream
-	 *            {@code InputStream} with User-Agent informations
-	 * @return read User-Agent data as {@code Data} instance
-	 */
-	Data read(final InputStream inputStream);
-
-	/**
 	 * Reads the data by an {@code URL}.
 	 * 
 	 * @param url

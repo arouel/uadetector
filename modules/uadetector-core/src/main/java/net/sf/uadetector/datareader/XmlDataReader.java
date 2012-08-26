@@ -16,7 +16,6 @@
 package net.sf.uadetector.datareader;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.URL;
 
 import javax.xml.parsers.ParserConfigurationException;
@@ -24,8 +23,8 @@ import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
 import net.sf.uadetector.internal.data.Data;
-import net.sf.uadetector.internal.data.XmlDataHandler;
 import net.sf.uadetector.internal.data.Data.Builder;
+import net.sf.uadetector.internal.data.XmlDataHandler;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -41,36 +40,47 @@ import org.xml.sax.SAXException;
  */
 public final class XmlDataReader implements DataReader {
 
-	private static final class XmlParser {
+	protected static final class XmlParser {
 
-		public static void parse(final InputStream stream, final Builder builder) throws ParserConfigurationException, SAXException,
-				IOException {
+		public static void parse(final URL url, final Builder builder) throws ParserConfigurationException, SAXException, IOException {
 			final SAXParser parser = SAXParserFactory.newInstance().newSAXParser();
 			final XmlDataHandler handler = new XmlDataHandler(builder);
-			parser.parse(stream, handler);
+			parser.parse(url.toExternalForm(), handler);
 		}
 
-		public static void parse(final String uri, final Builder builder) throws ParserConfigurationException, SAXException, IOException {
-			final SAXParser parser = SAXParserFactory.newInstance().newSAXParser();
-			final XmlDataHandler handler = new XmlDataHandler(builder);
-			parser.parse(uri, handler);
+		private XmlParser() {
+			// This class is not intended to create objects from it.
 		}
 
 	}
 
 	/**
-	 * Default log
+	 * Corresponding default logger for this class
 	 */
 	private static final Logger LOG = LoggerFactory.getLogger(XmlDataReader.class);
 
-	@Override
-	public Data read(final InputStream inputStream) {
-		if (inputStream == null) {
-			throw new IllegalArgumentException("Argument 'inputStream' must not be null.");
+	/**
+	 * Reads the <em>UAS data</em> in XML format based on the given URL.<br>
+	 * <br>
+	 * When during the reading errors occur which lead to a termination of the read operation, the information will be
+	 * written to a log. The termination of the read operation will not lead to a program termination.
+	 * 
+	 * @param url
+	 *            {@code URL} to User-Agent informations
+	 * @return read User-Agent data as {@code Data} instance
+	 * @throws IllegalArgumentException
+	 *             if the given {@code URL} is {@code null}
+	 * @throws IllegalArgumentException
+	 *             if the given {@code URL} is unreachable
+	 */
+	protected static final Data readXml(final URL url) {
+		if (url == null) {
+			throw new IllegalArgumentException("Argument 'url' must not be null.");
 		}
+
 		final Builder builder = new Builder();
 		try {
-			XmlParser.parse(inputStream, builder);
+			XmlParser.parse(url, builder);
 		} catch (final ParserConfigurationException e) {
 			LOG.warn(e.getLocalizedMessage());
 		} catch (final SAXException e) {
@@ -82,7 +92,7 @@ public final class XmlDataReader implements DataReader {
 	}
 
 	/**
-	 * Reads the data by an {@code URL}.
+	 * Reads the <em>UAS data</em> in XML format based on the given URL.
 	 * 
 	 * @param url
 	 *            {@code URL} to User-Agent informations
@@ -97,17 +107,8 @@ public final class XmlDataReader implements DataReader {
 		if (url == null) {
 			throw new IllegalArgumentException("Argument 'url' must not be null.");
 		}
-		final Builder builder = new Builder();
-		try {
-			XmlParser.parse(url.toExternalForm(), builder);
-		} catch (final ParserConfigurationException e) {
-			LOG.warn(e.getLocalizedMessage());
-		} catch (final SAXException e) {
-			LOG.warn(e.getLocalizedMessage());
-		} catch (final IOException e) {
-			LOG.warn(e.getLocalizedMessage());
-		}
-		return builder.build();
+
+		return readXml(url);
 	}
 
 }

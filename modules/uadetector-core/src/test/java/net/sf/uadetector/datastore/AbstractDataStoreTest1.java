@@ -15,8 +15,6 @@
  ******************************************************************************/
 package net.sf.uadetector.datastore;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.HashSet;
@@ -91,21 +89,6 @@ public class AbstractDataStoreTest1 {
 	public void construct_versionUrl_null() throws MalformedURLException {
 		final URL url = new URL("http://localhost");
 		new TestDataStore(Data.EMPTY, new XmlDataReader(), url, null);
-	}
-
-	@Test(expected = IllegalArgumentException.class)
-	public void readData_dataReader_null() throws MalformedURLException {
-		AbstractDataStore.readData(new InputStream() {
-			@Override
-			public int read() throws IOException {
-				return 0;
-			}
-		}, null);
-	}
-
-	@Test(expected = IllegalArgumentException.class)
-	public void readData_stream_null() throws MalformedURLException {
-		AbstractDataStore.readData((InputStream) null, new XmlDataReader());
 	}
 
 	@Test(expected = IllegalArgumentException.class)

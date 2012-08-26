@@ -15,7 +15,6 @@
  ******************************************************************************/
 package net.sf.uadetector.datareader;
 
-import java.io.InputStream;
 import java.net.URL;
 
 import net.sf.uadetector.internal.data.Data;

@@ -19,6 +19,7 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import net.sf.uadetector.exception.CanNotOpenStreamException;
 import net.sf.uadetector.internal.data.Data;
 
 import org.junit.Assert;
@@ -36,7 +37,7 @@ public class XmlDataReaderTest {
 		new XmlDataReader().read((URL) null);
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = CanNotOpenStreamException.class)
 	public void read_url_unreachable() throws MalformedURLException {
 		new XmlDataReader().read(new URL("http://unreachable.local/"));
 	}

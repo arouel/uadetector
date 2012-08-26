@@ -15,14 +15,12 @@
  ******************************************************************************/
 package net.sf.uadetector.datastore;
 
-import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 
 import net.sf.uadetector.datareader.DataReader;
-import net.sf.uadetector.exception.CanNotOpenStreamException;
 import net.sf.uadetector.internal.data.Data;
-import net.sf.uadetector.internal.util.UrlBuilder;
+import net.sf.uadetector.internal.util.UrlUtil;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -72,7 +70,7 @@ public abstract class AbstractDataStore implements DataStore {
 	 * @return new created instance of {@code Data} and never {@code null}
 	 * @throws IllegalArgumentException
 	 *             if the given argument is {@code null}
-	 * @throws CanNotOpenStreamException
+	 * @throws net.sf.uadetector.exception.CanNotOpenStreamException
 	 *             if no stream to the given {@code URL} can be established
 	 */
 	protected static final Data readData(final URL url, final DataReader reader) {
@@ -83,11 +81,7 @@ public abstract class AbstractDataStore implements DataStore {
 			throw new IllegalArgumentException("Argument 'reader' must not be null.");
 		}
 
-		try {
-			return readData(url.openStream(), reader);
-		} catch (final IOException e) {
-			throw new CanNotOpenStreamException(url.toString());
-		}
+		return readData(UrlUtil.open(url), reader);
 	}
 
 	/**
@@ -151,11 +145,11 @@ public abstract class AbstractDataStore implements DataStore {
 	 *             if one of given arguments is {@code null}
 	 * @throws IllegalArgumentException
 	 *             if the given strings are not valid URLs
-	 * @throws CanNotOpenStreamException
+	 * @throws net.sf.uadetector.exception.CanNotOpenStreamException
 	 *             when no streams to the given {@code URL}s can be established
 	 */
 	protected AbstractDataStore(final DataReader reader, final String dataUrl, final String versionUrl) {
-		this(reader, UrlBuilder.build(dataUrl), UrlBuilder.build(versionUrl));
+		this(reader, UrlUtil.build(dataUrl), UrlUtil.build(versionUrl));
 	}
 
 	/**
@@ -169,7 +163,7 @@ public abstract class AbstractDataStore implements DataStore {
 	 *            URL to version information about the given <em>UAS data</em>
 	 * @throws IllegalArgumentException
 	 *             if the given argument is {@code null}
-	 * @throws CanNotOpenStreamException
+	 * @throws net.sf.uadetector.exception.CanNotOpenStreamException
 	 *             when no streams to the given {@code URL}s can be established
 	 */
 	protected AbstractDataStore(final DataReader reader, final URL dataUrl, final URL versionUrl) {

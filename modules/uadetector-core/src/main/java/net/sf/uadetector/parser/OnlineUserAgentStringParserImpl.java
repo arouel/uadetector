@@ -25,7 +25,7 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 
-import net.sf.uadetector.DataStore;
+import net.sf.uadetector.datastore.DataStore;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

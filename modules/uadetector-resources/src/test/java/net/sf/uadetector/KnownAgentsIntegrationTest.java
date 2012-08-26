@@ -15,36 +15,15 @@
  ******************************************************************************/
 package net.sf.uadetector;
 
-import net.sf.uadetector.internal.data.Data;
-import net.sf.uadetector.internal.data.DataReader;
+import org.junit.Ignore;
+import org.junit.Test;
 
-/**
- * Defines an interface to store UAS data where ever you want.
- * 
- * @author André Rouél
- */
-public interface DataStore {
+public class KnownAgentsIntegrationTest {
 
-	/**
-	 * Gets the data reader to read in UAS data.
-	 * 
-	 * @return the data reader to read in UAS data
-	 */
-	DataReader getDataReader();
-
-	/**
-	 * Gets the UAS data which are currently set.
-	 * 
-	 * @return current UAS data
-	 */
-	Data getData();
-
-	/**
-	 * Sets new UAS data in the store.
-	 * 
-	 * @param data
-	 *            new UAS data ({@code null} is not allowed)
-	 */
-	void setData(Data data);
+	@Ignore
+	@Test
+	public void testUserAgentExamples() throws Exception {
+		new KnownAgentsReader().read();
+	}
 
 }

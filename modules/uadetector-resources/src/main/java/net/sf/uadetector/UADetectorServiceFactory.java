@@ -15,9 +15,13 @@
  ******************************************************************************/
 package net.sf.uadetector;
 
-import java.io.InputStream;
 import java.net.MalformedURLException;
+import java.net.URL;
 
+import net.sf.uadetector.datastore.AbstractDataStore;
+import net.sf.uadetector.datastore.OnlineXmlDataStore;
+import net.sf.uadetector.internal.data.DataReader;
+import net.sf.uadetector.internal.data.XmlDataReader;
 import net.sf.uadetector.parser.OnlineUserAgentStringParserImpl;
 import net.sf.uadetector.parser.UserAgentStringParserImpl;
 
@@ -31,11 +35,14 @@ import org.slf4j.LoggerFactory;
  */
 public final class UADetectorServiceFactory {
 
+	/**
+	 * Holder to load the parser only when it's needed.
+	 */
 	private static final class OfflineUserAgentStringParserHolder {
 		private static UserAgentStringParser INSTANCE;
 		static {
 			try {
-				INSTANCE = new UserAgentStringParserImpl(readDataIntoStore());
+				INSTANCE = new UserAgentStringParserImpl(new ResourceModuleXmlDataStore());
 			} catch (final Exception e) {
 				LOG.error(e.getLocalizedMessage(), e);
 			}
@@ -43,11 +50,14 @@ public final class UADetectorServiceFactory {
 		}
 	}
 
+	/**
+	 * Holder to load the parser only when it's needed.
+	 */
 	private static final class OnlineUserAgentStringParserHolder {
 		private static UserAgentStringParser INSTANCE;
 		static {
 			try {
-				INSTANCE = new OnlineUserAgentStringParserImpl(readDataIntoStore());
+				INSTANCE = new OnlineUserAgentStringParserImpl(new OnlineXmlDataStore());
 			} catch (final MalformedURLException e) {
 				LOG.warn(e.getLocalizedMessage(), e);
 			} catch (final Exception e) {
@@ -58,14 +68,47 @@ public final class UADetectorServiceFactory {
 	}
 
 	/**
+	 * A simple implementation to store <em>UAS data</em> delivered in this module (called <em>uadetector-resource</em>)
+	 * only in the heap space.
+	 * 
+	 * @author André Rouél
+	 */
+	public static final class ResourceModuleXmlDataStore extends AbstractDataStore {
+
+		/**
+		 * The default data reader to read in <em>UAS data</em> in XML format
+		 */
+		private static final DataReader DEFAULT_DATA_READER = new XmlDataReader();
+
+		/**
+		 * Path where the UAS data file is stored for the {@code ClassLoader}
+		 */
+		private static final String PATH = "net/sf/uadetector/resources";
+
+		/**
+		 * {@link URL} to the UAS data delivered in this module
+		 */
+		public static final URL UAS_DATA = ResourceModuleXmlDataStore.class.getClassLoader().getResource(PATH + "/uas.xml");
+
+		/**
+		 * {@link URL} to the version information of the delivered UAS data in this module
+		 */
+		public static final URL UAS_VERSION = ResourceModuleXmlDataStore.class.getClassLoader().getResource(PATH + "/uas.version");
+
+		/**
+		 * Constructs an {@code ResourceModuleXmlDataStore} by reading <em>UAS data</em> by the specified URL
+		 * {@link UADetectorServiceFactory#UAS_DATA} (in XML format).
+		 */
+		public ResourceModuleXmlDataStore() {
+			super(DEFAULT_DATA_READER, UAS_DATA, UAS_VERSION);
+		}
+
+	}
+
+	/**
 	 * Corresponding default logger for this class
 	 */
 	private static final Logger LOG = LoggerFactory.getLogger(UADetectorServiceFactory.class);
-
-	/**
-	 * Path where the UAS file is stored for the {@code ClassLoader}
-	 */
-	private static final String UASDATA = "net/sf/uadetector/resources/uas.xml";
 
 	/**
 	 * Gets always the same implementation instance of the interface {@code UserAgentStringParser}. This instance has an
@@ -108,11 +151,6 @@ public final class UADetectorServiceFactory {
 	 */
 	public static UserAgentStringParser getUserAgentStringParser() {
 		return OfflineUserAgentStringParserHolder.INSTANCE;
-	}
-
-	private static final DataStore readDataIntoStore() {
-		final InputStream stream = UADetectorServiceFactory.class.getClassLoader().getResourceAsStream(UASDATA);
-		return new SimpleDataStore(stream);
 	}
 
 	private UADetectorServiceFactory() {

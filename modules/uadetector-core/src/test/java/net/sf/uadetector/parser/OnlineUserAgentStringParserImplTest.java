@@ -15,17 +15,16 @@
  ******************************************************************************/
 package net.sf.uadetector.parser;
 
-import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Properties;
 
-import net.sf.uadetector.DataStore;
 import net.sf.uadetector.OperatingSystem;
 import net.sf.uadetector.OperatingSystemFamily;
-import net.sf.uadetector.SimpleDataStore;
 import net.sf.uadetector.UserAgent;
 import net.sf.uadetector.VersionNumber;
+import net.sf.uadetector.datastore.DataStore;
+import net.sf.uadetector.datastore.TestXmlDataStore;
 import net.sf.uadetector.internal.data.domain.Robot;
 
 import org.junit.Assert;
@@ -39,11 +38,8 @@ public class OnlineUserAgentStringParserImplTest {
 
 	private static final OnlineUserAgentStringParserImpl PARSER = OnlineUserAgentStringParserHolder.getInstance();
 
-	private static final String RESOURCE = "uas_test.xml";
-
 	private static DataStore setUpDataStore() {
-		final InputStream stream = OnlineUserAgentStringParserImplTest.class.getClassLoader().getResourceAsStream(RESOURCE);
-		return new SimpleDataStore(stream);
+		return new TestXmlDataStore();
 	}
 
 	@Test(expected = IllegalArgumentException.class)

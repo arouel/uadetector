@@ -15,18 +15,15 @@
  ******************************************************************************/
 package net.sf.uadetector.parser;
 
-import java.io.InputStream;
 import java.net.MalformedURLException;
 
-import net.sf.uadetector.DataStore;
-import net.sf.uadetector.SimpleDataStore;
+import net.sf.uadetector.datastore.DataStore;
+import net.sf.uadetector.datastore.TestXmlDataStore;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 final class OnlineUserAgentStringParserHolder {
-
-	private static final String RESOURCE = "uas_test.xml";
 
 	private static final Logger LOG = LoggerFactory.getLogger(OnlineUserAgentStringParserImpl.class);
 
@@ -44,8 +41,7 @@ final class OnlineUserAgentStringParserHolder {
 	}
 
 	private static DataStore setUpDataStore() {
-		final InputStream stream = OnlineUserAgentStringParserHolder.class.getClassLoader().getResourceAsStream(RESOURCE);
-		return new SimpleDataStore(stream);
+		return new TestXmlDataStore();
 	}
 
 	private OnlineUserAgentStringParserHolder() {

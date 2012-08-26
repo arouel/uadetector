@@ -15,18 +15,20 @@
  ******************************************************************************/
 package net.sf.uadetector.internal.data;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
-
-import net.sf.uadetector.internal.data.Data;
-import net.sf.uadetector.internal.data.DataReader;
-import net.sf.uadetector.internal.data.XmlDataReader;
 
 import org.junit.Assert;
 import org.junit.Test;
 
 public class XmlDataReaderTest {
+
+	/**
+	 * URL to retrieve the current UAS data as XML
+	 */
+	private static final URL DATA_URL = XmlDataReaderTest.class.getClassLoader().getResource("uas_older.xml");
 
 	@Test(expected = IllegalArgumentException.class)
 	public void read_stream_null() {
@@ -44,9 +46,9 @@ public class XmlDataReaderTest {
 	}
 
 	@Test
-	public void testVersionParsing() {
+	public void testVersionParsing() throws IOException {
 		final DataReader reader = new XmlDataReader();
-		final Data data = reader.read(getClass().getClassLoader().getResourceAsStream("uas_test.xml"));
+		final Data data = reader.read(DATA_URL.openStream());
 		Assert.assertEquals("20120817-01", data.getVersion());
 	}
 

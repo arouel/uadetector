@@ -13,32 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  ******************************************************************************/
-package net.sf.uadetector.parser;
+package net.sf.uadetector;
 
-import net.sf.uadetector.datastore.DataStore;
+import org.junit.Test;
 
-interface Updater {
+public class ResourceModuleXmlDataStoreTest {
 
-	/**
-	 * Character set to read UAS data
-	 */
-	final String CHARSET = "UTF-8";
-
-	/**
-	 * The default interval to check for updates is once per day
-	 */
-	final long DEFAULT_UPDATE_INTERVAL = 1000 * 60 * 60 * 24; // 1 day
-
-	/**
-	 * This function checks whether updated UAS data are available and updates silently the data in a {@link DataStore}.
-	 */
-	void call();
-
-	/**
-	 * Gets the time of the last update check in milliseconds.
-	 * 
-	 * @return time of the last update check in milliseconds
-	 */
-	long getLastUpdateCheck();
+	@Test
+	public void construct_successful() {
+		new UADetectorServiceFactory.ResourceModuleXmlDataStore();
+	}
 
 }

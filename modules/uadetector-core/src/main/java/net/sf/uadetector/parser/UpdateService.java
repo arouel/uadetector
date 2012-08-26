@@ -21,7 +21,7 @@ import java.io.InputStreamReader;
 import java.io.LineNumberReader;
 import java.net.URL;
 
-import net.sf.uadetector.DataStore;
+import net.sf.uadetector.datastore.DataStore;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

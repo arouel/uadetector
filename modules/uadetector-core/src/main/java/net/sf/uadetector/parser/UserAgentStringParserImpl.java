@@ -15,7 +15,7 @@
  ******************************************************************************/
 package net.sf.uadetector.parser;
 
-import net.sf.uadetector.DataStore;
+import net.sf.uadetector.datastore.DataStore;
 
 /**
  * This parser is an implementation of {@code UserAgentStringParser} interface and can detect user agents. The analysis

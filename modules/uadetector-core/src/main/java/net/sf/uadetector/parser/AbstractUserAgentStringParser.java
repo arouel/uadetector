@@ -18,10 +18,10 @@ package net.sf.uadetector.parser;
 import java.util.Map.Entry;
 import java.util.regex.Matcher;
 
-import net.sf.uadetector.DataStore;
 import net.sf.uadetector.UserAgent;
 import net.sf.uadetector.UserAgentStringParser;
 import net.sf.uadetector.VersionNumber;
+import net.sf.uadetector.datastore.DataStore;
 import net.sf.uadetector.internal.data.Data;
 import net.sf.uadetector.internal.data.domain.Browser;
 import net.sf.uadetector.internal.data.domain.BrowserPattern;

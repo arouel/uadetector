@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  ******************************************************************************/
-package net.sf.uadetector;
+package net.sf.uadetector.datastore;
 
 import net.sf.uadetector.util.FinalStaticFieldValueChanger;
 import net.sf.uadetector.util.LowestLogLevelTestLogger;
@@ -27,25 +27,25 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 @RunWith(Suite.class)
-@SuiteClasses({ SimpleDataStoreTest.class })
-public class SimpleDataStoreTest_LowestLogLevel {
+@SuiteClasses({ AbstractDataStoreTest1.class, AbstractDataStoreTest2.class, AbstractDataStoreTest3.class })
+public class AbstractDataStoreTest_LowestLogLevel {
 
 	private static final String FIELD_NAME = "LOG";
 
-	private static final Logger LOG = LoggerFactory.getLogger(SimpleDataStoreTest_LowestLogLevel.class);
+	private static final Logger LOG = LoggerFactory.getLogger(AbstractDataStoreTest_LowestLogLevel.class);
 
 	@BeforeClass
 	public static void setUp() throws SecurityException, NoSuchFieldException, Exception {
-		LOG.info("Deactivating default logger for '" + SimpleDataStore.class.getSimpleName() + "'.");
+		LOG.info("Deactivating default logger for '" + AbstractDataStore.class.getSimpleName() + "'.");
 		final Logger log = new LowestLogLevelTestLogger();
-		FinalStaticFieldValueChanger.setFinalStatic(SimpleDataStore.class.getDeclaredField(FIELD_NAME), log);
+		FinalStaticFieldValueChanger.setFinalStatic(AbstractDataStore.class.getDeclaredField(FIELD_NAME), log);
 	}
 
 	@AfterClass
 	public static void tearDown() throws SecurityException, NoSuchFieldException, Exception {
-		LOG.info("Activating default logger for '" + SimpleDataStore.class.getSimpleName() + "'.");
-		final Logger log = LoggerFactory.getLogger(SimpleDataStore.class);
-		FinalStaticFieldValueChanger.setFinalStatic(SimpleDataStore.class.getDeclaredField(FIELD_NAME), log);
+		LOG.info("Activating default logger for '" + AbstractDataStore.class.getSimpleName() + "'.");
+		final Logger log = LoggerFactory.getLogger(AbstractDataStore.class);
+		FinalStaticFieldValueChanger.setFinalStatic(AbstractDataStore.class.getDeclaredField(FIELD_NAME), log);
 	}
 
 }

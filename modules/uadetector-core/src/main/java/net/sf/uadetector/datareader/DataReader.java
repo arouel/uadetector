@@ -27,11 +27,11 @@ import net.sf.uadetector.internal.data.Data;
 public interface DataReader {
 
 	/**
-	 * Reads the data by an {@code URL}.
+	 * Reads <em>UAS data</em> from the given {@code URL}.
 	 * 
 	 * @param url
-	 *            {@code URL} to User-Agent informations
-	 * @return read User-Agent data as {@code Data} instance
+	 *            the URL where the <em>UAS data</em> can be retrieved
+	 * @return read in <em>UAS data</em> as {@code Data} instance
 	 */
 	Data read(final URL url);
 

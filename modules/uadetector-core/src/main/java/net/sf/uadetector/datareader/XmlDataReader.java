@@ -16,15 +16,18 @@
 package net.sf.uadetector.datareader;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
 
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
+import net.sf.uadetector.exception.CanNotOpenStreamException;
 import net.sf.uadetector.internal.data.Data;
 import net.sf.uadetector.internal.data.Data.Builder;
 import net.sf.uadetector.internal.data.XmlDataHandler;
+import net.sf.uadetector.internal.util.UrlUtil;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -42,10 +45,11 @@ public final class XmlDataReader implements DataReader {
 
 	protected static final class XmlParser {
 
-		public static void parse(final URL url, final Builder builder) throws ParserConfigurationException, SAXException, IOException {
+		public static void parse(final InputStream stream, final Builder builder) throws ParserConfigurationException, SAXException,
+				IOException {
 			final SAXParser parser = SAXParserFactory.newInstance().newSAXParser();
 			final XmlDataHandler handler = new XmlDataHandler(builder);
-			parser.parse(url.toExternalForm(), handler);
+			parser.parse(stream, handler);
 		}
 
 		private XmlParser() {
@@ -70,8 +74,8 @@ public final class XmlDataReader implements DataReader {
 	 * @return read User-Agent data as {@code Data} instance
 	 * @throws IllegalArgumentException
 	 *             if the given {@code URL} is {@code null}
-	 * @throws IllegalArgumentException
-	 *             if the given {@code URL} is unreachable
+	 * @throws CanNotOpenStreamException
+	 *             if no stream to the given {@code URL} can be established
 	 */
 	protected static final Data readXml(final URL url) {
 		if (url == null) {
@@ -80,7 +84,7 @@ public final class XmlDataReader implements DataReader {
 
 		final Builder builder = new Builder();
 		try {
-			XmlParser.parse(url, builder);
+			XmlParser.parse(UrlUtil.open(url), builder);
 		} catch (final ParserConfigurationException e) {
 			LOG.warn(e.getLocalizedMessage());
 		} catch (final SAXException e) {
@@ -99,8 +103,8 @@ public final class XmlDataReader implements DataReader {
 	 * @return read User-Agent data as {@code Data} instance
 	 * @throws IllegalArgumentException
 	 *             if the given {@code URL} is {@code null}
-	 * @throws IllegalArgumentException
-	 *             if the given {@code URL} is unreachable
+	 * @throws CanNotOpenStreamException
+	 *             if no stream to the given {@code URL} can be established
 	 */
 	@Override
 	public Data read(final URL url) {

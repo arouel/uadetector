@@ -16,14 +16,12 @@
 package net.sf.uadetector.parser;
 
 import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.Properties;
 
 import net.sf.uadetector.OperatingSystem;
 import net.sf.uadetector.OperatingSystemFamily;
 import net.sf.uadetector.UserAgent;
 import net.sf.uadetector.VersionNumber;
-import net.sf.uadetector.datastore.DataStore;
+import net.sf.uadetector.datastore.NotUpdateableXmlDataStore;
 import net.sf.uadetector.datastore.TestXmlDataStore;
 import net.sf.uadetector.internal.data.domain.Robot;
 
@@ -38,38 +36,9 @@ public class OnlineUserAgentStringParserImplTest {
 
 	private static final OnlineUserAgentStringParserImpl PARSER = OnlineUserAgentStringParserHolder.getInstance();
 
-	private static DataStore setUpDataStore() {
-		return new TestXmlDataStore();
-	}
-
 	@Test(expected = IllegalArgumentException.class)
-	public void construct_dataUrl_null() throws Exception {
-		new OnlineUserAgentStringParserImpl(setUpDataStore(), null, new URL("http://localhost/"));
-	}
-
-	@Test(expected = MalformedURLException.class)
-	public void construct_properties_empty() throws Exception {
-		new OnlineUserAgentStringParserImpl(setUpDataStore(), new Properties());
-	}
-
-	@Test(expected = NullPointerException.class)
-	public void construct_properties_null() throws Exception {
-		new OnlineUserAgentStringParserImpl(setUpDataStore(), null);
-	}
-
-	@Test(expected = IllegalArgumentException.class)
-	public void construct_stream_null_1() throws Exception {
+	public void construct_store_null() throws Exception {
 		new OnlineUserAgentStringParserImpl(null);
-	}
-
-	@Test(expected = IllegalArgumentException.class)
-	public void construct_stream_null_2() throws Exception {
-		new OnlineUserAgentStringParserImpl(null, new URL("http://localhost/"), new URL("http://localhost/"));
-	}
-
-	@Test(expected = IllegalArgumentException.class)
-	public void construct_versionUrl_null() throws Exception {
-		new OnlineUserAgentStringParserImpl(setUpDataStore(), new URL("http://localhost/"), null);
 	}
 
 	@Test
@@ -261,21 +230,19 @@ public class OnlineUserAgentStringParserImplTest {
 
 	@Test(expected = IllegalArgumentException.class)
 	public void setData() throws Exception {
-		final OnlineUserAgentStringParserImpl parser = new OnlineUserAgentStringParserImpl(setUpDataStore());
+		final OnlineUserAgentStringParserImpl parser = new OnlineUserAgentStringParserImpl(new TestXmlDataStore());
 		parser.getDataStore().setData(null);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void setUpdateInterval_toSmall() throws MalformedURLException {
-		final OnlineUserAgentStringParserImpl parser = new OnlineUserAgentStringParserImpl(setUpDataStore());
+		final OnlineUserAgentStringParserImpl parser = new OnlineUserAgentStringParserImpl(new TestXmlDataStore());
 		parser.setUpdateInterval(-1l);
 	}
 
 	@Test
 	public void testUpdateMechanismWhileParsing() throws InterruptedException {
-		final URL dataUrl = OnlineUserAgentStringParserImplTest.class.getClassLoader().getResource("uas_newer.xml");
-		final URL versionUrl = OnlineUserAgentStringParserImplTest.class.getClassLoader().getResource("uas_newer.version");
-		final OnlineUserAgentStringParserImpl parser = new OnlineUserAgentStringParserImpl(setUpDataStore(), dataUrl, versionUrl);
+		final OnlineUserAgentStringParserImpl parser = new OnlineUserAgentStringParserImpl(new TestXmlDataStore());
 		final long firstLastUpdateCheck = parser.getUpdater().getLastUpdateCheck();
 		LOG.debug("LastUpdateCheck at: " + firstLastUpdateCheck);
 		final long originalInterval = parser.getUpdateInterval();
@@ -296,9 +263,8 @@ public class OnlineUserAgentStringParserImplTest {
 
 	@Test
 	public void testWrongUrl() throws Exception {
-		final URL unknownUrl = new URL("http://localhost/");
 		LOG.debug("Testing the update ability with a wrong URL.");
-		final OnlineUserAgentStringParserImpl parser = new OnlineUserAgentStringParserImpl(setUpDataStore(), unknownUrl, unknownUrl);
+		final OnlineUserAgentStringParserImpl parser = new OnlineUserAgentStringParserImpl(new NotUpdateableXmlDataStore());
 		LOG.debug("Reducing the update interval during the test.");
 		parser.setUpdateInterval(10l);
 		parser.parse("");

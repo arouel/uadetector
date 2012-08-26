@@ -73,11 +73,6 @@ final class UpdateService implements Updater, Runnable {
 	}
 
 	/**
-	 * The {@code URL} to request the latest UAS data
-	 */
-	private final URL dataUrl;
-
-	/**
 	 * Time of last update check in milliseconds
 	 */
 	private long lastUpdateCheck = 0;
@@ -86,11 +81,6 @@ final class UpdateService implements Updater, Runnable {
 	 * The data store for instances that implements {@link net.sf.uadetector.internal.data.Data}
 	 */
 	private final DataStore store;
-
-	/**
-	 * The {@code URL} to request the latest version information of UAS data
-	 */
-	private final URL versionUrl;
 
 	/**
 	 * Message for the log when an exception occur during the update check.<br>
@@ -120,27 +110,19 @@ final class UpdateService implements Updater, Runnable {
 	 */
 	private static final String MSG_NO_UPDATE_AVAILABLE = "No update available. Current version is '%s'.";
 
-	public UpdateService(final DataStore store, final URL dataUrl, final URL versionUrl) {
+	public UpdateService(final DataStore store) {
 		if (store == null) {
 			throw new IllegalArgumentException("Argument 'store' must not be null.");
 		}
-		if (dataUrl == null) {
-			throw new IllegalArgumentException("Argument 'dataUrl' must not be null.");
-		}
-		if (versionUrl == null) {
-			throw new IllegalArgumentException("Argument 'versionUrl' must not be null.");
-		}
 
 		this.store = store;
-		this.dataUrl = dataUrl;
-		this.versionUrl = versionUrl;
 	}
 
 	@Override
 	public void call() {
 		if (isUpdateAvailable()) {
 			LOG.debug("Reading remote data...");
-			this.store.setData(store.getDataReader().read(dataUrl));
+			this.store.setData(store.getDataReader().read(store.getDataUrl()));
 		}
 	}
 
@@ -173,7 +155,7 @@ final class UpdateService implements Updater, Runnable {
 		boolean result = false;
 		String version = EMPTY_VERSION;
 		try {
-			version = retrieveRemoteVersion(versionUrl);
+			version = retrieveRemoteVersion(store.getVersionUrl());
 		} catch (final IOException e) {
 			LOG.info(MSG_NO_UPDATE_CHECK_POSSIBLE);
 			if (LOG.isDebugEnabled()) {

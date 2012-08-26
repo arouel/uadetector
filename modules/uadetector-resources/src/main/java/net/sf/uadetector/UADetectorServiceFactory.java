@@ -15,7 +15,6 @@
  ******************************************************************************/
 package net.sf.uadetector;
 
-import java.net.MalformedURLException;
 import java.net.URL;
 
 import net.sf.uadetector.datastore.AbstractDataStore;
@@ -24,9 +23,6 @@ import net.sf.uadetector.internal.data.DataReader;
 import net.sf.uadetector.internal.data.XmlDataReader;
 import net.sf.uadetector.parser.OnlineUserAgentStringParserImpl;
 import net.sf.uadetector.parser.UserAgentStringParserImpl;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * Service factory to get preconfigured instances of {@code UserAgentStringParser} implementations.
@@ -39,32 +35,14 @@ public final class UADetectorServiceFactory {
 	 * Holder to load the parser only when it's needed.
 	 */
 	private static final class OfflineUserAgentStringParserHolder {
-		private static UserAgentStringParser INSTANCE;
-		static {
-			try {
-				INSTANCE = new UserAgentStringParserImpl(new ResourceModuleXmlDataStore());
-			} catch (final Exception e) {
-				LOG.error(e.getLocalizedMessage(), e);
-			}
-
-		}
+		private static UserAgentStringParser INSTANCE = new UserAgentStringParserImpl(new ResourceModuleXmlDataStore());
 	}
 
 	/**
 	 * Holder to load the parser only when it's needed.
 	 */
 	private static final class OnlineUserAgentStringParserHolder {
-		private static UserAgentStringParser INSTANCE;
-		static {
-			try {
-				INSTANCE = new OnlineUserAgentStringParserImpl(new OnlineXmlDataStore());
-			} catch (final MalformedURLException e) {
-				LOG.warn(e.getLocalizedMessage(), e);
-			} catch (final Exception e) {
-				LOG.error(e.getLocalizedMessage(), e);
-			}
-
-		}
+		private static UserAgentStringParser INSTANCE = new OnlineUserAgentStringParserImpl(new OnlineXmlDataStore());
 	}
 
 	/**
@@ -104,11 +82,6 @@ public final class UADetectorServiceFactory {
 		}
 
 	}
-
-	/**
-	 * Corresponding default logger for this class
-	 */
-	private static final Logger LOG = LoggerFactory.getLogger(UADetectorServiceFactory.class);
 
 	/**
 	 * Gets always the same implementation instance of the interface {@code UserAgentStringParser}. This instance has an

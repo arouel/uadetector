@@ -19,6 +19,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 import net.sf.uadetector.datastore.AbstractDataStore;
+import net.sf.uadetector.datastore.NotUpdateableXmlDataStore;
 import net.sf.uadetector.datastore.TestXmlDataStore;
 import net.sf.uadetector.internal.data.Data;
 import net.sf.uadetector.internal.data.XmlDataReader;
@@ -40,26 +41,25 @@ public class UpdateServiceTest {
 
 	@Test
 	public void call() {
-		final UpdateService service = new UpdateService(new TestXmlDataStore(), DATA_URL, VERSION_URL);
+		final UpdateService service = new UpdateService(new TestXmlDataStore());
 		service.call();
 	}
 
 	@Test
 	public void call_notReachable() throws MalformedURLException {
-		final URL notReachableUrl = new URL("http://localhost:17171");
-		final UpdateService service = new UpdateService(new TestXmlDataStore(), notReachableUrl, notReachableUrl);
+		final UpdateService service = new UpdateService(new NotUpdateableXmlDataStore());
 		service.call();
 	}
 
 	@Test
 	public void call_withEmptyData() {
-		final UpdateService service = new UpdateService(new TestEmptyDataStore(), DATA_URL, VERSION_URL);
+		final UpdateService service = new UpdateService(new TestEmptyDataStore());
 		service.call();
 	}
 
 	@Test
 	public void callTriple() {
-		final UpdateService service = new UpdateService(new TestXmlDataStore(), DATA_URL, VERSION_URL);
+		final UpdateService service = new UpdateService(new TestXmlDataStore());
 		Assert.assertEquals(0, service.getLastUpdateCheck());
 		final long startTime = System.currentTimeMillis();
 		service.call();
@@ -74,7 +74,7 @@ public class UpdateServiceTest {
 
 	@Test
 	public void callTwice() {
-		final UpdateService service = new UpdateService(new TestXmlDataStore(), DATA_URL, VERSION_URL);
+		final UpdateService service = new UpdateService(new TestXmlDataStore());
 		Assert.assertEquals(0, service.getLastUpdateCheck());
 		final long startTime = System.currentTimeMillis();
 		service.call();
@@ -85,28 +85,18 @@ public class UpdateServiceTest {
 	}
 
 	@Test(expected = IllegalArgumentException.class)
-	public void construct_dataUrl_null() {
-		new UpdateService(new TestXmlDataStore(), null, VERSION_URL);
-	}
-
-	@Test(expected = IllegalArgumentException.class)
 	public void construct_store_null() {
-		new UpdateService(null, DATA_URL, VERSION_URL);
+		new UpdateService(null);
 	}
 
 	@Test
 	public void construct_successful() {
-		new UpdateService(new TestXmlDataStore(), DATA_URL, VERSION_URL);
-	}
-
-	@Test(expected = IllegalArgumentException.class)
-	public void construct_versionUrl_null() {
-		new UpdateService(new TestXmlDataStore(), DATA_URL, null);
+		new UpdateService(new TestXmlDataStore());
 	}
 
 	@Test
 	public void getLastUpdateCheck() {
-		final UpdateService service = new UpdateService(new TestXmlDataStore(), DATA_URL, VERSION_URL);
+		final UpdateService service = new UpdateService(new TestXmlDataStore());
 		Assert.assertEquals(0, service.getLastUpdateCheck());
 		final long startTime = System.currentTimeMillis();
 		service.call();
@@ -115,7 +105,7 @@ public class UpdateServiceTest {
 
 	@Test
 	public void run() {
-		final UpdateService service = new UpdateService(new TestXmlDataStore(), DATA_URL, VERSION_URL);
+		final UpdateService service = new UpdateService(new TestXmlDataStore());
 		service.run();
 	}
 

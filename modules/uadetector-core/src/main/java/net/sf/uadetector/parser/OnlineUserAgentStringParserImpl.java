@@ -15,20 +15,12 @@
  ******************************************************************************/
 package net.sf.uadetector.parser;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.Properties;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 
 import net.sf.uadetector.datastore.DataStore;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * This parser checks by every {@code read} call once a day if newer data are remotely available. When newer data are
@@ -39,64 +31,9 @@ import org.slf4j.LoggerFactory;
 public final class OnlineUserAgentStringParserImpl extends UserAgentStringParserImpl {
 
 	/**
-	 * Default configuration properties
-	 */
-	private static final String CONFIG_FILE = "uadetector/config.properties";
-
-	/**
-	 * Key for the {@code URL} of UAS data in the configuration properties
-	 */
-	private static final String DATA_URL_KEY = "data.url";
-
-	/**
-	 * Default log
-	 */
-	private static final Logger LOG = LoggerFactory.getLogger(OnlineUserAgentStringParserImpl.class);
-
-	/**
-	 * Key for the {@code URL} of UAS version information in the configuration properties
-	 */
-	private static final String VERSION_URL_KEY = "version.url";
-
-	/**
-	 * Reads all configuration properties from <code>config.properties</code> file and returns a {@code Properties}
-	 * object.
-	 * 
-	 * @return Configuration properties
-	 * @throws IOException
-	 *             if the properties file can not be loaded
-	 */
-	private static Properties readConfigProperties() {
-		final Properties properties = new Properties();
-		final InputStream stream = OnlineUserAgentStringParserImpl.class.getClassLoader().getResourceAsStream(CONFIG_FILE);
-		try {
-			properties.load(stream);
-		} catch (final IOException e) {
-			LOG.warn(e.getLocalizedMessage(), e);
-		} finally {
-			try {
-				stream.close();
-			} catch (final IOException e) {
-				LOG.warn(e.getLocalizedMessage(), e);
-			}
-		}
-		return properties;
-	}
-
-	/**
-	 * The {@code URL} to request the latest UAS data
-	 */
-	private final URL dataUrl;
-
-	/**
 	 * Interval to check for updates in milliseconds
 	 */
 	private long updateInterval = Updater.DEFAULT_UPDATE_INTERVAL;
-
-	/**
-	 * The {@code URL} to request the latest version information of UAS data
-	 */
-	private final URL versionUrl;
 
 	/**
 	 * Current update task of {@link OnlineUserAgentStringParserImpl#scheduler}
@@ -115,38 +52,6 @@ public final class OnlineUserAgentStringParserImpl extends UserAgentStringParser
 
 	/**
 	 * Constructs an instance of {@code OnlineUserAgentStringParser}. During construction new UAS data will be queried
-	 * online by predefined {@code URL}s.
-	 * 
-	 * @param store
-	 *            {@code DataStore} with reference UAS data used in fallback case
-	 * @throws MalformedURLException
-	 *             if on of the read URLs from the default configuration properties is invalid
-	 * @throws IllegalArgumentException
-	 *             if the given argument {@code stream} is {@code null}
-	 */
-	public OnlineUserAgentStringParserImpl(final DataStore store) throws MalformedURLException {
-		this(store, readConfigProperties());
-	}
-
-	/**
-	 * Constructs an instance of {@code OnlineUserAgentStringParser}. During construction new UAS data will be queried
-	 * online by custom {@code URL}s.
-	 * 
-	 * @param store
-	 *            {@code DataStore} with reference UAS data used in fallback case
-	 * @throws IllegalArgumentException
-	 *             if the given argument {@code stream} is {@code null}
-	 * @throws MalformedURLException
-	 *             if on of the read URLs from the default configuration properties is invalid
-	 * @throws NullPointerException
-	 *             if the given argument {@code configuration} is {@code null}
-	 */
-	public OnlineUserAgentStringParserImpl(final DataStore store, final Properties configuration) throws MalformedURLException {
-		this(store, new URL(configuration.getProperty(DATA_URL_KEY)), new URL(configuration.getProperty(VERSION_URL_KEY)));
-	}
-
-	/**
-	 * Constructs an instance of {@code OnlineUserAgentStringParser}. During construction new UAS data will be queried
 	 * online by the given {@code URL}s.
 	 * 
 	 * @param store
@@ -158,18 +63,8 @@ public final class OnlineUserAgentStringParserImpl extends UserAgentStringParser
 	 * @throws IllegalArgumentException
 	 *             if one of the given arguments is {@code null}
 	 */
-	public OnlineUserAgentStringParserImpl(final DataStore store, final URL dataUrl, final URL versionUrl) {
+	public OnlineUserAgentStringParserImpl(final DataStore store) {
 		super(store);
-
-		if (dataUrl == null) {
-			throw new IllegalArgumentException("Argument 'dataUrl' must not be null.");
-		}
-		if (versionUrl == null) {
-			throw new IllegalArgumentException("Argument 'versionUrl' must not be null.");
-		}
-
-		this.dataUrl = dataUrl;
-		this.versionUrl = versionUrl;
 
 		// query newer UAS data
 		setUpUpdateService();
@@ -219,7 +114,7 @@ public final class OnlineUserAgentStringParserImpl extends UserAgentStringParser
 		if (currentUpdateTask != null) {
 			currentUpdateTask.cancel(false);
 		}
-		updateService = new UpdateService(getDataStore(), dataUrl, versionUrl);
+		updateService = new UpdateService(getDataStore());
 		currentUpdateTask = scheduler.scheduleWithFixedDelay(updateService, 0, updateInterval, TimeUnit.MILLISECONDS);
 	}
 

@@ -15,27 +15,16 @@
  ******************************************************************************/
 package net.sf.uadetector.parser;
 
-import java.net.MalformedURLException;
-
 import net.sf.uadetector.datastore.DataStore;
 import net.sf.uadetector.datastore.TestXmlDataStore;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 final class OnlineUserAgentStringParserHolder {
-
-	private static final Logger LOG = LoggerFactory.getLogger(OnlineUserAgentStringParserImpl.class);
 
 	private static OnlineUserAgentStringParserImpl INSTANCE;
 
 	public static OnlineUserAgentStringParserImpl getInstance() {
 		if (INSTANCE == null) {
-			try {
-				INSTANCE = new OnlineUserAgentStringParserImpl(setUpDataStore());
-			} catch (final MalformedURLException e) {
-				LOG.warn(e.getLocalizedMessage(), e);
-			}
+			INSTANCE = new OnlineUserAgentStringParserImpl(setUpDataStore());
 		}
 		return INSTANCE;
 	}

@@ -16,6 +16,7 @@
 package net.sf.uadetector.datastore;
 
 import java.net.URL;
+import java.nio.charset.Charset;
 
 import net.sf.uadetector.datareader.DataReader;
 import net.sf.uadetector.internal.data.Data;
@@ -63,6 +64,11 @@ public abstract class AbstractDataStore implements DataStore {
 	}
 
 	/**
+	 * Current the character set in which the <em>UAS data</em> will be read
+	 */
+	private final Charset charset;
+
+	/**
 	 * Current <em>UAS data</em>
 	 */
 	private Data data;
@@ -90,12 +96,15 @@ public abstract class AbstractDataStore implements DataStore {
 	 * @throws IllegalArgumentException
 	 *             if the given argument is {@code null}
 	 */
-	protected AbstractDataStore(final Data data, final DataReader reader, final URL dataUrl, final URL versionUrl) {
+	protected AbstractDataStore(final Data data, final DataReader reader, final URL dataUrl, final URL versionUrl, final Charset charset) {
 		if (data == null) {
 			throw new IllegalArgumentException("Argument 'data' must not be null.");
 		}
 		if (reader == null) {
 			throw new IllegalArgumentException("Argument 'reader' must not be null.");
+		}
+		if (charset == null) {
+			throw new IllegalArgumentException("Argument 'charset' must not be null.");
 		}
 		if (dataUrl == null) {
 			throw new IllegalArgumentException("Argument 'dataUrl' must not be null.");
@@ -108,6 +117,7 @@ public abstract class AbstractDataStore implements DataStore {
 		this.reader = reader;
 		this.dataUrl = dataUrl;
 		this.versionUrl = versionUrl;
+		this.charset = charset;
 	}
 
 	/**
@@ -126,8 +136,8 @@ public abstract class AbstractDataStore implements DataStore {
 	 * @throws net.sf.uadetector.exception.CanNotOpenStreamException
 	 *             when no streams to the given {@code URL}s can be established
 	 */
-	protected AbstractDataStore(final DataReader reader, final String dataUrl, final String versionUrl) {
-		this(reader, UrlUtil.build(dataUrl), UrlUtil.build(versionUrl));
+	protected AbstractDataStore(final DataReader reader, final String dataUrl, final String versionUrl, final Charset charset) {
+		this(reader, UrlUtil.build(dataUrl), UrlUtil.build(versionUrl), charset);
 	}
 
 	/**
@@ -144,8 +154,13 @@ public abstract class AbstractDataStore implements DataStore {
 	 * @throws net.sf.uadetector.exception.CanNotOpenStreamException
 	 *             when no streams to the given {@code URL}s can be established
 	 */
-	protected AbstractDataStore(final DataReader reader, final URL dataUrl, final URL versionUrl) {
-		this(readData(dataUrl, reader), reader, dataUrl, versionUrl);
+	protected AbstractDataStore(final DataReader reader, final URL dataUrl, final URL versionUrl, final Charset charset) {
+		this(readData(dataUrl, reader), reader, dataUrl, versionUrl, charset);
+	}
+
+	@Override
+	public Charset getCharset() {
+		return charset;
 	}
 
 	@Override

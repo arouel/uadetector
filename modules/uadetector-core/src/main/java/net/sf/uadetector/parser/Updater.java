@@ -20,11 +20,6 @@ import net.sf.uadetector.datastore.DataStore;
 interface Updater {
 
 	/**
-	 * Character set to read UAS data
-	 */
-	final String CHARSET = "UTF-8";
-
-	/**
 	 * The default interval to check for updates is once per day
 	 */
 	final long DEFAULT_UPDATE_INTERVAL = 1000 * 60 * 60 * 24; // 1 day

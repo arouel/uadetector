@@ -17,6 +17,7 @@ package net.sf.uadetector.datastore;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.nio.charset.Charset;
 import java.util.HashSet;
 import java.util.TreeMap;
 
@@ -36,38 +37,49 @@ public class AbstractDataStoreTest1 {
 
 	private static class TestDataStore extends AbstractDataStore {
 
-		protected TestDataStore(final Data data, final DataReader reader, final URL dataUrl, final URL versionUrl) {
-			super(data, reader, dataUrl, versionUrl);
+		protected TestDataStore(final Data data, final DataReader reader, final Charset charset, final URL dataUrl, final URL versionUrl) {
+			super(data, reader, dataUrl, versionUrl, charset);
 		}
 
 	}
 
 	/**
-	 * URL to retrieve the current UAS data as XML
+	 * The character set to read UAS data
+	 */
+	private static final Charset CHARSET = DataStore.DEFAULT_CHARSET;
+
+	/**
+	 * URL to retrieve the UAS data as XML
 	 */
 	private static final URL DATA_URL = AbstractDataStoreTest1.class.getClassLoader().getResource("uas_older.xml");
 
 	/**
-	 * URL to retrieve the current version of the UAS data
+	 * URL to retrieve the version of the UAS data
 	 */
 	private static final URL VERSION_URL = AbstractDataStoreTest2.class.getClassLoader().getResource("uas_older.version");
 
 	@Test(expected = IllegalArgumentException.class)
+	public void construct_charset_null() throws MalformedURLException {
+		final URL url = new URL("http://localhost");
+		new TestDataStore(Data.EMPTY, new XmlDataReader(), null, url, url);
+	}
+
+	@Test(expected = IllegalArgumentException.class)
 	public void construct_data_null() throws MalformedURLException {
 		final URL url = new URL("http://localhost");
-		new TestDataStore((Data) null, new XmlDataReader(), url, url);
+		new TestDataStore((Data) null, new XmlDataReader(), CHARSET, url, url);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void construct_dataReader_null() throws MalformedURLException {
 		final URL url = new URL("http://localhost");
-		new TestDataStore(Data.EMPTY, null, url, url);
+		new TestDataStore(Data.EMPTY, null, CHARSET, url, url);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void construct_dataUrl_null() throws MalformedURLException {
 		final URL url = new URL("http://localhost");
-		new TestDataStore(Data.EMPTY, new XmlDataReader(), null, url);
+		new TestDataStore(Data.EMPTY, new XmlDataReader(), CHARSET, null, url);
 	}
 
 	@Test
@@ -76,7 +88,7 @@ public class AbstractDataStoreTest1 {
 		final Data data = new Data(new HashSet<Browser>(), new HashSet<OperatingSystem>(), new HashSet<Robot>(0),
 				new TreeMap<BrowserPattern, Browser>(), new TreeMap<OperatingSystemPattern, OperatingSystem>(), "test-version");
 		final DataReader reader = new XmlDataReader();
-		final TestDataStore store = new TestDataStore(data, reader, DATA_URL, VERSION_URL);
+		final TestDataStore store = new TestDataStore(data, reader, CHARSET, DATA_URL, VERSION_URL);
 
 		Assert.assertEquals("test-version", store.getData().getVersion());
 		Assert.assertSame(data, store.getData());
@@ -88,14 +100,14 @@ public class AbstractDataStoreTest1 {
 	@Test(expected = IllegalArgumentException.class)
 	public void construct_versionUrl_null() throws MalformedURLException {
 		final URL url = new URL("http://localhost");
-		new TestDataStore(Data.EMPTY, new XmlDataReader(), url, null);
+		new TestDataStore(Data.EMPTY, new XmlDataReader(), CHARSET, url, null);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void setData_null() {
 		final Data data = Data.EMPTY;
 		final DataReader reader = new XmlDataReader();
-		final TestDataStore store = new TestDataStore(data, reader, DATA_URL, VERSION_URL);
+		final TestDataStore store = new TestDataStore(data, reader, CHARSET, DATA_URL, VERSION_URL);
 		store.setData(null);
 	}
 
@@ -103,7 +115,7 @@ public class AbstractDataStoreTest1 {
 	public void setData_successful() {
 		final Data data = Data.EMPTY;
 		final DataReader reader = new XmlDataReader();
-		final TestDataStore store = new TestDataStore(data, reader, DATA_URL, VERSION_URL);
+		final TestDataStore store = new TestDataStore(data, reader, CHARSET, DATA_URL, VERSION_URL);
 
 		final Data data2 = new Data(new HashSet<Browser>(), new HashSet<OperatingSystem>(), new HashSet<Robot>(0),
 				new TreeMap<BrowserPattern, Browser>(), new TreeMap<OperatingSystemPattern, OperatingSystem>(), "test-version");

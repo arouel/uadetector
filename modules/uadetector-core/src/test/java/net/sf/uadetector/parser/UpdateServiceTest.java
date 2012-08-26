@@ -17,9 +17,11 @@ package net.sf.uadetector.parser;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.nio.charset.Charset;
 
 import net.sf.uadetector.datareader.XmlDataReader;
 import net.sf.uadetector.datastore.AbstractDataStore;
+import net.sf.uadetector.datastore.DataStore;
 import net.sf.uadetector.datastore.NotUpdateableXmlDataStore;
 import net.sf.uadetector.datastore.TestXmlDataStore;
 import net.sf.uadetector.internal.data.Data;
@@ -31,12 +33,23 @@ public class UpdateServiceTest {
 
 	private static class TestEmptyDataStore extends AbstractDataStore {
 		protected TestEmptyDataStore() {
-			super(Data.EMPTY, new XmlDataReader(), DATA_URL, VERSION_URL);
+			super(Data.EMPTY, new XmlDataReader(), DATA_URL, VERSION_URL, CHARSET);
 		}
 	}
 
+	/**
+	 * The character set to read UAS data
+	 */
+	private static final Charset CHARSET = DataStore.DEFAULT_CHARSET;
+
+	/**
+	 * URL to retrieve the UAS data as XML
+	 */
 	private static final URL DATA_URL = UpdateServiceTest.class.getClassLoader().getResource("uas_newer.xml");
 
+	/**
+	 * URL to retrieve the version information of the UAS data
+	 */
 	private static final URL VERSION_URL = UpdateServiceTest.class.getClassLoader().getResource("uas_newer.version");
 
 	@Test

@@ -36,7 +36,7 @@ public class OnlineXmlDataStore extends AbstractDataStore {
 	 * {@link DataStore#DEFAULT_DATA_URL} (in XML format).
 	 */
 	public OnlineXmlDataStore() {
-		super(DEFAULT_DATA_READER, DEFAULT_DATA_URL, DEFAULT_VERSION_URL);
+		super(DEFAULT_DATA_READER, DEFAULT_DATA_URL, DEFAULT_VERSION_URL, DEFAULT_CHARSET);
 	}
 
 }

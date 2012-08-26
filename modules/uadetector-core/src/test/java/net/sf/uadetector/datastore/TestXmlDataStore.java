@@ -58,7 +58,7 @@ public class TestXmlDataStore extends AbstractDataStore {
 	 * {@link DataStore#DEFAULT_DATA_URL} (in XML format).
 	 */
 	public TestXmlDataStore() {
-		super(DEFAULT_DATA_READER, DATA_URL, VERSION_URL);
+		super(DEFAULT_DATA_READER, DATA_URL, VERSION_URL, DEFAULT_CHARSET);
 	}
 
 	@Override

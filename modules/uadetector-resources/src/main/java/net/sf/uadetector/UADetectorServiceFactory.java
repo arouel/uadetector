@@ -78,7 +78,7 @@ public final class UADetectorServiceFactory {
 		 * {@link UADetectorServiceFactory#UAS_DATA} (in XML format).
 		 */
 		public ResourceModuleXmlDataStore() {
-			super(DEFAULT_DATA_READER, UAS_DATA, UAS_VERSION);
+			super(DEFAULT_DATA_READER, UAS_DATA, UAS_VERSION, DEFAULT_CHARSET);
 		}
 
 	}

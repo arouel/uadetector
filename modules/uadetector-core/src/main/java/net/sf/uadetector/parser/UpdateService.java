@@ -20,6 +20,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.LineNumberReader;
 import java.net.URL;
+import java.nio.charset.Charset;
 
 import net.sf.uadetector.datastore.DataStore;
 
@@ -61,9 +62,9 @@ final class UpdateService implements Updater, Runnable {
 	 * @throws IOException
 	 *             if an I/O exception occurs
 	 */
-	private static String retrieveRemoteVersion(final URL url) throws IOException {
+	private static String retrieveRemoteVersion(final URL url, final Charset charset) throws IOException {
 		final InputStream stream = url.openStream();
-		final InputStreamReader reader = new InputStreamReader(stream, CHARSET);
+		final InputStreamReader reader = new InputStreamReader(stream, charset);
 		final LineNumberReader lnr = new LineNumberReader(reader);
 		final String line = lnr.readLine();
 		lnr.close();
@@ -155,7 +156,7 @@ final class UpdateService implements Updater, Runnable {
 		boolean result = false;
 		String version = EMPTY_VERSION;
 		try {
-			version = retrieveRemoteVersion(store.getVersionUrl());
+			version = retrieveRemoteVersion(store.getVersionUrl(), store.getCharset());
 		} catch (final IOException e) {
 			LOG.info(MSG_NO_UPDATE_CHECK_POSSIBLE);
 			if (LOG.isDebugEnabled()) {

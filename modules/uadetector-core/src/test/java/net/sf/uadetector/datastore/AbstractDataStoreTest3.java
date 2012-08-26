@@ -16,6 +16,7 @@
 package net.sf.uadetector.datastore;
 
 import java.net.MalformedURLException;
+import java.nio.charset.Charset;
 
 import net.sf.uadetector.datareader.DataReader;
 import net.sf.uadetector.datareader.XmlDataReader;
@@ -28,36 +29,46 @@ public class AbstractDataStoreTest3 {
 
 	private static class TestDataStore extends AbstractDataStore {
 
-		protected TestDataStore(final DataReader reader, final String dataUrl, final String versionUrl) {
-			super(reader, dataUrl, versionUrl);
+		protected TestDataStore(final DataReader reader, final String dataUrl, final String versionUrl, final Charset charset) {
+			super(reader, dataUrl, versionUrl, charset);
 		}
 
 	}
 
 	/**
-	 * URL to retrieve the current UAS data as XML
+	 * The character set to read UAS data
+	 */
+	private static final Charset CHARSET = DataStore.DEFAULT_CHARSET;
+
+	/**
+	 * URL to retrieve the UAS data as XML
 	 */
 	private static final String DATA_URL = AbstractDataStoreTest2.class.getClassLoader().getResource("uas_newer.xml").toExternalForm();
 
 	/**
-	 * URL to retrieve the current version of the UAS data
+	 * URL to retrieve the version of the UAS data
 	 */
 	private static final String VERSION_URL = AbstractDataStoreTest2.class.getClassLoader().getResource("uas_newer.version").toString();
 
 	@Test(expected = IllegalArgumentException.class)
+	public void construct_charset_null() throws MalformedURLException {
+		new TestDataStore(new XmlDataReader(), DATA_URL, VERSION_URL, null);
+	}
+
+	@Test(expected = IllegalArgumentException.class)
 	public void construct_dataReader_null() throws MalformedURLException {
-		new TestDataStore(null, DATA_URL, VERSION_URL);
+		new TestDataStore(null, DATA_URL, VERSION_URL, CHARSET);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void construct_dataUrl_null() throws MalformedURLException {
-		new TestDataStore(new XmlDataReader(), null, VERSION_URL);
+		new TestDataStore(new XmlDataReader(), null, VERSION_URL, CHARSET);
 	}
 
 	@Test
 	public void construct_successful() {
 		final DataReader reader = new XmlDataReader();
-		final DataStore store = new TestDataStore(reader, DATA_URL, VERSION_URL);
+		final DataStore store = new TestDataStore(reader, DATA_URL, VERSION_URL, CHARSET);
 
 		Assert.assertTrue(!store.getData().getVersion().isEmpty());
 		Assert.assertEquals(reader, store.getDataReader());
@@ -69,12 +80,12 @@ public class AbstractDataStoreTest3 {
 	public void construct_unreachable_url() {
 		final DataReader reader = new XmlDataReader();
 		final String unreachable = "http://unreachable,local";
-		new TestDataStore(reader, unreachable, unreachable);
+		new TestDataStore(reader, unreachable, unreachable, CHARSET);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void construct_versionUrl_null() throws MalformedURLException {
-		new TestDataStore(new XmlDataReader(), DATA_URL, null);
+		new TestDataStore(new XmlDataReader(), DATA_URL, null, CHARSET);
 	}
 
 }

@@ -17,12 +17,12 @@ package net.sf.uadetector.datastore;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.MalformedURLException;
 import java.net.URL;
 
 import net.sf.uadetector.datareader.DataReader;
 import net.sf.uadetector.exception.CanNotOpenStreamException;
 import net.sf.uadetector.internal.data.Data;
+import net.sf.uadetector.internal.util.UrlBuilder;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -41,27 +41,6 @@ public abstract class AbstractDataStore implements DataStore {
 	 * Corresponding default logger for this class
 	 */
 	private static final Logger LOG = LoggerFactory.getLogger(AbstractDataStore.class);
-
-	/**
-	 * Creates an {@code URL} instance from the given {@code String} representation.<br>
-	 * <br>
-	 * This method tunnels a {@link MalformedURLException} by an {@link IllegalArgumentException}.
-	 * 
-	 * @param url
-	 *            {@code String} representation of an {@code URL}
-	 * @return new {@code URL} instance
-	 * @throws IllegalArgumentException
-	 *             if a {@link MalformedURLException} occurs
-	 */
-	protected static final URL buildUrl(final String url) {
-		URL ret = null;
-		try {
-			ret = new URL(url);
-		} catch (final MalformedURLException e) {
-			throw new IllegalArgumentException("The given string is not a valid URL: " + url, e);
-		}
-		return ret;
-	}
 
 	/**
 	 * This method reads the given {@link InputStream} by using an {@link DataReader}. The new created instance of
@@ -176,7 +155,7 @@ public abstract class AbstractDataStore implements DataStore {
 	 *             when no streams to the given {@code URL}s can be established
 	 */
 	protected AbstractDataStore(final DataReader reader, final String dataUrl, final String versionUrl) {
-		this(reader, buildUrl(dataUrl), buildUrl(versionUrl));
+		this(reader, UrlBuilder.build(dataUrl), UrlBuilder.build(versionUrl));
 	}
 
 	/**

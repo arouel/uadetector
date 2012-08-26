@@ -18,8 +18,8 @@ package net.sf.uadetector.datastore;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-import net.sf.uadetector.internal.data.DataReader;
-import net.sf.uadetector.internal.data.XmlDataReader;
+import net.sf.uadetector.datareader.DataReader;
+import net.sf.uadetector.datareader.XmlDataReader;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

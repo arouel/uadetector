@@ -13,34 +13,4 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  ******************************************************************************/
-package net.sf.uadetector.internal.data;
-
-import java.io.InputStream;
-import java.net.URL;
-
-/**
- * Interface for data readers that reads User-Agent informations for implementations of {@code UserAgentStringParser}.
- * 
- * @author André Rouél
- */
-public interface DataReader {
-
-	/**
-	 * Reads the data of an {@code InputStream}.
-	 * 
-	 * @param inputStream
-	 *            {@code InputStream} with User-Agent informations
-	 * @return read User-Agent data as {@code Data} instance
-	 */
-	Data read(final InputStream inputStream);
-
-	/**
-	 * Reads the data by an {@code URL}.
-	 * 
-	 * @param url
-	 *            {@code URL} to User-Agent informations
-	 * @return read User-Agent data as {@code Data} instance
-	 */
-	Data read(final URL url);
-
-}
+package net.sf.uadetector.datareader;

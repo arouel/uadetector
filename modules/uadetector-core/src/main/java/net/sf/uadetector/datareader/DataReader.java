@@ -13,30 +13,36 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  ******************************************************************************/
-package net.sf.uadetector.datastore;
+package net.sf.uadetector.datareader;
 
-import net.sf.uadetector.datareader.DataReader;
-import net.sf.uadetector.datareader.XmlDataReader;
+import java.io.InputStream;
+import java.net.URL;
+
+import net.sf.uadetector.internal.data.Data;
 
 /**
- * This is the simplest implementation of a {@link DataStore}. It initialize the store by reading the <em>UAS data</em>
- * online and store it only in the Java heap space.
+ * Interface for data readers that reads User-Agent informations for implementations of {@code UserAgentStringParser}.
  * 
  * @author André Rouél
  */
-public class OnlineXmlDataStore extends AbstractDataStore {
+public interface DataReader {
 
 	/**
-	 * The default data reader to read in <em>UAS data</em> in XML format
+	 * Reads the data of an {@code InputStream}.
+	 * 
+	 * @param inputStream
+	 *            {@code InputStream} with User-Agent informations
+	 * @return read User-Agent data as {@code Data} instance
 	 */
-	private static final DataReader DEFAULT_DATA_READER = new XmlDataReader();
+	Data read(final InputStream inputStream);
 
 	/**
-	 * Constructs an {@code OnlineXmlDataStore} by reading <em>UAS data</em> by the specified default URL
-	 * {@link DataStore#DEFAULT_DATA_URL} (in XML format).
+	 * Reads the data by an {@code URL}.
+	 * 
+	 * @param url
+	 *            {@code URL} to User-Agent informations
+	 * @return read User-Agent data as {@code Data} instance
 	 */
-	public OnlineXmlDataStore() {
-		super(DEFAULT_DATA_READER, DEFAULT_DATA_URL, DEFAULT_VERSION_URL);
-	}
+	Data read(final URL url);
 
 }

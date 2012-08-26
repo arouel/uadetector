@@ -17,10 +17,10 @@ package net.sf.uadetector;
 
 import java.net.URL;
 
+import net.sf.uadetector.datareader.DataReader;
+import net.sf.uadetector.datareader.XmlDataReader;
 import net.sf.uadetector.datastore.AbstractDataStore;
 import net.sf.uadetector.datastore.OnlineXmlDataStore;
-import net.sf.uadetector.internal.data.DataReader;
-import net.sf.uadetector.internal.data.XmlDataReader;
 import net.sf.uadetector.parser.OnlineUserAgentStringParserImpl;
 import net.sf.uadetector.parser.UserAgentStringParserImpl;
 

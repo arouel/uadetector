@@ -20,9 +20,9 @@ import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import net.sf.uadetector.datareader.DataReader;
 import net.sf.uadetector.exception.CanNotOpenStreamException;
 import net.sf.uadetector.internal.data.Data;
-import net.sf.uadetector.internal.data.DataReader;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

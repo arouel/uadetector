@@ -17,9 +17,9 @@ package net.sf.uadetector.datastore;
 
 import java.net.MalformedURLException;
 
+import net.sf.uadetector.datareader.DataReader;
+import net.sf.uadetector.datareader.XmlDataReader;
 import net.sf.uadetector.exception.CanNotOpenStreamException;
-import net.sf.uadetector.internal.data.DataReader;
-import net.sf.uadetector.internal.data.XmlDataReader;
 
 import org.junit.Assert;
 import org.junit.Test;

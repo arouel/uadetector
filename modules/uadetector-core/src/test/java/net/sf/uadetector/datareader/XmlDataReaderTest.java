@@ -13,12 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  ******************************************************************************/
-package net.sf.uadetector.internal.data;
+package net.sf.uadetector.datareader;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
+
+import net.sf.uadetector.internal.data.Data;
 
 import org.junit.Assert;
 import org.junit.Test;

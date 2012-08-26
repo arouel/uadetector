@@ -17,8 +17,8 @@ package net.sf.uadetector.datastore;
 
 import java.net.URL;
 
+import net.sf.uadetector.datareader.DataReader;
 import net.sf.uadetector.internal.data.Data;
-import net.sf.uadetector.internal.data.DataReader;
 
 /**
  * Defines an interface to store UAS data where ever you want.

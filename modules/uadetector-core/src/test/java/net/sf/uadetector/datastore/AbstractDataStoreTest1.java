@@ -22,9 +22,9 @@ import java.net.URL;
 import java.util.HashSet;
 import java.util.TreeMap;
 
+import net.sf.uadetector.datareader.DataReader;
+import net.sf.uadetector.datareader.XmlDataReader;
 import net.sf.uadetector.internal.data.Data;
-import net.sf.uadetector.internal.data.DataReader;
-import net.sf.uadetector.internal.data.XmlDataReader;
 import net.sf.uadetector.internal.data.domain.Browser;
 import net.sf.uadetector.internal.data.domain.BrowserPattern;
 import net.sf.uadetector.internal.data.domain.OperatingSystem;

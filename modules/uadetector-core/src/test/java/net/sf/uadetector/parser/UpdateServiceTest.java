@@ -18,11 +18,11 @@ package net.sf.uadetector.parser;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import net.sf.uadetector.datareader.XmlDataReader;
 import net.sf.uadetector.datastore.AbstractDataStore;
 import net.sf.uadetector.datastore.NotUpdateableXmlDataStore;
 import net.sf.uadetector.datastore.TestXmlDataStore;
 import net.sf.uadetector.internal.data.Data;
-import net.sf.uadetector.internal.data.XmlDataReader;
 
 import org.junit.Assert;
 import org.junit.Test;

@@ -17,8 +17,8 @@ package net.sf.uadetector.datastore;
 
 import java.net.URL;
 
-import net.sf.uadetector.internal.data.DataReader;
-import net.sf.uadetector.internal.data.XmlDataReader;
+import net.sf.uadetector.datareader.DataReader;
+import net.sf.uadetector.datareader.XmlDataReader;
 
 /**
  * This is a very simple implementation of a {@link DataStore} for test cases. It initialize the store by reading the

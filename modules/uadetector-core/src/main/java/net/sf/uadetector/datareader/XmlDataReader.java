@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  ******************************************************************************/
-package net.sf.uadetector.internal.data;
+package net.sf.uadetector.datareader;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -23,6 +23,8 @@ import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
+import net.sf.uadetector.internal.data.Data;
+import net.sf.uadetector.internal.data.XmlDataHandler;
 import net.sf.uadetector.internal.data.Data.Builder;
 
 import org.slf4j.Logger;

@@ -123,7 +123,7 @@ final class UpdateService implements Updater, Runnable {
 	public void call() {
 		if (isUpdateAvailable()) {
 			LOG.debug("Reading remote data...");
-			this.store.setData(store.getDataReader().read(store.getDataUrl()));
+			this.store.setData(store.getDataReader().read(store.getDataUrl(), store.getCharset()));
 		}
 	}
 

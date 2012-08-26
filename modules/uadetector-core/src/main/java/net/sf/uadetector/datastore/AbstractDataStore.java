@@ -46,21 +46,26 @@ public abstract class AbstractDataStore implements DataStore {
 	 * 
 	 * @param url
 	 *            URL to <em>UAS data</em>
+	 * @param charset
+	 *            the character set in which the data should be read
 	 * @return new created instance of {@code Data} and never {@code null}
 	 * @throws IllegalArgumentException
 	 *             if the given argument is {@code null}
 	 * @throws net.sf.uadetector.exception.CanNotOpenStreamException
 	 *             if no stream to the given {@code URL} can be established
 	 */
-	protected static final Data readData(final URL url, final DataReader reader) {
-		if (url == null) {
-			throw new IllegalArgumentException("Argument 'url' must not be null.");
-		}
+	protected static final Data readData(final DataReader reader, final URL url, Charset charset) {
 		if (reader == null) {
 			throw new IllegalArgumentException("Argument 'reader' must not be null.");
 		}
+		if (url == null) {
+			throw new IllegalArgumentException("Argument 'url' must not be null.");
+		}
+		if (charset == null) {
+			throw new IllegalArgumentException("Argument 'charset' must not be null.");
+		}
 
-		return reader.read(url);
+		return reader.read(url, charset);
 	}
 
 	/**
@@ -155,7 +160,7 @@ public abstract class AbstractDataStore implements DataStore {
 	 *             when no streams to the given {@code URL}s can be established
 	 */
 	protected AbstractDataStore(final DataReader reader, final URL dataUrl, final URL versionUrl, final Charset charset) {
-		this(readData(dataUrl, reader), reader, dataUrl, versionUrl, charset);
+		this(readData(reader, dataUrl, charset), reader, dataUrl, versionUrl, charset);
 	}
 
 	@Override

@@ -16,6 +16,7 @@
 package net.sf.uadetector.datareader;
 
 import java.net.URL;
+import java.nio.charset.Charset;
 
 import net.sf.uadetector.internal.data.Data;
 
@@ -31,8 +32,10 @@ public interface DataReader {
 	 * 
 	 * @param url
 	 *            the URL where the <em>UAS data</em> can be retrieved
+	 * @param charset
+	 *            the character set in which the data should be read
 	 * @return read in <em>UAS data</em> as {@code Data} instance
 	 */
-	Data read(final URL url);
+	Data read(final URL url, final Charset charset);
 
 }

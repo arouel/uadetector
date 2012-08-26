@@ -18,6 +18,7 @@ package net.sf.uadetector.datareader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
+import java.nio.charset.Charset;
 
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
@@ -71,15 +72,20 @@ public final class XmlDataReader implements DataReader {
 	 * 
 	 * @param url
 	 *            {@code URL} to User-Agent informations
+	 * @param charset
+	 *            the character set in which the data should be read
 	 * @return read User-Agent data as {@code Data} instance
 	 * @throws IllegalArgumentException
-	 *             if the given {@code URL} is {@code null}
+	 *             if any of the given arguments is {@code null}
 	 * @throws CanNotOpenStreamException
 	 *             if no stream to the given {@code URL} can be established
 	 */
-	protected static final Data readXml(final URL url) {
+	protected static final Data readXml(final URL url, final Charset charset) {
 		if (url == null) {
 			throw new IllegalArgumentException("Argument 'url' must not be null.");
+		}
+		if (charset == null) {
+			throw new IllegalArgumentException("Argument 'charset' must not be null.");
 		}
 
 		final Builder builder = new Builder();
@@ -100,19 +106,24 @@ public final class XmlDataReader implements DataReader {
 	 * 
 	 * @param url
 	 *            {@code URL} to User-Agent informations
+	 * @param charset
+	 *            the character set in which the data should be read
 	 * @return read User-Agent data as {@code Data} instance
 	 * @throws IllegalArgumentException
-	 *             if the given {@code URL} is {@code null}
+	 *             if any of the given arguments is {@code null}
 	 * @throws CanNotOpenStreamException
 	 *             if no stream to the given {@code URL} can be established
 	 */
 	@Override
-	public Data read(final URL url) {
+	public Data read(final URL url, final Charset charset) {
 		if (url == null) {
 			throw new IllegalArgumentException("Argument 'url' must not be null.");
 		}
+		if (charset == null) {
+			throw new IllegalArgumentException("Argument 'charset' must not be null.");
+		}
 
-		return readXml(url);
+		return readXml(url, charset);
 	}
 
 }

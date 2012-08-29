@@ -30,7 +30,7 @@ import org.slf4j.LoggerFactory;
  * 
  * @author André Rouél
  */
-public class NotUpdateableXmlDataStore extends AbstractDataStore {
+public class NotUpdateableXmlDataStore extends AbstractDataStore implements RefreshableDataStore {
 
 	private static final Logger LOG = LoggerFactory.getLogger(NotUpdateableXmlDataStore.class);
 
@@ -84,6 +84,12 @@ public class NotUpdateableXmlDataStore extends AbstractDataStore {
 	@Override
 	public URL getVersionUrl() {
 		return VERSION_URL_UNREACHABLE;
+	}
+
+	@Override
+	public synchronized void refresh() {
+		// access the resource protected by this lock
+		setData(getDataReader().read(getDataUrl(), getCharset()));
 	}
 
 }

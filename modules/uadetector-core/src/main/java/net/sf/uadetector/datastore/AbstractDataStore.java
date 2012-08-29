@@ -196,8 +196,7 @@ public abstract class AbstractDataStore implements DataStore {
 	 * @throws IllegalArgumentException
 	 *             if the given argument is {@code null}
 	 */
-	@Override
-	public void setData(final Data data) {
+	protected void setData(final Data data) {
 		if (data == null) {
 			throw new IllegalArgumentException("Argument 'data' must not be null.");
 		}

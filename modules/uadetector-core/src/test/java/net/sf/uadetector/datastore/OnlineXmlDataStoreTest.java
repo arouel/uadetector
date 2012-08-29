@@ -22,11 +22,12 @@ public class OnlineXmlDataStoreTest {
 
 	@Test
 	public void construct_successful() {
-		final DataStore store = new OnlineXmlDataStore();
+		final OnlineXmlDataStore store = new OnlineXmlDataStore();
 		Assert.assertTrue(!store.getData().getVersion().isEmpty());
 		Assert.assertNotNull(store.getDataReader());
 		Assert.assertNotNull(store.getDataUrl());
 		Assert.assertNotNull(store.getVersionUrl().toExternalForm());
+		store.refresh();
 	}
 
 }

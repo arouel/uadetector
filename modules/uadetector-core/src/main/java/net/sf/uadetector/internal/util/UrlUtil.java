@@ -15,10 +15,15 @@
  ******************************************************************************/
 package net.sf.uadetector.internal.util;
 
+import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.nio.charset.Charset;
 
 import net.sf.uadetector.exception.CanNotOpenStreamException;
 
@@ -83,6 +88,85 @@ public class UrlUtil {
 			throw new CanNotOpenStreamException(url.toString());
 		}
 		return ret;
+	}
+
+	/**
+	 * Reads the content of the passed {@link URL} as string representation.
+	 * 
+	 * @param url
+	 *            URL to <em>UAS data</em>
+	 * @param charset
+	 *            the character set in which the data should be read
+	 * @return content as {@code String}
+	 * @throws IllegalArgumentException
+	 *             if any of the given arguments is {@code null}
+	 * @throws CanNotOpenStreamException
+	 *             if no stream to the given {@code URL} can be established
+	 * @throws IOException
+	 *             if an I/O error occurs
+	 */
+	public static String read(final URL url, final Charset charset) throws IOException {
+		if (url == null) {
+			throw new IllegalArgumentException("Argument 'url' must not be null.");
+		}
+		if (charset == null) {
+			throw new IllegalArgumentException("Argument 'charset' must not be null.");
+		}
+
+		final InputStream inputStream = open(url);
+		BufferedReader reader = null;
+		final StringBuilder buffer = new StringBuilder();
+		try {
+			reader = new BufferedReader(new InputStreamReader(inputStream, charset));
+			buffer.append(readAll(reader));
+		} finally {
+			if (reader != null) {
+				reader.close();
+			}
+			inputStream.close();
+		}
+		return buffer.toString();
+	}
+
+	/**
+	 * Reads the entire contents via the given {@link Reader} as string.
+	 * 
+	 * @param reader
+	 *            {@code Reader} to read the entire contents
+	 * @return the read contents as string
+	 * @throws IOException
+	 *             If an I/O error occurs
+	 */
+	private static String readAll(final Reader reader) throws IOException {
+		final StringBuilder buffer = new StringBuilder();
+		int cp;
+		while ((cp = reader.read()) != -1) {
+			buffer.append((char) cp);
+		}
+		return buffer.toString();
+	}
+
+	/**
+	 * Gets the URL to a given {@code File}.
+	 * 
+	 * @param file
+	 *            file to be converted to a URL
+	 * @return an URL to the passed file
+	 * @throws IllegalStateException
+	 *             if no URL can be resolved to the given file
+	 */
+	public static URL toUrl(final File file) {
+		if (file == null) {
+			throw new IllegalArgumentException("Argument 'file' must not be null.");
+		}
+
+		URL url = null;
+		try {
+			url = file.toURI().toURL();
+		} catch (final MalformedURLException e) {
+			new IllegalStateException("Can not construct an URL for the passed file.", e);
+		}
+		return url;
 	}
 
 	/**

@@ -15,15 +15,25 @@
  ******************************************************************************/
 package net.sf.uadetector.internal.util;
 
+import java.io.File;
+import java.io.IOException;
 import java.lang.reflect.Constructor;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.nio.charset.Charset;
 
+import net.sf.uadetector.datastore.DataStore;
 import net.sf.uadetector.exception.CanNotOpenStreamException;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 public class UrlUtilTest {
+
+	/**
+	 * The character set to read the contents of an URL
+	 */
+	private static final Charset CHARSET = DataStore.DEFAULT_CHARSET;
 
 	@Test(expected = IllegalArgumentException.class)
 	public void build_invalid_url() throws Exception {
@@ -50,8 +60,35 @@ public class UrlUtilTest {
 
 	@Test(expected = CanNotOpenStreamException.class)
 	public void open_unreachable_url() throws MalformedURLException {
-		final String unreachable = "http://unreachable,local";
+		final String unreachable = "http://unreachable.local";
 		UrlUtil.open(new URL(unreachable));
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void read_charset_null() throws IOException {
+		UrlUtil.read(new URL("http://localhost"), null);
+	}
+
+	@Test(expected = CanNotOpenStreamException.class)
+	public void read_unreachable_url() throws IOException {
+		final String unreachable = "http://unreachable.local";
+		UrlUtil.read(new URL(unreachable), CHARSET);
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void read_url_null() throws IOException {
+		UrlUtil.read(null, CHARSET);
+	}
+
+	@Test
+	public void toUrl_empty() {
+		final URL url = UrlUtil.toUrl(new File("don't exist"));
+		Assert.assertNotNull(url);
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void toUrl_null() {
+		UrlUtil.toUrl(null);
 	}
 
 }

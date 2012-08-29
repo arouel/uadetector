@@ -20,6 +20,7 @@ import net.sf.uadetector.OperatingSystemFamily;
 import net.sf.uadetector.UserAgent;
 import net.sf.uadetector.UserAgentType;
 import net.sf.uadetector.VersionNumber;
+import net.sf.uadetector.datastore.DataStore;
 import net.sf.uadetector.datastore.TestXmlDataStore;
 import net.sf.uadetector.internal.data.domain.Robot;
 
@@ -32,11 +33,11 @@ public class UserAgentStringParserTest {
 
 	private static final Logger LOG = LoggerFactory.getLogger(UserAgentStringParserTest.class);
 
-	private static final UserAgentStringParserImpl PARSER = new UserAgentStringParserImpl(new TestXmlDataStore());
+	private static final UserAgentStringParserImpl<DataStore> PARSER = new UserAgentStringParserImpl<DataStore>(new TestXmlDataStore());
 
 	@Test(expected = IllegalArgumentException.class)
 	public void construct_stream_null() throws Exception {
-		new UserAgentStringParserImpl(null);
+		new UserAgentStringParserImpl<DataStore>(null);
 	}
 
 	@Test

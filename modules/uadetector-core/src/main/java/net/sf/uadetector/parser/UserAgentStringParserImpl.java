@@ -23,13 +23,13 @@ import net.sf.uadetector.datastore.DataStore;
  * 
  * @author André Rouél
  */
-public class UserAgentStringParserImpl extends AbstractUserAgentStringParser {
+public class UserAgentStringParserImpl<T extends DataStore> extends AbstractUserAgentStringParser {
 
 	/**
 	 * Storage for all detection informations for <i>UASparsers</i> from <a
 	 * href="http://user-agent-string.info/">http://user-agent-string.info</a>.
 	 */
-	private final DataStore store;
+	private final T store;
 
 	/**
 	 * Constructs an {@code UserAgentStringParser} using the given UAS data as detection source.
@@ -39,7 +39,7 @@ public class UserAgentStringParserImpl extends AbstractUserAgentStringParser {
 	 * @throws IllegalArgumentException
 	 *             if the given argument is {@code null}
 	 */
-	public UserAgentStringParserImpl(final DataStore store) {
+	public UserAgentStringParserImpl(final T store) {
 		super();
 
 		if (store == null) {
@@ -50,7 +50,7 @@ public class UserAgentStringParserImpl extends AbstractUserAgentStringParser {
 	}
 
 	@Override
-	protected DataStore getDataStore() {
+	protected T getDataStore() {
 		return store;
 	}
 

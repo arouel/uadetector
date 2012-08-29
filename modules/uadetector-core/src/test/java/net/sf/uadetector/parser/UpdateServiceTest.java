@@ -23,6 +23,7 @@ import net.sf.uadetector.datareader.XmlDataReader;
 import net.sf.uadetector.datastore.AbstractDataStore;
 import net.sf.uadetector.datastore.DataStore;
 import net.sf.uadetector.datastore.NotUpdateableXmlDataStore;
+import net.sf.uadetector.datastore.RefreshableDataStore;
 import net.sf.uadetector.datastore.TestXmlDataStore;
 import net.sf.uadetector.internal.data.Data;
 
@@ -31,9 +32,14 @@ import org.junit.Test;
 
 public class UpdateServiceTest {
 
-	private static class TestEmptyDataStore extends AbstractDataStore {
+	private static class TestEmptyDataStore extends AbstractDataStore implements RefreshableDataStore {
 		protected TestEmptyDataStore() {
 			super(Data.EMPTY, new XmlDataReader(), DATA_URL, VERSION_URL, CHARSET);
+		}
+
+		@Override
+		public void refresh() {
+			setData(getDataReader().read(getDataUrl(), getCharset()));
 		}
 	}
 

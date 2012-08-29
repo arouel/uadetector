@@ -15,7 +15,7 @@
  ******************************************************************************/
 package net.sf.uadetector.parser;
 
-import net.sf.uadetector.datastore.DataStore;
+import net.sf.uadetector.datastore.RefreshableDataStore;
 import net.sf.uadetector.datastore.TestXmlDataStore;
 
 final class OnlineUserAgentStringParserHolder {
@@ -29,7 +29,7 @@ final class OnlineUserAgentStringParserHolder {
 		return INSTANCE;
 	}
 
-	private static DataStore setUpDataStore() {
+	private static RefreshableDataStore setUpDataStore() {
 		return new TestXmlDataStore();
 	}
 

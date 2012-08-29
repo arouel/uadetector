@@ -23,6 +23,7 @@ import java.net.URL;
 import java.nio.charset.Charset;
 
 import net.sf.uadetector.datastore.DataStore;
+import net.sf.uadetector.datastore.RefreshableDataStore;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -81,7 +82,7 @@ final class UpdateService implements Updater, Runnable {
 	/**
 	 * The data store for instances that implements {@link net.sf.uadetector.internal.data.Data}
 	 */
-	private final DataStore store;
+	private final RefreshableDataStore store;
 
 	/**
 	 * Message for the log when an exception occur during the update check.<br>
@@ -111,7 +112,7 @@ final class UpdateService implements Updater, Runnable {
 	 */
 	private static final String MSG_NO_UPDATE_AVAILABLE = "No update available. Current version is '%s'.";
 
-	public UpdateService(final DataStore store) {
+	public UpdateService(final RefreshableDataStore store) {
 		if (store == null) {
 			throw new IllegalArgumentException("Argument 'store' must not be null.");
 		}
@@ -123,7 +124,7 @@ final class UpdateService implements Updater, Runnable {
 	public void call() {
 		if (isUpdateAvailable()) {
 			LOG.debug("Reading remote data...");
-			this.store.setData(store.getDataReader().read(store.getDataUrl(), store.getCharset()));
+			store.refresh();
 		}
 	}
 

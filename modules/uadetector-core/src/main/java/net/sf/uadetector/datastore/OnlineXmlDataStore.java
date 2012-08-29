@@ -24,7 +24,7 @@ import net.sf.uadetector.datareader.XmlDataReader;
  * 
  * @author André Rouél
  */
-public class OnlineXmlDataStore extends AbstractDataStore {
+public final class OnlineXmlDataStore extends AbstractDataStore implements RefreshableDataStore {
 
 	/**
 	 * The default data reader to read in <em>UAS data</em> in XML format
@@ -37,6 +37,12 @@ public class OnlineXmlDataStore extends AbstractDataStore {
 	 */
 	public OnlineXmlDataStore() {
 		super(DEFAULT_DATA_READER, DEFAULT_DATA_URL, DEFAULT_VERSION_URL, DEFAULT_CHARSET);
+	}
+
+	@Override
+	public synchronized void refresh() {
+		// access the resource protected by this lock
+		setData(getDataReader().read(getDataUrl(), getCharset()));
 	}
 
 }

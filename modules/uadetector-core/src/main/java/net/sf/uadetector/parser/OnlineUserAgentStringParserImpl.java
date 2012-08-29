@@ -20,7 +20,7 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 
-import net.sf.uadetector.datastore.DataStore;
+import net.sf.uadetector.datastore.RefreshableDataStore;
 
 /**
  * This parser checks by every {@code read} call once a day if newer data are remotely available. When newer data are
@@ -28,7 +28,7 @@ import net.sf.uadetector.datastore.DataStore;
  * 
  * @author André Rouél
  */
-public final class OnlineUserAgentStringParserImpl extends UserAgentStringParserImpl {
+public final class OnlineUserAgentStringParserImpl extends UserAgentStringParserImpl<RefreshableDataStore> {
 
 	/**
 	 * Interval to check for updates in milliseconds
@@ -63,12 +63,11 @@ public final class OnlineUserAgentStringParserImpl extends UserAgentStringParser
 	 * @throws IllegalArgumentException
 	 *             if one of the given arguments is {@code null}
 	 */
-	public OnlineUserAgentStringParserImpl(final DataStore store) {
+	public OnlineUserAgentStringParserImpl(final RefreshableDataStore store) {
 		super(store);
 
-		// query newer UAS data
+		// set up update service
 		setUpUpdateService();
-		updateService.call();
 	}
 
 	/**

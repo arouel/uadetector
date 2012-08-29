@@ -228,10 +228,10 @@ public class OnlineUserAgentStringParserImplTest {
 		Assert.assertEquals(OperatingSystem.EMPTY, agent.getOperatingSystem());
 	}
 
-	@Test(expected = IllegalArgumentException.class)
-	public void setData() throws Exception {
+	@Test
+	public void refresh() throws Exception {
 		final OnlineUserAgentStringParserImpl parser = new OnlineUserAgentStringParserImpl(new TestXmlDataStore());
-		parser.getDataStore().setData(null);
+		parser.getDataStore().refresh();
 	}
 
 	@Test(expected = IllegalArgumentException.class)

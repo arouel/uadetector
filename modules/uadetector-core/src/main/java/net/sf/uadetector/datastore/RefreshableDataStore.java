@@ -13,27 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  ******************************************************************************/
-package net.sf.uadetector.parser;
+package net.sf.uadetector.datastore;
 
-import net.sf.uadetector.datastore.DataStore;
-
-public interface Updater {
-
-	/**
-	 * The default interval to check for updates is once per day
-	 */
-	final long DEFAULT_UPDATE_INTERVAL = 1000 * 60 * 60 * 24; // 1 day
+/**
+ * Extends the interface with an update functionality for <em>UAS data</em> in the store.
+ * 
+ * @author André Rouél
+ */
+public interface RefreshableDataStore extends DataStore {
 
 	/**
-	 * This function checks whether updated UAS data are available and updates silently the data in a {@link DataStore}.
+	 * Triggers the update of the {@code DataStore}. When this action is executed, the current data URL will be read in
+	 * and the {@code DataReader} parses and builds a new {@code Data} instance. Finally, the currently set {@code Data}
+	 * reference will be replaced by the new one.
 	 */
-	void call();
-
-	/**
-	 * Gets the time of the last update check in milliseconds.
-	 * 
-	 * @return time of the last update check in milliseconds
-	 */
-	long getLastUpdateCheck();
+	void refresh();
 
 }

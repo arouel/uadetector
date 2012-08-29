@@ -78,12 +78,4 @@ public interface DataStore {
 	 */
 	URL getVersionUrl();
 
-	/**
-	 * Sets new UAS data in the store.
-	 * 
-	 * @param data
-	 *            new UAS data ({@code null} is not allowed)
-	 */
-	void setData(Data data);
-
 }

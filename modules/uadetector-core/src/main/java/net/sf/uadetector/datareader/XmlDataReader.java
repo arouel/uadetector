@@ -24,7 +24,6 @@ import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
-import net.sf.uadetector.exception.CanNotOpenStreamException;
 import net.sf.uadetector.internal.data.Data;
 import net.sf.uadetector.internal.data.Data.Builder;
 import net.sf.uadetector.internal.data.XmlDataHandler;
@@ -77,10 +76,10 @@ public final class XmlDataReader implements DataReader {
 	 * @return read User-Agent data as {@code Data} instance
 	 * @throws IllegalArgumentException
 	 *             if any of the given arguments is {@code null}
-	 * @throws CanNotOpenStreamException
+	 * @throws net.sf.uadetector.exception.CanNotOpenStreamException
 	 *             if no stream to the given {@code URL} can be established
 	 */
-	protected static final Data readXml(final URL url, final Charset charset) {
+	protected static Data readXml(final URL url, final Charset charset) {
 		if (url == null) {
 			throw new IllegalArgumentException("Argument 'url' must not be null.");
 		}

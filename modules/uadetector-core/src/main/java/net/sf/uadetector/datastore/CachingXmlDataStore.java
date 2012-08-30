@@ -17,10 +17,11 @@ package net.sf.uadetector.datastore;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.URL;
 import java.nio.charset.Charset;
 
@@ -117,7 +118,7 @@ public final class CachingXmlDataStore extends AbstractDataStore implements Refr
 		final DataReader reader = new XmlDataReader();
 
 		final Data data;
-		if (!isEmpty(cacheFile)) {
+		if (!isEmpty(cacheFile, charset)) {
 			data = reader.read(UrlUtil.toUrl(cacheFile), charset);
 			LOG.debug(MSG_CACHE_FILE_IS_FILLED);
 		} else {
@@ -161,7 +162,7 @@ public final class CachingXmlDataStore extends AbstractDataStore implements Refr
 	 * @throws IllegalStateException
 	 *             if the cache file can not be created
 	 */
-	public static final File findOrCreateCacheFile() {
+	public static File findOrCreateCacheFile() {
 		final File file = new File(CACHE_DIR, PREFIX + SUFFIX);
 		if (!file.exists()) {
 			try {
@@ -180,15 +181,25 @@ public final class CachingXmlDataStore extends AbstractDataStore implements Refr
 	 *            the file that could be empty
 	 * @return {@code true} when the file is accessible and empty otherwise {@code false}
 	 */
-	private static boolean isEmpty(final File file) {
+	private static boolean isEmpty(final File file, final Charset charset) {
 		boolean empty = false;
+		BufferedReader reader = null;
 		try {
-			final BufferedReader reader = new BufferedReader(new FileReader(file));
-			empty = reader.readLine() == null;
+			reader = new BufferedReader(new InputStreamReader(new FileInputStream(file), charset));
+			final String line = reader.readLine();
+			empty = line == null;
 		} catch (final FileNotFoundException e) {
 			throw new IllegalStateException("file does not exist");
 		} catch (final IOException e) {
 			throw new IllegalStateException("file can not be read");
+		} finally {
+			if (reader != null) {
+				try {
+					reader.close();
+				} catch (final IOException e) {
+					throw new IllegalStateException("closing the reader failed");
+				}
+			}
 		}
 		return empty;
 	}
@@ -207,7 +218,7 @@ public final class CachingXmlDataStore extends AbstractDataStore implements Refr
 	 * @throws IOException
 	 *             if an I/O error occurs
 	 */
-	protected synchronized static void readAndSave(final URL url, final File file, final Charset charset) throws IOException {
+	protected static void readAndSave(final URL url, final File file, final Charset charset) throws IOException {
 		if (url == null) {
 			throw new IllegalArgumentException("Argument 'url' must not be null.");
 		}
@@ -218,19 +229,20 @@ public final class CachingXmlDataStore extends AbstractDataStore implements Refr
 			throw new IllegalArgumentException("Argument 'charset' must not be null.");
 		}
 
-		if (!url.equals(file.toURI().toURL())) {
-			final BufferedReader reader = null;
+		final boolean isEqual = url.toExternalForm().equals(UrlUtil.toUrl(file).toExternalForm());
+		if (!isEqual) {
 			FileOutputStream outputStream = null;
 			try {
 				outputStream = new FileOutputStream(file);
 				final String data = UrlUtil.read(url, charset);
-				outputStream.write(data.getBytes());
+				outputStream.write(data.getBytes(charset));
 			} finally {
-				if (reader != null) {
-					reader.close();
-				}
 				if (outputStream != null) {
-					outputStream.close();
+					try {
+						outputStream.close();
+					} catch (final IOException e) {
+						LOG.warn("Can not close output stream.");
+					}
 				}
 			}
 		} else {

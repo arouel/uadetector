@@ -132,9 +132,9 @@ public final class CachingXmlDataStore extends AbstractDataStore implements Refr
 
 	/**
 	 * Constructs a new instance of {@code CachingXmlDataStore} with the given arguments. The file used to cache the
-	 * read <em>UAS data</em> will be called from {@link CachingXmlDataReader#findOrCreateCacheFile()}. This file may be
-	 * empty or filled with previously cached data in XML format. The file must be writable otherwise an exception will
-	 * be thrown.
+	 * read in <em>UAS data</em> will be called from {@link CachingXmlDataStore#findOrCreateCacheFile()}. This file may
+	 * be empty or filled with previously cached data in XML format. The file must be writable otherwise an exception
+	 * will be thrown.
 	 * 
 	 * @param dataUrl
 	 *            URL to <em>UAS data</em>

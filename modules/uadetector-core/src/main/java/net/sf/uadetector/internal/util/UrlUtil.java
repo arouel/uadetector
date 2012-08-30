@@ -164,7 +164,7 @@ public class UrlUtil {
 		try {
 			url = file.toURI().toURL();
 		} catch (final MalformedURLException e) {
-			new IllegalStateException("Can not construct an URL for the passed file.", e);
+			throw new IllegalStateException("Can not construct an URL for the passed file.", e);
 		}
 		return url;
 	}

@@ -35,7 +35,8 @@ public final class UADetectorServiceFactory {
 	 * Holder to load the parser only when it's needed.
 	 */
 	private static final class OfflineUserAgentStringParserHolder {
-		private static UserAgentStringParser INSTANCE = new UserAgentStringParserImpl(new ResourceModuleXmlDataStore());
+		private static UserAgentStringParser INSTANCE = new UserAgentStringParserImpl<ResourceModuleXmlDataStore>(
+				new ResourceModuleXmlDataStore());
 	}
 
 	/**

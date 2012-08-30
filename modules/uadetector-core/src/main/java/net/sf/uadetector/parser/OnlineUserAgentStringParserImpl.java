@@ -56,10 +56,6 @@ public final class OnlineUserAgentStringParserImpl extends UserAgentStringParser
 	 * 
 	 * @param store
 	 *            {@code DataStore} with reference UAS data used in fallback case
-	 * @param dataUrl
-	 *            {@code URL} to request the latest UAS data
-	 * @param versionUrl
-	 *            {@code URL} to request the latest version information of UAS data
 	 * @throws IllegalArgumentException
 	 *             if one of the given arguments is {@code null}
 	 */

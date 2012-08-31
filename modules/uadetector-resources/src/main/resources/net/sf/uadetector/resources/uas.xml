@@ -3,7 +3,7 @@
 <uasdata>
 	<description>
 		<label>Data (format xml) for UASparser - http://user-agent-string.info/download/UASparser</label>
-		<version>20120830-04</version>
+		<version>20120831-02</version>
 		<checksum type="MD5">http://user-agent-string.info/rpc/get_data.php?format=xml&amp;md5=y</checksum>
 		<checksum type="SHA1">http://user-agent-string.info/rpc/get_data.php?format=xml&amp;sha1=y</checksum>
 	</description>
@@ -778,6 +778,26 @@
 				<url_company><![CDATA[http://2.0promotion.de/]]></url_company>
 				<icon>bot.png</icon>
 				<bot_info_url>/list-of-ua/bot-detail?bot=BacklinkCrawler</bot_info_url>
+			</robot>
+			<robot>
+				<id>7732</id>
+				<useragent><![CDATA[Bad-Neighborhood Link Analyzer (http://www.bad-neighborhood.com/)]]></useragent>
+				<family>Bad-Neighborhood</family>
+				<name>Bad-Neighborhood Link Analyzer</name>
+				<company><![CDATA[Michael VanDeMar]]></company>
+				<url_company><![CDATA[]]></url_company>
+				<icon>bot.png</icon>
+				<bot_info_url>/list-of-ua/bot-detail?bot=Bad-Neighborhood</bot_info_url>
+			</robot>
+			<robot>
+				<id>7733</id>
+				<useragent><![CDATA[Bad Neighborhood Header Detector (http://www.bad-neighborhood.com/header_detector.php)]]></useragent>
+				<family>Bad-Neighborhood</family>
+				<name>Bad Neighborhood Header Detector</name>
+				<company><![CDATA[Michael VanDeMar]]></company>
+				<url_company><![CDATA[]]></url_company>
+				<icon>bot.png</icon>
+				<bot_info_url>/list-of-ua/bot-detail?bot=Bad-Neighborhood</bot_info_url>
 			</robot>
 			<robot>
 				<id>14</id>
@@ -9390,6 +9410,16 @@
 				<bot_info_url>/list-of-ua/bot-detail?bot=yacybot</bot_info_url>
 			</robot>
 			<robot>
+				<id>7729</id>
+				<useragent><![CDATA[yacybot (freeworld/global; amd64 Windows 7 6.1; java 1.6.0_25; Europe/de) http://yacy.net/bot.html]]></useragent>
+				<family>yacybot</family>
+				<name>yacybot</name>
+				<company><![CDATA[Michael Christen]]></company>
+				<url_company><![CDATA[]]></url_company>
+				<icon>bot_yacybot.png</icon>
+				<bot_info_url>/list-of-ua/bot-detail?bot=yacybot</bot_info_url>
+			</robot>
+			<robot>
 				<id>4</id>
 				<useragent><![CDATA[Mozilla/5.0 (compatible; Yahoo! Slurp; http://help.yahoo.com/help/us/ysearch/slurp)]]></useragent>
 				<family>Yahoo!</family>
@@ -14833,6 +14863,16 @@
 				<icon>SubStream.png</icon>
 				<browser_info_url>/list-of-ua/browser-detail?browser=SubStream</browser_info_url>
 			</browser>
+			<browser>
+				<id>452</id>
+				<type>4</type>
+				<name>Barca</name>
+				<url><![CDATA[http://www.pocosystems.com/home/index.php?option=content&task=category&sectionid=2&id=9&Itemid=27]]></url>
+				<company><![CDATA[Poco Systems Inc]]></company>
+				<url_company><![CDATA[http://www.pocosystems.com/]]></url_company>
+				<icon>barca.png</icon>
+				<browser_info_url>/list-of-ua/browser-detail?browser=Barca</browser_info_url>
+			</browser>
 		</browsers>
 		<browser_types>
 			<browser_type>
@@ -17398,46 +17438,56 @@
 			</browser_reg>
 			<browser_reg>
 				<order>504</order>
+				<browser_id>452</browser_id>
+				<regstring>/^Barca\/([0-9\.]+)/si</regstring>
+			</browser_reg>
+			<browser_reg>
+				<order>505</order>
+				<browser_id>452</browser_id>
+				<regstring>/^BarcaPro\/([0-9\.]+)/si</regstring>
+			</browser_reg>
+			<browser_reg>
+				<order>506</order>
 				<browser_id>151</browser_id>
 				<regstring>/ObigoInternetBrowser/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>505</order>
+				<order>507</order>
 				<browser_id>54</browser_id>
 				<regstring>/mozilla.*(rv:[0-9\.]+).*/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>506</order>
+				<order>508</order>
 				<browser_id>41</browser_id>
 				<regstring>/^Avant Browser/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>507</order>
+				<order>509</order>
 				<browser_id>346</browser_id>
 				<regstring>/^holmes\/([0-9\.]+)/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>508</order>
+				<order>510</order>
 				<browser_id>35</browser_id>
 				<regstring>/^Mozilla\/4.0 \(compatible; MSIE ([0-9\.]+); Windows/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>509</order>
+				<order>511</order>
 				<browser_id>35</browser_id>
 				<regstring>/mozilla\/.*MSIE ([0-9b\.]+).*/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>510</order>
+				<order>512</order>
 				<browser_id>157</browser_id>
 				<regstring>/MSIE ([0-9a-z\+\-\.]+).*windows ce/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>511</order>
+				<order>513</order>
 				<browser_id>4</browser_id>
 				<regstring>/^Mozilla\/([0-9a-z\.\[\] ]+) \([a-z0-9;. \-]+\)/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>512</order>
+				<order>514</order>
 				<browser_id>282</browser_id>
 				<regstring>/WinHttp/si</regstring>
 			</browser_reg>
@@ -17706,6 +17756,10 @@
 			<browser_os>
 				<browser_id>437</browser_id>
 				<os_id>65</os_id>
+			</browser_os>
+			<browser_os>
+				<browser_id>452</browser_id>
+				<os_id>43</os_id>
 			</browser_os>
 		</browsers_os>
 		<operating_systems_reg>

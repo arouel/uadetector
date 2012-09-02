@@ -10,7 +10,7 @@ import java.nio.channels.FileChannel;
 import java.nio.charset.Charset;
 import java.util.Random;
 
-import net.sf.uadetector.parser.OnlineUserAgentStringParserImpl;
+import net.sf.uadetector.parser.UpdatingUserAgentStringParserImpl;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -65,7 +65,7 @@ public class CachingXmlDataStoreTest {
 	public void createCachingXmlDataStore_defaultCacheFile_successful() throws IOException, InterruptedException {
 		// create caching data store
 		final CachingXmlDataStore store = CachingXmlDataStore.createCachingXmlDataStore(DATA_URL, VERSION_URL, CHARSET);
-		final OnlineUserAgentStringParserImpl parser = new OnlineUserAgentStringParserImpl(store);
+		final UpdatingUserAgentStringParserImpl parser = new UpdatingUserAgentStringParserImpl(store);
 		parser.parse("test");
 	}
 
@@ -83,7 +83,7 @@ public class CachingXmlDataStoreTest {
 
 		// create caching data store
 		final CachingXmlDataStore store = CachingXmlDataStore.createCachingXmlDataStore(temp, DATA_URL, VERSION_URL, CHARSET);
-		final OnlineUserAgentStringParserImpl parser = new OnlineUserAgentStringParserImpl(store);
+		final UpdatingUserAgentStringParserImpl parser = new UpdatingUserAgentStringParserImpl(store);
 
 		Assert.assertTrue(readFile(temp).length() >= 721915);
 

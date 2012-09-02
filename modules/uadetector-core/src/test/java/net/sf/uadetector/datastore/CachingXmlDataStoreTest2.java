@@ -10,7 +10,7 @@ import java.nio.charset.Charset;
 import java.util.Random;
 
 import net.sf.uadetector.datareader.XmlDataReaderTest;
-import net.sf.uadetector.parser.OnlineUserAgentStringParserImpl;
+import net.sf.uadetector.parser.UpdatingUserAgentStringParserImpl;
 
 import org.junit.AfterClass;
 import org.junit.Assert;
@@ -95,7 +95,7 @@ public class CachingXmlDataStoreTest2 {
 	public void _1_create_withEmptyCache() throws IOException, InterruptedException {
 		// create caching data store
 		final CachingXmlDataStore store = CachingXmlDataStore.createCachingXmlDataStore(temp, DATA_URL_OLDER, VERSION_URL_OLDER, CHARSET);
-		final OnlineUserAgentStringParserImpl parser = new OnlineUserAgentStringParserImpl(store);
+		final UpdatingUserAgentStringParserImpl parser = new UpdatingUserAgentStringParserImpl(store);
 		parser.parse("test");
 
 		final String readIn = readFile(temp);
@@ -107,7 +107,7 @@ public class CachingXmlDataStoreTest2 {
 	public void _2_create_withFilledCache_andAvailableUpdate() throws IOException, InterruptedException {
 		// create caching data store
 		final CachingXmlDataStore store = CachingXmlDataStore.createCachingXmlDataStore(temp, DATA_URL_NEWER, VERSION_URL_NEWER, CHARSET);
-		final OnlineUserAgentStringParserImpl parser = new OnlineUserAgentStringParserImpl(store);
+		final UpdatingUserAgentStringParserImpl parser = new UpdatingUserAgentStringParserImpl(store);
 		parser.parse("test");
 
 		final String readIn = readFile(temp);
@@ -119,7 +119,7 @@ public class CachingXmlDataStoreTest2 {
 	public void _3_create_withFilledCache_andNoAvailableUpdate() throws IOException, InterruptedException {
 		// create caching data store
 		final CachingXmlDataStore store = CachingXmlDataStore.createCachingXmlDataStore(temp, DATA_URL_NEWER, VERSION_URL_NEWER, CHARSET);
-		final OnlineUserAgentStringParserImpl parser = new OnlineUserAgentStringParserImpl(store);
+		final UpdatingUserAgentStringParserImpl parser = new UpdatingUserAgentStringParserImpl(store);
 		parser.parse("test");
 
 		final String readIn = readFile(temp);

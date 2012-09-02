@@ -23,12 +23,12 @@ import java.util.concurrent.TimeUnit;
 import net.sf.uadetector.datastore.RefreshableDataStore;
 
 /**
- * This parser checks by every {@code read} call once a day if newer data are remotely available. When newer data are
- * available, they are downloaded, read and replaced by the current one.
+ * This parser checks once per day if newer data are available. When newer data are available, they will be loaded, read
+ * and replaced by the current one.
  * 
  * @author André Rouél
  */
-public final class OnlineUserAgentStringParserImpl extends UserAgentStringParserImpl<RefreshableDataStore> {
+public final class UpdatingUserAgentStringParserImpl extends UserAgentStringParserImpl<RefreshableDataStore> {
 
 	/**
 	 * Interval to check for updates in milliseconds
@@ -36,7 +36,7 @@ public final class OnlineUserAgentStringParserImpl extends UserAgentStringParser
 	private long updateInterval = Updater.DEFAULT_UPDATE_INTERVAL;
 
 	/**
-	 * Current update task of {@link OnlineUserAgentStringParserImpl#scheduler}
+	 * Current update task of {@link UpdatingUserAgentStringParserImpl#scheduler}
 	 */
 	private ScheduledFuture<?> currentUpdateTask;
 
@@ -46,7 +46,7 @@ public final class OnlineUserAgentStringParserImpl extends UserAgentStringParser
 	private final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
 
 	/**
-	 * Current update service which will be triggered by the {@link OnlineUserAgentStringParserImpl#scheduler}
+	 * Current update service which will be triggered by the {@link UpdatingUserAgentStringParserImpl#scheduler}
 	 */
 	private UpdateService updateService;
 
@@ -59,7 +59,7 @@ public final class OnlineUserAgentStringParserImpl extends UserAgentStringParser
 	 * @throws IllegalArgumentException
 	 *             if one of the given arguments is {@code null}
 	 */
-	public OnlineUserAgentStringParserImpl(final RefreshableDataStore store) {
+	public UpdatingUserAgentStringParserImpl(final RefreshableDataStore store) {
 		super(store);
 
 		// set up update service

@@ -21,7 +21,7 @@ import net.sf.uadetector.datareader.DataReader;
 import net.sf.uadetector.datareader.XmlDataReader;
 import net.sf.uadetector.datastore.AbstractDataStore;
 import net.sf.uadetector.datastore.OnlineXmlDataStore;
-import net.sf.uadetector.parser.OnlineUserAgentStringParserImpl;
+import net.sf.uadetector.parser.UpdatingUserAgentStringParserImpl;
 import net.sf.uadetector.parser.UserAgentStringParserImpl;
 
 /**
@@ -43,7 +43,7 @@ public final class UADetectorServiceFactory {
 	 * Holder to load the parser only when it's needed.
 	 */
 	private static final class OnlineUserAgentStringParserHolder {
-		private static UserAgentStringParser INSTANCE = new OnlineUserAgentStringParserImpl(new OnlineXmlDataStore());
+		private static UserAgentStringParser INSTANCE = new UpdatingUserAgentStringParserImpl(new OnlineXmlDataStore());
 	}
 
 	/**
@@ -93,11 +93,11 @@ public final class UADetectorServiceFactory {
 	 * within the <em>uadetector-resources</em> JAR). The initialization is started only when this method is called the
 	 * first time.<br>
 	 * <br>
-	 * The static class definition {@link OnlineUserAgentStringParserHolder} within this factory class is <em>not</em>
-	 * initialized until the JVM determines that {@link OnlineUserAgentStringParserHolder} must be executed. The static
-	 * class {@code OnlineUserAgentStringParserHolder} is only executed when the static method
+	 * The static class definition {@link UpdatingUserAgentStringParserHolder} within this factory class is <em>not</em>
+	 * initialized until the JVM determines that {@link UpdatingUserAgentStringParserHolder} must be executed. The static
+	 * class {@code UpdatingUserAgentStringParserHolder} is only executed when the static method
 	 * {@code getOnlineUserAgentStringParser} is invoked on the class {@code UADetectorServiceFactory}, and the first
-	 * time this happens the JVM will load and initialize the {@code OnlineUserAgentStringParserHolder} class.<br>
+	 * time this happens the JVM will load and initialize the {@code UpdatingUserAgentStringParserHolder} class.<br>
 	 * <br>
 	 * If during the operation the Internet connection gets lost, then this instance continues to work properly (and
 	 * under correct log level settings you will get an corresponding log messages).

@@ -18,13 +18,13 @@ package net.sf.uadetector.parser;
 import net.sf.uadetector.datastore.RefreshableDataStore;
 import net.sf.uadetector.datastore.TestXmlDataStore;
 
-final class OnlineUserAgentStringParserHolder {
+final class UpdatingUserAgentStringParserHolder {
 
-	private static OnlineUserAgentStringParserImpl INSTANCE;
+	private static UpdatingUserAgentStringParserImpl INSTANCE;
 
-	public static OnlineUserAgentStringParserImpl getInstance() {
+	public static UpdatingUserAgentStringParserImpl getInstance() {
 		if (INSTANCE == null) {
-			INSTANCE = new OnlineUserAgentStringParserImpl(setUpDataStore());
+			INSTANCE = new UpdatingUserAgentStringParserImpl(setUpDataStore());
 		}
 		return INSTANCE;
 	}
@@ -33,7 +33,7 @@ final class OnlineUserAgentStringParserHolder {
 		return new TestXmlDataStore();
 	}
 
-	private OnlineUserAgentStringParserHolder() {
+	private UpdatingUserAgentStringParserHolder() {
 		// should not be instantiated
 	}
 

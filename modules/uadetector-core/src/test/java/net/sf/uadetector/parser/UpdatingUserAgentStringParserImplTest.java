@@ -30,15 +30,15 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class OnlineUserAgentStringParserImplTest {
+public class UpdatingUserAgentStringParserImplTest {
 
-	private static final Logger LOG = LoggerFactory.getLogger(OnlineUserAgentStringParserImplTest.class);
+	private static final Logger LOG = LoggerFactory.getLogger(UpdatingUserAgentStringParserImplTest.class);
 
-	private static final OnlineUserAgentStringParserImpl PARSER = OnlineUserAgentStringParserHolder.getInstance();
+	private static final UpdatingUserAgentStringParserImpl PARSER = UpdatingUserAgentStringParserHolder.getInstance();
 
 	@Test(expected = IllegalArgumentException.class)
 	public void construct_store_null() throws Exception {
-		new OnlineUserAgentStringParserImpl(null);
+		new UpdatingUserAgentStringParserImpl(null);
 	}
 
 	@Test
@@ -230,19 +230,19 @@ public class OnlineUserAgentStringParserImplTest {
 
 	@Test
 	public void refresh() throws Exception {
-		final OnlineUserAgentStringParserImpl parser = new OnlineUserAgentStringParserImpl(new TestXmlDataStore());
+		final UpdatingUserAgentStringParserImpl parser = new UpdatingUserAgentStringParserImpl(new TestXmlDataStore());
 		parser.getDataStore().refresh();
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void setUpdateInterval_toSmall() throws MalformedURLException {
-		final OnlineUserAgentStringParserImpl parser = new OnlineUserAgentStringParserImpl(new TestXmlDataStore());
+		final UpdatingUserAgentStringParserImpl parser = new UpdatingUserAgentStringParserImpl(new TestXmlDataStore());
 		parser.setUpdateInterval(-1l);
 	}
 
 	@Test
 	public void testUpdateMechanismWhileParsing() throws InterruptedException {
-		final OnlineUserAgentStringParserImpl parser = new OnlineUserAgentStringParserImpl(new TestXmlDataStore());
+		final UpdatingUserAgentStringParserImpl parser = new UpdatingUserAgentStringParserImpl(new TestXmlDataStore());
 		final long firstLastUpdateCheck = parser.getUpdater().getLastUpdateCheck();
 		LOG.debug("LastUpdateCheck at: " + firstLastUpdateCheck);
 		final long originalInterval = parser.getUpdateInterval();
@@ -264,7 +264,7 @@ public class OnlineUserAgentStringParserImplTest {
 	@Test
 	public void testWrongUrl() throws Exception {
 		LOG.debug("Testing the update ability with a wrong URL.");
-		final OnlineUserAgentStringParserImpl parser = new OnlineUserAgentStringParserImpl(new NotUpdateableXmlDataStore());
+		final UpdatingUserAgentStringParserImpl parser = new UpdatingUserAgentStringParserImpl(new NotUpdateableXmlDataStore());
 		LOG.debug("Reducing the update interval during the test.");
 		parser.setUpdateInterval(10l);
 		parser.parse("");

@@ -28,11 +28,9 @@ import java.nio.charset.Charset;
 import net.sf.uadetector.exception.CanNotOpenStreamException;
 
 /**
- * This class is used to create a new instance of {@link URL} from a string representation of an {@code URL} or to open
- * streams to it.<br>
- * <br>
- * It is intended to encapsulate the checked exception {@link MalformedURLException} during the construction of an URL
- * or the {@link IOException} while opening a stream to an {@code URL}.
+ * This class is intended to provide URL utility functions that encapsulate the checked exceptions like
+ * {@link MalformedURLException} during the construction of an URL or the {@link IOException} while opening a stream to
+ * an {@code URL}.
  * 
  * @author André Rouél
  */
@@ -164,7 +162,7 @@ public class UrlUtil {
 		try {
 			url = file.toURI().toURL();
 		} catch (final MalformedURLException e) {
-			throw new IllegalStateException("Can not construct an URL for the passed file.", e);
+			throw new IllegalStateException("Can not construct an URL for passed file.", e);
 		}
 		return url;
 	}

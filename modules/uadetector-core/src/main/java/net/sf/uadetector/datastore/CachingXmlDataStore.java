@@ -15,19 +15,16 @@
  ******************************************************************************/
 package net.sf.uadetector.datastore;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.net.URL;
 import java.nio.charset.Charset;
 
 import net.sf.uadetector.datareader.DataReader;
 import net.sf.uadetector.datareader.XmlDataReader;
 import net.sf.uadetector.internal.data.Data;
+import net.sf.uadetector.internal.util.FileUtil;
 import net.sf.uadetector.internal.util.UrlUtil;
 
 import org.slf4j.Logger;
@@ -180,26 +177,15 @@ public final class CachingXmlDataStore extends AbstractDataStore implements Refr
 	 * @param file
 	 *            the file that could be empty
 	 * @return {@code true} when the file is accessible and empty otherwise {@code false}
+	 * @throws IllegalStateException
+	 *             if an I/O error occurs
 	 */
 	private static boolean isEmpty(final File file, final Charset charset) {
 		boolean empty = false;
-		BufferedReader reader = null;
 		try {
-			reader = new BufferedReader(new InputStreamReader(new FileInputStream(file), charset));
-			final String line = reader.readLine();
-			empty = line == null;
-		} catch (final FileNotFoundException e) {
-			throw new IllegalStateException("file does not exist");
+			empty = FileUtil.isEmpty(file, charset);
 		} catch (final IOException e) {
-			throw new IllegalStateException("file can not be read");
-		} finally {
-			if (reader != null) {
-				try {
-					reader.close();
-				} catch (final IOException e) {
-					throw new IllegalStateException("closing the reader failed");
-				}
-			}
+			throw new IllegalStateException("The given file could not be read.");
 		}
 		return empty;
 	}
@@ -241,7 +227,7 @@ public final class CachingXmlDataStore extends AbstractDataStore implements Refr
 					try {
 						outputStream.close();
 					} catch (final IOException e) {
-						LOG.warn("Can not close output stream.");
+						LOG.warn("The output stream could not be closed.");
 					}
 				}
 			}

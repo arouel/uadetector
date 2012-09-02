@@ -35,7 +35,7 @@ public class KnownAgentsReader {
 	/**
 	 * Parser to detect informations about an user agent
 	 */
-	private static final UserAgentStringParser parser = UADetectorServiceFactory.getUserAgentStringParser();
+	private static final UserAgentStringParser parser = UADetectorServiceFactory.getResourceModuleParser();
 
 	/**
 	 * CSV printer for detected version numbers to be particularly examined

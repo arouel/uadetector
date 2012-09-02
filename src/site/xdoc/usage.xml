@@ -46,7 +46,7 @@ public class HelloServlet extends HttpServlet {
 		PrintWriter out = response.getWriter();
 
 		// Get an UserAgentStringParser and analyze the requesting client
-		UserAgentStringParser parser = UADetectorServiceFactory.getUserAgentStringParser();
+		UserAgentStringParser parser = UADetectorServiceFactory.getResourceModuleParser();
 		UserAgent agent = parser.parse(request.getHeader("User-Agent"));
 
 		out.append("You're a <em>");

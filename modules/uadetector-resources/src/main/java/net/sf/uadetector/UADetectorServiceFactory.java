@@ -34,16 +34,16 @@ public final class UADetectorServiceFactory {
 	/**
 	 * Holder to load the parser only when it's needed.
 	 */
-	private static final class OfflineUserAgentStringParserHolder {
-		private static UserAgentStringParser INSTANCE = new UserAgentStringParserImpl<ResourceModuleXmlDataStore>(
-				new ResourceModuleXmlDataStore());
+	private static final class OnlineUpdatingParserHolder {
+		private static UserAgentStringParser INSTANCE = new UpdatingUserAgentStringParserImpl(new OnlineXmlDataStore());
 	}
 
 	/**
 	 * Holder to load the parser only when it's needed.
 	 */
-	private static final class OnlineUserAgentStringParserHolder {
-		private static UserAgentStringParser INSTANCE = new UpdatingUserAgentStringParserImpl(new OnlineXmlDataStore());
+	private static final class ResourceModuleParserHolder {
+		private static UserAgentStringParser INSTANCE = new UserAgentStringParserImpl<ResourceModuleXmlDataStore>(
+				new ResourceModuleXmlDataStore());
 	}
 
 	/**
@@ -85,6 +85,32 @@ public final class UADetectorServiceFactory {
 	}
 
 	/**
+	 * Returns an implementation of {@link UserAgentStringParser} which checks at regular intervals for new versions of
+	 * <em>UAS data</em> (also known as database). When newer data available, it automatically loads and updates it.
+	 * 
+	 * <p>
+	 * At initialization time the returned parser will be loaded with the <em>UAS data</em> of this module (the shipped
+	 * one within the <em>uadetector-resources</em> JAR) and tries to update it. The initialization is started only when
+	 * this method is called the first time.
+	 * 
+	 * <p>
+	 * The static class definition {@link UpdatingUserAgentStringParserHolder} within this factory class is <em>not</em>
+	 * initialized until the JVM determines that {@code UpdatingUserAgentStringParserHolder} must be executed. The
+	 * static class {@code UpdatingUserAgentStringParserHolder} is only executed when the static method
+	 * {@code getOnlineUserAgentStringParser} is invoked on the class {@code UADetectorServiceFactory}, and the first
+	 * time this happens the JVM will load and initialize the {@code UpdatingUserAgentStringParserHolder} class.
+	 * 
+	 * <p>
+	 * If during the operation the Internet connection gets lost, then this instance continues to work properly (and
+	 * under correct log level settings you will get an corresponding log messages).
+	 * 
+	 * @return an user agent string parser with updating service
+	 */
+	public static UserAgentStringParser getOnlineUpdatingParser() {
+		return OnlineUpdatingParserHolder.INSTANCE;
+	}
+
+	/**
 	 * Gets always the same implementation instance of the interface {@code UserAgentStringParser}. This instance has an
 	 * update function so that it checks at regular intervals for new versions of the <em>UAS data</em> (also known as
 	 * database). When a newer database is available, it is automatically loaded and updated.<br>
@@ -94,8 +120,8 @@ public final class UADetectorServiceFactory {
 	 * first time.<br>
 	 * <br>
 	 * The static class definition {@link UpdatingUserAgentStringParserHolder} within this factory class is <em>not</em>
-	 * initialized until the JVM determines that {@link UpdatingUserAgentStringParserHolder} must be executed. The static
-	 * class {@code UpdatingUserAgentStringParserHolder} is only executed when the static method
+	 * initialized until the JVM determines that {@link UpdatingUserAgentStringParserHolder} must be executed. The
+	 * static class {@code UpdatingUserAgentStringParserHolder} is only executed when the static method
 	 * {@code getOnlineUserAgentStringParser} is invoked on the class {@code UADetectorServiceFactory}, and the first
 	 * time this happens the JVM will load and initialize the {@code UpdatingUserAgentStringParserHolder} class.<br>
 	 * <br>
@@ -105,8 +131,31 @@ public final class UADetectorServiceFactory {
 	 * @return always the same implementation instance of the interface {@code UserAgentStringParser} and never
 	 *         {@code null}
 	 */
+	@Deprecated
 	public static UserAgentStringParser getOnlineUserAgentStringParser() {
-		return OnlineUserAgentStringParserHolder.INSTANCE;
+		return OnlineUpdatingParserHolder.INSTANCE;
+	}
+
+	/**
+	 * Returns an implementation of {@link UserAgentStringParser} with no updating functions. It will be loaded by using
+	 * the shipped <em>UAS data</em> (also known as database) of this module. The database is loaded once during
+	 * initialization. The initialization is started only when this method is called the first time.
+	 * 
+	 * <p>
+	 * The static class definition {@link ResourceModuleParserHolder} within this factory class is <em>not</em>
+	 * initialized until the JVM determines that {@code ResourceModuleParserHolder} must be executed. The static class
+	 * {@code UpdatingUserAgentStringParserHolder} is only executed when the static method
+	 * {@code getOnlineUserAgentStringParser} is invoked on the class {@code UADetectorServiceFactory}, and the first
+	 * time this happens the JVM will load and initialize the {@code ResourceModuleParserHolder} class.
+	 * 
+	 * <p>
+	 * If during the operation the Internet connection gets lost, then this instance continues to work properly (and
+	 * under correct log level settings you will get an corresponding log messages).
+	 * 
+	 * @return an user agent string parser with updating service
+	 */
+	public static UserAgentStringParser getResourceModuleParser() {
+		return ResourceModuleParserHolder.INSTANCE;
 	}
 
 	/**
@@ -114,17 +163,18 @@ public final class UADetectorServiceFactory {
 	 * offline by using the <em>UAS data</em> (also known as database) of this module. The database is loaded once
 	 * during initialization. The initialization is started only when this method is called the first time.<br>
 	 * <br>
-	 * The static class definition {@link OfflineUserAgentStringParserHolder} within this factory class is <em>not</em>
-	 * initialized until the JVM determines that {@link OfflineUserAgentStringParserHolder} must be executed. The static
-	 * class {@code OfflineUserAgentStringParserHolder} is only executed when the static method
+	 * The static class definition {@link ResourceModuleParserHolder} within this factory class is <em>not</em>
+	 * initialized until the JVM determines that {@link ResourceModuleParserHolder} must be executed. The static class
+	 * {@code OfflineUserAgentStringParserHolder} is only executed when the static method
 	 * {@code getUserAgentStringParser} is invoked on the class {@code UADetectorServiceFactory}, and the first time
 	 * this happens the JVM will load and initialize the {@code OfflineUserAgentStringParserHolder} class.
 	 * 
 	 * @return always the same implementation instance of the interface {@code UserAgentStringParser} and never
 	 *         {@code null}
 	 */
+	@Deprecated
 	public static UserAgentStringParser getUserAgentStringParser() {
-		return OfflineUserAgentStringParserHolder.INSTANCE;
+		return ResourceModuleParserHolder.INSTANCE;
 	}
 
 	private UADetectorServiceFactory() {

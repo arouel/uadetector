@@ -17,7 +17,7 @@ public class OperatingSystemSampleTest {
 	/**
 	 * Parser to detect informations about an user agent
 	 */
-	private static final UserAgentStringParser PARSER = UADetectorServiceFactory.getUserAgentStringParser();
+	private static final UserAgentStringParser PARSER = UADetectorServiceFactory.getResourceModuleParser();
 
 	@Test
 	public void test() {

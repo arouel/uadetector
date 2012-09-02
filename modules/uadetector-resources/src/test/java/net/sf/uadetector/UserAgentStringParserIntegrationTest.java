@@ -70,7 +70,7 @@ public class UserAgentStringParserIntegrationTest {
 
 	private static final List<UserAgentExample> UA_EXAMPLES = UserAgentExamplesReader.read();
 
-	private static final UserAgentStringParser PARSER = UADetectorServiceFactory.getUserAgentStringParser();
+	private static final UserAgentStringParser PARSER = UADetectorServiceFactory.getResourceModuleParser();
 
 	@Test
 	public void testOperatingSystemExamples() throws Exception {

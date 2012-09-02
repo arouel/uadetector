@@ -30,7 +30,7 @@ public class UrlUtilTest_read {
 	private static final URL VERSION_URL = UrlUtilTest_read.class.getClassLoader().getResource("uas_newer.version");
 
 	@Test(expected = IOException.class)
-	public void read() throws Exception {
+	public void testNullCheckBeforeClosing() throws Exception {
 		PowerMock.expectNiceNew(BufferedReader.class, EasyMock.anyObject(Reader.class)).andThrow(new IOException());
 		PowerMock.replayAll();
 		UrlUtil.read(VERSION_URL, CHARSET);

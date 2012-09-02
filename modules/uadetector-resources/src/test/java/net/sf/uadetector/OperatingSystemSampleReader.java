@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.sf.uadetector.internal.util.VersionParser;
-import net.sf.uadetector.parser.OnlineUserAgentStringParserImpl;
 
 import org.apache.commons.csv.CSVParser;
 import org.slf4j.Logger;
@@ -24,7 +23,7 @@ final class OperatingSystemSampleReader {
 	/**
 	 * Default log
 	 */
-	private static final Logger LOG = LoggerFactory.getLogger(OnlineUserAgentStringParserImpl.class);
+	private static final Logger LOG = LoggerFactory.getLogger(OperatingSystemSampleReader.class);
 
 	private static List<OperatingSystemSample> read(final String file) {
 		final InputStream stream = UserAgentStringParserIntegrationTest.class.getClassLoader().getResourceAsStream(file);

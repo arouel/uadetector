@@ -11,8 +11,6 @@ import java.io.OutputStreamWriter;
 import java.util.HashMap;
 import java.util.Map;
 
-import net.sf.uadetector.parser.OnlineUserAgentStringParserImpl;
-
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,7 +30,7 @@ public class KnownAgentsReader {
 	/**
 	 * Default log
 	 */
-	private static final Logger LOG = LoggerFactory.getLogger(OnlineUserAgentStringParserImpl.class);
+	private static final Logger LOG = LoggerFactory.getLogger(KnownAgentsReader.class);
 
 	/**
 	 * Parser to detect informations about an user agent

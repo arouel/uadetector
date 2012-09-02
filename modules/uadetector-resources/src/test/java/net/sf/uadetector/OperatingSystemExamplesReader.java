@@ -7,8 +7,6 @@ import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.sf.uadetector.parser.OnlineUserAgentStringParserImpl;
-
 import org.apache.commons.csv.CSVParser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,7 +26,7 @@ final class OperatingSystemExamplesReader {
 	/**
 	 * Default log
 	 */
-	private static final Logger LOG = LoggerFactory.getLogger(OnlineUserAgentStringParserImpl.class);
+	private static final Logger LOG = LoggerFactory.getLogger(OperatingSystemExamplesReader.class);
 
 	public static List<OperatingSystemExample> read() {
 		final InputStream stream = UserAgentStringParserIntegrationTest.class.getClassLoader().getResourceAsStream(FILE);

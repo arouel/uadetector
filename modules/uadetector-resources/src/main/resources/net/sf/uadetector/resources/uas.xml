@@ -3,7 +3,7 @@
 <uasdata>
 	<description>
 		<label>Data (format xml) for UASparser - http://user-agent-string.info/download/UASparser</label>
-		<version>20120831-02</version>
+		<version>20120910-01</version>
 		<checksum type="MD5">http://user-agent-string.info/rpc/get_data.php?format=xml&amp;md5=y</checksum>
 		<checksum type="SHA1">http://user-agent-string.info/rpc/get_data.php?format=xml&amp;sha1=y</checksum>
 	</description>
@@ -2078,6 +2078,16 @@
 				<url_company><![CDATA[]]></url_company>
 				<icon>bot.png</icon>
 				<bot_info_url>/list-of-ua/bot-detail?bot=dotSemantic</bot_info_url>
+			</robot>
+			<robot>
+				<id>7764</id>
+				<useragent><![CDATA[Mozilla/5.0 (compatible; DripfeedBot/2.0; +http://dripfeedbookmark.com/bot.html]]></useragent>
+				<family>DripfeedBot</family>
+				<name>DripfeedBot/2.0</name>
+				<company><![CDATA[dripfeedbookmark.com]]></company>
+				<url_company><![CDATA[http://dripfeedbookmark.com/]]></url_company>
+				<icon>bot.png</icon>
+				<bot_info_url>/list-of-ua/bot-detail?bot=DripfeedBot</bot_info_url>
 			</robot>
 			<robot>
 				<id>1225</id>
@@ -5960,21 +5970,21 @@
 				<bot_info_url>/list-of-ua/bot-detail?bot=percbotspider</bot_info_url>
 			</robot>
 			<robot>
-				<id>690</id>
-				<useragent><![CDATA[Pingdom GIGRIB (http://www.pingdom.com)]]></useragent>
-				<family>Pingdom GIGRIB</family>
-				<name>Pingdom GIGRIB</name>
-				<company><![CDATA[Pingdom]]></company>
-				<url_company><![CDATA[http://www.pingdom.com/]]></url_company>
-				<icon>bot.png</icon>
-				<bot_info_url>/list-of-ua/bot-detail?bot=Pingdom GIGRIB</bot_info_url>
-			</robot>
-			<robot>
 				<id>2197</id>
-				<useragent><![CDATA[pingdom.com_bot_version_1.4_(http://www.pingdom.com/)]]></useragent>
+				<useragent><![CDATA[Pingdom.com_bot_version_1.4_(http://www.pingdom.com/)]]></useragent>
 				<family>pingdom.com_bot</family>
 				<name>pingdom.com_bot 1.4</name>
 				<company><![CDATA[Pingdom AB]]></company>
+				<url_company><![CDATA[http://www.pingdom.com/]]></url_company>
+				<icon>bot_pingdomcom_bot.png</icon>
+				<bot_info_url>/list-of-ua/bot-detail?bot=pingdom.com_bot</bot_info_url>
+			</robot>
+			<robot>
+				<id>690</id>
+				<useragent><![CDATA[Pingdom GIGRIB (http://www.pingdom.com)]]></useragent>
+				<family>pingdom.com_bot</family>
+				<name>Pingdom GIGRIB</name>
+				<company><![CDATA[Pingdom]]></company>
 				<url_company><![CDATA[http://www.pingdom.com/]]></url_company>
 				<icon>bot_pingdomcom_bot.png</icon>
 				<bot_info_url>/list-of-ua/bot-detail?bot=pingdom.com_bot</bot_info_url>
@@ -6468,6 +6478,16 @@
 				<url_company><![CDATA[http://www.searchengineworld.com/]]></url_company>
 				<icon>bot.png</icon>
 				<bot_info_url>/list-of-ua/bot-detail?bot=Search Engine World Robots.txt Validator</bot_info_url>
+			</robot>
+			<robot>
+				<id>7757</id>
+				<useragent><![CDATA[search.KumKie.com]]></useragent>
+				<family>search.KumKie.com</family>
+				<name>search.KumKie.com</name>
+				<company><![CDATA[Gifts Next Day]]></company>
+				<url_company><![CDATA[http://giftsnextday.net/]]></url_company>
+				<icon>bot.png</icon>
+				<bot_info_url>/list-of-ua/bot-detail?bot=search.KumKie.com</bot_info_url>
 			</robot>
 			<robot>
 				<id>4512</id>
@@ -8380,6 +8400,16 @@
 				<bot_info_url>/list-of-ua/bot-detail?bot=WebImages</bot_info_url>
 			</robot>
 			<robot>
+				<id>7748</id>
+				<useragent><![CDATA[webinatorbot 1.0; +http://www.webinator.de]]></useragent>
+				<family>webinatorbot</family>
+				<name>webinatorbot 1.0</name>
+				<company><![CDATA[HighSignal UG]]></company>
+				<url_company><![CDATA[http://www.highsignal.de/]]></url_company>
+				<icon>bot.png</icon>
+				<bot_info_url>/list-of-ua/bot-detail?bot=webinatorbot</bot_info_url>
+			</robot>
+			<robot>
 				<id>1478</id>
 				<useragent><![CDATA[mozilla/5.0 (compatible; webmastercoffee/0.7; +http://webmastercoffee.com/about)]]></useragent>
 				<family>webmastercoffee</family>
@@ -8458,6 +8488,16 @@
 				<url_company><![CDATA[http://www.wesee.com/]]></url_company>
 				<icon>bot.png</icon>
 				<bot_info_url>/list-of-ua/bot-detail?bot=WeSEE:Search</bot_info_url>
+			</robot>
+			<robot>
+				<id>7747</id>
+				<useragent><![CDATA[Whoismindbot/1.0 (+http://www.whoismind.com/bot.html)]]></useragent>
+				<family>Whoismindbot</family>
+				<name>Whoismindbot/1.0</name>
+				<company><![CDATA[WhoisMind]]></company>
+				<url_company><![CDATA[http://www.whoismind.com/]]></url_company>
+				<icon>bot.png</icon>
+				<bot_info_url>/list-of-ua/bot-detail?bot=Whoismindbot</bot_info_url>
 			</robot>
 			<robot>
 				<id>5389</id>

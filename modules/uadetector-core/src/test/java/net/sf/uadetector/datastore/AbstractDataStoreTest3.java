@@ -79,7 +79,7 @@ public class AbstractDataStoreTest3 {
 	@Test(expected = CanNotOpenStreamException.class)
 	public void construct_unreachable_url() {
 		final DataReader reader = new XmlDataReader();
-		final String unreachable = "http://unreachable,local";
+		final String unreachable = "http://unreachable.local";
 		new TestDataStore(reader, unreachable, unreachable, CHARSET);
 	}
 

@@ -51,7 +51,7 @@ public class HelloWorld extends AbstractHandler {
 		out.println("<br>");
 
 		// Get an UserAgentStringParser and analyze the requesting client
-		UserAgentStringParser parser = UADetectorServiceFactory.getUserAgentStringParser();
+		UserAgentStringParser parser = UADetectorServiceFactory.getOnlineUpdatingParser();
 		UserAgent agent = parser.parse(request.getHeader("User-Agent"));
 
 		out.append("You're a <em>");

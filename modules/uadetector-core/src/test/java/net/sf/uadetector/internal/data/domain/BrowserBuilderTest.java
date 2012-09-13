@@ -18,6 +18,7 @@ package net.sf.uadetector.internal.data.domain;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
+import net.sf.uadetector.UserAgentFamily;
 import net.sf.uadetector.internal.data.domain.Browser.Builder;
 
 import org.junit.Assert;
@@ -38,7 +39,7 @@ public class BrowserBuilderTest {
 		final SortedSet<BrowserPattern> patternSet = new TreeSet<BrowserPattern>();
 
 		final Browser.Builder original = new Browser.Builder();
-		original.setFamily("f1");
+		original.setFamily(UserAgentFamily.CHROME);
 		original.setIcon("i1");
 		original.setId(1);
 		original.setInfoUrl("iu1");
@@ -51,7 +52,7 @@ public class BrowserBuilderTest {
 		original.setUrl("u1");
 
 		final Builder copy1 = new Browser.Builder(original);
-		Assert.assertEquals("f1", copy1.getFamily());
+		Assert.assertEquals(UserAgentFamily.CHROME, copy1.getFamily());
 		Assert.assertEquals("i1", copy1.getIcon());
 		Assert.assertEquals("iu1", copy1.getInfoUrl());
 		Assert.assertSame(operatingSystem, copy1.getOperatingSystem());
@@ -64,7 +65,7 @@ public class BrowserBuilderTest {
 		Assert.assertEquals("u1", copy1.getUrl());
 
 		final Builder copy2 = original.copy();
-		Assert.assertEquals("f1", copy2.getFamily());
+		Assert.assertEquals(UserAgentFamily.CHROME, copy2.getFamily());
 		Assert.assertEquals("i1", copy2.getIcon());
 		Assert.assertEquals("iu1", copy2.getInfoUrl());
 		Assert.assertSame(operatingSystem, copy2.getOperatingSystem());
@@ -105,10 +106,10 @@ public class BrowserBuilderTest {
 	@Test
 	public void setId_numericString() {
 		final BrowserType type = new BrowserType.Builder().setId("1").setName("browser type test").build();
-		final Browser b1 = new Browser.Builder().setId("1").setFamily("f1").setIcon("i1").setInfoUrl("iu1").setProducer("p1")
-				.setProducerUrl("pu1").setType(type).setUrl("u1").build();
-		final Browser b2 = new Browser.Builder().setId(1).setFamily("f1").setIcon("i1").setInfoUrl("iu1").setProducer("p1")
-				.setProducerUrl("pu1").setType(type).setUrl("u1").build();
+		final Browser b1 = new Browser.Builder().setId("1").setFamily(UserAgentFamily.CHROME).setIcon("i1").setInfoUrl("iu1")
+				.setProducer("p1").setProducerUrl("pu1").setType(type).setUrl("u1").build();
+		final Browser b2 = new Browser.Builder().setId(1).setFamily(UserAgentFamily.CHROME).setIcon("i1").setInfoUrl("iu1")
+				.setProducer("p1").setProducerUrl("pu1").setType(type).setUrl("u1").build();
 		Assert.assertTrue(b1.equals(b2));
 	}
 
@@ -175,7 +176,7 @@ public class BrowserBuilderTest {
 		final SortedSet<BrowserPattern> patternSet = new TreeSet<BrowserPattern>();
 
 		final Browser.Builder builder = new Browser.Builder();
-		Assert.assertSame(builder, builder.setFamily("f1"));
+		Assert.assertSame(builder, builder.setFamily(UserAgentFamily.CHROME));
 		Assert.assertSame(builder, builder.setIcon("i1"));
 		Assert.assertSame(builder, builder.setId(1));
 		Assert.assertSame(builder, builder.setInfoUrl("iu1"));
@@ -187,7 +188,7 @@ public class BrowserBuilderTest {
 		Assert.assertSame(builder, builder.setTypeId(1));
 		Assert.assertSame(builder, builder.setUrl("u1"));
 
-		Assert.assertEquals("f1", builder.getFamily());
+		Assert.assertEquals(UserAgentFamily.CHROME, builder.getFamily());
 		Assert.assertEquals("i1", builder.getIcon());
 		Assert.assertEquals("iu1", builder.getInfoUrl());
 		Assert.assertSame(operatingSystem, builder.getOperatingSystem());
@@ -200,7 +201,7 @@ public class BrowserBuilderTest {
 		Assert.assertEquals("u1", builder.getUrl());
 
 		final Browser browser = builder.build();
-		Assert.assertEquals("f1", browser.getFamily());
+		Assert.assertEquals(UserAgentFamily.CHROME, browser.getFamily());
 		Assert.assertEquals("i1", browser.getIcon());
 		Assert.assertEquals("iu1", browser.getInfoUrl());
 		Assert.assertEquals("p1", browser.getProducer());

@@ -19,6 +19,7 @@ import java.util.SortedSet;
 import java.util.TreeSet;
 import java.util.regex.Pattern;
 
+import net.sf.uadetector.UserAgentFamily;
 import net.sf.uadetector.internal.data.domain.Browser;
 import net.sf.uadetector.internal.data.domain.BrowserOperatingSystemMapping;
 import net.sf.uadetector.internal.data.domain.BrowserPattern;
@@ -37,7 +38,8 @@ public class DataBuilderTest {
 		final Data.Builder b = new Data.Builder();
 		final SortedSet<OperatingSystemPattern> osPatternSet = new TreeSet<OperatingSystemPattern>();
 		final OperatingSystem os = new OperatingSystem("f1", "i1", 1, "iu1", "n1", osPatternSet, "p1", "pu1", "u1");
-		final Browser br = new Browser(1, new BrowserType(1, "Browser"), "f", "u", "p", "pu", "i", "iu", new TreeSet<BrowserPattern>(), os);
+		final Browser br = new Browser(1, new BrowserType(1, "Browser"), UserAgentFamily.FIREFOX, "u", "p", "pu", "i", "iu",
+				new TreeSet<BrowserPattern>(), os);
 		Assert.assertSame(b, b.appendBrowser(br));
 		Assert.assertSame(b, b.appendBrowser(br)); // testing to add same one more time
 	}
@@ -53,7 +55,7 @@ public class DataBuilderTest {
 		final Data.Builder b = new Data.Builder();
 		final Browser.Builder builder = new Browser.Builder();
 		builder.setId(1);
-		builder.setFamily("BrowserBuilder1");
+		builder.setFamily(UserAgentFamily.FIREFOX);
 		builder.setType(new BrowserType(1, "Browser"));
 		Assert.assertSame(b, b.appendBrowserBuilder(builder));
 		Assert.assertSame(b, b.appendBrowserBuilder(builder)); // testing to add same one more time
@@ -76,11 +78,11 @@ public class DataBuilderTest {
 		final Data.Builder d = new Data.Builder().setVersion("test version");
 		final Browser.Builder builder = new Browser.Builder();
 		builder.setId(1);
-		builder.setFamily("BrowserBuilder1");
+		builder.setFamily(UserAgentFamily.FIREFOX);
 		builder.setType(new BrowserType(1, "Browser"));
 		Assert.assertSame(d, d.appendBrowserBuilder(builder));
 		builder.setId(2);
-		builder.setFamily("BrowserBuilder2");
+		builder.setFamily(UserAgentFamily.CHROME);
 		builder.setType(new BrowserType(1, "Browser"));
 		Assert.assertSame(d, d.appendBrowserBuilder(builder));
 		final Data data = d.build();
@@ -92,12 +94,12 @@ public class DataBuilderTest {
 		final Data.Builder d = new Data.Builder().setVersion("test version");
 		final Browser.Builder b1 = new Browser.Builder();
 		b1.setId(1);
-		b1.setFamily("BrowserBuilder1");
+		b1.setFamily(UserAgentFamily.FIREFOX);
 		b1.setType(new BrowserType(1, "Browser"));
 		Assert.assertSame(d, d.appendBrowserBuilder(b1));
 		final Browser.Builder b2 = new Browser.Builder();
 		b2.setId(2);
-		b2.setFamily("BrowserBuilder2");
+		b2.setFamily(UserAgentFamily.CHROME);
 		b2.setType(new BrowserType(1, "Browser"));
 		Assert.assertSame(d, d.appendBrowserBuilder(b2));
 		final Data data = d.build();
@@ -109,7 +111,7 @@ public class DataBuilderTest {
 		final Data.Builder b = new Data.Builder();
 		final Browser.Builder builder = new Browser.Builder();
 		builder.setId(1);
-		builder.setFamily("BrowserBuilder1");
+		builder.setFamily(UserAgentFamily.FIREFOX);
 		b.appendBrowserBuilder(builder);
 	}
 
@@ -120,7 +122,7 @@ public class DataBuilderTest {
 		d.appendBrowserType(type);
 		final Browser.Builder builder = new Browser.Builder();
 		builder.setId(1);
-		builder.setFamily("BrowserBuilder1");
+		builder.setFamily(UserAgentFamily.FIREFOX);
 		builder.setTypeId(2);
 		Assert.assertSame(d, d.appendBrowserBuilder(builder));
 		final Data data = d.build();
@@ -133,7 +135,7 @@ public class DataBuilderTest {
 		final Data.Builder d = new Data.Builder().setVersion("test version");
 		final Browser.Builder builder = new Browser.Builder();
 		builder.setId(1);
-		builder.setFamily("BrowserBuilder1");
+		builder.setFamily(UserAgentFamily.FIREFOX);
 		builder.setTypeId(1); // type does not exist, a log message occur
 		Assert.assertSame(d, d.appendBrowserBuilder(builder));
 		final Data data = d.build();
@@ -202,11 +204,11 @@ public class DataBuilderTest {
 		// browser builder entry
 		final Browser.Builder browserBuilder = new Browser.Builder();
 		browserBuilder.setId(1);
-		browserBuilder.setFamily("BrowserBuilder1");
+		browserBuilder.setFamily(UserAgentFamily.FIREFOX);
 		browserBuilder.setType(new BrowserType(1, "Browser"));
 		d.appendBrowserBuilder(browserBuilder);
 		browserBuilder.setId(2);
-		browserBuilder.setFamily("BrowserBuilder2");
+		browserBuilder.setFamily(UserAgentFamily.CHROME);
 		browserBuilder.setType(new BrowserType(1, "Browser"));
 		d.appendBrowserBuilder(browserBuilder);
 
@@ -298,7 +300,7 @@ public class DataBuilderTest {
 
 	@Test
 	public void appendRobot_successful() {
-		final Robot robot = new Robot("f1", "i1", 1, "iu1", "n1", "p1", "pu1", "u1", "uas1");
+		final Robot robot = new Robot(UserAgentFamily.BINGBOT, "i1", 1, "iu1", "n1", "p1", "pu1", "u1", "uas1");
 		final Data.Builder b = new Data.Builder();
 		Assert.assertSame(b, b.appendRobot(robot));
 		b.appendRobot(robot); // testing to add same one more time

@@ -16,13 +16,14 @@
 package net.sf.uadetector.internal.data.domain;
 
 import net.sf.uadetector.UserAgent;
+import net.sf.uadetector.UserAgentFamily;
 import net.sf.uadetector.UserAgentType;
 
 public final class Robot {
 
 	public static final class Builder {
 
-		private String family = "";
+		private UserAgentFamily family = UserAgentFamily.UNKNOWN;
 		private String icon = "";
 		private int id = Integer.MIN_VALUE;
 		private String infoUrl = "";
@@ -36,7 +37,7 @@ public final class Robot {
 			return new Robot(family, icon, id, infoUrl, name, producer, producerUrl, url, userAgentString);
 		}
 
-		public String getFamily() {
+		public UserAgentFamily getFamily() {
 			return family;
 		}
 
@@ -72,7 +73,7 @@ public final class Robot {
 			return userAgentString;
 		}
 
-		public Builder setFamily(final String family) {
+		public Builder setFamily(final UserAgentFamily family) {
 			if (family == null) {
 				throw new IllegalArgumentException("Argument 'family' must not be null.");
 			}
@@ -169,7 +170,7 @@ public final class Robot {
 	 */
 	public static final String TYPENAME = "Robot";
 
-	private final String family;
+	private final UserAgentFamily family;
 	private final String icon;
 	private final int id;
 	private final String infoUrl;
@@ -179,8 +180,8 @@ public final class Robot {
 	private final String url;
 	private final String userAgentString;
 
-	public Robot(final String family, final String icon, final int id, final String infoUrl, final String name, final String producer,
-			final String producerUrl, final String url, final String userAgentString) {
+	public Robot(final UserAgentFamily family, final String icon, final int id, final String infoUrl, final String name,
+			final String producer, final String producerUrl, final String url, final String userAgentString) {
 
 		if (family == null) {
 			throw new IllegalArgumentException("Argument 'family' must not be null.");
@@ -272,7 +273,7 @@ public final class Robot {
 		return true;
 	}
 
-	public String getFamily() {
+	public UserAgentFamily getFamily() {
 		return family;
 	}
 

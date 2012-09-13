@@ -16,6 +16,7 @@
 package net.sf.uadetector.internal.data.domain;
 
 import net.sf.uadetector.UserAgent;
+import net.sf.uadetector.UserAgentFamily;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -29,7 +30,7 @@ public class RobotTest {
 		final String infoUrl = "info url";
 		final String name = "name";
 		final String url = "url";
-		final String family = null;
+		final UserAgentFamily family = null;
 		final String producerUrl = "producer url";
 		final String producer = "producer";
 		final String userAgentString = "I'm a robot";
@@ -43,7 +44,7 @@ public class RobotTest {
 		final String infoUrl = "info url";
 		final String name = "name";
 		final String url = "url";
-		final String family = "family";
+		final UserAgentFamily family = UserAgentFamily.GOOGLEBOT;
 		final String producerUrl = "producer url";
 		final String producer = "producer";
 		final String userAgentString = "I'm a robot";
@@ -57,7 +58,7 @@ public class RobotTest {
 		final String infoUrl = "info url";
 		final String name = "name";
 		final String url = "url";
-		final String family = "family";
+		final UserAgentFamily family = UserAgentFamily.GOOGLEBOT;
 		final String producerUrl = "producer url";
 		final String producer = "producer";
 		final String userAgentString = "I'm a robot";
@@ -71,7 +72,7 @@ public class RobotTest {
 		final String infoUrl = null;
 		final String name = "name";
 		final String url = "url";
-		final String family = "family";
+		final UserAgentFamily family = UserAgentFamily.GOOGLEBOT;
 		final String producerUrl = "producer url";
 		final String producer = "producer";
 		final String userAgentString = "I'm a robot";
@@ -85,7 +86,7 @@ public class RobotTest {
 		final String infoUrl = "info url";
 		final String url = "url";
 		final String name = null;
-		final String family = "family";
+		final UserAgentFamily family = UserAgentFamily.GOOGLEBOT;
 		final String producerUrl = "producer url";
 		final String producer = "producer";
 		final String userAgentString = "I'm a robot";
@@ -99,7 +100,7 @@ public class RobotTest {
 		final String infoUrl = "info url";
 		final String name = "name";
 		final String url = "url";
-		final String family = "family";
+		final UserAgentFamily family = UserAgentFamily.GOOGLEBOT;
 		final String producerUrl = "producer url";
 		final String producer = null;
 		final String userAgentString = "I'm a robot";
@@ -113,7 +114,7 @@ public class RobotTest {
 		final String infoUrl = "info url";
 		final String name = "name";
 		final String url = "url";
-		final String family = "family";
+		final UserAgentFamily family = UserAgentFamily.GOOGLEBOT;
 		final String producerUrl = null;
 		final String producer = "producer";
 		final String userAgentString = "I'm a robot";
@@ -127,7 +128,7 @@ public class RobotTest {
 		final String infoUrl = "info url";
 		final String name = "name";
 		final String url = "url";
-		final String family = "family";
+		final UserAgentFamily family = UserAgentFamily.GOOGLEBOT;
 		final String producerUrl = "producer url";
 		final String producer = "producer";
 		final String userAgentString = "I'm a robot";
@@ -141,7 +142,7 @@ public class RobotTest {
 		final String infoUrl = "info url";
 		final String name = "name";
 		final String url = null;
-		final String family = "family";
+		final UserAgentFamily family = UserAgentFamily.GOOGLEBOT;
 		final String producerUrl = "producer url";
 		final String producer = "producer";
 		final String userAgentString = "I'm a robot";
@@ -155,7 +156,7 @@ public class RobotTest {
 		final String infoUrl = "info url";
 		final String name = "name";
 		final String url = "url";
-		final String family = "family";
+		final UserAgentFamily family = UserAgentFamily.GOOGLEBOT;
 		final String producerUrl = "producer url";
 		final String producer = "producer";
 		final String userAgentString = null;
@@ -164,7 +165,7 @@ public class RobotTest {
 
 	@Test
 	public void copyTo_successful() {
-		final Robot robot = new Robot("f1", "i1", 1, "iu1", "n1", "p1", "pu1", "u1", "uas1");
+		final Robot robot = new Robot(UserAgentFamily.GOOGLEBOT, "i1", 1, "iu1", "n1", "p1", "pu1", "u1", "uas1");
 		final UserAgent.Builder builder = new UserAgent.Builder();
 		robot.copyTo(builder);
 		Assert.assertEquals(robot.getFamily(), builder.getFamily());
@@ -177,72 +178,72 @@ public class RobotTest {
 
 	@Test
 	public void equals_differentFamily() {
-		final Robot robot1 = new Robot("f1", "i1", 1, "iu1", "n1", "p1", "pu1", "u1", "uas1");
-		final Robot robot2 = new Robot("f2", "i1", 1, "iu1", "n1", "p1", "pu1", "u1", "uas1");
+		final Robot robot1 = new Robot(UserAgentFamily.GOOGLEBOT, "i1", 1, "iu1", "n1", "p1", "pu1", "u1", "uas1");
+		final Robot robot2 = new Robot(UserAgentFamily.BINGBOT, "i1", 1, "iu1", "n1", "p1", "pu1", "u1", "uas1");
 		Assert.assertFalse(robot1.hashCode() == robot2.hashCode());
 		Assert.assertFalse(robot1.equals(robot2));
 	}
 
 	@Test
 	public void equals_differentIcon() {
-		final Robot robot1 = new Robot("f1", "i1", 1, "iu1", "n1", "p1", "pu1", "u1", "uas1");
-		final Robot robot2 = new Robot("f1", "i2", 1, "iu1", "n1", "p1", "pu1", "u1", "uas1");
+		final Robot robot1 = new Robot(UserAgentFamily.GOOGLEBOT, "i1", 1, "iu1", "n1", "p1", "pu1", "u1", "uas1");
+		final Robot robot2 = new Robot(UserAgentFamily.GOOGLEBOT, "i2", 1, "iu1", "n1", "p1", "pu1", "u1", "uas1");
 		Assert.assertFalse(robot1.hashCode() == robot2.hashCode());
 		Assert.assertFalse(robot1.equals(robot2));
 	}
 
 	@Test
 	public void equals_differentId() {
-		final Robot robot1 = new Robot("f1", "i1", 1, "iu1", "n1", "p1", "pu1", "u1", "uas1");
-		final Robot robot2 = new Robot("f1", "i1", 2, "iu1", "n1", "p1", "pu1", "u1", "uas1");
+		final Robot robot1 = new Robot(UserAgentFamily.GOOGLEBOT, "i1", 1, "iu1", "n1", "p1", "pu1", "u1", "uas1");
+		final Robot robot2 = new Robot(UserAgentFamily.GOOGLEBOT, "i1", 2, "iu1", "n1", "p1", "pu1", "u1", "uas1");
 		Assert.assertFalse(robot1.hashCode() == robot2.hashCode());
 		Assert.assertFalse(robot1.equals(robot2));
 	}
 
 	@Test
 	public void equals_differentInfoUrl() {
-		final Robot robot1 = new Robot("f1", "i1", 1, "iu1", "n1", "p1", "pu1", "u1", "uas1");
-		final Robot robot2 = new Robot("f1", "i1", 1, "iu2", "n1", "p1", "pu1", "u1", "uas1");
+		final Robot robot1 = new Robot(UserAgentFamily.GOOGLEBOT, "i1", 1, "iu1", "n1", "p1", "pu1", "u1", "uas1");
+		final Robot robot2 = new Robot(UserAgentFamily.GOOGLEBOT, "i1", 1, "iu2", "n1", "p1", "pu1", "u1", "uas1");
 		Assert.assertFalse(robot1.hashCode() == robot2.hashCode());
 		Assert.assertFalse(robot1.equals(robot2));
 	}
 
 	@Test
 	public void equals_differentName() {
-		final Robot robot1 = new Robot("f1", "i1", 1, "iu1", "n1", "p1", "pu1", "u1", "uas1");
-		final Robot robot2 = new Robot("f1", "i1", 1, "iu1", "n2", "p1", "pu1", "u1", "uas1");
+		final Robot robot1 = new Robot(UserAgentFamily.GOOGLEBOT, "i1", 1, "iu1", "n1", "p1", "pu1", "u1", "uas1");
+		final Robot robot2 = new Robot(UserAgentFamily.GOOGLEBOT, "i1", 1, "iu1", "n2", "p1", "pu1", "u1", "uas1");
 		Assert.assertFalse(robot1.hashCode() == robot2.hashCode());
 		Assert.assertFalse(robot1.equals(robot2));
 	}
 
 	@Test
 	public void equals_differentProducer() {
-		final Robot robot1 = new Robot("f1", "i1", 1, "iu1", "n1", "p1", "pu1", "u1", "uas1");
-		final Robot robot2 = new Robot("f1", "i1", 1, "iu1", "n1", "p2", "pu1", "u1", "uas1");
+		final Robot robot1 = new Robot(UserAgentFamily.GOOGLEBOT, "i1", 1, "iu1", "n1", "p1", "pu1", "u1", "uas1");
+		final Robot robot2 = new Robot(UserAgentFamily.GOOGLEBOT, "i1", 1, "iu1", "n1", "p2", "pu1", "u1", "uas1");
 		Assert.assertFalse(robot1.hashCode() == robot2.hashCode());
 		Assert.assertFalse(robot1.equals(robot2));
 	}
 
 	@Test
 	public void equals_differentProducerUrl() {
-		final Robot robot1 = new Robot("f1", "i1", 1, "iu1", "n1", "p1", "pu1", "u1", "uas1");
-		final Robot robot2 = new Robot("f1", "i1", 1, "iu1", "n1", "p1", "pu2", "u1", "uas1");
+		final Robot robot1 = new Robot(UserAgentFamily.GOOGLEBOT, "i1", 1, "iu1", "n1", "p1", "pu1", "u1", "uas1");
+		final Robot robot2 = new Robot(UserAgentFamily.GOOGLEBOT, "i1", 1, "iu1", "n1", "p1", "pu2", "u1", "uas1");
 		Assert.assertFalse(robot1.hashCode() == robot2.hashCode());
 		Assert.assertFalse(robot1.equals(robot2));
 	}
 
 	@Test
 	public void equals_differentUrl() {
-		final Robot robot1 = new Robot("f1", "i1", 1, "iu1", "n1", "p1", "pu1", "u1", "uas1");
-		final Robot robot2 = new Robot("f1", "i1", 1, "iu1", "n1", "p1", "pu1", "u2", "uas1");
+		final Robot robot1 = new Robot(UserAgentFamily.GOOGLEBOT, "i1", 1, "iu1", "n1", "p1", "pu1", "u1", "uas1");
+		final Robot robot2 = new Robot(UserAgentFamily.GOOGLEBOT, "i1", 1, "iu1", "n1", "p1", "pu1", "u2", "uas1");
 		Assert.assertFalse(robot1.hashCode() == robot2.hashCode());
 		Assert.assertFalse(robot1.equals(robot2));
 	}
 
 	@Test
 	public void equals_differentUserAgentString() {
-		final Robot robot1 = new Robot("f1", "i1", 1, "iu1", "n1", "p1", "pu1", "u1", "uas1");
-		final Robot robot2 = new Robot("f1", "i1", 1, "iu1", "n1", "p1", "pu1", "u1", "uas2");
+		final Robot robot1 = new Robot(UserAgentFamily.GOOGLEBOT, "i1", 1, "iu1", "n1", "p1", "pu1", "u1", "uas1");
+		final Robot robot2 = new Robot(UserAgentFamily.GOOGLEBOT, "i1", 1, "iu1", "n1", "p1", "pu1", "u1", "uas2");
 		Assert.assertFalse(robot1.hashCode() == robot2.hashCode());
 		Assert.assertFalse(robot1.equals(robot2));
 		Assert.assertFalse(robot2.equals(robot1));
@@ -250,28 +251,28 @@ public class RobotTest {
 
 	@Test
 	public void equals_identical() {
-		final Robot robot1 = new Robot("f1", "i1", 1, "iu1", "n1", "p1", "pu1", "u1", "uas1");
-		final Robot robot2 = new Robot("f1", "i1", 1, "iu1", "n1", "p1", "pu1", "u1", "uas1");
+		final Robot robot1 = new Robot(UserAgentFamily.GOOGLEBOT, "i1", 1, "iu1", "n1", "p1", "pu1", "u1", "uas1");
+		final Robot robot2 = new Robot(UserAgentFamily.GOOGLEBOT, "i1", 1, "iu1", "n1", "p1", "pu1", "u1", "uas1");
 		Assert.assertTrue(robot1.hashCode() == robot2.hashCode());
 		Assert.assertTrue(robot1.equals(robot2));
 	}
 
 	@Test
 	public void equals_null() {
-		final Robot robot = new Robot("f1", "i1", 1, "iu1", "n1", "p1", "pu1", "u1", "uas1");
+		final Robot robot = new Robot(UserAgentFamily.GOOGLEBOT, "i1", 1, "iu1", "n1", "p1", "pu1", "u1", "uas1");
 		Assert.assertFalse(robot.equals(null));
 	}
 
 	@Test
 	public void equals_otherClass() {
-		final Robot robot = new Robot("f1", "i1", 1, "iu1", "n1", "p1", "pu1", "u1", "uas1");
+		final Robot robot = new Robot(UserAgentFamily.GOOGLEBOT, "i1", 1, "iu1", "n1", "p1", "pu1", "u1", "uas1");
 		final String otherClass = "";
 		Assert.assertFalse(robot.equals(otherClass));
 	}
 
 	@Test
 	public void equals_same() {
-		final Robot robot = new Robot("f1", "i1", 1, "iu1", "n1", "p1", "pu1", "u1", "uas1");
+		final Robot robot = new Robot(UserAgentFamily.GOOGLEBOT, "i1", 1, "iu1", "n1", "p1", "pu1", "u1", "uas1");
 		Assert.assertTrue(robot.equals(robot));
 		Assert.assertTrue(robot.hashCode() == robot.hashCode());
 	}
@@ -282,13 +283,13 @@ public class RobotTest {
 		final String icon = "bunt.png";
 		final String infoUrl = "http://programming-motherfucker.com/";
 		final String name = "Programming, Motherfucker";
-		final String family = "Learn Code The Hard Way";
+		final UserAgentFamily family = UserAgentFamily.GOOGLEBOT;
 		final String producerUrl = "https://github.com/before";
 		final String producer = "Our Values";
 		final String url = "http://user-agent-string.info/";
 		final String userAgentString = "I'm a robot";
 		final Robot b = new Robot(family, icon, id, infoUrl, name, producer, producerUrl, url, userAgentString);
-		Assert.assertEquals("Learn Code The Hard Way", b.getFamily());
+		Assert.assertEquals(family, b.getFamily());
 		Assert.assertEquals("bunt.png", b.getIcon());
 		Assert.assertEquals(12354, b.getId());
 		Assert.assertEquals("http://programming-motherfucker.com/", b.getInfoUrl());
@@ -302,9 +303,9 @@ public class RobotTest {
 	@Test
 	public void testToString() {
 		// reduces only some noise in coverage report
-		final Robot robot = new Robot("f1", "i1", 1, "iu1", "n1", "p1", "pu1", "u1", "uas1");
+		final Robot robot = new Robot(UserAgentFamily.GOOGLEBOT, "i1", 1, "iu1", "n1", "p1", "pu1", "u1", "uas1");
 		Assert.assertEquals(
-				"Robot [family=f1, icon=i1, id=1, infoUrl=iu1, name=n1, producer=p1, producerUrl=pu1, url=u1, userAgentString=uas1]",
+				"Robot [family=GOOGLEBOT, icon=i1, id=1, infoUrl=iu1, name=n1, producer=p1, producerUrl=pu1, url=u1, userAgentString=uas1]",
 				robot.toString());
 	}
 

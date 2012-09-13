@@ -20,6 +20,7 @@ import java.net.MalformedURLException;
 import net.sf.uadetector.OperatingSystem;
 import net.sf.uadetector.OperatingSystemFamily;
 import net.sf.uadetector.UserAgent;
+import net.sf.uadetector.UserAgentFamily;
 import net.sf.uadetector.VersionNumber;
 import net.sf.uadetector.datastore.NotUpdateableXmlDataStore;
 import net.sf.uadetector.datastore.TestXmlDataStore;
@@ -61,7 +62,7 @@ public class UpdatingUserAgentStringParserImplTest {
 		Assert.assertFalse(OperatingSystem.EMPTY.equals(agent.getOperatingSystem()));
 
 		// check user agent informations
-		Assert.assertEquals("Chrome", agent.getFamily());
+		Assert.assertEquals(UserAgentFamily.CHROME, agent.getFamily());
 		Assert.assertEquals("Chrome", agent.getName());
 		Assert.assertEquals("Google Inc.", agent.getProducer());
 		Assert.assertEquals("http://www.google.com/", agent.getProducerUrl());
@@ -88,7 +89,7 @@ public class UpdatingUserAgentStringParserImplTest {
 		Assert.assertFalse(OperatingSystem.EMPTY.equals(agent.getOperatingSystem()));
 
 		// check user agent informations
-		Assert.assertEquals("Safari", agent.getFamily());
+		Assert.assertEquals(UserAgentFamily.SAFARI, agent.getFamily());
 		Assert.assertEquals("Safari", agent.getName());
 		Assert.assertEquals("Apple Inc.", agent.getProducer());
 		Assert.assertEquals("http://www.apple.com/", agent.getProducerUrl());
@@ -114,7 +115,7 @@ public class UpdatingUserAgentStringParserImplTest {
 		Assert.assertFalse(OperatingSystem.EMPTY.equals(agent.getOperatingSystem()));
 
 		// check user agent informations
-		Assert.assertEquals("SiteSucker", agent.getFamily());
+		Assert.assertEquals(UserAgentFamily.SITESUCKER, agent.getFamily());
 		Assert.assertEquals("SiteSucker", agent.getName());
 		Assert.assertEquals("Rick Cranisky", agent.getProducer());
 		Assert.assertEquals("", agent.getProducerUrl());
@@ -141,7 +142,7 @@ public class UpdatingUserAgentStringParserImplTest {
 		Assert.assertFalse(OperatingSystem.EMPTY.equals(agent.getOperatingSystem()));
 
 		// check user agent informations
-		Assert.assertEquals("Skyfire", agent.getFamily());
+		Assert.assertEquals(UserAgentFamily.SKYFIRE, agent.getFamily());
 		Assert.assertEquals("Skyfire", agent.getName());
 		Assert.assertEquals("Skyfire Labs, Inc.", agent.getProducer());
 		Assert.assertEquals("http://www.skyfire.com/about", agent.getProducerUrl());
@@ -168,7 +169,7 @@ public class UpdatingUserAgentStringParserImplTest {
 		Assert.assertTrue(OperatingSystem.EMPTY.equals(agent.getOperatingSystem()));
 
 		// check user agent informations
-		Assert.assertEquals("Skyfire", agent.getFamily());
+		Assert.assertEquals(UserAgentFamily.SKYFIRE, agent.getFamily());
 		Assert.assertEquals("Skyfire", agent.getName());
 		Assert.assertEquals("Skyfire Labs, Inc.", agent.getProducer());
 		Assert.assertEquals("http://www.skyfire.com/about", agent.getProducerUrl());
@@ -202,7 +203,7 @@ public class UpdatingUserAgentStringParserImplTest {
 		Assert.assertTrue(OperatingSystem.EMPTY.equals(agent.getOperatingSystem()));
 
 		// check user agent informations
-		Assert.assertEquals("Googlebot", agent.getFamily());
+		Assert.assertEquals(UserAgentFamily.GOOGLEBOT, agent.getFamily());
 		Assert.assertEquals("Googlebot/2.1", agent.getName());
 		Assert.assertEquals("Google Inc.", agent.getProducer());
 		Assert.assertEquals("http://www.google.com/", agent.getProducerUrl());

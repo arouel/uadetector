@@ -19,6 +19,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
+import net.sf.uadetector.UserAgentFamily;
 import net.sf.uadetector.internal.data.domain.Browser;
 import net.sf.uadetector.internal.data.domain.BrowserOperatingSystemMapping;
 import net.sf.uadetector.internal.data.domain.BrowserPattern;
@@ -285,7 +286,7 @@ public class XmlDataHandler extends DefaultHandler {
 		} else if (isBrowser && currentTag == Tag.BROWSER_TYPE_ID) {
 			browserBuilder.setTypeId(buffer.toString());
 		} else if (isBrowser && currentTag == Tag.NAME) {
-			browserBuilder.setFamily(buffer.toString());
+			browserBuilder.setFamily(UserAgentFamily.evaluate(buffer.toString()));
 		} else if (isBrowser && currentTag == Tag.URL) {
 			browserBuilder.setUrl(buffer.toString());
 		} else if (isBrowser && currentTag == Tag.COMPANY) {
@@ -361,7 +362,7 @@ public class XmlDataHandler extends DefaultHandler {
 		} else if (isRobot && currentTag == Tag.USERAGENT) {
 			robotBuilder.setUserAgentString(buffer.toString());
 		} else if (isRobot && currentTag == Tag.FAMILY) {
-			robotBuilder.setFamily(buffer.toString());
+			robotBuilder.setFamily(UserAgentFamily.evaluate(buffer.toString()));
 		} else if (isRobot && currentTag == Tag.NAME) {
 			robotBuilder.setName(buffer.toString());
 		} else if (isRobot && currentTag == Tag.COMPANY) {

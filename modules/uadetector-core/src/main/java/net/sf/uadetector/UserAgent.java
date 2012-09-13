@@ -25,7 +25,7 @@ public final class UserAgent implements ReadableUserAgent {
 
 	public static final class Builder implements ReadableUserAgent {
 
-		private String family = EMPTY.family;
+		private UserAgentFamily family = EMPTY.family;
 
 		private String name = EMPTY.name;
 
@@ -61,7 +61,7 @@ public final class UserAgent implements ReadableUserAgent {
 		}
 
 		@Override
-		public String getFamily() {
+		public UserAgentFamily getFamily() {
 			return family;
 		}
 
@@ -109,7 +109,7 @@ public final class UserAgent implements ReadableUserAgent {
 			return versionNumber;
 		}
 
-		public Builder setFamily(final String family) {
+		public Builder setFamily(final UserAgentFamily family) {
 			if (family == null) {
 				throw new IllegalArgumentException("Argument 'family' must not be null.");
 			}
@@ -202,10 +202,10 @@ public final class UserAgent implements ReadableUserAgent {
 
 	}
 
-	public static final UserAgent EMPTY = new UserAgent("unknown", "unknown", OperatingSystem.EMPTY, "", "", UserAgentType.UNKNOWN, "", "",
-			VersionNumber.UNKNOWN);
+	public static final UserAgent EMPTY = new UserAgent(UserAgentFamily.UNKNOWN, "unknown", OperatingSystem.EMPTY, "", "",
+			UserAgentType.UNKNOWN, "", "", VersionNumber.UNKNOWN);
 
-	private final String family;
+	private final UserAgentFamily family;
 
 	private final String name;
 
@@ -223,7 +223,7 @@ public final class UserAgent implements ReadableUserAgent {
 
 	private final VersionNumber versionNumber;
 
-	public UserAgent(final String family, final String name, final OperatingSystem operatingSystem, final String producer,
+	public UserAgent(final UserAgentFamily family, final String name, final OperatingSystem operatingSystem, final String producer,
 			final String producerUrl, final UserAgentType type, final String typeName, final String url, final VersionNumber versionNumber) {
 
 		if (family == null) {
@@ -308,7 +308,7 @@ public final class UserAgent implements ReadableUserAgent {
 	}
 
 	@Override
-	public String getFamily() {
+	public UserAgentFamily getFamily() {
 		return family;
 	}
 

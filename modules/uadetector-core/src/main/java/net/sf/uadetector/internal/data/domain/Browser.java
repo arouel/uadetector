@@ -19,12 +19,13 @@ import java.util.SortedSet;
 import java.util.TreeSet;
 
 import net.sf.uadetector.UserAgent;
+import net.sf.uadetector.UserAgentFamily;
 
 public final class Browser {
 
 	public static final class Builder {
 
-		private String family = "unknown";
+		private UserAgentFamily family = UserAgentFamily.UNKNOWN;
 		private String icon = "";
 		private int id = Integer.MIN_VALUE;
 		private String infoUrl = "";
@@ -79,7 +80,7 @@ public final class Browser {
 			return new Builder(this);
 		}
 
-		public String getFamily() {
+		public UserAgentFamily getFamily() {
 			return family;
 		}
 
@@ -123,7 +124,7 @@ public final class Browser {
 			return url;
 		}
 
-		public Builder setFamily(final String family) {
+		public Builder setFamily(final UserAgentFamily family) {
 			if (family == null) {
 				throw new IllegalArgumentException("Argument 'family' must not be null.");
 			}
@@ -250,7 +251,7 @@ public final class Browser {
 
 	}
 
-	private final String family;
+	private final UserAgentFamily family;
 	private final String icon;
 	private final int id;
 	private final String infoUrl;
@@ -261,7 +262,7 @@ public final class Browser {
 	private final BrowserType type;
 	private final String url;
 
-	public Browser(final int id, final BrowserType type, final String family, final String url, final String producer,
+	public Browser(final int id, final BrowserType type, final UserAgentFamily family, final String url, final String producer,
 			final String producerUrl, final String icon, final String infoUrl, final SortedSet<BrowserPattern> patternSet,
 			final OperatingSystem operatingSystem) {
 
@@ -310,7 +311,7 @@ public final class Browser {
 	 */
 	public void copyTo(final UserAgent.Builder builder) {
 		builder.setFamily(family);
-		builder.setName(family);
+		builder.setName(family.getName());
 		builder.setProducer(producer);
 		builder.setProducerUrl(producerUrl);
 		builder.setTypeName(type.getName());
@@ -369,7 +370,7 @@ public final class Browser {
 		return true;
 	}
 
-	public String getFamily() {
+	public UserAgentFamily getFamily() {
 		return family;
 	}
 

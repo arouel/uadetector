@@ -29,7 +29,7 @@ public class UserAgentBuilderTest {
 				new VersionNumber("1"));
 
 		final UserAgent.Builder b = new UserAgent.Builder();
-		Assert.assertSame(b, b.setFamily("f1"));
+		Assert.assertSame(b, b.setFamily(UserAgentFamily.CHROMIUM));
 		Assert.assertSame(b, b.setName("n1"));
 		Assert.assertSame(b, b.setOperatingSystem(os));
 		Assert.assertSame(b, b.setProducer("p1"));
@@ -39,7 +39,7 @@ public class UserAgentBuilderTest {
 		Assert.assertSame(b, b.setUrl("u1"));
 		Assert.assertSame(b, b.setVersionNumber(VersionParser.parseVersion("1.0.0")));
 
-		Assert.assertEquals("f1", b.getFamily());
+		Assert.assertEquals(UserAgentFamily.CHROMIUM, b.getFamily());
 		Assert.assertEquals("n1", b.getName());
 		Assert.assertEquals(os, b.getOperatingSystem());
 		Assert.assertEquals("p1", b.getProducer());
@@ -50,7 +50,7 @@ public class UserAgentBuilderTest {
 
 		final UserAgent ua = b.build();
 		Assert.assertNotNull(ua);
-		Assert.assertEquals("f1", ua.getFamily());
+		Assert.assertEquals(UserAgentFamily.CHROMIUM, ua.getFamily());
 		Assert.assertEquals("n1", ua.getName());
 		Assert.assertEquals(os, ua.getOperatingSystem());
 		Assert.assertEquals("p1", ua.getProducer());

@@ -30,12 +30,11 @@ package net.sf.uadetector;
 public interface ReadableUserAgent {
 
 	/**
-	 * Gets the name of an user agent.
+	 * Gets the family of an user agent.
 	 * 
-	 * @return name of an user agent
+	 * @return family of an user agent
 	 */
-	@Deprecated
-	String getFamily();
+	UserAgentFamily getFamily();
 
 	/**
 	 * Gets the name of an user agent.

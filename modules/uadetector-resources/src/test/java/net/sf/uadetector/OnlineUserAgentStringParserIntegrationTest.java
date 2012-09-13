@@ -108,10 +108,11 @@ public class OnlineUserAgentStringParserIntegrationTest {
 			final UserAgent agent = PARSER.parse(example.getUserAgentString());
 
 			// comparing the name
-			if (!example.getName().equals(agent.getFamily())) {
+			UserAgentFamily family = UserAgentFamily.evaluate(example.getName());
+			if (family != agent.getFamily()) {
 				LOG.info("Unexpected user agent family found. Please check the user agent string '" + example.getUserAgentString() + "'.");
 			}
-			Assert.assertEquals(example.getName(), agent.getFamily());
+			Assert.assertEquals(family, agent.getFamily());
 
 			final String type = "robot".equals(example.getType()) ? Robot.TYPENAME : example.getType();
 			if (Robot.TYPENAME.equals(type)) {

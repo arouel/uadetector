@@ -15,6 +15,8 @@
  ******************************************************************************/
 package net.sf.uadetector.internal.data.domain;
 
+import net.sf.uadetector.UserAgentFamily;
+
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -47,10 +49,10 @@ public class RobotBuilderTest {
 
 	@Test
 	public void setId_numericString() {
-		final Robot b1 = new Robot.Builder().setId("1").setFamily("f1").setIcon("i1").setInfoUrl("iu1").setName("n1").setProducer("p1")
-				.setProducerUrl("pu1").setUrl("u1").build();
-		final Robot b2 = new Robot.Builder().setId(1).setFamily("f1").setIcon("i1").setInfoUrl("iu1").setName("n1").setProducer("p1")
-				.setProducerUrl("pu1").setUrl("u1").build();
+		final Robot b1 = new Robot.Builder().setId("1").setFamily(UserAgentFamily.GOOGLEBOT).setIcon("i1").setInfoUrl("iu1").setName("n1")
+				.setProducer("p1").setProducerUrl("pu1").setUrl("u1").build();
+		final Robot b2 = new Robot.Builder().setId(1).setFamily(UserAgentFamily.GOOGLEBOT).setIcon("i1").setInfoUrl("iu1").setName("n1")
+				.setProducer("p1").setProducerUrl("pu1").setUrl("u1").build();
 		Assert.assertTrue(b1.equals(b2));
 		Assert.assertTrue(b1.hashCode() == b2.hashCode());
 	}
@@ -93,7 +95,7 @@ public class RobotBuilderTest {
 	@Test
 	public void testGetters() throws Exception {
 		final Robot.Builder builder = new Robot.Builder();
-		Assert.assertSame(builder, builder.setFamily("f1"));
+		Assert.assertSame(builder, builder.setFamily(UserAgentFamily.GOOGLEBOT));
 		Assert.assertSame(builder, builder.setIcon("i1"));
 		Assert.assertSame(builder, builder.setId(1));
 		Assert.assertSame(builder, builder.setInfoUrl("iu1"));
@@ -103,7 +105,7 @@ public class RobotBuilderTest {
 		Assert.assertSame(builder, builder.setUrl("u1"));
 		Assert.assertSame(builder, builder.setUserAgentString("uas1"));
 
-		Assert.assertEquals("f1", builder.getFamily());
+		Assert.assertEquals(UserAgentFamily.GOOGLEBOT, builder.getFamily());
 		Assert.assertEquals("i1", builder.getIcon());
 		Assert.assertEquals(1, builder.getId());
 		Assert.assertEquals("iu1", builder.getInfoUrl());
@@ -114,7 +116,7 @@ public class RobotBuilderTest {
 		Assert.assertEquals("uas1", builder.getUserAgentString());
 
 		final Robot browser = builder.build();
-		Assert.assertEquals("f1", browser.getFamily());
+		Assert.assertEquals(UserAgentFamily.GOOGLEBOT, browser.getFamily());
 		Assert.assertEquals("i1", browser.getIcon());
 		Assert.assertEquals(1, browser.getId());
 		Assert.assertEquals("iu1", browser.getInfoUrl());

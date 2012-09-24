@@ -15,6 +15,8 @@
  ******************************************************************************/
 package net.sf.uadetector;
 
+import net.sf.uadetector.service.UADetectorServiceFactory;
+
 import org.junit.Test;
 
 public class ResourceModuleXmlDataStoreTest {

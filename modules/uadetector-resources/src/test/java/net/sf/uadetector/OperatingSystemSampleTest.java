@@ -2,6 +2,8 @@ package net.sf.uadetector;
 
 import java.util.List;
 
+import net.sf.uadetector.service.UADetectorServiceFactory;
+
 import org.junit.Assert;
 import org.junit.Test;
 import org.slf4j.Logger;

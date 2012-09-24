@@ -13,10 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  ******************************************************************************/
-package net.sf.uadetector;
+package net.sf.uadetector.service;
 
 import java.net.URL;
 
+import net.sf.uadetector.UserAgentStringParser;
 import net.sf.uadetector.datareader.DataReader;
 import net.sf.uadetector.datareader.XmlDataReader;
 import net.sf.uadetector.datastore.AbstractDataStore;

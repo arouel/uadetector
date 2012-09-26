@@ -151,6 +151,12 @@ public enum OperatingSystemFamily {
 	PALM_OS("Palm OS", Pattern.compile("Palm OS")),
 
 	/**
+	 * The PlayStation Vita system software is the official, updatable firmware and operating system for the PlayStation
+	 * Vita.
+	 */
+	PLAYSTATION_VITA("LiveArea", Pattern.compile("LiveArea")),
+
+	/**
 	 * QNX is a POSIX-compatible proprietary Unix-like real-time operating system that focused primarily at the embedded
 	 * market.
 	 */

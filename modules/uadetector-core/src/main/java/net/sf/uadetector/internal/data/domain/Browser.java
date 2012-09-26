@@ -156,7 +156,7 @@ public final class Browser {
 				throw new IllegalArgumentException("Argument 'icon' must not be null.");
 			}
 
-			this.setId(Integer.parseInt(id));
+			this.setId(Integer.parseInt(id.trim()));
 			return this;
 		}
 
@@ -236,7 +236,7 @@ public final class Browser {
 				throw new IllegalArgumentException("Argument 'typeId' must not be null.");
 			}
 
-			setTypeId(Integer.parseInt(typeId));
+			setTypeId(Integer.parseInt(typeId.trim()));
 			return this;
 		}
 

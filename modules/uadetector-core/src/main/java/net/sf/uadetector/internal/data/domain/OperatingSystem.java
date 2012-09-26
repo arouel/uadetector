@@ -164,7 +164,7 @@ public final class OperatingSystem {
 				throw new IllegalArgumentException("Argument 'id' must not be null.");
 			}
 
-			this.setId(Integer.parseInt(id));
+			this.setId(Integer.parseInt(id.trim()));
 			return this;
 		}
 

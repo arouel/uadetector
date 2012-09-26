@@ -100,7 +100,7 @@ public final class BrowserPattern implements OrderedPattern<BrowserPattern> {
 				throw new IllegalArgumentException("Argument 'id' must not be null.");
 			}
 
-			this.setId(Integer.parseInt(id));
+			this.setId(Integer.parseInt(id.trim()));
 			return this;
 		}
 
@@ -173,7 +173,7 @@ public final class BrowserPattern implements OrderedPattern<BrowserPattern> {
 				throw new IllegalArgumentException("Argument 'position' must not be null.");
 			}
 
-			this.setPosition(Integer.parseInt(position));
+			this.setPosition(Integer.parseInt(position.trim()));
 			return this;
 		}
 

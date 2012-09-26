@@ -93,7 +93,7 @@ public final class BrowserOperatingSystemMapping {
 				throw new IllegalArgumentException("Argument 'browserId' must not be null.");
 			}
 
-			this.setBrowserId(Integer.parseInt(browserId));
+			this.setBrowserId(Integer.parseInt(browserId.trim()));
 			return this;
 		}
 
@@ -131,7 +131,7 @@ public final class BrowserOperatingSystemMapping {
 				throw new IllegalArgumentException("Argument 'operatingSystemId' must not be null.");
 			}
 
-			this.setOperatingSystemId(Integer.parseInt(operatingSystemId));
+			this.setOperatingSystemId(Integer.parseInt(operatingSystemId.trim()));
 			return this;
 		}
 

@@ -219,9 +219,24 @@ public final class CachingXmlDataStore extends AbstractDataStore implements Refr
 		if (!isEqual) {
 			FileOutputStream outputStream = null;
 			try {
-				outputStream = new FileOutputStream(file);
+				final File tempFile = new File(file.getParent(), file.getName() + ".temp");
+
+				// remove orphaned temporary file
+				tempFile.delete();
+
+				// write data to temporary file
+				outputStream = new FileOutputStream(tempFile);
 				final String data = UrlUtil.read(url, charset);
 				outputStream.write(data.getBytes(charset));
+
+				// delete the original file
+				file.delete();
+
+				// rename the new file to the original one
+				if (!tempFile.renameTo(file)) {
+					LOG.warn("Renaming of temporary file to the original file has failed.");
+				}
+
 			} finally {
 				if (outputStream != null) {
 					try {

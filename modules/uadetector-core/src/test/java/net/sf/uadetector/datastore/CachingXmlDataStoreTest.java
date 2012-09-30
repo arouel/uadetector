@@ -134,6 +134,17 @@ public class CachingXmlDataStoreTest {
 		temp.delete();
 	}
 
+	@Test
+	public void readAndSave_deleteAndRenameTempFileTest() throws MalformedURLException, IOException {
+		final File temp = CachingXmlDataStore.findOrCreateCacheFile(); // cache file does not exist
+		Assert.assertTrue(temp.length() == 0);
+		CachingXmlDataStore.readAndSave(DATA_URL, temp, CHARSET); // file will be created
+		Assert.assertTrue(temp.length() >= 722015);
+		CachingXmlDataStore.readAndSave(DATA_URL, temp, CHARSET); // file will be overwritten
+		Assert.assertTrue(temp.length() >= 722015);
+		temp.delete();
+	}
+
 	@Test(expected = IllegalArgumentException.class)
 	public void readAndSave_file_null() throws IOException {
 		CachingXmlDataStore.readAndSave(DATA_URL, null, CHARSET);

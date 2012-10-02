@@ -23,6 +23,20 @@ package net.sf.uadetector;
 public interface UserAgentStringParser {
 
 	/**
+	 * Returns the current version information of the used <em>UAS data</em>.
+	 * 
+	 * <p>
+	 * The version will be set by the <em>UAS data provider</em> (http://user-agent-string.info/) and the version should
+	 * look like this:<br>
+	 * <br>
+	 * format: <code>YYYYMMDD-counter</code> (<code>counter</code> is two digits long)<br>
+	 * example: <code>20120931-02</code>
+	 * 
+	 * @return version of the current <em>UAS data</em>
+	 */
+	String getDataVersion();
+
+	/**
 	 * Detects informations about a network client based on a user agent string.<br>
 	 * <br>
 	 * Typically user agent string will be read by an instance of {@code HttpServletRequest}. With the method

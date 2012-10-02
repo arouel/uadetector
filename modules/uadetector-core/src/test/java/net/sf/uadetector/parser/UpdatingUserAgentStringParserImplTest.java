@@ -45,6 +45,7 @@ public class UpdatingUserAgentStringParserImplTest {
 	@Test
 	public void getCurrentVersion() {
 		Assert.assertFalse("20120509-01".equals(PARSER.getDataStore().getData().getVersion()));
+		Assert.assertFalse("20120509-01".equals(PARSER.getDataVersion()));
 	}
 
 	@Test

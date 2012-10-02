@@ -113,6 +113,11 @@ public abstract class AbstractUserAgentStringParser implements UserAgentStringPa
 	protected abstract DataStore getDataStore();
 
 	@Override
+	public String getDataVersion() {
+		return getDataStore().getData().getVersion();
+	}
+
+	@Override
 	public UserAgent parse(final String userAgent) {
 		final UserAgent.Builder builder = new UserAgent.Builder(userAgent);
 

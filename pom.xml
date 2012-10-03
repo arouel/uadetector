@@ -9,7 +9,7 @@
 
 	<groupId>net.sf.uadetector</groupId>
 	<artifactId>uadetector-parent</artifactId>
-	<version>0.2.4</version>
+	<version>0.2.5-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<name>UADetector</name>
@@ -40,7 +40,7 @@
 		<connection>scm:git://git.code.sf.net/p/uadetector/code</connection>
 		<developerConnection>scm:git:ssh://belor@git.code.sf.net/p/uadetector/code</developerConnection>
 		<url>http://sourceforge.net/p/uadetector/code/?branch=ref%2Fmaster</url>
-	  <tag>2012.09</tag>
+	  <tag>HEAD</tag>
   </scm>
 
 	<modules>

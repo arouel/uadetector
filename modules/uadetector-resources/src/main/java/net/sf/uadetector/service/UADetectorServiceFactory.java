@@ -153,7 +153,7 @@ public final class UADetectorServiceFactory {
 	 * If during the operation the Internet connection gets lost, then this instance continues to work properly (and
 	 * under correct log level settings you will get an corresponding log messages).
 	 * 
-	 * @return an user agent string parser with updating service
+	 * @return an user agent string parser without updating service
 	 */
 	public static UserAgentStringParser getResourceModuleParser() {
 		return ResourceModuleParserHolder.INSTANCE;

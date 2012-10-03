@@ -57,7 +57,7 @@ public enum UserAgentFamily {
 	/**
 	 * AB (Apache Bench)
 	 */
-	AB_APACHE_BENCH("AB (Apache Bench)", Pattern.compile("AB (Apache Bench)")),
+	AB_APACHE_BENCH("AB (Apache Bench)", Pattern.compile("AB \\(Apache Bench\\)")),
 
 	/**
 	 * abby
@@ -1132,7 +1132,7 @@ public enum UserAgentFamily {
 	/**
 	 * Firebird (old name for Firefox)
 	 */
-	FIREBIRD("Firebird (old name for Firefox)", Pattern.compile("Firebird (old name for Firefox)")),
+	FIREBIRD("Firebird (old name for Firefox)", Pattern.compile("Firebird \\(old name for Firefox\\)")),
 
 	/**
 	 * Firefox
@@ -1142,32 +1142,32 @@ public enum UserAgentFamily {
 	/**
 	 * Firefox (BonEcho)
 	 */
-	FIREFOX_BONECHO("Firefox (BonEcho)", Pattern.compile("Firefox (BonEcho)")),
+	FIREFOX_BONECHO("Firefox (BonEcho)", Pattern.compile("Firefox \\(BonEcho\\)")),
 
 	/**
 	 * Firefox (GranParadiso)
 	 */
-	FIREFOX_GRANPARADISO("Firefox (GranParadiso)", Pattern.compile("Firefox (GranParadiso)")),
+	FIREFOX_GRANPARADISO("Firefox (GranParadiso)", Pattern.compile("Firefox \\(GranParadiso\\)")),
 
 	/**
 	 * Firefox (Lorentz)
 	 */
-	FIREFOX_LORENTZ("Firefox (Lorentz)", Pattern.compile("Firefox (Lorentz)")),
+	FIREFOX_LORENTZ("Firefox (Lorentz)", Pattern.compile("Firefox \\(Lorentz\\)")),
 
 	/**
 	 * Firefox (Minefield)
 	 */
-	FIREFOX_MINEFIELD("Firefox (Minefield)", Pattern.compile("Firefox (Minefield)")),
+	FIREFOX_MINEFIELD("Firefox (Minefield)", Pattern.compile("Firefox \\(Minefield\\)")),
 
 	/**
 	 * Firefox (Namoroka)
 	 */
-	FIREFOX_NAMOROKA("Firefox (Namoroka)", Pattern.compile("Firefox (Namoroka)")),
+	FIREFOX_NAMOROKA("Firefox (Namoroka)", Pattern.compile("Firefox \\(Namoroka\\)")),
 
 	/**
 	 * Firefox (Shiretoko)
 	 */
-	FIREFOX_SHIRETOKO("Firefox (Shiretoko)", Pattern.compile("Firefox (Shiretoko)")),
+	FIREFOX_SHIRETOKO("Firefox (Shiretoko)", Pattern.compile("Firefox \\(Shiretoko\\)")),
 
 	/**
 	 * Fireweb Navigator
@@ -2722,7 +2722,7 @@ public enum UserAgentFamily {
 	/**
 	 * Phoenix (old name for Firefox)
 	 */
-	PHOENIX("Phoenix (old name for Firefox)", Pattern.compile("Phoenix (old name for Firefox)")),
+	PHOENIX("Phoenix (old name for Firefox)", Pattern.compile("Phoenix \\(old name for Firefox\\)")),
 
 	/**
 	 * PHP
@@ -3723,7 +3723,7 @@ public enum UserAgentFamily {
 	/**
 	 * Urlfilebot (Urlbot)
 	 */
-	URLFILEBOT("Urlfilebot (Urlbot)", Pattern.compile("Urlfilebot (Urlbot)")),
+	URLFILEBOT("Urlfilebot (Urlbot)", Pattern.compile("Urlfilebot \\(Urlbot\\)")),
 
 	/**
 	 * urlgrabber
@@ -4278,7 +4278,7 @@ public enum UserAgentFamily {
 	/**
 	 * ZoomSpider (ZSEBOT)
 	 */
-	ZOOMSPIDER("ZoomSpider (ZSEBOT)", Pattern.compile("ZoomSpider (ZSEBOT)")),
+	ZOOMSPIDER("ZoomSpider (ZSEBOT)", Pattern.compile("ZoomSpider \\(ZSEBOT\\)")),
 
 	/**
 	 * ZyBorg

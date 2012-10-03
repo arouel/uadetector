@@ -10,6 +10,7 @@ import java.nio.channels.FileChannel;
 import java.nio.charset.Charset;
 import java.util.Random;
 
+import net.sf.uadetector.internal.util.FileUtil;
 import net.sf.uadetector.parser.UpdatingUserAgentStringParserImpl;
 
 import org.junit.Assert;
@@ -137,11 +138,16 @@ public class CachingXmlDataStoreTest {
 	@Test
 	public void readAndSave_deleteAndRenameTempFileTest() throws MalformedURLException, IOException {
 		final File temp = CachingXmlDataStore.findOrCreateCacheFile(); // cache file does not exist
-		Assert.assertTrue(temp.length() == 0);
+
+		// Assert.assertTrue(temp.length() == 0); // does not work on any system
+		Assert.assertTrue(FileUtil.isEmpty(temp, DataStore.DEFAULT_CHARSET));
+
 		CachingXmlDataStore.readAndSave(DATA_URL, temp, CHARSET); // file will be created
 		Assert.assertTrue(temp.length() >= 722015);
+
 		CachingXmlDataStore.readAndSave(DATA_URL, temp, CHARSET); // file will be overwritten
 		Assert.assertTrue(temp.length() >= 722015);
+
 		temp.delete();
 	}
 

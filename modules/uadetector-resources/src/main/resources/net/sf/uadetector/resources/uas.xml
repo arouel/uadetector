@@ -3,7 +3,7 @@
 <uasdata>
 	<description>
 		<label>Data (format xml) for UASparser - http://user-agent-string.info/download/UASparser</label>
-		<version>20120928-03</version>
+		<version>20121003-01</version>
 		<checksum type="MD5">http://user-agent-string.info/rpc/get_data.php?format=xml&amp;md5=y</checksum>
 		<checksum type="SHA1">http://user-agent-string.info/rpc/get_data.php?format=xml&amp;sha1=y</checksum>
 	</description>
@@ -2098,6 +2098,16 @@
 				<url_company><![CDATA[http://dripfeedbookmark.com/]]></url_company>
 				<icon>bot.png</icon>
 				<bot_info_url>/list-of-ua/bot-detail?bot=DripfeedBot</bot_info_url>
+			</robot>
+			<robot>
+				<id>7832</id>
+				<useragent><![CDATA[drupact/0.7; http://www.arocom.de/drupact]]></useragent>
+				<family>drupact</family>
+				<name>drupact/0.7</name>
+				<company><![CDATA[arocom GmbH]]></company>
+				<url_company><![CDATA[http://www.arocom.de/]]></url_company>
+				<icon>bot.png</icon>
+				<bot_info_url>/list-of-ua/bot-detail?bot=drupact</bot_info_url>
 			</robot>
 			<robot>
 				<id>1225</id>
@@ -4360,16 +4370,6 @@
 				<bot_info_url>/list-of-ua/bot-detail?bot=lmspider</bot_info_url>
 			</robot>
 			<robot>
-				<id>7820</id>
-				<useragent><![CDATA[LSSRocketCrawler/1.0 LightspeedSystems]]></useragent>
-				<family>LSSRocketCrawler</family>
-				<name>LSSRocketCrawler/1.0</name>
-				<company><![CDATA[Lightspeed Systems Inc. ]]></company>
-				<url_company><![CDATA[http://www.lightspeedsystems.com/]]></url_company>
-				<icon>bot.png</icon>
-				<bot_info_url>/list-of-ua/bot-detail?bot=LSSRocketCrawler</bot_info_url>
-			</robot>
-			<robot>
 				<id>4996</id>
 				<useragent><![CDATA[magpie-crawler/1.1 (U; Linux amd64; en-GB; +http://www.brandwatch.net)]]></useragent>
 				<family>magpie-crawler</family>
@@ -5978,6 +5978,16 @@
 				<url_company><![CDATA[http://www.parchmenthill.com/]]></url_company>
 				<icon>bot.png</icon>
 				<bot_info_url>/list-of-ua/bot-detail?bot=ParchBot</bot_info_url>
+			</robot>
+			<robot>
+				<id>7833</id>
+				<useragent><![CDATA[peerindex/0.1 (http://www.peerindex.com/; crawler AT peerindex DOT com)]]></useragent>
+				<family>peerindex</family>
+				<name>peerindex/0.1</name>
+				<company><![CDATA[PeerIndex]]></company>
+				<url_company><![CDATA[http://www.peerindex.com/]]></url_company>
+				<icon>bot.png</icon>
+				<bot_info_url>/list-of-ua/bot-detail?bot=peerindex</bot_info_url>
 			</robot>
 			<robot>
 				<id>5376</id>

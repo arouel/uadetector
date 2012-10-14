@@ -23,6 +23,7 @@ import java.nio.charset.Charset;
 
 import net.sf.uadetector.datareader.DataReader;
 import net.sf.uadetector.datareader.XmlDataReader;
+import net.sf.uadetector.exception.CanNotOpenStreamException;
 import net.sf.uadetector.internal.data.Data;
 import net.sf.uadetector.internal.util.FileUtil;
 import net.sf.uadetector.internal.util.UrlUtil;
@@ -284,10 +285,16 @@ public final class CachingXmlDataStore extends AbstractDataStore implements Refr
 	public synchronized void refresh() {
 		try {
 			readAndSave(getDataUrl(), cacheFile, getCharset());
+			setData(getDataReader().read(getDataUrl(), getCharset()));
+		} catch (final CanNotOpenStreamException e) {
+			LOG.warn("Can not read from the passed URL: " + e.getLocalizedMessage());
+		} catch (final IllegalArgumentException e) {
+			LOG.warn("Something is wrong with the read contents: " + e.getLocalizedMessage());
+		} catch (final RuntimeException e) {
+			LOG.warn("Something is wrong with the read contents: " + e.getLocalizedMessage(), e);
 		} catch (final IOException e) {
 			LOG.warn("Can not read and save UAS data: " + e.getLocalizedMessage(), e);
 		}
-		setData(getDataReader().read(getDataUrl(), getCharset()));
 	}
 
 }

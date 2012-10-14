@@ -42,17 +42,6 @@ import org.slf4j.LoggerFactory;
 public final class CachingXmlDataStore extends AbstractDataStore implements RefreshableDataStore {
 
 	/**
-	 * The suffix string to be used in generating the cache file's name; may be {@code null}, in which case the suffix "
-	 * {@code .tmp}" will be used
-	 */
-	private static final String SUFFIX = "";
-
-	/**
-	 * The prefix string to be used in generating the cache file's name; must be at least three characters long
-	 */
-	private static final String PREFIX = "uas";
-
-	/**
 	 * The default temporary-file directory
 	 */
 	private static final String CACHE_DIR = System.getProperty("java.io.tmpdir");
@@ -73,9 +62,25 @@ public final class CachingXmlDataStore extends AbstractDataStore implements Refr
 	private static final String MSG_CACHE_FILE_IS_FILLED = "The cache file is filled and will be imported.";
 
 	/**
+	 * Message for the log when issues occur during reading of or writing to the cache file.
+	 */
+	private static final String MSG_CACHE_FILE_ISSUES = "Issues occured during reading of or writing to the cache file: %s";
+
+	/**
 	 * Message for the log if the passed resources are the same and an update makes no sense
 	 */
 	private static final String MSG_SAME_RESOURCES = "The passed URL and file resources are the same. An update was not performed.";
+
+	/**
+	 * The prefix string to be used in generating the cache file's name; must be at least three characters long
+	 */
+	private static final String PREFIX = "uas";
+
+	/**
+	 * The suffix string to be used in generating the cache file's name; may be {@code null}, in which case the suffix "
+	 * {@code .tmp}" will be used
+	 */
+	private static final String SUFFIX = "";
 
 	/**
 	 * Constructs a new instance of {@code CachingXmlDataStore} with the given arguments. The given {@code cacheFile}
@@ -287,13 +292,13 @@ public final class CachingXmlDataStore extends AbstractDataStore implements Refr
 			readAndSave(getDataUrl(), cacheFile, getCharset());
 			setData(getDataReader().read(getDataUrl(), getCharset()));
 		} catch (final CanNotOpenStreamException e) {
-			LOG.warn("Can not read from the passed URL: " + e.getLocalizedMessage());
+			LOG.warn(String.format(MSG_URL_NOT_READABLE, e.getLocalizedMessage()));
 		} catch (final IllegalArgumentException e) {
-			LOG.warn("Something is wrong with the read contents: " + e.getLocalizedMessage());
+			LOG.warn(MSG_FAULTY_CONTENT + " " + e.getLocalizedMessage());
 		} catch (final RuntimeException e) {
-			LOG.warn("Something is wrong with the read contents: " + e.getLocalizedMessage(), e);
+			LOG.warn(MSG_FAULTY_CONTENT, e);
 		} catch (final IOException e) {
-			LOG.warn("Can not read and save UAS data: " + e.getLocalizedMessage(), e);
+			LOG.warn(String.format(MSG_CACHE_FILE_ISSUES, e.getLocalizedMessage()), e);
 		}
 	}
 

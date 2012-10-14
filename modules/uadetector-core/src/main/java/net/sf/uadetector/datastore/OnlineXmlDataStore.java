@@ -17,6 +17,10 @@ package net.sf.uadetector.datastore;
 
 import net.sf.uadetector.datareader.DataReader;
 import net.sf.uadetector.datareader.XmlDataReader;
+import net.sf.uadetector.exception.CanNotOpenStreamException;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * This is the simplest implementation of a {@link DataStore}. It initialize the store by reading the <em>UAS data</em>
@@ -32,6 +36,11 @@ public final class OnlineXmlDataStore extends AbstractDataStore implements Refre
 	private static final DataReader DEFAULT_DATA_READER = new XmlDataReader();
 
 	/**
+	 * Corresponding default logger of this class
+	 */
+	private static final Logger LOG = LoggerFactory.getLogger(OnlineXmlDataStore.class);
+
+	/**
 	 * Constructs an {@code OnlineXmlDataStore} by reading <em>UAS data</em> by the specified default URL
 	 * {@link DataStore#DEFAULT_DATA_URL} (in XML format).
 	 */
@@ -41,8 +50,15 @@ public final class OnlineXmlDataStore extends AbstractDataStore implements Refre
 
 	@Override
 	public synchronized void refresh() {
-		// access the resource protected by this lock
-		setData(getDataReader().read(getDataUrl(), getCharset()));
+		try {
+			setData(getDataReader().read(getDataUrl(), getCharset()));
+		} catch (final CanNotOpenStreamException e) {
+			LOG.warn(String.format(MSG_URL_NOT_READABLE, e.getLocalizedMessage()));
+		} catch (final IllegalArgumentException e) {
+			LOG.warn(MSG_FAULTY_CONTENT + " " + e.getLocalizedMessage());
+		} catch (final RuntimeException e) {
+			LOG.warn(MSG_FAULTY_CONTENT, e);
+		}
 	}
 
 }

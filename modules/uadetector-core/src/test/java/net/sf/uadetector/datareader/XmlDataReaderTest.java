@@ -23,7 +23,6 @@ import java.nio.charset.Charset;
 
 import net.sf.uadetector.datareader.XmlDataReader.XmlParser;
 import net.sf.uadetector.datastore.DataStore;
-import net.sf.uadetector.exception.CanNotOpenStreamException;
 import net.sf.uadetector.internal.data.Data;
 
 import org.junit.Assert;
@@ -35,6 +34,16 @@ public class XmlDataReaderTest {
 	 * URL to retrieve the UAS data as XML
 	 */
 	private static final URL DATA_URL = XmlDataReaderTest.class.getClassLoader().getResource("uas_older.xml");
+
+	/**
+	 * URL to retrieve the UAS data as XML (corrupted)
+	 */
+	private static final URL CORRUPTED_DATA_URL = XmlDataReaderTest.class.getClassLoader().getResource("uas_corrupted.xml");
+
+	/**
+	 * URL to retrieve the UAS data as XML (dirty)
+	 */
+	private static final URL DIRTY_DATA_URL = XmlDataReaderTest.class.getClassLoader().getResource("uas_dirty.xml");
 
 	/**
 	 * The character set to read UAS data
@@ -59,9 +68,10 @@ public class XmlDataReaderTest {
 		new XmlDataReader().read((URL) null, CHARSET);
 	}
 
-	@Test(expected = CanNotOpenStreamException.class)
+	@Test
 	public void read_url_unreachable() throws MalformedURLException {
-		new XmlDataReader().read(new URL("http://unreachable.local/"), CHARSET);
+		final Data data = new XmlDataReader().read(new URL("http://unreachable.local/"), CHARSET);
+		Assert.assertSame(Data.EMPTY, data);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
@@ -72,6 +82,20 @@ public class XmlDataReaderTest {
 	@Test(expected = IllegalArgumentException.class)
 	public void readXml_url_null() throws IOException {
 		XmlDataReader.readXml(null, CHARSET);
+	}
+
+	@Test
+	public void testParsingOfCorruptedData() throws IOException {
+		final XmlDataReader reader = new XmlDataReader();
+		final Data data = reader.read(CORRUPTED_DATA_URL, CHARSET);
+		Assert.assertSame(Data.EMPTY, data);
+	}
+
+	@Test
+	public void testParsingOfDirtyData() throws IOException {
+		final XmlDataReader reader = new XmlDataReader();
+		final Data data = reader.read(DIRTY_DATA_URL, CHARSET);
+		Assert.assertSame(Data.EMPTY, data);
 	}
 
 	@Test

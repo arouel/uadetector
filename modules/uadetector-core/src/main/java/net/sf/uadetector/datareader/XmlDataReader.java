@@ -24,6 +24,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
+import net.sf.uadetector.exception.CanNotOpenStreamException;
 import net.sf.uadetector.internal.data.Data;
 import net.sf.uadetector.internal.data.Data.Builder;
 import net.sf.uadetector.internal.data.XmlDataHandler;
@@ -45,11 +46,18 @@ public final class XmlDataReader implements DataReader {
 
 	protected static final class XmlParser {
 
+		private static final String MSG_NOT_PARSED_AS_EXPECTED = "The UAS data has not been parsed as expected.";
+
 		public static void parse(final InputStream stream, final Builder builder) throws ParserConfigurationException, SAXException,
 				IOException {
-			final SAXParser parser = SAXParserFactory.newInstance().newSAXParser();
+			SAXParserFactory factory = SAXParserFactory.newInstance();
+			factory.setValidating(true);
+			final SAXParser parser = factory.newSAXParser();
 			final XmlDataHandler handler = new XmlDataHandler(builder);
 			parser.parse(stream, handler);
+			if (handler.hasError() || handler.hasWarning()) {
+				throw new IllegalStateException(MSG_NOT_PARSED_AS_EXPECTED);
+			}
 		}
 
 		private XmlParser() {
@@ -67,13 +75,14 @@ public final class XmlDataReader implements DataReader {
 	 * Reads the <em>UAS data</em> in XML format based on the given URL.<br>
 	 * <br>
 	 * When during the reading errors occur which lead to a termination of the read operation, the information will be
-	 * written to a log. The termination of the read operation will not lead to a program termination.
+	 * written to a log. The termination of the read operation will not lead to a program termination and in this case
+	 * this method returns {@link Data#EMPTY}.
 	 * 
 	 * @param url
 	 *            {@code URL} to User-Agent informations
 	 * @param charset
 	 *            the character set in which the data should be read
-	 * @return read User-Agent data as {@code Data} instance
+	 * @return read in <em>UAS data</em> as {@code Data} instance
 	 * @throws IllegalArgumentException
 	 *             if any of the given arguments is {@code null}
 	 * @throws net.sf.uadetector.exception.CanNotOpenStreamException
@@ -88,16 +97,30 @@ public final class XmlDataReader implements DataReader {
 		}
 
 		final Builder builder = new Builder();
+		boolean hasErrors = false;
 		try {
 			XmlParser.parse(UrlUtil.open(url), builder);
 		} catch (final ParserConfigurationException e) {
+			hasErrors = true;
 			LOG.warn(e.getLocalizedMessage());
 		} catch (final SAXException e) {
+			hasErrors = true;
 			LOG.warn(e.getLocalizedMessage());
 		} catch (final IOException e) {
+			hasErrors = true;
 			LOG.warn(e.getLocalizedMessage());
+		} catch (final CanNotOpenStreamException e) {
+			hasErrors = true;
+			LOG.warn(e.getLocalizedMessage());
+		} catch (final IllegalStateException e) {
+			hasErrors = true;
+			LOG.warn(e.getLocalizedMessage());
+		} catch (final Exception e) {
+			hasErrors = true;
+			LOG.warn(e.getLocalizedMessage(), e);
 		}
-		return builder.build();
+
+		return hasErrors ? Data.EMPTY : builder.build();
 	}
 
 	/**

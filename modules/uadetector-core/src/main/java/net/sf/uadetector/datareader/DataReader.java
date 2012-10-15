@@ -30,11 +30,15 @@ public interface DataReader {
 	/**
 	 * Reads <em>UAS data</em> from the given {@code URL}.
 	 * 
+	 * <p>
+	 * The implementing class must ensure that no error leads to a termination of this operation. In case of an error
+	 * this operation must return {@link Data#EMPTY} and all error information must be stored in a log.
+	 * 
 	 * @param url
 	 *            the URL where the <em>UAS data</em> can be retrieved
 	 * @param charset
 	 *            the character set in which the data should be read
-	 * @return read in <em>UAS data</em> as {@code Data} instance
+	 * @return read in <em>UAS data</em> as new {@code Data} instance or {@link Data#EMPTY}
 	 */
 	Data read(final URL url, final Charset charset);
 

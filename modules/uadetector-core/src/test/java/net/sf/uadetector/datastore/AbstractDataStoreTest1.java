@@ -24,6 +24,7 @@ import java.util.TreeMap;
 import net.sf.uadetector.datareader.DataReader;
 import net.sf.uadetector.datareader.XmlDataReader;
 import net.sf.uadetector.internal.data.Data;
+import net.sf.uadetector.internal.data.DataBlueprint;
 import net.sf.uadetector.internal.data.domain.Browser;
 import net.sf.uadetector.internal.data.domain.BrowserPattern;
 import net.sf.uadetector.internal.data.domain.OperatingSystem;
@@ -103,9 +104,14 @@ public class AbstractDataStoreTest1 {
 		new TestDataStore(Data.EMPTY, new XmlDataReader(), CHARSET, url, null);
 	}
 
+	@Test(expected = IllegalStateException.class)
+	public void setData_EMPTY() {
+		new TestDataStore(Data.EMPTY, new XmlDataReader(), CHARSET, DATA_URL, VERSION_URL);
+	}
+
 	@Test(expected = IllegalArgumentException.class)
 	public void setData_null() {
-		final Data data = Data.EMPTY;
+		final Data data = DataBlueprint.buildEmptyTestData();
 		final DataReader reader = new XmlDataReader();
 		final TestDataStore store = new TestDataStore(data, reader, CHARSET, DATA_URL, VERSION_URL);
 		store.setData(null);
@@ -113,7 +119,7 @@ public class AbstractDataStoreTest1 {
 
 	@Test
 	public void setData_successful() {
-		final Data data = Data.EMPTY;
+		final Data data = DataBlueprint.buildEmptyTestData();
 		final DataReader reader = new XmlDataReader();
 		final TestDataStore store = new TestDataStore(data, reader, CHARSET, DATA_URL, VERSION_URL);
 

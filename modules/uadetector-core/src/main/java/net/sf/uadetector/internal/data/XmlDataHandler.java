@@ -33,6 +33,7 @@ import org.slf4j.LoggerFactory;
 import org.xml.sax.Attributes;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
+import org.xml.sax.SAXParseException;
 import org.xml.sax.helpers.DefaultHandler;
 
 public class XmlDataHandler extends DefaultHandler {
@@ -238,6 +239,21 @@ public class XmlDataHandler extends DefaultHandler {
 	 */
 	protected static final String UASDATA_DEF_URL = "http://user-agent-string.info/rpc/uasxmldata.dtd";
 
+	private static void logParsingIssue(final String prefix, final SAXParseException e) {
+		final StringBuilder buffer = new StringBuilder();
+		buffer.append(prefix);
+		buffer.append(" while reading UAS data: ");
+		buffer.append(e.getMessage());
+		buffer.append(" (line: ");
+		buffer.append(e.getLineNumber());
+		if (e.getSystemId() != null) {
+			buffer.append(" uri: ");
+			buffer.append(e.getSystemId());
+		}
+		buffer.append(")");
+		LOG.warn(buffer.toString());
+	}
+
 	private Browser.Builder browserBuilder = new Browser.Builder();
 
 	private BrowserOperatingSystemMapping.Builder browserOsMappingBuilder = new BrowserOperatingSystemMapping.Builder();
@@ -251,6 +267,11 @@ public class XmlDataHandler extends DefaultHandler {
 	private Tag currentTag = null;
 
 	private final Data.Builder dataBuilder;
+
+	/**
+	 * Flag to note that a fatal error occurred while parsing the document
+	 */
+	private boolean error = false;
 
 	private boolean isBrowser = false;
 
@@ -271,6 +292,11 @@ public class XmlDataHandler extends DefaultHandler {
 	private OperatingSystemPattern.Builder operatingSystemPatternBuilder = new OperatingSystemPattern.Builder();
 
 	private Robot.Builder robotBuilder = new Robot.Builder();
+
+	/**
+	 * Flag to note that a warning occurred while parsing the document
+	 */
+	private boolean warning = false;
 
 	public XmlDataHandler(final Data.Builder builder) {
 		if (builder == null) {
@@ -413,6 +439,37 @@ public class XmlDataHandler extends DefaultHandler {
 	}
 
 	@Override
+	public void error(final SAXParseException e) throws SAXException {
+		error = true;
+		logParsingIssue("Error", e);
+		super.fatalError(e);
+	}
+
+	@Override
+	public void fatalError(final SAXParseException e) throws SAXException {
+		logParsingIssue("Fatal error", e);
+		super.fatalError(e); // throws a SAXException
+	}
+
+	/**
+	 * Gets the flag whether an error occurred while parsing the document.
+	 * 
+	 * @return {@code true} if an error occurred otherwise {@code false}
+	 */
+	public boolean hasError() {
+		return error;
+	}
+
+	/**
+	 * Gets the flag whether an warning occurred while parsing the document.
+	 * 
+	 * @return {@code true} if an warning occurred otherwise {@code false}
+	 */
+	public boolean hasWarning() {
+		return warning;
+	}
+
+	@Override
 	public InputSource resolveEntity(final String publicId, final String systemId) throws IOException, SAXException {
 		if (UASDATA_DEF_URL.equals(systemId)) {
 			final InputStream stream = this.getClass().getClassLoader().getResourceAsStream(UASDATA_DEF);
@@ -519,6 +576,13 @@ public class XmlDataHandler extends DefaultHandler {
 		addToOperatingSystemPatternBuilder();
 
 		buffer = new StringBuilder();
+	}
+
+	@Override
+	public void warning(final SAXParseException e) throws SAXException {
+		warning = true;
+		logParsingIssue("Warning", e);
+		super.warning(e);
 	}
 
 }

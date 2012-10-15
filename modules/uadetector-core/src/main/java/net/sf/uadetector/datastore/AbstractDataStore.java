@@ -41,6 +41,21 @@ public abstract class AbstractDataStore implements DataStore {
 	private static final Logger LOG = LoggerFactory.getLogger(AbstractDataStore.class);
 
 	/**
+	 * Runtime check that the passed instance of {@link Data} is not empty (respectively {@link Data#EMPTY}).
+	 * 
+	 * @param data
+	 *            instance of {@code Data}
+	 * @throws IllegalStateException
+	 *             if the passed instance is empty
+	 */
+	private static Data checkData(final Data data) {
+		if (Data.EMPTY.equals(data)) {
+			throw new IllegalStateException("Argument 'data' must not be empty.");
+		}
+		return data;
+	}
+
+	/**
 	 * This method reads the given {@link URL} by using an {@link DataReader}. The new created instance of {@link Data}
 	 * will be returned.
 	 * 
@@ -48,13 +63,13 @@ public abstract class AbstractDataStore implements DataStore {
 	 *            URL to <em>UAS data</em>
 	 * @param charset
 	 *            the character set in which the data should be read
-	 * @return new created instance of {@code Data} and never {@code null}
+	 * @return new created instance of {@code Data} and never {@link Data#EMPTY} or {@code null}
 	 * @throws IllegalArgumentException
 	 *             if the given argument is {@code null}
-	 * @throws net.sf.uadetector.exception.CanNotOpenStreamException
-	 *             if no stream to the given {@code URL} can be established
+	 * @throws IllegalStateException
+	 *             if the created instance of {@link Data} is empty (because an error occurred during reading)
 	 */
-	protected static final Data readData(final DataReader reader, final URL url, Charset charset) {
+	protected static final Data readData(final DataReader reader, final URL url, final Charset charset) {
 		if (reader == null) {
 			throw new IllegalArgumentException("Argument 'reader' must not be null.");
 		}
@@ -65,7 +80,7 @@ public abstract class AbstractDataStore implements DataStore {
 			throw new IllegalArgumentException("Argument 'charset' must not be null.");
 		}
 
-		return reader.read(url, charset);
+		return checkData(reader.read(url, charset));
 	}
 
 	/**
@@ -118,7 +133,7 @@ public abstract class AbstractDataStore implements DataStore {
 			throw new IllegalArgumentException("Argument 'versionUrl' must not be null.");
 		}
 
-		this.data = data;
+		this.data = checkData(data);
 		this.reader = reader;
 		this.dataUrl = dataUrl;
 		this.versionUrl = versionUrl;
@@ -138,8 +153,6 @@ public abstract class AbstractDataStore implements DataStore {
 	 *             if one of given arguments is {@code null}
 	 * @throws IllegalArgumentException
 	 *             if the given strings are not valid URLs
-	 * @throws net.sf.uadetector.exception.CanNotOpenStreamException
-	 *             when no streams to the given {@code URL}s can be established
 	 */
 	protected AbstractDataStore(final DataReader reader, final String dataUrl, final String versionUrl, final Charset charset) {
 		this(reader, UrlUtil.build(dataUrl), UrlUtil.build(versionUrl), charset);
@@ -156,8 +169,8 @@ public abstract class AbstractDataStore implements DataStore {
 	 *            URL to version information about the given <em>UAS data</em>
 	 * @throws IllegalArgumentException
 	 *             if the given argument is {@code null}
-	 * @throws net.sf.uadetector.exception.CanNotOpenStreamException
-	 *             when no streams to the given {@code URL}s can be established
+	 * @throws IllegalStateException
+	 *             if the created instance of {@link Data} is empty
 	 */
 	protected AbstractDataStore(final DataReader reader, final URL dataUrl, final URL versionUrl, final Charset charset) {
 		this(readData(reader, dataUrl, charset), reader, dataUrl, versionUrl, charset);
@@ -195,13 +208,15 @@ public abstract class AbstractDataStore implements DataStore {
 	 *            <em>UAS data</em> to override the current ({@code null} is not allowed)
 	 * @throws IllegalArgumentException
 	 *             if the given argument is {@code null}
+	 * @throws IllegalArgumentException
+	 *             if the given instance of {@code Data} is empty
 	 */
 	protected void setData(final Data data) {
 		if (data == null) {
 			throw new IllegalArgumentException("Argument 'data' must not be null.");
 		}
 
-		this.data = data;
+		this.data = checkData(data);
 
 		// add some useful UAS data informations to the log
 		if (LOG.isDebugEnabled()) {

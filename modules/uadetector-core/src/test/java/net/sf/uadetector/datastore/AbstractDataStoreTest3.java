@@ -20,7 +20,6 @@ import java.nio.charset.Charset;
 
 import net.sf.uadetector.datareader.DataReader;
 import net.sf.uadetector.datareader.XmlDataReader;
-import net.sf.uadetector.exception.CanNotOpenStreamException;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -76,7 +75,7 @@ public class AbstractDataStoreTest3 {
 		Assert.assertEquals(VERSION_URL, store.getVersionUrl().toExternalForm());
 	}
 
-	@Test(expected = CanNotOpenStreamException.class)
+	@Test(expected = IllegalStateException.class)
 	public void construct_unreachable_url() {
 		final DataReader reader = new XmlDataReader();
 		final String unreachable = "http://unreachable.local";

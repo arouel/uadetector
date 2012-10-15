@@ -180,6 +180,25 @@ public final class OperatingSystemPattern implements OrderedPattern<OperatingSys
 	}
 
 	/**
+	 * Compares to integers.
+	 * 
+	 * @param a
+	 *            first integer
+	 * @param b
+	 *            second integer
+	 * @return {@code -1} if {@code a} is less, {@code 0} if equal, or {@code 1} if greater than {@code b}
+	 */
+	private static int compareInt(final int a, final int b) {
+		int result = 0;
+		if (a > b) {
+			result = 1;
+		} else if (a < b) {
+			result = -1;
+		}
+		return result;
+	}
+
+	/**
 	 * Identification number (ID) of an operating system pattern
 	 */
 	private final int id;
@@ -214,30 +233,30 @@ public final class OperatingSystemPattern implements OrderedPattern<OperatingSys
 	}
 
 	/**
-	 * Compares this instance with the given instance of a {@code OperatingSystemPattern} for sorting. Returns a
-	 * negative integer, zero, or a positive integer as this instances position ({@code OperatingSystemPattern#position}
-	 * ) is less than, equal to, or greater than the position of the given one.<br>
-	 * <br>
-	 * Note: this class has a ordering by attribute <i>position</i> that is inconsistent with equals.
+	 * Compares all attributes of this instance with the given instance of a {@code OperatingSystemPattern}.
 	 * 
-	 * @param pattern
+	 * <p>
+	 * This method is <em>consistent with equals</em>.
+	 * 
+	 * @param other
 	 *            another instance of {@code OperatingSystemPattern}
-	 * @return negative value if the position of this instance is less, 0 if equal, or positive value if greater than
-	 *         the position of the other one
-	 * @throws IllegalArgumentException
-	 *             if the given argument is {@code null}
+	 * @return negative value if one of the attributes of this instance is less, 0 if equal, or positive value if
+	 *         greater than the other one
 	 */
 	@Override
-	public int compareTo(final OperatingSystemPattern pattern) {
-		if (pattern == null) {
-			throw new IllegalArgumentException("Argument 'pattern' must not be null.");
-		}
-
-		int result = 0;
-		if (getPosition() > pattern.getPosition()) {
-			result = 1;
-		} else if (getPosition() < pattern.getPosition()) {
-			result = -1;
+	public int compareTo(final OperatingSystemPattern other) {
+		int result = other == null ? -1 : 0;
+		if (result == 0) {
+			result = compareInt(getPosition(), other.getPosition());
+			if (result == 0) {
+				result = compareInt(getId(), other.getId());
+			}
+			if (result == 0) {
+				result = getPattern().pattern().compareTo(other.getPattern().pattern());
+			}
+			if (result == 0) {
+				result = compareInt(getPattern().flags(), other.getPattern().flags());
+			}
 		}
 		return result;
 	}

@@ -28,7 +28,7 @@ public class OrderedPatternComparatorTest {
 	public void compare_differentFlags() {
 		final BrowserPattern pattern1 = new BrowserPattern(1, Pattern.compile("[0-9]+", Pattern.MULTILINE), 1);
 		final BrowserPattern pattern2 = new BrowserPattern(1, Pattern.compile("[0-9]+", Pattern.CASE_INSENSITIVE), 1);
-		Assert.assertEquals(0, new OrderedPatternComparator<BrowserPattern>().compare(pattern1, pattern2));
+		Assert.assertEquals(1, new OrderedPatternComparator<BrowserPattern>().compare(pattern1, pattern2));
 	}
 
 	@Test

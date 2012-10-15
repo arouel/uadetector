@@ -430,6 +430,39 @@ public class Data {
 		this.version = version;
 	}
 
+	@Override
+	public boolean equals(final Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null) {
+			return false;
+		}
+		if (getClass() != obj.getClass()) {
+			return false;
+		}
+		final Data other = (Data) obj;
+		if (!browsers.equals(other.browsers)) {
+			return false;
+		}
+		if (!operatingSystems.equals(other.operatingSystems)) {
+			return false;
+		}
+		if (!patternBrowserMap.equals(other.patternBrowserMap)) {
+			return false;
+		}
+		if (!patternOsMap.equals(other.patternOsMap)) {
+			return false;
+		}
+		if (!robots.equals(other.robots)) {
+			return false;
+		}
+		if (!version.equals(other.version)) {
+			return false;
+		}
+		return true;
+	}
+
 	public Set<Browser> getBrowsers() {
 		return Collections.unmodifiableSet(browsers);
 	}
@@ -457,6 +490,19 @@ public class Data {
 	 */
 	public String getVersion() {
 		return version;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + browsers.hashCode();
+		result = prime * result + operatingSystems.hashCode();
+		result = prime * result + patternBrowserMap.hashCode();
+		result = prime * result + patternOsMap.hashCode();
+		result = prime * result + robots.hashCode();
+		result = prime * result + version.hashCode();
+		return result;
 	}
 
 	public String toStats() {

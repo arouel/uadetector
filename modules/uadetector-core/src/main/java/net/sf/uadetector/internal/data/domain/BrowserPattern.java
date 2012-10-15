@@ -214,9 +214,9 @@ public final class BrowserPattern implements OrderedPattern<BrowserPattern> {
 	}
 
 	/**
-	 * Compares this instance with the given instance of a {@code BrowserPattern} for order. Returns a negative integer,
-	 * zero, or a positive integer as this instances position ({@code BrowserPattern#position}) is less than, equal to,
-	 * or greater than the position of the given one.<br>
+	 * Compares this instance with the given instance of a {@code BrowserPattern} for sorting. Returns a negative
+	 * integer, zero, or a positive integer as this instances position ({@code BrowserPattern#position}) is less than,
+	 * equal to, or greater than the position of the given one.<br>
 	 * <br>
 	 * Note: this class has a ordering by attribute <i>position</i> that is inconsistent with equals.
 	 * 

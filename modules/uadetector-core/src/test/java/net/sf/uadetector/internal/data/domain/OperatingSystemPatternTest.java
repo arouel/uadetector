@@ -76,34 +76,35 @@ public class OperatingSystemPatternTest {
 	}
 
 	@Test
-	public void equals_different() {
-		// different id
+	public void equals_different_flags() {
+		final OperatingSystemPattern pattern1 = new OperatingSystemPattern(1, Pattern.compile("[0-9]+", Pattern.CASE_INSENSITIVE), 1);
+		final OperatingSystemPattern pattern2 = new OperatingSystemPattern(1, Pattern.compile("[0-9]+", Pattern.MULTILINE), 1);
+		Assert.assertFalse(pattern1.equals(pattern2));
+		Assert.assertFalse(pattern1.hashCode() == pattern2.hashCode());
+	}
+
+	@Test
+	public void equals_different_id() {
 		final OperatingSystemPattern pattern1 = new OperatingSystemPattern(1, Pattern.compile("[0-9]+"), 1);
 		final OperatingSystemPattern pattern2 = new OperatingSystemPattern(2, Pattern.compile("[0-9]+"), 1);
 		Assert.assertFalse(pattern1.equals(pattern2));
 		Assert.assertFalse(pattern1.hashCode() == pattern2.hashCode());
+	}
 
-		// different pattern
-		final OperatingSystemPattern pattern3 = new OperatingSystemPattern(1, Pattern.compile("[0-9]+"), 1);
-		final OperatingSystemPattern pattern4 = new OperatingSystemPattern(1, Pattern.compile("[a-z]+"), 1);
-		Assert.assertFalse(pattern3.equals(pattern4));
-		Assert.assertFalse(pattern3.hashCode() == pattern4.hashCode());
+	@Test
+	public void equals_different_pattern() {
+		final OperatingSystemPattern pattern1 = new OperatingSystemPattern(1, Pattern.compile("[0-9]+"), 1);
+		final OperatingSystemPattern pattern2 = new OperatingSystemPattern(1, Pattern.compile("[a-z]+"), 1);
+		Assert.assertFalse(pattern1.equals(pattern2));
+		Assert.assertFalse(pattern1.hashCode() == pattern2.hashCode());
+	}
 
-		// different order
-		final OperatingSystemPattern pattern5 = new OperatingSystemPattern(1, Pattern.compile("[0-9]+"), 1);
-		final OperatingSystemPattern pattern6 = new OperatingSystemPattern(1, Pattern.compile("[0-9]+"), 2);
-		Assert.assertFalse(pattern5.equals(pattern6));
-		Assert.assertFalse(pattern5.hashCode() == pattern6.hashCode());
-
-		// different class
-		final OperatingSystemPattern pattern7 = new OperatingSystemPattern(1, Pattern.compile("[0-9]+"), 1);
-		final BrowserPattern pattern8 = new BrowserPattern(1, Pattern.compile("[0-9]+"), 2);
-		Assert.assertFalse(pattern7.equals(pattern8));
-
-		// different to null
-		final OperatingSystemPattern pattern9 = new OperatingSystemPattern(1, Pattern.compile("[0-9]+"), 1);
-		final OperatingSystemPattern pattern10 = null;
-		Assert.assertFalse(pattern9.equals(pattern10));
+	@Test
+	public void equals_different_position() {
+		final OperatingSystemPattern pattern1 = new OperatingSystemPattern(1, Pattern.compile("[0-9]+"), 1);
+		final OperatingSystemPattern pattern2 = new OperatingSystemPattern(1, Pattern.compile("[0-9]+"), 2);
+		Assert.assertFalse(pattern1.equals(pattern2));
+		Assert.assertFalse(pattern1.hashCode() == pattern2.hashCode());
 	}
 
 	@Test
@@ -112,6 +113,19 @@ public class OperatingSystemPatternTest {
 		final OperatingSystemPattern pattern2 = new OperatingSystemPattern(1, Pattern.compile("[0-9]+"), 1);
 		Assert.assertTrue(pattern1.equals(pattern2));
 		Assert.assertTrue(pattern1.hashCode() == pattern2.hashCode());
+	}
+
+	@Test
+	public void equals_null() {
+		final OperatingSystemPattern pattern = new OperatingSystemPattern(1, Pattern.compile("[0-9]+"), 1);
+		Assert.assertFalse(pattern.equals(null));
+	}
+
+	@Test
+	public void equals_otherClass() {
+		final OperatingSystemPattern pattern = new OperatingSystemPattern(1, Pattern.compile("[0-9]+"), 1);
+		final BrowserPattern otherClass = new BrowserPattern(1, Pattern.compile("[0-9]+"), 2);
+		Assert.assertFalse(pattern.equals(otherClass));
 	}
 
 	@Test

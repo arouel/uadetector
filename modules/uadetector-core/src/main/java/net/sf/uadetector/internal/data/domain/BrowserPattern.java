@@ -295,6 +295,7 @@ public final class BrowserPattern implements OrderedPattern<BrowserPattern> {
 		result = prime * result + id;
 		result = prime * result + position;
 		result = prime * result + pattern.pattern().hashCode();
+		result = prime * result + pattern.flags();
 		return result;
 	}
 

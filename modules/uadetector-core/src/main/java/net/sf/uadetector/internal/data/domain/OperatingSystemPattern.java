@@ -295,6 +295,7 @@ public final class OperatingSystemPattern implements OrderedPattern<OperatingSys
 		result = prime * result + id;
 		result = prime * result + position;
 		result = prime * result + pattern.pattern().hashCode();
+		result = prime * result + pattern.flags();
 		return result;
 	}
 

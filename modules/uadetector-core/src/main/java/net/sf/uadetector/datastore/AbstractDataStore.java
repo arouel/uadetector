@@ -113,8 +113,16 @@ public abstract class AbstractDataStore implements DataStore {
 	 * 
 	 * @param data
 	 *            first <em>UAS data</em> which will be available in the store
+	 * @param reader
+	 *            data reader to read the given {@code dataUrl}
+	 * @param dataUrl
+	 *            URL to <em>UAS data</em>
+	 * @param versionUrl
+	 *            URL to version information about the given <em>UAS data</em>
+	 * @param charset
+	 *            the character set in which the data should be read
 	 * @throws IllegalArgumentException
-	 *             if the given argument is {@code null}
+	 *             if one of the given arguments is {@code null}
 	 */
 	protected AbstractDataStore(final Data data, final DataReader reader, final URL dataUrl, final URL versionUrl, final Charset charset) {
 		if (data == null) {
@@ -149,8 +157,10 @@ public abstract class AbstractDataStore implements DataStore {
 	 *            URL to <em>UAS data</em>
 	 * @param versionUrl
 	 *            URL to version information about the given <em>UAS data</em>
+	 * @param charset
+	 *            the character set in which the data should be read
 	 * @throws IllegalArgumentException
-	 *             if one of given arguments is {@code null}
+	 *             if one of the given arguments is {@code null}
 	 * @throws IllegalArgumentException
 	 *             if the given strings are not valid URLs
 	 */
@@ -167,6 +177,8 @@ public abstract class AbstractDataStore implements DataStore {
 	 *            URL to <em>UAS data</em>
 	 * @param versionUrl
 	 *            URL to version information about the given <em>UAS data</em>
+	 * @param charset
+	 *            the character set in which the data should be read
 	 * @throws IllegalArgumentException
 	 *             if the given argument is {@code null}
 	 * @throws IllegalStateException

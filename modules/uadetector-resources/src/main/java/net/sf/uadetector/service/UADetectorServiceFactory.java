@@ -36,15 +36,15 @@ public final class UADetectorServiceFactory {
 	 * Holder to load the parser only when it's needed.
 	 */
 	private static final class OnlineUpdatingParserHolder {
-		private static UserAgentStringParser INSTANCE = new UpdatingUserAgentStringParserImpl(new OnlineXmlDataStore());
+		private static UserAgentStringParser INSTANCE = new UpdatingUserAgentStringParserImpl(new OnlineXmlDataStore(
+				RESOURCE_MODULE.getData()));
 	}
 
 	/**
 	 * Holder to load the parser only when it's needed.
 	 */
 	private static final class ResourceModuleParserHolder {
-		private static UserAgentStringParser INSTANCE = new UserAgentStringParserImpl<ResourceModuleXmlDataStore>(
-				new ResourceModuleXmlDataStore());
+		private static UserAgentStringParser INSTANCE = new UserAgentStringParserImpl<ResourceModuleXmlDataStore>(RESOURCE_MODULE);
 	}
 
 	/**
@@ -84,6 +84,11 @@ public final class UADetectorServiceFactory {
 		}
 
 	}
+
+	/**
+	 * Data store filled with the <em>UAS data</em> that are shipped with this module (JAR)
+	 */
+	private static final ResourceModuleXmlDataStore RESOURCE_MODULE = new ResourceModuleXmlDataStore();
 
 	/**
 	 * Returns an implementation of {@link UserAgentStringParser} which checks at regular intervals for new versions of

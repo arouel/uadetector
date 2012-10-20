@@ -12,8 +12,12 @@ import net.sf.uadetector.internal.data.domain.Robot;
 public class DataBlueprint {
 
 	public static Data buildEmptyTestData() {
+		return buildEmptyTestData("empty-test-data");
+	}
+
+	public static Data buildEmptyTestData(final String version) {
 		return new Data(new HashSet<Browser>(0), new HashSet<OperatingSystem>(0), new HashSet<Robot>(0),
-				new TreeMap<BrowserPattern, Browser>(), new TreeMap<OperatingSystemPattern, OperatingSystem>(), "empty-test-data");
+				new TreeMap<BrowserPattern, Browser>(), new TreeMap<OperatingSystemPattern, OperatingSystem>(), version);
 	}
 
 }

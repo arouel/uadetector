@@ -18,6 +18,7 @@ package net.sf.uadetector.datastore;
 import net.sf.uadetector.datareader.DataReader;
 import net.sf.uadetector.datareader.XmlDataReader;
 import net.sf.uadetector.exception.CanNotOpenStreamException;
+import net.sf.uadetector.internal.data.Data;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -46,6 +47,17 @@ public final class OnlineXmlDataStore extends AbstractDataStore implements Refre
 	 */
 	public OnlineXmlDataStore() {
 		super(DEFAULT_DATA_READER, DEFAULT_DATA_URL, DEFAULT_VERSION_URL, DEFAULT_CHARSET);
+	}
+
+	/**
+	 * Constructs an {@code OnlineXmlDataStore} by reading <em>UAS data</em> by the specified default URL
+	 * {@link DataStore#DEFAULT_DATA_URL} (in XML format).
+	 * 
+	 * @param fallback
+	 *            <em>UAS data</em> as fallback in case the data on the specified resource can not be read correctly
+	 */
+	public OnlineXmlDataStore(final Data fallback) {
+		super(DEFAULT_DATA_READER, DEFAULT_DATA_URL, DEFAULT_VERSION_URL, DEFAULT_CHARSET, fallback);
 	}
 
 	@Override

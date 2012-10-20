@@ -105,6 +105,34 @@ public final class CachingXmlDataStore extends AbstractDataStore implements Refr
 	 */
 	public static CachingXmlDataStore createCachingXmlDataStore(final File cacheFile, final URL dataUrl, final URL versionUrl,
 			final Charset charset) {
+		return createCachingXmlDataStore(cacheFile, dataUrl, versionUrl, charset, Data.EMPTY);
+	}
+
+	/**
+	 * Constructs a new instance of {@code CachingXmlDataStore} with the given arguments. The given {@code cacheFile}
+	 * can be empty or filled with previously cached data in XML format. The file must be writable otherwise an
+	 * exception will be thrown.
+	 * 
+	 * @param cacheFile
+	 *            file with cached <em>UAS data</em> in XML format or empty file
+	 * @param dataUrl
+	 *            URL to <em>UAS data</em>
+	 * @param versionUrl
+	 *            URL to version information about the given <em>UAS data</em>
+	 * @param charset
+	 *            the character set in which the data should be read
+	 * @param fallback
+	 *            <em>UAS data</em> as fallback in case the data on the specified resource can not be read correctly
+	 * @return new instance of {@link CachingXmlDataStore}
+	 * @throws IllegalArgumentException
+	 *             if one of the given arguments is {@code null}
+	 * @throws IllegalArgumentException
+	 *             if the given cache file can not be read
+	 * @throws IllegalStateException
+	 *             if no URL can be resolved to the given given file
+	 */
+	public static CachingXmlDataStore createCachingXmlDataStore(final File cacheFile, final URL dataUrl, final URL versionUrl,
+			final Charset charset, final Data fallback) {
 		if (cacheFile == null) {
 			throw new IllegalArgumentException("Argument 'cacheFile' must not be null.");
 		}
@@ -114,19 +142,26 @@ public final class CachingXmlDataStore extends AbstractDataStore implements Refr
 		if (dataUrl == null) {
 			throw new IllegalArgumentException("Argument 'dataUrl' must not be null.");
 		}
+		if (fallback == null) {
+			throw new IllegalArgumentException("Argument 'fallback' must not be null.");
+		}
 		if (versionUrl == null) {
 			throw new IllegalArgumentException("Argument 'versionUrl' must not be null.");
 		}
 
 		final DataReader reader = new XmlDataReader();
 
-		final Data data;
+		Data data;
 		if (!isEmpty(cacheFile, charset)) {
 			data = reader.read(UrlUtil.toUrl(cacheFile), charset);
 			LOG.debug(MSG_CACHE_FILE_IS_FILLED);
 		} else {
 			data = reader.read(dataUrl, charset);
 			LOG.debug(MSG_CACHE_FILE_IS_EMPTY);
+		}
+
+		if (Data.EMPTY.equals(data)) {
+			data = fallback;
 		}
 
 		final CachingXmlDataStore store = new CachingXmlDataStore(data, reader, dataUrl, versionUrl, charset, cacheFile);
@@ -154,6 +189,31 @@ public final class CachingXmlDataStore extends AbstractDataStore implements Refr
 	 */
 	public static CachingXmlDataStore createCachingXmlDataStore(final URL dataUrl, final URL versionUrl, final Charset charset) {
 		return createCachingXmlDataStore(findOrCreateCacheFile(), dataUrl, versionUrl, charset);
+	}
+
+	/**
+	 * Constructs a new instance of {@code CachingXmlDataStore} with the given arguments. The file used to cache the
+	 * read in <em>UAS data</em> will be called from {@link CachingXmlDataStore#findOrCreateCacheFile()}. This file may
+	 * be empty or filled with previously cached data in XML format. The file must be writable otherwise an exception
+	 * will be thrown.
+	 * 
+	 * @param dataUrl
+	 *            URL to <em>UAS data</em>
+	 * @param versionUrl
+	 *            URL to version information about the given <em>UAS data</em>
+	 * @param charset
+	 *            the character set in which the data should be read
+	 * @param fallback
+	 *            <em>UAS data</em> as fallback in case the data on the specified resource can not be read correctly
+	 * @return new instance of {@link CachingXmlDataStore}
+	 * @throws IllegalArgumentException
+	 *             if one of the given arguments is {@code null}
+	 * @throws IllegalArgumentException
+	 *             if the given cache file can not be read
+	 */
+	public static CachingXmlDataStore createCachingXmlDataStore(final URL dataUrl, final URL versionUrl, final Charset charset,
+			final Data fallback) {
+		return createCachingXmlDataStore(findOrCreateCacheFile(), dataUrl, versionUrl, charset, fallback);
 	}
 
 	/**

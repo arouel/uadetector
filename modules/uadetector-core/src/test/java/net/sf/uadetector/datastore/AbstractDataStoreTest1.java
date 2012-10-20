@@ -30,6 +30,7 @@ import net.sf.uadetector.internal.data.domain.BrowserPattern;
 import net.sf.uadetector.internal.data.domain.OperatingSystem;
 import net.sf.uadetector.internal.data.domain.OperatingSystemPattern;
 import net.sf.uadetector.internal.data.domain.Robot;
+import net.sf.uadetector.internal.util.UrlUtil;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -53,6 +54,11 @@ public class AbstractDataStoreTest1 {
 	 * URL to retrieve the UAS data as XML
 	 */
 	private static final URL DATA_URL = AbstractDataStoreTest1.class.getClassLoader().getResource("uas_older.xml");
+
+	/**
+	 * {@link URL} that is not available
+	 */
+	private static final URL UNREACHABLE_URL = UrlUtil.build("http://unreachable.local/");
 
 	/**
 	 * URL to retrieve the version of the UAS data
@@ -102,6 +108,41 @@ public class AbstractDataStoreTest1 {
 	public void construct_versionUrl_null() throws MalformedURLException {
 		final URL url = new URL("http://localhost");
 		new TestDataStore(Data.EMPTY, new XmlDataReader(), CHARSET, url, null);
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void readData_charset_null() {
+		AbstractDataStore.readData(new XmlDataReader(), DATA_URL, null, Data.EMPTY);
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void readData_dataUrl_null() {
+		AbstractDataStore.readData(new XmlDataReader(), null, CHARSET, Data.EMPTY);
+	}
+
+	@Test
+	public void readData_failsAndReturnsFallbackData() {
+		final String version = "fallback-data-version";
+		final Data data = AbstractDataStore.readData(new XmlDataReader(), UNREACHABLE_URL, CHARSET,
+				DataBlueprint.buildEmptyTestData(version));
+		Assert.assertEquals(version, data.getVersion());
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void readData_fallback_null() {
+		AbstractDataStore.readData(new XmlDataReader(), DATA_URL, CHARSET, null);
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void readData_reader_null() {
+		AbstractDataStore.readData(null, DATA_URL, CHARSET, Data.EMPTY);
+	}
+
+	@Test
+	public void readData_successful() {
+		final String version = "fallback-data-version";
+		final Data data = AbstractDataStore.readData(new XmlDataReader(), DATA_URL, CHARSET, DataBlueprint.buildEmptyTestData(version));
+		Assert.assertFalse(version.equals(data.getVersion()));
 	}
 
 	@Test(expected = IllegalStateException.class)

@@ -10,7 +10,10 @@ import java.nio.channels.FileChannel;
 import java.nio.charset.Charset;
 import java.util.Random;
 
+import net.sf.uadetector.internal.data.Data;
+import net.sf.uadetector.internal.data.DataBlueprint;
 import net.sf.uadetector.internal.util.FileUtil;
+import net.sf.uadetector.internal.util.UrlUtil;
 import net.sf.uadetector.parser.UpdatingUserAgentStringParserImpl;
 
 import org.junit.Assert;
@@ -36,6 +39,11 @@ public class CachingXmlDataStoreTest {
 	private static final Logger LOG = LoggerFactory.getLogger(CachingXmlDataStoreTest.class);
 
 	/**
+	 * {@link URL} that is not available
+	 */
+	private static final URL UNREACHABLE_URL = UrlUtil.build("http://unreachable.local/");
+
+	/**
 	 * URL to retrieve the version of the UAS data
 	 */
 	private static final URL VERSION_URL = CachingXmlDataStoreTest.class.getClassLoader().getResource("uas_older.version");
@@ -54,12 +62,12 @@ public class CachingXmlDataStoreTest {
 
 	@Test(expected = IllegalArgumentException.class)
 	public void createCachingXmlDataStore_charset_null() throws IOException {
-		CachingXmlDataStore.createCachingXmlDataStore(new File("test"), DATA_URL, VERSION_URL, null);
+		CachingXmlDataStore.createCachingXmlDataStore(new File("test"), DATA_URL, VERSION_URL, null, Data.EMPTY);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void createCachingXmlDataStore_dataUrl_null() throws IOException {
-		CachingXmlDataStore.createCachingXmlDataStore(new File("test"), null, VERSION_URL, CHARSET);
+		CachingXmlDataStore.createCachingXmlDataStore(new File("test"), null, VERSION_URL, CHARSET, Data.EMPTY);
 	}
 
 	@Test
@@ -71,8 +79,30 @@ public class CachingXmlDataStoreTest {
 	}
 
 	@Test(expected = IllegalArgumentException.class)
+	public void createCachingXmlDataStore_fallback_null() throws IOException {
+		CachingXmlDataStore.createCachingXmlDataStore(new File("test"), DATA_URL, VERSION_URL, CHARSET, null);
+	}
+
+	@Test(expected = IllegalArgumentException.class)
 	public void createCachingXmlDataStore_file_null() throws IOException {
-		CachingXmlDataStore.createCachingXmlDataStore(null, DATA_URL, VERSION_URL, CHARSET);
+		CachingXmlDataStore.createCachingXmlDataStore(null, DATA_URL, VERSION_URL, CHARSET, Data.EMPTY);
+	}
+
+	@Test
+	public void createCachingXmlDataStore_provokeFallback() throws IOException, InterruptedException {
+		// create temp file
+		final File temp = File.createTempFile("uas_temp_" + new Random().nextLong(), ".data");
+		temp.deleteOnExit();
+		Assert.assertEquals("", readFile(temp));
+
+		// create caching data store
+		final String version = "fallback-data-version";
+		final DataStore store = CachingXmlDataStore.createCachingXmlDataStore(temp, UNREACHABLE_URL, UNREACHABLE_URL, CHARSET,
+				DataBlueprint.buildEmptyTestData(version));
+		Assert.assertEquals(version, store.getData().getVersion());
+
+		// delete temp file
+		temp.delete();
 	}
 
 	@Test
@@ -109,7 +139,12 @@ public class CachingXmlDataStoreTest {
 
 	@Test(expected = IllegalArgumentException.class)
 	public void createCachingXmlDataStore_versionUrl_null() throws IOException {
-		CachingXmlDataStore.createCachingXmlDataStore(new File("test"), DATA_URL, null, CHARSET);
+		CachingXmlDataStore.createCachingXmlDataStore(new File("test"), DATA_URL, null, CHARSET, Data.EMPTY);
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void createCachingXmlDataStore_withoutSpecificCacheFile_fallback_null() throws IOException {
+		CachingXmlDataStore.createCachingXmlDataStore(DATA_URL, VERSION_URL, CHARSET, null);
 	}
 
 	@Test

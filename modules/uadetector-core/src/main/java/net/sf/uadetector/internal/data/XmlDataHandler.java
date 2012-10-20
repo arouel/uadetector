@@ -36,7 +36,7 @@ import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
 import org.xml.sax.helpers.DefaultHandler;
 
-public class XmlDataHandler extends DefaultHandler {
+public final class XmlDataHandler extends DefaultHandler {
 
 	public enum Tag {
 
@@ -239,7 +239,15 @@ public class XmlDataHandler extends DefaultHandler {
 	 */
 	protected static final String UASDATA_DEF_URL = "http://user-agent-string.info/rpc/uasxmldata.dtd";
 
-	private static void logParsingIssue(final String prefix, final SAXParseException e) {
+	/**
+	 * Logs an issue while parsing XML.
+	 * 
+	 * @param prefix
+	 *            log level as string to add at the beginning of the message
+	 * @param e
+	 *            exception to log
+	 */
+	protected static void logParsingIssue(final String prefix, final SAXParseException e) {
 		final StringBuilder buffer = new StringBuilder();
 		buffer.append(prefix);
 		buffer.append(" while reading UAS data: ");

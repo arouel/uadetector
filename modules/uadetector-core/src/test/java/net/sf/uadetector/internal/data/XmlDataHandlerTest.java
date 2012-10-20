@@ -21,12 +21,28 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
+import org.xml.sax.SAXParseException;
 
 public class XmlDataHandlerTest {
 
 	@Test(expected = IllegalArgumentException.class)
 	public void constructor_null() {
 		new XmlDataHandler(null);
+	}
+
+	/**
+	 * This test reduces only some coverage noise.
+	 */
+	@Test
+	public void logParsingIssue() {
+		final String message = "msg";
+		final String publicId = "public id";
+		final String systemId = "system id";
+		final int lineNumber = 123;
+		final int columnNumber = 345;
+		final IllegalArgumentException iae = new IllegalArgumentException();
+		final SAXParseException e = new SAXParseException(message, publicId, systemId, lineNumber, columnNumber, iae);
+		XmlDataHandler.logParsingIssue("Warning", e);
 	}
 
 	@Test

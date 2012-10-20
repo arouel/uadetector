@@ -1,4 +1,5 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
@@ -37,11 +38,11 @@
 	</licenses>
 
 	<scm>
-		<connection>scm:git://git.code.sf.net/p/uadetector/code</connection>
-		<developerConnection>scm:git:ssh://belor@git.code.sf.net/p/uadetector/code</developerConnection>
-		<url>http://sourceforge.net/p/uadetector/code/?branch=ref%2Fmaster</url>
-	  <tag>HEAD</tag>
-  </scm>
+		<connection>scm:git:git://github.com/before/uadetector.git</connection>
+		<developerConnection>scm:git:git@github.com:before/uadetector.git</developerConnection>
+		<url>https://github.com/before/uadetector.git</url>
+		<tag>HEAD</tag>
+	</scm>
 
 	<modules>
 		<module>modules/uadetector-core</module>

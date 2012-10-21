@@ -36,7 +36,7 @@ public final class LowestLogLevelTestLogger implements Logger {
 	}
 
 	@Override
-	public void debug(final Marker marker, final String format, final Object[] argArray) {
+	public void debug(final Marker marker, final String format, final Object... argArray) {
 		// do nothing
 	}
 
@@ -61,7 +61,7 @@ public final class LowestLogLevelTestLogger implements Logger {
 	}
 
 	@Override
-	public void debug(final String format, final Object[] argArray) {
+	public void debug(final String format, final Object... argArray) {
 		// do nothing
 	}
 
@@ -86,7 +86,7 @@ public final class LowestLogLevelTestLogger implements Logger {
 	}
 
 	@Override
-	public void error(final Marker marker, final String format, final Object[] argArray) {
+	public void error(final Marker marker, final String format, final Object... argArray) {
 		// do nothing
 	}
 
@@ -111,7 +111,7 @@ public final class LowestLogLevelTestLogger implements Logger {
 	}
 
 	@Override
-	public void error(final String format, final Object[] argArray) {
+	public void error(final String format, final Object... argArray) {
 		// do nothing
 	}
 
@@ -141,7 +141,7 @@ public final class LowestLogLevelTestLogger implements Logger {
 	}
 
 	@Override
-	public void info(final Marker marker, final String format, final Object[] argArray) {
+	public void info(final Marker marker, final String format, final Object... argArray) {
 		// do nothing
 	}
 
@@ -166,7 +166,7 @@ public final class LowestLogLevelTestLogger implements Logger {
 	}
 
 	@Override
-	public void info(final String format, final Object[] argArray) {
+	public void info(final String format, final Object... argArray) {
 		// do nothing
 	}
 
@@ -241,7 +241,7 @@ public final class LowestLogLevelTestLogger implements Logger {
 	}
 
 	@Override
-	public void trace(final Marker marker, final String format, final Object[] argArray) {
+	public void trace(final Marker marker, final String format, final Object... argArray) {
 		// do nothing
 	}
 
@@ -266,7 +266,7 @@ public final class LowestLogLevelTestLogger implements Logger {
 	}
 
 	@Override
-	public void trace(final String format, final Object[] argArray) {
+	public void trace(final String format, final Object... argArray) {
 		// do nothing
 	}
 
@@ -291,7 +291,7 @@ public final class LowestLogLevelTestLogger implements Logger {
 	}
 
 	@Override
-	public void warn(final Marker marker, final String format, final Object[] argArray) {
+	public void warn(final Marker marker, final String format, final Object... argArray) {
 		// do nothing
 	}
 
@@ -316,7 +316,7 @@ public final class LowestLogLevelTestLogger implements Logger {
 	}
 
 	@Override
-	public void warn(final String format, final Object[] argArray) {
+	public void warn(final String format, final Object... argArray) {
 		// do nothing
 	}
 

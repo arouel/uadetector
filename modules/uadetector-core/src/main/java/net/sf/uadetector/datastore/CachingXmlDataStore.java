@@ -87,6 +87,47 @@ public final class CachingXmlDataStore extends AbstractDataStore implements Refr
 	 * can be empty or filled with previously cached data in XML format. The file must be writable otherwise an
 	 * exception will be thrown.
 	 * 
+	 * @param fallback
+	 *            <em>UAS data</em> as fallback in case the data on the specified resource can not be read correctly
+	 * @return new instance of {@link CachingXmlDataStore}
+	 * @throws IllegalArgumentException
+	 *             if one of the given arguments is {@code null}
+	 * @throws IllegalArgumentException
+	 *             if the given cache file can not be read
+	 * @throws IllegalStateException
+	 *             if no URL can be resolved to the given given file
+	 */
+	public static CachingXmlDataStore createCachingXmlDataStore(final Data fallback) {
+		return createCachingXmlDataStore(findOrCreateCacheFile(), fallback);
+	}
+
+	/**
+	 * Constructs a new instance of {@code CachingXmlDataStore} with the given arguments. The given {@code cacheFile}
+	 * can be empty or filled with previously cached data in XML format. The file must be writable otherwise an
+	 * exception will be thrown.
+	 * 
+	 * @param cacheFile
+	 *            file with cached <em>UAS data</em> in XML format or empty file
+	 * @param fallback
+	 *            <em>UAS data</em> as fallback in case the data on the specified resource can not be read correctly
+	 * @return new instance of {@link CachingXmlDataStore}
+	 * @throws IllegalArgumentException
+	 *             if one of the given arguments is {@code null}
+	 * @throws IllegalArgumentException
+	 *             if the given cache file can not be read
+	 * @throws IllegalStateException
+	 *             if no URL can be resolved to the given given file
+	 */
+	public static CachingXmlDataStore createCachingXmlDataStore(final File cacheFile, final Data fallback) {
+		return createCachingXmlDataStore(cacheFile, UrlUtil.build(DEFAULT_DATA_URL), UrlUtil.build(DEFAULT_VERSION_URL), DEFAULT_CHARSET,
+				fallback);
+	}
+
+	/**
+	 * Constructs a new instance of {@code CachingXmlDataStore} with the given arguments. The given {@code cacheFile}
+	 * can be empty or filled with previously cached data in XML format. The file must be writable otherwise an
+	 * exception will be thrown.
+	 * 
 	 * @param cacheFile
 	 *            file with cached <em>UAS data</em> in XML format or empty file
 	 * @param dataUrl

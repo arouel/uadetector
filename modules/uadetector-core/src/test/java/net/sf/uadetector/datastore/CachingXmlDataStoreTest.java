@@ -79,13 +79,33 @@ public class CachingXmlDataStoreTest {
 	}
 
 	@Test(expected = IllegalArgumentException.class)
-	public void createCachingXmlDataStore_fallback_null() throws IOException {
+	public void createCachingXmlDataStore_fallback1_null() throws IOException {
 		CachingXmlDataStore.createCachingXmlDataStore(new File("test"), DATA_URL, VERSION_URL, CHARSET, null);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
-	public void createCachingXmlDataStore_file_null() throws IOException {
+	public void createCachingXmlDataStore_fallback2_null() throws IOException {
+		CachingXmlDataStore.createCachingXmlDataStore(DATA_URL, VERSION_URL, CHARSET, null);
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void createCachingXmlDataStore_fallback3_null() throws IOException {
+		CachingXmlDataStore.createCachingXmlDataStore(new File("test"), null);
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void createCachingXmlDataStore_file1_null() throws IOException {
+		CachingXmlDataStore.createCachingXmlDataStore(null, DATA_URL, VERSION_URL, CHARSET);
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void createCachingXmlDataStore_file2_null() throws IOException {
 		CachingXmlDataStore.createCachingXmlDataStore(null, DATA_URL, VERSION_URL, CHARSET, Data.EMPTY);
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void createCachingXmlDataStore_file3_null() throws IOException {
+		CachingXmlDataStore.createCachingXmlDataStore(null, Data.EMPTY);
 	}
 
 	@Test
@@ -140,11 +160,6 @@ public class CachingXmlDataStoreTest {
 	@Test(expected = IllegalArgumentException.class)
 	public void createCachingXmlDataStore_versionUrl_null() throws IOException {
 		CachingXmlDataStore.createCachingXmlDataStore(new File("test"), DATA_URL, null, CHARSET, Data.EMPTY);
-	}
-
-	@Test(expected = IllegalArgumentException.class)
-	public void createCachingXmlDataStore_withoutSpecificCacheFile_fallback_null() throws IOException {
-		CachingXmlDataStore.createCachingXmlDataStore(DATA_URL, VERSION_URL, CHARSET, null);
 	}
 
 	@Test

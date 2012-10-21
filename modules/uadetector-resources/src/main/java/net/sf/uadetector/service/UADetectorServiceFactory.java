@@ -21,6 +21,7 @@ import net.sf.uadetector.UserAgentStringParser;
 import net.sf.uadetector.datareader.DataReader;
 import net.sf.uadetector.datareader.XmlDataReader;
 import net.sf.uadetector.datastore.AbstractDataStore;
+import net.sf.uadetector.datastore.CachingXmlDataStore;
 import net.sf.uadetector.datastore.OnlineXmlDataStore;
 import net.sf.uadetector.parser.UpdatingUserAgentStringParserImpl;
 import net.sf.uadetector.parser.UserAgentStringParserImpl;
@@ -31,6 +32,14 @@ import net.sf.uadetector.parser.UserAgentStringParserImpl;
  * @author André Rouél
  */
 public final class UADetectorServiceFactory {
+
+	/**
+	 * Holder to load the parser only when it's needed.
+	 */
+	private static final class CachingAndUpdatingParserHolder {
+		private static UserAgentStringParser INSTANCE = new UpdatingUserAgentStringParserImpl(
+				CachingXmlDataStore.createCachingXmlDataStore(RESOURCE_MODULE.getData()));
+	}
 
 	/**
 	 * Holder to load the parser only when it's needed.
@@ -88,6 +97,33 @@ public final class UADetectorServiceFactory {
 	 */
 	private static final UserAgentStringParser RESOURCE_MODULE_PARSER = new UserAgentStringParserImpl<ResourceModuleXmlDataStore>(
 			RESOURCE_MODULE);
+
+	/**
+	 * Returns an implementation of {@link UserAgentStringParser} which checks at regular intervals for new versions of
+	 * <em>UAS data</em> (also known as database). When newer data available, it automatically loads and updates it.
+	 * Additionally the loaded data are stored in a cache file.
+	 * 
+	 * <p>
+	 * At initialization time the returned parser will be loaded with the <em>UAS data</em> of the cache file. If the
+	 * cache file doesn't exist or is empty the data of this module will be loaded. The initialization is started only
+	 * when this method is called the first time.
+	 * 
+	 * <p>
+	 * The static class definition {@link CachingAndUpdatingParserHolder} within this factory class is <em>not</em>
+	 * initialized until the JVM determines that {@code CachingAndUpdatingParserHolder} must be executed. The static
+	 * class {@code CachingAndUpdatingParserHolder} is only executed when the static method
+	 * {@code getOnlineUserAgentStringParser} is invoked on the class {@code UADetectorServiceFactory}, and the first
+	 * time this happens the JVM will load and initialize the {@code CachingAndUpdatingParserHolder} class.
+	 * 
+	 * <p>
+	 * If during the operation the Internet connection gets lost, then this instance continues to work properly (and
+	 * under correct log level settings you will get an corresponding log messages).
+	 * 
+	 * @return an user agent string parser with updating service
+	 */
+	public static UserAgentStringParser getCachingAndUpdatingParserHolder() {
+		return CachingAndUpdatingParserHolder.INSTANCE;
+	}
 
 	/**
 	 * Returns an implementation of {@link UserAgentStringParser} which checks at regular intervals for new versions of

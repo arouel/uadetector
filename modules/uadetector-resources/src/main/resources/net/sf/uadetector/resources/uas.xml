@@ -3,7 +3,7 @@
 <uasdata>
 	<description>
 		<label>Data (format xml) for UASparser - http://user-agent-string.info/download/UASparser</label>
-		<version>20121021-01</version>
+		<version>20121023-01</version>
 		<checksum type="MD5">http://user-agent-string.info/rpc/get_data.php?format=xml&amp;md5=y</checksum>
 		<checksum type="SHA1">http://user-agent-string.info/rpc/get_data.php?format=xml&amp;sha1=y</checksum>
 	</description>
@@ -3928,6 +3928,26 @@
 				<url_company><![CDATA[http://www.tamu.edu/]]></url_company>
 				<icon>bot.png</icon>
 				<bot_info_url>/list-of-ua/bot-detail?bot=IRLbot</bot_info_url>
+			</robot>
+			<robot>
+				<id>7113</id>
+				<useragent><![CDATA[Mozilla/5.0 (compatible; IstellaBot/1.01.18 +http://www.tiscali.it/)]]></useragent>
+				<family>IstellaBot</family>
+				<name>IstellaBot/1.01.18</name>
+				<company><![CDATA[Tiscali Italia S.p.a]]></company>
+				<url_company><![CDATA[http://www.tiscali.it/]]></url_company>
+				<icon>bot.png</icon>
+				<bot_info_url>/list-of-ua/bot-detail?bot=IstellaBot</bot_info_url>
+			</robot>
+			<robot>
+				<id>7995</id>
+				<useragent><![CDATA[Mozilla/5.0 (compatible; IstellaBot/1.10.2 +http://www.tiscali.it/)]]></useragent>
+				<family>IstellaBot</family>
+				<name>IstellaBot/1.10.2</name>
+				<company><![CDATA[Tiscali Italia S.p.a]]></company>
+				<url_company><![CDATA[http://www.tiscali.it/]]></url_company>
+				<icon>bot.png</icon>
+				<bot_info_url>/list-of-ua/bot-detail?bot=IstellaBot</bot_info_url>
 			</robot>
 			<robot>
 				<id>1540</id>

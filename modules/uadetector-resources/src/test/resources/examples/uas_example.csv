@@ -1431,6 +1431,8 @@
 "robot","IRLbot","IRLbot/2.0 (compatible; MSIE 6.0; http://irl.cs.tamu.edu/crawler)"
 "robot","IRLbot","IRLbot/3.0 (compatible; MSIE 6.0; http://irl.cs.tamu.edu/crawler)"
 "robot","IRLbot","IRLbot/3.0 (compatible; MSIE 6.0; http://irl.cs.tamu.edu/crawler/)"
+"robot","IstellaBot","Mozilla/5.0 (compatible; IstellaBot/1.01.18 +http://www.tiscali.it/)"
+"robot","IstellaBot","Mozilla/5.0 (compatible; IstellaBot/1.10.2 +http://www.tiscali.it/)"
 "robot","JadynAve","JadynAve - http://www.jadynave.com/robot"
 "robot","JadynAveBot","Mozilla/5.0 (compatible; JadynAveBot; +http://www.jadynave.com/robot)"
 "robot","Jambot","Jambot/0.1.1 (Jambot; http://www.jambot.com/blog; crawler@jambot.com)"

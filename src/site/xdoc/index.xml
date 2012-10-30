@@ -64,11 +64,11 @@
 				<img src="./images/tested.png" alt="Extremely tested" />
 				<span class="title">Extremely tested</span>
 				<p>
-					All classes in this library have been especially tested. The unit tests have a 100%
-					<a href="modules/uadetector-core/cobertura/index.html">branch coverage</a>
-					and 98%
-					<a href="modules/uadetector-core/cobertura/index.html">line coverage</a>
-					. In addition, many integration tests performed regularly.
+					All classes in this library have been especially tested. The unit tests have over 90%
+					<a href="modules/uadetector-core/cobertura/index.html">branch</a>
+					and
+					<a href="modules/uadetector-core/cobertura/index.html">line</a>
+					coverage. In addition, many integration tests performed regularly.
 				</p>
 			</div>
 			<br class="clear" />

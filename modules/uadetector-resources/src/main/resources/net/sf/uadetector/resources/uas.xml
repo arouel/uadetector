@@ -3,7 +3,7 @@
 <uasdata>
 	<description>
 		<label>Data (format xml) for UASparser - http://user-agent-string.info/download/UASparser</label>
-		<version>20121027-02</version>
+		<version>20121030-02</version>
 		<checksum type="MD5">http://user-agent-string.info/rpc/get_data.php?format=xml&amp;md5=y</checksum>
 		<checksum type="SHA1">http://user-agent-string.info/rpc/get_data.php?format=xml&amp;sha1=y</checksum>
 	</description>
@@ -6172,6 +6172,16 @@
 			<robot>
 				<id>7784</id>
 				<useragent><![CDATA[Pixray-Seeker/2.0 (Pixray-Seeker; http://www.pixray.com/pixraybot; crawler@pixray.com)]]></useragent>
+				<family>Pixray-Seeker</family>
+				<name>Pixray-Seeker/2.0</name>
+				<company><![CDATA[PIXRAY GmbH.]]></company>
+				<url_company><![CDATA[http://www.pixray.com/]]></url_company>
+				<icon>bot_PixraySeeker.png</icon>
+				<bot_info_url>/list-of-ua/bot-detail?bot=Pixray-Seeker</bot_info_url>
+			</robot>
+			<robot>
+				<id>8061</id>
+				<useragent><![CDATA[Pixray-Seeker/2.0 (http://www.pixray.com/pixraybot; crawler@pixray.com)]]></useragent>
 				<family>Pixray-Seeker</family>
 				<name>Pixray-Seeker/2.0</name>
 				<company><![CDATA[PIXRAY GmbH.]]></company>

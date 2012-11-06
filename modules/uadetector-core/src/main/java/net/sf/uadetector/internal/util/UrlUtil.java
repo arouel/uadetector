@@ -34,7 +34,7 @@ import net.sf.uadetector.exception.CanNotOpenStreamException;
  * 
  * @author André Rouél
  */
-public class UrlUtil {
+public final class UrlUtil {
 
 	/**
 	 * Creates an {@code URL} instance from the given {@code String} representation.<br>

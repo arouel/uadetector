@@ -49,7 +49,7 @@ public final class UrlUtil {
 	 * @throws IllegalArgumentException
 	 *             if the string representation of the given URL is invalid and a {@link MalformedURLException} occurs
 	 */
-	public static final URL build(final String url) {
+	public static URL build(final String url) {
 		if (url == null) {
 			throw new IllegalArgumentException("Argument 'url' must not be null.");
 		}
@@ -74,7 +74,7 @@ public final class UrlUtil {
 	 * @throws CanNotOpenStreamException
 	 *             if no stream to the given {@code URL} can be established
 	 */
-	public static final InputStream open(final URL url) {
+	public static InputStream open(final URL url) {
 		if (url == null) {
 			throw new IllegalArgumentException("Argument 'url' must not be null.");
 		}

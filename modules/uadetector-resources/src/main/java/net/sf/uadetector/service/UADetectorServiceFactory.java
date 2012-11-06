@@ -37,7 +37,7 @@ public final class UADetectorServiceFactory {
 	 * Holder to load the parser only when it's needed.
 	 */
 	private static final class CachingAndUpdatingParserHolder {
-		private static UserAgentStringParser INSTANCE = new UpdatingUserAgentStringParserImpl(
+		private static final UserAgentStringParser INSTANCE = new UpdatingUserAgentStringParserImpl(
 				CachingXmlDataStore.createCachingXmlDataStore(RESOURCE_MODULE.getData()));
 	}
 
@@ -45,7 +45,7 @@ public final class UADetectorServiceFactory {
 	 * Holder to load the parser only when it's needed.
 	 */
 	private static final class OnlineUpdatingParserHolder {
-		private static UserAgentStringParser INSTANCE = new UpdatingUserAgentStringParserImpl(new OnlineXmlDataStore(
+		private static final UserAgentStringParser INSTANCE = new UpdatingUserAgentStringParserImpl(new OnlineXmlDataStore(
 				RESOURCE_MODULE.getData()));
 	}
 

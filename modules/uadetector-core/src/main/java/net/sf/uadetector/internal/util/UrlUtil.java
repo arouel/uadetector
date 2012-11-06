@@ -83,7 +83,7 @@ public class UrlUtil {
 		try {
 			ret = url.openStream();
 		} catch (final IOException e) {
-			throw new CanNotOpenStreamException(url.toString());
+			throw new CanNotOpenStreamException(url.toString(), e);
 		}
 		return ret;
 	}

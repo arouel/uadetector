@@ -22,14 +22,13 @@ import java.io.LineNumberReader;
 import java.net.URL;
 import java.nio.charset.Charset;
 
-import net.sf.uadetector.datastore.DataStore;
 import net.sf.uadetector.datastore.RefreshableDataStore;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * Service to update the UAS data in an {@link DataStore}.
+ * Service to update the UAS data in an {@link net.sf.uadetector.datastore.DataStore}.
  * 
  * @author André Rouél
  */
@@ -129,7 +128,7 @@ final class UpdateService implements Updater, Runnable {
 	}
 
 	/**
-	 * Shortcut to get the current version of the UAS data in the {@link DataStore}.
+	 * Shortcut to get the current version of the UAS data in the {@link net.sf.uadetector.datastore.DataStore}.
 	 * 
 	 * @return current version of UAS data
 	 */

@@ -15,8 +15,6 @@
  ******************************************************************************/
 package net.sf.uadetector.parser;
 
-import net.sf.uadetector.datastore.DataStore;
-
 public interface Updater {
 
 	/**
@@ -25,7 +23,8 @@ public interface Updater {
 	final long DEFAULT_UPDATE_INTERVAL = 1000 * 60 * 60 * 24; // 1 day
 
 	/**
-	 * This function checks whether updated UAS data are available and updates silently the data in a {@link DataStore}.
+	 * This function checks whether updated UAS data are available and updates silently the data in a
+	 * {@link net.sf.uadetector.datastore.DataStore}.
 	 */
 	void call();
 

@@ -208,18 +208,6 @@ public final class VersionNumber implements ReadableVersionNumber {
 		this(major, minor, EMPTY_GROUP);
 	}
 
-	// /**
-	// * Constructs a {@code VersionNumber} without a more processable (atomizable) string.
-	// *
-	// * @param extension
-	// * extension of a version number
-	// * @throws IllegalArgumentException
-	// * if the given argument is {@code null}
-	// */
-	// public VersionNumber(final String extension) {
-	// this(EMPTY_GROUP, EMPTY_GROUP, EMPTY_GROUP, extension);
-	// }
-
 	/**
 	 * Constructs a {@code VersionNumber} with the given major, minor and bugfix number.
 	 * 

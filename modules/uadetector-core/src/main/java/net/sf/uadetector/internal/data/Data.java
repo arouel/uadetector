@@ -352,10 +352,10 @@ public class Data {
 			addPatternToBrowser(browserBuilders, browserPatterns);
 			addPatternToOperatingSystem(operatingSystemBuilders, operatingSystemPatterns);
 
-			final Map<Integer, OperatingSystem> operatingSystems = buildOperatingSystems(operatingSystemBuilders);
-			addOperatingSystemToBrowser(browserBuilders, operatingSystems, convertBrowserOsMapping(browserOperatingSystemMappings));
+			final Map<Integer, OperatingSystem> systems = buildOperatingSystems(operatingSystemBuilders);
+			addOperatingSystemToBrowser(browserBuilders, systems, convertBrowserOsMapping(browserOperatingSystemMappings));
 
-			final Set<OperatingSystem> osSet = convertOperatingSystems(operatingSystems);
+			final Set<OperatingSystem> osSet = convertOperatingSystems(systems);
 			osSet.addAll(this.operatingSystems);
 
 			final Set<Browser> browserSet = buildBrowsers(browserBuilders);

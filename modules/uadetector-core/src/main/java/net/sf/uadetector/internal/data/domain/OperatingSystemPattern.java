@@ -17,7 +17,6 @@ package net.sf.uadetector.internal.data.domain;
 
 import java.util.regex.Pattern;
 
-import net.sf.uadetector.internal.data.OrderedPattern;
 import net.sf.uadetector.internal.util.RegularExpressionConverter;
 
 /**

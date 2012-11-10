@@ -160,7 +160,7 @@ public abstract class AbstractDataStore implements DataStore {
 	}
 
 	/**
-	 * Constructs an {@code SimpleDataStore} by reading the given {@code dataUrl} as <em>UAS data</em>.
+	 * Constructs an {@code AbstractDataStore} by reading the given {@code dataUrl} as <em>UAS data</em>.
 	 * 
 	 * @param reader
 	 *            data reader to read the given {@code dataUrl}
@@ -180,7 +180,7 @@ public abstract class AbstractDataStore implements DataStore {
 	}
 
 	/**
-	 * Constructs an {@code SimpleDataStore} by reading the given {@code dataUrl} as <em>UAS data</em>.
+	 * Constructs an {@code AbstractDataStore} by reading the given {@code dataUrl} as <em>UAS data</em>.
 	 * 
 	 * @param reader
 	 *            data reader to read the given {@code dataUrl}
@@ -203,7 +203,7 @@ public abstract class AbstractDataStore implements DataStore {
 	}
 
 	/**
-	 * Constructs an {@code SimpleDataStore} by reading the given {@code dataUrl} as <em>UAS data</em>.
+	 * Constructs an {@code AbstractDataStore} by reading the given {@code dataUrl} as <em>UAS data</em>.
 	 * 
 	 * @param reader
 	 *            data reader to read the given {@code dataUrl}
@@ -223,7 +223,7 @@ public abstract class AbstractDataStore implements DataStore {
 	}
 
 	/**
-	 * Constructs an {@code SimpleDataStore} by reading the given {@code dataUrl} as <em>UAS data</em>.
+	 * Constructs an {@code AbstractDataStore} by reading the given {@code dataUrl} as <em>UAS data</em>.
 	 * 
 	 * @param reader
 	 *            data reader to read the given {@code dataUrl}

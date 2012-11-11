@@ -82,7 +82,7 @@ public class UrlUtilTest {
 
 	@Test
 	public void toUrl_empty() {
-		final URL url = UrlUtil.toUrl(new File("don't exist"));
+		final URL url = UrlUtil.toUrl(new File("doesn't exist"));
 		Assert.assertNotNull(url);
 	}
 

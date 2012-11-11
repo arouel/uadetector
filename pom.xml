@@ -1,4 +1,5 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
@@ -92,12 +93,20 @@
 		<junit.version>4.10</junit.version>
 		<log4j.version>1.2.17</log4j.version>
 		<powermock.version>1.4.12</powermock.version>
+		<quality-check.version>0.10</quality-check.version>
 		<slf4j.version>1.7.2</slf4j.version>
 
 	</properties>
 
 	<dependencyManagement>
 		<dependencies>
+
+			<!-- Quality-Check -->
+			<dependency>
+				<groupId>net.sf.qualitycheck</groupId>
+				<artifactId>quality-check</artifactId>
+				<version>${quality-check.version}</version>
+			</dependency>
 
 			<!-- Logging -->
 			<dependency>

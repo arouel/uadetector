@@ -8,7 +8,6 @@ import java.net.URL;
 import java.nio.MappedByteBuffer;
 import java.nio.channels.FileChannel;
 import java.nio.charset.Charset;
-import java.util.Random;
 
 import net.sf.uadetector.internal.data.Data;
 import net.sf.uadetector.internal.data.DataBlueprint;
@@ -17,7 +16,9 @@ import net.sf.uadetector.internal.util.UrlUtil;
 import net.sf.uadetector.parser.UpdatingUserAgentStringParserImpl;
 
 import org.junit.Assert;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.TemporaryFolder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -60,14 +61,21 @@ public class CachingXmlDataStoreTest {
 		}
 	}
 
+	/**
+	 * Temporary folder to cache <em>UAS data</em> in a file. Created files in this folder are guaranteed to be deleted
+	 * when the test method finishes (whether it passes or fails).
+	 */
+	@Rule
+	public final TemporaryFolder folder = new TemporaryFolder();
+
 	@Test(expected = IllegalArgumentException.class)
 	public void createCachingXmlDataStore_charset_null() throws IOException {
-		CachingXmlDataStore.createCachingXmlDataStore(new File("test"), DATA_URL, VERSION_URL, null, Data.EMPTY);
+		CachingXmlDataStore.createCachingXmlDataStore(folder.newFile("uas_test.xml"), DATA_URL, VERSION_URL, null, Data.EMPTY);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void createCachingXmlDataStore_dataUrl_null() throws IOException {
-		CachingXmlDataStore.createCachingXmlDataStore(new File("test"), null, VERSION_URL, CHARSET, Data.EMPTY);
+		CachingXmlDataStore.createCachingXmlDataStore(folder.newFile("uas_test.xml"), null, VERSION_URL, CHARSET, Data.EMPTY);
 	}
 
 	@Test
@@ -80,7 +88,7 @@ public class CachingXmlDataStoreTest {
 
 	@Test(expected = IllegalArgumentException.class)
 	public void createCachingXmlDataStore_fallback1_null() throws IOException {
-		CachingXmlDataStore.createCachingXmlDataStore(new File("test"), DATA_URL, VERSION_URL, CHARSET, null);
+		CachingXmlDataStore.createCachingXmlDataStore(folder.newFile("uas_test.xml"), DATA_URL, VERSION_URL, CHARSET, null);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
@@ -90,7 +98,7 @@ public class CachingXmlDataStoreTest {
 
 	@Test(expected = IllegalArgumentException.class)
 	public void createCachingXmlDataStore_fallback3_null() throws IOException {
-		CachingXmlDataStore.createCachingXmlDataStore(new File("test"), null);
+		CachingXmlDataStore.createCachingXmlDataStore(folder.newFile("uas_test.xml"), null);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
@@ -111,32 +119,27 @@ public class CachingXmlDataStoreTest {
 	@Test
 	public void createCachingXmlDataStore_provokeFallback() throws IOException, InterruptedException {
 		// create temp file
-		final File temp = File.createTempFile("uas_temp_" + new Random().nextLong(), ".data");
-		temp.deleteOnExit();
-		Assert.assertEquals("", readFile(temp));
+		final File cache = folder.newFile("uas_temp.xml");
+		Assert.assertEquals("", readFile(cache));
 
 		// create caching data store
 		final String version = "fallback-data-version";
-		final DataStore store = CachingXmlDataStore.createCachingXmlDataStore(temp, UNREACHABLE_URL, UNREACHABLE_URL, CHARSET,
+		final DataStore store = CachingXmlDataStore.createCachingXmlDataStore(cache, UNREACHABLE_URL, UNREACHABLE_URL, CHARSET,
 				DataBlueprint.buildEmptyTestData(version));
 		Assert.assertEquals(version, store.getData().getVersion());
-
-		// delete temp file
-		temp.delete();
 	}
 
 	@Test
 	public void createCachingXmlDataStore_successful() throws IOException, InterruptedException {
 		// create temp file
-		final File temp = File.createTempFile("uas_temp_" + new Random().nextLong(), ".data");
-		temp.deleteOnExit();
-		Assert.assertEquals("", readFile(temp));
+		final File cache = folder.newFile("uas_temp.xml");
+		Assert.assertEquals("", readFile(cache));
 
 		// create caching data store
-		final CachingXmlDataStore store = CachingXmlDataStore.createCachingXmlDataStore(temp, DATA_URL, VERSION_URL, CHARSET);
+		final CachingXmlDataStore store = CachingXmlDataStore.createCachingXmlDataStore(cache, DATA_URL, VERSION_URL, CHARSET);
 		final UpdatingUserAgentStringParserImpl parser = new UpdatingUserAgentStringParserImpl(store);
 
-		Assert.assertTrue(readFile(temp).length() >= 721915);
+		Assert.assertTrue(readFile(cache).length() >= 721915);
 
 		final long firstLastUpdateCheck = parser.getUpdater().getLastUpdateCheck();
 		LOG.debug("LastUpdateCheck at: " + firstLastUpdateCheck);
@@ -154,12 +157,11 @@ public class CachingXmlDataStoreTest {
 		Assert.assertTrue(firstLastUpdateCheck < currentLastUpdateCheck);
 
 		parser.setUpdateInterval(originalInterval);
-		temp.delete();
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void createCachingXmlDataStore_versionUrl_null() throws IOException {
-		CachingXmlDataStore.createCachingXmlDataStore(new File("test"), DATA_URL, null, CHARSET, Data.EMPTY);
+		CachingXmlDataStore.createCachingXmlDataStore(folder.newFile("uas_test.xml"), DATA_URL, null, CHARSET, Data.EMPTY);
 	}
 
 	@Test

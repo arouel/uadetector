@@ -24,8 +24,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * This is the simplest implementation of a {@link DataStore}. It initialize the store by reading the <em>UAS data</em>
- * online and store it only in the Java heap space.
+ * This is the simplest implementation of a {@link RefreshableDataStore}. It initialize the store by reading the
+ * <em>UAS data</em> online via {@link DataStore#DEFAULT_DATA_URL} and store it only in the Java heap space.
  * 
  * @author André Rouél
  */

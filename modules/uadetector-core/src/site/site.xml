@@ -28,6 +28,7 @@
 		</menu>
 
 		<menu name="Reports">
+			<item name="Clirr" href="clirr-report.html" />
 			<item name="Cobertura" href="cobertura/index.html" />
 			<item name="CPD" href="cpd.html" />
 			<item name="FindBugs" href="findbugs.html" />

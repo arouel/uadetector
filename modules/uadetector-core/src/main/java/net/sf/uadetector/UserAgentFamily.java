@@ -4279,7 +4279,7 @@ public enum UserAgentFamily {
 	/**
 	 * ZookaBot
 	 */
-	ZOOKABOT("ZookaBot", Pattern.compile("ZookaBot")),
+	ZOOKABOT("ZookaBot", Pattern.compile("ZookaBot(/\\d+(\\.\\d+)*)?", Pattern.CASE_INSENSITIVE)),
 
 	/**
 	 * ZoomSpider (ZSEBOT)

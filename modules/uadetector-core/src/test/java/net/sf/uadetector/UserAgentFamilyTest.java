@@ -42,6 +42,12 @@ public class UserAgentFamilyTest {
 		Assert.assertEquals(UserAgentFamily.FIREFOX, UserAgentFamily.evaluate("Firefox"));
 	}
 
+	@Test
+	public void evaluate_MAILRU() {
+		Assert.assertEquals(UserAgentFamily.MAIL_RU, UserAgentFamily.evaluate("Mail.Ru/1.0"));
+		Assert.assertEquals(UserAgentFamily.MAIL_RU, UserAgentFamily.evaluate("Mail.RU_Bot/2.0"));
+	}
+
 	@Test(expected = IllegalArgumentException.class)
 	public void evaluate_null() {
 		UserAgentFamily.evaluate(null);

@@ -2076,9 +2076,9 @@ public enum UserAgentFamily {
 	MAHITI_CRAWLER("Mahiti Crawler", Pattern.compile("Mahiti Crawler")),
 
 	/**
-	 * Mail.Ru
+	 * Mail.RU
 	 */
-	MAIL_RU("Mail.Ru", Pattern.compile("Mail.Ru")),
+	MAIL_RU("Mail.Ru", Pattern.compile("Mail.RU(_Bot)?(/\\d+(\\.\\d+)*)?", Pattern.CASE_INSENSITIVE)),
 
 	/**
 	 * Maple browser
@@ -2118,7 +2118,7 @@ public enum UserAgentFamily {
 	/**
 	 * Metaspinner/0.01
 	 */
-	METASPINNER("Metaspinner", Pattern.compile("Metaspinner/(\\d+(\\.\\d+)*)")),
+	METASPINNER("Metaspinner", Pattern.compile("Metaspinner(/\\d+(\\.\\d+)*)?")),
 
 	/**
 	 * MetaTagRobot

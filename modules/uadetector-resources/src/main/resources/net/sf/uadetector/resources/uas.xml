@@ -3,7 +3,7 @@
 <uasdata>
 	<description>
 		<label>Data (format xml) for UASparser - http://user-agent-string.info/download/UASparser</label>
-		<version>20121030-02</version>
+		<version>20121112-01</version>
 		<checksum type="MD5">http://user-agent-string.info/rpc/get_data.php?format=xml&amp;md5=y</checksum>
 		<checksum type="SHA1">http://user-agent-string.info/rpc/get_data.php?format=xml&amp;sha1=y</checksum>
 	</description>
@@ -3058,6 +3058,16 @@
 				<url_company><![CDATA[http://www.genieknows.com/]]></url_company>
 				<icon>bot.png</icon>
 				<bot_info_url>/list-of-ua/bot-detail?bot=genieBot</bot_info_url>
+			</robot>
+			<robot>
+				<id>8096</id>
+				<useragent><![CDATA[Mozilla/5.0 (compatible; Genieo/1.0 http://www.genieo.com/webfilter.html)]]></useragent>
+				<family>Genieo Web filter</family>
+				<name>Genieo/1.0</name>
+				<company><![CDATA[Genieo]]></company>
+				<url_company><![CDATA[http://www.genieo.com]]></url_company>
+				<icon>bot.png</icon>
+				<bot_info_url>/list-of-ua/bot-detail?bot=Genieo Web filter</bot_info_url>
 			</robot>
 			<robot>
 				<id>1133</id>
@@ -6720,6 +6730,16 @@
 				<bot_info_url>/list-of-ua/bot-detail?bot=Search17Bot</bot_info_url>
 			</robot>
 			<robot>
+				<id>8066</id>
+				<useragent><![CDATA[Mozilla/5.0 (compatible; SearchmetricsBot; http://www.searchmetrics.com/en/searchmetrics-bot/)]]></useragent>
+				<family>SearchmetricsBot</family>
+				<name>SearchmetricsBot</name>
+				<company><![CDATA[Searchmetrics GmbH]]></company>
+				<url_company><![CDATA[http://www.searchmetrics.com/]]></url_company>
+				<icon>bot.png</icon>
+				<bot_info_url>/list-of-ua/bot-detail?bot=SearchmetricsBot</bot_info_url>
+			</robot>
+			<robot>
 				<id>2246</id>
 				<useragent><![CDATA[Mozilla/5.0 (compatible; Semager/1.4; http://www.semager.de/blog/semager-bots/)]]></useragent>
 				<family>Semager</family>
@@ -9702,6 +9722,36 @@
 			<robot>
 				<id>7729</id>
 				<useragent><![CDATA[yacybot (freeworld/global; amd64 Windows 7 6.1; java 1.6.0_25; Europe/de) http://yacy.net/bot.html]]></useragent>
+				<family>yacybot</family>
+				<name>yacybot</name>
+				<company><![CDATA[Michael Christen]]></company>
+				<url_company><![CDATA[]]></url_company>
+				<icon>bot_yacybot.png</icon>
+				<bot_info_url>/list-of-ua/bot-detail?bot=yacybot</bot_info_url>
+			</robot>
+			<robot>
+				<id>8107</id>
+				<useragent><![CDATA[yacybot (freeworld/global; i386 Linux 2.6.32-5-686; java 1.6.0_18; Europe/en) http://yacy.net/bot.html]]></useragent>
+				<family>yacybot</family>
+				<name>yacybot</name>
+				<company><![CDATA[Michael Christen]]></company>
+				<url_company><![CDATA[]]></url_company>
+				<icon>bot_yacybot.png</icon>
+				<bot_info_url>/list-of-ua/bot-detail?bot=yacybot</bot_info_url>
+			</robot>
+			<robot>
+				<id>8114</id>
+				<useragent><![CDATA[yacybot (freeworld/global; amd64 Windows 7 6.1; java 1.6.0_23; Europe/de) http://yacy.net/bot.html]]></useragent>
+				<family>yacybot</family>
+				<name>yacybot</name>
+				<company><![CDATA[Michael Christen]]></company>
+				<url_company><![CDATA[]]></url_company>
+				<icon>bot_yacybot.png</icon>
+				<bot_info_url>/list-of-ua/bot-detail?bot=yacybot</bot_info_url>
+			</robot>
+			<robot>
+				<id>8083</id>
+				<useragent><![CDATA[yacybot (freeworld/global; amd64 Linux 3.2.0-3-amd64; java 1.6.0_24; Europe/en) http://yacy.net/bot.html]]></useragent>
 				<family>yacybot</family>
 				<name>yacybot</name>
 				<company><![CDATA[Michael Christen]]></company>

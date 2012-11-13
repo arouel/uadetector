@@ -835,9 +835,10 @@ public enum UserAgentFamily {
 	DILLO("Dillo", Pattern.compile("Dillo")),
 
 	/**
-	 * discobot
+	 * Discoverybot is Discovery Engine's web crawler. It downloads text/html documents for use in building our full web
+	 * search engine.
 	 */
-	DISCOBOT("discobot", Pattern.compile("discobot")),
+	DISCOBOT("discobot", Pattern.compile("(discobot|discoverybot)(/\\d+(\\.\\d+))?")),
 
 	/**
 	 * DKIMRepBot

@@ -602,7 +602,7 @@ public enum UserAgentFamily {
 	/**
 	 * ChangeDetection
 	 */
-	CHANGEDETECTION("ChangeDetection", Pattern.compile("ChangeDetection")),
+	CHANGEDETECTION("ChangeDetection", Pattern.compile("ChangeDetection(/\\d+(\\.\\d+)*)?", Pattern.CASE_INSENSITIVE)),
 
 	/**
 	 * Charlotte
@@ -688,6 +688,11 @@ public enum UserAgentFamily {
 	 * CometBird
 	 */
 	COMETBIRD("CometBird", Pattern.compile("CometBird")),
+
+	/**
+	 * CompSpyBot - Competitive Spying and Scraping
+	 */
+	COMPSPYBOT("CompSpyBot/1.0", Pattern.compile("CompSpyBot(/\\d+(\\.\\d+)*)?")),
 
 	/**
 	 * Comodo Dragon

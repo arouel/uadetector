@@ -80,7 +80,7 @@ public final class CachingXmlDataStore extends AbstractDataStore implements Refr
 	 * The suffix string to be used in generating the cache file's name; may be {@code null}, in which case the suffix "
 	 * {@code .tmp}" will be used
 	 */
-	private static final String SUFFIX = "";
+	private static final String SUFFIX = ".xml";
 
 	/**
 	 * Constructs a new instance of {@code CachingXmlDataStore} with the given arguments. The given {@code cacheFile}

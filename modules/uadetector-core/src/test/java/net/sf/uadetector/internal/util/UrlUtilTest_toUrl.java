@@ -26,12 +26,12 @@ public class UrlUtilTest_toUrl {
 		final boolean isLinux = OperatingSystemDetector.isLinux();
 		if (isLinux) {
 			LOG.info("This unit test will be ignored due to a bug in EasyMock <= 3.1, in the class mocking feature under GNU/Linux.");
-			Assume.assumeTrue(isLinux);
 		}
 	}
 
 	@Test(expected = IllegalStateException.class)
 	public void read() throws Exception {
+		Assume.assumeTrue(!OperatingSystemDetector.isLinux());
 		final URI uri = PowerMock.createPartialMock(URI.class, "toURL");
 		EasyMock.expect(uri.toURL()).andThrow(new MalformedURLException());
 		final File file = PowerMock.createMock(File.class);

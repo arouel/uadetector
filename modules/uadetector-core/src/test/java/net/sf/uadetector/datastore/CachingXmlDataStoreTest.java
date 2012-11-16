@@ -175,32 +175,30 @@ public class CachingXmlDataStoreTest {
 
 	@Test(expected = IllegalArgumentException.class)
 	public void readAndSave_charset_null() throws IOException {
-		final File temp = CachingXmlDataStore.findOrCreateCacheFile(); // cache file should not exist
-		CachingXmlDataStore.readAndSave(DATA_URL, temp, null);
-		temp.delete();
+		final File cache = folder.newFile(); // cache file does not exist
+		CachingXmlDataStore.readAndSave(DATA_URL, cache, null);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void readAndSave_dataUrl_null() throws IOException {
-		final File temp = CachingXmlDataStore.findOrCreateCacheFile(); // cache file should not exist
-		CachingXmlDataStore.readAndSave(null, temp, CHARSET);
-		temp.delete();
+		final File cache = folder.newFile(); // cache file does not exist
+		CachingXmlDataStore.readAndSave(null, cache, CHARSET);
 	}
 
 	@Test
 	public void readAndSave_deleteAndRenameTempFileTest() throws MalformedURLException, IOException {
-		final File temp = CachingXmlDataStore.findOrCreateCacheFile(); // cache file does not exist
+		final File cache = folder.newFile(); // cache file does not exist
 
 		// Assert.assertTrue(temp.length() == 0); // does not work on any system
-		Assert.assertTrue(FileUtil.isEmpty(temp, DataStore.DEFAULT_CHARSET));
+		Assert.assertTrue(FileUtil.isEmpty(cache, DataStore.DEFAULT_CHARSET));
 
-		CachingXmlDataStore.readAndSave(DATA_URL, temp, CHARSET); // file will be created
-		Assert.assertTrue(temp.length() >= 722015);
+		// file will be created
+		CachingXmlDataStore.readAndSave(DATA_URL, cache, CHARSET);
+		Assert.assertTrue(cache.length() >= 722015);
 
-		CachingXmlDataStore.readAndSave(DATA_URL, temp, CHARSET); // file will be overwritten
-		Assert.assertTrue(temp.length() >= 722015);
-
-		temp.delete();
+		// file will be overwritten (delete and rename)
+		CachingXmlDataStore.readAndSave(DATA_URL, cache, CHARSET);
+		Assert.assertTrue(cache.length() >= 722015);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
@@ -210,9 +208,8 @@ public class CachingXmlDataStoreTest {
 
 	@Test
 	public void readAndSave_urlAndFileAreSameResource() throws MalformedURLException, IOException {
-		final File temp = CachingXmlDataStore.findOrCreateCacheFile(); // cache file does not exist
-		CachingXmlDataStore.readAndSave(temp.toURI().toURL(), temp, CHARSET);
-		temp.delete();
+		final File resource = folder.newFile(); // cache file does not exist
+		CachingXmlDataStore.readAndSave(resource.toURI().toURL(), resource, CHARSET);
 	}
 
 }

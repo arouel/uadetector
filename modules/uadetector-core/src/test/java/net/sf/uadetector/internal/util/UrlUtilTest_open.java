@@ -25,6 +25,7 @@ public class UrlUtilTest_open {
 	@Before
 	public void doNotRunOnLinux() {
 		final boolean isLinux = OperatingSystemDetector.isLinux();
+		Assume.assumeTrue(isLinux);
 		if (isLinux) {
 			LOG.info("This unit test will be ignored due to a bug in EasyMock <= 3.1, in the class mocking feature under GNU/Linux.");
 		}
@@ -32,8 +33,6 @@ public class UrlUtilTest_open {
 
 	@Test(expected = CanNotOpenStreamException.class)
 	public void open_withIOException() throws IOException {
-		Assume.assumeTrue(!OperatingSystemDetector.isLinux());
-
 		// The following line makes a bug in EasyMock 3.1 visible. For example on OS X the output will be
 		// 'EasyMock.DISABLE_CLASS_MOCKING: false' and on Linux it is 'EasyMock.DISABLE_CLASS_MOCKING: true'. The
 		// behavior of EasyMock on Linux breaks this test.

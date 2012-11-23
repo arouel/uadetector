@@ -15,28 +15,15 @@
  ******************************************************************************/
 package net.sf.uadetector.internal.data;
 
-import java.io.Serializable;
-import java.util.Comparator;
+import net.sf.uadetector.internal.util.CompareNullSafe;
 
-public final class OrderedPatternComparator<T extends Comparable<T>> implements Comparator<T>, Serializable {
+public final class OrderedPatternComparator<T extends Comparable<T>> extends CompareNullSafe<T> {
 
-	private static final long serialVersionUID = -3161079380603225797L;
+	private static final long serialVersionUID = -3561941361756671092L;
 
 	@Override
-	public int compare(final T b1, final T b2) {
-		int result = 0;
-		if (b1 == null) {
-			if (b2 != null) {
-				result = -1;
-			}
-		} else {
-			if (b2 == null) {
-				result = 1;
-			} else {
-				result = b1.compareTo(b2);
-			}
-		}
-		return result;
+	public int compareType(final T o1, final T o2) {
+		return o1.compareTo(o2);
 	}
 
 }

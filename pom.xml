@@ -92,7 +92,7 @@
 		<commons-logging.version>1.1.1</commons-logging.version>
 		<easymock.version>3.1</easymock.version>
 		<junit.version>4.11</junit.version>
-		<log4j.version>1.2.17</log4j.version>
+		<logback.version>1.0.7</logback.version>
 		<powermock.version>1.4.12</powermock.version>
 		<quality-check.version>0.10</quality-check.version>
 		<slf4j.version>1.7.2</slf4j.version>
@@ -136,15 +136,9 @@
 				<scope>test</scope>
 			</dependency>
 			<dependency>
-				<groupId>org.slf4j</groupId>
-				<artifactId>slf4j-log4j12</artifactId>
-				<version>${slf4j.version}</version>
-				<scope>test</scope>
-			</dependency>
-			<dependency>
-				<groupId>log4j</groupId>
-				<artifactId>log4j</artifactId>
-				<version>${log4j.version}</version>
+				<groupId>ch.qos.logback</groupId>
+				<artifactId>logback-classic</artifactId>
+				<version>${logback.version}</version>
 				<scope>test</scope>
 			</dependency>
 			<dependency>

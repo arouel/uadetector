@@ -33,17 +33,19 @@ public class UrlUtilTest_open {
 
 	@Test(expected = CanNotOpenStreamException.class)
 	public void open_withIOException() throws IOException {
-		// The following line makes a bug in EasyMock 3.1 visible. For example on OS X the output will be
-		// 'EasyMock.DISABLE_CLASS_MOCKING: false' and on Linux it is 'EasyMock.DISABLE_CLASS_MOCKING: true'. The
-		// behavior of EasyMock on Linux breaks this test.
-		EasyMock.setEasyMockProperty(EasyMock.DISABLE_CLASS_MOCKING, Boolean.FALSE.toString());
-		System.out.println("EasyMock.DISABLE_CLASS_MOCKING: " + EasyMock.getEasyMockProperty(EasyMock.DISABLE_CLASS_MOCKING));
+		if (!OperatingSystemDetector.isLinux()) {
+			// The following line makes a bug in EasyMock 3.1 visible. For example on OS X the output will be
+			// 'EasyMock.DISABLE_CLASS_MOCKING: false' and on Linux it is 'EasyMock.DISABLE_CLASS_MOCKING: true'. The
+			// behavior of EasyMock on Linux breaks this test.
+			EasyMock.setEasyMockProperty(EasyMock.DISABLE_CLASS_MOCKING, Boolean.FALSE.toString());
+			System.out.println("EasyMock.DISABLE_CLASS_MOCKING: " + EasyMock.getEasyMockProperty(EasyMock.DISABLE_CLASS_MOCKING));
 
-		final URL url = PowerMock.createMock(URL.class);
-		EasyMock.expect(url.openStream()).andThrow(new IOException());
-		PowerMock.replayAll();
-		UrlUtil.open(url);
-		PowerMock.verifyAll();
+			final URL url = PowerMock.createMock(URL.class);
+			EasyMock.expect(url.openStream()).andThrow(new IOException());
+			PowerMock.replayAll();
+			UrlUtil.open(url);
+			PowerMock.verifyAll();
+		}
 	}
 
 }

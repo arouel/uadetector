@@ -15,7 +15,7 @@
  ******************************************************************************/
 package net.sf.uadetector.internal.data.domain;
 
-import junit.framework.Assert;
+import org.junit.Assert;
 
 import net.sf.uadetector.internal.data.domain.BrowserType.Builder;
 

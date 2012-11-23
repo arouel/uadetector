@@ -8,7 +8,7 @@ import java.io.Reader;
 import java.net.URL;
 import java.nio.charset.Charset;
 
-import junit.framework.Assert;
+import org.junit.Assert;
 import net.sf.uadetector.datastore.DataStore;
 
 import org.easymock.EasyMock;

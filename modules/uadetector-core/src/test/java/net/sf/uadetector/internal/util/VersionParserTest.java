@@ -17,7 +17,7 @@ package net.sf.uadetector.internal.util;
 
 import java.lang.reflect.Constructor;
 
-import junit.framework.Assert;
+import org.junit.Assert;
 import net.sf.uadetector.OperatingSystemFamily;
 import net.sf.uadetector.VersionNumber;
 

@@ -15,7 +15,7 @@
  ******************************************************************************/
 package net.sf.uadetector;
 
-import junit.framework.Assert;
+import org.junit.Assert;
 import net.sf.uadetector.internal.data.domain.Robot;
 
 import org.junit.Test;

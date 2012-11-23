@@ -17,7 +17,7 @@ package net.sf.uadetector.internal.data.domain;
 
 import java.util.regex.Pattern;
 
-import junit.framework.Assert;
+import org.junit.Assert;
 
 import org.junit.Test;
 

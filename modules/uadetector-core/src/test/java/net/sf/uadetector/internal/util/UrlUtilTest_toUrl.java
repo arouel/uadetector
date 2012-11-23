@@ -32,15 +32,13 @@ public class UrlUtilTest_toUrl {
 
 	@Test(expected = IllegalStateException.class)
 	public void read() throws Exception {
-		if (!OperatingSystemDetector.isLinux()) {
-			final URI uri = PowerMock.createPartialMock(URI.class, "toURL");
-			EasyMock.expect(uri.toURL()).andThrow(new MalformedURLException());
-			final File file = PowerMock.createMock(File.class);
-			EasyMock.expect(file.toURI()).andReturn(uri);
-			PowerMock.replayAll();
-			UrlUtil.toUrl(file);
-			PowerMock.verifyAll();
-		}
+		final URI uri = PowerMock.createPartialMock(URI.class, "toURL");
+		EasyMock.expect(uri.toURL()).andThrow(new MalformedURLException());
+		final File file = PowerMock.createMock(File.class);
+		EasyMock.expect(file.toURI()).andReturn(uri);
+		PowerMock.replayAll();
+		UrlUtil.toUrl(file);
+		PowerMock.verifyAll();
 	}
 
 }

@@ -95,24 +95,4 @@ public class RegularExpressionConverterTest {
 		constructor.newInstance();
 	}
 
-	@Test
-	public void translateModifiers_imsx() {
-		final int flags = RegularExpressionConverter.translateModifiers("imsx");
-		Assert.assertSame(Pattern.CASE_INSENSITIVE | Pattern.DOTALL | Pattern.MULTILINE | Pattern.COMMENTS, flags);
-		Assert.assertNotSame(Pattern.CASE_INSENSITIVE | Pattern.DOTALL | Pattern.MULTILINE, flags);
-		Assert.assertSame(RegularExpressionConverter.translateModifiers("msxi"), flags);
-	}
-
-	@Test(expected = IllegalArgumentException.class)
-	public void translateModifiers_null() {
-		RegularExpressionConverter.translateModifiers(null);
-	}
-
-	@Test
-	public void translateModifiers_si() {
-		final int flags = RegularExpressionConverter.translateModifiers("si");
-		Assert.assertSame(Pattern.CASE_INSENSITIVE | Pattern.DOTALL, flags);
-		Assert.assertSame(RegularExpressionConverter.translateModifiers("is"), flags);
-	}
-
 }

@@ -1091,6 +1091,11 @@ public enum UserAgentFamily {
 	FAVORSTARBOT("favorstarbot", Pattern.compile("favorstarbot")),
 
 	/**
+	 * FeedDemon
+	 */
+	FEEDDEMON("FeedDemon", Pattern.compile("FeedDemon")),
+
+	/**
 	 * Feed::Find
 	 */
 	FEED_FIND("Feed::Find", Pattern.compile("Feed::Find")),

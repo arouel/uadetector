@@ -17619,7 +17619,7 @@
 			<browser_reg>
 				<order>430</order>
 				<browser_id>462</browser_id>
-				<regstring>/^FeedDemon\/([0-9\.]+).*www\.feeddemon\.com/si</regstring>
+				<regstring>/^FeedDemon\/([0-9\.]+).*www\.(feeddemon|newsgator)\.com/si</regstring>
 			</browser_reg>
 			<browser_reg>
 				<order>431</order>

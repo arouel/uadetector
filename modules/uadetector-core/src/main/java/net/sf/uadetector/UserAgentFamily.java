@@ -2876,6 +2876,11 @@ public enum UserAgentFamily {
 	PRTG_NETWORK_MONITOR("PRTG Network Monitor", Pattern.compile("PRTG Network Monitor")),
 
 	/**
+	 * PS Vita browser
+	 */
+	PS_VITA_BROWSER("PS Vita browser", Pattern.compile("PS Vita browser")),
+
+	/**
 	 * psbot
 	 */
 	PSBOT("psbot", Pattern.compile("psbot")),

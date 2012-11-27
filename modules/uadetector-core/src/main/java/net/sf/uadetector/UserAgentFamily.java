@@ -2471,6 +2471,11 @@ public enum UserAgentFamily {
 	NINESKY("NineSky", Pattern.compile("NineSky")),
 
 	/**
+	 * Nintendo Browser
+	 */
+	NINTENDO("Nintendo Browser", Pattern.compile("Nintendo Browser")),
+
+	/**
 	 * nodestackbot
 	 */
 	NODESTACKBOT("nodestackbot", Pattern.compile("nodestackbot")),

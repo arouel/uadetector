@@ -55,6 +55,11 @@ public enum UserAgentFamily {
 	_80LEGS("80legs", Pattern.compile("80legs")),
 
 	/**
+	 * A1 Sitemap Generator
+	 */
+	A1_SITEMAP_GENERATOR("A1 Sitemap Generator", Pattern.compile("A1 Sitemap Generator")),
+
+	/**
 	 * AB (Apache Bench)
 	 */
 	AB_APACHE_BENCH("AB (Apache Bench)", Pattern.compile("AB \\(Apache Bench\\)")),

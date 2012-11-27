@@ -13,7 +13,6 @@ import java.util.Map;
 
 import net.sf.uadetector.service.UADetectorServiceFactory;
 
-import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -107,7 +106,6 @@ public class KnownAgentsReader {
 		printer.flush();
 	}
 
-	@Test
 	public void read() {
 		final InputStream stream = UserAgentStringParserIntegrationTest.class.getClassLoader().getResourceAsStream(FILE);
 		try {

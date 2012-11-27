@@ -2916,6 +2916,11 @@ public enum UserAgentFamily {
 	QIRINA_HURDLER("Qirina Hurdler", Pattern.compile("Qirina Hurdler")),
 
 	/**
+	 * QQbrowser
+	 */
+	QQBROWSER("QQbrowser", Pattern.compile("QQbrowser")),
+
+	/**
 	 * Qseero
 	 */
 	QSEERO("Qseero", Pattern.compile("Qseero")),

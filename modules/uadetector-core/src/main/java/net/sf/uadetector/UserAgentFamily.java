@@ -4237,6 +4237,11 @@ public enum UserAgentFamily {
 	YANDEXBOT("YandexBot", Pattern.compile("YandexBot")),
 
 	/**
+	 * Yandex.Browser
+	 */
+	YANDEX_BROWSER("Yandex.Browser", Pattern.compile("Yandex.Browser")),
+
+	/**
 	 * Yanga
 	 */
 	YANGA("Yanga", Pattern.compile("Yanga")),

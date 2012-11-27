@@ -74,6 +74,11 @@ public enum OperatingSystemFamily {
 	DANGEROS("DangerOS", Pattern.compile("DangerOS")),
 
 	/**
+	 * Firefox OS is an open source operating system for smartphones and tablet computers being developed by Mozilla.
+	 */
+	FIREFOX_OS("Firefox OS", Pattern.compile("Firefox OS")),
+
+	/**
 	 * HP-UX (Hewlett Packard UniX) is a commercial Unix operating system from Hewlett-Packard and is based on UNIX
 	 * System V.
 	 */

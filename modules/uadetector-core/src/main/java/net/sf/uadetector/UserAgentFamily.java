@@ -4192,6 +4192,11 @@ public enum UserAgentFamily {
 	XML_RPC_FOR_PHP("XML-RPC for PHP", Pattern.compile("XML-RPC for PHP")),
 
 	/**
+	 * XML-RPC for Ruby
+	 */
+	XML_RPC_FOR_RUBY("XML-RPC for Ruby", Pattern.compile("XML-RPC for Ruby")),
+
+	/**
 	 * XML Sitemaps Generator
 	 */
 	XML_SITEMAPS_GENERATOR("XML Sitemaps Generator", Pattern.compile("XML Sitemaps Generator")),

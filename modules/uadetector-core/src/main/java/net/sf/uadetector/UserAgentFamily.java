@@ -190,6 +190,11 @@ public enum UserAgentFamily {
 	AMAYA("Amaya", Pattern.compile("Amaya")),
 
 	/**
+	 * Amazon Silk
+	 */
+	AMAZON_SILK("Amazon Silk", Pattern.compile("Amazon Silk")),
+
+	/**
 	 * Amfibibot
 	 */
 	AMFIBIBOT("Amfibibot", Pattern.compile("Amfibibot")),

@@ -825,6 +825,11 @@ public enum UserAgentFamily {
 	DEL_ICIO_US_THUMBNAILS("del.icio.us-thumbnails", Pattern.compile("del.icio.us-thumbnails")),
 
 	/**
+	 * Dell Web Monitor
+	 */
+	DELL_WEB_MONITOR("Dell Web Monitor", Pattern.compile("Dell Web Monitor")),
+
+	/**
 	 * Demeter
 	 */
 	DEMETER("Demeter", Pattern.compile("Demeter")),

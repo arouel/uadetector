@@ -4259,7 +4259,7 @@ public enum UserAgentFamily {
 	/**
 	 * Yandex.Browser
 	 */
-	YANDEX_BROWSER("Yandex.Browser", Pattern.compile("Yandex.Browser")),
+	YANDEX_BROWSER("Yandex.Browser", Pattern.compile("Yandex\\.Browser")),
 
 	/**
 	 * Yanga

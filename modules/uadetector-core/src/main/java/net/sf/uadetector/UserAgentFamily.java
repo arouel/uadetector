@@ -375,6 +375,11 @@ public enum UserAgentFamily {
 	BDFETCH("BDFetch", Pattern.compile("BDFetch")),
 
 	/**
+	 * Beamrise
+	 */
+	BEAMRISE("Beamrise", Pattern.compile("Beamrise")),
+
+	/**
 	 * BecomeBot
 	 */
 	BECOMEBOT("BecomeBot", Pattern.compile("BecomeBot")),

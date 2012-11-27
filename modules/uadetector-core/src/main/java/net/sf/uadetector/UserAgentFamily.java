@@ -705,14 +705,14 @@ public enum UserAgentFamily {
 	COMETBIRD("CometBird", Pattern.compile("CometBird")),
 
 	/**
-	 * CompSpyBot - Competitive Spying and Scraping
-	 */
-	COMPSPYBOT("CompSpyBot/1.0", Pattern.compile("CompSpyBot(/\\d+(\\.\\d+)*)?")),
-
-	/**
 	 * Comodo Dragon
 	 */
 	COMODO_DRAGON("Comodo Dragon", Pattern.compile("Comodo Dragon")),
+
+	/**
+	 * CompSpyBot - Competitive Spying and Scraping
+	 */
+	COMPSPYBOT("CompSpyBot/1.0", Pattern.compile("CompSpyBot(/\\d+(\\.\\d+)*)?")),
 
 	/**
 	 * Conkeror
@@ -1111,11 +1111,6 @@ public enum UserAgentFamily {
 	FAVORSTARBOT("favorstarbot", Pattern.compile("favorstarbot")),
 
 	/**
-	 * FeedDemon
-	 */
-	FEEDDEMON("FeedDemon", Pattern.compile("FeedDemon")),
-
-	/**
 	 * Feed::Find
 	 */
 	FEED_FIND("Feed::Find", Pattern.compile("Feed::Find")),
@@ -1129,6 +1124,11 @@ public enum UserAgentFamily {
 	 * FeedCatBot
 	 */
 	FEEDCATBOT("FeedCatBot", Pattern.compile("FeedCatBot")),
+
+	/**
+	 * FeedDemon
+	 */
+	FEEDDEMON("FeedDemon", Pattern.compile("FeedDemon")),
 
 	/**
 	 * Feedfetcher-Google
@@ -4252,14 +4252,14 @@ public enum UserAgentFamily {
 	YAHOOFEEDSEEKER("YahooFeedSeeker", Pattern.compile("YahooFeedSeeker")),
 
 	/**
-	 * YandexBot
-	 */
-	YANDEXBOT("YandexBot", Pattern.compile("YandexBot")),
-
-	/**
 	 * Yandex.Browser
 	 */
 	YANDEX_BROWSER("Yandex.Browser", Pattern.compile("Yandex\\.Browser")),
+
+	/**
+	 * YandexBot
+	 */
+	YANDEXBOT("YandexBot", Pattern.compile("YandexBot")),
 
 	/**
 	 * Yanga

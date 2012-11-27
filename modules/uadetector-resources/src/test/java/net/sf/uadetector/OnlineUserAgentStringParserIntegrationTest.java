@@ -71,7 +71,7 @@ public class OnlineUserAgentStringParserIntegrationTest {
 
 	private static final List<UserAgentExample> UA_EXAMPLES = UserAgentExamplesReader.read();
 
-	private static final UserAgentStringParser PARSER = UADetectorServiceFactory.getOnlineUpdatingParser();
+	private static final UserAgentStringParser PARSER = UADetectorServiceFactory.getResourceModuleParser();
 
 	@Test
 	public void testOperatingSystemExamples() throws Exception {
@@ -109,11 +109,12 @@ public class OnlineUserAgentStringParserIntegrationTest {
 			final UserAgent agent = PARSER.parse(example.getUserAgentString());
 
 			// comparing the name
-			UserAgentFamily family = UserAgentFamily.evaluate(example.getName());
+			final UserAgentFamily family = UserAgentFamily.evaluate(example.getName());
 			if (family != agent.getFamily()) {
 				LOG.info("Unexpected user agent family found. Please check the user agent string '" + example.getUserAgentString() + "'.");
 			}
-			Assert.assertEquals(family, agent.getFamily());
+			final String msgForFamilyDiff = "'" + family + "' != '" + agent.getFamily() + "' : " + example.getUserAgentString();
+			Assert.assertEquals(msgForFamilyDiff, family, agent.getFamily());
 
 			final String type = "robot".equals(example.getType()) ? Robot.TYPENAME : example.getType();
 			if (Robot.TYPENAME.equals(type)) {
@@ -122,7 +123,8 @@ public class OnlineUserAgentStringParserIntegrationTest {
 			}
 
 			// abort if the type is not the expected one
-			Assert.assertEquals(type, agent.getTypeName());
+			final String msgForTypeDiff = "'" + type + "' != '" + agent.getTypeName() + "' : " + example.getUserAgentString();
+			Assert.assertEquals(msgForTypeDiff, type, agent.getTypeName());
 
 			i++;
 		}

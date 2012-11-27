@@ -113,7 +113,8 @@ public class UserAgentStringParserIntegrationTest {
 			if (family != agent.getFamily()) {
 				LOG.info("Unexpected user agent family found. Please check the user agent string '" + example.getUserAgentString() + "'.");
 			}
-			Assert.assertEquals(family, agent.getFamily());
+			final String msgForFamilyDiff = "'" + family + "' != '" + agent.getFamily() + "' : " + example.getUserAgentString();
+			Assert.assertEquals(msgForFamilyDiff, family, agent.getFamily());
 
 			final String type = "robot".equals(example.getType()) ? Robot.TYPENAME : example.getType();
 			if (Robot.TYPENAME.equals(type)) {
@@ -122,7 +123,8 @@ public class UserAgentStringParserIntegrationTest {
 			}
 
 			// abort if the type is not the expected one
-			Assert.assertEquals(type, agent.getTypeName());
+			final String msgForTypeDiff = "'" + type + "' != '" + agent.getTypeName() + "' : " + example.getUserAgentString();
+			Assert.assertEquals(msgForTypeDiff, type, agent.getTypeName());
 
 			i++;
 		}

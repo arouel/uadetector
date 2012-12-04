@@ -2736,6 +2736,11 @@ public enum UserAgentFamily {
 	PATRIOTT("Patriott", Pattern.compile("Patriott")),
 
 	/**
+	 * Pattern is a web mining module for the Python programming language.
+	 */
+	PATTERN("Pattern", Pattern.compile("Pattern")),
+
+	/**
 	 * PEAR HTTP_Request
 	 */
 	PEAR_HTTP_REQUEST("PEAR HTTP_Request", Pattern.compile("PEAR HTTP_Request")),

@@ -1778,7 +1778,7 @@ public enum UserAgentFamily {
 	/**
 	 * Jakarta Commons-HttpClient
 	 */
-	JAKARTA_COMMONS_HTTPCLIENT("Jakarta Commons-HttpClient", Pattern.compile("Jakarta Commons-HttpClient")),
+	JAKARTA_COMMONS_HTTPCLIENT("Jakarta Commons-HttpClient", Pattern.compile("(Apache-HttpClient|Jakarta Commons-HttpClient)")),
 
 	/**
 	 * Jambot

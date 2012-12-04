@@ -197,7 +197,7 @@ public enum UserAgentFamily {
 	/**
 	 * Amazon Silk
 	 */
-	AMAZON_SILK("Amazon Silk", Pattern.compile("Amazon Silk")),
+	AMAZON_SILK("Amazon Silk", Pattern.compile("(Amazon Silk|Mobile Silk)")),
 
 	/**
 	 * Amfibibot

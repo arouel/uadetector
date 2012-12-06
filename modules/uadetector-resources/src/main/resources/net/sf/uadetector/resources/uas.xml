@@ -3,7 +3,7 @@
 <uasdata>
 	<description>
 		<label>Data (format xml) for UASparser - http://user-agent-string.info/download/UASparser</label>
-		<version>20121202-02</version>
+		<version>20121203-02</version>
 		<checksum type="MD5">http://user-agent-string.info/rpc/get_data.php?format=xml&amp;md5=y</checksum>
 		<checksum type="SHA1">http://user-agent-string.info/rpc/get_data.php?format=xml&amp;sha1=y</checksum>
 	</description>
@@ -1168,6 +1168,16 @@
 				<url_company><![CDATA[http://www.chlooe.com/]]></url_company>
 				<icon>bot.png</icon>
 				<bot_info_url>/list-of-ua/bot-detail?bot=bot-pge.chlooe.com</bot_info_url>
+			</robot>
+			<robot>
+				<id>8192</id>
+				<useragent><![CDATA[bot.wsowner.com/1.0.0 (+http://wsowner.com/)]]></useragent>
+				<family>bot.wsowner.com</family>
+				<name>bot.wsowner.com/1.0.0</name>
+				<company><![CDATA[AsiaWS]]></company>
+				<url_company><![CDATA[http://asiaws.net/]]></url_company>
+				<icon>bot.png</icon>
+				<bot_info_url>/list-of-ua/bot-detail?bot=bot.wsowner.com</bot_info_url>
 			</robot>
 			<robot>
 				<id>1733</id>
@@ -8960,6 +8970,16 @@
 				<bot_info_url>/list-of-ua/bot-detail?bot=wsAnalyzer</bot_info_url>
 			</robot>
 			<robot>
+				<id>8191</id>
+				<useragent><![CDATA[wscheck.com/1.0.0 (+http://wscheck.com/)]]></useragent>
+				<family>wscheck.com</family>
+				<name>wscheck.com/1.0.0</name>
+				<company><![CDATA[AsiaWS]]></company>
+				<url_company><![CDATA[http://asiaws.net/]]></url_company>
+				<icon>bot.png</icon>
+				<bot_info_url>/list-of-ua/bot-detail?bot=wscheck.com</bot_info_url>
+			</robot>
+			<robot>
 				<id>626</id>
 				<useragent><![CDATA[www.fi crawler, contact crawler@www.fi]]></useragent>
 				<family>www.fi crawler</family>
@@ -14628,8 +14648,8 @@
 				<type>0</type>
 				<name>RockMelt</name>
 				<url><![CDATA[http://www.rockmelt.com/]]></url>
-				<company><![CDATA[Tim Howes and Eric Vishria]]></company>
-				<url_company><![CDATA[]]></url_company>
+				<company><![CDATA[Rockmelt, Inc.]]></company>
+				<url_company><![CDATA[http://www.rockmelt.com/]]></url_company>
 				<icon>rockmelt.png</icon>
 				<browser_info_url>/list-of-ua/browser-detail?browser=RockMelt</browser_info_url>
 			</browser>

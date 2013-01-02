@@ -1,6 +1,6 @@
 {
   "format": "1.0",
-  "version": "20121203-02",
+  "version": "20121224-01",
   "operating-system-patterns": [
     {
       "regex": {
@@ -1181,9 +1181,9 @@
     {
       "regex": {
         "flags": "is",
-        "pattern": " mac"
+        "pattern": "macos"
       },
-      "hash": "8479c8e36f9063f46e3529144e77f017d1226434a5e7537e492f099fc78a08ba"
+      "hash": "ff7840b4d737d2d56bfb537fb01748da69f9163edeee77289aeb43292301e594"
     },
     {
       "regex": {
@@ -1774,13 +1774,13 @@
         "fabe9c090ff86b6f806c0671383af2fe3adf554f52f5cb3e884f2c0cbc006d08",
         "9741867faec5ccaf154c2039ae67a26dc2f5734d507a14812053f4aa7267301b",
         "c32f676a6503edc385752c972bdf6899c1ed39c8a6df93042d06fe2259a9d9ff",
-        "8479c8e36f9063f46e3529144e77f017d1226434a5e7537e492f099fc78a08ba",
+        "ff7840b4d737d2d56bfb537fb01748da69f9163edeee77289aeb43292301e594",
         "bedd7aaf0a55a55693790a406813bddb940402c84661b1780becc1981180e668"
       ],
       "producer": "Apple Computer, Inc.",
       "producer-url": "http://www.apple.com/",
       "url": "http://en.wikipedia.org/wiki/Mac_OS",
-      "hash": "ee0a01eba1d5400c0ab42c34395327f1e882fa1df2ac96dfa3869ea0479c4f58"
+      "hash": "f2cafd7f070587b57265e92f4307d054e64673f471e0097a5bb466941eb42477"
     },
     {
       "family": "AIX",
@@ -3701,13 +3701,6 @@
         "pattern": "^xine\\/([0-9a-z\\.]+)"
       },
       "hash": "8ea3d221c7ac2fb728d414208348949641d4ff87a4efd4d501a2fe18e4fdb3d8"
-    },
-    {
-      "regex": {
-        "flags": "is",
-        "pattern": "mozilla.*applewebkit.*version\\/([0-9a-z\\+\\-\\.]+).*safari\\/[0-9a-z\\+\\-\\.]+.*"
-      },
-      "hash": "4cfe07e70678e92b1d14ce5a36d6364397fefb7d5a5bb58f83f677e31dcd1aee"
     },
     {
       "regex": {
@@ -5693,6 +5686,13 @@
     {
       "regex": {
         "flags": "is",
+        "pattern": "^Eudora\\/?([0-9a-z\\.]+)*"
+      },
+      "hash": "a73f10af6c98250b062060e3a2b3de8767ba9c1bfa83e07f3ca8c1341ce4c17f"
+    },
+    {
+      "regex": {
+        "flags": "is",
         "pattern": "^Mozilla.*MSIE.*TencentTraveler"
       },
       "hash": "e8c3c308f8061a90fcad0e18fadfb0a97c4b5ab56d4db4e15993e5b76422d57a"
@@ -5714,9 +5714,9 @@
     {
       "regex": {
         "flags": "is",
-        "pattern": "mozilla.*applewebkit\\/[0-9a-z\\+\\-\\.]+.*"
+        "pattern": "^Mozilla.*AppleWebKit.*\\(KHTML, like Gecko\\)$"
       },
-      "hash": "79b7d56142bd40239d836d77f314ba2ce65a7af3f1b5d6212443970506c36692"
+      "hash": "bc5b5233d83eddb2310d1c129e834eca69ab199fa49292439ae939df933f8f11"
     },
     {
       "regex": {
@@ -6099,6 +6099,13 @@
     {
       "regex": {
         "flags": "is",
+        "pattern": "mozilla.*applewebkit.*\\/[0-9a-z\\+\\-\\.]+.*safari\\/([0-9a-z\\+\\-\\.]+).*"
+      },
+      "hash": "bd8c8f244bd332f164a985fa31110bc2fceb994a6d310520fb45b1a947dd8686"
+    },
+    {
+      "regex": {
+        "flags": "is",
         "pattern": "^DoCoMo\\/"
       },
       "hash": "339b6e122313fc640d68a00d9bd8f43de5e50d526754d11c7c9106fe7be1343e"
@@ -6351,13 +6358,6 @@
     {
       "regex": {
         "flags": "is",
-        "pattern": "^Mozilla\\/([0-9a-z\\.\\[\\] ]+) \\([a-z0-9;. \\-]+\\)"
-      },
-      "hash": "dab21fb2e816016ef0c6da826d58a88d47df01d33c97d2581aa82b7f02c22823"
-    },
-    {
-      "regex": {
-        "flags": "is",
         "pattern": "WinHttp"
       },
       "hash": "43faa75f326cd9565c981981273881528c29d7a599f4f372a8ce1be7fcc040bd"
@@ -6412,14 +6412,13 @@
       "browser-pattern-hashs": [
         "f91a42116da8b799bd1751b9bf28f72f5a27a7e94778aa6ca284b9079c297726",
         "4271297fcc0288117706ab050a23e19e78048cad284ca7aa7d63afcf42e50dc1",
-        "c8fc85d637db3234938ccb7a27cbed8fa69241b6a978b9ecabb8034e2a35f49a",
-        "dab21fb2e816016ef0c6da826d58a88d47df01d33c97d2581aa82b7f02c22823"
+        "c8fc85d637db3234938ccb7a27cbed8fa69241b6a978b9ecabb8034e2a35f49a"
       ],
       "producer": "Netscape Communications Corp.",
       "producer-url": "http://en.wikipedia.org/wiki/Netscape_Communications_Corporation",
       "browser-type-hash": "d31de1a5c5c8ba2a210a167cf0d0dc2425c57ea7525f4b73a4b7ab934af79dfc",
       "url": "http://en.wikipedia.org/wiki/Netscape_Navigator",
-      "hash": "11349de0e684190d9a34a225679b44b0119f5cde5d158375cff2a1830052727a"
+      "hash": "0dedae6112279eb3d06011885967620859d1e1ec36df254b332f9d9efdb68e5e"
     },
     {
       "family": "EPIPHANY",
@@ -6574,7 +6573,7 @@
       "family": "OMNIWEB",
       "icon": "omniweb.png",
       "info-url": "/list-of-ua/browser-detail?browser\u003dOmniWeb",
-      "operating-system-hash": "ee0a01eba1d5400c0ab42c34395327f1e882fa1df2ac96dfa3869ea0479c4f58",
+      "operating-system-hash": "f2cafd7f070587b57265e92f4307d054e64673f471e0097a5bb466941eb42477",
       "browser-pattern-hashs": [
         "f71cded500edcf5c251b6392e9410541719bec72d7f43bce5ff6d9a0d6960916",
         "ab522e7497f3f51e8ab5be4669781706baed5a57e8e29fe23ad3a40ad1962cf1",
@@ -6584,7 +6583,7 @@
       "producer-url": "http://www.omnigroup.com/",
       "browser-type-hash": "d31de1a5c5c8ba2a210a167cf0d0dc2425c57ea7525f4b73a4b7ab934af79dfc",
       "url": "http://www.omnigroup.com/applications/omniweb/",
-      "hash": "faad6ea05b4b8650188c0144da046447fdbdbdf6e73fb8f58c8b709749a99227"
+      "hash": "10e39f74b69a7cd06979802dd8e08e1daf848e93ba992a2e72a5e8d9f04c1e60"
     },
     {
       "family": "SUNRISE",
@@ -6620,14 +6619,13 @@
       "icon": "safari.png",
       "info-url": "/list-of-ua/browser-detail?browser\u003dSafari",
       "browser-pattern-hashs": [
-        "4cfe07e70678e92b1d14ce5a36d6364397fefb7d5a5bb58f83f677e31dcd1aee",
-        "79b7d56142bd40239d836d77f314ba2ce65a7af3f1b5d6212443970506c36692"
+        "bd8c8f244bd332f164a985fa31110bc2fceb994a6d310520fb45b1a947dd8686"
       ],
       "producer": "Apple Inc.",
       "producer-url": "http://www.apple.com/",
       "browser-type-hash": "d31de1a5c5c8ba2a210a167cf0d0dc2425c57ea7525f4b73a4b7ab934af79dfc",
       "url": "http://en.wikipedia.org/wiki/Safari_%28web_browser%29",
-      "hash": "65d0d3a1c63669773b6f013f4ae1186ab9db67c347c3c9dd86ce9a51a313406a"
+      "hash": "9421ab5cc5646a25234c86fa9fb3f5a1dfee55bf2c74b33da90545cc9b97d439"
     },
     {
       "family": "DILLO",
@@ -7462,7 +7460,7 @@
       "family": "SITESUCKER",
       "icon": "sitesucker.png",
       "info-url": "/list-of-ua/browser-detail?browser\u003dSiteSucker",
-      "operating-system-hash": "ee0a01eba1d5400c0ab42c34395327f1e882fa1df2ac96dfa3869ea0479c4f58",
+      "operating-system-hash": "f2cafd7f070587b57265e92f4307d054e64673f471e0097a5bb466941eb42477",
       "browser-pattern-hashs": [
         "9a846f6a8ebe5a0b4f187d4448b7fb5ce3883000c65f4e1ee9a064612d998bc1"
       ],
@@ -7470,7 +7468,7 @@
       "producer-url": "",
       "browser-type-hash": "3e4f388cbbe80735dba9dc7aa81ee9281e84f171c26f2a765120eb356d701e3f",
       "url": "http://www.sitesucker.us/",
-      "hash": "4627e5d4364adb9631a20fbdc10d9cf7b760ae1c2a9b310e29b08a6333a24b73"
+      "hash": "536ce0e1845fb9e8085ecd056b57d082abab3c76ae99ada7dace3ec931c2df58"
     },
     {
       "family": "ARORA",
@@ -7725,7 +7723,7 @@
       "family": "BOOKDOG",
       "icon": "bookdog.png",
       "info-url": "/list-of-ua/browser-detail?browser\u003dBookdog",
-      "operating-system-hash": "ee0a01eba1d5400c0ab42c34395327f1e882fa1df2ac96dfa3869ea0479c4f58",
+      "operating-system-hash": "f2cafd7f070587b57265e92f4307d054e64673f471e0097a5bb466941eb42477",
       "browser-pattern-hashs": [
         "12fc9eaa5df71a664256c69298a00e4ade2ce9cdc45d1ea1fa974245b2616d9b"
       ],
@@ -7733,7 +7731,7 @@
       "producer-url": "http://sheepsystems.com/",
       "browser-type-hash": "f97e9da0e3b879f0a9df979ae260a5f7e1371edb127c1862d4f861981166cdc1",
       "url": "http://sheepsystems.com/products/bookdog/",
-      "hash": "c773f4739625668519c6c198fac5506410595e6ba43c941a06307db215c15d49"
+      "hash": "11629020983268b64d3e58233a1c53298691e1d6c9853a3077151c405fb96688"
     },
     {
       "family": "ANONYMOUSE_ORG",
@@ -8037,7 +8035,7 @@
       "family": "APPLE_PUBSUB",
       "icon": "apple.png",
       "info-url": "/list-of-ua/browser-detail?browser\u003dApple-PubSub",
-      "operating-system-hash": "ee0a01eba1d5400c0ab42c34395327f1e882fa1df2ac96dfa3869ea0479c4f58",
+      "operating-system-hash": "f2cafd7f070587b57265e92f4307d054e64673f471e0097a5bb466941eb42477",
       "browser-pattern-hashs": [
         "3a5f94b1bd5f6f3598b0234defce70ee94b136fd2f310774f91d51fe82e58d4d"
       ],
@@ -8045,7 +8043,7 @@
       "producer-url": "http://www.apple.com/",
       "browser-type-hash": "5fa04e9ebd5155094546faa58f26a23c83ab2b1f413e76eba83b588d793609d9",
       "url": "http://developer.apple.com/documentation/Darwin/Reference/ManPages/man1/pubsub.1.html",
-      "hash": "e289537c3ee32cf609b5fcfcdddc8c0f1d0b326734c5ebaf55f22390ebd2d28e"
+      "hash": "f4ade098206966a043af573489ea9472fef5854696189cf2a49a7c07e5fdca14"
     },
     {
       "family": "FEEDFETCHER_GOOGLE",
@@ -9865,7 +9863,7 @@
       "family": "CYBERDUCK",
       "icon": "Cyberduck.png",
       "info-url": "/list-of-ua/browser-detail?browser\u003dCyberduck",
-      "operating-system-hash": "ee0a01eba1d5400c0ab42c34395327f1e882fa1df2ac96dfa3869ea0479c4f58",
+      "operating-system-hash": "f2cafd7f070587b57265e92f4307d054e64673f471e0097a5bb466941eb42477",
       "browser-pattern-hashs": [
         "b82f7aee9b0fe82466362dd1c5ccd0b463267c1e34612c991faa0ee5b76ec94e"
       ],
@@ -9873,7 +9871,7 @@
       "producer-url": "dkocher.name",
       "browser-type-hash": "f97e9da0e3b879f0a9df979ae260a5f7e1371edb127c1862d4f861981166cdc1",
       "url": "http://cyberduck.ch/",
-      "hash": "3c90b71459a32fa6f3ad3e0377d2cb1a9175b4c4fee1d7b52a4188b8dbcf716d"
+      "hash": "2aa3da509394cdb52561f5799f21fc4210428ec1f722831a4e1cb2713e50d622"
     },
     {
       "family": "WORLDWIDEWEB",
@@ -11832,6 +11830,32 @@
       "browser-type-hash": "f97e9da0e3b879f0a9df979ae260a5f7e1371edb127c1862d4f861981166cdc1",
       "url": "http://www.clips.ua.ac.be/pages/pattern",
       "hash": "e45c0e36087ead1560085f6018de229acf280fd7ec1ba41d6e34f34fa87a8d02"
+    },
+    {
+      "family": "UNKNOWN",
+      "icon": "eudora.png",
+      "info-url": "/list-of-ua/browser-detail?browser\u003dEudora",
+      "browser-pattern-hashs": [
+        "a73f10af6c98250b062060e3a2b3de8767ba9c1bfa83e07f3ca8c1341ce4c17f"
+      ],
+      "producer": "Qualcomm Incorporated.",
+      "producer-url": "http://www.qualcomm.com/",
+      "browser-type-hash": "d31de1a5c5c8ba2a210a167cf0d0dc2425c57ea7525f4b73a4b7ab934af79dfc",
+      "url": "http://www.eudora.com/archive.html",
+      "hash": "a2fdb095cdbdd0d254aa3cacbde880d33e201e4a9679737dd5535d836ff6db49"
+    },
+    {
+      "family": "UNKNOWN",
+      "icon": "apple-mail.png",
+      "info-url": "/list-of-ua/browser-detail?browser\u003dApple Mail",
+      "browser-pattern-hashs": [
+        "bc5b5233d83eddb2310d1c129e834eca69ab199fa49292439ae939df933f8f11"
+      ],
+      "producer": "Apple Inc.",
+      "producer-url": "http://www.apple.com/",
+      "browser-type-hash": "1e88220c991000b14b14a6be9efbf0ef87e6628032d66046eaf0a50423056e65",
+      "url": "http://en.wikipedia.org/wiki/Apple_mail",
+      "hash": "b21d7a9d53342b862d04dc2c877d67affa24df8815ecc5af26bbbc2ce94a4867"
     }
   ],
   "robots": [
@@ -23252,6 +23276,28 @@
       "url": "",
       "user-agent-string": "bot.wsowner.com/1.0.0 (+http://wsowner.com/)",
       "hash": "d558681c744c78820995856df88b2015288f2922b5edd800db658016c6dc72bb"
+    },
+    {
+      "family": "NAVERBOT",
+      "icon": "bot_NaverBot.png",
+      "info-url": "/list-of-ua/bot-detail?bot\u003dNaverBot",
+      "name": "Yepi/1.0",
+      "producer": "NHN Corporation",
+      "producer-url": "http://www.nhncorp.com/",
+      "url": "",
+      "user-agent-string": "Yepi/1.0 (NHN Corp.; http://help.naver.com/robots/)",
+      "hash": "4fd4ee35975221859864162277a271b97f7b2c205517933e7d459dc006d6a385"
+    },
+    {
+      "family": "UNKNOWN",
+      "icon": "bot.png",
+      "info-url": "/list-of-ua/bot-detail?bot\u003dMail.Ru bot",
+      "name": "Mail.RU_Bot/2.0",
+      "producer": "Mail.Ru Group",
+      "producer-url": "http://corp.mail.ru/",
+      "url": "",
+      "user-agent-string": "Mozilla/5.0 (compatible; Mail.RU_Bot/2.0; +http://go.mail.ru/help/robots)",
+      "hash": "92e04430087239d8374637b8b29e2680b393a2e645bef5e6e62ca42b11f00c72"
     }
   ]
 }

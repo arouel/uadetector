@@ -11832,7 +11832,7 @@
       "hash": "e45c0e36087ead1560085f6018de229acf280fd7ec1ba41d6e34f34fa87a8d02"
     },
     {
-      "family": "UNKNOWN",
+      "family": "EUDORA",
       "icon": "eudora.png",
       "info-url": "/list-of-ua/browser-detail?browser\u003dEudora",
       "browser-pattern-hashs": [
@@ -11842,10 +11842,10 @@
       "producer-url": "http://www.qualcomm.com/",
       "browser-type-hash": "d31de1a5c5c8ba2a210a167cf0d0dc2425c57ea7525f4b73a4b7ab934af79dfc",
       "url": "http://www.eudora.com/archive.html",
-      "hash": "a2fdb095cdbdd0d254aa3cacbde880d33e201e4a9679737dd5535d836ff6db49"
+      "hash": "6db6177a5fec88cbaf897ec0fcc7c6442e42da1e7e48ca14909242b4b8020b40"
     },
     {
-      "family": "UNKNOWN",
+      "family": "APPLE_MAIL",
       "icon": "apple-mail.png",
       "info-url": "/list-of-ua/browser-detail?browser\u003dApple Mail",
       "browser-pattern-hashs": [
@@ -11855,7 +11855,7 @@
       "producer-url": "http://www.apple.com/",
       "browser-type-hash": "1e88220c991000b14b14a6be9efbf0ef87e6628032d66046eaf0a50423056e65",
       "url": "http://en.wikipedia.org/wiki/Apple_mail",
-      "hash": "b21d7a9d53342b862d04dc2c877d67affa24df8815ecc5af26bbbc2ce94a4867"
+      "hash": "f3eed14f1c2e724890f2cbd80ecec6ed0be50d5a18267185526cf51c271a66c1"
     }
   ],
   "robots": [

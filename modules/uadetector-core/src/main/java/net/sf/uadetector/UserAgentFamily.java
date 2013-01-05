@@ -277,6 +277,11 @@ public enum UserAgentFamily {
 	/**
 	 * Apple-PubSub
 	 */
+	APPLE_MAIL("Apple Mail", Pattern.compile("Apple Mail")),
+
+	/**
+	 * Apple-PubSub
+	 */
 	APPLE_PUBSUB("Apple-PubSub", Pattern.compile("Apple-PubSub")),
 
 	/**

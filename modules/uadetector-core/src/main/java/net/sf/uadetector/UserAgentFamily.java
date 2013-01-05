@@ -1026,6 +1026,11 @@ public enum UserAgentFamily {
 	ESPIAL_TV_BROWSER("Espial TV Browser", Pattern.compile("Espial TV Browser")),
 
 	/**
+	 * Eudora
+	 */
+	EUDORA("Eudora", Pattern.compile("Eudora")),
+
+	/**
 	 * EuripBot
 	 */
 	EURIPBOT("EuripBot", Pattern.compile("EuripBot")),

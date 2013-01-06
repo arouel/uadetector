@@ -63,6 +63,7 @@ public class UserAgentStringParserTest {
 
 		// check user agent informations
 		Assert.assertEquals(UserAgentFamily.SAFARI, agent.getFamily());
+		Assert.assertEquals("safari.png", agent.getIcon());
 		Assert.assertEquals("Safari", agent.getName());
 		Assert.assertEquals("Apple Inc.", agent.getProducer());
 		Assert.assertEquals("http://www.apple.com/", agent.getProducerUrl());
@@ -91,6 +92,7 @@ public class UserAgentStringParserTest {
 
 		// check user agent informations
 		Assert.assertEquals(UserAgentFamily.CHROME, agent.getFamily());
+		Assert.assertEquals("chrome.png", agent.getIcon());
 		Assert.assertEquals("Chrome", agent.getName());
 		Assert.assertEquals("Google Inc.", agent.getProducer());
 		Assert.assertEquals("http://www.google.com/", agent.getProducerUrl());
@@ -120,6 +122,7 @@ public class UserAgentStringParserTest {
 
 		// check user agent informations
 		Assert.assertEquals(UserAgentFamily.CHROME, agent.getFamily());
+		Assert.assertEquals("chrome.png", agent.getIcon());
 		Assert.assertEquals("Chrome", agent.getName());
 		Assert.assertEquals("Google Inc.", agent.getProducer());
 		Assert.assertEquals("http://www.google.com/", agent.getProducerUrl());
@@ -149,6 +152,7 @@ public class UserAgentStringParserTest {
 
 		// check user agent informations
 		Assert.assertEquals(UserAgentFamily.FIREFOX, agent.getFamily());
+		Assert.assertEquals("firefox.png", agent.getIcon());
 		Assert.assertEquals("Firefox", agent.getName());
 		Assert.assertEquals("Mozilla Foundation", agent.getProducer());
 		Assert.assertEquals("http://www.mozilla.org/", agent.getProducerUrl());
@@ -178,6 +182,7 @@ public class UserAgentStringParserTest {
 
 		// check user agent informations
 		Assert.assertEquals(UserAgentFamily.ICEWEASEL, agent.getFamily());
+		Assert.assertEquals("iceweasel.png", agent.getIcon());
 		Assert.assertEquals("IceWeasel", agent.getName());
 		Assert.assertEquals("Software in the Public Interest, Inc.", agent.getProducer());
 		Assert.assertEquals("http://www.spi-inc.org/", agent.getProducerUrl());
@@ -207,6 +212,7 @@ public class UserAgentStringParserTest {
 
 		// check user agent informations
 		Assert.assertEquals(UserAgentFamily.IE, agent.getFamily());
+		Assert.assertEquals("msie.png", agent.getIcon());
 		Assert.assertEquals("IE", agent.getName());
 		Assert.assertEquals("Microsoft Corporation.", agent.getProducer());
 		Assert.assertEquals("http://www.microsoft.com/", agent.getProducerUrl());
@@ -236,6 +242,7 @@ public class UserAgentStringParserTest {
 
 		// check user agent informations
 		Assert.assertEquals(UserAgentFamily.JAVA, agent.getFamily());
+		Assert.assertEquals("java.png", agent.getIcon());
 		Assert.assertEquals("Java", agent.getName());
 		Assert.assertEquals("Sun Microsystems, Inc.", agent.getProducer());
 		Assert.assertEquals("http://www.sun.com/", agent.getProducerUrl());
@@ -264,6 +271,7 @@ public class UserAgentStringParserTest {
 
 		// check user agent informations
 		Assert.assertEquals(UserAgentFamily.CHROME_MOBILE, agent.getFamily());
+		Assert.assertEquals("chrome.png", agent.getIcon());
 		Assert.assertEquals("Chrome Mobile", agent.getName());
 		Assert.assertEquals("Google Inc.", agent.getProducer());
 		Assert.assertEquals("http://www.google.com/", agent.getProducerUrl());
@@ -293,6 +301,7 @@ public class UserAgentStringParserTest {
 
 		// check user agent informations
 		Assert.assertEquals(UserAgentFamily.MOBILE_SAFARI, agent.getFamily());
+		Assert.assertEquals("safari.png", agent.getIcon());
 		Assert.assertEquals("Mobile Safari", agent.getName());
 		Assert.assertEquals("Apple Inc.", agent.getProducer());
 		Assert.assertEquals("http://www.apple.com/", agent.getProducerUrl());
@@ -328,6 +337,7 @@ public class UserAgentStringParserTest {
 
 		// check user agent informations
 		Assert.assertEquals(UserAgentFamily.MOBILE_SAFARI, agent.getFamily());
+		Assert.assertEquals("safari.png", agent.getIcon());
 		Assert.assertEquals("Mobile Safari", agent.getName());
 		Assert.assertEquals("Apple Inc.", agent.getProducer());
 		Assert.assertEquals("http://www.apple.com/", agent.getProducerUrl());
@@ -363,6 +373,7 @@ public class UserAgentStringParserTest {
 
 		// check user agent informations
 		Assert.assertEquals(UserAgentFamily.MOBILE_SAFARI, agent.getFamily());
+		Assert.assertEquals("safari.png", agent.getIcon());
 		Assert.assertEquals("Mobile Safari", agent.getName());
 		Assert.assertEquals("Apple Inc.", agent.getProducer());
 		Assert.assertEquals("http://www.apple.com/", agent.getProducerUrl());
@@ -398,6 +409,7 @@ public class UserAgentStringParserTest {
 
 		// check user agent informations
 		Assert.assertEquals(UserAgentFamily.OPERA, agent.getFamily());
+		Assert.assertEquals("opera.png", agent.getIcon());
 		Assert.assertEquals("Opera", agent.getName());
 		Assert.assertEquals("Opera Software ASA.", agent.getProducer());
 		Assert.assertEquals("http://www.opera.com/", agent.getProducerUrl());
@@ -427,6 +439,7 @@ public class UserAgentStringParserTest {
 
 		// check user agent informations
 		Assert.assertEquals(UserAgentFamily.SAFARI, agent.getFamily());
+		Assert.assertEquals("safari.png", agent.getIcon());
 		Assert.assertEquals("Safari", agent.getName());
 		Assert.assertEquals("Apple Inc.", agent.getProducer());
 		Assert.assertEquals("http://www.apple.com/", agent.getProducerUrl());
@@ -456,6 +469,7 @@ public class UserAgentStringParserTest {
 
 		// check user agent informations
 		Assert.assertEquals(UserAgentFamily.SITESUCKER, agent.getFamily());
+		Assert.assertEquals("sitesucker.png", agent.getIcon());
 		Assert.assertEquals("SiteSucker", agent.getName());
 		Assert.assertEquals("Rick Cranisky", agent.getProducer());
 		Assert.assertEquals("", agent.getProducerUrl());
@@ -485,6 +499,7 @@ public class UserAgentStringParserTest {
 
 		// check user agent informations
 		Assert.assertEquals(UserAgentFamily.SKYFIRE, agent.getFamily());
+		Assert.assertEquals("skyfire.png", agent.getIcon());
 		Assert.assertEquals("Skyfire", agent.getName());
 		Assert.assertEquals("Skyfire Labs, Inc.", agent.getProducer());
 		Assert.assertEquals("http://www.skyfire.com/about", agent.getProducerUrl());
@@ -514,6 +529,7 @@ public class UserAgentStringParserTest {
 
 		// check user agent informations
 		Assert.assertEquals(UserAgentFamily.SKYFIRE, agent.getFamily());
+		Assert.assertEquals("skyfire.png", agent.getIcon());
 		Assert.assertEquals("Skyfire", agent.getName());
 		Assert.assertEquals("Skyfire Labs, Inc.", agent.getProducer());
 		Assert.assertEquals("http://www.skyfire.com/about", agent.getProducerUrl());
@@ -530,6 +546,7 @@ public class UserAgentStringParserTest {
 		// check user agent informations
 		final UserAgent e = UserAgent.EMPTY;
 		Assert.assertEquals(e.getFamily(), agent.getFamily());
+		Assert.assertEquals(e.getIcon(), agent.getIcon());
 		Assert.assertEquals(e.getName(), agent.getName());
 		Assert.assertEquals(e.getProducer(), agent.getProducer());
 		Assert.assertEquals(e.getProducerUrl(), agent.getProducerUrl());
@@ -550,6 +567,7 @@ public class UserAgentStringParserTest {
 
 		// check user agent informations
 		Assert.assertEquals(UserAgentFamily.GOOGLEBOT, agent.getFamily());
+		Assert.assertEquals("bot_googlebot.png", agent.getIcon());
 		Assert.assertEquals("Googlebot/2.1", agent.getName());
 		Assert.assertEquals("Google Inc.", agent.getProducer());
 		Assert.assertEquals("http://www.google.com/", agent.getProducerUrl());
@@ -569,6 +587,7 @@ public class UserAgentStringParserTest {
 
 		// check user agent informations
 		Assert.assertEquals(UserAgentFamily.SETOOZBOT, agent.getFamily());
+		Assert.assertEquals("bot.png", agent.getIcon());
 		Assert.assertEquals("OOZBOT/0.20 b", agent.getName());
 		Assert.assertEquals("SETU Software Systems P. Ltd.", agent.getProducer());
 		Assert.assertEquals("http://www.setusoftware.com/", agent.getProducerUrl());
@@ -585,6 +604,7 @@ public class UserAgentStringParserTest {
 		// check user agent informations
 		final UserAgent e = UserAgent.EMPTY;
 		Assert.assertEquals(e.getFamily(), agent.getFamily());
+		Assert.assertEquals(e.getIcon(), agent.getIcon());
 		Assert.assertEquals(e.getName(), agent.getName());
 		Assert.assertEquals(e.getProducer(), agent.getProducer());
 		Assert.assertEquals(e.getProducerUrl(), agent.getProducerUrl());

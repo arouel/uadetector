@@ -30,6 +30,7 @@ public class UserAgentBuilderTest {
 
 		final UserAgent.Builder b = new UserAgent.Builder();
 		Assert.assertSame(b, b.setFamily(UserAgentFamily.CHROMIUM));
+		Assert.assertSame(b, b.setIcon("i1"));
 		Assert.assertSame(b, b.setName("n1"));
 		Assert.assertSame(b, b.setOperatingSystem(os));
 		Assert.assertSame(b, b.setProducer("p1"));
@@ -40,6 +41,7 @@ public class UserAgentBuilderTest {
 		Assert.assertSame(b, b.setVersionNumber(VersionParser.parseVersion("1.0.0")));
 
 		Assert.assertEquals(UserAgentFamily.CHROMIUM, b.getFamily());
+		Assert.assertEquals("i1", b.getIcon());
 		Assert.assertEquals("n1", b.getName());
 		Assert.assertEquals(os, b.getOperatingSystem());
 		Assert.assertEquals("p1", b.getProducer());
@@ -51,6 +53,7 @@ public class UserAgentBuilderTest {
 		final UserAgent ua = b.build();
 		Assert.assertNotNull(ua);
 		Assert.assertEquals(UserAgentFamily.CHROMIUM, ua.getFamily());
+		Assert.assertEquals("i1", ua.getIcon());
 		Assert.assertEquals("n1", ua.getName());
 		Assert.assertEquals(os, ua.getOperatingSystem());
 		Assert.assertEquals("p1", ua.getProducer());
@@ -64,6 +67,7 @@ public class UserAgentBuilderTest {
 	public void build_empty() {
 		final UserAgent.Builder b = new UserAgent.Builder();
 		Assert.assertEquals(UserAgent.EMPTY.getFamily(), b.getFamily());
+		Assert.assertEquals(UserAgent.EMPTY.getIcon(), b.getIcon());
 		Assert.assertEquals(UserAgent.EMPTY.getName(), b.getName());
 		Assert.assertEquals(UserAgent.EMPTY.getOperatingSystem(), b.getOperatingSystem());
 		Assert.assertEquals(UserAgent.EMPTY.getProducer(), b.getProducer());
@@ -76,6 +80,7 @@ public class UserAgentBuilderTest {
 
 		final UserAgent ua = b.build();
 		Assert.assertEquals(UserAgent.EMPTY.getFamily(), ua.getFamily());
+		Assert.assertEquals(UserAgent.EMPTY.getIcon(), ua.getIcon());
 		Assert.assertEquals(UserAgent.EMPTY.getName(), ua.getName());
 		Assert.assertEquals(UserAgent.EMPTY.getOperatingSystem(), ua.getOperatingSystem());
 		Assert.assertEquals(UserAgent.EMPTY.getProducer(), ua.getProducer());
@@ -95,6 +100,11 @@ public class UserAgentBuilderTest {
 	@Test(expected = IllegalArgumentException.class)
 	public void setFamily_null() {
 		new UserAgent.Builder().setFamily(null);
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void setIcon_null() {
+		new UserAgent.Builder().setIcon(null);
 	}
 
 	@Test(expected = IllegalArgumentException.class)

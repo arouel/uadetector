@@ -27,6 +27,8 @@ public final class UserAgent implements ReadableUserAgent {
 
 		private UserAgentFamily family = EMPTY.family;
 
+		private String icon = EMPTY.icon;
+
 		private String name = EMPTY.name;
 
 		private OperatingSystem operatingSystem = OperatingSystem.EMPTY;
@@ -57,12 +59,17 @@ public final class UserAgent implements ReadableUserAgent {
 		}
 
 		public UserAgent build() {
-			return new UserAgent(family, name, operatingSystem, producer, producerUrl, type, typeName, url, versionNumber);
+			return new UserAgent(family, icon, name, operatingSystem, producer, producerUrl, type, typeName, url, versionNumber);
 		}
 
 		@Override
 		public UserAgentFamily getFamily() {
 			return family;
+		}
+
+		@Override
+		public String getIcon() {
+			return icon;
 		}
 
 		@Override
@@ -114,6 +121,14 @@ public final class UserAgent implements ReadableUserAgent {
 				throw new IllegalArgumentException("Argument 'family' must not be null.");
 			}
 			this.family = family;
+			return this;
+		}
+
+		public Builder setIcon(final String icon) {
+			if (icon == null) {
+				throw new IllegalArgumentException("Argument 'icon' must not be null.");
+			}
+			this.icon = icon;
 			return this;
 		}
 
@@ -202,10 +217,12 @@ public final class UserAgent implements ReadableUserAgent {
 
 	}
 
-	public static final UserAgent EMPTY = new UserAgent(UserAgentFamily.UNKNOWN, "unknown", OperatingSystem.EMPTY, "", "",
+	public static final UserAgent EMPTY = new UserAgent(UserAgentFamily.UNKNOWN, "", "unknown", OperatingSystem.EMPTY, "", "",
 			UserAgentType.UNKNOWN, "", "", VersionNumber.UNKNOWN);
 
 	private final UserAgentFamily family;
+
+	private final String icon;
 
 	private final String name;
 
@@ -223,11 +240,15 @@ public final class UserAgent implements ReadableUserAgent {
 
 	private final VersionNumber versionNumber;
 
-	public UserAgent(final UserAgentFamily family, final String name, final OperatingSystem operatingSystem, final String producer,
-			final String producerUrl, final UserAgentType type, final String typeName, final String url, final VersionNumber versionNumber) {
+	public UserAgent(final UserAgentFamily family, final String icon, final String name, final OperatingSystem operatingSystem,
+			final String producer, final String producerUrl, final UserAgentType type, final String typeName, final String url,
+			final VersionNumber versionNumber) {
 
 		if (family == null) {
 			throw new IllegalArgumentException("Argument 'family' must not be null.");
+		}
+		if (icon == null) {
+			throw new IllegalArgumentException("Argument 'icon' must not be null.");
 		}
 		if (name == null) {
 			throw new IllegalArgumentException("Argument 'name' must not be null.");
@@ -255,6 +276,7 @@ public final class UserAgent implements ReadableUserAgent {
 		}
 
 		this.family = family;
+		this.icon = icon;
 		this.name = name;
 		this.operatingSystem = operatingSystem;
 		this.producer = producer;
@@ -278,6 +300,9 @@ public final class UserAgent implements ReadableUserAgent {
 		}
 		final UserAgent other = (UserAgent) obj;
 		if (!family.equals(other.family)) {
+			return false;
+		}
+		if (!icon.equals(other.icon)) {
 			return false;
 		}
 		if (!name.equals(other.name)) {
@@ -310,6 +335,11 @@ public final class UserAgent implements ReadableUserAgent {
 	@Override
 	public UserAgentFamily getFamily() {
 		return family;
+	}
+
+	@Override
+	public String getIcon() {
+		return icon;
 	}
 
 	@Override
@@ -357,6 +387,7 @@ public final class UserAgent implements ReadableUserAgent {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + family.hashCode();
+		result = prime * result + icon.hashCode();
 		result = prime * result + name.hashCode();
 		result = prime * result + operatingSystem.hashCode();
 		result = prime * result + producer.hashCode();
@@ -373,6 +404,8 @@ public final class UserAgent implements ReadableUserAgent {
 		final StringBuilder builder = new StringBuilder();
 		builder.append("UserAgent [family=");
 		builder.append(family);
+		builder.append(", icon=");
+		builder.append(icon);
 		builder.append(", name=");
 		builder.append(name);
 		builder.append(", operatingSystem=");

@@ -37,6 +37,13 @@ public interface ReadableUserAgent {
 	UserAgentFamily getFamily();
 
 	/**
+	 * Gets the icon name of an user agent.
+	 * 
+	 * @return icon name of an user agent
+	 */
+	String getIcon();
+
+	/**
 	 * Gets the name of an user agent.
 	 * 
 	 * @return name of an user agent

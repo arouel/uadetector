@@ -224,6 +224,7 @@ public final class Robot {
 
 	public void copyTo(final UserAgent.Builder builder) {
 		builder.setFamily(family);
+		builder.setIcon(icon);
 		builder.setName(name);
 		builder.setProducer(producer);
 		builder.setProducerUrl(producerUrl);

@@ -50,11 +50,15 @@ public final class XmlDataReader implements DataReader {
 
 		public static void parse(final InputStream stream, final Builder builder) throws ParserConfigurationException, SAXException,
 				IOException {
-			SAXParserFactory factory = SAXParserFactory.newInstance();
+			final SAXParserFactory factory = SAXParserFactory.newInstance();
 			factory.setValidating(true);
 			final SAXParser parser = factory.newSAXParser();
 			final XmlDataHandler handler = new XmlDataHandler(builder);
 			parser.parse(stream, handler);
+			validate(handler);
+		}
+
+		protected static void validate(final XmlDataHandler handler) {
 			if (handler.hasError() || handler.hasWarning()) {
 				throw new IllegalStateException(MSG_NOT_PARSED_AS_EXPECTED);
 			}

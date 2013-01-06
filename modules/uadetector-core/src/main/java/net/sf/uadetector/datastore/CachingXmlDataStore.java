@@ -258,6 +258,46 @@ public final class CachingXmlDataStore extends AbstractDataStore implements Refr
 	}
 
 	/**
+	 * Creates a temporary file near the passed file. The name of the given one will be used and the suffix ".temp" will
+	 * be added.
+	 * 
+	 * @param file
+	 *            file in which the entire contents from the given URL can be saved
+	 * @throws IOException
+	 *             if an I/O error occurs
+	 */
+	protected static File createTemporaryFile(final File file) {// throws IOException {
+		if (file == null) {
+			throw new IllegalArgumentException("Argument 'file' must not be null.");
+		}
+
+		final File tempFile = new File(file.getParent(), file.getName() + ".temp");
+
+		// remove orphaned temporary file
+		deleteFile(tempFile);
+
+		return tempFile;
+	}
+
+	/**
+	 * Removes the given file.
+	 * 
+	 * @param file
+	 *            an existing file
+	 * @throws IllegalStateException
+	 *             if the file can not be deleted
+	 */
+	protected static void deleteFile(final File file) {
+		if (file == null) {
+			throw new IllegalArgumentException("Argument 'file' must not be null.");
+		}
+
+		if (file.exists() && !file.delete()) {
+			throw new IllegalStateException("Passed file can not be removed: " + file.getAbsolutePath());
+		}
+	}
+
+	/**
 	 * Gets the cache file for <em>UAS data</em> in the default temporary-file directory. If no cache file exists, a new
 	 * empty file in the default temporary-file directory will be created, using the default prefix and suffix to
 	 * generate its name.
@@ -326,10 +366,7 @@ public final class CachingXmlDataStore extends AbstractDataStore implements Refr
 		if (!isEqual) {
 			FileOutputStream outputStream = null;
 			try {
-				final File tempFile = new File(file.getParent(), file.getName() + ".temp");
-
-				// remove orphaned temporary file
-				tempFile.delete();
+				final File tempFile = createTemporaryFile(file);
 
 				// write data to temporary file
 				outputStream = new FileOutputStream(tempFile);
@@ -340,9 +377,7 @@ public final class CachingXmlDataStore extends AbstractDataStore implements Refr
 				file.delete();
 
 				// rename the new file to the original one
-				if (!tempFile.renameTo(file)) {
-					LOG.warn("Renaming of temporary file to the original file has failed.");
-				}
+				renameFile(tempFile, file);
 
 			} finally {
 				if (outputStream != null) {
@@ -355,6 +390,32 @@ public final class CachingXmlDataStore extends AbstractDataStore implements Refr
 			}
 		} else {
 			LOG.debug(MSG_SAME_RESOURCES);
+		}
+	}
+
+	/**
+	 * Removes the given file.
+	 * 
+	 * @param from
+	 *            an existing file
+	 * @param to
+	 *            a new file
+	 * @throws IllegalStateException
+	 *             if the file can not be renamed
+	 */
+	protected static void renameFile(final File from, final File to) {
+		if (from == null) {
+			throw new IllegalArgumentException("Argument 'from' must not be null.");
+		}
+		if (!from.exists()) {
+			throw new IllegalArgumentException("Argument 'from' must not be an existing file.");
+		}
+		if (to == null) {
+			throw new IllegalArgumentException("Argument 'to' must not be null.");
+		}
+
+		if (!from.renameTo(to)) {
+			throw new IllegalStateException("Renaming file from '" + from.getAbsolutePath() + "' to '" + to.getAbsolutePath() + "' failed.");
 		}
 	}
 

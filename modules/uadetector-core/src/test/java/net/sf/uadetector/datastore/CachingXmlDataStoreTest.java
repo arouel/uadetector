@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.MalformedURLException;
+import java.net.URI;
 import java.net.URL;
 import java.nio.MappedByteBuffer;
 import java.nio.channels.FileChannel;
@@ -15,6 +16,8 @@ import net.sf.uadetector.internal.util.FileUtil;
 import net.sf.uadetector.internal.util.UrlUtil;
 import net.sf.uadetector.parser.UpdatingUserAgentStringParserImpl;
 
+import org.easymock.EasyMock;
+import org.easymock.IMockBuilder;
 import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.Test;
@@ -164,6 +167,58 @@ public class CachingXmlDataStoreTest {
 		CachingXmlDataStore.createCachingXmlDataStore(folder.newFile("uas_test.xml"), DATA_URL, null, CHARSET, Data.EMPTY);
 	}
 
+	@Test(expected = IllegalArgumentException.class)
+	public void createTemporaryFile_null() {
+		CachingXmlDataStore.createTemporaryFile(null);
+	}
+
+	@Test
+	public void deleteFile_doesNotExist() throws IOException {
+		final File cache = folder.newFile(); // cache file does not exist
+		CachingXmlDataStore.deleteFile(cache);
+	}
+
+	@Test(expected = IllegalStateException.class)
+	public void deleteFile_existsButDeletingFails() throws IOException, SecurityException, NoSuchMethodException {
+		final File file = folder.newFile(); // cache file does not exist
+		final IMockBuilder<File> builder = EasyMock.createMockBuilder(File.class);
+		builder.withConstructor(URI.class);
+		builder.withArgs(file.toURI());
+		builder.addMockedMethod(File.class.getMethod("exists"));
+		builder.addMockedMethod(File.class.getMethod("delete"));
+		final File fileMock = builder.createMock();
+		EasyMock.expect(fileMock.exists()).andReturn(true).anyTimes();
+		EasyMock.expect(fileMock.delete()).andReturn(false).anyTimes();
+		EasyMock.replay(fileMock);
+
+		CachingXmlDataStore.deleteFile(fileMock);
+
+		EasyMock.verify(fileMock);
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void deleteFile_null() {
+		CachingXmlDataStore.deleteFile(null);
+	}
+
+	@Test
+	public void deleteFile_successful() throws IOException, SecurityException, NoSuchMethodException {
+		final File file = folder.newFile(); // cache file does not exist
+		final IMockBuilder<File> builder = EasyMock.createMockBuilder(File.class);
+		builder.withConstructor(URI.class);
+		builder.withArgs(file.toURI());
+		builder.addMockedMethod(File.class.getMethod("exists"));
+		builder.addMockedMethod(File.class.getMethod("delete"));
+		final File fileMock = builder.createMock();
+		EasyMock.expect(fileMock.exists()).andReturn(true).anyTimes();
+		EasyMock.expect(fileMock.delete()).andReturn(true).anyTimes();
+		EasyMock.replay(fileMock);
+
+		CachingXmlDataStore.deleteFile(fileMock);
+
+		EasyMock.verify(fileMock);
+	}
+
 	@Test
 	public void findOrCreateCacheFile() {
 		CachingXmlDataStore.findOrCreateCacheFile().delete(); // delete if exists
@@ -207,9 +262,76 @@ public class CachingXmlDataStoreTest {
 	}
 
 	@Test
+	public void readAndSave_renamingFailsTest() throws MalformedURLException, IOException {
+		final File cache = folder.newFile(); // cache file does not exist
+		final IMockBuilder<File> builder = EasyMock.createMockBuilder(File.class);
+		builder.withConstructor(URI.class);
+		builder.withArgs(cache.toURI());
+		final File fileMock = builder.addMockedMethod("renameTo", File.class).createMock();
+		EasyMock.expect(fileMock.renameTo(EasyMock.anyObject(File.class))).andReturn(false).anyTimes();
+		EasyMock.replay(fileMock);
+
+		// Assert.assertTrue(temp.length() == 0); // does not work on any system
+		Assert.assertTrue(FileUtil.isEmpty(fileMock, DataStore.DEFAULT_CHARSET));
+
+		// file will be created
+		CachingXmlDataStore.readAndSave(DATA_URL, fileMock, CHARSET);
+		Assert.assertTrue(fileMock.length() >= 722015);
+
+		// file will be overwritten (delete and rename)
+		CachingXmlDataStore.readAndSave(DATA_URL, fileMock, CHARSET);
+		Assert.assertTrue(fileMock.length() >= 722015);
+	}
+
+	@Test
 	public void readAndSave_urlAndFileAreSameResource() throws MalformedURLException, IOException {
 		final File resource = folder.newFile(); // cache file does not exist
 		CachingXmlDataStore.readAndSave(resource.toURI().toURL(), resource, CHARSET);
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void renameFile_from_null() throws IOException {
+		CachingXmlDataStore.renameFile(null, folder.newFile());
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void renameFile_fromFileDoesNotExist() throws MalformedURLException, IOException, SecurityException, NoSuchMethodException {
+		final File from = folder.newFile(); // cache file does not exist
+		final IMockBuilder<File> builder = EasyMock.createMockBuilder(File.class);
+		builder.withConstructor(URI.class);
+		builder.withArgs(from.toURI());
+		builder.addMockedMethod(File.class.getMethod("exists"));
+		final File fileMock = builder.createMock();
+		EasyMock.expect(fileMock.exists()).andReturn(false).anyTimes();
+		EasyMock.replay(fileMock);
+
+		CachingXmlDataStore.renameFile(fileMock, folder.newFile());
+
+		EasyMock.verify(fileMock);
+	}
+
+	@Test(expected = IllegalStateException.class)
+	public void renameFile_removingOrphanedFileTest() throws MalformedURLException, IOException, SecurityException, NoSuchMethodException {
+		final File from = folder.newFile(); // cache file does not exist
+		final IMockBuilder<File> builder = EasyMock.createMockBuilder(File.class);
+		builder.withConstructor(URI.class);
+		builder.withArgs(from.toURI());
+		builder.addMockedMethod(File.class.getMethod("exists"));
+		builder.addMockedMethod(File.class.getMethod("renameTo", File.class));
+		final File fileMock = builder.createMock();
+		// final File fileMock = builder.addMockedMethod("exists").addMockedMethod("renameTo", File.class).createMock();
+		EasyMock.expect(fileMock.exists()).andReturn(true).anyTimes();
+		EasyMock.expect(fileMock.renameTo(EasyMock.anyObject(File.class))).andReturn(false).anyTimes();
+		EasyMock.replay(fileMock);
+
+		CachingXmlDataStore.renameFile(fileMock, folder.newFile());
+
+		EasyMock.verify(fileMock);
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void renameFile_to_null() throws IOException {
+		CachingXmlDataStore.renameFile(folder.newFile(), null);
 	}
 
 }

@@ -94,53 +94,25 @@ public final class OperatingSystem implements ReadableOperatingSystem {
 		if (family != other.family) {
 			return false;
 		}
-		if (familyName == null) {
-			if (other.familyName != null) {
-				return false;
-			}
-		} else if (!familyName.equals(other.familyName)) {
+		if (!familyName.equals(other.familyName)) {
 			return false;
 		}
-		if (icon == null) {
-			if (other.icon != null) {
-				return false;
-			}
-		} else if (!icon.equals(other.icon)) {
+		if (!icon.equals(other.icon)) {
 			return false;
 		}
-		if (name == null) {
-			if (other.name != null) {
-				return false;
-			}
-		} else if (!name.equals(other.name)) {
+		if (!name.equals(other.name)) {
 			return false;
 		}
-		if (producer == null) {
-			if (other.producer != null) {
-				return false;
-			}
-		} else if (!producer.equals(other.producer)) {
+		if (!producer.equals(other.producer)) {
 			return false;
 		}
-		if (producerUrl == null) {
-			if (other.producerUrl != null) {
-				return false;
-			}
-		} else if (!producerUrl.equals(other.producerUrl)) {
+		if (!producerUrl.equals(other.producerUrl)) {
 			return false;
 		}
-		if (url == null) {
-			if (other.url != null) {
-				return false;
-			}
-		} else if (!url.equals(other.url)) {
+		if (!url.equals(other.url)) {
 			return false;
 		}
-		if (versionNumber == null) {
-			if (other.versionNumber != null) {
-				return false;
-			}
-		} else if (!versionNumber.equals(other.versionNumber)) {
+		if (!versionNumber.equals(other.versionNumber)) {
 			return false;
 		}
 		return true;
@@ -190,14 +162,14 @@ public final class OperatingSystem implements ReadableOperatingSystem {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((family == null) ? 0 : family.hashCode());
-		result = prime * result + ((familyName == null) ? 0 : familyName.hashCode());
-		result = prime * result + ((icon == null) ? 0 : icon.hashCode());
-		result = prime * result + ((name == null) ? 0 : name.hashCode());
-		result = prime * result + ((producer == null) ? 0 : producer.hashCode());
-		result = prime * result + ((producerUrl == null) ? 0 : producerUrl.hashCode());
-		result = prime * result + ((url == null) ? 0 : url.hashCode());
-		result = prime * result + ((versionNumber == null) ? 0 : versionNumber.hashCode());
+		result = prime * result + family.hashCode();
+		result = prime * result + familyName.hashCode();
+		result = prime * result + icon.hashCode();
+		result = prime * result + name.hashCode();
+		result = prime * result + producer.hashCode();
+		result = prime * result + producerUrl.hashCode();
+		result = prime * result + url.hashCode();
+		result = prime * result + versionNumber.hashCode();
 		return result;
 	}
 

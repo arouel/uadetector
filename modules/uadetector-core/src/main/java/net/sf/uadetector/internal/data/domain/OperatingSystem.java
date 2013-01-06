@@ -275,9 +275,9 @@ public final class OperatingSystem {
 	 *            user agent builder
 	 */
 	public void copyTo(final UserAgent.Builder builder) {
-		final OperatingSystemFamily f = OperatingSystemFamily.evaluate(this.family);
+		final OperatingSystemFamily f = OperatingSystemFamily.evaluate(family);
 		final VersionNumber version = VersionParser.parseOperatingSystemVersion(f, builder.getUserAgentString());
-		builder.setOperatingSystem(new net.sf.uadetector.OperatingSystem(f, this.family, name, producer, producerUrl, url, version));
+		builder.setOperatingSystem(new net.sf.uadetector.OperatingSystem(f, family, icon, name, producer, producerUrl, url, version));
 	}
 
 	@Override

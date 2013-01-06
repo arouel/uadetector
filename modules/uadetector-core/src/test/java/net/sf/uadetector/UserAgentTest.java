@@ -125,8 +125,8 @@ public class UserAgentTest {
 	@Test
 	public void equals_differentOperatingSystem() {
 		final OperatingSystemFamily linux = OperatingSystemFamily.LINUX;
-		final OperatingSystem os1 = new OperatingSystem(linux, "Gentoo", "name1", "producer", "producer url", "url", new VersionNumber("1"));
-		final OperatingSystem os2 = new OperatingSystem(linux, "Gentoo", "name2", "producer", "producer url", "url", new VersionNumber("1"));
+		final OperatingSystem os1 = new OperatingSystem(linux, "Gentoo", "icon", "name1", "p", "pUrl", "url", new VersionNumber("1"));
+		final OperatingSystem os2 = new OperatingSystem(linux, "Gentoo", "icon", "name2", "p", "pUrl", "url", new VersionNumber("1"));
 		final UserAgent ua1 = new UserAgent(UserAgentFamily.CHROMIUM, "icon", "name", os1, "producer", "producer url",
 				UserAgentType.BROWSER, "type", "url", VersionParser.parseVersion("1"));
 		final UserAgent ua2 = new UserAgent(UserAgentFamily.CHROMIUM, "icon", "name", os2, "producer", "producer url",

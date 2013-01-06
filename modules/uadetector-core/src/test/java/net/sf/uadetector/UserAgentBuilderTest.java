@@ -25,8 +25,8 @@ public class UserAgentBuilderTest {
 
 	@Test
 	public void build_custom() {
-		final OperatingSystem os = new OperatingSystem(OperatingSystemFamily.UNKNOWN, "family", "name", "producer", "producer url", "url",
-				new VersionNumber("1"));
+		final OperatingSystem os = new OperatingSystem(OperatingSystemFamily.UNKNOWN, "family", "icon", "name", "producer", "producer url",
+				"url", new VersionNumber("1"));
 
 		final UserAgent.Builder b = new UserAgent.Builder();
 		Assert.assertSame(b, b.setFamily(UserAgentFamily.CHROMIUM));
@@ -122,6 +122,7 @@ public class UserAgentBuilderTest {
 		final ReadableOperatingSystem os = EasyMock.createMock(ReadableOperatingSystem.class);
 		EasyMock.expect(os.getFamily()).andReturn(OperatingSystemFamily.LINUX).anyTimes();
 		EasyMock.expect(os.getFamilyName()).andReturn("f1").anyTimes();
+		EasyMock.expect(os.getIcon()).andReturn("i1").anyTimes();
 		EasyMock.expect(os.getName()).andReturn("n1").anyTimes();
 		EasyMock.expect(os.getProducer()).andReturn("p1").anyTimes();
 		EasyMock.expect(os.getProducerUrl()).andReturn("pu1").anyTimes();
@@ -136,6 +137,7 @@ public class UserAgentBuilderTest {
 		final ReadableOperatingSystem os = EasyMock.createMock(ReadableOperatingSystem.class);
 		EasyMock.expect(os.getFamily()).andReturn(OperatingSystemFamily.LINUX).anyTimes();
 		EasyMock.expect(os.getFamilyName()).andReturn(null).anyTimes();
+		EasyMock.expect(os.getIcon()).andReturn("i1").anyTimes();
 		EasyMock.expect(os.getName()).andReturn("n1").anyTimes();
 		EasyMock.expect(os.getProducer()).andReturn("p1").anyTimes();
 		EasyMock.expect(os.getProducerUrl()).andReturn("pu1").anyTimes();

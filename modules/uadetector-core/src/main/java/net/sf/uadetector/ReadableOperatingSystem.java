@@ -43,6 +43,13 @@ public interface ReadableOperatingSystem {
 	String getFamilyName();
 
 	/**
+	 * Gets the icon name of an operating system.
+	 * 
+	 * @return the icon name of an operating system
+	 */
+	String getIcon();
+
+	/**
 	 * Gets the name of an operating system.
 	 * 
 	 * @return the name of an operating system

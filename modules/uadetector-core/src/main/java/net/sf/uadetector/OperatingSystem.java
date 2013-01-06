@@ -23,12 +23,14 @@ package net.sf.uadetector;
  */
 public final class OperatingSystem implements ReadableOperatingSystem {
 
-	public static final OperatingSystem EMPTY = new OperatingSystem(OperatingSystemFamily.UNKNOWN, "unknown", "unknown", "", "", "",
-			VersionNumber.UNKNOWN);
+	public static final OperatingSystem EMPTY = new OperatingSystem(OperatingSystemFamily.UNKNOWN, "unknown", "unknown.png", "unknown", "",
+			"", "", VersionNumber.UNKNOWN);
 
 	private final OperatingSystemFamily family;
 
 	private final String familyName;
+
+	private final String icon;
 
 	private final String name;
 
@@ -40,13 +42,16 @@ public final class OperatingSystem implements ReadableOperatingSystem {
 
 	private final VersionNumber versionNumber;
 
-	public OperatingSystem(final OperatingSystemFamily family, final String familyName, final String name, final String producer,
-			final String producerUrl, final String url, final VersionNumber versionNumber) {
+	public OperatingSystem(final OperatingSystemFamily family, final String familyName, final String icon, final String name,
+			final String producer, final String producerUrl, final String url, final VersionNumber versionNumber) {
 		if (family == null) {
 			throw new IllegalArgumentException("Argument 'family' must not be null");
 		}
 		if (familyName == null) {
 			throw new IllegalArgumentException("Argument 'familyName' must not be null");
+		}
+		if (icon == null) {
+			throw new IllegalArgumentException("Argument 'icon' must not be null");
 		}
 		if (name == null) {
 			throw new IllegalArgumentException("Argument 'name' must not be null");
@@ -66,6 +71,7 @@ public final class OperatingSystem implements ReadableOperatingSystem {
 
 		this.family = family;
 		this.familyName = familyName;
+		this.icon = icon;
 		this.name = name;
 		this.producer = producer;
 		this.producerUrl = producerUrl;
@@ -85,25 +91,56 @@ public final class OperatingSystem implements ReadableOperatingSystem {
 			return false;
 		}
 		final OperatingSystem other = (OperatingSystem) obj;
-		if (!family.equals(other.family)) {
+		if (family != other.family) {
 			return false;
 		}
-		if (!familyName.equals(other.familyName)) {
+		if (familyName == null) {
+			if (other.familyName != null) {
+				return false;
+			}
+		} else if (!familyName.equals(other.familyName)) {
 			return false;
 		}
-		if (!name.equals(other.name)) {
+		if (icon == null) {
+			if (other.icon != null) {
+				return false;
+			}
+		} else if (!icon.equals(other.icon)) {
 			return false;
 		}
-		if (!producer.equals(other.producer)) {
+		if (name == null) {
+			if (other.name != null) {
+				return false;
+			}
+		} else if (!name.equals(other.name)) {
 			return false;
 		}
-		if (!producerUrl.equals(other.producerUrl)) {
+		if (producer == null) {
+			if (other.producer != null) {
+				return false;
+			}
+		} else if (!producer.equals(other.producer)) {
 			return false;
 		}
-		if (!url.equals(other.url)) {
+		if (producerUrl == null) {
+			if (other.producerUrl != null) {
+				return false;
+			}
+		} else if (!producerUrl.equals(other.producerUrl)) {
 			return false;
 		}
-		if (!versionNumber.equals(other.versionNumber)) {
+		if (url == null) {
+			if (other.url != null) {
+				return false;
+			}
+		} else if (!url.equals(other.url)) {
+			return false;
+		}
+		if (versionNumber == null) {
+			if (other.versionNumber != null) {
+				return false;
+			}
+		} else if (!versionNumber.equals(other.versionNumber)) {
 			return false;
 		}
 		return true;
@@ -117,6 +154,11 @@ public final class OperatingSystem implements ReadableOperatingSystem {
 	@Override
 	public String getFamilyName() {
 		return familyName;
+	}
+
+	@Override
+	public String getIcon() {
+		return icon;
 	}
 
 	@Override
@@ -148,13 +190,14 @@ public final class OperatingSystem implements ReadableOperatingSystem {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + family.hashCode();
-		result = prime * result + familyName.hashCode();
-		result = prime * result + name.hashCode();
-		result = prime * result + producer.hashCode();
-		result = prime * result + producerUrl.hashCode();
-		result = prime * result + url.hashCode();
-		result = prime * result + versionNumber.hashCode();
+		result = prime * result + ((family == null) ? 0 : family.hashCode());
+		result = prime * result + ((familyName == null) ? 0 : familyName.hashCode());
+		result = prime * result + ((icon == null) ? 0 : icon.hashCode());
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + ((producer == null) ? 0 : producer.hashCode());
+		result = prime * result + ((producerUrl == null) ? 0 : producerUrl.hashCode());
+		result = prime * result + ((url == null) ? 0 : url.hashCode());
+		result = prime * result + ((versionNumber == null) ? 0 : versionNumber.hashCode());
 		return result;
 	}
 
@@ -165,6 +208,8 @@ public final class OperatingSystem implements ReadableOperatingSystem {
 		builder.append(family);
 		builder.append(", familyName=");
 		builder.append(familyName);
+		builder.append(", icon=");
+		builder.append(icon);
 		builder.append(", name=");
 		builder.append(name);
 		builder.append(", producer=");

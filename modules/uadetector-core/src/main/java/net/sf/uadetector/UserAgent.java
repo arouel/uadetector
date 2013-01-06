@@ -152,7 +152,7 @@ public final class UserAgent implements ReadableUserAgent {
 			if (os == null) {
 				throw new IllegalArgumentException("Argument 'os' must not be null.");
 			}
-			this.operatingSystem = new OperatingSystem(os.getFamily(), os.getFamilyName(), os.getName(), os.getProducer(),
+			this.operatingSystem = new OperatingSystem(os.getFamily(), os.getFamilyName(), os.getIcon(), os.getName(), os.getProducer(),
 					os.getProducerUrl(), os.getUrl(), os.getVersionNumber());
 			return this;
 		}

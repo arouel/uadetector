@@ -1,5 +1,4 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
 	<modelVersion>4.0.0</modelVersion>
 
@@ -7,11 +6,11 @@
 		<relativePath>../../</relativePath>
 		<groupId>net.sf.uadetector</groupId>
 		<artifactId>uadetector-parent</artifactId>
-		<version>0.2.7-SNAPSHOT</version>
+		<version>0.2.7</version>
 	</parent>
 
 	<artifactId>uadetector-json</artifactId>
-	<version>0.1.0-SNAPSHOT</version>
+	<version>0.1.0</version>
 	<name>UADetector :: JSON</name>
 	<description>This package contains functions to export and import the internal data as JSON.</description>
 	<inceptionYear>2012</inceptionYear>
@@ -27,7 +26,7 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<java.version>1.6</java.version>
-		<uadetector-core.version>0.9.0-SNAPSHOT</uadetector-core.version>
+		<uadetector-core.version>0.9.0</uadetector-core.version>
 	</properties>
 
 	<dependencies>

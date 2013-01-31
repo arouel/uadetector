@@ -15,6 +15,7 @@
  ******************************************************************************/
 package net.sf.uadetector;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -30,7 +31,7 @@ import net.sf.uadetector.internal.util.AlphanumComparator;
  * 
  * @author André Rouél
  */
-public final class VersionNumber implements ReadableVersionNumber {
+public final class VersionNumber implements ReadableVersionNumber, Serializable {
 
 	/**
 	 * Empty extension or addition of a version number

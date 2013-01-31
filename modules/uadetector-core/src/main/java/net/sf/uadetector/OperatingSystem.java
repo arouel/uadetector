@@ -15,13 +15,15 @@
  ******************************************************************************/
 package net.sf.uadetector;
 
+import java.io.Serializable;
+
 /**
  * {@code OperatingSystem} is an immutable entity that represents the informations about an operating system like Linux,
  * Mac OS X or Windows.
  * 
  * @author André Rouél
  */
-public final class OperatingSystem implements ReadableOperatingSystem {
+public final class OperatingSystem implements ReadableOperatingSystem, Serializable {
 
 	public static final OperatingSystem EMPTY = new OperatingSystem(OperatingSystemFamily.UNKNOWN, "unknown", "unknown.png", "unknown", "",
 			"", "", VersionNumber.UNKNOWN);

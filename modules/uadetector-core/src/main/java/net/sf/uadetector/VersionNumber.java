@@ -44,16 +44,6 @@ public final class VersionNumber implements ReadableVersionNumber, Serializable 
 	public static final String EMPTY_GROUP = "";
 
 	/**
-	 * Defines an empty or not set version number
-	 */
-	public static final VersionNumber UNKNOWN = new VersionNumber(EMPTY_GROUP);
-
-	/**
-	 * Separator between numeric groups of a version number
-	 */
-	private static final char SEPARATOR = '.';
-
-	/**
 	 * Minimum number of numeric group a version number
 	 */
 	private static final int MIN_GROUP_SIZE = 3;
@@ -62,6 +52,16 @@ public final class VersionNumber implements ReadableVersionNumber, Serializable 
 	 * Regular expression to find only numerical values ​​in strings
 	 */
 	private static final Pattern NUMERIC = Pattern.compile("\\d+");
+
+	/**
+	 * Separator between numeric groups of a version number
+	 */
+	private static final char SEPARATOR = '.';
+
+	/**
+	 * Defines an empty or not set version number
+	 */
+	public static final VersionNumber UNKNOWN = new VersionNumber(EMPTY_GROUP);
 
 	/**
 	 * Checks a string that only numerical values ​​are present. Negative numbers are not included.
@@ -126,14 +126,14 @@ public final class VersionNumber implements ReadableVersionNumber, Serializable 
 	}
 
 	/**
-	 * Groups, segments or categories of the version number
-	 */
-	private final List<String> groups;
-
-	/**
 	 * Extension or suffix of the version number consisting of alphanumeric and special characters
 	 */
 	private final String extension;
+
+	/**
+	 * Groups, segments or categories of the version number
+	 */
+	private final List<String> groups;
 
 	/**
 	 * Constructs a {@code VersionNumber} with the given numeric groups, such as major, minor and bugfix number.

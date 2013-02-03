@@ -222,6 +222,11 @@ public final class UserAgent implements ReadableUserAgent, Serializable {
 	public static final UserAgent EMPTY = new UserAgent(UserAgentFamily.UNKNOWN, "", "unknown", OperatingSystem.EMPTY, "", "",
 			UserAgentType.UNKNOWN, "", "", VersionNumber.UNKNOWN);
 
+	/**
+	 * Serialization version
+	 */
+	private static final long serialVersionUID = 1L;
+
 	private final UserAgentFamily family;
 
 	private final String icon;

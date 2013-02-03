@@ -59,6 +59,11 @@ public final class VersionNumber implements ReadableVersionNumber, Serializable 
 	private static final char SEPARATOR = '.';
 
 	/**
+	 * Serialization version
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/**
 	 * Defines an empty or not set version number
 	 */
 	public static final VersionNumber UNKNOWN = new VersionNumber(EMPTY_GROUP);

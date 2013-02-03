@@ -28,6 +28,11 @@ public final class OperatingSystem implements ReadableOperatingSystem, Serializa
 	public static final OperatingSystem EMPTY = new OperatingSystem(OperatingSystemFamily.UNKNOWN, "unknown", "unknown.png", "unknown", "",
 			"", "", VersionNumber.UNKNOWN);
 
+	/**
+	 * Serialization version
+	 */
+	private static final long serialVersionUID = 1L;
+
 	private final OperatingSystemFamily family;
 
 	private final String familyName;

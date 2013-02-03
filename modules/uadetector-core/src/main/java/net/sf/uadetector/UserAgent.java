@@ -15,13 +15,15 @@
  ******************************************************************************/
 package net.sf.uadetector;
 
+import java.io.Serializable;
+
 /**
  * {@code UserAgent} is an immutable entity that represents the informations about web-based client applications like
  * Web browsers, search engines or crawlers (spiders) as well as mobile phones, screen readers and braille browsers.
  * 
  * @author André Rouél
  */
-public final class UserAgent implements ReadableUserAgent {
+public final class UserAgent implements ReadableUserAgent, Serializable {
 
 	public static final class Builder implements ReadableUserAgent {
 

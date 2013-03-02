@@ -1,6 +1,6 @@
 {
   "format": "1.0",
-  "version": "20130131-01",
+  "version": "20130301-01",
   "operating-system-patterns": [
     {
       "regex": {
@@ -2669,6 +2669,13 @@
     {
       "regex": {
         "flags": "is",
+        "pattern": "mozilla.*AppleWebKit.*NetFrontLifeBrowser\\/([0-9\\.]+)"
+      },
+      "hash": "620806a97b0cfe284fbb3faee7e079f19dde40b58a6e29e893d31efabc4285b3"
+    },
+    {
+      "regex": {
+        "flags": "is",
         "pattern": "^FlyCast\\/([0-9\\.]+)"
       },
       "hash": "bcacc9172000a45f600aa6a4bae76773ca249ee543a8c95c5c5897fb46c5be37"
@@ -2826,6 +2833,13 @@
         "pattern": "Mozilla.*Linux.*webOS.*webOSBrowser\\/([0-9\\.]+)"
       },
       "hash": "24b8000583b8c186afebf390d25c58e98be415f4fe85e35360db7b08dfcb9608"
+    },
+    {
+      "regex": {
+        "flags": "is",
+        "pattern": "^Microsoft Office\\/14.*Microsoft Outlook 14"
+      },
+      "hash": "f21dce2416915215061ad92dd7732083453cad06f1ab4ea6424066b450ade744"
     },
     {
       "regex": {
@@ -3071,6 +3085,13 @@
         "pattern": "^Mozilla.*AppleWebKit.*YaBrowser\\/([0-9\\.]+).*Chrome"
       },
       "hash": "5eb408ac41ca265264a4b4a9d743cbdccc626231dfa7c30330dd1399c6415541"
+    },
+    {
+      "regex": {
+        "flags": "is",
+        "pattern": "^Mozilla.*AppleWebKit.*Superbird\\/([0-9\\.]+)"
+      },
+      "hash": "aedf96fccafa3623559dfd799b3f3060e9e6a84e39d8aba6c8e894a475784f3f"
     },
     {
       "regex": {
@@ -10052,13 +10073,14 @@
       "info-url": "/list-of-ua/browser-detail?browser\u003dOutlook 2010",
       "browser-pattern-hashs": [
         "2ed8f2366dc99fc43c598ef3496fd8466b9d8e8a738c4210b3a9f61e64890ba2",
+        "f21dce2416915215061ad92dd7732083453cad06f1ab4ea6424066b450ade744",
         "23411cfef3678d4ea0be1c7f4cc1c85bd202f42a4cb3cb52a466c95e0a6edac1"
       ],
       "producer": "Microsoft Corporation.",
       "producer-url": "http://www.microsoft.com/",
       "browser-type-hash": "1e88220c991000b14b14a6be9efbf0ef87e6628032d66046eaf0a50423056e65",
       "url": "http://en.wikipedia.org/wiki/Microsoft_Office_2010",
-      "hash": "2c12770f0b04534cd90339373b63b8d49f604d49e833f5373f8e46df02f353d6"
+      "hash": "0447f31e1e45911a9f039793819e3a4bbd06396cb3d920263429898340f2283b"
     },
     {
       "family": "WINDOWS_LIVE_MAIL",
@@ -11847,7 +11869,7 @@
       ],
       "producer": "Qualcomm Incorporated.",
       "producer-url": "http://www.qualcomm.com/",
-      "browser-type-hash": "d31de1a5c5c8ba2a210a167cf0d0dc2425c57ea7525f4b73a4b7ab934af79dfc",
+      "browser-type-hash": "1e88220c991000b14b14a6be9efbf0ef87e6628032d66046eaf0a50423056e65",
       "url": "http://www.eudora.com/archive.html",
       "hash": "6db6177a5fec88cbaf897ec0fcc7c6442e42da1e7e48ca14909242b4b8020b40"
     },
@@ -11876,6 +11898,32 @@
       "browser-type-hash": "d31de1a5c5c8ba2a210a167cf0d0dc2425c57ea7525f4b73a4b7ab934af79dfc",
       "url": "http://polarityweb.webs.com/",
       "hash": "c035b977789dbe96684d34c8d185d79d250155a50c892bdfbd9e9d5b4738a10f"
+    },
+    {
+      "family": "UNKNOWN",
+      "icon": "superbird.png",
+      "info-url": "/list-of-ua/browser-detail?browser\u003dSuperbird",
+      "browser-pattern-hashs": [
+        "aedf96fccafa3623559dfd799b3f3060e9e6a84e39d8aba6c8e894a475784f3f"
+      ],
+      "producer": "The Superbird Authors",
+      "producer-url": "",
+      "browser-type-hash": "d31de1a5c5c8ba2a210a167cf0d0dc2425c57ea7525f4b73a4b7ab934af79dfc",
+      "url": "http://superbird.me/",
+      "hash": "9608d893ba8027261d1e7895117117d43817d4593b9c1d39121763f3941c9e15"
+    },
+    {
+      "family": "UNKNOWN",
+      "icon": "netfrontlife.png",
+      "info-url": "/list-of-ua/browser-detail?browser\u003dNetFront Life",
+      "browser-pattern-hashs": [
+        "620806a97b0cfe284fbb3faee7e079f19dde40b58a6e29e893d31efabc4285b3"
+      ],
+      "producer": "ACCESS CO., LTD.",
+      "producer-url": "http://www.access-company.com/",
+      "browser-type-hash": "d4f1118eb3ace8c9d67d4b72ff39234cd4f3ab260ef6f422ce24b7a1b10d14ee",
+      "url": "http://gl.access-company.com/files/legacy/products/nflife/app_browser2.html",
+      "hash": "cabb852be8c46c8b18485ab09707b371a47b856a640a469a43101ae3ba52d167"
     }
   ],
   "robots": [
@@ -23395,6 +23443,50 @@
       "url": "",
       "user-agent-string": "emefgebot/beta (+http://emefge.de/bot.html)",
       "hash": "e3463f6619f3e53e886a431210f74c37a0a056f3a084778d982df8e84777b672"
+    },
+    {
+      "family": "COCCOC",
+      "icon": "bot.png",
+      "info-url": "/list-of-ua/bot-detail?bot\u003dcoccoc",
+      "name": "coccoc/1.0",
+      "producer": "Coc Coc",
+      "producer-url": "http://coccoc.vn/",
+      "url": "",
+      "user-agent-string": "coccoc/1.0 (http://help.coccoc.com/)",
+      "hash": "ac73d957e819b36e06649118210ddca335a4e2bc40df141ba9f3deb38678bd29"
+    },
+    {
+      "family": "UNKNOWN",
+      "icon": "bot.png",
+      "info-url": "/list-of-ua/bot-detail?bot\u003dExB Language Crawler",
+      "name": "ExB Language Crawler 2.1.5",
+      "producer": "ExB Communication Systems GmbH",
+      "producer-url": "http://www.exb.de/",
+      "url": "",
+      "user-agent-string": "ExB Language Crawler 2.1.5 (+http://www.exb.de/crawler)",
+      "hash": "004c4c4c2e685bd15ee3091b9c74039e772c03b0684c73fe4ff3f6e343b00b9b"
+    },
+    {
+      "family": "VAGABONDO",
+      "icon": "bot.png",
+      "info-url": "/list-of-ua/bot-detail?bot\u003dVagabondo",
+      "name": "Vagabondo/4.0",
+      "producer": "WiseGuys Internet BV",
+      "producer-url": "http://www.wise-guys.nl/",
+      "url": "",
+      "user-agent-string": "Mozilla/4.0 (compatible;  Vagabondo/4.0; webcrawler at wise-guys dot nl; http://webagent.wise-guys.nl/; http://www.wise-guys.nl/)",
+      "hash": "f7395aa3d2766c8125e32137aa505e297c19e4a9ece1840083015ee8b8be34b8"
+    },
+    {
+      "family": "UNKNOWN",
+      "icon": "bot.png",
+      "info-url": "/list-of-ua/bot-detail?bot\u003dExB Language Crawler",
+      "name": "ExB Language Crawler 2.1.2",
+      "producer": "ExB Communication Systems GmbH",
+      "producer-url": "http://www.exb.de/",
+      "url": "",
+      "user-agent-string": "ExB Language Crawler 2.1.2 (+http://www.exb.de/crawler)",
+      "hash": "14f377e0af35bb39771d86b75cbc36e53e77bd650e406d1ab20e729d65819636"
     }
   ]
 }

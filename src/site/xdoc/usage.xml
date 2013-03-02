@@ -12,7 +12,8 @@
 				in the desired logging framework at deployment time.
 			</p>
 			<p>This means that if the UADetector library is used also the SLF4J-API must exist in your classpath.</p>
-			<h3>A simple Servlet</h3>
+			<a name="usage_in_a_servlet" />
+			<h3>Usage in a simple Servlet</h3>
 			<p>
 				To use the library it must be added to your classpath. With Apache Maven you can start with
 				<a href="quickstart.html">this guide</a>
@@ -24,11 +25,7 @@
 			<source><![CDATA[package net.sf.uadetector.example;
 
 import java.io.IOException;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
+import javax.servlet.*;
 import net.sf.uadetector.UADetectorServiceFactory;
 import net.sf.uadetector.UserAgent;
 import net.sf.uadetector.UserAgentStringParser;
@@ -54,6 +51,51 @@ public class HelloServlet extends HttpServlet {
 		out.append("</em> on <em>");
 		out.append(agent.getOperatingSystem().getName());
 		out.append("</em>!");
+	}
+
+}]]></source>
+			<a name="improve_performance" />
+			<h3>Improve Performance by Caching</h3>
+			<p>
+				Since the parsing of user agent strings is very processing costly, it's recommended to build a cache on top of the
+				parser. You can use a simple
+				<code>HashMap</code>
+				or
+				<i>Guava's</i>
+				<code>CacheBuilder</code>
+				for example.
+			</p>
+			<source><![CDATA[package to.noc.uadetector.example;
+
+import java.util.concurrent.TimeUnit;
+import net.sf.uadetector.UserAgent;
+import net.sf.uadetector.UserAgentStringParser;
+import net.sf.uadetector.service.UADetectorServiceFactory;
+import com.google.common.cache.Cache;
+import com.google.common.cache.CacheBuilder;
+
+public final class CachedUserAgentStringParser implements UserAgentStringParser {
+
+	public final UserAgentStringParser parser = UADetectorServiceFactory
+							.getCachingAndUpdatingParserHolder();
+	public final Cache<String, UserAgent> cache = CacheBuilder.newBuilder()
+							.maximumSize(100)
+							.expireAfterWrite(2, TimeUnit.HOURS)
+							.build();
+
+	@Override
+	public String getDataVersion() {
+		return parser.getDataVersion();
+	}
+
+	@Override
+	public UserAgent parse(final String userAgentString) {
+		UserAgent result = cache.getIfPresent(userAgentString);
+		if (result == null) {
+			result = parser.parse(userAgentString);
+			cache.put(userAgentString, result);
+		}
+		return result;
 	}
 
 }]]></source>

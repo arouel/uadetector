@@ -18,10 +18,10 @@ package net.sf.uadetector.parser;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
-import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.TimeUnit;
 
 import net.sf.uadetector.datastore.RefreshableDataStore;
+import net.sf.uadetector.internal.util.DaemonThreadFactory;
 
 /**
  * This parser checks once per day if newer data are available. When newer data are available, they will be loaded, read
@@ -30,18 +30,6 @@ import net.sf.uadetector.datastore.RefreshableDataStore;
  * @author André Rouél
  */
 public final class UpdatingUserAgentStringParserImpl extends UserAgentStringParserImpl<RefreshableDataStore> {
-
-	/**
-	 * Factory to create daemon threads that runs as a background process and do not blocks an application shutdown
-	 */
-	private static class DaemonThreadFactory implements ThreadFactory {
-		@Override
-		public Thread newThread(final Runnable r) {
-			final Thread thread = new Thread(r);
-			thread.setDaemon(true);
-			return thread;
-		}
-	}
 
 	/**
 	 * Interval to check for updates in milliseconds

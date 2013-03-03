@@ -40,6 +40,16 @@ import org.slf4j.LoggerFactory;
 public final class CachingXmlDataStore extends AbstractRefreshableDataStore {
 
 	/**
+	 * Internal data store which will be used to load previously saved <em>UAS data</em> from a cache file.
+	 */
+	private static class CacheFileDataStore extends AbstractDataStore {
+		protected CacheFileDataStore(final Data data, final DataReader reader, final URL dataUrl, final URL versionUrl,
+				final Charset charset) {
+			super(data, reader, dataUrl, versionUrl, charset);
+		}
+	}
+
+	/**
 	 * The default temporary-file directory
 	 */
 	private static final String CACHE_DIR = System.getProperty("java.io.tmpdir");
@@ -154,19 +164,17 @@ public final class CachingXmlDataStore extends AbstractRefreshableDataStore {
 
 		final DataReader reader = new XmlDataReader();
 
-		final Data data;
+		final DataStore fallbackDataStore;
 		if (!isEmpty(cacheFile, charset)) {
-			data = reader.read(UrlUtil.toUrl(cacheFile), charset);
+			final URL cacheFileUrl = UrlUtil.toUrl(cacheFile);
+			fallbackDataStore = new CacheFileDataStore(reader.read(cacheFileUrl, charset), reader, cacheFileUrl, versionUrl, charset);
 			LOG.debug(MSG_CACHE_FILE_IS_FILLED);
 		} else {
-			data = fallback.getData();
+			fallbackDataStore = fallback;
 			LOG.debug(MSG_CACHE_FILE_IS_EMPTY);
 		}
 
-		final CachingXmlDataStore store = new CachingXmlDataStore(data, reader, dataUrl, versionUrl, charset, cacheFile, fallback);
-		// update the cache file (non-blocking in background)
-		// store.refresh();
-		return store;
+		return new CachingXmlDataStore(reader, dataUrl, versionUrl, charset, cacheFile, fallbackDataStore);
 	}
 
 	/**
@@ -250,7 +258,7 @@ public final class CachingXmlDataStore extends AbstractRefreshableDataStore {
 	 * @throws IllegalArgumentException
 	 *             if one of the given arguments is {@code null}
 	 */
-	private CachingXmlDataStore(final Data data, final DataReader reader, final URL dataUrl, final URL versionUrl, final Charset charset,
+	private CachingXmlDataStore(final DataReader reader, final URL dataUrl, final URL versionUrl, final Charset charset,
 			final File cacheFile, final DataStore fallback) {
 		super(reader, dataUrl, versionUrl, charset, fallback);
 		setUpdateOperation(new UpdateOperationWithCacheFileTask(this, cacheFile));

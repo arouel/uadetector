@@ -251,7 +251,7 @@ public class UpdatingUserAgentStringParserImplTest {
 
 		// reduce the interval since testing
 		LOG.debug("Reducing the update interval during the test.");
-		parser.setUpdateInterval(100l);
+		parser.setUpdateInterval(400l);
 		// we have to read to activate the update mechanism
 		parser.parse("check for updates");
 

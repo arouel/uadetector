@@ -16,14 +16,12 @@
 package net.sf.uadetector.datastore;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.nio.charset.Charset;
 
 import net.sf.uadetector.datareader.DataReader;
 import net.sf.uadetector.datareader.XmlDataReader;
-import net.sf.uadetector.exception.CanNotOpenStreamException;
 import net.sf.uadetector.internal.data.Data;
 import net.sf.uadetector.internal.util.FileUtil;
 import net.sf.uadetector.internal.util.UrlUtil;
@@ -39,7 +37,7 @@ import org.slf4j.LoggerFactory;
  * 
  * @author André Rouél
  */
-public final class CachingXmlDataStore extends AbstractDataStore implements RefreshableDataStore {
+public final class CachingXmlDataStore extends AbstractRefreshableDataStore {
 
 	/**
 	 * The default temporary-file directory
@@ -60,16 +58,6 @@ public final class CachingXmlDataStore extends AbstractDataStore implements Refr
 	 * Message for the log if the cache file is empty
 	 */
 	private static final String MSG_CACHE_FILE_IS_FILLED = "The cache file is filled and will be imported.";
-
-	/**
-	 * Message for the log when issues occur during reading of or writing to the cache file.
-	 */
-	private static final String MSG_CACHE_FILE_ISSUES = "Issues occured during reading of or writing to the cache file: %s";
-
-	/**
-	 * Message for the log if the passed resources are the same and an update makes no sense
-	 */
-	private static final String MSG_SAME_RESOURCES = "The passed URL and file resources are the same. An update was not performed.";
 
 	/**
 	 * The prefix string to be used in generating the cache file's name; must be at least three characters long
@@ -97,7 +85,7 @@ public final class CachingXmlDataStore extends AbstractDataStore implements Refr
 	 * @throws IllegalStateException
 	 *             if no URL can be resolved to the given given file
 	 */
-	public static CachingXmlDataStore createCachingXmlDataStore(final Data fallback) {
+	public static CachingXmlDataStore createCachingXmlDataStore(final DataStore fallback) {
 		return createCachingXmlDataStore(findOrCreateCacheFile(), fallback);
 	}
 
@@ -118,7 +106,7 @@ public final class CachingXmlDataStore extends AbstractDataStore implements Refr
 	 * @throws IllegalStateException
 	 *             if no URL can be resolved to the given given file
 	 */
-	public static CachingXmlDataStore createCachingXmlDataStore(final File cacheFile, final Data fallback) {
+	public static CachingXmlDataStore createCachingXmlDataStore(final File cacheFile, final DataStore fallback) {
 		return createCachingXmlDataStore(cacheFile, UrlUtil.build(DEFAULT_DATA_URL), UrlUtil.build(DEFAULT_VERSION_URL), DEFAULT_CHARSET,
 				fallback);
 	}
@@ -147,7 +135,7 @@ public final class CachingXmlDataStore extends AbstractDataStore implements Refr
 	 *             if no URL can be resolved to the given given file
 	 */
 	public static CachingXmlDataStore createCachingXmlDataStore(final File cacheFile, final URL dataUrl, final URL versionUrl,
-			final Charset charset, final Data fallback) {
+			final Charset charset, final DataStore fallback) {
 		if (cacheFile == null) {
 			throw new IllegalArgumentException("Argument 'cacheFile' must not be null.");
 		}
@@ -166,21 +154,18 @@ public final class CachingXmlDataStore extends AbstractDataStore implements Refr
 
 		final DataReader reader = new XmlDataReader();
 
-		Data data;
+		final Data data;
 		if (!isEmpty(cacheFile, charset)) {
 			data = reader.read(UrlUtil.toUrl(cacheFile), charset);
 			LOG.debug(MSG_CACHE_FILE_IS_FILLED);
 		} else {
-			data = reader.read(dataUrl, charset);
+			data = fallback.getData();
 			LOG.debug(MSG_CACHE_FILE_IS_EMPTY);
 		}
 
-		if (Data.EMPTY.equals(data)) {
-			data = fallback;
-		}
-
-		final CachingXmlDataStore store = new CachingXmlDataStore(data, reader, dataUrl, versionUrl, charset, cacheFile);
-		store.refresh(); // update the cache file
+		final CachingXmlDataStore store = new CachingXmlDataStore(data, reader, dataUrl, versionUrl, charset, cacheFile, fallback);
+		// update the cache file (non-blocking in background)
+		//store.refresh();
 		return store;
 	}
 
@@ -205,48 +190,8 @@ public final class CachingXmlDataStore extends AbstractDataStore implements Refr
 	 *             if the given cache file can not be read
 	 */
 	public static CachingXmlDataStore createCachingXmlDataStore(final URL dataUrl, final URL versionUrl, final Charset charset,
-			final Data fallback) {
+			final DataStore fallback) {
 		return createCachingXmlDataStore(findOrCreateCacheFile(), dataUrl, versionUrl, charset, fallback);
-	}
-
-	/**
-	 * Creates a temporary file near the passed file. The name of the given one will be used and the suffix ".temp" will
-	 * be added.
-	 * 
-	 * @param file
-	 *            file in which the entire contents from the given URL can be saved
-	 * @throws IOException
-	 *             if an I/O error occurs
-	 */
-	protected static File createTemporaryFile(final File file) {// throws IOException {
-		if (file == null) {
-			throw new IllegalArgumentException("Argument 'file' must not be null.");
-		}
-
-		final File tempFile = new File(file.getParent(), file.getName() + ".temp");
-
-		// remove orphaned temporary file
-		deleteFile(tempFile);
-
-		return tempFile;
-	}
-
-	/**
-	 * Removes the given file.
-	 * 
-	 * @param file
-	 *            an existing file
-	 * @throws IllegalStateException
-	 *             if the file can not be deleted
-	 */
-	protected static void deleteFile(final File file) {
-		if (file == null) {
-			throw new IllegalArgumentException("Argument 'file' must not be null.");
-		}
-
-		if (file.exists() && !file.delete()) {
-			throw new IllegalStateException("Passed file can not be removed: " + file.getAbsolutePath());
-		}
 	}
 
 	/**
@@ -280,101 +225,12 @@ public final class CachingXmlDataStore extends AbstractDataStore implements Refr
 	 *             if an I/O error occurs
 	 */
 	private static boolean isEmpty(final File file, final Charset charset) {
-		boolean empty = false;
 		try {
-			empty = FileUtil.isEmpty(file, charset);
+			return FileUtil.isEmpty(file, charset);
 		} catch (final IOException e) {
 			throw new IllegalStateException("The given file could not be read.");
 		}
-		return empty;
 	}
-
-	/**
-	 * Reads the content from the given {@link URL} and saves it to the passed file.
-	 * 
-	 * @param url
-	 *            URL to <em>UAS data</em>
-	 * @param file
-	 *            file in which the entire contents from the given URL can be saved
-	 * @param charset
-	 *            the character set in which the data should be read
-	 * @throws IllegalArgumentException
-	 *             if any of the passed arguments is {@code null}
-	 * @throws IOException
-	 *             if an I/O error occurs
-	 */
-	protected static void readAndSave(final URL url, final File file, final Charset charset) throws IOException {
-		if (url == null) {
-			throw new IllegalArgumentException("Argument 'url' must not be null.");
-		}
-		if (file == null) {
-			throw new IllegalArgumentException("Argument 'file' must not be null.");
-		}
-		if (charset == null) {
-			throw new IllegalArgumentException("Argument 'charset' must not be null.");
-		}
-
-		final boolean isEqual = url.toExternalForm().equals(UrlUtil.toUrl(file).toExternalForm());
-		if (!isEqual) {
-			FileOutputStream outputStream = null;
-			try {
-				final File tempFile = createTemporaryFile(file);
-
-				// write data to temporary file
-				outputStream = new FileOutputStream(tempFile);
-				final String data = UrlUtil.read(url, charset);
-				outputStream.write(data.getBytes(charset));
-
-				// delete the original file
-				file.delete();
-
-				// rename the new file to the original one
-				renameFile(tempFile, file);
-
-			} finally {
-				if (outputStream != null) {
-					try {
-						outputStream.close();
-					} catch (final IOException e) {
-						LOG.warn("The output stream could not be closed.");
-					}
-				}
-			}
-		} else {
-			LOG.debug(MSG_SAME_RESOURCES);
-		}
-	}
-
-	/**
-	 * Removes the given file.
-	 * 
-	 * @param from
-	 *            an existing file
-	 * @param to
-	 *            a new file
-	 * @throws IllegalStateException
-	 *             if the file can not be renamed
-	 */
-	protected static void renameFile(final File from, final File to) {
-		if (from == null) {
-			throw new IllegalArgumentException("Argument 'from' must not be null.");
-		}
-		if (!from.exists()) {
-			throw new IllegalArgumentException("Argument 'from' must not be an existing file.");
-		}
-		if (to == null) {
-			throw new IllegalArgumentException("Argument 'to' must not be null.");
-		}
-
-		if (!from.renameTo(to)) {
-			throw new IllegalStateException("Renaming file from '" + from.getAbsolutePath() + "' to '" + to.getAbsolutePath() + "' failed.");
-		}
-	}
-
-	/**
-	 * File to cache read in <em>UAS data</em>
-	 */
-	private final File cacheFile;
 
 	/**
 	 * Constructs an {@code CachingXmlDataStore} with the given arguments.
@@ -395,25 +251,9 @@ public final class CachingXmlDataStore extends AbstractDataStore implements Refr
 	 *             if one of the given arguments is {@code null}
 	 */
 	private CachingXmlDataStore(final Data data, final DataReader reader, final URL dataUrl, final URL versionUrl, final Charset charset,
-			final File cacheFile) {
-		super(data, reader, dataUrl, versionUrl, charset);
-		this.cacheFile = cacheFile;
-	}
-
-	@Override
-	public synchronized void refresh() {
-		try {
-			readAndSave(getDataUrl(), cacheFile, getCharset());
-			setData(getDataReader().read(getDataUrl(), getCharset()));
-		} catch (final CanNotOpenStreamException e) {
-			LOG.warn(String.format(MSG_URL_NOT_READABLE, e.getLocalizedMessage()));
-		} catch (final IllegalArgumentException e) {
-			LOG.warn(MSG_FAULTY_CONTENT + " " + e.getLocalizedMessage());
-		} catch (final RuntimeException e) {
-			LOG.warn(MSG_FAULTY_CONTENT, e);
-		} catch (final IOException e) {
-			LOG.warn(String.format(MSG_CACHE_FILE_ISSUES, e.getLocalizedMessage()), e);
-		}
+			final File cacheFile, final DataStore fallback) {
+		super(reader, dataUrl, versionUrl, charset, fallback);
+		setUpdateOperation(new CachingUpdateOperationTask(this, cacheFile));
 	}
 
 }

@@ -245,7 +245,7 @@ public class UpdatingUserAgentStringParserImplTest {
 	@Test
 	public void testUpdateMechanismWhileParsing() throws InterruptedException {
 		final UpdatingUserAgentStringParserImpl parser = new UpdatingUserAgentStringParserImpl(new TestXmlDataStore());
-		final long firstLastUpdateCheck = parser.getUpdater().getLastUpdateCheck();
+		final long firstLastUpdateCheck = parser.getDataStore().getUpdateOperation().getLastUpdateCheck();
 		LOG.debug("LastUpdateCheck at: " + firstLastUpdateCheck);
 		final long originalInterval = parser.getUpdateInterval();
 
@@ -256,7 +256,7 @@ public class UpdatingUserAgentStringParserImplTest {
 		parser.parse("check for updates");
 
 		Thread.sleep(1000l);
-		final long currentLastUpdateCheck = parser.getUpdater().getLastUpdateCheck();
+		final long currentLastUpdateCheck = parser.getDataStore().getUpdateOperation().getLastUpdateCheck();
 		LOG.debug("LastUpdateCheck at: " + currentLastUpdateCheck);
 		Assert.assertTrue(firstLastUpdateCheck < currentLastUpdateCheck);
 

@@ -14,8 +14,8 @@ import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
 @RunWith(PowerMockRunner.class)
-@PrepareForTest({ FileOutputStream.class, CachingXmlDataStore.class })
-public class CachingXmlDataStoreTest_readAndSave {
+@PrepareForTest({ FileOutputStream.class, CachingUpdateOperationTask.class })
+public class CachingUpdateOperationTaskTest_readAndSave {
 
 	/**
 	 * The character set to read the contents of an URL
@@ -25,7 +25,7 @@ public class CachingXmlDataStoreTest_readAndSave {
 	/**
 	 * URL to retrieve the UAS data as XML
 	 */
-	private static final URL DATA_URL = CachingXmlDataStoreTest_readAndSave.class.getClassLoader().getResource("uas_older.xml");
+	private static final URL DATA_URL = CachingUpdateOperationTaskTest_readAndSave.class.getClassLoader().getResource("uas_older.xml");
 
 	@Test(expected = IOException.class)
 	public void testNullCheckBeforeClosing() throws Exception {
@@ -33,7 +33,7 @@ public class CachingXmlDataStoreTest_readAndSave {
 		temp.deleteOnExit();
 		PowerMock.expectNiceNew(FileOutputStream.class, EasyMock.anyObject(File.class)).andThrow(new IOException());
 		PowerMock.replayAll();
-		CachingXmlDataStore.readAndSave(DATA_URL, temp, CHARSET);
+		CachingUpdateOperationTask.readAndSave(DATA_URL, temp, CHARSET);
 		PowerMock.verifyAll();
 		temp.delete();
 	}

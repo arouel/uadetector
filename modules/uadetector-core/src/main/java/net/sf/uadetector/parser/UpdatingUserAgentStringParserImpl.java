@@ -47,11 +47,6 @@ public final class UpdatingUserAgentStringParserImpl extends UserAgentStringPars
 	private final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1, new DaemonThreadFactory());
 
 	/**
-	 * Current update service which will be triggered by the {@link UpdatingUserAgentStringParserImpl#scheduler}
-	 */
-	private UpdateService updateService;
-
-	/**
 	 * Constructs an instance of {@code OnlineUserAgentStringParser}. During construction new UAS data will be queried
 	 * online by the given {@code URL}s.
 	 * 
@@ -74,15 +69,6 @@ public final class UpdatingUserAgentStringParserImpl extends UserAgentStringPars
 	 */
 	public long getUpdateInterval() {
 		return updateInterval;
-	}
-
-	/**
-	 * Gets the current {@link UpdateService} of this parser.
-	 * 
-	 * @return current update service of this parser
-	 */
-	public Updater getUpdater() {
-		return updateService;
 	}
 
 	/**
@@ -110,8 +96,7 @@ public final class UpdatingUserAgentStringParserImpl extends UserAgentStringPars
 		if (currentUpdateTask != null) {
 			currentUpdateTask.cancel(false);
 		}
-		updateService = new UpdateService(getDataStore());
-		currentUpdateTask = scheduler.scheduleWithFixedDelay(updateService, 0, updateInterval, TimeUnit.MILLISECONDS);
+		currentUpdateTask = scheduler.scheduleWithFixedDelay(getDataStore().getUpdateOperation(), 0, updateInterval, TimeUnit.MILLISECONDS);
 	}
 
 }

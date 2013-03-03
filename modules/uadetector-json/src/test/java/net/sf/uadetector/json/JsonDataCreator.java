@@ -59,7 +59,7 @@ public class JsonDataCreator {
 	private static final DataStore determineDataStore(final String argument) {
 		final boolean isOffline = argument != null && argument.toLowerCase().equals("offline");
 		DataStore fallback = new SimpleXmlDataStore(DATA_URL, VERSION_URL);
-		return isOffline ? fallback : new OnlineXmlDataStore(fallback.getData());
+		return isOffline ? fallback : new OnlineXmlDataStore(fallback);
 	}
 
 	public static void main(final String[] args) {

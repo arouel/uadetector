@@ -33,6 +33,21 @@ public interface RefreshableDataStore extends DataStore {
 	String MSG_URL_NOT_READABLE = "The data can not be read from the specified URL: %s";
 
 	/**
+	 * This method returns a data store which will be used during start up and can be used in emergency cases.
+	 * <p>
+	 * This data store will be used instantly during initialization to avoid long initializations times of an
+	 * {@link net.sf.uadetector.UserAgentStringParser}, especially when reading data by a network connection.
+	 */
+	DataStore getFallback();
+
+	/**
+	 * Returns the update operation of this data store which can be triggered within an executor service.
+	 * 
+	 * @return an update operation
+	 */
+	UpdateOperation getUpdateOperation();
+
+	/**
 	 * Triggers the update of the {@code DataStore}. When this action is executed, the current data URL will be read in
 	 * and the {@code DataReader} parses and builds a new {@code Data} instance. Finally, the currently set {@code Data}
 	 * reference will be replaced by the new one.

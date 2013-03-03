@@ -82,28 +82,33 @@ public class CachingXmlDataStoreTest2 {
 
 		// create caching data store without a cache file
 		final CachingXmlDataStore store1 = CachingXmlDataStore.createCachingXmlDataStore(cache, DATA_URL_OLDER, VERSION_URL_OLDER, CHARSET,
-				fallbackDataStore.getData());
+				fallbackDataStore);
 		final UpdatingUserAgentStringParserImpl parser1 = new UpdatingUserAgentStringParserImpl(store1);
 		parser1.parse("test");
+
+		Thread.sleep(1000l);
 		final String readIn1 = readFile(cache);
 		Assert.assertTrue(readIn1.contains(DATA_VERSION_OLDER));
 		Assert.assertTrue(readIn1.length() >= 721915);
 
 		// create caching data store with filled cache and available update
 		final CachingXmlDataStore store2 = CachingXmlDataStore.createCachingXmlDataStore(cache, DATA_URL_NEWER, VERSION_URL_NEWER, CHARSET,
-				fallbackDataStore.getData());
+				fallbackDataStore);
 		final UpdatingUserAgentStringParserImpl parser2 = new UpdatingUserAgentStringParserImpl(store2);
 		parser2.parse("test");
+
+		Thread.sleep(1000l);
 		final String readIn2 = readFile(cache);
 		Assert.assertTrue(readIn2.contains(DATA_VERSION_NEWER));
 		Assert.assertTrue(readIn2.length() >= 721915);
 
 		// create caching data store with filled cache and without an available update
 		final CachingXmlDataStore store = CachingXmlDataStore.createCachingXmlDataStore(cache, DATA_URL_NEWER, VERSION_URL_NEWER, CHARSET,
-				fallbackDataStore.getData());
+				fallbackDataStore);
 		final UpdatingUserAgentStringParserImpl parser = new UpdatingUserAgentStringParserImpl(store);
 		parser.parse("test");
 
+		Thread.sleep(1000l);
 		final String readIn = readFile(cache);
 		Assert.assertTrue(readIn.contains(DATA_VERSION_NEWER));
 		Assert.assertTrue(readIn.length() >= 721915);

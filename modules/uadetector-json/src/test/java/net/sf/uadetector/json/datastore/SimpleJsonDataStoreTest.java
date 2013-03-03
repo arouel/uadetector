@@ -28,9 +28,4 @@ public class SimpleJsonDataStoreTest {
 		new SimpleJsonDataStore(DATA_URL, null);
 	}
 
-	@Test(expected = IllegalNullArgumentException.class)
-	public void construct2_charsetIsNull() {
-		new SimpleJsonDataStore(DATA_URL, VERSION_URL, null);
-	}
-
 }

@@ -38,15 +38,14 @@ public final class UADetectorServiceFactory {
 	 */
 	private static final class CachingAndUpdatingParserHolder {
 		private static final UserAgentStringParser INSTANCE = new UpdatingUserAgentStringParserImpl(
-				CachingXmlDataStore.createCachingXmlDataStore(RESOURCE_MODULE.getData()));
+				CachingXmlDataStore.createCachingXmlDataStore(RESOURCE_MODULE));
 	}
 
 	/**
 	 * Holder to load the parser only when it's needed.
 	 */
 	private static final class OnlineUpdatingParserHolder {
-		private static final UserAgentStringParser INSTANCE = new UpdatingUserAgentStringParserImpl(new OnlineXmlDataStore(
-				RESOURCE_MODULE.getData()));
+		private static final UserAgentStringParser INSTANCE = new UpdatingUserAgentStringParserImpl(new OnlineXmlDataStore(RESOURCE_MODULE));
 	}
 
 	/**

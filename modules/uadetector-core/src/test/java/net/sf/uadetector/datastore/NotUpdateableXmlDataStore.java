@@ -30,7 +30,7 @@ import org.slf4j.LoggerFactory;
  * 
  * @author André Rouél
  */
-public class NotUpdateableXmlDataStore extends AbstractDataStore implements RefreshableDataStore {
+public final class NotUpdateableXmlDataStore extends AbstractRefreshableDataStore {
 
 	private static final Logger LOG = LoggerFactory.getLogger(NotUpdateableXmlDataStore.class);
 
@@ -73,7 +73,7 @@ public class NotUpdateableXmlDataStore extends AbstractDataStore implements Refr
 	 * {@link DataStore#DEFAULT_DATA_URL} (in XML format).
 	 */
 	public NotUpdateableXmlDataStore() {
-		super(DEFAULT_DATA_READER, DATA_URL, VERSION_URL, DEFAULT_CHARSET);
+		super(DEFAULT_DATA_READER, DATA_URL, VERSION_URL, DEFAULT_CHARSET, new TestXmlDataStore());
 	}
 
 	@Override
@@ -82,14 +82,19 @@ public class NotUpdateableXmlDataStore extends AbstractDataStore implements Refr
 	}
 
 	@Override
+	public DataStore getFallback() {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
 	public URL getVersionUrl() {
 		return VERSION_URL_UNREACHABLE;
 	}
 
 	@Override
-	public synchronized void refresh() {
-		// access the resource protected by this lock
-		setData(getDataReader().read(getDataUrl(), getCharset()));
+	public void refresh() {
+		// bypass non-blocking behavior
+		getUpdateOperation().call();
 	}
 
 }

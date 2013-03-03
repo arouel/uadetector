@@ -15,9 +15,6 @@
  ******************************************************************************/
 package net.sf.uadetector.datastore;
 
-import net.sf.uadetector.internal.data.Data;
-import net.sf.uadetector.internal.data.DataBlueprint;
-
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -28,7 +25,7 @@ public class OnlineXmlDataStoreTest {
 		// create fallback data store
 		TestXmlDataStore fallbackDataStore = new TestXmlDataStore();
 
-		final OnlineXmlDataStore store = new OnlineXmlDataStore(fallbackDataStore.getData());
+		final OnlineXmlDataStore store = new OnlineXmlDataStore(fallbackDataStore);
 		Assert.assertTrue(!store.getData().getVersion().isEmpty());
 		Assert.assertNotNull(store.getDataReader());
 		Assert.assertNotNull(store.getDataUrl());
@@ -38,10 +35,11 @@ public class OnlineXmlDataStoreTest {
 
 	@Test
 	public void readData_failsAndReturnsFallbackData() {
-		final String version = "fallback-data-version";
-		final Data fallback = DataBlueprint.buildEmptyTestData(version);
-		final OnlineXmlDataStore store = new OnlineXmlDataStore(fallback);
-		Assert.assertFalse(store.getData().getVersion().equals(version));
+		// create fallback data store
+		TestXmlDataStore fallbackDataStore = new TestXmlDataStore();
+
+		final OnlineXmlDataStore store = new OnlineXmlDataStore(fallbackDataStore);
+		Assert.assertEquals(fallbackDataStore.getData().getVersion(), store.getData().getVersion());
 		Assert.assertNotNull(store.getDataReader());
 		Assert.assertNotNull(store.getDataUrl());
 		Assert.assertNotNull(store.getVersionUrl().toExternalForm());

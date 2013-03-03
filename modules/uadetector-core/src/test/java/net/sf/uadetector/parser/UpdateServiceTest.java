@@ -19,12 +19,13 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.Charset;
 
+import net.sf.uadetector.datareader.DataReader;
 import net.sf.uadetector.datareader.XmlDataReader;
-import net.sf.uadetector.datastore.AbstractDataStore;
+import net.sf.uadetector.datastore.AbstractRefreshableDataStore;
 import net.sf.uadetector.datastore.DataStore;
 import net.sf.uadetector.datastore.NotUpdateableXmlDataStore;
-import net.sf.uadetector.datastore.RefreshableDataStore;
 import net.sf.uadetector.datastore.TestXmlDataStore;
+import net.sf.uadetector.internal.data.Data;
 import net.sf.uadetector.internal.data.DataBlueprint;
 
 import org.junit.Assert;
@@ -32,15 +33,42 @@ import org.junit.Test;
 
 public class UpdateServiceTest {
 
-	private static class TestEmptyDataStore extends AbstractDataStore implements RefreshableDataStore {
+	private static class TestEmptyDataStore extends AbstractRefreshableDataStore {
 
 		protected TestEmptyDataStore() {
-			super(DataBlueprint.buildEmptyTestData(), new XmlDataReader(), DATA_URL, VERSION_URL, CHARSET);
+			super(new XmlDataReader(), DATA_URL, VERSION_URL, CHARSET, new DataStore() {
+
+				@Override
+				public URL getVersionUrl() {
+					return VERSION_URL;
+				}
+
+				@Override
+				public URL getDataUrl() {
+					return DATA_URL;
+				}
+
+				@Override
+				public DataReader getDataReader() {
+					return new XmlDataReader();
+				}
+
+				@Override
+				public Data getData() {
+					return DataBlueprint.buildEmptyTestData();
+				}
+
+				@Override
+				public Charset getCharset() {
+					return CHARSET;
+				}
+			});
 		}
 
 		@Override
 		public void refresh() {
-			setData(getDataReader().read(getDataUrl(), getCharset()));
+			// bypass non-blocking behavior
+			getUpdateOperation().call();
 		}
 	}
 

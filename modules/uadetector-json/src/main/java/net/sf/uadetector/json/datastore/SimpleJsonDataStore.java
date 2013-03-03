@@ -6,7 +6,6 @@ import net.sf.qualitycheck.Check;
 import net.sf.uadetector.datareader.DataReader;
 import net.sf.uadetector.datastore.AbstractDataStore;
 import net.sf.uadetector.datastore.DataStore;
-import net.sf.uadetector.internal.data.Data;
 import net.sf.uadetector.json.datareader.JsonDataReader;
 
 /**
@@ -37,21 +36,6 @@ public final class SimpleJsonDataStore extends AbstractDataStore implements Data
 	 */
 	public SimpleJsonDataStore(final URL dataUrl, final URL versionUrl) {
 		super(DEFAULT_DATA_READER, Check.notNull(dataUrl), Check.notNull(versionUrl), DEFAULT_CHARSET);
-	}
-
-	/**
-	 * Constructs an {@code SimpleJsonDataStore} by reading <em>UAS data</em> by the specified default URL
-	 * {@link DataStore#DEFAULT_DATA_URL} (in JSON format).
-	 * 
-	 * @param dataUrl
-	 *            URL to <em>UAS data</em>
-	 * @param versionUrl
-	 *            URL to version information about the given <em>UAS data</em>
-	 * @param fallback
-	 *            <em>UAS data</em> as fallback in case the data on the specified resource can not be read correctly
-	 */
-	public SimpleJsonDataStore(final URL dataUrl, final URL versionUrl, final Data fallback) {
-		super(DEFAULT_DATA_READER, Check.notNull(dataUrl), Check.notNull(versionUrl), DEFAULT_CHARSET, Check.notNull(fallback));
 	}
 
 }

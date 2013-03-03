@@ -24,7 +24,6 @@ import java.util.TreeMap;
 import net.sf.uadetector.datareader.DataReader;
 import net.sf.uadetector.datareader.XmlDataReader;
 import net.sf.uadetector.internal.data.Data;
-import net.sf.uadetector.internal.data.DataBlueprint;
 import net.sf.uadetector.internal.data.domain.Browser;
 import net.sf.uadetector.internal.data.domain.BrowserPattern;
 import net.sf.uadetector.internal.data.domain.OperatingSystem;
@@ -112,62 +111,34 @@ public class AbstractDataStoreTest1 {
 
 	@Test(expected = IllegalArgumentException.class)
 	public void readData_charset_null() {
-		AbstractDataStore.readData(new XmlDataReader(), DATA_URL, null, Data.EMPTY);
+		AbstractDataStore.readData(new XmlDataReader(), DATA_URL, null);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void readData_dataUrl_null() {
-		AbstractDataStore.readData(new XmlDataReader(), null, CHARSET, Data.EMPTY);
+		AbstractDataStore.readData(new XmlDataReader(), null, CHARSET);
 	}
 
 	@Test
-	public void readData_failsAndReturnsFallbackData() {
-		final String version = "fallback-data-version";
-		final Data data = AbstractDataStore.readData(new XmlDataReader(), UNREACHABLE_URL, CHARSET,
-				DataBlueprint.buildEmptyTestData(version));
-		Assert.assertEquals(version, data.getVersion());
-	}
-
-	@Test(expected = IllegalArgumentException.class)
-	public void readData_fallback_null() {
-		AbstractDataStore.readData(new XmlDataReader(), DATA_URL, CHARSET, null);
+	public void readData_failsAndReturnsEMPTY() {
+		final Data data = AbstractDataStore.readData(new XmlDataReader(), UNREACHABLE_URL, CHARSET);
+		Assert.assertEquals(Data.EMPTY, data);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void readData_reader_null() {
-		AbstractDataStore.readData(null, DATA_URL, CHARSET, Data.EMPTY);
+		AbstractDataStore.readData(null, DATA_URL, CHARSET);
 	}
 
 	@Test
 	public void readData_successful() {
-		final String version = "fallback-data-version";
-		final Data data = AbstractDataStore.readData(new XmlDataReader(), DATA_URL, CHARSET, DataBlueprint.buildEmptyTestData(version));
-		Assert.assertFalse(version.equals(data.getVersion()));
+		final Data data = AbstractDataStore.readData(new XmlDataReader(), DATA_URL, CHARSET);
+		Assert.assertEquals("20120817-01", data.getVersion());
 	}
 
 	@Test(expected = IllegalStateException.class)
 	public void setData_EMPTY() {
 		new TestDataStore(Data.EMPTY, new XmlDataReader(), CHARSET, DATA_URL, VERSION_URL);
-	}
-
-	@Test(expected = IllegalArgumentException.class)
-	public void setData_null() {
-		final Data data = DataBlueprint.buildEmptyTestData();
-		final DataReader reader = new XmlDataReader();
-		final TestDataStore store = new TestDataStore(data, reader, CHARSET, DATA_URL, VERSION_URL);
-		store.setData(null);
-	}
-
-	@Test
-	public void setData_successful() {
-		final Data data = DataBlueprint.buildEmptyTestData();
-		final DataReader reader = new XmlDataReader();
-		final TestDataStore store = new TestDataStore(data, reader, CHARSET, DATA_URL, VERSION_URL);
-
-		final Data data2 = new Data(new HashSet<Browser>(), new HashSet<OperatingSystem>(), new HashSet<Robot>(0),
-				new TreeMap<BrowserPattern, Browser>(), new TreeMap<OperatingSystemPattern, OperatingSystem>(), "test-version");
-		store.setData(data2);
-		Assert.assertSame(data2, store.getData());
 	}
 
 }

@@ -17,8 +17,6 @@ package net.sf.uadetector.datastore;
 
 import java.net.URL;
 
-import net.sf.uadetector.internal.data.Data;
-import net.sf.uadetector.internal.data.DataBlueprint;
 import net.sf.uadetector.internal.util.UrlUtil;
 
 import org.junit.Assert;
@@ -50,15 +48,9 @@ public class SimpleXmlDataStoreTest {
 		Assert.assertNotNull(store.getVersionUrl());
 	}
 
-	@Test
-	public void readData_failsAndReturnsFallbackData() {
-		final String version = "fallback-data-version";
-		final Data fallback = DataBlueprint.buildEmptyTestData(version);
-		final SimpleXmlDataStore store = new SimpleXmlDataStore(UNREACHABLE_URL, UNREACHABLE_URL, fallback);
-		Assert.assertEquals(store.getData().getVersion(), version);
-		Assert.assertNotNull(store.getDataReader());
-		Assert.assertNotNull(store.getDataUrl());
-		Assert.assertNotNull(store.getVersionUrl());
+	@Test(expected = IllegalStateException.class)
+	public void readData_fails() {
+		new SimpleXmlDataStore(UNREACHABLE_URL, UNREACHABLE_URL);
 	}
 
 }

@@ -78,7 +78,7 @@ public class CachingXmlDataStoreTest2 {
 		final File cache = folder.newFile();
 
 		// create fallback data store
-		TestXmlDataStore fallbackDataStore = new TestXmlDataStore();
+		final TestXmlDataStore fallbackDataStore = new TestXmlDataStore();
 
 		// create caching data store without a cache file
 		final CachingXmlDataStore store1 = CachingXmlDataStore.createCachingXmlDataStore(cache, DATA_URL_OLDER, VERSION_URL_OLDER, CHARSET,

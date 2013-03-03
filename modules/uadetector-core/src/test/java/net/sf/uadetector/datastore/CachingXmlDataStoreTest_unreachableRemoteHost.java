@@ -68,7 +68,7 @@ public class CachingXmlDataStoreTest_unreachableRemoteHost {
 		final File cache = folder.newFile();
 
 		// create fallback data store
-		TestXmlDataStore fallback = new TestXmlDataStore();
+		final TestXmlDataStore fallback = new TestXmlDataStore();
 
 		// create caching data store without a cache file
 		final long startTime = System.currentTimeMillis();
@@ -92,12 +92,29 @@ public class CachingXmlDataStoreTest_unreachableRemoteHost {
 	}
 
 	@Test
+	public void loadingOfUnreachableRemoteData_checkToBeFast() throws IOException, InterruptedException {
+		// setup a temporary file
+		final File cache = folder.newFile();
+
+		// create fallback data store
+		final TestXmlDataStore fallback = new TestXmlDataStore();
+
+		// create caching data store without a cache file
+		final long startTime = System.currentTimeMillis();
+		final CachingXmlDataStore store = CachingXmlDataStore.createCachingXmlDataStore(cache, UNREACHABLE_URL, UNREACHABLE_URL, CHARSET,
+				fallback);
+		Assert.assertEquals(fallback.getData().getVersion(), store.getData().getVersion());
+		final long duration = System.currentTimeMillis() - startTime;
+		Assert.assertTrue("loading unreachable remote data takes too long", duration < 1000);
+	}
+
+	@Test
 	public void loadingOfUnreachableRemoteData_useFallback() throws IOException, InterruptedException {
 		// setup a temporary file
 		final File cache = folder.newFile();
 
 		// create fallback data store
-		TestXmlDataStore fallback = new TestXmlDataStore();
+		final TestXmlDataStore fallback = new TestXmlDataStore();
 
 		// create caching data store without a cache file
 		final CachingXmlDataStore store = CachingXmlDataStore.createCachingXmlDataStore(cache, UNREACHABLE_URL, UNREACHABLE_URL, CHARSET,
@@ -107,7 +124,7 @@ public class CachingXmlDataStoreTest_unreachableRemoteHost {
 		final UpdatingUserAgentStringParserImpl parser = new UpdatingUserAgentStringParserImpl(store);
 		parser.parse("test");
 
-		String newerVersionOfFallback = UrlUtil.read(TestXmlDataStore.VERSION_URL_NEWER, TestXmlDataStore.DEFAULT_CHARSET);
+		final String newerVersionOfFallback = UrlUtil.read(TestXmlDataStore.VERSION_URL_NEWER, DataStore.DEFAULT_CHARSET);
 		final long lookupStartTime = System.currentTimeMillis();
 		do {
 			Thread.sleep(1000l);
@@ -115,23 +132,6 @@ public class CachingXmlDataStoreTest_unreachableRemoteHost {
 
 		Assert.assertEquals(newerVersionOfFallback, store.getData().getVersion());
 		Assert.assertTrue(readFile(cache).contains(newerVersionOfFallback));
-	}
-
-	@Test
-	public void loadingOfUnreachableRemoteData_checkToBeFast() throws IOException, InterruptedException {
-		// setup a temporary file
-		final File cache = folder.newFile();
-
-		// create fallback data store
-		TestXmlDataStore fallback = new TestXmlDataStore();
-
-		// create caching data store without a cache file
-		final long startTime = System.currentTimeMillis();
-		final CachingXmlDataStore store = CachingXmlDataStore.createCachingXmlDataStore(cache, UNREACHABLE_URL, UNREACHABLE_URL, CHARSET,
-				fallback);
-		Assert.assertEquals(fallback.getData().getVersion(), store.getData().getVersion());
-		final long duration = System.currentTimeMillis() - startTime;
-		Assert.assertTrue("loading unreachable remote data takes too long", duration < 1000);
 	}
 
 }

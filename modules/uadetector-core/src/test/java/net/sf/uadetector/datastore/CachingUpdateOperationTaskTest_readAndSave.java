@@ -14,7 +14,7 @@ import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
 @RunWith(PowerMockRunner.class)
-@PrepareForTest({ FileOutputStream.class, CachingUpdateOperationTask.class })
+@PrepareForTest({ FileOutputStream.class, UpdateOperationWithCacheFileTask.class })
 public class CachingUpdateOperationTaskTest_readAndSave {
 
 	/**
@@ -33,7 +33,7 @@ public class CachingUpdateOperationTaskTest_readAndSave {
 		temp.deleteOnExit();
 		PowerMock.expectNiceNew(FileOutputStream.class, EasyMock.anyObject(File.class)).andThrow(new IOException());
 		PowerMock.replayAll();
-		CachingUpdateOperationTask.readAndSave(DATA_URL, temp, CHARSET);
+		UpdateOperationWithCacheFileTask.readAndSave(DATA_URL, temp, CHARSET);
 		PowerMock.verifyAll();
 		temp.delete();
 	}

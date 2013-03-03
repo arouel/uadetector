@@ -165,7 +165,7 @@ public final class CachingXmlDataStore extends AbstractRefreshableDataStore {
 
 		final CachingXmlDataStore store = new CachingXmlDataStore(data, reader, dataUrl, versionUrl, charset, cacheFile, fallback);
 		// update the cache file (non-blocking in background)
-		//store.refresh();
+		// store.refresh();
 		return store;
 	}
 
@@ -253,7 +253,7 @@ public final class CachingXmlDataStore extends AbstractRefreshableDataStore {
 	private CachingXmlDataStore(final Data data, final DataReader reader, final URL dataUrl, final URL versionUrl, final Charset charset,
 			final File cacheFile, final DataStore fallback) {
 		super(reader, dataUrl, versionUrl, charset, fallback);
-		setUpdateOperation(new CachingUpdateOperationTask(this, cacheFile));
+		setUpdateOperation(new UpdateOperationWithCacheFileTask(this, cacheFile));
 	}
 
 }

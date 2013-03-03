@@ -23,7 +23,7 @@ public class OnlineXmlDataStoreTest {
 	@Test
 	public void construct_successful() {
 		// create fallback data store
-		TestXmlDataStore fallbackDataStore = new TestXmlDataStore();
+		final TestXmlDataStore fallbackDataStore = new TestXmlDataStore();
 
 		final OnlineXmlDataStore store = new OnlineXmlDataStore(fallbackDataStore);
 		Assert.assertTrue(!store.getData().getVersion().isEmpty());
@@ -36,7 +36,7 @@ public class OnlineXmlDataStoreTest {
 	@Test
 	public void readData_failsAndReturnsFallbackData() {
 		// create fallback data store
-		TestXmlDataStore fallbackDataStore = new TestXmlDataStore();
+		final TestXmlDataStore fallbackDataStore = new TestXmlDataStore();
 
 		final OnlineXmlDataStore store = new OnlineXmlDataStore(fallbackDataStore);
 		Assert.assertEquals(fallbackDataStore.getData().getVersion(), store.getData().getVersion());

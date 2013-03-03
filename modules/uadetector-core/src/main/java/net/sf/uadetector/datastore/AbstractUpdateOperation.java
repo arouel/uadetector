@@ -137,16 +137,12 @@ abstract class AbstractUpdateOperation implements UpdateOperation {
 			version = retrieveRemoteVersion(store.getVersionUrl(), store.getCharset());
 		} catch (final IOException e) {
 			LOG.info(MSG_NO_UPDATE_CHECK_POSSIBLE);
-			if (LOG.isDebugEnabled()) {
-				LOG.debug(String.format(MSG_NO_UPDATE_CHECK_POSSIBLE__DEBUG, e.getClass().getName(), e.getLocalizedMessage()));
-			}
+			LOG.debug(String.format(MSG_NO_UPDATE_CHECK_POSSIBLE__DEBUG, e.getClass().getName(), e.getLocalizedMessage()));
 		}
 		if (version.compareTo(getCurrentVersion()) > 0) {
-			if (LOG.isDebugEnabled()) {
-				LOG.debug(String.format(MSG_UPDATE_AVAILABLE, getCurrentVersion(), version));
-			}
+			LOG.debug(String.format(MSG_UPDATE_AVAILABLE, getCurrentVersion(), version));
 			result = true;
-		} else if (LOG.isDebugEnabled()) {
+		} else {
 			LOG.debug(String.format(MSG_NO_UPDATE_AVAILABLE, getCurrentVersion()));
 		}
 		lastUpdateCheck = System.currentTimeMillis();

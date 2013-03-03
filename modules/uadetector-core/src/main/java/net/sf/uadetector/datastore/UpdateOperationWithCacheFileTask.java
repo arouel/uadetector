@@ -14,12 +14,12 @@ import net.sf.uadetector.internal.util.UrlUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-final class CachingUpdateOperationTask extends AbstractUpdateOperation {
+final class UpdateOperationWithCacheFileTask extends AbstractUpdateOperation {
 
 	/**
 	 * Corresponding default logger of this class
 	 */
-	private static final Logger LOG = LoggerFactory.getLogger(CachingUpdateOperationTask.class);
+	private static final Logger LOG = LoggerFactory.getLogger(UpdateOperationWithCacheFileTask.class);
 
 	/**
 	 * Message for the log when issues occur during reading of or writing to the cache file.
@@ -180,7 +180,7 @@ final class CachingUpdateOperationTask extends AbstractUpdateOperation {
 	 */
 	private final AbstractRefreshableDataStore store;
 
-	public CachingUpdateOperationTask(final AbstractRefreshableDataStore dataStore, final File cacheFile) {
+	public UpdateOperationWithCacheFileTask(final AbstractRefreshableDataStore dataStore, final File cacheFile) {
 		super(dataStore);
 		if (dataStore == null) {
 			throw new IllegalArgumentException("Argument 'dataStore' must not be null.");

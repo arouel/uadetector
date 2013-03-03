@@ -30,6 +30,12 @@ public class AbstractRefreshableDataStoreTest {
 		Assert.assertSame(data2, store.getData());
 	}
 
+	@Test(expected = IllegalStateException.class)
+	public void setData_withEmptyData() {
+		final TestXmlDataStore store = new TestXmlDataStore();
+		store.setData(Data.EMPTY);
+	}
+
 	@Test(expected = IllegalArgumentException.class)
 	public void setUpdateOperation_null() {
 		final TestXmlDataStore store = new TestXmlDataStore();

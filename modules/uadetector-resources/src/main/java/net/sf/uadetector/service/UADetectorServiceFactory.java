@@ -120,6 +120,16 @@ public final class UADetectorServiceFactory {
 	 * 
 	 * @return an user agent string parser with updating service
 	 */
+	public static UserAgentStringParser getCachingAndUpdatingParser() {
+		return CachingAndUpdatingParserHolder.INSTANCE;
+	}
+
+	/**
+	 * This method has been renamed in {@link UADetectorServiceFactory#getCachingAndUpdatingParser()}.
+	 * 
+	 * @return an user agent string parser with updating service
+	 */
+	@Deprecated
 	public static UserAgentStringParser getCachingAndUpdatingParserHolder() {
 		return CachingAndUpdatingParserHolder.INSTANCE;
 	}

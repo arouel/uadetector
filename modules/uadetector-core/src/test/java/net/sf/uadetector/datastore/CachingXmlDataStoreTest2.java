@@ -77,8 +77,12 @@ public class CachingXmlDataStoreTest2 {
 		// setup a temporary file
 		final File cache = folder.newFile();
 
+		// create fallback data store
+		TestXmlDataStore fallbackDataStore = new TestXmlDataStore();
+
 		// create caching data store without a cache file
-		final CachingXmlDataStore store1 = CachingXmlDataStore.createCachingXmlDataStore(cache, DATA_URL_OLDER, VERSION_URL_OLDER, CHARSET);
+		final CachingXmlDataStore store1 = CachingXmlDataStore.createCachingXmlDataStore(cache, DATA_URL_OLDER, VERSION_URL_OLDER, CHARSET,
+				fallbackDataStore.getData());
 		final UpdatingUserAgentStringParserImpl parser1 = new UpdatingUserAgentStringParserImpl(store1);
 		parser1.parse("test");
 		final String readIn1 = readFile(cache);
@@ -86,7 +90,8 @@ public class CachingXmlDataStoreTest2 {
 		Assert.assertTrue(readIn1.length() >= 721915);
 
 		// create caching data store with filled cache and available update
-		final CachingXmlDataStore store2 = CachingXmlDataStore.createCachingXmlDataStore(cache, DATA_URL_NEWER, VERSION_URL_NEWER, CHARSET);
+		final CachingXmlDataStore store2 = CachingXmlDataStore.createCachingXmlDataStore(cache, DATA_URL_NEWER, VERSION_URL_NEWER, CHARSET,
+				fallbackDataStore.getData());
 		final UpdatingUserAgentStringParserImpl parser2 = new UpdatingUserAgentStringParserImpl(store2);
 		parser2.parse("test");
 		final String readIn2 = readFile(cache);
@@ -94,7 +99,8 @@ public class CachingXmlDataStoreTest2 {
 		Assert.assertTrue(readIn2.length() >= 721915);
 
 		// create caching data store with filled cache and without an available update
-		final CachingXmlDataStore store = CachingXmlDataStore.createCachingXmlDataStore(cache, DATA_URL_NEWER, VERSION_URL_NEWER, CHARSET);
+		final CachingXmlDataStore store = CachingXmlDataStore.createCachingXmlDataStore(cache, DATA_URL_NEWER, VERSION_URL_NEWER, CHARSET,
+				fallbackDataStore.getData());
 		final UpdatingUserAgentStringParserImpl parser = new UpdatingUserAgentStringParserImpl(store);
 		parser.parse("test");
 

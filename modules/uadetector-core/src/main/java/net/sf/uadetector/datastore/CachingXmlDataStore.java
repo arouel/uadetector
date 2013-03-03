@@ -136,32 +136,6 @@ public final class CachingXmlDataStore extends AbstractDataStore implements Refr
 	 *            URL to version information about the given <em>UAS data</em>
 	 * @param charset
 	 *            the character set in which the data should be read
-	 * @return new instance of {@link CachingXmlDataStore}
-	 * @throws IllegalArgumentException
-	 *             if one of the given arguments is {@code null}
-	 * @throws IllegalArgumentException
-	 *             if the given cache file can not be read
-	 * @throws IllegalStateException
-	 *             if no URL can be resolved to the given given file
-	 */
-	public static CachingXmlDataStore createCachingXmlDataStore(final File cacheFile, final URL dataUrl, final URL versionUrl,
-			final Charset charset) {
-		return createCachingXmlDataStore(cacheFile, dataUrl, versionUrl, charset, Data.EMPTY);
-	}
-
-	/**
-	 * Constructs a new instance of {@code CachingXmlDataStore} with the given arguments. The given {@code cacheFile}
-	 * can be empty or filled with previously cached data in XML format. The file must be writable otherwise an
-	 * exception will be thrown.
-	 * 
-	 * @param cacheFile
-	 *            file with cached <em>UAS data</em> in XML format or empty file
-	 * @param dataUrl
-	 *            URL to <em>UAS data</em>
-	 * @param versionUrl
-	 *            URL to version information about the given <em>UAS data</em>
-	 * @param charset
-	 *            the character set in which the data should be read
 	 * @param fallback
 	 *            <em>UAS data</em> as fallback in case the data on the specified resource can not be read correctly
 	 * @return new instance of {@link CachingXmlDataStore}
@@ -208,28 +182,6 @@ public final class CachingXmlDataStore extends AbstractDataStore implements Refr
 		final CachingXmlDataStore store = new CachingXmlDataStore(data, reader, dataUrl, versionUrl, charset, cacheFile);
 		store.refresh(); // update the cache file
 		return store;
-	}
-
-	/**
-	 * Constructs a new instance of {@code CachingXmlDataStore} with the given arguments. The file used to cache the
-	 * read in <em>UAS data</em> will be called from {@link CachingXmlDataStore#findOrCreateCacheFile()}. This file may
-	 * be empty or filled with previously cached data in XML format. The file must be writable otherwise an exception
-	 * will be thrown.
-	 * 
-	 * @param dataUrl
-	 *            URL to <em>UAS data</em>
-	 * @param versionUrl
-	 *            URL to version information about the given <em>UAS data</em>
-	 * @param charset
-	 *            the character set in which the data should be read
-	 * @return new instance of {@link CachingXmlDataStore}
-	 * @throws IllegalArgumentException
-	 *             if one of the given arguments is {@code null}
-	 * @throws IllegalArgumentException
-	 *             if the given cache file can not be read
-	 */
-	public static CachingXmlDataStore createCachingXmlDataStore(final URL dataUrl, final URL versionUrl, final Charset charset) {
-		return createCachingXmlDataStore(findOrCreateCacheFile(), dataUrl, versionUrl, charset);
 	}
 
 	/**

@@ -25,7 +25,10 @@ public class OnlineXmlDataStoreTest {
 
 	@Test
 	public void construct_successful() {
-		final OnlineXmlDataStore store = new OnlineXmlDataStore();
+		// create fallback data store
+		TestXmlDataStore fallbackDataStore = new TestXmlDataStore();
+
+		final OnlineXmlDataStore store = new OnlineXmlDataStore(fallbackDataStore.getData());
 		Assert.assertTrue(!store.getData().getVersion().isEmpty());
 		Assert.assertNotNull(store.getDataReader());
 		Assert.assertNotNull(store.getDataUrl());

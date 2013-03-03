@@ -81,14 +81,6 @@ public class CachingXmlDataStoreTest {
 		CachingXmlDataStore.createCachingXmlDataStore(folder.newFile("uas_test.xml"), null, VERSION_URL, CHARSET, Data.EMPTY);
 	}
 
-	@Test
-	public void createCachingXmlDataStore_defaultCacheFile_successful() throws IOException, InterruptedException {
-		// create caching data store
-		final CachingXmlDataStore store = CachingXmlDataStore.createCachingXmlDataStore(DATA_URL, VERSION_URL, CHARSET);
-		final UpdatingUserAgentStringParserImpl parser = new UpdatingUserAgentStringParserImpl(store);
-		parser.parse("test");
-	}
-
 	@Test(expected = IllegalArgumentException.class)
 	public void createCachingXmlDataStore_fallback1_null() throws IOException {
 		CachingXmlDataStore.createCachingXmlDataStore(folder.newFile("uas_test.xml"), DATA_URL, VERSION_URL, CHARSET, null);
@@ -102,11 +94,6 @@ public class CachingXmlDataStoreTest {
 	@Test(expected = IllegalArgumentException.class)
 	public void createCachingXmlDataStore_fallback3_null() throws IOException {
 		CachingXmlDataStore.createCachingXmlDataStore(folder.newFile("uas_test.xml"), null);
-	}
-
-	@Test(expected = IllegalArgumentException.class)
-	public void createCachingXmlDataStore_file1_null() throws IOException {
-		CachingXmlDataStore.createCachingXmlDataStore(null, DATA_URL, VERSION_URL, CHARSET);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
@@ -138,8 +125,12 @@ public class CachingXmlDataStoreTest {
 		final File cache = folder.newFile("uas_temp.xml");
 		Assert.assertEquals("", readFile(cache));
 
+		// create fallback data store
+		TestXmlDataStore fallbackDataStore = new TestXmlDataStore();
+
 		// create caching data store
-		final CachingXmlDataStore store = CachingXmlDataStore.createCachingXmlDataStore(cache, DATA_URL, VERSION_URL, CHARSET);
+		final CachingXmlDataStore store = CachingXmlDataStore.createCachingXmlDataStore(cache, DATA_URL, VERSION_URL, CHARSET,
+				fallbackDataStore.getData());
 		final UpdatingUserAgentStringParserImpl parser = new UpdatingUserAgentStringParserImpl(store);
 
 		Assert.assertTrue(readFile(cache).length() >= 721915);

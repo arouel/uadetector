@@ -11,9 +11,6 @@ final class UpdateOperationTask extends AbstractUpdateOperation {
 
 	public UpdateOperationTask(final AbstractRefreshableDataStore dataStore) {
 		super(dataStore);
-		if (dataStore == null) {
-			throw new IllegalArgumentException("Argument 'dataStore' must not be null.");
-		}
 		store = dataStore;
 	}
 

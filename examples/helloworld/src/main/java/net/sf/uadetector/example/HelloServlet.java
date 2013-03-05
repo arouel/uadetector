@@ -23,9 +23,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import net.sf.uadetector.UADetectorServiceFactory;
 import net.sf.uadetector.UserAgent;
 import net.sf.uadetector.UserAgentStringParser;
+import net.sf.uadetector.service.UADetectorServiceFactory;
 
 public class HelloServlet extends HttpServlet {
 

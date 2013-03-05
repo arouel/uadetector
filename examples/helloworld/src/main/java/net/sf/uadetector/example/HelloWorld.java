@@ -22,9 +22,9 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import net.sf.uadetector.UADetectorServiceFactory;
 import net.sf.uadetector.UserAgent;
 import net.sf.uadetector.UserAgentStringParser;
+import net.sf.uadetector.service.UADetectorServiceFactory;
 
 import org.eclipse.jetty.server.Request;
 import org.eclipse.jetty.server.Server;

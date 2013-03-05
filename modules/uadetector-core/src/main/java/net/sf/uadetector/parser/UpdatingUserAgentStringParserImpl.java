@@ -44,7 +44,7 @@ public final class UpdatingUserAgentStringParserImpl extends UserAgentStringPars
 	/**
 	 * {@link ScheduledExecutorService} to schedule commands to update the UAS data in defined intervals
 	 */
-	private final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1, new DaemonThreadFactory());
+	private final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1, new DaemonThreadFactory("update-scheduler"));
 
 	/**
 	 * Constructs an instance of {@code OnlineUserAgentStringParser}. During construction new UAS data will be queried

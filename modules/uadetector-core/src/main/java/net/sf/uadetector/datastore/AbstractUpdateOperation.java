@@ -86,7 +86,7 @@ abstract class AbstractUpdateOperation implements UpdateOperation {
 	/**
 	 * {@link ExecutorService} to run the update operation of the UAS data in background
 	 */
-	private final ExecutorService executorService = Executors.newSingleThreadExecutor(new DaemonThreadFactory());
+	private final ExecutorService executorService = Executors.newSingleThreadExecutor(new DaemonThreadFactory("update-operation"));
 
 	/**
 	 * Time of last update check in milliseconds

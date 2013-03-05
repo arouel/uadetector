@@ -13,6 +13,7 @@
 		<java.version>1.6</java.version>
 
 		<!-- dependencies versions -->
+		<logback.version>1.0.9</logback.version>
 		<slf4j.version>1.7.2</slf4j.version>
 		<uadetector-resources.version>2013.02</uadetector-resources.version>
 
@@ -30,9 +31,9 @@
 			<version>${uadetector-resources.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-log4j12</artifactId>
-			<version>${slf4j.version}</version>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+			<version>${logback.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.eclipse.jetty</groupId>

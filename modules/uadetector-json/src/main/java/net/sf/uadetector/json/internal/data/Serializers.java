@@ -24,7 +24,7 @@ import net.sf.uadetector.json.internal.data.serializer.RobotSerializer;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-public class Serializers extends AbstractDeserializer<Data> {
+public final class Serializers extends AbstractDeserializer<Data> {
 
 	public static Serialization serialize(final Data data, final EnumSet<SerializationOption> options) {
 		final Serializers serializers = new Serializers(options);

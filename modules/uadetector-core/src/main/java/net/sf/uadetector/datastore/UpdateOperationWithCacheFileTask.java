@@ -37,10 +37,10 @@ final class UpdateOperationWithCacheFileTask extends AbstractUpdateOperation {
 	 * 
 	 * @param file
 	 *            file in which the entire contents from the given URL can be saved
-	 * @throws IOException
-	 *             if an I/O error occurs
+	 * @throws IllegalStateException
+	 *             if the file can not be deleted
 	 */
-	protected static File createTemporaryFile(final File file) {// throws IOException {
+	protected static File createTemporaryFile(final File file) {
 		if (file == null) {
 			throw new IllegalArgumentException("Argument 'file' must not be null.");
 		}

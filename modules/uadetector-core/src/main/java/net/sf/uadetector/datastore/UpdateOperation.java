@@ -10,7 +10,7 @@ public interface UpdateOperation extends Runnable {
 	/**
 	 * The default interval to check for updates is once per day
 	 */
-	long DEFAULT_UPDATE_INTERVAL = 1000 * 60 * 60 * 24; // 1 day
+	long DEFAULT_UPDATE_INTERVAL = 1000 * 60 * 60 * 24;
 
 	/**
 	 * This function checks whether updated UAS data are available and updates silently the data in a

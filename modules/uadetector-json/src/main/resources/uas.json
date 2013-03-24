@@ -1,6 +1,6 @@
 {
   "format": "1.0",
-  "version": "20130301-01",
+  "version": "20130321-01",
   "operating-system-patterns": [
     {
       "regex": {
@@ -2662,6 +2662,13 @@
     {
       "regex": {
         "flags": "is",
+        "pattern": "^Mozilla.*AppleWebKit.*Chrome.*OPR\\/([0-9\\.]+)"
+      },
+      "hash": "db07c1c97950af8649f55311fa1787ec6721a24d1f627b773b921a2f56a5c7f4"
+    },
+    {
+      "regex": {
+        "flags": "is",
         "pattern": "^Mozilla.*Android .*Ninesky\\-android\\-mobile\\/([0-9\\.]+)"
       },
       "hash": "8f1297870fd44948ce891135d649fce6106ec15fea78c9cf1ff6442f6db067b5"
@@ -2805,6 +2812,13 @@
         "pattern": "^MQQBrowser\\/(Mini[0-9\\.]+)"
       },
       "hash": "d76b7779468b748be5032caa348d689ec45d50c951d9b2e77febb06136f29092"
+    },
+    {
+      "regex": {
+        "flags": "is",
+        "pattern": "^Mozilla.*ASUS Transformer Pad.*AppleWebKit.*Chrome\\/([0-9\\.]+).*Safari"
+      },
+      "hash": "92fedbbd8a9aa418544d15d0527ec308b7033075c8ca3b9a4407921e545c3073"
     },
     {
       "regex": {
@@ -3204,6 +3218,13 @@
         "pattern": "Mozilla.*AppleWebKit.*zBrowser\\/NigtSky-([0-9\\.]+)"
       },
       "hash": "1b4d555371017d60a9c355a31d016904ce7383b87475b644308fd30d2de135a1"
+    },
+    {
+      "regex": {
+        "flags": "is",
+        "pattern": "^Mozilla.*AppleWebKit.*YRCWeblink\\/([0-9\\.]+).*Safari"
+      },
+      "hash": "f37155a65aad08169ccac5117ee7dadf755afb069af920437d424d09388494dc"
     },
     {
       "regex": {
@@ -6127,6 +6148,13 @@
     {
       "regex": {
         "flags": "is",
+        "pattern": "mozilla.*applewebkit.*\\/[0-9a-z\\+\\-\\.]+.*version\\/([0-9a-z\\+\\-\\.]+).*safari\\/[0-9a-z\\+\\-\\.]+.*"
+      },
+      "hash": "144e9b60f0c3a3515307185a16f13cdaf794a4afbe3c7fe87fd890eb98a09a66"
+    },
+    {
+      "regex": {
+        "flags": "is",
         "pattern": "mozilla.*applewebkit.*\\/[0-9a-z\\+\\-\\.]+.*safari\\/([0-9a-z\\+\\-\\.]+).*"
       },
       "hash": "bd8c8f244bd332f164a985fa31110bc2fceb994a6d310520fb45b1a947dd8686"
@@ -6647,13 +6675,14 @@
       "icon": "safari.png",
       "info-url": "/list-of-ua/browser-detail?browser\u003dSafari",
       "browser-pattern-hashs": [
+        "144e9b60f0c3a3515307185a16f13cdaf794a4afbe3c7fe87fd890eb98a09a66",
         "bd8c8f244bd332f164a985fa31110bc2fceb994a6d310520fb45b1a947dd8686"
       ],
       "producer": "Apple Inc.",
       "producer-url": "http://www.apple.com/",
       "browser-type-hash": "d31de1a5c5c8ba2a210a167cf0d0dc2425c57ea7525f4b73a4b7ab934af79dfc",
       "url": "http://en.wikipedia.org/wiki/Safari_%28web_browser%29",
-      "hash": "9421ab5cc5646a25234c86fa9fb3f5a1dfee55bf2c74b33da90545cc9b97d439"
+      "hash": "c0219375a68819bce3796044876d4ebd9f4bee112d5517a0b84b901836fb71a6"
     },
     {
       "family": "DILLO",
@@ -10001,6 +10030,7 @@
       "icon": "opera.png",
       "info-url": "/list-of-ua/browser-detail?browser\u003dOpera Mobile",
       "browser-pattern-hashs": [
+        "db07c1c97950af8649f55311fa1787ec6721a24d1f627b773b921a2f56a5c7f4",
         "fe0f1e61e67ddff518e6ba9e6f172d716742b3cd6fd5e674b6cb32be5f2ceaf6",
         "2355c0968c6ef274a36e172a056a936c038b41c476678cd828bffd3e28bdc4b1",
         "3cca8cd2e6779f0f5e74f28bebfc9c0db7167d0224bbda73dede78cf012b9640",
@@ -10012,7 +10042,7 @@
       "producer-url": "http://www.opera.com/",
       "browser-type-hash": "d4f1118eb3ace8c9d67d4b72ff39234cd4f3ab260ef6f422ce24b7a1b10d14ee",
       "url": "http://www.opera.com/mobile/",
-      "hash": "bb0a44888050ea19a0932e44b01814cff73f4e703cec9bfdfb6cf8f7b3dbc283"
+      "hash": "08702e367c3294e2f79e620814dbc51c5747bf6117580d31c0e21cb62a5e414d"
     },
     {
       "family": "KIRIX_STRATA",
@@ -11347,13 +11377,14 @@
         "9fe644457932c7f9737fa5f98b5ae2127403871bcea5289a35cb3401cefccb52",
         "f82e45e5829519169925bb9e26e803646a70a27c00f4e5d6db3af4425c6ac330",
         "12a874989a709270a59ebef5e3c9d55057099e284adeeab88da5200c8600f90b",
-        "c17afe298b8bfbce0ded30eae21e73c597bc8f5b223e2ee30908acfc89d7ab88"
+        "c17afe298b8bfbce0ded30eae21e73c597bc8f5b223e2ee30908acfc89d7ab88",
+        "92fedbbd8a9aa418544d15d0527ec308b7033075c8ca3b9a4407921e545c3073"
       ],
       "producer": "Google Inc.",
       "producer-url": "http://www.google.com/",
       "browser-type-hash": "d4f1118eb3ace8c9d67d4b72ff39234cd4f3ab260ef6f422ce24b7a1b10d14ee",
       "url": "http://www.google.com/intl/en/chrome/browser/mobile/",
-      "hash": "f17bf41a513cd289453cf9646c5d726b225aff43a77dbdfc044806e7493f19eb"
+      "hash": "16d8417b47c48989a90debb44a25649eaefeb0c86a958eb9a6986f1e1ec793ed"
     },
     {
       "family": "WINAMP_FOR_ANDROID",
@@ -11924,6 +11955,19 @@
       "browser-type-hash": "d4f1118eb3ace8c9d67d4b72ff39234cd4f3ab260ef6f422ce24b7a1b10d14ee",
       "url": "http://gl.access-company.com/files/legacy/products/nflife/app_browser2.html",
       "hash": "cabb852be8c46c8b18485ab09707b371a47b856a640a469a43101ae3ba52d167"
+    },
+    {
+      "family": "UNKNOWN",
+      "icon": "yrc_webling.png",
+      "info-url": "/list-of-ua/browser-detail?browser\u003dYRC Weblink",
+      "browser-pattern-hashs": [
+        "f37155a65aad08169ccac5117ee7dadf755afb069af920437d424d09388494dc"
+      ],
+      "producer": "YRC Group Inc.",
+      "producer-url": "http://www.justyrc.com/",
+      "browser-type-hash": "d31de1a5c5c8ba2a210a167cf0d0dc2425c57ea7525f4b73a4b7ab934af79dfc",
+      "url": "http://weblink.justyrc.com/",
+      "hash": "50f9168132decaef27d5c767ac89bff4d6fb96e87e4fd0c230028cd8c6334df4"
     }
   ],
   "robots": [
@@ -23487,6 +23531,50 @@
       "url": "",
       "user-agent-string": "ExB Language Crawler 2.1.2 (+http://www.exb.de/crawler)",
       "hash": "14f377e0af35bb39771d86b75cbc36e53e77bd650e406d1ab20e729d65819636"
+    },
+    {
+      "family": "UNKNOWN",
+      "icon": "bot.png",
+      "info-url": "/list-of-ua/bot-detail?bot\u003dNLNZ_IAHarvester2013",
+      "name": "NLNZ_IAHarvester2013",
+      "producer": "National Library of New Zealand",
+      "producer-url": "http://natlib.govt.nz/",
+      "url": "",
+      "user-agent-string": "Mozilla/5.0 (compatible; NLNZ_IAHarvester2013 +http://natlib.govt.nz/about-us/current-initiatives/web-harvest-2013)",
+      "hash": "3bad5e2de1d8047a8f3cb52b1158712041eb9bcafebf27e8b4da10a008ea1961"
+    },
+    {
+      "family": "ZOOKABOT",
+      "icon": "bot_Zookabot.png",
+      "info-url": "/list-of-ua/bot-detail?bot\u003dZookabot",
+      "name": "Zookabot/2.5",
+      "producer": "Hwacha ApS",
+      "producer-url": "http://hwacha.dk/",
+      "url": "",
+      "user-agent-string": "Zookabot/2.5;++http://zookabot.com",
+      "hash": "4f279c71a2ff984dd5d7932437ec04953c3fcfc6ac2d148e8f0f587d60e950bd"
+    },
+    {
+      "family": "UNKNOWN",
+      "icon": "bot.png",
+      "info-url": "/list-of-ua/bot-detail?bot\u003dZumBot",
+      "name": "ZumBot/1.0",
+      "producer": "ZUMinternet Corp",
+      "producer-url": "http://www.zuminternet.com/",
+      "url": "",
+      "user-agent-string": "Mozilla/5.0 (compatible; ZumBot/1.0; http://help.zum.com/inquiry)",
+      "hash": "a311baa257219468fb660572f45e21fddd2bfdd10364dd178ad3d74978fc68f9"
+    },
+    {
+      "family": "UNKNOWN",
+      "icon": "bot.png",
+      "info-url": "/list-of-ua/bot-detail?bot\u003d4seohuntBot",
+      "name": "4seohuntBot",
+      "producer": "4seohunt.biz",
+      "producer-url": "http://4seohunt.biz/",
+      "url": "",
+      "user-agent-string": "Mozilla/5.0 (compatible; 4SeoHuntBot; +http://4seohunt.biz/about.html)",
+      "hash": "c84b23a169de5aa8fa278ddecf81995408a7f05c0d4b23893f5e189053afd8d3"
     }
   ]
 }

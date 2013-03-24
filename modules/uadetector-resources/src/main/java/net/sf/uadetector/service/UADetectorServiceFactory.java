@@ -108,6 +108,11 @@ public final class UADetectorServiceFactory {
 	 * when this method is called the first time.
 	 * 
 	 * <p>
+	 * The update of the data store runs as background task. With this feature we try to reduce the initialization time
+	 * of this <code>UserAgentStringParser</code>, because a network connection is involved and the remote system can be
+	 * not available or slow.
+	 * 
+	 * <p>
 	 * The static class definition {@link CachingAndUpdatingParserHolder} within this factory class is <em>not</em>
 	 * initialized until the JVM determines that {@code CachingAndUpdatingParserHolder} must be executed. The static
 	 * class {@code CachingAndUpdatingParserHolder} is only executed when the static method
@@ -142,6 +147,11 @@ public final class UADetectorServiceFactory {
 	 * At initialization time the returned parser will be loaded with the <em>UAS data</em> of this module (the shipped
 	 * one within the <em>uadetector-resources</em> JAR) and tries to update it. The initialization is started only when
 	 * this method is called the first time.
+	 * 
+	 * <p>
+	 * The update of the data store runs as background task. With this feature we try to reduce the initialization time
+	 * of this <code>UserAgentStringParser</code>, because a network connection is involved and the remote system can be
+	 * not available or slow.
 	 * 
 	 * <p>
 	 * The static class definition {@link OnlineUpdatingParserHolder} within this factory class is <em>not</em>

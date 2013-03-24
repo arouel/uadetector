@@ -7,7 +7,6 @@ import java.net.URL;
 
 import net.sf.qualitycheck.Check;
 import net.sf.uadetector.datastore.DataStore;
-import net.sf.uadetector.datastore.OnlineXmlDataStore;
 import net.sf.uadetector.datastore.SimpleXmlDataStore;
 import net.sf.uadetector.json.internal.data.JsonConverter;
 import net.sf.uadetector.json.internal.data.JsonConverter.SerializationOption;
@@ -58,8 +57,8 @@ public class JsonDataCreator {
 
 	private static final DataStore determineDataStore(final String argument) {
 		final boolean isOffline = argument != null && argument.toLowerCase().equals("offline");
-		DataStore fallback = new SimpleXmlDataStore(DATA_URL, VERSION_URL);
-		return isOffline ? fallback : new OnlineXmlDataStore(fallback);
+		final DataStore fallback = new SimpleXmlDataStore(DATA_URL, VERSION_URL);
+		return isOffline ? fallback : new OnlineXmlDataStore();
 	}
 
 	public static void main(final String[] args) {

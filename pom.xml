@@ -101,10 +101,10 @@
 		<commons-logging.version>1.1.1</commons-logging.version>
 		<easymock.version>3.1</easymock.version>
 		<junit.version>4.11</junit.version>
-		<logback.version>1.0.9</logback.version>
+		<logback.version>1.0.10</logback.version>
 		<powermock.version>1.4.12</powermock.version>
 		<quality-check.version>1.0</quality-check.version>
-		<slf4j.version>1.7.2</slf4j.version>
+		<slf4j.version>1.7.4</slf4j.version>
 
 	</properties>
 

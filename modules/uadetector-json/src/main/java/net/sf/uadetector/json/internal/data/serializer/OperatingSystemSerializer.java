@@ -26,7 +26,7 @@ import com.google.gson.JsonSerializer;
 
 public final class OperatingSystemSerializer implements JsonSerializer<OperatingSystem> {
 
-	private static final List<String> createHashCodeList(final SortedSet<OperatingSystemPattern> patterns) {
+	private static List<String> createHashCodeList(final SortedSet<OperatingSystemPattern> patterns) {
 		final List<String> hashs = new ArrayList<String>(patterns.size());
 		for (final OperatingSystemPattern pattern : patterns) {
 			hashs.add(HashCodeGenerator.generate(pattern));

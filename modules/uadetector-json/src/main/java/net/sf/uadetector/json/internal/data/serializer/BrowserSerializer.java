@@ -27,7 +27,7 @@ import com.google.gson.JsonSerializer;
 
 public final class BrowserSerializer implements JsonSerializer<Browser> {
 
-	static final List<String> createHashCodeList(final SortedSet<BrowserPattern> patterns) {
+	static List<String> createHashCodeList(final SortedSet<BrowserPattern> patterns) {
 		final List<String> hashs = new ArrayList<String>(patterns.size());
 		for (final BrowserPattern pattern : patterns) {
 			hashs.add(HashCodeGenerator.generate(pattern));

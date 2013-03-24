@@ -20,7 +20,6 @@ import java.nio.charset.Charset;
 
 import net.sf.qualitycheck.Check;
 import net.sf.uadetector.datareader.DataReader;
-import net.sf.uadetector.exception.CanNotOpenStreamException;
 import net.sf.uadetector.internal.data.Data;
 import net.sf.uadetector.internal.util.UrlUtil;
 import net.sf.uadetector.json.internal.data.JsonConverter;
@@ -80,7 +79,7 @@ public final class JsonDataReader implements DataReader {
 	 * @return read User-Agent data as {@code Data} instance
 	 * @throws IllegalArgumentException
 	 *             if any of the given arguments is {@code null}
-	 * @throws CanNotOpenStreamException
+	 * @throws net.sf.uadetector.exception.CanNotOpenStreamException
 	 *             if no stream to the given {@code URL} can be established
 	 */
 	@Override

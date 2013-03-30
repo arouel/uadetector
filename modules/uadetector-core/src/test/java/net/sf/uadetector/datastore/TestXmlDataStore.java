@@ -29,24 +29,34 @@ import net.sf.uadetector.datareader.XmlDataReader;
 public class TestXmlDataStore extends AbstractRefreshableDataStore {
 
 	/**
-	 * The default data reader to read in <em>UAS data</em> in XML format
-	 */
-	private static final DataReader DEFAULT_DATA_READER = new XmlDataReader();
-
-	/**
 	 * URL to retrieve the UAS data as XML
 	 */
 	public static final URL DATA_URL = TestXmlDataStore.class.getClassLoader().getResource("uas_older.xml");
 
 	/**
-	 * URL to retrieve the version information of the UAS data
-	 */
-	public static final URL VERSION_URL = TestXmlDataStore.class.getClassLoader().getResource("uas_older.version");
-
-	/**
 	 * URL to retrieve a newer UAS data as XML
 	 */
 	public static final URL DATA_URL_NEWER = TestXmlDataStore.class.getClassLoader().getResource("uas_newer.xml");
+
+	/**
+	 * The default data reader to read in <em>UAS data</em> in XML format
+	 */
+	private static final DataReader DEFAULT_DATA_READER = new XmlDataReader();
+
+	/**
+	 * Version of the newer UAS data
+	 */
+	public static final String VERSION_NEWER = "20120822-01";
+
+	/**
+	 * Version of the older UAS data
+	 */
+	public static final String VERSION_OLDER = "20120817-01";
+
+	/**
+	 * URL to retrieve the version information of the UAS data
+	 */
+	public static final URL VERSION_URL = TestXmlDataStore.class.getClassLoader().getResource("uas_older.version");
 
 	/**
 	 * URL to retrieve a newer version of the UAS data

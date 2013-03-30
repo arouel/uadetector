@@ -113,13 +113,19 @@ final class UpdateOperationWithCacheFileTask extends AbstractUpdateOperation {
 
 		final boolean isEqual = url.toExternalForm().equals(UrlUtil.toUrl(file).toExternalForm());
 		if (!isEqual) {
+
+			// check if the data can be read in successfully
+			final String data = UrlUtil.read(url, charset);
+			if (Data.EMPTY.equals(store.getDataReader().read(data))) {
+				throw new IllegalStateException("The read in content can not be transformed to an instance of 'Data'.");
+			}
+
 			FileOutputStream outputStream = null;
 			try {
 				final File tempFile = createTemporaryFile(file);
 
 				// write data to temporary file
 				outputStream = new FileOutputStream(tempFile);
-				final String data = UrlUtil.read(url, charset);
 				outputStream.write(data.getBytes(charset));
 
 				// delete the original file

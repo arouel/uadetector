@@ -150,7 +150,7 @@ public final class XmlDataReader implements DataReader {
 			throw new IllegalArgumentException("Argument 'data' must not be null.");
 		}
 
-		return readXml(new ByteArrayInputStream(data.getBytes()), DataStore.DEFAULT_CHARSET);
+		return readXml(new ByteArrayInputStream(data.getBytes(DataStore.DEFAULT_CHARSET)), DataStore.DEFAULT_CHARSET);
 	}
 
 	/**

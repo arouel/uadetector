@@ -16,6 +16,8 @@
 package net.sf.uadetector.datareader;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.lang.reflect.Constructor;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -28,12 +30,14 @@ import net.sf.uadetector.internal.data.Data;
 import org.junit.Assert;
 import org.junit.Test;
 
+import com.google.common.io.CharStreams;
+
 public class XmlDataReaderTest {
 
 	/**
-	 * URL to retrieve the UAS data as XML
+	 * The character set to read UAS data
 	 */
-	private static final URL DATA_URL = XmlDataReaderTest.class.getClassLoader().getResource("uas_older.xml");
+	private static final Charset CHARSET = DataStore.DEFAULT_CHARSET;
 
 	/**
 	 * URL to retrieve the UAS data as XML (corrupted)
@@ -41,14 +45,14 @@ public class XmlDataReaderTest {
 	private static final URL CORRUPTED_DATA_URL = XmlDataReaderTest.class.getClassLoader().getResource("uas_corrupted.xml");
 
 	/**
+	 * URL to retrieve the UAS data as XML
+	 */
+	private static final URL DATA_URL = XmlDataReaderTest.class.getClassLoader().getResource("uas_older.xml");
+
+	/**
 	 * URL to retrieve the UAS data as XML (dirty)
 	 */
 	private static final URL DIRTY_DATA_URL = XmlDataReaderTest.class.getClassLoader().getResource("uas_dirty.xml");
-
-	/**
-	 * The character set to read UAS data
-	 */
-	private static final Charset CHARSET = DataStore.DEFAULT_CHARSET;
 
 	@Test
 	public void giveMeCoverageForMyPrivateConstructor() throws Exception {
@@ -64,6 +68,11 @@ public class XmlDataReaderTest {
 	}
 
 	@Test(expected = IllegalArgumentException.class)
+	public void read_data_isNull() throws MalformedURLException {
+		new XmlDataReader().read(null);
+	}
+
+	@Test(expected = IllegalArgumentException.class)
 	public void read_url_null() {
 		new XmlDataReader().read((URL) null, CHARSET);
 	}
@@ -74,35 +83,64 @@ public class XmlDataReaderTest {
 		Assert.assertSame(Data.EMPTY, data);
 	}
 
-	@Test(expected = IllegalArgumentException.class)
-	public void readXml_charset_null() throws IOException {
-		XmlDataReader.readXml(new URL("http://localhost/"), null);
-	}
-
-	@Test(expected = IllegalArgumentException.class)
-	public void readXml_url_null() throws IOException {
-		XmlDataReader.readXml(null, CHARSET);
+	@Test
+	public void readByString_parsingOfCorruptedData() throws IOException {
+		final XmlDataReader reader = new XmlDataReader();
+		final String dataAsString = CharStreams.toString(new InputStreamReader(CORRUPTED_DATA_URL.openStream()));
+		final Data data = reader.read(dataAsString);
+		Assert.assertSame(Data.EMPTY, data);
 	}
 
 	@Test
-	public void testParsingOfCorruptedData() throws IOException {
+	public void readByString_parsingOfDirtyData() throws IOException {
+		final XmlDataReader reader = new XmlDataReader();
+		final String dataAsString = CharStreams.toString(new InputStreamReader(DIRTY_DATA_URL.openStream()));
+		final Data data = reader.read(dataAsString);
+		Assert.assertSame(Data.EMPTY, data);
+	}
+
+	@Test
+	public void readByString_parsingSuccessful() throws IOException {
+		final XmlDataReader reader = new XmlDataReader();
+		final String dataAsString = CharStreams.toString(new InputStreamReader(DATA_URL.openStream()));
+		final Data data = reader.read(dataAsString);
+		Assert.assertEquals("20120817-01", data.getVersion());
+	}
+
+	@Test
+	public void readByUrl_parsingOfCorruptedData() throws IOException {
 		final XmlDataReader reader = new XmlDataReader();
 		final Data data = reader.read(CORRUPTED_DATA_URL, CHARSET);
 		Assert.assertSame(Data.EMPTY, data);
 	}
 
 	@Test
-	public void testParsingOfDirtyData() throws IOException {
+	public void readByUrl_parsingOfDirtyData() throws IOException {
 		final XmlDataReader reader = new XmlDataReader();
 		final Data data = reader.read(DIRTY_DATA_URL, CHARSET);
 		Assert.assertSame(Data.EMPTY, data);
 	}
 
 	@Test
-	public void testVersionParsing() throws IOException {
+	public void readByUrl_versionParsing() throws IOException {
 		final DataReader reader = new XmlDataReader();
 		final Data data = reader.read(DATA_URL, CHARSET);
 		Assert.assertEquals("20120817-01", data.getVersion());
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void readXml_charset_null() throws IOException {
+		XmlDataReader.readXml(new InputStream() {
+			@Override
+			public int read() throws IOException {
+				return 0;
+			}
+		}, null);
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void readXml_url_null() throws IOException {
+		XmlDataReader.readXml(null, CHARSET);
 	}
 
 }

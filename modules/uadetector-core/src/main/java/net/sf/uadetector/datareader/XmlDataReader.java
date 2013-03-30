@@ -15,6 +15,7 @@
  ******************************************************************************/
 package net.sf.uadetector.datareader;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
@@ -24,6 +25,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
+import net.sf.uadetector.datastore.DataStore;
 import net.sf.uadetector.exception.CanNotOpenStreamException;
 import net.sf.uadetector.internal.data.Data;
 import net.sf.uadetector.internal.data.Data.Builder;
@@ -82,8 +84,8 @@ public final class XmlDataReader implements DataReader {
 	 * written to a log. The termination of the read operation will not lead to a program termination and in this case
 	 * this method returns {@link Data#EMPTY}.
 	 * 
-	 * @param url
-	 *            {@code URL} to User-Agent informations
+	 * @param inputStream
+	 *            an input stream for reading <em>UAS data</em>
 	 * @param charset
 	 *            the character set in which the data should be read
 	 * @return read in <em>UAS data</em> as {@code Data} instance
@@ -92,9 +94,9 @@ public final class XmlDataReader implements DataReader {
 	 * @throws net.sf.uadetector.exception.CanNotOpenStreamException
 	 *             if no stream to the given {@code URL} can be established
 	 */
-	protected static Data readXml(final URL url, final Charset charset) {
-		if (url == null) {
-			throw new IllegalArgumentException("Argument 'url' must not be null.");
+	protected static Data readXml(final InputStream inputStream, final Charset charset) {
+		if (inputStream == null) {
+			throw new IllegalArgumentException("Argument 'inputStream' must not be null.");
 		}
 		if (charset == null) {
 			throw new IllegalArgumentException("Argument 'charset' must not be null.");
@@ -103,7 +105,7 @@ public final class XmlDataReader implements DataReader {
 		final Builder builder = new Builder();
 		boolean hasErrors = false;
 		try {
-			XmlParser.parse(UrlUtil.open(url), builder);
+			XmlParser.parse(inputStream, builder);
 		} catch (final ParserConfigurationException e) {
 			hasErrors = true;
 			LOG.warn(e.getLocalizedMessage());
@@ -113,18 +115,42 @@ public final class XmlDataReader implements DataReader {
 		} catch (final IOException e) {
 			hasErrors = true;
 			LOG.warn(e.getLocalizedMessage());
-		} catch (final CanNotOpenStreamException e) {
-			hasErrors = true;
-			LOG.warn(e.getLocalizedMessage());
 		} catch (final IllegalStateException e) {
 			hasErrors = true;
 			LOG.warn(e.getLocalizedMessage());
 		} catch (final Exception e) {
 			hasErrors = true;
 			LOG.warn(e.getLocalizedMessage(), e);
+		} finally {
+			if (inputStream != null) {
+				try {
+					inputStream.close();
+				} catch (final IOException e) {
+					LOG.warn(e.getLocalizedMessage(), e);
+				}
+			}
 		}
 
 		return hasErrors ? Data.EMPTY : builder.build();
+	}
+
+	/**
+	 * Reads the <em>UAS data</em> in XML format from the given string.
+	 * 
+	 * @param data
+	 *            <em>UAS data</em> as string
+	 * @return read in User-Agent data as {@code Data} instance otherwise {@link Data#EMPTY}
+	 * 
+	 * @throws IllegalArgumentException
+	 *             if any of the given argument is {@code null}
+	 */
+	@Override
+	public Data read(final String data) {
+		if (data == null) {
+			throw new IllegalArgumentException("Argument 'data' must not be null.");
+		}
+
+		return readXml(new ByteArrayInputStream(data.getBytes()), DataStore.DEFAULT_CHARSET);
 	}
 
 	/**
@@ -134,11 +160,10 @@ public final class XmlDataReader implements DataReader {
 	 *            {@code URL} to User-Agent informations
 	 * @param charset
 	 *            the character set in which the data should be read
-	 * @return read User-Agent data as {@code Data} instance
+	 * @return read in User-Agent data as {@code Data} instance otherwise {@link Data#EMPTY}
+	 * 
 	 * @throws IllegalArgumentException
 	 *             if any of the given arguments is {@code null}
-	 * @throws CanNotOpenStreamException
-	 *             if no stream to the given {@code URL} can be established
 	 */
 	@Override
 	public Data read(final URL url, final Charset charset) {
@@ -149,7 +174,14 @@ public final class XmlDataReader implements DataReader {
 			throw new IllegalArgumentException("Argument 'charset' must not be null.");
 		}
 
-		return readXml(url, charset);
+		Data data = Data.EMPTY;
+		try {
+			data = readXml(UrlUtil.open(url), charset);
+		} catch (final CanNotOpenStreamException e) {
+			LOG.warn(e.getLocalizedMessage());
+		}
+
+		return data;
 	}
 
 }

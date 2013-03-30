@@ -44,8 +44,8 @@ public final class JsonDataReader implements DataReader {
 	private static final Logger LOG = LoggerFactory.getLogger(JsonDataReader.class);
 
 	/**
-	 * Reads the <em>UAS data</em> in JSON format based on the given URL.<br>
-	 * <br>
+	 * Reads the <em>UAS data</em> in JSON format via the given URL.
+	 * <p>
 	 * When during the reading errors occur which lead to a termination of the read operation, the information will be
 	 * written to a log. The termination of the read operation will not lead to a program termination and in this case
 	 * this method returns {@link Data#EMPTY}.
@@ -54,39 +54,49 @@ public final class JsonDataReader implements DataReader {
 	 *            {@code URL} to User-Agent informations
 	 * @param charset
 	 *            the character set in which the data should be read
-	 * @return read in <em>UAS data</em> as {@code Data} instance
-	 * @throws net.sf.uadetector.exception.CanNotOpenStreamException
-	 *             if no stream to the given {@code URL} can be established
-	 */
-	protected static Data readJson(final URL url, final Charset charset) {
-		Data data = Data.EMPTY;
-		try {
-			final String json = UrlUtil.read(url, charset);
-			data = JsonConverter.deserialize(json, SerializationOption.HASH_VALIDATING).getData();
-		} catch (final Exception e) {
-			LOG.warn(e.getLocalizedMessage(), e);
-		}
-		return data;
-	}
-
-	/**
-	 * Reads the <em>UAS data</em> in JSON format via the given URL.
+	 * @return read in content as {@code Data} instance otherwise {@link Data#EMPTY}
 	 * 
-	 * @param url
-	 *            {@code URL} to User-Agent informations
-	 * @param charset
-	 *            the character set in which the data should be read
-	 * @return read User-Agent data as {@code Data} instance
 	 * @throws IllegalArgumentException
 	 *             if any of the given arguments is {@code null}
-	 * @throws net.sf.uadetector.exception.CanNotOpenStreamException
-	 *             if no stream to the given {@code URL} can be established
 	 */
 	@Override
 	public Data read(final URL url, final Charset charset) {
 		Check.notNull(url, "url");
 		Check.notNull(charset, "charset");
-		return readJson(url, charset);
+		try {
+			final String json = UrlUtil.read(url, charset);
+			return read(json);
+		} catch (Exception e) {
+			LOG.warn(e.getLocalizedMessage(), e);
+		}
+		return Data.EMPTY;
+	}
+
+	/**
+	 * Reads the <em>UAS data</em> in JSON format from the given string.
+	 * <p>
+	 * When during the reading errors occur which lead to a termination of the read operation, the information will be
+	 * written to a log. The termination of the read operation will not lead to a program termination and in this case
+	 * this method returns {@link Data#EMPTY}.
+	 * 
+	 * @param url
+	 *            {@code URL} to User-Agent informations
+	 * @param charset
+	 *            the character set in which the data should be read
+	 * @return read in content as {@code Data} instance otherwise {@link Data#EMPTY}
+	 * 
+	 * @throws IllegalArgumentException
+	 *             if any of the given arguments is {@code null}
+	 */
+	@Override
+	public Data read(final String json) {
+		Check.notNull(json, "json");
+		try {
+			return JsonConverter.deserialize(json, SerializationOption.HASH_VALIDATING).getData();
+		} catch (Exception e) {
+			LOG.warn(e.getLocalizedMessage(), e);
+		}
+		return Data.EMPTY;
 	}
 
 }

@@ -91,27 +91,25 @@ final class UpdateOperationWithCacheFileTask extends AbstractUpdateOperation {
 	/**
 	 * Reads the content from the given {@link URL} and saves it to the passed file.
 	 * 
-	 * @param url
-	 *            URL to <em>UAS data</em>
 	 * @param file
 	 *            file in which the entire contents from the given URL can be saved
-	 * @param charset
-	 *            the character set in which the data should be read
+	 * @param store
+	 *            a data store for <em>UAS data</em>
 	 * @throws IllegalArgumentException
 	 *             if any of the passed arguments is {@code null}
 	 * @throws IOException
 	 *             if an I/O error occurs
 	 */
-	protected static void readAndSave(final URL url, final File file, final Charset charset) throws IOException {
-		if (url == null) {
-			throw new IllegalArgumentException("Argument 'url' must not be null.");
-		}
+	protected static void readAndSave(final File file, final DataStore store) throws IOException {
 		if (file == null) {
 			throw new IllegalArgumentException("Argument 'file' must not be null.");
 		}
-		if (charset == null) {
-			throw new IllegalArgumentException("Argument 'charset' must not be null.");
+		if (store == null) {
+			throw new IllegalArgumentException("Argument 'store' must not be null.");
 		}
+
+		final URL url = store.getDataUrl();
+		final Charset charset = store.getCharset();
 
 		final boolean isEqual = url.toExternalForm().equals(UrlUtil.toUrl(file).toExternalForm());
 		if (!isEqual) {
@@ -204,7 +202,7 @@ final class UpdateOperationWithCacheFileTask extends AbstractUpdateOperation {
 	private void readDataIfNewerAvailable() {
 		try {
 			if (isUpdateAvailable() || isCacheFileEmpty()) {
-				readAndSave(store.getDataUrl(), cacheFile, store.getCharset());
+				readAndSave(cacheFile, store);
 				store.setData(store.getDataReader().read(cacheFile.toURI().toURL(), store.getCharset()));
 			}
 		} catch (final CanNotOpenStreamException e) {
@@ -226,7 +224,7 @@ final class UpdateOperationWithCacheFileTask extends AbstractUpdateOperation {
 		LOG.info("Reading fallback data...");
 		try {
 			if (isCacheFileEmpty()) {
-				readAndSave(store.getFallback().getDataUrl(), cacheFile, store.getFallback().getCharset());
+				readAndSave(cacheFile, store.getFallback());
 				final Data data = store.getDataReader().read(cacheFile.toURI().toURL(), store.getCharset());
 				if (data.getVersion().compareTo(store.getData().getVersion()) > 0) {
 					store.setData(data);

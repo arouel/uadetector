@@ -7,7 +7,11 @@ import java.net.URI;
 import java.net.URL;
 import java.nio.charset.Charset;
 
+import net.sf.uadetector.datareader.DataReader;
+import net.sf.uadetector.datareader.XmlDataReader;
+import net.sf.uadetector.internal.data.Data;
 import net.sf.uadetector.internal.util.FileUtil;
+import net.sf.uadetector.internal.util.UrlUtil;
 
 import org.easymock.EasyMock;
 import org.easymock.IMockBuilder;
@@ -17,16 +21,6 @@ import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 
 public class CachingUpdateOperationTaskTest {
-
-	/**
-	 * The character set to read UAS data
-	 */
-	private static final Charset CHARSET = DataStore.DEFAULT_CHARSET;
-
-	/**
-	 * URL to retrieve the UAS data as XML
-	 */
-	private static final URL DATA_URL = CachingUpdateOperationTaskTest.class.getClassLoader().getResource("uas_older.xml");
 
 	/**
 	 * Temporary folder to cache <em>UAS data</em> in a file. Created files in this folder are guaranteed to be deleted
@@ -97,18 +91,6 @@ public class CachingUpdateOperationTaskTest {
 		EasyMock.verify(fileMock);
 	}
 
-	@Test(expected = IllegalArgumentException.class)
-	public void readAndSave_charset_null() throws IOException {
-		final File cache = folder.newFile(); // cache file does not exist
-		UpdateOperationWithCacheFileTask.readAndSave(DATA_URL, cache, null);
-	}
-
-	@Test(expected = IllegalArgumentException.class)
-	public void readAndSave_dataUrl_null() throws IOException {
-		final File cache = folder.newFile(); // cache file does not exist
-		UpdateOperationWithCacheFileTask.readAndSave(null, cache, CHARSET);
-	}
-
 	@Test
 	public void readAndSave_deleteAndRenameTempFileTest() throws MalformedURLException, IOException {
 		final File cache = folder.newFile(); // cache file does not exist
@@ -117,17 +99,17 @@ public class CachingUpdateOperationTaskTest {
 		Assert.assertTrue(FileUtil.isEmpty(cache, DataStore.DEFAULT_CHARSET));
 
 		// file will be created
-		UpdateOperationWithCacheFileTask.readAndSave(DATA_URL, cache, CHARSET);
+		UpdateOperationWithCacheFileTask.readAndSave(cache, new TestXmlDataStore());
 		Assert.assertTrue(cache.length() >= 722015);
 
 		// file will be overwritten (delete and rename)
-		UpdateOperationWithCacheFileTask.readAndSave(DATA_URL, cache, CHARSET);
+		UpdateOperationWithCacheFileTask.readAndSave(cache, new TestXmlDataStore());
 		Assert.assertTrue(cache.length() >= 722015);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void readAndSave_file_null() throws IOException {
-		UpdateOperationWithCacheFileTask.readAndSave(DATA_URL, null, CHARSET);
+		UpdateOperationWithCacheFileTask.readAndSave(null, new TestXmlDataStore());
 	}
 
 	@Test
@@ -144,18 +126,54 @@ public class CachingUpdateOperationTaskTest {
 		Assert.assertTrue(FileUtil.isEmpty(fileMock, DataStore.DEFAULT_CHARSET));
 
 		// file will be created
-		UpdateOperationWithCacheFileTask.readAndSave(DATA_URL, fileMock, CHARSET);
+		UpdateOperationWithCacheFileTask.readAndSave(fileMock, new TestXmlDataStore());
 		Assert.assertTrue(fileMock.length() >= 722015);
 
 		// file will be overwritten (delete and rename)
-		UpdateOperationWithCacheFileTask.readAndSave(DATA_URL, fileMock, CHARSET);
+		UpdateOperationWithCacheFileTask.readAndSave(fileMock, new TestXmlDataStore());
 		Assert.assertTrue(fileMock.length() >= 722015);
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void readAndSave_store_null() throws IOException {
+		final File cache = folder.newFile(); // cache file does not exist
+		UpdateOperationWithCacheFileTask.readAndSave(cache, null);
 	}
 
 	@Test
 	public void readAndSave_urlAndFileAreSameResource() throws MalformedURLException, IOException {
 		final File resource = folder.newFile(); // cache file does not exist
-		UpdateOperationWithCacheFileTask.readAndSave(resource.toURI().toURL(), resource, CHARSET);
+		UpdateOperationWithCacheFileTask.readAndSave(resource, new DataStore() {
+
+			@Override
+			public Charset getCharset() {
+				return DEFAULT_CHARSET;
+			}
+
+			@Override
+			public Data getData() {
+				return Data.EMPTY;
+			}
+
+			@Override
+			public DataReader getDataReader() {
+				return new XmlDataReader();
+			}
+
+			@Override
+			public URL getDataUrl() {
+				try {
+					return resource.toURI().toURL();
+				} catch (final MalformedURLException e) {
+					throw new RuntimeException(e);
+				}
+			}
+
+			@Override
+			public URL getVersionUrl() {
+				return UrlUtil.build(DEFAULT_VERSION_URL);
+			}
+		});
 	}
 
 	@Test(expected = IllegalArgumentException.class)

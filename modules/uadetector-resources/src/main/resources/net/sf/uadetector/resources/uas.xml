@@ -3,7 +3,7 @@
 <uasdata>
 	<description>
 		<label>Data (format xml) for UASparser - http://user-agent-string.info/download/UASparser</label>
-		<version>20130321-01</version>
+		<version>20130329-01</version>
 		<checksum type="MD5">http://user-agent-string.info/rpc/get_data.php?format=xml&amp;md5=y</checksum>
 		<checksum type="SHA1">http://user-agent-string.info/rpc/get_data.php?format=xml&amp;sha1=y</checksum>
 	</description>
@@ -2648,6 +2648,26 @@
 				<url_company><![CDATA[http://www.fastsearch.com/]]></url_company>
 				<icon>bot.png</icon>
 				<bot_info_url>/list-of-ua/bot-detail?bot=FAST MetaWeb Crawler</bot_info_url>
+			</robot>
+			<robot>
+				<id>9020</id>
+				<useragent><![CDATA[fastbot crawler beta 2.0 (+http://www.fastbot.de)]]></useragent>
+				<family>fastbot crawler</family>
+				<name>fastbot crawler beta 2.0</name>
+				<company><![CDATA[http://www.pagedesign.de/]]></company>
+				<url_company><![CDATA[Pagedesign GmbH]]></url_company>
+				<icon>bot.png</icon>
+				<bot_info_url>/list-of-ua/bot-detail?bot=fastbot crawler</bot_info_url>
+			</robot>
+			<robot>
+				<id>9065</id>
+				<useragent><![CDATA[fastbot.de crawler 2.0 beta (http://www.fastbot.de)]]></useragent>
+				<family>fastbot crawler</family>
+				<name>fastbot.de crawler beta 2.0</name>
+				<company><![CDATA[http://www.pagedesign.de/]]></company>
+				<url_company><![CDATA[Pagedesign GmbH]]></url_company>
+				<icon>bot.png</icon>
+				<bot_info_url>/list-of-ua/bot-detail?bot=fastbot crawler</bot_info_url>
 			</robot>
 			<robot>
 				<id>4722</id>
@@ -6318,6 +6338,16 @@
 				<url_company><![CDATA[http://www.pingdom.com/]]></url_company>
 				<icon>bot_pingdomcom_bot.png</icon>
 				<bot_info_url>/list-of-ua/bot-detail?bot=pingdom.com_bot</bot_info_url>
+			</robot>
+			<robot>
+				<id>9116</id>
+				<useragent><![CDATA[Mozilla/5.0+(compatible;+PiplBot;++http://www.pipl.com/bot/)]]></useragent>
+				<family>PiplBot</family>
+				<name>PiplBot</name>
+				<company><![CDATA[pipl.com]]></company>
+				<url_company><![CDATA[http://pipl.com/]]></url_company>
+				<icon>bot.png</icon>
+				<bot_info_url>/list-of-ua/bot-detail?bot=PiplBot</bot_info_url>
 			</robot>
 			<robot>
 				<id>6978</id>

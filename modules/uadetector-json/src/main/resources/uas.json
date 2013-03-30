@@ -1,6 +1,6 @@
 {
   "format": "1.0",
-  "version": "20130321-01",
+  "version": "20130329-01",
   "operating-system-patterns": [
     {
       "regex": {
@@ -23575,6 +23575,39 @@
       "url": "",
       "user-agent-string": "Mozilla/5.0 (compatible; 4SeoHuntBot; +http://4seohunt.biz/about.html)",
       "hash": "c84b23a169de5aa8fa278ddecf81995408a7f05c0d4b23893f5e189053afd8d3"
+    },
+    {
+      "family": "UNKNOWN",
+      "icon": "bot.png",
+      "info-url": "/list-of-ua/bot-detail?bot\u003dfastbot crawler",
+      "name": "fastbot crawler beta 2.0",
+      "producer": "http://www.pagedesign.de/",
+      "producer-url": "Pagedesign GmbH",
+      "url": "",
+      "user-agent-string": "fastbot crawler beta 2.0 (+http://www.fastbot.de)",
+      "hash": "fd34c43e4ea6a3e4e8e56522c8d4e925dbb4efb26968cc63fce398ee5584fccf"
+    },
+    {
+      "family": "UNKNOWN",
+      "icon": "bot.png",
+      "info-url": "/list-of-ua/bot-detail?bot\u003dfastbot crawler",
+      "name": "fastbot.de crawler beta 2.0",
+      "producer": "http://www.pagedesign.de/",
+      "producer-url": "Pagedesign GmbH",
+      "url": "",
+      "user-agent-string": "fastbot.de crawler 2.0 beta (http://www.fastbot.de)",
+      "hash": "5b1db789d4c55f5f68942dfa4db074ab4f0de3080908fbff1bb94a3c7cd4ced9"
+    },
+    {
+      "family": "UNKNOWN",
+      "icon": "bot.png",
+      "info-url": "/list-of-ua/bot-detail?bot\u003dPiplBot",
+      "name": "PiplBot",
+      "producer": "pipl.com",
+      "producer-url": "http://pipl.com/",
+      "url": "",
+      "user-agent-string": "Mozilla/5.0+(compatible;+PiplBot;++http://www.pipl.com/bot/)",
+      "hash": "26f1dabbe8647676d2b1289f73a316408f552e870c38337d37a76db4e784fbbc"
     }
   ]
 }

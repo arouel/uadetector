@@ -6,11 +6,11 @@
 		<relativePath>../../</relativePath>
 		<groupId>net.sf.uadetector</groupId>
 		<artifactId>uadetector-parent</artifactId>
-		<version>0.2.10-SNAPSHOT</version>
+		<version>0.2.10</version>
 	</parent>
 
 	<artifactId>uadetector-json</artifactId>
-	<version>0.1.3-SNAPSHOT</version>
+	<version>0.1.3</version>
 	<name>UADetector :: JSON</name>
 	<description>This package contains functions to export and import the internal data as JSON.</description>
 	<inceptionYear>2012</inceptionYear>
@@ -26,7 +26,7 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<java.version>1.6</java.version>
-		<uadetector-core.version>0.9.3-SNAPSHOT</uadetector-core.version>
+		<uadetector-core.version>0.9.3</uadetector-core.version>
 	</properties>
 
 	<dependencies>

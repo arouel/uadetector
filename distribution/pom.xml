@@ -6,11 +6,11 @@
 		<relativePath>../</relativePath>
 		<groupId>net.sf.uadetector</groupId>
 		<artifactId>uadetector-parent</artifactId>
-		<version>0.2.10-SNAPSHOT</version>
+		<version>0.2.10</version>
 	</parent>
 
 	<artifactId>distribution</artifactId>
-	<version>2013.03-SNAPSHOT</version>
+	<version>2013.03</version>
 
 	<name>UADetector :: Distribution</name>
 	<description>This project is intended to create distributions of the UADetector multimodule project.</description>
@@ -24,12 +24,12 @@
 		<dependency>
 			<groupId>net.sf.uadetector</groupId>
 			<artifactId>uadetector-core</artifactId>
-			<version>0.9.3-SNAPSHOT</version>
+			<version>0.9.3</version>
 		</dependency>
 		<dependency>
 			<groupId>net.sf.uadetector</groupId>
 			<artifactId>uadetector-resources</artifactId>
-			<version>2013.03-SNAPSHOT</version>
+			<version>2013.03</version>
 		</dependency>
 	</dependencies>
 

@@ -122,12 +122,10 @@ public final class XmlDataReader implements DataReader {
 			hasErrors = true;
 			LOG.warn(e.getLocalizedMessage(), e);
 		} finally {
-			if (inputStream != null) {
-				try {
-					inputStream.close();
-				} catch (final IOException e) {
-					LOG.warn(e.getLocalizedMessage(), e);
-				}
+			try {
+				inputStream.close();
+			} catch (final IOException e) {
+				LOG.warn(e.getLocalizedMessage(), e);
 			}
 		}
 

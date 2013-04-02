@@ -16,7 +16,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 
-public class CachingXmlDataStoreTest2 {
+public class CachingXmlDataStoreTest_differentCacheFileAndUpdateStates {
 
 	/**
 	 * URL to retrieve the older UAS data as XML

@@ -29,11 +29,6 @@ public class CachingXmlDataStoreTest_loadingWrongContent {
 	private static final URL DATA_CONNECTION_ERROR_URL = TestXmlDataStore.class.getClassLoader().getResource("uas_connection_error.xml");
 
 	/**
-	 * URL to retrieve a newer UAS data as XML
-	 */
-	private static final URL DATA_NEWER_URL = TestXmlDataStore.class.getClassLoader().getResource("uas_newer.xml");
-
-	/**
 	 * URL to retrieve wrong content instead of UAS data as XML
 	 */
 	private static final URL VERSION_CONNECTION_ERROR_URL = TestXmlDataStore.class.getClassLoader().getResource(
@@ -64,7 +59,7 @@ public class CachingXmlDataStoreTest_loadingWrongContent {
 		assertEquals(TestXmlDataStore.VERSION_OLDER, store.getData().getVersion());
 
 		// check that cache file's content is still correctly filled
-		assertEquals(Files.toString(new File(DATA_NEWER_URL.toURI()), CHARSET), Files.toString(cache, CHARSET));
+		assertEquals(Files.toString(new File(TestXmlDataStore.DATA_URL_NEWER.toURI()), CHARSET), Files.toString(cache, CHARSET));
 
 		// try to update the content
 		store.refresh();
@@ -72,7 +67,36 @@ public class CachingXmlDataStoreTest_loadingWrongContent {
 
 		// test that no corrupt data will be saved into cache file
 		assertEquals(TestXmlDataStore.VERSION_NEWER, store.getData().getVersion());
-		assertEquals(Files.toString(new File(DATA_NEWER_URL.toURI()), CHARSET), Files.toString(cache, CHARSET));
+		assertEquals(Files.toString(new File(TestXmlDataStore.DATA_URL_NEWER.toURI()), CHARSET), Files.toString(cache, CHARSET));
+	}
+
+	@Test(expected = IllegalStateException.class)
+	public void loadCorruptedCacheFile_useRemoteData_overrideCacheFileWithWorkingData() throws IOException, InterruptedException,
+			URISyntaxException {
+		final File cache = folder.newFile();
+
+		// fill cache file with false content
+		Files.write(ByteStreams.toByteArray(DATA_CONNECTION_ERROR_URL.openStream()), cache);
+
+		// create working fallback data store
+		final DataStore fallback = new SimpleXmlDataStore(TestXmlDataStore.DATA_URL, TestXmlDataStore.VERSION_URL);
+
+		// create caching data store without a cache file
+		final CachingXmlDataStore store = CachingXmlDataStore.createCachingXmlDataStore(cache, TestXmlDataStore.DATA_URL_NEWER,
+				TestXmlDataStore.VERSION_URL_NEWER, CHARSET, fallback);
+
+		assertEquals(TestXmlDataStore.VERSION_OLDER, store.getData().getVersion());
+
+		// check that cache file's content is still correctly filled
+		assertEquals(Files.toString(new File(TestXmlDataStore.DATA_URL_NEWER.toURI()), CHARSET), Files.toString(cache, CHARSET));
+
+		// try to update the content
+		store.refresh();
+		Thread.sleep(1000L);
+
+		// test that no corrupt data will be saved into cache file
+		assertEquals(TestXmlDataStore.VERSION_NEWER, store.getData().getVersion());
+		assertEquals(Files.toString(new File(TestXmlDataStore.DATA_URL_NEWER.toURI()), CHARSET), Files.toString(cache, CHARSET));
 	}
 
 	@Test
@@ -98,7 +122,7 @@ public class CachingXmlDataStoreTest_loadingWrongContent {
 
 		// test that no corrupt data will be saved into cache file
 		assertEquals(TestXmlDataStore.VERSION_NEWER, store.getData().getVersion());
-		assertEquals(Files.toString(new File(DATA_NEWER_URL.toURI()), CHARSET), Files.toString(cache, CHARSET));
+		assertEquals(Files.toString(new File(TestXmlDataStore.DATA_URL_NEWER.toURI()), CHARSET), Files.toString(cache, CHARSET));
 	}
 
 	@Test
@@ -106,7 +130,7 @@ public class CachingXmlDataStoreTest_loadingWrongContent {
 		final File cache = folder.newFile();
 
 		// fill cache file with usable UAS data
-		Files.write(ByteStreams.toByteArray(DATA_NEWER_URL.openStream()), cache);
+		Files.write(ByteStreams.toByteArray(TestXmlDataStore.DATA_URL_NEWER.openStream()), cache);
 
 		// create working fallback data store
 		final TestXmlDataStore fallback = new TestXmlDataStore();
@@ -118,7 +142,7 @@ public class CachingXmlDataStoreTest_loadingWrongContent {
 		assertEquals(TestXmlDataStore.VERSION_NEWER, store.getData().getVersion());
 
 		// check that cache file's content is still correctly filled
-		assertEquals(Files.toString(new File(DATA_NEWER_URL.toURI()), CHARSET), Files.toString(cache, CHARSET));
+		assertEquals(Files.toString(new File(TestXmlDataStore.DATA_URL_NEWER.toURI()), CHARSET), Files.toString(cache, CHARSET));
 
 		// try to update the content
 		store.refresh();
@@ -126,7 +150,7 @@ public class CachingXmlDataStoreTest_loadingWrongContent {
 
 		// test that no corrupt data will be saved into cache file
 		assertEquals(TestXmlDataStore.VERSION_NEWER, store.getData().getVersion());
-		assertEquals(Files.toString(new File(DATA_NEWER_URL.toURI()), CHARSET), Files.toString(cache, CHARSET));
+		assertEquals(Files.toString(new File(TestXmlDataStore.DATA_URL_NEWER.toURI()), CHARSET), Files.toString(cache, CHARSET));
 	}
 
 }

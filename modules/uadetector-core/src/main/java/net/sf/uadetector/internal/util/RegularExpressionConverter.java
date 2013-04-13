@@ -285,7 +285,7 @@ public final class RegularExpressionConverter {
 		}
 
 		String pattern = regex.trim();
-		final Matcher matcher = (faultTolerant) ? PERL_STYLE_TOLERANT.matcher(pattern) : PERL_STYLE.matcher(pattern);
+		final Matcher matcher = faultTolerant ? PERL_STYLE_TOLERANT.matcher(pattern) : PERL_STYLE.matcher(pattern);
 		if (!matcher.matches()) {
 			throw new IllegalArgumentException("The given regular expression '" + pattern
 					+ "' seems to be not in PERL style or has unsupported modifiers.");

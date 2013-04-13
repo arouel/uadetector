@@ -76,9 +76,9 @@ import com.google.common.cache.CacheBuilder;
 
 public final class CachedUserAgentStringParser implements UserAgentStringParser {
 
-	public final UserAgentStringParser parser = UADetectorServiceFactory
+	private final UserAgentStringParser parser = UADetectorServiceFactory
 							.getCachingAndUpdatingParserHolder();
-	public final Cache<String, UserAgent> cache = CacheBuilder.newBuilder()
+	private final Cache<String, UserAgent> cache = CacheBuilder.newBuilder()
 							.maximumSize(100)
 							.expireAfterWrite(2, TimeUnit.HOURS)
 							.build();

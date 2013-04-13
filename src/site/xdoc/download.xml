@@ -18,6 +18,79 @@
 		</section>
 
 		<section name="Releases">
+			<subsection name="Release 2013.03">
+				<table>
+					<tr>
+						<th>Module</th>
+						<th>File</th>
+						<th>Checksum</th>
+						<th>Signature</th>
+					</tr>
+					<tr>
+						<td>UADetector :: Core</td>
+						<td>
+							<a
+								href="http://search.maven.org/remotecontent?filepath=net/sf/uadetector/uadetector-core/0.9.3/uadetector-core-0.9.3.jar">
+								uadetector-core-0.9.3.jar
+							</a>
+						</td>
+						<td>
+							<a
+								href="http://search.maven.org/remotecontent?filepath=net/sf/uadetector/uadetector-core/0.9.3/uadetector-core-0.9.3.jar.md5">
+								uadetector-core-0.9.3.jar.md5
+							</a>
+						</td>
+						<td>
+							<a
+								href="http://search.maven.org/remotecontent?filepath=net/sf/uadetector/uadetector-core/0.9.3/uadetector-core-0.9.3.jar.asc">
+								uadetector-core-0.9.3.jar.asc
+							</a>
+						</td>
+					</tr>
+					<tr>
+						<td>UADetector :: JSON</td>
+						<td>
+							<a
+								href="http://search.maven.org/remotecontent?filepath=net/sf/uadetector/uadetector-json/0.1.3/uadetector-json-0.1.3.jar">
+								uadetector-json-0.1.3.jar
+							</a>
+						</td>
+						<td>
+							<a
+								href="http://search.maven.org/remotecontent?filepath=net/sf/uadetector/uadetector-json/0.1.3/uadetector-json-0.1.3.jar.md5">
+								uadetector-json-0.1.3.jar.md5
+							</a>
+						</td>
+						<td>
+							<a
+								href="http://search.maven.org/remotecontent?filepath=net/sf/uadetector/uadetector-json/0.1.3/uadetector-json-0.1.3.jar.asc">
+								uadetector-json-0.1.3.jar.asc
+							</a>
+						</td>
+					</tr>
+					<tr>
+						<td>UADetector :: Resources</td>
+						<td>
+							<a
+								href="http://search.maven.org/remotecontent?filepath=net/sf/uadetector/uadetector-resources/2013.03/uadetector-resources-2013.03.jar">
+								uadetector-resources-2013.03.jar
+							</a>
+						</td>
+						<td>
+							<a
+								href="http://search.maven.org/remotecontent?filepath=net/sf/uadetector/uadetector-resources/2013.03/uadetector-resources-2013.03.jar.md5">
+								uadetector-resources-2013.03.jar.md5
+							</a>
+						</td>
+						<td>
+							<a
+								href="http://search.maven.org/remotecontent?filepath=net/sf/uadetector/uadetector-resources/2013.03/uadetector-resources-2013.03.jar.asc">
+								uadetector-resources-2013.03.jar.asc
+							</a>
+						</td>
+					</tr>
+				</table>
+			</subsection>
 			<subsection name="Release 2013.02">
 				<table>
 					<tr>

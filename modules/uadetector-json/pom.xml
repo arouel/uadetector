@@ -37,6 +37,12 @@
 			<artifactId>quality-check</artifactId>
 		</dependency>
 
+		<!-- JSR-305 annotations -->
+		<dependency>
+			<groupId>com.google.code.findbugs</groupId>
+			<artifactId>jsr305</artifactId>
+		</dependency>
+
 		<!-- compile and runtime -->
 		<dependency>
 			<groupId>net.sf.uadetector</groupId>

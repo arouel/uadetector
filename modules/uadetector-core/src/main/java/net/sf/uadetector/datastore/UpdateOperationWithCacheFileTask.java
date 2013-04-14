@@ -124,7 +124,7 @@ final class UpdateOperationWithCacheFileTask extends AbstractUpdateOperation {
 				outputStream.write(data.getBytes(charset));
 
 				// delete the original file
-				file.delete();
+				Check.stateIsTrue(!file.exists() || file.delete(), "Cannot delete file '%s'.", file.getPath());
 
 				// rename the new file to the original one
 				renameFile(tempFile, file);

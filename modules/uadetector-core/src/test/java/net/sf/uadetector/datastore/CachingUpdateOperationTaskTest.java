@@ -94,6 +94,35 @@ public class CachingUpdateOperationTaskTest {
 	}
 
 	@Test
+	public void readAndSave_cacheFileDoesExist() throws MalformedURLException, IOException {
+		final File cache = new File(folder.getRoot(), "test.cache"); // cache file does not exist
+		cache.createNewFile();
+		Assert.assertTrue(cache.exists());
+
+		// file will be created
+		UpdateOperationWithCacheFileTask.readAndSave(cache, new TestXmlDataStore());
+		Assert.assertTrue(cache.length() >= 722015);
+
+		// file will be overwritten (delete and rename)
+		UpdateOperationWithCacheFileTask.readAndSave(cache, new TestXmlDataStore());
+		Assert.assertTrue(cache.length() >= 722015);
+	}
+
+	@Test
+	public void readAndSave_cacheFileDoesNotExist() throws MalformedURLException, IOException {
+		final File cache = new File(folder.getRoot(), "test.cache"); // cache file does not exist
+		Assert.assertFalse(cache.exists());
+
+		// file will be created
+		UpdateOperationWithCacheFileTask.readAndSave(cache, new TestXmlDataStore());
+		Assert.assertTrue(cache.length() >= 722015);
+
+		// file will be overwritten (delete and rename)
+		UpdateOperationWithCacheFileTask.readAndSave(cache, new TestXmlDataStore());
+		Assert.assertTrue(cache.length() >= 722015);
+	}
+
+	@Test
 	public void readAndSave_deleteAndRenameTempFileTest() throws MalformedURLException, IOException {
 		final File cache = folder.newFile(); // cache file does not exist
 

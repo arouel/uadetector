@@ -149,13 +149,13 @@ public class VersionNumberTest {
 		Assert.assertEquals(-1, version.compareTo(null));
 	}
 
-	@Test
+	@Test(expected = IllegalNullArgumentException.class)
 	public void compareTo_otherImplementation_getGroups_null() {
 		final ReadableVersionNumber otherImpl = EasyMock.createMock(ReadableVersionNumber.class);
 		EasyMock.expect(otherImpl.getGroups()).andReturn(null).anyTimes();
 		EasyMock.replay(otherImpl);
 		final VersionNumber version = new VersionNumber(Arrays.asList("1", "0", "0"));
-		Assert.assertEquals(-1, version.compareTo(otherImpl));
+		version.compareTo(otherImpl);
 	}
 
 	@Test

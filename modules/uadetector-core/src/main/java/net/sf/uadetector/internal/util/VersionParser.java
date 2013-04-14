@@ -35,6 +35,16 @@ import net.sf.uadetector.VersionNumber;
 public final class VersionParser {
 
 	/**
+	 * Index number of the group in a matching {@link Pattern} which contains the extension/suffix of a version string
+	 */
+	private static final int EXTENSION_INDEX = 5;
+
+	/**
+	 * Index number of the group in a matching {@link Pattern} which contains the first/major number of a version string
+	 */
+	private static final int MAJOR_INDEX = 1;
+
+	/**
 	 * Regular expression to analyze a version number separated by a dot
 	 */
 	private static final Pattern VERSIONNUMBER = Pattern.compile("((\\d+)((\\.\\d+)+)?)");
@@ -64,7 +74,7 @@ public final class VersionParser {
 		for (final Pattern pattern : patterns) {
 			final Matcher m = pattern.matcher(userAgent);
 			if (m.find()) {
-				version = parseFirstVersionNumber(m.group(1));
+				version = parseFirstVersionNumber(m.group(MAJOR_INDEX));
 				break;
 			}
 		}
@@ -83,7 +93,7 @@ public final class VersionParser {
 		final Pattern pattern = Pattern.compile("Bada/((\\d+)((\\.\\d+)+)?)");
 		final Matcher m = pattern.matcher(userAgent);
 		if (m.find()) {
-			version = parseFirstVersionNumber(m.group(1));
+			version = parseFirstVersionNumber(m.group(MAJOR_INDEX));
 		}
 		return version;
 	}
@@ -100,7 +110,7 @@ public final class VersionParser {
 		final Pattern pattern = Pattern.compile("\\w+bsd\\s?((\\d+)((\\.\\d+)+)?((\\-|_)[\\w\\d\\-]+)?)", Pattern.CASE_INSENSITIVE);
 		final Matcher m = pattern.matcher(userAgent);
 		if (m.find()) {
-			version = parseFirstVersionNumber(m.group(1));
+			version = parseFirstVersionNumber(m.group(MAJOR_INDEX));
 		}
 		return version;
 	}
@@ -121,7 +131,7 @@ public final class VersionParser {
 		for (final Pattern pattern : patterns) {
 			final Matcher m = pattern.matcher(userAgent);
 			if (m.find()) {
-				version = parseFirstVersionNumber(m.group(1).replaceAll("_", "."));
+				version = parseFirstVersionNumber(m.group(MAJOR_INDEX).replaceAll("_", "."));
 				break;
 			}
 		}
@@ -143,7 +153,7 @@ public final class VersionParser {
 		for (final Pattern pattern : patterns) {
 			final Matcher m = pattern.matcher(userAgent);
 			if (m.find()) {
-				version = parseFirstVersionNumber(m.group(1));
+				version = parseFirstVersionNumber(m.group(MAJOR_INDEX));
 				break;
 			}
 		}
@@ -166,7 +176,7 @@ public final class VersionParser {
 		for (final Pattern pattern : patterns) {
 			final Matcher m = pattern.matcher(userAgent);
 			if (m.find()) {
-				version = parseFirstVersionNumber(m.group(1).replaceAll("_", "."));
+				version = parseFirstVersionNumber(m.group(MAJOR_INDEX).replaceAll("_", "."));
 				break;
 			}
 		}
@@ -185,7 +195,7 @@ public final class VersionParser {
 		final Pattern pattern = Pattern.compile("SymbianOS/((\\d+)((\\.\\d+)+)?s?)");
 		final Matcher m = pattern.matcher(userAgent);
 		if (m.find()) {
-			version = parseFirstVersionNumber(m.group(1));
+			version = parseFirstVersionNumber(m.group(MAJOR_INDEX));
 		}
 		return version;
 	}
@@ -205,7 +215,7 @@ public final class VersionParser {
 		for (final Pattern pattern : patterns) {
 			final Matcher m = pattern.matcher(userAgent);
 			if (m.find()) {
-				version = parseFirstVersionNumber(m.group(1));
+				version = parseFirstVersionNumber(m.group(MAJOR_INDEX));
 				break;
 			}
 		}
@@ -234,7 +244,7 @@ public final class VersionParser {
 		for (final Pattern pattern : patterns) {
 			final Matcher m = pattern.matcher(userAgent);
 			if (m.find()) {
-				version = parseFirstVersionNumber(m.group(1));
+				version = parseFirstVersionNumber(m.group(MAJOR_INDEX));
 				break;
 			}
 		}
@@ -256,8 +266,8 @@ public final class VersionParser {
 		String[] split = null;
 		String ext = null;
 		if (matcher.find()) {
-			split = matcher.group(1).split("\\.");
-			ext = matcher.group(5);
+			split = matcher.group(MAJOR_INDEX).split("\\.");
+			ext = matcher.group(EXTENSION_INDEX);
 		}
 
 		final String extension = ext == null ? VersionNumber.EMPTY_EXTENSION : trimRight(ext);
@@ -280,8 +290,8 @@ public final class VersionParser {
 		String[] split = null;
 		String ext = null;
 		while (matcher.find()) {
-			split = matcher.group(1).split("\\.");
-			ext = matcher.group(5);
+			split = matcher.group(MAJOR_INDEX).split("\\.");
+			ext = matcher.group(EXTENSION_INDEX);
 		}
 
 		final String extension = ext == null ? VersionNumber.EMPTY_EXTENSION : trimRight(ext);
@@ -341,8 +351,9 @@ public final class VersionParser {
 		VersionNumber result = new VersionNumber(new ArrayList<String>(0), version);
 		final Matcher matcher = VERSIONSTRING.matcher(version);
 		if (matcher.find()) {
-			final List<String> groups = Arrays.asList(matcher.group(1).split("\\."));
-			final String extension = matcher.group(5) == null ? VersionNumber.EMPTY_EXTENSION : trimRight(matcher.group(5));
+			final List<String> groups = Arrays.asList(matcher.group(MAJOR_INDEX).split("\\."));
+			final String extension = matcher.group(EXTENSION_INDEX) == null ? VersionNumber.EMPTY_EXTENSION : trimRight(matcher
+					.group(EXTENSION_INDEX));
 			result = new VersionNumber(groups, extension);
 		}
 

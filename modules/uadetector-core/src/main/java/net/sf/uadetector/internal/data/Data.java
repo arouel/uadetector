@@ -201,7 +201,6 @@ public class Data {
 		@Nonnull
 		private final Set<Robot> robots = new HashSet<Robot>();
 
-		@Nonnull
 		private String version;
 
 		@Nonnull
@@ -383,19 +382,25 @@ public class Data {
 	public static final Data EMPTY = new Data(new HashSet<Browser>(), new HashSet<OperatingSystem>(), new HashSet<Robot>(0),
 			new TreeMap<BrowserPattern, Browser>(), new TreeMap<OperatingSystemPattern, OperatingSystem>(), "");
 
+	@Nonnull
 	private final Set<Browser> browsers;
 
+	@Nonnull
 	private final Set<OperatingSystem> operatingSystems;
 
+	@Nonnull
 	private final Set<Robot> robots;
 
 	/**
 	 * Version information of the UAS data
 	 */
+	@Nonnull
 	private final String version;
 
+	@Nonnull
 	private final SortedMap<BrowserPattern, Browser> patternBrowserMap;
 
+	@Nonnull
 	private final SortedMap<OperatingSystemPattern, OperatingSystem> patternOsMap;
 
 	public Data(@Nonnull final Set<Browser> browsers, @Nonnull final Set<OperatingSystem> operatingSystems,

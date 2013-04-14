@@ -47,7 +47,6 @@ public final class BrowserPattern implements OrderedPattern<BrowserPattern> {
 		/**
 		 * A compiled representation of a regular expression to detect a browser
 		 */
-		@Nonnull
 		private Pattern pattern;
 
 		/**
@@ -202,17 +201,20 @@ public final class BrowserPattern implements OrderedPattern<BrowserPattern> {
 	/**
 	 * Identification number (ID) of a browser pattern
 	 */
+	@Nonnegative
 	private final int id;
 
 	/**
 	 * A compiled representation of a regular expression to detect a browser
 	 */
+	@Nonnull
 	private final Pattern pattern;
 
 	/**
 	 * Position of a {@code BrowserPattern} (only relevant if there are multiple patterns for a browser in a
 	 * {@code SortedSet})
 	 */
+	@Nonnegative
 	private final int position;
 
 	public BrowserPattern(@Nonnegative final int id, @Nonnull final Pattern pattern, @Nonnegative final int position) {

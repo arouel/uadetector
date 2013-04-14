@@ -22,6 +22,10 @@ import java.util.Collections;
 import java.util.List;
 import java.util.regex.Pattern;
 
+import javax.annotation.Nonnull;
+
+import net.sf.qualitycheck.Check;
+import net.sf.qualitycheck.exception.IllegalStateOfArgumentException;
 import net.sf.uadetector.internal.util.AlphanumComparator;
 
 /**
@@ -86,10 +90,8 @@ public final class VersionNumber implements ReadableVersionNumber, Serializable 
 	 *            list of numbers of a version number
 	 * @return a new list of groups without {@code null} values
 	 */
-	public static List<String> replaceNullValueWithEmptyGroup(final List<String> groups) {
-		if (groups == null) {
-			throw new IllegalArgumentException("Argument 'groups' must not be null.");
-		}
+	public static List<String> replaceNullValueWithEmptyGroup(@Nonnull final List<String> groups) {
+		Check.notNull(groups, "groups");
 
 		final List<String> result = new ArrayList<String>(groups.size());
 		for (final String group : groups) {
@@ -113,7 +115,7 @@ public final class VersionNumber implements ReadableVersionNumber, Serializable 
 	 *            list of numbers of a version number
 	 * @return a formated version string
 	 */
-	private static String toVersionString(final List<String> groups) {
+	private static String toVersionString(@Nonnull final List<String> groups) {
 		final StringBuilder builder = new StringBuilder(6);
 		int count = 0;
 		for (final String segment : groups) {
@@ -133,11 +135,13 @@ public final class VersionNumber implements ReadableVersionNumber, Serializable 
 	/**
 	 * Extension or suffix of the version number consisting of alphanumeric and special characters
 	 */
+	@Nonnull
 	private final String extension;
 
 	/**
 	 * Groups, segments or categories of the version number
 	 */
+	@Nonnull
 	private final List<String> groups;
 
 	/**
@@ -145,12 +149,12 @@ public final class VersionNumber implements ReadableVersionNumber, Serializable 
 	 * 
 	 * @param groups
 	 *            list of numbers of a version number
-	 * @throws IllegalArgumentException
+	 * @throws net.sf.qualitycheck.exception.IllegalNullArgumentException
 	 *             if the given argument is {@code null}
-	 * @throws IllegalArgumentException
+	 * @throws net.sf.qualitycheck.exception.IllegalStateOfArgumentException
 	 *             if one of the segments of the version number is smaller than 0 and not empty
 	 */
-	public VersionNumber(final List<String> groups) {
+	public VersionNumber(@Nonnull final List<String> groups) {
 		this(groups, EMPTY_EXTENSION);
 	}
 
@@ -162,24 +166,20 @@ public final class VersionNumber implements ReadableVersionNumber, Serializable 
 	 *            list of numbers of a version number
 	 * @param extension
 	 *            extension of a version number
-	 * @throws IllegalArgumentException
+	 * @throws net.sf.qualitycheck.exception.IllegalNullArgumentException
 	 *             if one of the given arguments is {@code null}
-	 * @throws IllegalArgumentException
+	 * @throws net.sf.qualitycheck.exception.IllegalStateOfArgumentException
 	 *             if one of the groups of the version number is not empty or a positive number
 	 */
-	public VersionNumber(final List<String> groups, final String extension) {
-		if (groups == null) {
-			throw new IllegalArgumentException("Argument 'groups' must not be null.");
-		}
-		if (extension == null) {
-			throw new IllegalArgumentException("Argument 'extension' must not be null.");
-		}
+	public VersionNumber(@Nonnull final List<String> groups, @Nonnull final String extension) {
+		Check.notNull(groups, "groups");
+		Check.notNull(extension, "extension");
 
 		final List<String> segments = replaceNullValueWithEmptyGroup(groups);
 		int i = 0;
 		for (final String segment : segments) {
 			if (!EMPTY_GROUP.equals(segment) && !isNumeric(segment)) {
-				throw new IllegalArgumentException("The segment on position " + i + " (" + segment + ") must be a number.");
+				throw new IllegalStateOfArgumentException("The segment on position " + i + " (" + segment + ") must be a number.");
 			}
 			i++;
 		}
@@ -193,11 +193,13 @@ public final class VersionNumber implements ReadableVersionNumber, Serializable 
 	 * 
 	 * @param major
 	 *            major group of the version number
-	 * @throws IllegalArgumentException
+	 * @throws net.sf.qualitycheck.exception.IllegalNullArgumentException
+	 *             if the given argument is {@code null}
+	 * @throws net.sf.qualitycheck.exception.IllegalStateOfArgumentException
 	 *             if the major segment is smaller than 0 and not empty
 	 */
-	public VersionNumber(final String major) {
-		this(major, EMPTY_GROUP);
+	public VersionNumber(@Nonnull final String major) {
+		this(Check.notNull(major, "major"), EMPTY_GROUP);
 	}
 
 	/**
@@ -207,11 +209,13 @@ public final class VersionNumber implements ReadableVersionNumber, Serializable 
 	 *            major group of the version number
 	 * @param minor
 	 *            minor group of the version number
-	 * @throws IllegalArgumentException
+	 * @throws net.sf.qualitycheck.exception.IllegalNullArgumentException
+	 *             if one of the given arguments is {@code null}
+	 * @throws net.sf.qualitycheck.exception.IllegalStateOfArgumentException
 	 *             if the major or minor segment is smaller than 0 and not empty
 	 */
-	public VersionNumber(final String major, final String minor) {
-		this(major, minor, EMPTY_GROUP);
+	public VersionNumber(@Nonnull final String major, @Nonnull final String minor) {
+		this(Check.notNull(major, "major"), Check.notNull(minor, "minor"), EMPTY_GROUP);
 	}
 
 	/**
@@ -223,11 +227,13 @@ public final class VersionNumber implements ReadableVersionNumber, Serializable 
 	 *            minor group of the version number
 	 * @param bugfix
 	 *            bugfix group of the version number
-	 * @throws IllegalArgumentException
+	 * @throws net.sf.qualitycheck.exception.IllegalNullArgumentException
+	 *             if one of the given arguments is {@code null}
+	 * @throws net.sf.qualitycheck.exception.IllegalStateOfArgumentException
 	 *             if the major, minor or bugfix segment is smaller than 0 and not empty
 	 */
-	public VersionNumber(final String major, final String minor, final String bugfix) {
-		this(major, minor, bugfix, EMPTY_EXTENSION);
+	public VersionNumber(@Nonnull final String major, @Nonnull final String minor, @Nonnull final String bugfix) {
+		this(Check.notNull(major, "major"), Check.notNull(minor, "minor"), Check.notNull(bugfix, "bugfix"), EMPTY_EXTENSION);
 	}
 
 	/**
@@ -241,13 +247,15 @@ public final class VersionNumber implements ReadableVersionNumber, Serializable 
 	 *            bugfix group of the version number
 	 * @param extension
 	 *            extension of a version number
-	 * @throws IllegalArgumentException
+	 * @throws net.sf.qualitycheck.exception.IllegalNullArgumentException
+	 *             if one of the given arguments is {@code null}
+	 * @throws net.sf.qualitycheck.exception.IllegalStateOfArgumentException
 	 *             if the major, minor or bugfix segment is smaller than 0 and not empty
-	 * @throws IllegalArgumentException
-	 *             if argument 'extension' is {@code null}
 	 */
-	public VersionNumber(final String major, final String minor, final String bugfix, final String extension) {
-		this(Arrays.asList(major, minor, bugfix), extension);
+	public VersionNumber(@Nonnull final String major, @Nonnull final String minor, @Nonnull final String bugfix,
+			@Nonnull final String extension) {
+		this(Arrays.asList(Check.notNull(major, "major"), Check.notNull(minor, "minor"), Check.notNull(bugfix, "bugfix")), Check.notNull(
+				extension, "extension"));
 	}
 
 	/**
@@ -368,6 +376,7 @@ public final class VersionNumber implements ReadableVersionNumber, Serializable 
 	 * 
 	 * @return a string representation of this version number
 	 */
+	@Nonnull
 	@Override
 	public String toString() {
 		return "VersionNumber [groups=" + groups + ", extension=" + extension + "]";
@@ -378,6 +387,7 @@ public final class VersionNumber implements ReadableVersionNumber, Serializable 
 	 * 
 	 * @return numeric groups as dot separated version number string
 	 */
+	@Nonnull
 	@Override
 	public String toVersionString() {
 		return toVersionString(groups) + extension;

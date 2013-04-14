@@ -15,53 +15,55 @@
  ******************************************************************************/
 package net.sf.uadetector;
 
+import net.sf.qualitycheck.exception.IllegalNullArgumentException;
+
 import org.junit.Assert;
 import org.junit.Test;
 
 public class OperatingSystemTest {
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void construct_family_null() {
 		new OperatingSystem(null, "family", "icon", "name", "producer", "producer url", "url", new VersionNumber("1"));
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void construct_familyName_null() {
 		final OperatingSystemFamily linux = OperatingSystemFamily.LINUX;
 		new OperatingSystem(linux, null, "icon", "name", "producer", "producer url", "url", new VersionNumber("1"));
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void construct_icon_null() {
 		final OperatingSystemFamily linux = OperatingSystemFamily.LINUX;
 		new OperatingSystem(linux, "family", null, "name", "producer", "producer url", "url", new VersionNumber("1"));
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void construct_name_null() {
 		final OperatingSystemFamily linux = OperatingSystemFamily.LINUX;
 		new OperatingSystem(linux, "family", "icon", null, "producer", "producer url", "url", new VersionNumber("1"));
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void construct_producer_null() {
 		final OperatingSystemFamily linux = OperatingSystemFamily.LINUX;
 		new OperatingSystem(linux, "family", "icon", "name", null, "producer url", "url", new VersionNumber("1"));
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void construct_producerUrl_null() {
 		final OperatingSystemFamily linux = OperatingSystemFamily.LINUX;
 		new OperatingSystem(linux, "family", "icon", "name", "producer", null, "url", new VersionNumber("1"));
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void construct_url_null() {
 		final OperatingSystemFamily linux = OperatingSystemFamily.LINUX;
 		new OperatingSystem(linux, "family", "icon", "name", "producer", "producer url", null, new VersionNumber("1"));
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void construct_version_null() {
 		final OperatingSystemFamily linux = OperatingSystemFamily.LINUX;
 		new OperatingSystem(linux, "family", "icon", "name", "producer", "producer url", "url", null);

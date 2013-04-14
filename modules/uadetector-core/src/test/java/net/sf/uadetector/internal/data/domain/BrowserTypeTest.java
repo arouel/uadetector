@@ -15,18 +15,20 @@
  ******************************************************************************/
 package net.sf.uadetector.internal.data.domain;
 
-import org.junit.Assert;
+import net.sf.qualitycheck.exception.IllegalNegativeArgumentException;
+import net.sf.qualitycheck.exception.IllegalNullArgumentException;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 public class BrowserTypeTest {
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNegativeArgumentException.class)
 	public void constructor_id_toSmall() {
 		new BrowserType(-1, "Email client");
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void constructor_name_null() {
 		new BrowserType(1, null);
 	}

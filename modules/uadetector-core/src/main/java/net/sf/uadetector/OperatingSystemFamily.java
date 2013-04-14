@@ -18,6 +18,10 @@ package net.sf.uadetector;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javax.annotation.Nonnull;
+
+import net.sf.qualitycheck.Check;
+
 /**
  * This enum represents the more commonly used operating system families. It will never be complete, but can assist in
  * identifying the version of an operating system.
@@ -236,13 +240,11 @@ public enum OperatingSystemFamily {
 	 * @param family
 	 *            name of an operating system family
 	 * @return the matching enum value or {@code OperatingSystemFamily#UNKNOWN}
-	 * @throws IllegalArgumentException
+	 * @throws net.sf.qualitycheck.exception.IllegalNullArgumentException
 	 *             if the given argument is {@code null}
 	 */
-	public static OperatingSystemFamily evaluate(final String family) {
-		if (family == null) {
-			throw new IllegalArgumentException("Argument 'family' must not be null.");
-		}
+	public static OperatingSystemFamily evaluate(@Nonnull final String family) {
+		Check.notNull(family, "family");
 
 		OperatingSystemFamily result = UNKNOWN;
 
@@ -264,13 +266,11 @@ public enum OperatingSystemFamily {
 	 * @param family
 	 *            name of an operating system family
 	 * @return the matching enum value or {@code OperatingSystemFamily#UNKNOWN}
-	 * @throws IllegalArgumentException
+	 * @throws net.sf.qualitycheck.exception.IllegalNullArgumentException
 	 *             if the given argument is {@code null}
 	 */
-	protected static OperatingSystemFamily evaluateByName(final String family) {
-		if (family == null) {
-			throw new IllegalArgumentException("Argument 'family' must not be null.");
-		}
+	protected static OperatingSystemFamily evaluateByName(@Nonnull final String family) {
+		Check.notNull(family, "family");
 
 		OperatingSystemFamily result = UNKNOWN;
 		for (final OperatingSystemFamily value : values()) {
@@ -290,13 +290,11 @@ public enum OperatingSystemFamily {
 	 * @param family
 	 *            name of an operating system family
 	 * @return the matching enum value or {@code OperatingSystemFamily#UNKNOWN}
-	 * @throws IllegalArgumentException
+	 * @throws net.sf.qualitycheck.exception.IllegalNullArgumentException
 	 *             if the given argument is {@code null}
 	 */
-	protected static OperatingSystemFamily evaluateByPattern(final String family) {
-		if (family == null) {
-			throw new IllegalArgumentException("Argument 'family' must not be null.");
-		}
+	protected static OperatingSystemFamily evaluateByPattern(@Nonnull final String family) {
+		Check.notNull(family, "family");
 
 		OperatingSystemFamily result = UNKNOWN;
 		for (final OperatingSystemFamily value : values()) {
@@ -313,14 +311,16 @@ public enum OperatingSystemFamily {
 	/**
 	 * The internal family name in the UAS database.
 	 */
+	@Nonnull
 	private final String name;
 
 	/**
 	 * The regular expression which a family name must be match.
 	 */
+	@Nonnull
 	private final Pattern pattern;
 
-	private OperatingSystemFamily(final String name, final Pattern pattern) {
+	private OperatingSystemFamily(@Nonnull final String name, @Nonnull final Pattern pattern) {
 		this.name = name;
 		this.pattern = pattern;
 	}
@@ -330,6 +330,7 @@ public enum OperatingSystemFamily {
 	 * 
 	 * @return the internal family name
 	 */
+	@Nonnull
 	public String getName() {
 		return this.name;
 	}
@@ -339,6 +340,7 @@ public enum OperatingSystemFamily {
 	 * 
 	 * @return regular expression
 	 */
+	@Nonnull
 	public Pattern getPattern() {
 		return pattern;
 	}

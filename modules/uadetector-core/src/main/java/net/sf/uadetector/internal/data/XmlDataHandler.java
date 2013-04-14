@@ -19,6 +19,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
+import javax.annotation.Nonnull;
+
+import net.sf.qualitycheck.Check;
 import net.sf.uadetector.UserAgentFamily;
 import net.sf.uadetector.internal.data.domain.Browser;
 import net.sf.uadetector.internal.data.domain.BrowserOperatingSystemMapping;
@@ -160,10 +163,8 @@ public final class XmlDataHandler extends DefaultHandler {
 		 */
 		VERSION("version");
 
-		public static Tag evaluate(final String tagName) {
-			if (tagName == null) {
-				throw new IllegalArgumentException("Argument 'tagName' must not be null.");
-			}
+		public static Tag evaluate(@Nonnull final String tagName) {
+			Check.notNull(tagName, "tagName");
 
 			Tag result = null;
 			for (final Tag tag : values()) {
@@ -207,12 +208,14 @@ public final class XmlDataHandler extends DefaultHandler {
 			return ROBOT.getTagName().equalsIgnoreCase(tagName);
 		}
 
+		@Nonnull
 		private String tagName;
 
-		private Tag(final String tagName) {
+		private Tag(@Nonnull final String tagName) {
 			this.tagName = tagName;
 		}
 
+		@Nonnull
 		public String getTagName() {
 			return tagName;
 		}
@@ -274,6 +277,7 @@ public final class XmlDataHandler extends DefaultHandler {
 
 	private Tag currentTag = null;
 
+	@Nonnull
 	private final Data.Builder dataBuilder;
 
 	/**
@@ -306,10 +310,8 @@ public final class XmlDataHandler extends DefaultHandler {
 	 */
 	private boolean warning = false;
 
-	public XmlDataHandler(final Data.Builder builder) {
-		if (builder == null) {
-			throw new IllegalArgumentException("Argument 'builder' must not be null.");
-		}
+	public XmlDataHandler(@Nonnull final Data.Builder builder) {
+		Check.notNull(builder, "builder");
 
 		dataBuilder = builder;
 	}

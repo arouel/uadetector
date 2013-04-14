@@ -15,6 +15,9 @@
  ******************************************************************************/
 package net.sf.uadetector;
 
+import javax.annotation.Nonnull;
+
+import net.sf.qualitycheck.Check;
 import net.sf.uadetector.internal.data.domain.Robot;
 
 /**
@@ -100,13 +103,11 @@ public enum UserAgentType {
 	 * @param typeName
 	 *            name of an user agent type
 	 * @return the matching enum value or {@code UserAgentType#UNKNOWN}
-	 * @throws IllegalArgumentException
+	 * @throws net.sf.qualitycheck.exception.IllegalNullArgumentException
 	 *             if the given argument is {@code null}
 	 */
-	public static UserAgentType evaluateByTypeName(final String typeName) {
-		if (typeName == null) {
-			throw new IllegalArgumentException("Argument 'typeName' must not be null.");
-		}
+	public static UserAgentType evaluateByTypeName(@Nonnull final String typeName) {
+		Check.notNull(typeName, "typeName");
 
 		UserAgentType result = UNKNOWN;
 		for (final UserAgentType value : values()) {
@@ -121,9 +122,10 @@ public enum UserAgentType {
 	/**
 	 * Name of the user agent type
 	 */
+	@Nonnull
 	private final String name;
 
-	private UserAgentType(final String name) {
+	private UserAgentType(@Nonnull final String name) {
 		this.name = name;
 	}
 
@@ -132,6 +134,7 @@ public enum UserAgentType {
 	 * 
 	 * @return name of the type
 	 */
+	@Nonnull
 	public String getName() {
 		return name;
 	}

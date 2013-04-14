@@ -19,6 +19,9 @@ import java.util.SortedSet;
 import java.util.TreeSet;
 import java.util.regex.Pattern;
 
+import net.sf.qualitycheck.exception.IllegalNegativeArgumentException;
+import net.sf.qualitycheck.exception.IllegalNullArgumentException;
+import net.sf.qualitycheck.exception.IllegalStateOfArgumentException;
 import net.sf.uadetector.UserAgentFamily;
 import net.sf.uadetector.internal.data.domain.Browser;
 import net.sf.uadetector.internal.data.domain.BrowserOperatingSystemMapping;
@@ -44,13 +47,13 @@ public class DataBuilderTest {
 		Assert.assertSame(b, b.appendBrowser(br)); // testing to add same one more time
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void appendBrowser_null() {
 		final Data.Builder b = new Data.Builder();
 		b.appendBrowser(null);
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalStateOfArgumentException.class)
 	public void appendBrowserBuilder_addSameOneMoreTime() {
 		final Data.Builder b = new Data.Builder();
 		final Browser.Builder builder = new Browser.Builder();
@@ -61,13 +64,13 @@ public class DataBuilderTest {
 		Assert.assertSame(b, b.appendBrowserBuilder(builder)); // testing to add same one more time
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNegativeArgumentException.class)
 	public void appendBrowserBuilder_id_toSmall() {
 		final Data.Builder b = new Data.Builder();
 		b.appendBrowserBuilder(new Browser.Builder());
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void appendBrowserBuilder_null() {
 		final Data.Builder b = new Data.Builder();
 		b.appendBrowserBuilder(null);
@@ -106,7 +109,7 @@ public class DataBuilderTest {
 		Assert.assertEquals(2, data.getBrowsers().size());
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalStateOfArgumentException.class)
 	public void appendBrowserBuilder_withoutType() {
 		final Data.Builder b = new Data.Builder();
 		final Browser.Builder builder = new Browser.Builder();
@@ -142,25 +145,25 @@ public class DataBuilderTest {
 		Assert.assertEquals(0, data.getBrowsers().size());
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void appendBrowserOperatingSystemMapping_null() {
 		final Data.Builder b = new Data.Builder();
 		b.appendBrowserOperatingSystemMapping(null);
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void appendBrowserPattern_null() {
 		final Data.Builder b = new Data.Builder();
 		b.appendBrowserPattern(null);
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void appendBrowserType() {
 		final Data.Builder b = new Data.Builder();
 		b.appendBrowserType(null);
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void appendOperatingSystem_null() {
 		final Data.Builder b = new Data.Builder();
 		b.appendOperatingSystem(null);
@@ -229,13 +232,13 @@ public class DataBuilderTest {
 		Assert.assertEquals("MyOS", os.getName());
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNegativeArgumentException.class)
 	public void appendOperatingSystemBuilder_id_toSmall() {
 		final Data.Builder b = new Data.Builder();
 		b.appendOperatingSystemBuilder(new OperatingSystem.Builder());
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void appendOperatingSystemBuilder_null() {
 		final Data.Builder b = new Data.Builder();
 		b.appendOperatingSystemBuilder(null);
@@ -286,13 +289,13 @@ public class DataBuilderTest {
 		b.appendOperatingSystemPattern(new OperatingSystemPattern(1, Pattern.compile("[0-9]"), 1));
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void appendOperatingSystemPattern_null() {
 		final Data.Builder b = new Data.Builder();
 		b.appendOperatingSystemPattern(null);
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void appendRobot_null() {
 		final Data.Builder b = new Data.Builder();
 		b.appendRobot(null);
@@ -311,12 +314,12 @@ public class DataBuilderTest {
 		new Data.Builder().setVersion("empty test version").build();
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void build_withoutData() {
 		new Data.Builder().build();
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void setVersion_null() {
 		final Data.Builder b = new Data.Builder();
 		b.setVersion(null);

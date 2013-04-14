@@ -15,8 +15,9 @@
  ******************************************************************************/
 package net.sf.uadetector;
 
-import org.junit.Assert;
+import net.sf.qualitycheck.exception.IllegalNullArgumentException;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 public class OperatingSystemFamilyTest {
@@ -36,7 +37,7 @@ public class OperatingSystemFamilyTest {
 		Assert.assertEquals(OperatingSystemFamily.XROSSMEDIABAR, OperatingSystemFamily.evaluate("XrossMediaBar (XMB)"));
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void evaluate_null() {
 		OperatingSystemFamily.evaluate(null);
 	}
@@ -57,7 +58,7 @@ public class OperatingSystemFamilyTest {
 		Assert.assertFalse(OperatingSystemFamily.IOS == OperatingSystemFamily.evaluateByName("iPhone OS"));
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void evaluateByName_null() {
 		OperatingSystemFamily.evaluateByName(null);
 	}
@@ -78,7 +79,7 @@ public class OperatingSystemFamilyTest {
 		Assert.assertEquals(OperatingSystemFamily.IOS, OperatingSystemFamily.evaluateByPattern("iPhone OS"));
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void evaluateByPattern_null() {
 		OperatingSystemFamily.evaluateByPattern(null);
 	}

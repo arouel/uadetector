@@ -17,6 +17,8 @@ package net.sf.uadetector.internal.data;
 
 import java.io.IOException;
 
+import net.sf.qualitycheck.exception.IllegalNullArgumentException;
+
 import org.junit.Assert;
 import org.junit.Test;
 import org.xml.sax.InputSource;
@@ -25,7 +27,7 @@ import org.xml.sax.SAXParseException;
 
 public class XmlDataHandlerTest {
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void constructor_null() {
 		new XmlDataHandler(null);
 	}

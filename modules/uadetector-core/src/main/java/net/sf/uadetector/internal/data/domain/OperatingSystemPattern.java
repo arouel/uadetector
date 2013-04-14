@@ -17,6 +17,10 @@ package net.sf.uadetector.internal.data.domain;
 
 import java.util.regex.Pattern;
 
+import javax.annotation.Nonnegative;
+import javax.annotation.Nonnull;
+
+import net.sf.qualitycheck.Check;
 import net.sf.uadetector.internal.util.RegularExpressionConverter;
 
 /**
@@ -55,7 +59,9 @@ public final class OperatingSystemPattern implements OrderedPattern<OperatingSys
 		 * Builds a new instance of {@code OperatingSystemPattern} and returns it.
 		 * 
 		 * @return a new instance of {@code OperatingSystemPattern}
-		 * @throws IllegalArgumentException
+		 * @throws net.sf.qualitycheck.exception.IllegalNegativeArgumentException
+		 *             if one of the needed arguments to build an instance of {@code OperatingSystemPattern} is invalid
+		 * @throws net.sf.qualitycheck.exception.IllegalNullArgumentException
 		 *             if one of the needed arguments to build an instance of {@code OperatingSystemPattern} is invalid
 		 */
 		public OperatingSystemPattern build() {
@@ -68,13 +74,11 @@ public final class OperatingSystemPattern implements OrderedPattern<OperatingSys
 		 * @param id
 		 *            identification number
 		 * @return this {@code Builder}, for chaining
-		 * @throws IllegalArgumentException
+		 * @throws net.sf.qualitycheck.exception.IllegalNegativeArgumentException
 		 *             if the given integer is smaller than {@code 0}
 		 */
 		public Builder setId(final int id) {
-			if (id < 0) {
-				throw new IllegalArgumentException("Argument 'id' must not be smaller than 0.");
-			}
+			Check.notNegative(id, "id");
 
 			this.id = id;
 			return this;
@@ -87,17 +91,15 @@ public final class OperatingSystemPattern implements OrderedPattern<OperatingSys
 		 * @param id
 		 *            ID of an operating system pattern as string
 		 * @return this {@code Builder}, for chaining
-		 * @throws IllegalArgumentException
+		 * @throws net.sf.qualitycheck.exception.IllegalNullArgumentException
 		 *             if the given argument is {@code null}
 		 * @throws NumberFormatException
 		 *             if the given string is not parsable as integer
-		 * @throws IllegalArgumentException
+		 * @throws net.sf.qualitycheck.exception.IllegalNegativeArgumentException
 		 *             if the parsed integer is smaller than {@code 0}
 		 */
-		public Builder setId(final String id) {
-			if (id == null) {
-				throw new IllegalArgumentException("Argument 'id' must not be null.");
-			}
+		public Builder setId(@Nonnull final String id) {
+			Check.notEmpty(id, "id");
 
 			this.setId(Integer.parseInt(id.trim()));
 			return this;
@@ -110,10 +112,8 @@ public final class OperatingSystemPattern implements OrderedPattern<OperatingSys
 		 *            compiled representation of a regular expression
 		 * @return this {@code Builder}, for chaining
 		 */
-		public Builder setPattern(final Pattern pattern) {
-			if (pattern == null) {
-				throw new IllegalArgumentException("Argument 'pattern' must not be null.");
-			}
+		public Builder setPattern(@Nonnull final Pattern pattern) {
+			Check.notNull(pattern, "pattern");
 
 			this.pattern = pattern;
 			return this;
@@ -126,10 +126,8 @@ public final class OperatingSystemPattern implements OrderedPattern<OperatingSys
 		 *            PERL style regular expression to be converted
 		 * @return this {@code Builder}, for chaining
 		 */
-		public Builder setPerlRegularExpression(final String regex) {
-			if (regex == null) {
-				throw new IllegalArgumentException("Argument 'regex' must not be null.");
-			}
+		public Builder setPerlRegularExpression(@Nonnull final String regex) {
+			Check.notEmpty(regex, "regex");
 
 			this.setPattern(RegularExpressionConverter.convertPerlRegexToPattern(regex));
 			return this;
@@ -141,13 +139,11 @@ public final class OperatingSystemPattern implements OrderedPattern<OperatingSys
 		 * @param position
 		 *            position of an operating system pattern
 		 * @return this {@code Builder}, for chaining
-		 * @throws IllegalArgumentException
+		 * @throws net.sf.qualitycheck.exception.IllegalNegativeArgumentException
 		 *             if the given integer is smaller than {@code 0}
 		 */
-		public Builder setPosition(final int position) {
-			if (position < 0) {
-				throw new IllegalArgumentException("Argument 'position' must not be null.");
-			}
+		public Builder setPosition(@Nonnegative final int position) {
+			Check.notNegative(position, "position");
 
 			this.position = position;
 			return this;
@@ -160,17 +156,15 @@ public final class OperatingSystemPattern implements OrderedPattern<OperatingSys
 		 * @param position
 		 *            position of an operating system pattern as string
 		 * @return this {@code Builder}, for chaining
-		 * @throws IllegalArgumentException
+		 * @throws net.sf.qualitycheck.exception.IllegalNullArgumentException
 		 *             if the given argument is {@code null}
 		 * @throws NumberFormatException
 		 *             if the given string is not parsable as integer
-		 * @throws IllegalArgumentException
+		 * @throws net.sf.qualitycheck.exception.IllegalNegativeArgumentException
 		 *             if the parsed integer is smaller than {@code 0}
 		 */
-		public Builder setPosition(final String position) {
-			if (position == null) {
-				throw new IllegalArgumentException("Argument 'position' must not be null.");
-			}
+		public Builder setPosition(@Nonnull final String position) {
+			Check.notEmpty(position, "position");
 
 			this.setPosition(Integer.parseInt(position.trim()));
 			return this;
@@ -200,31 +194,26 @@ public final class OperatingSystemPattern implements OrderedPattern<OperatingSys
 	/**
 	 * Identification number (ID) of an operating system pattern
 	 */
+	@Nonnegative
 	private final int id;
 
 	/**
 	 * A compiled representation of a regular expression to detect an operating system
 	 */
+	@Nonnull
 	private final Pattern pattern;
 
 	/**
 	 * Position of a {@code OperatingSystemPattern} (only relevant if there are multiple patterns for an operating
 	 * system in a {@code SortedSet})
 	 */
+	@Nonnegative
 	private final int position;
 
-	public OperatingSystemPattern(final int id, final Pattern pattern, final int position) {
-		if (id < 0) {
-			throw new IllegalArgumentException("Argument 'id' must not be smaller than 0.");
-		}
-
-		if (pattern == null) {
-			throw new IllegalArgumentException("Argument 'pattern' must not be null.");
-		}
-
-		if (position < 0) {
-			throw new IllegalArgumentException("Argument 'position' must not be smaller than 0.");
-		}
+	public OperatingSystemPattern(@Nonnegative final int id, @Nonnull final Pattern pattern, @Nonnegative final int position) {
+		Check.notNegative(id, "id");
+		Check.notNull(pattern, "pattern");
+		Check.notNegative(position, "position");
 
 		this.id = id;
 		this.pattern = pattern;

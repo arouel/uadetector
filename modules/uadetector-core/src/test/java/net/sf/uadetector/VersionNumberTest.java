@@ -20,9 +20,11 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import org.junit.Assert;
+import net.sf.qualitycheck.exception.IllegalNullArgumentException;
+import net.sf.qualitycheck.exception.IllegalStateOfArgumentException;
 
 import org.easymock.EasyMock;
+import org.junit.Assert;
 import org.junit.Test;
 
 public class VersionNumberTest {
@@ -165,17 +167,17 @@ public class VersionNumberTest {
 		Assert.assertEquals("0", version.toVersionString());
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalStateOfArgumentException.class)
 	public void construct_bugfix_toSmall() {
 		new VersionNumber("0", "0", "-1");
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void construct_extension_null() {
 		new VersionNumber(Arrays.asList("1", "2"), null);
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void construct_groups_null() {
 		new VersionNumber((List<String>) null);
 	}
@@ -196,7 +198,7 @@ public class VersionNumberTest {
 		Assert.assertEquals("4", version.toVersionString());
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalStateOfArgumentException.class)
 	public void construct_invalid_version() {
 		new VersionNumber(Arrays.asList("-1", VersionNumber.EMPTY_GROUP, "1"));
 	}
@@ -210,7 +212,7 @@ public class VersionNumberTest {
 		Assert.assertEquals("18.0.1025.162", version.toVersionString());
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalStateOfArgumentException.class)
 	public void construct_major_toSmall() {
 		new VersionNumber("-1", "0", "0");
 	}
@@ -224,12 +226,12 @@ public class VersionNumberTest {
 		Assert.assertEquals("1", version.toVersionString());
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalStateOfArgumentException.class)
 	public void construct_minor_toSmall() {
 		new VersionNumber("0", "-1", "0");
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalStateOfArgumentException.class)
 	public void construct_minusNumbers() {
 		new VersionNumber(Arrays.asList("-1", "-2"));
 	}
@@ -310,7 +312,7 @@ public class VersionNumberTest {
 		Assert.assertEquals("1.2", version.toVersionString());
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalStateOfArgumentException.class)
 	public void construct_version_1_2_minus1() {
 		new VersionNumber(Arrays.asList("1", "2", "-1"));
 	}
@@ -324,7 +326,7 @@ public class VersionNumberTest {
 		Assert.assertEquals("1.2", version.toVersionString());
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalStateOfArgumentException.class)
 	public void construct_version_1_minus1_1() {
 		new VersionNumber(Arrays.asList("1", "-1", "1"));
 	}
@@ -420,7 +422,7 @@ public class VersionNumberTest {
 		new VersionNumber(Arrays.asList("1", "2", "0")).getGroups().add("1");
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void replaceNullValueWithEmptyGroup_null() {
 		VersionNumber.replaceNullValueWithEmptyGroup(null);
 	}

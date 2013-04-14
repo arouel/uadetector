@@ -15,6 +15,8 @@
  ******************************************************************************/
 package net.sf.uadetector;
 
+import javax.annotation.Nonnull;
+
 /**
  * Defines an user agent.<br>
  * <br>
@@ -34,6 +36,7 @@ public interface ReadableUserAgent {
 	 * 
 	 * @return family of an user agent
 	 */
+	@Nonnull
 	UserAgentFamily getFamily();
 
 	/**
@@ -41,6 +44,7 @@ public interface ReadableUserAgent {
 	 * 
 	 * @return icon name of an user agent
 	 */
+	@Nonnull
 	String getIcon();
 
 	/**
@@ -48,6 +52,7 @@ public interface ReadableUserAgent {
 	 * 
 	 * @return name of an user agent
 	 */
+	@Nonnull
 	String getName();
 
 	/**
@@ -55,6 +60,7 @@ public interface ReadableUserAgent {
 	 * 
 	 * @return the running operating system
 	 */
+	@Nonnull
 	OperatingSystem getOperatingSystem();
 
 	/**
@@ -62,6 +68,7 @@ public interface ReadableUserAgent {
 	 * 
 	 * @return the manufacturer
 	 */
+	@Nonnull
 	String getProducer();
 
 	/**
@@ -69,6 +76,7 @@ public interface ReadableUserAgent {
 	 * 
 	 * @return URL to the website of the manufacturer
 	 */
+	@Nonnull
 	String getProducerUrl();
 
 	/**
@@ -76,6 +84,7 @@ public interface ReadableUserAgent {
 	 * 
 	 * @return the type of an user agent
 	 */
+	@Nonnull
 	UserAgentType getType();
 
 	/**
@@ -83,6 +92,7 @@ public interface ReadableUserAgent {
 	 * 
 	 * @return the type name of an user agent
 	 */
+	@Nonnull
 	String getTypeName();
 
 	/**
@@ -90,6 +100,7 @@ public interface ReadableUserAgent {
 	 * 
 	 * @return the URL to the product page
 	 */
+	@Nonnull
 	String getUrl();
 
 	/**
@@ -97,6 +108,7 @@ public interface ReadableUserAgent {
 	 * 
 	 * @return version number of an user agent
 	 */
+	@Nonnull
 	VersionNumber getVersionNumber();
 
 }

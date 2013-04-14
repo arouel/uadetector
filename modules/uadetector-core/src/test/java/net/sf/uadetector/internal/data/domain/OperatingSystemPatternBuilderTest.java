@@ -17,23 +17,26 @@ package net.sf.uadetector.internal.data.domain;
 
 import java.util.regex.Pattern;
 
-import org.junit.Assert;
+import net.sf.qualitycheck.exception.IllegalEmptyArgumentException;
+import net.sf.qualitycheck.exception.IllegalNegativeArgumentException;
+import net.sf.qualitycheck.exception.IllegalNullArgumentException;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 public class OperatingSystemPatternBuilderTest {
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNegativeArgumentException.class)
 	public void build_withoutId() {
 		new OperatingSystemPattern.Builder().setPosition(1).setPattern(Pattern.compile("[0-9]+")).build();
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNegativeArgumentException.class)
 	public void build_withoutOrder() {
 		new OperatingSystemPattern.Builder().setId(1).setPattern(Pattern.compile("[0-9]+")).build();
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void build_withoutPattern() {
 		new OperatingSystemPattern.Builder().setId(1).setPosition(1).build();
 	}
@@ -52,12 +55,12 @@ public class OperatingSystemPatternBuilderTest {
 		new OperatingSystemPattern.Builder().setId("abc");
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalEmptyArgumentException.class)
 	public void setId_emptyString() {
 		new OperatingSystemPattern.Builder().setId("");
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void setId_null() {
 		new OperatingSystemPattern.Builder().setId(null);
 	}
@@ -71,7 +74,7 @@ public class OperatingSystemPatternBuilderTest {
 		Assert.assertTrue(pattern1.equals(pattern2));
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNegativeArgumentException.class)
 	public void setId_toSmall() {
 		new OperatingSystemPattern.Builder().setId(-1);
 	}
@@ -81,27 +84,27 @@ public class OperatingSystemPatternBuilderTest {
 		new OperatingSystemPattern.Builder().setPosition("abc");
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalEmptyArgumentException.class)
 	public void setPosition_emptyString() {
 		new OperatingSystemPattern.Builder().setPosition("");
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void setPosition_null() {
 		new OperatingSystemPattern.Builder().setPosition(null);
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNegativeArgumentException.class)
 	public void setPosition_toSmall() {
 		new OperatingSystemPattern.Builder().setPosition(-1);
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void setPattern_pattern_null() {
 		new OperatingSystemPattern.Builder().setPattern((Pattern) null);
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalEmptyArgumentException.class)
 	public void setPerlRegularExpression_emptyString() {
 		new OperatingSystemPattern.Builder().setPerlRegularExpression("");
 	}
@@ -111,7 +114,7 @@ public class OperatingSystemPatternBuilderTest {
 		new OperatingSystemPattern.Builder().setPerlRegularExpression("abc");
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void setPerlRegularExpression_string_null() {
 		new OperatingSystemPattern.Builder().setPerlRegularExpression((String) null);
 	}

@@ -17,10 +17,11 @@ package net.sf.uadetector.internal.util;
 
 import java.lang.reflect.Constructor;
 
-import org.junit.Assert;
+import net.sf.qualitycheck.exception.IllegalNullArgumentException;
 import net.sf.uadetector.OperatingSystemFamily;
 import net.sf.uadetector.VersionNumber;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 public class VersionParserTest {
@@ -207,7 +208,7 @@ public class VersionParserTest {
 		Assert.assertEquals(version, v.toVersionString());
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void parseFirstVersionNumber_null() {
 		VersionParser.parseFirstVersionNumber(null);
 	}
@@ -227,7 +228,7 @@ public class VersionParserTest {
 		Assert.assertEquals(version, v.toVersionString());
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void parseLastVersionNumber_null() {
 		VersionParser.parseLastVersionNumber(null);
 	}
@@ -276,17 +277,17 @@ public class VersionParserTest {
 		Assert.assertEquals("6.2", VersionParser.parseOperatingSystemVersion(OperatingSystemFamily.WINDOWS, windows8).toVersionString());
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void parseOperatingSystemVersion_family_null() {
 		VersionParser.parseOperatingSystemVersion(null, "a user agent string");
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void parseOperatingSystemVersion_userAgentString_null() {
 		VersionParser.parseOperatingSystemVersion(OperatingSystemFamily.UNKNOWN, null);
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void parseVersion() {
 		VersionParser.parseVersion(null);
 	}

@@ -18,6 +18,10 @@ package net.sf.uadetector;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javax.annotation.Nonnull;
+
+import net.sf.qualitycheck.Check;
+
 /**
  * This enum represents the more commonly used user agent families. It will never be complete, but can assist in
  * identifying an user agent.
@@ -4363,13 +4367,11 @@ public enum UserAgentFamily {
 	 * @param family
 	 *            name of an user agent family
 	 * @return the matching enum value or {@code UserAgentFamily#UNKNOWN}
-	 * @throws IllegalArgumentException
+	 * @throws net.sf.qualitycheck.exception.IllegalNullArgumentException
 	 *             if the given argument is {@code null}
 	 */
-	public static UserAgentFamily evaluate(final String family) {
-		if (family == null) {
-			throw new IllegalArgumentException("Argument 'family' must not be null.");
-		}
+	public static UserAgentFamily evaluate(@Nonnull final String family) {
+		Check.notNull(family, "family");
 
 		UserAgentFamily result = UNKNOWN;
 
@@ -4391,13 +4393,11 @@ public enum UserAgentFamily {
 	 * @param family
 	 *            name of an user agent family
 	 * @return the matching enum value or {@code UserAgentFamily#UNKNOWN}
-	 * @throws IllegalArgumentException
+	 * @throws net.sf.qualitycheck.exception.IllegalNullArgumentException
 	 *             if the given argument is {@code null}
 	 */
-	protected static UserAgentFamily evaluateByName(final String family) {
-		if (family == null) {
-			throw new IllegalArgumentException("Argument 'family' must not be null.");
-		}
+	protected static UserAgentFamily evaluateByName(@Nonnull final String family) {
+		Check.notNull(family, "family");
 
 		UserAgentFamily result = UNKNOWN;
 		for (final UserAgentFamily value : values()) {
@@ -4417,13 +4417,11 @@ public enum UserAgentFamily {
 	 * @param family
 	 *            name of an user agent family
 	 * @return the matching enum value or {@code UserAgentFamily#UNKNOWN}
-	 * @throws IllegalArgumentException
+	 * @throws net.sf.qualitycheck.exception.IllegalNullArgumentException
 	 *             if the given argument is {@code null}
 	 */
-	protected static UserAgentFamily evaluateByPattern(final String family) {
-		if (family == null) {
-			throw new IllegalArgumentException("Argument 'family' must not be null.");
-		}
+	protected static UserAgentFamily evaluateByPattern(@Nonnull final String family) {
+		Check.notNull(family, "family");
 
 		UserAgentFamily result = UNKNOWN;
 		for (final UserAgentFamily value : values()) {
@@ -4440,14 +4438,16 @@ public enum UserAgentFamily {
 	/**
 	 * The internal family name in the UAS database.
 	 */
+	@Nonnull
 	private final String name;
 
 	/**
 	 * The regular expression which a family name must be match.
 	 */
+	@Nonnull
 	private final Pattern pattern;
 
-	private UserAgentFamily(final String name, final Pattern pattern) {
+	private UserAgentFamily(@Nonnull final String name, @Nonnull final Pattern pattern) {
 		this.name = name;
 		this.pattern = pattern;
 	}
@@ -4457,6 +4457,7 @@ public enum UserAgentFamily {
 	 * 
 	 * @return the internal family name
 	 */
+	@Nonnull
 	public String getName() {
 		return this.name;
 	}
@@ -4466,6 +4467,7 @@ public enum UserAgentFamily {
 	 * 
 	 * @return regular expression
 	 */
+	@Nonnull
 	public Pattern getPattern() {
 		return pattern;
 	}

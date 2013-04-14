@@ -21,6 +21,11 @@ import java.util.TreeSet;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javax.annotation.Nonnegative;
+import javax.annotation.Nonnull;
+
+import net.sf.qualitycheck.Check;
+
 public final class RegularExpressionConverter {
 
 	public enum Flag {
@@ -69,7 +74,7 @@ public final class RegularExpressionConverter {
 			private static final long serialVersionUID = 1L;
 
 			@Override
-			public int compareType(final Flag f1, final Flag f2) {
+			public int compareType(@Nonnull final Flag f1, @Nonnull final Flag f2) {
 				final Character c1 = Character.valueOf(f1.getCharacter());
 				final Character c2 = Character.valueOf(f2.getCharacter());
 				return c1.compareTo(c2);
@@ -85,10 +90,8 @@ public final class RegularExpressionConverter {
 		 *            a set of flags
 		 * @return sum of numerical values of passed flags or 0
 		 */
-		public static int convertToBitmask(final Set<Flag> flags) {
-			if (flags == null) {
-				throw new IllegalArgumentException("Argument 'flag' must not be null.");
-			}
+		public static int convertToBitmask(@Nonnull final Set<Flag> flags) {
+			Check.notNull(flags, "flags");
 
 			int bitmask = 0;
 			for (final Flag flag : flags) {
@@ -106,10 +109,8 @@ public final class RegularExpressionConverter {
 		 *            a set of flags
 		 * @return sum of numerical values of passed flags or 0
 		 */
-		public static String convertToModifiers(final Set<Flag> flags) {
-			if (flags == null) {
-				throw new IllegalArgumentException("Argument 'flag' must not be null.");
-			}
+		public static String convertToModifiers(@Nonnull final Set<Flag> flags) {
+			Check.notNull(flags, "flags");
 
 			final StringBuilder modifiers = new StringBuilder(8);
 			final Set<Flag> sortedFlags = new TreeSet<Flag>(FLAG_COMPARATOR);
@@ -127,10 +128,11 @@ public final class RegularExpressionConverter {
 		 * @param flag
 		 *            representation of a flag as a character
 		 * @return the matching enum value or {@code null}
-		 * @throws IllegalArgumentException
+		 * @throws net.sf.qualitycheck.exception.IllegalNegativeArgumentException
 		 *             if the given number is smaller than zero
 		 */
 		public static Flag evaluateByCharacter(final char flag) {
+			Check.notNegative(flag, "flag");
 			Flag result = null;
 			for (final Flag value : values()) {
 				if (value.getCharacter() == flag) {
@@ -148,14 +150,11 @@ public final class RegularExpressionConverter {
 		 * @param flag
 		 *            representation of a flag as a character
 		 * @return the matching enum value or {@code null}
-		 * @throws IllegalArgumentException
+		 * @throws net.sf.qualitycheck.exception.IllegalNegativeArgumentException
 		 *             if the given number is smaller than zero
 		 */
 		public static Flag evaluateByNumber(final int flag) {
-			if (flag < 0) {
-				throw new IllegalArgumentException("Argument 'flag' must be greater zero.");
-			}
-
+			Check.notNegative(flag, "flag");
 			Flag result = null;
 			for (final Flag value : values()) {
 				if (value.getNumber() == flag) {
@@ -172,11 +171,12 @@ public final class RegularExpressionConverter {
 		 * @param bitmask
 		 *            Sum of numerical values of flags
 		 * @return a set of flags
+		 * @throws net.sf.qualitycheck.exception.IllegalNegativeArgumentException
+		 *             if the given number is smaller than zero
 		 */
-		public static Set<Flag> parse(final int bitmask) {
-			if (bitmask < 0) {
-				throw new IllegalArgumentException("Argument 'flag' must be greater zero.");
-			}
+		@Nonnull
+		public static Set<Flag> parse(@Nonnegative final int bitmask) {
+			Check.notNegative(bitmask, "bitmask");
 
 			final Set<Flag> flags = new HashSet<Flag>();
 			for (final Flag flag : values()) {
@@ -194,10 +194,8 @@ public final class RegularExpressionConverter {
 		 *            modifiers as string of a PERL style regular expression
 		 * @return a set of modifier flags that may include CASE_INSENSITIVE, MULTILINE, DOTALL and COMMENTS
 		 */
-		public static Set<Flag> parse(final String modifiers) {
-			if (modifiers == null) {
-				throw new IllegalArgumentException("Argument 'modifiers' must not be null.");
-			}
+		public static Set<Flag> parse(@Nonnull final String modifiers) {
+			Check.notNull(modifiers, "modifiers");
 
 			final Set<Flag> flags = new HashSet<Flag>();
 			for (int i = 0; i < modifiers.length(); i++) {
@@ -264,7 +262,7 @@ public final class RegularExpressionConverter {
 	 *            A PERL style regular expression
 	 * @return Pattern
 	 */
-	public static Pattern convertPerlRegexToPattern(final String regex) {
+	public static Pattern convertPerlRegexToPattern(@Nonnull final String regex) {
 		return convertPerlRegexToPattern(regex, false);
 	}
 
@@ -279,10 +277,8 @@ public final class RegularExpressionConverter {
 	 *            Fault-tolerant translating the flags
 	 * @return Pattern
 	 */
-	public static Pattern convertPerlRegexToPattern(final String regex, final boolean faultTolerant) {
-		if (regex == null) {
-			throw new IllegalArgumentException("Argument 'regex' must not be null.");
-		}
+	public static Pattern convertPerlRegexToPattern(@Nonnull final String regex, @Nonnull final boolean faultTolerant) {
+		Check.notNull(regex, "regex");
 
 		String pattern = regex.trim();
 		final Matcher matcher = faultTolerant ? PERL_STYLE_TOLERANT.matcher(pattern) : PERL_STYLE.matcher(pattern);

@@ -19,6 +19,10 @@ import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
+import javax.annotation.Nonnegative;
+import javax.annotation.Nonnull;
+
+import net.sf.qualitycheck.Check;
 import net.sf.uadetector.OperatingSystemFamily;
 import net.sf.uadetector.UserAgent;
 import net.sf.uadetector.VersionNumber;
@@ -55,13 +59,11 @@ public final class OperatingSystem {
 		 * 
 		 * @param builder
 		 *            builder containing the data to be copied
-		 * @throws IllegalArgumentException
+		 * @throws net.sf.qualitycheck.exception.IllegalNullArgumentException
 		 *             if the given argument is {@code null}
 		 */
-		protected Builder(final Builder builder) {
-			if (builder == null) {
-				throw new IllegalArgumentException("Argument 'builder' must not be null.");
-			}
+		protected Builder(@Nonnull final Builder builder) {
+			Check.notNull(builder, "builder");
 
 			this.family = builder.family;
 			this.icon = builder.icon;
@@ -74,15 +76,15 @@ public final class OperatingSystem {
 			this.url = builder.url;
 		}
 
-		public Builder addPatternSet(final Set<OperatingSystemPattern> patternSet) {
-			if (patternSet == null) {
-				throw new IllegalArgumentException("Argument 'patternSet' must not be null.");
-			}
+		@Nonnull
+		public Builder addPatternSet(@Nonnull final Set<OperatingSystemPattern> patternSet) {
+			Check.notNull(patternSet, "patternSet");
 
 			this.patternSet.addAll(patternSet);
 			return this;
 		}
 
+		@Nonnull
 		public OperatingSystem build() {
 			return new OperatingSystem(family, icon, id, infoUrl, name, patternSet, producer, producerUrl, url);
 		}
@@ -92,6 +94,7 @@ public final class OperatingSystem {
 		 * 
 		 * @return a new instance of the current builder, never {@code null}
 		 */
+		@Nonnull
 		public OperatingSystem.Builder copy() {
 			return new Builder(this);
 		}
@@ -132,82 +135,73 @@ public final class OperatingSystem {
 			return url;
 		}
 
-		public Builder setFamily(final String family) {
-			if (family == null) {
-				throw new IllegalArgumentException("Argument 'family' must not be null.");
-			}
+		@Nonnull
+		public Builder setFamily(@Nonnull final String family) {
+			Check.notNull(family, "family");
 
 			this.family = family;
 			return this;
 		}
 
-		public Builder setIcon(final String icon) {
-			if (icon == null) {
-				throw new IllegalArgumentException("Argument 'icon' must not be null.");
-			}
+		@Nonnull
+		public Builder setIcon(@Nonnull final String icon) {
+			Check.notNull(icon, "icon");
 
 			this.icon = icon;
 			return this;
 		}
 
-		public Builder setId(final int id) {
-			if (id < 0) {
-				throw new IllegalArgumentException("Argument 'id' must not be smaller than 0.");
-			}
+		@Nonnull
+		public Builder setId(@Nonnegative final int id) {
+			Check.notNegative(id, "id");
 
 			this.id = id;
 			return this;
 		}
 
-		public Builder setId(final String id) {
-			if (id == null) {
-				throw new IllegalArgumentException("Argument 'id' must not be null.");
-			}
+		@Nonnull
+		public Builder setId(@Nonnull final String id) {
+			Check.notEmpty(id, "id");
 
 			this.setId(Integer.parseInt(id.trim()));
 			return this;
 		}
 
-		public Builder setInfoUrl(final String infoUrl) {
-			if (infoUrl == null) {
-				throw new IllegalArgumentException("Argument 'infoUrl' must not be null.");
-			}
+		@Nonnull
+		public Builder setInfoUrl(@Nonnull final String infoUrl) {
+			Check.notNull(infoUrl, "infoUrl");
 
 			this.infoUrl = infoUrl;
 			return this;
 		}
 
-		public Builder setName(final String name) {
-			if (name == null) {
-				throw new IllegalArgumentException("Argument 'name' must not be null.");
-			}
+		@Nonnull
+		public Builder setName(@Nonnull final String name) {
+			Check.notNull(name, "name");
 
 			this.name = name;
 			return this;
 		}
 
-		public Builder setProducer(final String producer) {
-			if (producer == null) {
-				throw new IllegalArgumentException("Argument 'producer' must not be null.");
-			}
+		@Nonnull
+		public Builder setProducer(@Nonnull final String producer) {
+			Check.notNull(producer, "producer");
 
 			this.producer = producer;
 			return this;
 		}
 
-		public Builder setProducerUrl(final String producerUrl) {
-			if (producerUrl == null) {
-				throw new IllegalArgumentException("Argument 'producerUrl' must not be null.");
-			}
+		@Nonnull
+		public Builder setProducerUrl(@Nonnull final String producerUrl) {
+			Check.notNull(producerUrl, "producerUrl");
 
 			this.producerUrl = producerUrl;
 			return this;
 		}
 
-		public Builder setUrl(final String url) {
-			if (url == null) {
-				throw new IllegalArgumentException("Argument 'url' must not be null.");
-			}
+		@Nonnull
+		public Builder setUrl(@Nonnull final String url) {
+			Check.notNull(url, "url");
 
 			this.url = url;
 			return this;
@@ -215,47 +209,37 @@ public final class OperatingSystem {
 
 	}
 
+	@Nonnull
 	private final String family;
+	@Nonnull
 	private final String icon;
+	@Nonnegative
 	private final int id;
+	@Nonnull
 	private final String infoUrl;
+	@Nonnull
 	private final String name;
+	@Nonnull
 	private final SortedSet<OperatingSystemPattern> patternSet;
+	@Nonnull
 	private final String producer;
+	@Nonnull
 	private final String producerUrl;
 
 	private final String url;
 
-	public OperatingSystem(final String family, final String icon, final int id, final String infoUrl, final String name,
-			final SortedSet<OperatingSystemPattern> patternSet, final String producer, final String producerUrl, final String url) {
-
-		if (family == null) {
-			throw new IllegalArgumentException("Argument 'family' must not be null.");
-		}
-		if (icon == null) {
-			throw new IllegalArgumentException("Argument 'icon' must not be null.");
-		}
-		if (id < 0) {
-			throw new IllegalArgumentException("Argument 'id' must not be smaller than 0.");
-		}
-		if (infoUrl == null) {
-			throw new IllegalArgumentException("Argument 'infoUrl' must not be null.");
-		}
-		if (name == null) {
-			throw new IllegalArgumentException("Argument 'name' must not be null.");
-		}
-		if (patternSet == null) {
-			throw new IllegalArgumentException("Argument 'patternSet' must not be null.");
-		}
-		if (producer == null) {
-			throw new IllegalArgumentException("Argument 'producer' must not be null.");
-		}
-		if (producerUrl == null) {
-			throw new IllegalArgumentException("Argument 'producerUrl' must not be null.");
-		}
-		if (url == null) {
-			throw new IllegalArgumentException("Argument 'url' must not be null.");
-		}
+	public OperatingSystem(@Nonnull final String family, @Nonnull final String icon, @Nonnegative final int id,
+			@Nonnull final String infoUrl, @Nonnull final String name, @Nonnull final SortedSet<OperatingSystemPattern> patternSet,
+			@Nonnull final String producer, @Nonnull final String producerUrl, @Nonnull final String url) {
+		Check.notNull(family, "family");
+		Check.notNull(icon, "icon");
+		Check.notNegative(id, "id");
+		Check.notNull(infoUrl, "infoUrl");
+		Check.notNull(name, "name");
+		Check.notNull(patternSet, "patternSet");
+		Check.notNull(producer, "producer");
+		Check.notNull(producerUrl, "producerUrl");
+		Check.notNull(url, "url");
 
 		this.family = family;
 		this.id = id;
@@ -274,7 +258,7 @@ public final class OperatingSystem {
 	 * @param builder
 	 *            user agent builder
 	 */
-	public void copyTo(final UserAgent.Builder builder) {
+	public void copyTo(@Nonnull final UserAgent.Builder builder) {
 		final OperatingSystemFamily f = OperatingSystemFamily.evaluate(family);
 		final VersionNumber version = VersionParser.parseOperatingSystemVersion(f, builder.getUserAgentString());
 		builder.setOperatingSystem(new net.sf.uadetector.OperatingSystem(f, family, icon, name, producer, producerUrl, url, version));

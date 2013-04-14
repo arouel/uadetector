@@ -15,8 +15,9 @@
  ******************************************************************************/
 package net.sf.uadetector;
 
-import org.junit.Assert;
+import net.sf.qualitycheck.exception.IllegalNullArgumentException;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 public class UserAgentFamilyTest {
@@ -48,7 +49,7 @@ public class UserAgentFamilyTest {
 		Assert.assertEquals(UserAgentFamily.MAIL_RU, UserAgentFamily.evaluate("Mail.RU_Bot/2.0"));
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void evaluate_null() {
 		UserAgentFamily.evaluate(null);
 	}
@@ -68,7 +69,7 @@ public class UserAgentFamilyTest {
 		Assert.assertEquals(UserAgentFamily.YAHOO, UserAgentFamily.evaluateByName("Yahoo!"));
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void evaluateByName_null() {
 		UserAgentFamily.evaluateByName(null);
 	}
@@ -88,7 +89,7 @@ public class UserAgentFamilyTest {
 		Assert.assertEquals(UserAgentFamily.ZOOMSPIDER, UserAgentFamily.evaluateByPattern("ZoomSpider (ZSEBOT)"));
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void evaluateByPattern_null() {
 		UserAgentFamily.evaluateByPattern(null);
 	}

@@ -15,6 +15,11 @@
  ******************************************************************************/
 package net.sf.uadetector.internal.data.domain;
 
+import javax.annotation.Nonnegative;
+import javax.annotation.Nonnull;
+
+import net.sf.qualitycheck.Check;
+
 public final class BrowserOperatingSystemMapping {
 
 	public static final class Builder {
@@ -33,10 +38,14 @@ public final class BrowserOperatingSystemMapping {
 		 * Build an instance of {@code BrowserOperatingSystemMapping}.
 		 * 
 		 * @return a new instance of {@code BrowserOperatingSystemMapping}
-		 * @throws IllegalArgumentException
+		 * @throws net.sf.qualitycheck.exception.IllegalNegativeArgumentException
+		 *             if one of the needed arguments to build an instance of {@code BrowserOperatingSystemMapping} is
+		 *             invalid
+		 * @throws net.sf.qualitycheck.exception.IllegalNullArgumentException
 		 *             if one of the needed arguments to build an instance of {@code BrowserOperatingSystemMapping} is
 		 *             invalid
 		 */
+		@Nonnull
 		public BrowserOperatingSystemMapping build() {
 			return new BrowserOperatingSystemMapping(browserId, operatingSystemId);
 		}
@@ -64,13 +73,12 @@ public final class BrowserOperatingSystemMapping {
 		 * 
 		 * @param browserId
 		 *            identification number
-		 * @throws IllegalArgumentException
+		 * @throws net.sf.qualitycheck.exception.IllegalNegativeArgumentException
 		 *             if the given number is smaller than {@code 0}
 		 */
-		public Builder setBrowserId(final int browserId) {
-			if (browserId < 0) {
-				throw new IllegalArgumentException("Argument 'browserId' can not be smaller than 0.");
-			}
+		@Nonnull
+		public Builder setBrowserId(@Nonnegative final int browserId) {
+			Check.notNegative(browserId, "browserId");
 
 			this.browserId = browserId;
 			return this;
@@ -81,17 +89,16 @@ public final class BrowserOperatingSystemMapping {
 		 * 
 		 * @param browserId
 		 *            identification number (as a {@code String)}
-		 * @throws IllegalArgumentException
+		 * @throws net.sf.qualitycheck.exception.IllegalNullArgumentException
 		 *             if the given argument is {@code null}
 		 * @throws NumberFormatException
 		 *             if the string can not be interpreted as a number
-		 * @throws IllegalArgumentException
+		 * @throws net.sf.qualitycheck.exception.IllegalNegativeArgumentException
 		 *             if the interpreted number is smaller than {@code 0}
 		 */
-		public Builder setBrowserId(final String browserId) {
-			if (browserId == null) {
-				throw new IllegalArgumentException("Argument 'browserId' must not be null.");
-			}
+		@Nonnull
+		public Builder setBrowserId(@Nonnull final String browserId) {
+			Check.notNull(browserId, "browserId");
 
 			this.setBrowserId(Integer.parseInt(browserId.trim()));
 			return this;
@@ -102,13 +109,12 @@ public final class BrowserOperatingSystemMapping {
 		 * 
 		 * @param operatingSystemId
 		 *            identification number
-		 * @throws IllegalArgumentException
+		 * @throws net.sf.qualitycheck.exception.IllegalNegativeArgumentException
 		 *             if the given number is smaller than {@code 0}
 		 */
-		public Builder setOperatingSystemId(final int operatingSystemId) {
-			if (operatingSystemId < 0) {
-				throw new IllegalArgumentException("Argument 'operatingSystemId' can not be smaller than 0.");
-			}
+		@Nonnull
+		public Builder setOperatingSystemId(@Nonnegative final int operatingSystemId) {
+			Check.notNegative(operatingSystemId, "operatingSystemId");
 
 			this.operatingSystemId = operatingSystemId;
 			return this;
@@ -119,17 +125,16 @@ public final class BrowserOperatingSystemMapping {
 		 * 
 		 * @param operatingSystemId
 		 *            identification number (as a {@code String)}
-		 * @throws IllegalArgumentException
+		 * @throws net.sf.qualitycheck.exception.IllegalNullArgumentException
 		 *             if the given argument is {@code null}
 		 * @throws NumberFormatException
 		 *             if the string can not be interpreted as a number
-		 * @throws IllegalArgumentException
+		 * @throws net.sf.qualitycheck.exception.IllegalNegativeArgumentException
 		 *             if the interpreted number is smaller than {@code 0}
 		 */
-		public Builder setOperatingSystemId(final String operatingSystemId) {
-			if (operatingSystemId == null) {
-				throw new IllegalArgumentException("Argument 'operatingSystemId' must not be null.");
-			}
+		@Nonnull
+		public Builder setOperatingSystemId(@Nonnull final String operatingSystemId) {
+			Check.notNull(operatingSystemId, "operatingSystemId");
 
 			this.setOperatingSystemId(Integer.parseInt(operatingSystemId.trim()));
 			return this;
@@ -140,27 +145,24 @@ public final class BrowserOperatingSystemMapping {
 	/**
 	 * ID of a browser entry
 	 */
+	@Nonnegative
 	private final int browserId;
 
 	/**
 	 * ID of a operating system entry
 	 */
+	@Nonnegative
 	private final int operatingSystemId;
 
 	/**
 	 * Constructs an instance of {@code BrowserOperatingSystemMapping}.
 	 * 
-	 * @throws IllegalArgumentException
-	 *             if one of the given arguments is smaller than null
+	 * @throws net.sf.qualitycheck.exception.IllegalNegativeArgumentException
+	 *             if one of the given arguments is smaller than {@code 0}
 	 */
-	public BrowserOperatingSystemMapping(final int browserId, final int operatingSystemId) {
-		if (browserId < 0) {
-			throw new IllegalArgumentException("Argument 'browserId' can not be smaller than 0.");
-		}
-
-		if (operatingSystemId < 0) {
-			throw new IllegalArgumentException("Argument 'operatingSystemId' can not be smaller than 0.");
-		}
+	public BrowserOperatingSystemMapping(@Nonnegative final int browserId, @Nonnegative final int operatingSystemId) {
+		Check.notNegative(browserId, "browserId");
+		Check.notNegative(operatingSystemId, "operatingSystemId");
 
 		this.browserId = browserId;
 		this.operatingSystemId = operatingSystemId;

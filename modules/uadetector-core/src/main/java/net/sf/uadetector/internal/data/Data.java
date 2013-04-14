@@ -27,6 +27,10 @@ import java.util.TreeMap;
 import java.util.TreeSet;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import javax.annotation.Nonnull;
+
+import net.sf.qualitycheck.Check;
+import net.sf.qualitycheck.exception.IllegalStateOfArgumentException;
 import net.sf.uadetector.internal.data.domain.Browser;
 import net.sf.uadetector.internal.data.domain.BrowserOperatingSystemMapping;
 import net.sf.uadetector.internal.data.domain.BrowserPattern;
@@ -173,34 +177,42 @@ public class Data {
 			return result;
 		}
 
+		@Nonnull
 		private final Map<Integer, BrowserType> browserTypes = new HashMap<Integer, BrowserType>();
 
+		@Nonnull
 		private final Map<Integer, SortedSet<BrowserPattern>> browserPatterns = new HashMap<Integer, SortedSet<BrowserPattern>>();
 
+		@Nonnull
 		private final Map<Integer, SortedSet<OperatingSystemPattern>> operatingSystemPatterns = new HashMap<Integer, SortedSet<OperatingSystemPattern>>();
 
+		@Nonnull
 		private final Map<Integer, Browser.Builder> browserBuilders = new HashMap<Integer, Browser.Builder>();
 
+		@Nonnull
 		private final Set<Browser> browsers = new HashSet<Browser>();
 
+		@Nonnull
 		private final Map<Integer, OperatingSystem.Builder> operatingSystemBuilders = new HashMap<Integer, OperatingSystem.Builder>();
 
+		@Nonnull
 		private final Set<OperatingSystem> operatingSystems = new HashSet<OperatingSystem>();
 
+		@Nonnull
 		private final Set<Robot> robots = new HashSet<Robot>();
 
+		@Nonnull
 		private String version;
 
+		@Nonnull
 		private final Set<BrowserOperatingSystemMapping> browserOperatingSystemMappings = new HashSet<BrowserOperatingSystemMapping>();
 
 		private static final OrderedPatternComparator<BrowserPattern> BROWSER_PATTERN_COMPARATOR = new OrderedPatternComparator<BrowserPattern>();
 
 		private static final OrderedPatternComparator<OperatingSystemPattern> OS_PATTERN_COMPARATOR = new OrderedPatternComparator<OperatingSystemPattern>();
 
-		public Builder appendBrowser(final Browser browser) {
-			if (browser == null) {
-				throw new IllegalArgumentException("Argument 'browser' must not be null.");
-			}
+		public Builder appendBrowser(@Nonnull final Browser browser) {
+			Check.notNull(browser, "browser");
 
 			browsers.add(browser);
 			return this;
@@ -212,25 +224,22 @@ public class Data {
 		 * @param browserBuilder
 		 *            {@code Browser.Builder} to be copied and appended
 		 * @return this {@code Builder}, for chaining
-		 * @throws IllegalArgumentException
+		 * @throws net.sf.qualitycheck.exception.IllegalNullArgumentException
 		 *             if the given argument is {@code null}
-		 * @throws IllegalArgumentException
+		 * @throws net.sf.qualitycheck.exception.IllegalStateOfArgumentException
 		 *             if the ID of the given builder is invalid
-		 * @throws IllegalArgumentException
+		 * @throws net.sf.qualitycheck.exception.IllegalStateOfArgumentException
 		 *             if a builder with the same ID already exists
 		 */
-		public Builder appendBrowserBuilder(final Browser.Builder browserBuilder) {
-			if (browserBuilder == null) {
-				throw new IllegalArgumentException("Argument 'browserBuilder' must not be null.");
-			}
-			if (browserBuilder.getId() < 0) {
-				throw new IllegalArgumentException("The ID of argument 'browserBuilder' must not be smaller than 0.");
-			}
+		@Nonnull
+		public Builder appendBrowserBuilder(@Nonnull final Browser.Builder browserBuilder) {
+			Check.notNull(browserBuilder, "browserBuilder");
+			Check.notNegative(browserBuilder.getId(), "browserBuilder.getId()");
 			if (browserBuilder.getType() == null && browserBuilder.getTypeId() < 0) {
-				throw new IllegalArgumentException("A Type or Type-ID of argument 'browserBuilder' must be set.");
+				throw new IllegalStateOfArgumentException("A Type or Type-ID of argument 'browserBuilder' must be set.");
 			}
 			if (browserBuilders.containsKey(browserBuilder.getId())) {
-				throw new IllegalArgumentException("The browser builder '" + browserBuilder.getProducer() + " "
+				throw new IllegalStateOfArgumentException("The browser builder '" + browserBuilder.getProducer() + " "
 						+ browserBuilder.getFamily() + "' is already in the map.");
 			}
 
@@ -239,10 +248,9 @@ public class Data {
 			return this;
 		}
 
-		public Builder appendBrowserOperatingSystemMapping(final BrowserOperatingSystemMapping browserOsMapping) {
-			if (browserOsMapping == null) {
-				throw new IllegalArgumentException("Argument 'browserOsMapping' must not be null.");
-			}
+		@Nonnull
+		public Builder appendBrowserOperatingSystemMapping(@Nonnull final BrowserOperatingSystemMapping browserOsMapping) {
+			Check.notNull(browserOsMapping, "browserOsMapping");
 
 			browserOperatingSystemMappings.add(browserOsMapping);
 			return this;
@@ -254,14 +262,13 @@ public class Data {
 		 * 
 		 * @param pattern
 		 *            a pattern for a browser
-		 * @throws IllegalArgumentException
-		 *             if pattern is {@code null}
 		 * @return itself
+		 * @throws net.sf.qualitycheck.exception.IllegalNullArgumentException
+		 *             if the given argument is {@code null}
 		 */
-		public Builder appendBrowserPattern(final BrowserPattern pattern) {
-			if (pattern == null) {
-				throw new IllegalArgumentException("Argument 'pattern' must not be null.");
-			}
+		@Nonnull
+		public Builder appendBrowserPattern(@Nonnull final BrowserPattern pattern) {
+			Check.notNull(pattern, "pattern");
 			if (!browserPatterns.containsKey(pattern.getId())) {
 				browserPatterns.put(pattern.getId(), new TreeSet<BrowserPattern>(BROWSER_PATTERN_COMPARATOR));
 			}
@@ -270,19 +277,17 @@ public class Data {
 			return this;
 		}
 
-		public Builder appendBrowserType(final BrowserType type) {
-			if (type == null) {
-				throw new IllegalArgumentException("Argument 'type' must not be null.");
-			}
+		@Nonnull
+		public Builder appendBrowserType(@Nonnull final BrowserType type) {
+			Check.notNull(type, "type");
 
 			browserTypes.put(type.getId(), type);
 			return this;
 		}
 
-		public Builder appendOperatingSystem(final OperatingSystem operatingSystem) {
-			if (operatingSystem == null) {
-				throw new IllegalArgumentException("Argument 'operatingSystem' must not be null.");
-			}
+		@Nonnull
+		public Builder appendOperatingSystem(@Nonnull final OperatingSystem operatingSystem) {
+			Check.notNull(operatingSystem, "operatingSystem");
 
 			operatingSystems.add(operatingSystem);
 			return this;
@@ -294,21 +299,17 @@ public class Data {
 		 * @param operatingSystemBuilder
 		 *            {@code OperatingSystem.Builder} to be copied and appended
 		 * @return this {@code Builder}, for chaining
-		 * @throws IllegalArgumentException
+		 * @throws net.sf.qualitycheck.exception.IllegalNullArgumentException
 		 *             if the given argument is {@code null}
 		 * @throws IllegalArgumentException
 		 *             if the ID of the given builder is invalid
 		 * @throws IllegalArgumentException
 		 *             if a builder with the same ID already exists
 		 */
-		public Builder appendOperatingSystemBuilder(final OperatingSystem.Builder operatingSystemBuilder) {
-			if (operatingSystemBuilder == null) {
-				throw new IllegalArgumentException("Argument 'operatingSystemBuilder' must not be null.");
-			}
-
-			if (operatingSystemBuilder.getId() < 0) {
-				throw new IllegalArgumentException("The ID of argument 'operatingSystemBuilder' can not be smaller than 0.");
-			}
+		@Nonnull
+		public Builder appendOperatingSystemBuilder(@Nonnull final OperatingSystem.Builder operatingSystemBuilder) {
+			Check.notNull(operatingSystemBuilder, "operatingSystemBuilder");
+			Check.notNegative(operatingSystemBuilder.getId(), "operatingSystemBuilder.getId()");
 
 			final OperatingSystem.Builder builder = operatingSystemBuilder.copy();
 			operatingSystemBuilders.put(builder.getId(), builder);
@@ -321,14 +322,13 @@ public class Data {
 		 * 
 		 * @param pattern
 		 *            a pattern for a browser
-		 * @throws IllegalArgumentException
+		 * @throws net.sf.qualitycheck.exception.IllegalNullArgumentException
 		 *             if the pattern is {@code null}
 		 * @return itself
 		 */
-		public Builder appendOperatingSystemPattern(final OperatingSystemPattern pattern) {
-			if (pattern == null) {
-				throw new IllegalArgumentException("Argument 'pattern' must not be null.");
-			}
+		@Nonnull
+		public Builder appendOperatingSystemPattern(@Nonnull final OperatingSystemPattern pattern) {
+			Check.notNull(pattern, "pattern");
 
 			if (!operatingSystemPatterns.containsKey(pattern.getId())) {
 				operatingSystemPatterns.put(pattern.getId(), new TreeSet<OperatingSystemPattern>(OS_PATTERN_COMPARATOR));
@@ -338,15 +338,15 @@ public class Data {
 			return this;
 		}
 
-		public Builder appendRobot(final Robot robot) {
-			if (robot == null) {
-				throw new IllegalArgumentException("Argument 'robot' must not be null.");
-			}
+		@Nonnull
+		public Builder appendRobot(@Nonnull final Robot robot) {
+			Check.notNull(robot, "robot");
 
 			robots.add(robot);
 			return this;
 		}
 
+		@Nonnull
 		public Data build() {
 			addTypeToBrowser(browserBuilders, browserTypes);
 			addPatternToBrowser(browserBuilders, browserPatterns);
@@ -367,10 +367,9 @@ public class Data {
 			return new Data(browserSet, osSet, robots, patternBrowserMap, patternOsMap, version);
 		}
 
-		public Builder setVersion(final String version) {
-			if (version == null) {
-				throw new IllegalArgumentException("Argument 'version' must not be null.");
-			}
+		@Nonnull
+		public Builder setVersion(@Nonnull final String version) {
+			Check.notNull(version, "version");
 
 			this.version = version;
 			return this;
@@ -399,28 +398,15 @@ public class Data {
 
 	private final SortedMap<OperatingSystemPattern, OperatingSystem> patternOsMap;
 
-	public Data(final Set<Browser> browsers, final Set<OperatingSystem> operatingSystems, final Set<Robot> robots,
-			final SortedMap<BrowserPattern, Browser> patternBrowserMap,
-			final SortedMap<OperatingSystemPattern, OperatingSystem> patternOsMap, final String version) {
-
-		if (browsers == null) {
-			throw new IllegalArgumentException("Argument 'browsers' must not be null.");
-		}
-		if (operatingSystems == null) {
-			throw new IllegalArgumentException("Argument 'operatingSystems' must not be null.");
-		}
-		if (robots == null) {
-			throw new IllegalArgumentException("Argument 'robots' must not be null.");
-		}
-		if (patternBrowserMap == null) {
-			throw new IllegalArgumentException("Argument 'patternBrowserMap' must not be null.");
-		}
-		if (patternOsMap == null) {
-			throw new IllegalArgumentException("Argument 'patternOsMap' must not be null.");
-		}
-		if (version == null) {
-			throw new IllegalArgumentException("Argument 'version' must not be null.");
-		}
+	public Data(@Nonnull final Set<Browser> browsers, @Nonnull final Set<OperatingSystem> operatingSystems,
+			@Nonnull final Set<Robot> robots, @Nonnull final SortedMap<BrowserPattern, Browser> patternBrowserMap,
+			@Nonnull final SortedMap<OperatingSystemPattern, OperatingSystem> patternOsMap, @Nonnull final String version) {
+		Check.notNull(browsers, "browsers");
+		Check.notNull(operatingSystems, "operatingSystems");
+		Check.notNull(robots, "robots");
+		Check.notNull(patternBrowserMap, "patternBrowserMap");
+		Check.notNull(patternOsMap, "patternOsMap");
+		Check.notNull(version, "version");
 
 		this.browsers = browsers;
 		this.operatingSystems = operatingSystems;
@@ -463,22 +449,27 @@ public class Data {
 		return true;
 	}
 
+	@Nonnull
 	public Set<Browser> getBrowsers() {
 		return Collections.unmodifiableSet(browsers);
 	}
 
+	@Nonnull
 	public Set<OperatingSystem> getOperatingSystems() {
 		return Collections.unmodifiableSet(operatingSystems);
 	}
 
+	@Nonnull
 	public SortedMap<BrowserPattern, Browser> getPatternBrowserMap() {
 		return patternBrowserMap;
 	}
 
+	@Nonnull
 	public SortedMap<OperatingSystemPattern, OperatingSystem> getPatternOsMap() {
 		return patternOsMap;
 	}
 
+	@Nonnull
 	public Set<Robot> getRobots() {
 		return Collections.unmodifiableSet(robots);
 	}
@@ -488,6 +479,7 @@ public class Data {
 	 * 
 	 * @return version of UAS data
 	 */
+	@Nonnull
 	public String getVersion() {
 		return version;
 	}
@@ -505,6 +497,7 @@ public class Data {
 		return result;
 	}
 
+	@Nonnull
 	public String toStats() {
 		final StringBuilder builder = new StringBuilder();
 		builder.append("UAS data stats\n");

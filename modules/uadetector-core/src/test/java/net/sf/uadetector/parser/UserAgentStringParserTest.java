@@ -15,6 +15,7 @@
  ******************************************************************************/
 package net.sf.uadetector.parser;
 
+import net.sf.qualitycheck.exception.IllegalNullArgumentException;
 import net.sf.uadetector.OperatingSystem;
 import net.sf.uadetector.OperatingSystemFamily;
 import net.sf.uadetector.UserAgent;
@@ -36,7 +37,7 @@ public class UserAgentStringParserTest {
 
 	private static final UserAgentStringParserImpl<DataStore> PARSER = new UserAgentStringParserImpl<DataStore>(new TestXmlDataStore());
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void construct_stream_null() throws Exception {
 		new UserAgentStringParserImpl<DataStore>(null);
 	}

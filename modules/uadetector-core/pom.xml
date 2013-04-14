@@ -37,6 +37,18 @@
 
 	<dependencies>
 
+		<!-- Quality-Check -->
+		<dependency>
+			<groupId>net.sf.qualitycheck</groupId>
+			<artifactId>quality-check</artifactId>
+		</dependency>
+
+		<!-- JSR-305 annotations -->
+		<dependency>
+			<groupId>com.google.code.findbugs</groupId>
+			<artifactId>jsr305</artifactId>
+		</dependency>
+
 		<!-- Logging -->
 		<dependency>
 			<groupId>org.slf4j</groupId>

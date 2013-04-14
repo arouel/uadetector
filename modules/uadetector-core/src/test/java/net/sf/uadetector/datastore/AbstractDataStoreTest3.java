@@ -18,6 +18,7 @@ package net.sf.uadetector.datastore;
 import java.net.MalformedURLException;
 import java.nio.charset.Charset;
 
+import net.sf.qualitycheck.exception.IllegalNullArgumentException;
 import net.sf.uadetector.datareader.DataReader;
 import net.sf.uadetector.datareader.XmlDataReader;
 
@@ -49,17 +50,17 @@ public class AbstractDataStoreTest3 {
 	 */
 	private static final String VERSION_URL = AbstractDataStoreTest2.class.getClassLoader().getResource("uas_newer.version").toString();
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void construct_charset_null() throws MalformedURLException {
 		new TestDataStore(new XmlDataReader(), DATA_URL, VERSION_URL, null);
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void construct_dataReader_null() throws MalformedURLException {
 		new TestDataStore(null, DATA_URL, VERSION_URL, CHARSET);
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void construct_dataUrl_null() throws MalformedURLException {
 		new TestDataStore(new XmlDataReader(), null, VERSION_URL, CHARSET);
 	}
@@ -82,7 +83,7 @@ public class AbstractDataStoreTest3 {
 		new TestDataStore(reader, unreachable, unreachable, CHARSET);
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void construct_versionUrl_null() throws MalformedURLException {
 		new TestDataStore(new XmlDataReader(), DATA_URL, null, CHARSET);
 	}

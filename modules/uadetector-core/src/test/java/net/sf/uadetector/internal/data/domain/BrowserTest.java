@@ -19,6 +19,8 @@ import java.util.SortedSet;
 import java.util.TreeSet;
 import java.util.regex.Pattern;
 
+import net.sf.qualitycheck.exception.IllegalNegativeArgumentException;
+import net.sf.qualitycheck.exception.IllegalNullArgumentException;
 import net.sf.uadetector.UserAgent;
 import net.sf.uadetector.UserAgent.Builder;
 import net.sf.uadetector.UserAgentFamily;
@@ -28,7 +30,7 @@ import org.junit.Test;
 
 public class BrowserTest {
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void construct_family_null() {
 		final int id = 1;
 		final String icon = "icon";
@@ -44,7 +46,7 @@ public class BrowserTest {
 		new Browser(id, type, family, url, producer, producerUrl, icon, infoUrl, patternSet, operatingSystem);
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void construct_icon_null() {
 		final int id = 1;
 		final String icon = null;
@@ -60,7 +62,7 @@ public class BrowserTest {
 		new Browser(id, type, family, url, producer, producerUrl, icon, infoUrl, patternSet, operatingSystem);
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNegativeArgumentException.class)
 	public void construct_id_toSmall() {
 		final int id = -1;
 		final String icon = "icon";
@@ -76,7 +78,7 @@ public class BrowserTest {
 		new Browser(id, type, family, url, producer, producerUrl, icon, infoUrl, patternSet, operatingSystem);
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void construct_infoUrl_null() {
 		final int id = 1;
 		final String icon = "icon";
@@ -107,7 +109,7 @@ public class BrowserTest {
 		new Browser(id, type, family, url, producer, producerUrl, icon, infoUrl, patternSet, operatingSystem);
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void construct_patternSet_null() {
 		final int id = 1;
 		final String icon = "icon";
@@ -123,7 +125,7 @@ public class BrowserTest {
 		new Browser(id, type, family, url, producer, producerUrl, icon, infoUrl, patternSet, operatingSystem);
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void construct_producer_null() {
 		final int id = 1;
 		final String icon = "icon";
@@ -139,7 +141,7 @@ public class BrowserTest {
 		new Browser(id, type, family, url, producer, producerUrl, icon, infoUrl, patternSet, operatingSystem);
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void construct_producerUrl_null() {
 		final int id = 1;
 		final String icon = "icon";
@@ -155,7 +157,7 @@ public class BrowserTest {
 		new Browser(id, type, family, url, producer, producerUrl, icon, infoUrl, patternSet, operatingSystem);
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void construct_type_null() {
 		final int id = 1;
 		final String icon = "icon";
@@ -171,7 +173,7 @@ public class BrowserTest {
 		new Browser(id, type, family, url, producer, producerUrl, icon, infoUrl, patternSet, operatingSystem);
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void construct_url_null() {
 		final int id = 1;
 		final String icon = "icon";

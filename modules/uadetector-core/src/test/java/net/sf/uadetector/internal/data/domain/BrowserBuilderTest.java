@@ -18,6 +18,9 @@ package net.sf.uadetector.internal.data.domain;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
+import net.sf.qualitycheck.exception.IllegalEmptyArgumentException;
+import net.sf.qualitycheck.exception.IllegalNegativeArgumentException;
+import net.sf.qualitycheck.exception.IllegalNullArgumentException;
 import net.sf.uadetector.UserAgentFamily;
 import net.sf.uadetector.internal.data.domain.Browser.Builder;
 
@@ -26,7 +29,7 @@ import org.junit.Test;
 
 public class BrowserBuilderTest {
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void construct_builder_null() {
 		new Browser.Builder(null);
 	}
@@ -78,12 +81,12 @@ public class BrowserBuilderTest {
 		Assert.assertEquals("u1", copy2.getUrl());
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void setFamily_null() {
 		new Browser.Builder().setFamily(null);
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void setIcon_null() {
 		new Browser.Builder().setIcon(null);
 	}
@@ -93,12 +96,12 @@ public class BrowserBuilderTest {
 		new Browser.Builder().setId("abc");
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalEmptyArgumentException.class)
 	public void setId_emptyString() {
 		new Browser.Builder().setId("");
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void setId_null() {
 		new Browser.Builder().setId(null);
 	}
@@ -113,57 +116,57 @@ public class BrowserBuilderTest {
 		Assert.assertTrue(b1.equals(b2));
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNegativeArgumentException.class)
 	public void setId_toSmall() {
 		new Browser.Builder().setId(-1);
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void setInfoUrl_null() {
 		new Browser.Builder().setInfoUrl(null);
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void setOperatingSystem_null() {
 		new Browser.Builder().setOperatingSystem(null);
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void setPatternSet_null() {
 		new Browser.Builder().setPatternSet(null);
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void setProducer_null() {
 		new Browser.Builder().setProducer(null);
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void setProducerUrl_null() {
 		new Browser.Builder().setProducerUrl(null);
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void setType_null() {
 		new Browser.Builder().setType(null);
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalEmptyArgumentException.class)
 	public void setTypeId_emptyString() {
 		new Browser.Builder().setTypeId("");
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void setTypeId_null() {
 		new Browser.Builder().setTypeId(null);
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNegativeArgumentException.class)
 	public void setTypeId_toSmall() {
 		new Browser.Builder().setTypeId(-1);
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void setUrl_null() {
 		new Browser.Builder().setUrl(null);
 	}

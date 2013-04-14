@@ -15,9 +15,10 @@
  ******************************************************************************/
 package net.sf.uadetector;
 
-import org.junit.Assert;
+import net.sf.qualitycheck.exception.IllegalNullArgumentException;
 import net.sf.uadetector.internal.data.domain.Robot;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 public class UserAgentTypeTest {
@@ -37,7 +38,7 @@ public class UserAgentTypeTest {
 		Assert.assertEquals(UserAgentType.ROBOT, UserAgentType.evaluateByTypeName(Robot.TYPENAME));
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void evaluateByType_null() {
 		UserAgentType.evaluateByTypeName(null);
 	}

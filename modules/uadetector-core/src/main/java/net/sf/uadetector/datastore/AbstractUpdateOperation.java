@@ -9,6 +9,10 @@ import java.nio.charset.Charset;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
+import net.sf.qualitycheck.Check;
 import net.sf.uadetector.internal.util.DaemonThreadFactory;
 
 import org.slf4j.Logger;
@@ -72,7 +76,8 @@ abstract class AbstractUpdateOperation implements UpdateOperation {
 	 * @throws IOException
 	 *             if an I/O exception occurs
 	 */
-	private static String retrieveRemoteVersion(final URL url, final Charset charset) throws IOException {
+	@Nullable
+	private static String retrieveRemoteVersion(@Nonnull final URL url, @Nonnull final Charset charset) throws IOException {
 		final InputStream stream = url.openStream();
 		final InputStreamReader reader = new InputStreamReader(stream, charset);
 		final LineNumberReader lnr = new LineNumberReader(reader);
@@ -98,10 +103,8 @@ abstract class AbstractUpdateOperation implements UpdateOperation {
 	 */
 	private final RefreshableDataStore store;
 
-	public AbstractUpdateOperation(final RefreshableDataStore dataStore) {
-		if (dataStore == null) {
-			throw new IllegalArgumentException("Argument 'dataStore' must not be null.");
-		}
+	public AbstractUpdateOperation(@Nonnull final RefreshableDataStore dataStore) {
+		Check.notNull(dataStore, "dataStore");
 		store = dataStore;
 	}
 
@@ -110,6 +113,7 @@ abstract class AbstractUpdateOperation implements UpdateOperation {
 	 * 
 	 * @return current version of UAS data
 	 */
+	@Nonnull
 	private String getCurrentVersion() {
 		return store.getData().getVersion();
 	}

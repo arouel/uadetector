@@ -1,5 +1,7 @@
 package net.sf.uadetector.datastore;
 
+import javax.annotation.Nonnegative;
+
 /**
  * Defines an update operation which can be executed within a executor service.
  * 
@@ -10,6 +12,7 @@ public interface UpdateOperation extends Runnable {
 	/**
 	 * The default interval to check for updates is once per day
 	 */
+	@Nonnegative
 	long DEFAULT_UPDATE_INTERVAL = 1000 * 60 * 60 * 24;
 
 	/**
@@ -23,6 +26,7 @@ public interface UpdateOperation extends Runnable {
 	 * 
 	 * @return time of the last update check in milliseconds
 	 */
+	@Nonnegative
 	long getLastUpdateCheck();
 
 }

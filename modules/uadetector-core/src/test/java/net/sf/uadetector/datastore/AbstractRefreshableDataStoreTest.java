@@ -3,6 +3,8 @@ package net.sf.uadetector.datastore;
 import java.util.HashSet;
 import java.util.TreeMap;
 
+import net.sf.qualitycheck.exception.IllegalNullArgumentException;
+import net.sf.qualitycheck.exception.IllegalStateOfArgumentException;
 import net.sf.uadetector.internal.data.Data;
 import net.sf.uadetector.internal.data.domain.Browser;
 import net.sf.uadetector.internal.data.domain.BrowserPattern;
@@ -15,7 +17,7 @@ import org.junit.Test;
 
 public class AbstractRefreshableDataStoreTest {
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void setData_null() {
 		final TestXmlDataStore store = new TestXmlDataStore();
 		store.setData(null);
@@ -30,13 +32,13 @@ public class AbstractRefreshableDataStoreTest {
 		Assert.assertSame(data2, store.getData());
 	}
 
-	@Test(expected = IllegalStateException.class)
+	@Test(expected = IllegalStateOfArgumentException.class)
 	public void setData_withEmptyData() {
 		final TestXmlDataStore store = new TestXmlDataStore();
 		store.setData(Data.EMPTY);
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void setUpdateOperation_null() {
 		final TestXmlDataStore store = new TestXmlDataStore();
 		store.setUpdateOperation(null);

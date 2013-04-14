@@ -17,6 +17,10 @@ package net.sf.uadetector.internal.data.domain;
 
 import java.util.regex.Pattern;
 
+import javax.annotation.Nonnegative;
+import javax.annotation.Nonnull;
+
+import net.sf.qualitycheck.Check;
 import net.sf.uadetector.internal.util.RegularExpressionConverter;
 
 /**
@@ -43,6 +47,7 @@ public final class BrowserPattern implements OrderedPattern<BrowserPattern> {
 		/**
 		 * A compiled representation of a regular expression to detect a browser
 		 */
+		@Nonnull
 		private Pattern pattern;
 
 		/**
@@ -55,9 +60,12 @@ public final class BrowserPattern implements OrderedPattern<BrowserPattern> {
 		 * Builds a new instance of {@code BrowserPattern} and returns it.
 		 * 
 		 * @return a new instance of {@code BrowserPattern}
-		 * @throws IllegalArgumentException
+		 * @throws net.sf.qualitycheck.exception.IllegalNegativeArgumentException
+		 *             if one of the needed arguments to build an instance of {@code BrowserPattern} is invalid
+		 * @throws net.sf.qualitycheck.exception.IllegalNullArgumentException
 		 *             if one of the needed arguments to build an instance of {@code BrowserPattern} is invalid
 		 */
+		@Nonnull
 		public BrowserPattern build() {
 			return new BrowserPattern(id, pattern, position);
 		}
@@ -68,13 +76,12 @@ public final class BrowserPattern implements OrderedPattern<BrowserPattern> {
 		 * @param id
 		 *            identification number
 		 * @return this {@code Builder}, for chaining
-		 * @throws IllegalArgumentException
+		 * @throws net.sf.qualitycheck.exception.IllegalNegativeArgumentException
 		 *             if the given integer is smaller than {@code 0}
 		 */
-		public Builder setId(final int id) {
-			if (id < 0) {
-				throw new IllegalArgumentException("Argument 'id' must not be smaller than 0.");
-			}
+		@Nonnull
+		public Builder setId(@Nonnegative final int id) {
+			Check.notNegative(id, "id");
 
 			this.id = id;
 			return this;
@@ -87,17 +94,16 @@ public final class BrowserPattern implements OrderedPattern<BrowserPattern> {
 		 * @param id
 		 *            ID of a browser pattern as string
 		 * @return this {@code Builder}, for chaining
-		 * @throws IllegalArgumentException
+		 * @throws net.sf.qualitycheck.exception.IllegalNullArgumentException
 		 *             if the given argument is {@code null}
 		 * @throws NumberFormatException
 		 *             if the given string is not parsable as integer
-		 * @throws IllegalArgumentException
+		 * @throws net.sf.qualitycheck.exception.IllegalNegativeArgumentException
 		 *             if the parsed integer is smaller than {@code 0}
 		 */
-		public Builder setId(final String id) {
-			if (id == null) {
-				throw new IllegalArgumentException("Argument 'id' must not be null.");
-			}
+		@Nonnull
+		public Builder setId(@Nonnull final String id) {
+			Check.notEmpty(id, "id");
 
 			this.setId(Integer.parseInt(id.trim()));
 			return this;
@@ -110,10 +116,9 @@ public final class BrowserPattern implements OrderedPattern<BrowserPattern> {
 		 *            compiled representation of a regular expression
 		 * @return this {@code Builder}, for chaining
 		 */
-		public Builder setPattern(final Pattern pattern) {
-			if (pattern == null) {
-				throw new IllegalArgumentException("Argument 'pattern' must not be null.");
-			}
+		@Nonnull
+		public Builder setPattern(@Nonnull final Pattern pattern) {
+			Check.notNull(pattern, "pattern");
 
 			this.pattern = pattern;
 			return this;
@@ -126,10 +131,9 @@ public final class BrowserPattern implements OrderedPattern<BrowserPattern> {
 		 *            PERL style regular expression to be converted
 		 * @return this {@code Builder}, for chaining
 		 */
-		public Builder setPerlRegularExpression(final String regex) {
-			if (regex == null) {
-				throw new IllegalArgumentException("Argument 'regex' must not be null.");
-			}
+		@Nonnull
+		public Builder setPerlRegularExpression(@Nonnull final String regex) {
+			Check.notEmpty(regex, "regex");
 
 			this.setPattern(RegularExpressionConverter.convertPerlRegexToPattern(regex));
 			return this;
@@ -141,13 +145,12 @@ public final class BrowserPattern implements OrderedPattern<BrowserPattern> {
 		 * @param position
 		 *            position of a browser pattern
 		 * @return this {@code Builder}, for chaining
-		 * @throws IllegalArgumentException
+		 * @throws net.sf.qualitycheck.exception.IllegalNegativeArgumentException
 		 *             if the given integer is smaller than {@code 0}
 		 */
-		public Builder setPosition(final int position) {
-			if (position < 0) {
-				throw new IllegalArgumentException("Argument 'position' must not be null.");
-			}
+		@Nonnull
+		public Builder setPosition(@Nonnegative final int position) {
+			Check.notNegative(position, "position");
 
 			this.position = position;
 			return this;
@@ -160,17 +163,16 @@ public final class BrowserPattern implements OrderedPattern<BrowserPattern> {
 		 * @param position
 		 *            position of a browser pattern as string
 		 * @return this {@code Builder}, for chaining
-		 * @throws IllegalArgumentException
+		 * @throws net.sf.qualitycheck.exception.IllegalNullArgumentException
 		 *             if the given argument is {@code null}
 		 * @throws NumberFormatException
 		 *             if the given string is not parsable as integer
-		 * @throws IllegalArgumentException
+		 * @throws net.sf.qualitycheck.exception.IllegalNegativeArgumentException
 		 *             if the parsed integer is smaller than {@code 0}
 		 */
-		public Builder setPosition(final String position) {
-			if (position == null) {
-				throw new IllegalArgumentException("Argument 'position' must not be null.");
-			}
+		@Nonnull
+		public Builder setPosition(@Nonnull final String position) {
+			Check.notEmpty(position, "position");
 
 			this.setPosition(Integer.parseInt(position.trim()));
 			return this;
@@ -213,18 +215,10 @@ public final class BrowserPattern implements OrderedPattern<BrowserPattern> {
 	 */
 	private final int position;
 
-	public BrowserPattern(final int id, final Pattern pattern, final int position) {
-		if (id < 0) {
-			throw new IllegalArgumentException("Argument 'id' must not be smaller than 0.");
-		}
-
-		if (pattern == null) {
-			throw new IllegalArgumentException("Argument 'pattern' must not be null.");
-		}
-
-		if (position < 0) {
-			throw new IllegalArgumentException("Argument 'position' must not be smaller than 0.");
-		}
+	public BrowserPattern(@Nonnegative final int id, @Nonnull final Pattern pattern, @Nonnegative final int position) {
+		Check.notNegative(id, "id");
+		Check.notNull(pattern, "pattern");
+		Check.notNegative(position, "position");
 
 		this.id = id;
 		this.pattern = pattern;

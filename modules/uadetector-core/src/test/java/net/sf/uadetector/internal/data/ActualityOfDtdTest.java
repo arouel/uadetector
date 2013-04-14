@@ -23,7 +23,6 @@ import java.io.Reader;
 import java.net.URL;
 
 import org.junit.Assert;
-
 import org.junit.Test;
 
 public class ActualityOfDtdTest {

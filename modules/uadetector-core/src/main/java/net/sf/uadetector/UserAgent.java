@@ -17,6 +17,10 @@ package net.sf.uadetector;
 
 import java.io.Serializable;
 
+import javax.annotation.Nonnull;
+
+import net.sf.qualitycheck.Check;
+
 /**
  * {@code UserAgent} is an immutable entity that represents the informations about web-based client applications like
  * Web browsers, search engines or crawlers (spiders) as well as mobile phones, screen readers and braille browsers.
@@ -53,13 +57,12 @@ public final class UserAgent implements ReadableUserAgent, Serializable {
 			// default constructor
 		}
 
-		public Builder(final String userAgentString) {
-			if (userAgentString == null) {
-				throw new IllegalArgumentException("Argument 'userAgentString' must not be null.");
-			}
+		public Builder(@Nonnull final String userAgentString) {
+			Check.notNull(userAgentString, "userAgentString");
 			this.userAgentString = userAgentString;
 		}
 
+		@Nonnull
 		public UserAgent build() {
 			return new UserAgent(family, icon, name, operatingSystem, producer, producerUrl, type, typeName, url, versionNumber);
 		}
@@ -118,101 +121,89 @@ public final class UserAgent implements ReadableUserAgent, Serializable {
 			return versionNumber;
 		}
 
-		public Builder setFamily(final UserAgentFamily family) {
-			if (family == null) {
-				throw new IllegalArgumentException("Argument 'family' must not be null.");
-			}
+		@Nonnull
+		public Builder setFamily(@Nonnull final UserAgentFamily family) {
+			Check.notNull(family, "family");
 			this.family = family;
 			return this;
 		}
 
-		public Builder setIcon(final String icon) {
-			if (icon == null) {
-				throw new IllegalArgumentException("Argument 'icon' must not be null.");
-			}
+		@Nonnull
+		public Builder setIcon(@Nonnull final String icon) {
+			Check.notNull(icon, "icon");
 			this.icon = icon;
 			return this;
 		}
 
-		public Builder setName(final String name) {
-			if (name == null) {
-				throw new IllegalArgumentException("Argument 'name' must not be null.");
-			}
+		@Nonnull
+		public Builder setName(@Nonnull final String name) {
+			Check.notNull(name, "name");
 			this.name = name;
 			return this;
 		}
 
-		public Builder setOperatingSystem(final OperatingSystem operatingSystem) {
-			if (operatingSystem == null) {
-				throw new IllegalArgumentException("Argument 'operatingSystem' must not be null.");
-			}
+		@Nonnull
+		public Builder setOperatingSystem(@Nonnull final OperatingSystem operatingSystem) {
+			Check.notNull(operatingSystem, "operatingSystem");
 			this.operatingSystem = operatingSystem;
 			return this;
 		}
 
-		public Builder setOperatingSystem(final ReadableOperatingSystem os) {
-			if (os == null) {
-				throw new IllegalArgumentException("Argument 'os' must not be null.");
-			}
+		@Nonnull
+		public Builder setOperatingSystem(@Nonnull final ReadableOperatingSystem os) {
+			Check.notNull(os, "os");
 			this.operatingSystem = new OperatingSystem(os.getFamily(), os.getFamilyName(), os.getIcon(), os.getName(), os.getProducer(),
 					os.getProducerUrl(), os.getUrl(), os.getVersionNumber());
 			return this;
 		}
 
-		public Builder setProducer(final String producer) {
-			if (producer == null) {
-				throw new IllegalArgumentException("Argument 'producer' must not be null.");
-			}
+		@Nonnull
+		public Builder setProducer(@Nonnull final String producer) {
+			Check.notNull(producer, "producer");
 			this.producer = producer;
 			return this;
 		}
 
-		public Builder setProducerUrl(final String producerUrl) {
-			if (producerUrl == null) {
-				throw new IllegalArgumentException("Argument 'producerUrl' must not be null.");
-			}
+		@Nonnull
+		public Builder setProducerUrl(@Nonnull final String producerUrl) {
+			Check.notNull(producerUrl, "producerUrl");
 			this.producerUrl = producerUrl;
 			return this;
 		}
 
-		public Builder setType(final UserAgentType type) {
-			if (type == null) {
-				throw new IllegalArgumentException("Argument 'type' must not be null.");
-			}
+		@Nonnull
+		public Builder setType(@Nonnull final UserAgentType type) {
+			Check.notNull(type, "type");
 			this.type = type;
 			this.typeName = type.getName();
 			return this;
 		}
 
-		public Builder setTypeName(final String typeName) {
-			if (typeName == null) {
-				throw new IllegalArgumentException("Argument 'typeName' must not be null.");
-			}
+		@Nonnull
+		public Builder setTypeName(@Nonnull final String typeName) {
+			Check.notNull(typeName, "typeName");
 			this.type = UserAgentType.evaluateByTypeName(typeName);
 			this.typeName = typeName;
 			return this;
 		}
 
-		public Builder setUrl(final String url) {
-			if (url == null) {
-				throw new IllegalArgumentException("Argument 'url' must not be null.");
-			}
+		@Nonnull
+		public Builder setUrl(@Nonnull final String url) {
+			Check.notNull(url, "url");
 			this.url = url;
 			return this;
 		}
 
-		public Builder setUserAgentString(final String userAgentString) {
-			if (userAgentString == null) {
-				throw new IllegalArgumentException("Argument 'userAgentString' must not be null.");
-			}
+		@Nonnull
+		public Builder setUserAgentString(@Nonnull final String userAgentString) {
+			Check.notNull(userAgentString, "userAgentString");
 			this.userAgentString = userAgentString;
 			return this;
 		}
 
-		public Builder setVersionNumber(final VersionNumber versionNumber) {
-			if (versionNumber == null) {
-				throw new IllegalArgumentException("Argument 'versionNumber' must not be null.");
-			}
+		@Nonnull
+		public Builder setVersionNumber(@Nonnull final VersionNumber versionNumber) {
+			Check.notNull(versionNumber, "versionNumber");
 			this.versionNumber = versionNumber;
 			return this;
 		}
@@ -227,60 +218,50 @@ public final class UserAgent implements ReadableUserAgent, Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 
+	@Nonnull
 	private final UserAgentFamily family;
 
+	@Nonnull
 	private final String icon;
 
+	@Nonnull
 	private final String name;
 
+	@Nonnull
 	private final OperatingSystem operatingSystem;
 
+	@Nonnull
 	private final String producer;
 
+	@Nonnull
 	private final String producerUrl;
 
+	@Nonnull
 	private final UserAgentType type;
 
+	@Nonnull
 	private final String typeName;
 
+	@Nonnull
 	private final String url;
 
+	@Nonnull
 	private final VersionNumber versionNumber;
 
-	public UserAgent(final UserAgentFamily family, final String icon, final String name, final OperatingSystem operatingSystem,
-			final String producer, final String producerUrl, final UserAgentType type, final String typeName, final String url,
-			final VersionNumber versionNumber) {
-
-		if (family == null) {
-			throw new IllegalArgumentException("Argument 'family' must not be null.");
-		}
-		if (icon == null) {
-			throw new IllegalArgumentException("Argument 'icon' must not be null.");
-		}
-		if (name == null) {
-			throw new IllegalArgumentException("Argument 'name' must not be null.");
-		}
-		if (operatingSystem == null) {
-			throw new IllegalArgumentException("Argument 'operatingSystem' must not be null.");
-		}
-		if (producer == null) {
-			throw new IllegalArgumentException("Argument 'producer' must not be null.");
-		}
-		if (producerUrl == null) {
-			throw new IllegalArgumentException("Argument 'producerUrl' must not be null.");
-		}
-		if (type == null) {
-			throw new IllegalArgumentException("Argument 'type' must not be null.");
-		}
-		if (typeName == null) {
-			throw new IllegalArgumentException("Argument 'typeName' must not be null.");
-		}
-		if (url == null) {
-			throw new IllegalArgumentException("Argument 'url' must not be null.");
-		}
-		if (versionNumber == null) {
-			throw new IllegalArgumentException("Argument 'versionNumber' must not be null.");
-		}
+	public UserAgent(@Nonnull final UserAgentFamily family, @Nonnull final String icon, @Nonnull final String name,
+			@Nonnull final OperatingSystem operatingSystem, @Nonnull final String producer, @Nonnull final String producerUrl,
+			@Nonnull final UserAgentType type, @Nonnull final String typeName, @Nonnull final String url,
+			@Nonnull final VersionNumber versionNumber) {
+		Check.notNull(family, "family");
+		Check.notNull(icon, "icon");
+		Check.notNull(name, "name");
+		Check.notNull(operatingSystem, "operatingSystem");
+		Check.notNull(producer, "producer");
+		Check.notNull(producerUrl, "producerUrl");
+		Check.notNull(type, "type");
+		Check.notNull(typeName, "typeName");
+		Check.notNull(url, "url");
+		Check.notNull(versionNumber, "versionNumber");
 
 		this.family = family;
 		this.icon = icon;
@@ -406,6 +387,7 @@ public final class UserAgent implements ReadableUserAgent, Serializable {
 		return result;
 	}
 
+	@Nonnull
 	@Override
 	public String toString() {
 		final StringBuilder builder = new StringBuilder();

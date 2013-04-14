@@ -20,18 +20,19 @@ import java.util.Set;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
-import org.junit.Assert;
+import net.sf.qualitycheck.exception.IllegalNullArgumentException;
 import net.sf.uadetector.internal.data.domain.Browser;
 import net.sf.uadetector.internal.data.domain.BrowserPattern;
 import net.sf.uadetector.internal.data.domain.OperatingSystem;
 import net.sf.uadetector.internal.data.domain.OperatingSystemPattern;
 import net.sf.uadetector.internal.data.domain.Robot;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 public class DataTest {
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void construct_browsers_null() {
 		final Set<Browser> browsers = null;
 		final Set<Robot> robots = new HashSet<Robot>();
@@ -42,7 +43,7 @@ public class DataTest {
 		new Data(browsers, operatingSystems, robots, patternBrowserMap, patternOsMap, version);
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void construct_operatingSystems_null() {
 		final Set<Browser> browsers = new HashSet<Browser>();
 		final Set<Robot> robots = new HashSet<Robot>();
@@ -53,7 +54,7 @@ public class DataTest {
 		new Data(browsers, operatingSystems, robots, patternBrowserMap, patternOsMap, version);
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void construct_patternBrowserMap_null() {
 		final Set<Browser> browsers = new HashSet<Browser>();
 		final Set<Robot> robots = new HashSet<Robot>();
@@ -64,7 +65,7 @@ public class DataTest {
 		new Data(browsers, operatingSystems, robots, patternBrowserMap, patternOsMap, version);
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void construct_patternOsMap_null() {
 		final Set<Browser> browsers = new HashSet<Browser>();
 		final Set<Robot> robots = new HashSet<Robot>();
@@ -75,7 +76,7 @@ public class DataTest {
 		new Data(browsers, operatingSystems, robots, patternBrowserMap, patternOsMap, version);
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void construct_robots_null() {
 		final Set<Browser> browsers = new HashSet<Browser>();
 		final Set<Robot> robots = null;
@@ -86,7 +87,7 @@ public class DataTest {
 		new Data(browsers, operatingSystems, robots, patternBrowserMap, patternOsMap, version);
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void construct_version_null() {
 		final Set<Browser> browsers = new HashSet<Browser>();
 		final Set<Robot> robots = new HashSet<Robot>();

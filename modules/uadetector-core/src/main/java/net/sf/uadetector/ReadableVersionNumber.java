@@ -17,6 +17,8 @@ package net.sf.uadetector;
 
 import java.util.List;
 
+import javax.annotation.Nonnull;
+
 /**
  * Defines a version number of an operating system or user agent.<br>
  * <br>
@@ -47,6 +49,7 @@ public interface ReadableVersionNumber extends Comparable<ReadableVersionNumber>
 	 * 
 	 * @return bugfix segment
 	 */
+	@Nonnull
 	String getBugfix();
 
 	/**
@@ -54,6 +57,7 @@ public interface ReadableVersionNumber extends Comparable<ReadableVersionNumber>
 	 * 
 	 * @return extension of the version number
 	 */
+	@Nonnull
 	String getExtension();
 
 	/**
@@ -64,6 +68,7 @@ public interface ReadableVersionNumber extends Comparable<ReadableVersionNumber>
 	 * 
 	 * @return a list of segments of the version number
 	 */
+	@Nonnull
 	List<String> getGroups();
 
 	/**
@@ -71,6 +76,7 @@ public interface ReadableVersionNumber extends Comparable<ReadableVersionNumber>
 	 * 
 	 * @return major segment
 	 */
+	@Nonnull
 	String getMajor();
 
 	/**
@@ -78,6 +84,7 @@ public interface ReadableVersionNumber extends Comparable<ReadableVersionNumber>
 	 * 
 	 * @return minor segment
 	 */
+	@Nonnull
 	String getMinor();
 
 	/**
@@ -85,6 +92,7 @@ public interface ReadableVersionNumber extends Comparable<ReadableVersionNumber>
 	 * 
 	 * @return numeric groups as dot separated version string
 	 */
+	@Nonnull
 	String toVersionString();
 
 }

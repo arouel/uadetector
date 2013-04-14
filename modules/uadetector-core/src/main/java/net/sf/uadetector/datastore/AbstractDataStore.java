@@ -18,6 +18,9 @@ package net.sf.uadetector.datastore;
 import java.net.URL;
 import java.nio.charset.Charset;
 
+import javax.annotation.Nonnull;
+
+import net.sf.qualitycheck.Check;
 import net.sf.uadetector.datareader.DataReader;
 import net.sf.uadetector.internal.data.Data;
 import net.sf.uadetector.internal.util.UrlUtil;
@@ -58,19 +61,13 @@ public abstract class AbstractDataStore implements DataStore {
 	 * @param charset
 	 *            the character set in which the data should be read
 	 * @return an instance of {@code Data} or {@link Data#EMPTY} if an error occurred, but never {@code null}
-	 * @throws IllegalArgumentException
+	 * @throws net.sf.qualitycheck.exception.IllegalNullArgumentException
 	 *             if the given argument is {@code null}
 	 */
-	protected static final Data readData(final DataReader reader, final URL url, final Charset charset) {
-		if (reader == null) {
-			throw new IllegalArgumentException("Argument 'reader' must not be null.");
-		}
-		if (url == null) {
-			throw new IllegalArgumentException("Argument 'url' must not be null.");
-		}
-		if (charset == null) {
-			throw new IllegalArgumentException("Argument 'charset' must not be null.");
-		}
+	protected static final Data readData(@Nonnull final DataReader reader, @Nonnull final URL url, @Nonnull final Charset charset) {
+		Check.notNull(reader, "reader");
+		Check.notNull(url, "url");
+		Check.notNull(charset, "charset");
 
 		return reader.read(url, charset);
 	}
@@ -113,25 +110,16 @@ public abstract class AbstractDataStore implements DataStore {
 	 *            URL to version information about the given <em>UAS data</em>
 	 * @param charset
 	 *            the character set in which the data should be read
-	 * @throws IllegalArgumentException
+	 * @throws net.sf.qualitycheck.exception.IllegalNullArgumentException
 	 *             if one of the given arguments is {@code null}
 	 */
-	protected AbstractDataStore(final Data data, final DataReader reader, final URL dataUrl, final URL versionUrl, final Charset charset) {
-		if (data == null) {
-			throw new IllegalArgumentException("Argument 'data' must not be null.");
-		}
-		if (reader == null) {
-			throw new IllegalArgumentException("Argument 'reader' must not be null.");
-		}
-		if (charset == null) {
-			throw new IllegalArgumentException("Argument 'charset' must not be null.");
-		}
-		if (dataUrl == null) {
-			throw new IllegalArgumentException("Argument 'dataUrl' must not be null.");
-		}
-		if (versionUrl == null) {
-			throw new IllegalArgumentException("Argument 'versionUrl' must not be null.");
-		}
+	protected AbstractDataStore(@Nonnull final Data data, @Nonnull final DataReader reader, @Nonnull final URL dataUrl,
+			@Nonnull final URL versionUrl, @Nonnull final Charset charset) {
+		Check.notNull(data, "data");
+		Check.notNull(reader, "reader");
+		Check.notNull(charset, "charset");
+		Check.notNull(dataUrl, "dataUrl");
+		Check.notNull(versionUrl, "versionUrl");
 
 		this.data = checkData(data);
 		this.reader = reader;
@@ -151,9 +139,9 @@ public abstract class AbstractDataStore implements DataStore {
 	 *            URL to version information about the given <em>UAS data</em>
 	 * @param charset
 	 *            the character set in which the data should be read
-	 * @throws IllegalArgumentException
+	 * @throws net.sf.qualitycheck.exception.IllegalNullArgumentException
 	 *             if one of the given arguments is {@code null}
-	 * @throws IllegalArgumentException
+	 * @throws net.sf.qualitycheck.exception.IllegalNullArgumentException
 	 *             if the given strings are not valid URLs
 	 */
 	protected AbstractDataStore(final DataReader reader, final String dataUrl, final String versionUrl, final Charset charset) {
@@ -171,9 +159,9 @@ public abstract class AbstractDataStore implements DataStore {
 	 *            URL to version information about the given <em>UAS data</em>
 	 * @param charset
 	 *            the character set in which the data should be read
-	 * @throws IllegalArgumentException
+	 * @throws net.sf.qualitycheck.exception.IllegalNullArgumentException
 	 *             if the given argument is {@code null}
-	 * @throws IllegalStateException
+	 * @throws net.sf.qualitycheck.exception.IllegalStateOfArgumentException
 	 *             if the created instance of {@link Data} is empty
 	 */
 	protected AbstractDataStore(final DataReader reader, final URL dataUrl, final URL versionUrl, final Charset charset) {

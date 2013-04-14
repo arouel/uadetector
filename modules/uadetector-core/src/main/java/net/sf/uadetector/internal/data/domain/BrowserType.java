@@ -15,6 +15,11 @@
  ******************************************************************************/
 package net.sf.uadetector.internal.data.domain;
 
+import javax.annotation.Nonnegative;
+import javax.annotation.Nonnull;
+
+import net.sf.qualitycheck.Check;
+
 /**
  * The {@code BrowserType} class represents the type of a browser.<br>
  * <br>
@@ -40,9 +45,12 @@ public final class BrowserType {
 		 * Builds a new instance of {@code BrowserType} and returns it.
 		 * 
 		 * @return a new instance of {@code BrowserType}
-		 * @throws IllegalArgumentException
+		 * @throws net.sf.qualitycheck.exception.IllegalNegativeArgumentException
+		 *             if one of the needed arguments to build an instance of {@code BrowserType} is invalid
+		 * @throws net.sf.qualitycheck.exception.IllegalNullArgumentException
 		 *             if one of the needed arguments to build an instance of {@code BrowserType} is invalid
 		 */
+		@Nonnull
 		public BrowserType build() {
 			return new BrowserType(id, name);
 		}
@@ -53,10 +61,8 @@ public final class BrowserType {
 		 * @param id
 		 *            ID
 		 */
-		public Builder setId(final int id) {
-			if (id < 0) {
-				throw new IllegalArgumentException("Argument 'id' must not be smaller than 0.");
-			}
+		public Builder setId(@Nonnegative final int id) {
+			Check.notNegative(id, "id");
 
 			this.id = id;
 			return this;
@@ -70,10 +76,8 @@ public final class BrowserType {
 		 * 
 		 * @param id
 		 */
-		public Builder setId(final String id) {
-			if (id == null) {
-				throw new IllegalArgumentException("Argument 'id' must not be null.");
-			}
+		public Builder setId(@Nonnull final String id) {
+			Check.notNull(id, "id");
 
 			this.setId(Integer.parseInt(id.trim()));
 			return this;
@@ -84,10 +88,8 @@ public final class BrowserType {
 		 * 
 		 * @param name
 		 */
-		public Builder setName(final String name) {
-			if (name == null) {
-				throw new IllegalArgumentException("Argument 'name' must not be null.");
-			}
+		public Builder setName(@Nonnull final String name) {
+			Check.notNull(name, "name");
 
 			this.name = name;
 			return this;
@@ -95,18 +97,15 @@ public final class BrowserType {
 
 	}
 
+	@Nonnegative
 	private final int id;
 
+	@Nonnull
 	private final String name;
 
-	public BrowserType(final int id, final String name) {
-		if (id < 0) {
-			throw new IllegalArgumentException("Argument 'id' must not be smaller than 0.");
-		}
-
-		if (name == null) {
-			throw new IllegalArgumentException("Argument 'name' must not be null.");
-		}
+	public BrowserType(@Nonnegative final int id, @Nonnull final String name) {
+		Check.notNegative(id, "id");
+		Check.notNull(name, "name");
 
 		this.id = id;
 		this.name = name;

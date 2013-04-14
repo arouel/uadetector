@@ -8,6 +8,7 @@ import java.nio.MappedByteBuffer;
 import java.nio.channels.FileChannel;
 import java.nio.charset.Charset;
 
+import net.sf.qualitycheck.exception.IllegalNullArgumentException;
 import net.sf.uadetector.datareader.DataReader;
 import net.sf.uadetector.internal.data.Data;
 import net.sf.uadetector.internal.data.DataBlueprint;
@@ -75,37 +76,37 @@ public class CachingXmlDataStoreTest {
 		fallback = new TestXmlDataStore();
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void createCachingXmlDataStore_charset_null() throws IOException {
 		CachingXmlDataStore.createCachingXmlDataStore(folder.newFile("uas_test.xml"), DATA_URL, VERSION_URL, null, fallback);
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void createCachingXmlDataStore_dataUrl_null() throws IOException {
 		CachingXmlDataStore.createCachingXmlDataStore(folder.newFile("uas_test.xml"), null, VERSION_URL, CHARSET, fallback);
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void createCachingXmlDataStore_fallback1_null() throws IOException {
 		CachingXmlDataStore.createCachingXmlDataStore(folder.newFile("uas_test.xml"), DATA_URL, VERSION_URL, CHARSET, null);
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void createCachingXmlDataStore_fallback2_null() throws IOException {
 		CachingXmlDataStore.createCachingXmlDataStore(DATA_URL, VERSION_URL, CHARSET, null);
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void createCachingXmlDataStore_fallback3_null() throws IOException {
 		CachingXmlDataStore.createCachingXmlDataStore(folder.newFile("uas_test.xml"), null);
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void createCachingXmlDataStore_file2_null() throws IOException {
 		CachingXmlDataStore.createCachingXmlDataStore(null, DATA_URL, VERSION_URL, CHARSET, fallback);
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void createCachingXmlDataStore_file3_null() throws IOException {
 		CachingXmlDataStore.createCachingXmlDataStore(null, fallback);
 	}
@@ -182,7 +183,7 @@ public class CachingXmlDataStoreTest {
 		parser.setUpdateInterval(originalInterval);
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void createCachingXmlDataStore_versionUrl_null() throws IOException {
 		CachingXmlDataStore.createCachingXmlDataStore(folder.newFile("uas_test.xml"), DATA_URL, null, CHARSET, fallback);
 	}

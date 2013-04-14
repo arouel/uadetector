@@ -21,6 +21,7 @@ import java.nio.charset.Charset;
 import java.util.HashSet;
 import java.util.TreeMap;
 
+import net.sf.qualitycheck.exception.IllegalNullArgumentException;
 import net.sf.uadetector.datareader.DataReader;
 import net.sf.uadetector.datareader.XmlDataReader;
 import net.sf.uadetector.internal.data.Data;
@@ -64,25 +65,25 @@ public class AbstractDataStoreTest1 {
 	 */
 	private static final URL VERSION_URL = AbstractDataStoreTest2.class.getClassLoader().getResource("uas_older.version");
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void construct_charset_null() throws MalformedURLException {
 		final URL url = new URL("http://localhost");
 		new TestDataStore(Data.EMPTY, new XmlDataReader(), null, url, url);
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void construct_data_null() throws MalformedURLException {
 		final URL url = new URL("http://localhost");
 		new TestDataStore((Data) null, new XmlDataReader(), CHARSET, url, url);
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void construct_dataReader_null() throws MalformedURLException {
 		final URL url = new URL("http://localhost");
 		new TestDataStore(Data.EMPTY, null, CHARSET, url, url);
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void construct_dataUrl_null() throws MalformedURLException {
 		final URL url = new URL("http://localhost");
 		new TestDataStore(Data.EMPTY, new XmlDataReader(), CHARSET, null, url);
@@ -103,18 +104,18 @@ public class AbstractDataStoreTest1 {
 		Assert.assertEquals(VERSION_URL, store.getVersionUrl());
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void construct_versionUrl_null() throws MalformedURLException {
 		final URL url = new URL("http://localhost");
 		new TestDataStore(Data.EMPTY, new XmlDataReader(), CHARSET, url, null);
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void readData_charset_null() {
 		AbstractDataStore.readData(new XmlDataReader(), DATA_URL, null);
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void readData_dataUrl_null() {
 		AbstractDataStore.readData(new XmlDataReader(), null, CHARSET);
 	}
@@ -125,7 +126,7 @@ public class AbstractDataStoreTest1 {
 		Assert.assertEquals(Data.EMPTY, data);
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void readData_reader_null() {
 		AbstractDataStore.readData(null, DATA_URL, CHARSET);
 	}

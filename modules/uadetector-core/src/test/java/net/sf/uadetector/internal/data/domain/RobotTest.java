@@ -15,6 +15,8 @@
  ******************************************************************************/
 package net.sf.uadetector.internal.data.domain;
 
+import net.sf.qualitycheck.exception.IllegalNegativeArgumentException;
+import net.sf.qualitycheck.exception.IllegalNullArgumentException;
 import net.sf.uadetector.UserAgent;
 import net.sf.uadetector.UserAgentFamily;
 
@@ -23,7 +25,7 @@ import org.junit.Test;
 
 public class RobotTest {
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void construct_family_null() {
 		final int id = 1;
 		final String icon = "icon";
@@ -37,7 +39,7 @@ public class RobotTest {
 		new Robot(family, icon, id, infoUrl, name, producer, producerUrl, url, userAgentString);
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void construct_icon_null() {
 		final int id = 1;
 		final String icon = null;
@@ -51,7 +53,7 @@ public class RobotTest {
 		new Robot(family, icon, id, infoUrl, name, producer, producerUrl, url, userAgentString);
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNegativeArgumentException.class)
 	public void construct_id_toSmall() {
 		final int id = -1;
 		final String icon = "icon";
@@ -65,7 +67,7 @@ public class RobotTest {
 		new Robot(family, icon, id, infoUrl, name, producer, producerUrl, url, userAgentString);
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void construct_infoUrl_null() {
 		final int id = 1;
 		final String icon = "icon";
@@ -79,7 +81,7 @@ public class RobotTest {
 		new Robot(family, icon, id, infoUrl, name, producer, producerUrl, url, userAgentString);
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void construct_name_null() {
 		final int id = 1;
 		final String icon = "icon";
@@ -93,7 +95,7 @@ public class RobotTest {
 		new Robot(family, icon, id, infoUrl, name, producer, producerUrl, url, userAgentString);
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void construct_producer_null() {
 		final int id = 1;
 		final String icon = "icon";
@@ -107,7 +109,7 @@ public class RobotTest {
 		new Robot(family, icon, id, infoUrl, name, producer, producerUrl, url, userAgentString);
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void construct_producerUrl_null() {
 		final int id = 1;
 		final String icon = "icon";
@@ -135,7 +137,7 @@ public class RobotTest {
 		new Robot(family, icon, id, infoUrl, name, producer, producerUrl, url, userAgentString);
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void construct_url_null() {
 		final int id = 1;
 		final String icon = "icon";
@@ -149,7 +151,7 @@ public class RobotTest {
 		new Robot(family, icon, id, infoUrl, name, producer, producerUrl, url, userAgentString);
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void construct_userAgentString_null() {
 		final int id = 1;
 		final String icon = "icon";

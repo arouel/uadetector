@@ -17,8 +17,10 @@ package net.sf.uadetector.internal.data.domain;
 
 import java.util.regex.Pattern;
 
-import org.junit.Assert;
+import net.sf.qualitycheck.exception.IllegalNegativeArgumentException;
+import net.sf.qualitycheck.exception.IllegalNullArgumentException;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 public class OperatingSystemPatternTest {
@@ -70,17 +72,17 @@ public class OperatingSystemPatternTest {
 		Assert.assertEquals(0, pattern.compareTo(pattern));
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNegativeArgumentException.class)
 	public void constructor_id_toSmall() {
 		new OperatingSystemPattern(-1, Pattern.compile("[0-9]+"), 1);
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNegativeArgumentException.class)
 	public void constructor_order_toSmall() {
 		new OperatingSystemPattern(1, Pattern.compile("[0-9]+"), -1);
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void constructor_pattern_null() {
 		new OperatingSystemPattern(1, null, 1);
 	}

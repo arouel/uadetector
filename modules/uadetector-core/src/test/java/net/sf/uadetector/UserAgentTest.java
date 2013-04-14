@@ -15,6 +15,7 @@
  ******************************************************************************/
 package net.sf.uadetector;
 
+import net.sf.qualitycheck.exception.IllegalNullArgumentException;
 import net.sf.uadetector.internal.util.VersionParser;
 
 import org.junit.Assert;
@@ -22,61 +23,61 @@ import org.junit.Test;
 
 public class UserAgentTest {
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void construct_family_null() {
 		new UserAgent(null, "icon", "name", OperatingSystem.EMPTY, "producer", "producer url", UserAgentType.BROWSER, "type", "url",
 				VersionParser.parseVersion("1"));
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void construct_icon_null() {
 		new UserAgent(UserAgentFamily.CHROMIUM, null, "name", OperatingSystem.EMPTY, "producer", "producer url", UserAgentType.BROWSER,
 				"type", "url", VersionParser.parseVersion("1"));
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void construct_name_null() {
 		new UserAgent(UserAgentFamily.CHROMIUM, "icon", null, OperatingSystem.EMPTY, "producer", "producer url", UserAgentType.BROWSER,
 				"type", "url", VersionParser.parseVersion("1"));
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void construct_os_null() {
 		new UserAgent(UserAgentFamily.CHROMIUM, "icon", "name", null, "producer", "producer url", UserAgentType.BROWSER, "type", "url",
 				VersionParser.parseVersion("1"));
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void construct_producer_null() {
 		new UserAgent(UserAgentFamily.CHROMIUM, "icon", "name", OperatingSystem.EMPTY, null, "producer url", UserAgentType.BROWSER, "type",
 				"url", VersionParser.parseVersion("1"));
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void construct_producerUrl_null() {
 		new UserAgent(UserAgentFamily.CHROMIUM, "icon", "name", OperatingSystem.EMPTY, "producer", null, UserAgentType.BROWSER, "type",
 				"url", VersionParser.parseVersion("1"));
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void construct_type_null() {
 		new UserAgent(UserAgentFamily.CHROMIUM, "icon", "name", OperatingSystem.EMPTY, "producer", "producer url", null, "type", "url",
 				VersionParser.parseVersion("1"));
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void construct_typeName_null() {
 		new UserAgent(UserAgentFamily.CHROMIUM, "icon", "name", OperatingSystem.EMPTY, "producer", "producer url", UserAgentType.BROWSER,
 				null, "url", VersionParser.parseVersion("1"));
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void construct_url_null() {
 		new UserAgent(UserAgentFamily.CHROMIUM, "icon", "name", OperatingSystem.EMPTY, "producer", "producer url", UserAgentType.BROWSER,
 				"type", null, VersionParser.parseVersion("1"));
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void construct_version_null() {
 		new UserAgent(UserAgentFamily.CHROMIUM, "icon", "name", OperatingSystem.EMPTY, "producer", "producer url", UserAgentType.BROWSER,
 				"type", "url", null);

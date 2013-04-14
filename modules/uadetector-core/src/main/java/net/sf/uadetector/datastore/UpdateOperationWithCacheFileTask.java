@@ -6,6 +6,9 @@ import java.io.IOException;
 import java.net.URL;
 import java.nio.charset.Charset;
 
+import javax.annotation.Nonnull;
+
+import net.sf.qualitycheck.Check;
 import net.sf.uadetector.exception.CanNotOpenStreamException;
 import net.sf.uadetector.internal.data.Data;
 import net.sf.uadetector.internal.util.FileUtil;
@@ -40,10 +43,8 @@ final class UpdateOperationWithCacheFileTask extends AbstractUpdateOperation {
 	 * @throws IllegalStateException
 	 *             if the file can not be deleted
 	 */
-	protected static File createTemporaryFile(final File file) {
-		if (file == null) {
-			throw new IllegalArgumentException("Argument 'file' must not be null.");
-		}
+	protected static File createTemporaryFile(@Nonnull final File file) {
+		Check.notNull(file, "file");
 
 		final File tempFile = new File(file.getParent(), file.getName() + ".temp");
 
@@ -61,10 +62,8 @@ final class UpdateOperationWithCacheFileTask extends AbstractUpdateOperation {
 	 * @throws IllegalStateException
 	 *             if the file can not be deleted
 	 */
-	protected static void deleteFile(final File file) {
-		if (file == null) {
-			throw new IllegalArgumentException("Argument 'file' must not be null.");
-		}
+	protected static void deleteFile(@Nonnull final File file) {
+		Check.notNull(file, "file");
 
 		if (file.exists() && !file.delete()) {
 			throw new IllegalStateException("Passed file can not be removed: " + file.getAbsolutePath());
@@ -80,7 +79,7 @@ final class UpdateOperationWithCacheFileTask extends AbstractUpdateOperation {
 	 * @throws IllegalStateException
 	 *             if an I/O error occurs
 	 */
-	private static boolean isEmpty(final File file, final Charset charset) {
+	private static boolean isEmpty(@Nonnull final File file, @Nonnull final Charset charset) {
 		try {
 			return FileUtil.isEmpty(file, charset);
 		} catch (final IOException e) {
@@ -95,18 +94,14 @@ final class UpdateOperationWithCacheFileTask extends AbstractUpdateOperation {
 	 *            file in which the entire contents from the given URL can be saved
 	 * @param store
 	 *            a data store for <em>UAS data</em>
-	 * @throws IllegalArgumentException
+	 * @throws net.sf.qualitycheck.exception.IllegalNullArgumentException
 	 *             if any of the passed arguments is {@code null}
 	 * @throws IOException
 	 *             if an I/O error occurs
 	 */
-	protected static void readAndSave(final File file, final DataStore store) throws IOException {
-		if (file == null) {
-			throw new IllegalArgumentException("Argument 'file' must not be null.");
-		}
-		if (store == null) {
-			throw new IllegalArgumentException("Argument 'store' must not be null.");
-		}
+	protected static void readAndSave(@Nonnull final File file, @Nonnull final DataStore store) throws IOException {
+		Check.notNull(file, "file");
+		Check.notNull(store, "store");
 
 		final URL url = store.getDataUrl();
 		final Charset charset = store.getCharset();
@@ -158,20 +153,11 @@ final class UpdateOperationWithCacheFileTask extends AbstractUpdateOperation {
 	 * @throws IllegalStateException
 	 *             if the file can not be renamed
 	 */
-	protected static void renameFile(final File from, final File to) {
-		if (from == null) {
-			throw new IllegalArgumentException("Argument 'from' must not be null.");
-		}
-		if (!from.exists()) {
-			throw new IllegalArgumentException("Argument 'from' must not be an existing file.");
-		}
-		if (to == null) {
-			throw new IllegalArgumentException("Argument 'to' must not be null.");
-		}
-
-		if (!from.renameTo(to)) {
-			throw new IllegalStateException("Renaming file from '" + from.getAbsolutePath() + "' to '" + to.getAbsolutePath() + "' failed.");
-		}
+	protected static void renameFile(@Nonnull final File from, @Nonnull final File to) {
+		Check.notNull(from, "from");
+		Check.stateIsTrue(from.exists(), "Argument 'from' must not be an existing file.");
+		Check.notNull(to, "to");
+		Check.stateIsTrue(from.renameTo(to), "Renaming file from '%s' to '%s' failed.", from.getAbsolutePath(), to.getAbsolutePath());
 	}
 
 	/**
@@ -184,14 +170,10 @@ final class UpdateOperationWithCacheFileTask extends AbstractUpdateOperation {
 	 */
 	private final AbstractRefreshableDataStore store;
 
-	public UpdateOperationWithCacheFileTask(final AbstractRefreshableDataStore dataStore, final File cacheFile) {
+	public UpdateOperationWithCacheFileTask(@Nonnull final AbstractRefreshableDataStore dataStore, @Nonnull final File cacheFile) {
 		super(dataStore);
-		if (dataStore == null) {
-			throw new IllegalArgumentException("Argument 'dataStore' must not be null.");
-		}
-		if (cacheFile == null) {
-			throw new IllegalArgumentException("Argument 'cacheFile' must not be null.");
-		}
+		Check.notNull(dataStore, "dataStore");
+		Check.notNull(cacheFile, "cacheFile");
 		store = dataStore;
 		this.cacheFile = cacheFile;
 	}

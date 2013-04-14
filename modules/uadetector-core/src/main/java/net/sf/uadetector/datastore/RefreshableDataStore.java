@@ -15,6 +15,8 @@
  ******************************************************************************/
 package net.sf.uadetector.datastore;
 
+import javax.annotation.Nonnull;
+
 /**
  * Extends the interface with an update functionality for <em>UAS data</em> in the store.
  * 
@@ -38,6 +40,7 @@ public interface RefreshableDataStore extends DataStore {
 	 * This data store will be used instantly during initialization to avoid long initializations times of an
 	 * {@link net.sf.uadetector.UserAgentStringParser}, especially when reading data by a network connection.
 	 */
+	@Nonnull
 	DataStore getFallback();
 
 	/**
@@ -45,6 +48,7 @@ public interface RefreshableDataStore extends DataStore {
 	 * 
 	 * @return an update operation
 	 */
+	@Nonnull
 	UpdateOperation getUpdateOperation();
 
 	/**

@@ -15,6 +15,10 @@
  ******************************************************************************/
 package net.sf.uadetector.internal.data.domain;
 
+import javax.annotation.Nonnegative;
+import javax.annotation.Nonnull;
+
+import net.sf.qualitycheck.Check;
 import net.sf.uadetector.UserAgent;
 import net.sf.uadetector.UserAgentFamily;
 import net.sf.uadetector.UserAgentType;
@@ -23,14 +27,23 @@ public final class Robot {
 
 	public static final class Builder {
 
+		@Nonnull
 		private UserAgentFamily family = UserAgentFamily.UNKNOWN;
+		@Nonnull
 		private String icon = "";
+		@Nonnull
 		private int id = Integer.MIN_VALUE;
+		@Nonnull
 		private String infoUrl = "";
-		private String name;
+		@Nonnull
+		private String name = "";
+		@Nonnull
 		private String producer = "";
+		@Nonnull
 		private String producerUrl = "";
+		@Nonnull
 		private String url = "";
+		@Nonnull
 		private String userAgentString = "";
 
 		public Robot build() {
@@ -73,91 +86,71 @@ public final class Robot {
 			return userAgentString;
 		}
 
-		public Builder setFamily(final UserAgentFamily family) {
-			if (family == null) {
-				throw new IllegalArgumentException("Argument 'family' must not be null.");
-			}
+		public Builder setFamily(@Nonnull final UserAgentFamily family) {
+			Check.notNull(family, "family");
 
 			this.family = family;
 			return this;
 		}
 
-		public Builder setIcon(final String icon) {
-			if (icon == null) {
-				throw new IllegalArgumentException("Argument 'icon' must not be null.");
-			}
+		public Builder setIcon(@Nonnull final String icon) {
+			Check.notNull(icon, "icon");
 
 			this.icon = icon;
 			return this;
 		}
 
 		public Builder setId(final int id) {
-			if (id < 0) {
-				throw new IllegalArgumentException("Argument 'id' must not be smaller than 0.");
-			}
+Check.notNegative(id, "id");
 
 			this.id = id;
 			return this;
 		}
 
-		public Builder setId(final String id) {
-			if (id == null) {
-				throw new IllegalArgumentException("Argument 'id' must not be null.");
-			}
+		public Builder setId(@Nonnull final String id) {
+			Check.notEmpty(id, "id");
 
 			this.setId(Integer.parseInt(id.trim()));
 			return this;
 		}
 
-		public Builder setInfoUrl(final String infoUrl) {
-			if (infoUrl == null) {
-				throw new IllegalArgumentException("Argument 'infoUrl' must not be null.");
-			}
+		public Builder setInfoUrl(@Nonnull final String infoUrl) {
+			Check.notNull(infoUrl, "infoUrl");
 
 			this.infoUrl = infoUrl;
 			return this;
 		}
 
-		public Builder setName(final String name) {
-			if (name == null) {
-				throw new IllegalArgumentException("Argument 'name' must not be null.");
-			}
+		public Builder setName(@Nonnull final String name) {
+			Check.notNull(name, "name");
 
 			this.name = name;
 			return this;
 		}
 
-		public Builder setProducer(final String producer) {
-			if (producer == null) {
-				throw new IllegalArgumentException("Argument 'producer' must not be null.");
-			}
+		public Builder setProducer(@Nonnull final String producer) {
+			Check.notNull(producer, "producer");
 
 			this.producer = producer;
 			return this;
 		}
 
-		public Builder setProducerUrl(final String producerUrl) {
-			if (producerUrl == null) {
-				throw new IllegalArgumentException("Argument 'producerUrl' must not be null.");
-			}
+		public Builder setProducerUrl(@Nonnull final String producerUrl) {
+			Check.notNull(producerUrl, "producerUrl");
 
 			this.producerUrl = producerUrl;
 			return this;
 		}
 
-		public Builder setUrl(final String url) {
-			if (url == null) {
-				throw new IllegalArgumentException("Argument 'url' must not be null.");
-			}
+		public Builder setUrl(@Nonnull final String url) {
+			Check.notNull(url, "url");
 
 			this.url = url;
 			return this;
 		}
 
-		public Builder setUserAgentString(final String userAgentString) {
-			if (userAgentString == null) {
-				throw new IllegalArgumentException("Argument 'userAgentString' must not be null.");
-			}
+		public Builder setUserAgentString(@Nonnull final String userAgentString) {
+			Check.notNull(userAgentString, "userAgentString");
 
 			this.userAgentString = userAgentString;
 			return this;
@@ -170,46 +163,37 @@ public final class Robot {
 	 */
 	public static final String TYPENAME = "Robot";
 
+	@Nonnull
 	private final UserAgentFamily family;
+	@Nonnull
 	private final String icon;
+	@Nonnegative
 	private final int id;
+	@Nonnull
 	private final String infoUrl;
+	@Nonnull
 	private final String name;
+	@Nonnull
 	private final String producer;
+	@Nonnull
 	private final String producerUrl;
+	@Nonnull
 	private final String url;
+	@Nonnull
 	private final String userAgentString;
 
-	public Robot(final UserAgentFamily family, final String icon, final int id, final String infoUrl, final String name,
-			final String producer, final String producerUrl, final String url, final String userAgentString) {
-
-		if (family == null) {
-			throw new IllegalArgumentException("Argument 'family' must not be null.");
-		}
-		if (icon == null) {
-			throw new IllegalArgumentException("Argument 'icon' must not be null.");
-		}
-		if (id < 0) {
-			throw new IllegalArgumentException("Argument 'id' must not be smaller than 0.");
-		}
-		if (infoUrl == null) {
-			throw new IllegalArgumentException("Argument 'infoUrl' must not be null.");
-		}
-		if (name == null) {
-			throw new IllegalArgumentException("Argument 'name' must not be null.");
-		}
-		if (producer == null) {
-			throw new IllegalArgumentException("Argument 'producer' must not be null.");
-		}
-		if (producerUrl == null) {
-			throw new IllegalArgumentException("Argument 'producerUrl' must not be null.");
-		}
-		if (url == null) {
-			throw new IllegalArgumentException("Argument 'url' must not be null.");
-		}
-		if (userAgentString == null) {
-			throw new IllegalArgumentException("Argument 'userAgentString' must not be null.");
-		}
+	public Robot(@Nonnull final UserAgentFamily family, @Nonnull final String icon, @Nonnegative final int id,
+			@Nonnull final String infoUrl, @Nonnull final String name, @Nonnull final String producer, @Nonnull final String producerUrl,
+			@Nonnull final String url, @Nonnull final String userAgentString) {
+		Check.notNull(family, "family");
+		Check.notNull(icon, "icon");
+		Check.notNegative(id, "id");
+		Check.notNull(infoUrl, "infoUrl");
+		Check.notEmpty(name, "name");
+		Check.notNull(producer, "producer");
+		Check.notNull(producerUrl, "producerUrl");
+		Check.notNull(url, "url");
+		Check.notNull(userAgentString, "userAgentString");
 
 		this.family = family;
 		this.id = id;
@@ -222,7 +206,7 @@ public final class Robot {
 		this.userAgentString = userAgentString;
 	}
 
-	public void copyTo(final UserAgent.Builder builder) {
+	public void copyTo(@Nonnull final UserAgent.Builder builder) {
 		builder.setFamily(family);
 		builder.setIcon(icon);
 		builder.setName(name);

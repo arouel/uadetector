@@ -15,6 +15,9 @@
  ******************************************************************************/
 package net.sf.uadetector.internal.data.domain;
 
+import net.sf.qualitycheck.exception.IllegalEmptyArgumentException;
+import net.sf.qualitycheck.exception.IllegalNegativeArgumentException;
+import net.sf.qualitycheck.exception.IllegalNullArgumentException;
 import net.sf.uadetector.UserAgentFamily;
 
 import org.junit.Assert;
@@ -22,12 +25,12 @@ import org.junit.Test;
 
 public class RobotBuilderTest {
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void setFamily_null() {
 		new Robot.Builder().setFamily(null);
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void setIcon_null() {
 		new Robot.Builder().setIcon(null);
 	}
@@ -37,12 +40,12 @@ public class RobotBuilderTest {
 		new Robot.Builder().setId("abc");
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalEmptyArgumentException.class)
 	public void setId_emptyString() {
 		new Robot.Builder().setId("");
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void setId_null() {
 		new Robot.Builder().setId(null);
 	}
@@ -57,37 +60,37 @@ public class RobotBuilderTest {
 		Assert.assertTrue(b1.hashCode() == b2.hashCode());
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNegativeArgumentException.class)
 	public void setId_toSmall() {
 		new Robot.Builder().setId(-1);
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void setInfoUrl_null() {
 		new Robot.Builder().setInfoUrl(null);
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void setName_null() {
 		new Robot.Builder().setName(null);
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void setProducer_null() {
 		new Robot.Builder().setProducer(null);
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void setProducerUrl_null() {
 		new Robot.Builder().setProducerUrl(null);
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void setUrl_null() {
 		new Robot.Builder().setUrl(null);
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void setUserAgentString_null() {
 		new Robot.Builder().setUserAgentString(null);
 	}

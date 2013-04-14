@@ -7,6 +7,8 @@ import java.net.URI;
 import java.net.URL;
 import java.nio.charset.Charset;
 
+import net.sf.qualitycheck.exception.IllegalNullArgumentException;
+import net.sf.qualitycheck.exception.IllegalStateOfArgumentException;
 import net.sf.uadetector.datareader.DataReader;
 import net.sf.uadetector.datareader.XmlDataReader;
 import net.sf.uadetector.internal.data.Data;
@@ -29,17 +31,17 @@ public class CachingUpdateOperationTaskTest {
 	@Rule
 	public final TemporaryFolder folder = new TemporaryFolder();
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void construct_cacheFile_isNull() {
 		new UpdateOperationWithCacheFileTask(new TestXmlDataStore(), null);
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void construct_dataStore_isNull() throws IOException {
 		new UpdateOperationWithCacheFileTask(null, folder.newFile());
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void createTemporaryFile_null() {
 		UpdateOperationWithCacheFileTask.createTemporaryFile(null);
 	}
@@ -68,7 +70,7 @@ public class CachingUpdateOperationTaskTest {
 		EasyMock.verify(fileMock);
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void deleteFile_null() {
 		UpdateOperationWithCacheFileTask.deleteFile(null);
 	}
@@ -107,7 +109,7 @@ public class CachingUpdateOperationTaskTest {
 		Assert.assertTrue(cache.length() >= 722015);
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void readAndSave_file_null() throws IOException {
 		UpdateOperationWithCacheFileTask.readAndSave(null, new TestXmlDataStore());
 	}
@@ -134,7 +136,7 @@ public class CachingUpdateOperationTaskTest {
 		Assert.assertTrue(fileMock.length() >= 722015);
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void readAndSave_store_null() throws IOException {
 		final File cache = folder.newFile(); // cache file does not exist
 		UpdateOperationWithCacheFileTask.readAndSave(cache, null);
@@ -176,12 +178,12 @@ public class CachingUpdateOperationTaskTest {
 		});
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void renameFile_from_null() throws IOException {
 		UpdateOperationWithCacheFileTask.renameFile(null, folder.newFile());
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalStateOfArgumentException.class)
 	public void renameFile_fromFileDoesNotExist() throws MalformedURLException, IOException, SecurityException, NoSuchMethodException {
 		final File from = folder.newFile(); // cache file does not exist
 		final IMockBuilder<File> builder = EasyMock.createMockBuilder(File.class);
@@ -197,7 +199,7 @@ public class CachingUpdateOperationTaskTest {
 		EasyMock.verify(fileMock);
 	}
 
-	@Test(expected = IllegalStateException.class)
+	@Test(expected = IllegalStateOfArgumentException.class)
 	public void renameFile_removingOrphanedFileTest() throws MalformedURLException, IOException, SecurityException, NoSuchMethodException {
 		final File from = folder.newFile(); // cache file does not exist
 		final IMockBuilder<File> builder = EasyMock.createMockBuilder(File.class);
@@ -216,7 +218,7 @@ public class CachingUpdateOperationTaskTest {
 		EasyMock.verify(fileMock);
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void renameFile_to_null() throws IOException {
 		UpdateOperationWithCacheFileTask.renameFile(folder.newFile(), null);
 	}

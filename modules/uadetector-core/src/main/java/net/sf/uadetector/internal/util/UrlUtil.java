@@ -25,6 +25,10 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.Charset;
 
+import javax.annotation.Nonnull;
+
+import net.sf.qualitycheck.Check;
+import net.sf.qualitycheck.exception.IllegalStateOfArgumentException;
 import net.sf.uadetector.exception.CanNotOpenStreamException;
 
 /**
@@ -44,21 +48,19 @@ public final class UrlUtil {
 	 * @param url
 	 *            {@code String} representation of an {@code URL}
 	 * @return new {@code URL} instance
-	 * @throws IllegalArgumentException
+	 * @throws net.sf.qualitycheck.exception.IllegalNullArgumentException
 	 *             if the given argument is {@code null}
-	 * @throws IllegalArgumentException
+	 * @throws net.sf.qualitycheck.exception.IllegalStateOfArgumentException
 	 *             if the string representation of the given URL is invalid and a {@link MalformedURLException} occurs
 	 */
-	public static URL build(final String url) {
-		if (url == null) {
-			throw new IllegalArgumentException("Argument 'url' must not be null.");
-		}
+	public static URL build(@Nonnull final String url) {
+		Check.notNull(url, "url");
 
 		URL ret = null;
 		try {
 			ret = new URL(url);
 		} catch (final MalformedURLException e) {
-			throw new IllegalArgumentException("The given string is not a valid URL: " + url, e);
+			throw new IllegalStateOfArgumentException("The given string is not a valid URL: " + url, e);
 		}
 		return ret;
 	}
@@ -69,15 +71,13 @@ public final class UrlUtil {
 	 * @param url
 	 *            URL which should be opened
 	 * @return opened stream
-	 * @throws IllegalArgumentException
+	 * @throws net.sf.qualitycheck.exception.IllegalNullArgumentException
 	 *             if the given argument is {@code null}
 	 * @throws CanNotOpenStreamException
 	 *             if no stream to the given {@code URL} can be established
 	 */
-	public static InputStream open(final URL url) {
-		if (url == null) {
-			throw new IllegalArgumentException("Argument 'url' must not be null.");
-		}
+	public static InputStream open(@Nonnull final URL url) {
+		Check.notNull(url, "url");
 
 		final InputStream ret;
 		try {
@@ -96,20 +96,16 @@ public final class UrlUtil {
 	 * @param charset
 	 *            the character set in which the data should be read
 	 * @return content as {@code String}
-	 * @throws IllegalArgumentException
+	 * @throws net.sf.qualitycheck.exception.IllegalNullArgumentException
 	 *             if any of the given arguments is {@code null}
 	 * @throws CanNotOpenStreamException
 	 *             if no stream to the given {@code URL} can be established
 	 * @throws IOException
 	 *             if an I/O error occurs
 	 */
-	public static String read(final URL url, final Charset charset) throws IOException {
-		if (url == null) {
-			throw new IllegalArgumentException("Argument 'url' must not be null.");
-		}
-		if (charset == null) {
-			throw new IllegalArgumentException("Argument 'charset' must not be null.");
-		}
+	public static String read(@Nonnull final URL url, @Nonnull final Charset charset) throws IOException {
+		Check.notNull(url, "url");
+		Check.notNull(charset, "charset");
 
 		final InputStream inputStream = open(url);
 		BufferedReader reader = null;
@@ -135,7 +131,7 @@ public final class UrlUtil {
 	 * @throws IOException
 	 *             If an I/O error occurs
 	 */
-	private static String readAll(final Reader reader) throws IOException {
+	private static String readAll(@Nonnull final Reader reader) throws IOException {
 		final StringBuilder buffer = new StringBuilder();
 		int cp;
 		while ((cp = reader.read()) != -1) {
@@ -153,10 +149,8 @@ public final class UrlUtil {
 	 * @throws IllegalStateException
 	 *             if no URL can be resolved to the given file
 	 */
-	public static URL toUrl(final File file) {
-		if (file == null) {
-			throw new IllegalArgumentException("Argument 'file' must not be null.");
-		}
+	public static URL toUrl(@Nonnull final File file) {
+		Check.notNull(file, "file");
 
 		URL url = null;
 		try {

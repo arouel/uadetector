@@ -15,15 +15,16 @@
  ******************************************************************************/
 package net.sf.uadetector.internal.data.domain;
 
-import org.junit.Assert;
-
+import net.sf.qualitycheck.exception.IllegalNegativeArgumentException;
+import net.sf.qualitycheck.exception.IllegalNullArgumentException;
 import net.sf.uadetector.internal.data.domain.BrowserType.Builder;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 public class BrowserTypeBuilderTest {
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNegativeArgumentException.class)
 	public void setId_toSmall() {
 		Builder b = new BrowserType.Builder();
 		b.setId(-1);
@@ -41,19 +42,19 @@ public class BrowserTypeBuilderTest {
 		b.setId("abc");
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNegativeArgumentException.class)
 	public void setId_byString_toSmall() {
 		Builder b = new BrowserType.Builder();
 		b.setId("-1");
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void setId_null() {
 		Builder b = new BrowserType.Builder();
 		b.setId(null);
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void setName_null() {
 		Builder b = new BrowserType.Builder();
 		b.setName(null);

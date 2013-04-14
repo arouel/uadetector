@@ -18,6 +18,8 @@ package net.sf.uadetector.internal.util;
 import java.lang.reflect.Constructor;
 import java.util.regex.Pattern;
 
+import net.sf.qualitycheck.exception.IllegalNullArgumentException;
+
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -37,7 +39,7 @@ public class RegularExpressionConverterTest {
 		RegularExpressionConverter.convertPerlRegexToPattern(perlStyleRegex);
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void convertPerlRegexToPattern_null() {
 		RegularExpressionConverter.convertPerlRegexToPattern(null);
 	}

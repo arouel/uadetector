@@ -4,6 +4,8 @@ import java.util.EnumSet;
 import java.util.HashSet;
 import java.util.Set;
 
+import net.sf.qualitycheck.exception.IllegalNegativeArgumentException;
+import net.sf.qualitycheck.exception.IllegalNullArgumentException;
 import net.sf.uadetector.internal.util.RegularExpressionConverter.Flag;
 
 import org.junit.Assert;
@@ -11,12 +13,12 @@ import org.junit.Test;
 
 public class FlagTest {
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void convertToBitmask_null() {
 		Flag.convertToBitmask(null);
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void convertToModifiers_null() {
 		Flag.convertToModifiers(null);
 	}
@@ -41,7 +43,7 @@ public class FlagTest {
 		Assert.assertEquals(null, Flag.evaluateByNumber(Integer.MAX_VALUE));
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNegativeArgumentException.class)
 	public void evaluateByNumber_negativeNumber() {
 		Flag.evaluateByNumber(-1);
 	}
@@ -72,12 +74,12 @@ public class FlagTest {
 		Assert.assertTrue(expected.containsAll(flags));
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNegativeArgumentException.class)
 	public void parse_negativeNumber() {
 		Flag.parse(-1);
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void parse_null() {
 		Flag.parse((String) null);
 	}

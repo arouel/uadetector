@@ -15,6 +15,8 @@
  ******************************************************************************/
 package net.sf.uadetector.internal.data.domain;
 
+import net.sf.qualitycheck.exception.IllegalNegativeArgumentException;
+import net.sf.qualitycheck.exception.IllegalNullArgumentException;
 import net.sf.uadetector.internal.data.domain.BrowserOperatingSystemMapping.Builder;
 
 import org.junit.Assert;
@@ -32,7 +34,7 @@ public class BrowserOperatingSystemMappingBuilderTest {
 		new BrowserOperatingSystemMapping.Builder().setBrowserId("");
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void setBrowserId_null() {
 		new BrowserOperatingSystemMapping.Builder().setBrowserId(null);
 	}
@@ -45,7 +47,7 @@ public class BrowserOperatingSystemMappingBuilderTest {
 		Assert.assertEquals(98765, b.getBrowserId());
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNegativeArgumentException.class)
 	public void setBrowserId_toSmall() {
 		new BrowserOperatingSystemMapping.Builder().setBrowserId(-1);
 	}
@@ -60,7 +62,7 @@ public class BrowserOperatingSystemMappingBuilderTest {
 		new BrowserOperatingSystemMapping.Builder().setOperatingSystemId("");
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void setOperatingSystemId_null() {
 		new BrowserOperatingSystemMapping.Builder().setOperatingSystemId(null);
 	}
@@ -73,7 +75,7 @@ public class BrowserOperatingSystemMappingBuilderTest {
 		Assert.assertEquals(98765, b.getOperatingSystemId());
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNegativeArgumentException.class)
 	public void setOperatingSystemId_toSmall() {
 		new BrowserOperatingSystemMapping.Builder().setOperatingSystemId(-1);
 	}

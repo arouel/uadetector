@@ -20,6 +20,10 @@ import java.io.IOException;
 import java.net.URL;
 import java.nio.charset.Charset;
 
+import javax.annotation.Nonnull;
+
+import net.sf.qualitycheck.Check;
+import net.sf.qualitycheck.exception.IllegalStateOfArgumentException;
 import net.sf.uadetector.datareader.DataReader;
 import net.sf.uadetector.datareader.XmlDataReader;
 import net.sf.uadetector.internal.data.Data;
@@ -88,14 +92,15 @@ public final class CachingXmlDataStore extends AbstractRefreshableDataStore {
 	 * @param fallback
 	 *            <em>UAS data</em> as fallback in case the data on the specified resource can not be read correctly
 	 * @return new instance of {@link CachingXmlDataStore}
-	 * @throws IllegalArgumentException
+	 * @throws net.sf.qualitycheck.exception.IllegalNullArgumentException
 	 *             if one of the given arguments is {@code null}
-	 * @throws IllegalArgumentException
+	 * @throws net.sf.qualitycheck.exception.IllegalStateOfArgumentException
 	 *             if the given cache file can not be read
-	 * @throws IllegalStateException
+	 * @throws net.sf.qualitycheck.exception.IllegalStateOfArgumentException
 	 *             if no URL can be resolved to the given given file
 	 */
-	public static CachingXmlDataStore createCachingXmlDataStore(final DataStore fallback) {
+	@Nonnull
+	public static CachingXmlDataStore createCachingXmlDataStore(@Nonnull final DataStore fallback) {
 		return createCachingXmlDataStore(findOrCreateCacheFile(), fallback);
 	}
 
@@ -109,14 +114,15 @@ public final class CachingXmlDataStore extends AbstractRefreshableDataStore {
 	 * @param fallback
 	 *            <em>UAS data</em> as fallback in case the data on the specified resource can not be read correctly
 	 * @return new instance of {@link CachingXmlDataStore}
-	 * @throws IllegalArgumentException
+	 * @throws net.sf.qualitycheck.exception.IllegalNullArgumentException
 	 *             if one of the given arguments is {@code null}
-	 * @throws IllegalArgumentException
+	 * @throws net.sf.qualitycheck.exception.IllegalStateOfArgumentException
 	 *             if the given cache file can not be read
-	 * @throws IllegalStateException
+	 * @throws net.sf.qualitycheck.exception.IllegalStateOfArgumentException
 	 *             if no URL can be resolved to the given given file
 	 */
-	public static CachingXmlDataStore createCachingXmlDataStore(final File cacheFile, final DataStore fallback) {
+	@Nonnull
+	public static CachingXmlDataStore createCachingXmlDataStore(@Nonnull final File cacheFile, @Nonnull final DataStore fallback) {
 		return createCachingXmlDataStore(cacheFile, UrlUtil.build(DEFAULT_DATA_URL), UrlUtil.build(DEFAULT_VERSION_URL), DEFAULT_CHARSET,
 				fallback);
 	}
@@ -137,30 +143,21 @@ public final class CachingXmlDataStore extends AbstractRefreshableDataStore {
 	 * @param fallback
 	 *            <em>UAS data</em> as fallback in case the data on the specified resource can not be read correctly
 	 * @return new instance of {@link CachingXmlDataStore}
-	 * @throws IllegalArgumentException
+	 * @throws net.sf.qualitycheck.exception.IllegalNullArgumentException
 	 *             if one of the given arguments is {@code null}
-	 * @throws IllegalArgumentException
+	 * @throws net.sf.qualitycheck.exception.IllegalNullArgumentException
 	 *             if the given cache file can not be read
-	 * @throws IllegalStateException
+	 * @throws net.sf.qualitycheck.exception.IllegalStateOfArgumentException
 	 *             if no URL can be resolved to the given given file
 	 */
-	public static CachingXmlDataStore createCachingXmlDataStore(final File cacheFile, final URL dataUrl, final URL versionUrl,
-			final Charset charset, final DataStore fallback) {
-		if (cacheFile == null) {
-			throw new IllegalArgumentException("Argument 'cacheFile' must not be null.");
-		}
-		if (charset == null) {
-			throw new IllegalArgumentException("Argument 'charset' must not be null.");
-		}
-		if (dataUrl == null) {
-			throw new IllegalArgumentException("Argument 'dataUrl' must not be null.");
-		}
-		if (fallback == null) {
-			throw new IllegalArgumentException("Argument 'fallback' must not be null.");
-		}
-		if (versionUrl == null) {
-			throw new IllegalArgumentException("Argument 'versionUrl' must not be null.");
-		}
+	@Nonnull
+	public static CachingXmlDataStore createCachingXmlDataStore(@Nonnull final File cacheFile, @Nonnull final URL dataUrl,
+			@Nonnull final URL versionUrl, @Nonnull final Charset charset, @Nonnull final DataStore fallback) {
+		Check.notNull(cacheFile, "cacheFile");
+		Check.notNull(charset, "charset");
+		Check.notNull(dataUrl, "dataUrl");
+		Check.notNull(fallback, "fallback");
+		Check.notNull(versionUrl, "versionUrl");
 
 		final DataReader reader = new XmlDataReader();
 
@@ -192,13 +189,14 @@ public final class CachingXmlDataStore extends AbstractRefreshableDataStore {
 	 * @param fallback
 	 *            <em>UAS data</em> as fallback in case the data on the specified resource can not be read correctly
 	 * @return new instance of {@link CachingXmlDataStore}
-	 * @throws IllegalArgumentException
+	 * @throws net.sf.qualitycheck.exception.IllegalNullArgumentException
 	 *             if one of the given arguments is {@code null}
-	 * @throws IllegalArgumentException
+	 * @throws net.sf.qualitycheck.exception.IllegalStateOfArgumentException
 	 *             if the given cache file can not be read
 	 */
-	public static CachingXmlDataStore createCachingXmlDataStore(final URL dataUrl, final URL versionUrl, final Charset charset,
-			final DataStore fallback) {
+	@Nonnull
+	public static CachingXmlDataStore createCachingXmlDataStore(@Nonnull final URL dataUrl, @Nonnull final URL versionUrl,
+			@Nonnull final Charset charset, @Nonnull final DataStore fallback) {
 		return createCachingXmlDataStore(findOrCreateCacheFile(), dataUrl, versionUrl, charset, fallback);
 	}
 
@@ -208,16 +206,17 @@ public final class CachingXmlDataStore extends AbstractRefreshableDataStore {
 	 * generate its name.
 	 * 
 	 * @return file to cache read in <em>UAS data</em>
-	 * @throws IllegalStateException
+	 * @throws net.sf.qualitycheck.exception.IllegalStateOfArgumentException
 	 *             if the cache file can not be created
 	 */
+	@Nonnull
 	public static File findOrCreateCacheFile() {
 		final File file = new File(CACHE_DIR, PREFIX + SUFFIX);
 		if (!file.exists()) {
 			try {
 				file.createNewFile();
 			} catch (final IOException e) {
-				throw new IllegalStateException("Can not create a cache file.");
+				throw new IllegalStateOfArgumentException("Can not create a cache file.");
 			}
 		}
 		return file;
@@ -229,14 +228,14 @@ public final class CachingXmlDataStore extends AbstractRefreshableDataStore {
 	 * @param file
 	 *            the file that could be empty
 	 * @return {@code true} when the file is accessible and empty otherwise {@code false}
-	 * @throws IllegalStateException
+	 * @throws net.sf.qualitycheck.exception.IllegalStateOfArgumentException
 	 *             if an I/O error occurs
 	 */
-	private static boolean isEmpty(final File file, final Charset charset) {
+	private static boolean isEmpty(@Nonnull final File file, @Nonnull final Charset charset) {
 		try {
 			return FileUtil.isEmpty(file, charset);
 		} catch (final IOException e) {
-			throw new IllegalStateException("The given file could not be read.");
+			throw new IllegalStateOfArgumentException("The given file could not be read.");
 		}
 	}
 
@@ -255,11 +254,11 @@ public final class CachingXmlDataStore extends AbstractRefreshableDataStore {
 	 *            the character set in which the data should be read
 	 * @param cacheFile
 	 *            file with cached <em>UAS data</em> in XML format or an empty file
-	 * @throws IllegalArgumentException
+	 * @throws net.sf.qualitycheck.exception.IllegalNullArgumentException
 	 *             if one of the given arguments is {@code null}
 	 */
-	private CachingXmlDataStore(final DataReader reader, final URL dataUrl, final URL versionUrl, final Charset charset,
-			final File cacheFile, final DataStore fallback) {
+	private CachingXmlDataStore(@Nonnull final DataReader reader, @Nonnull final URL dataUrl, @Nonnull final URL versionUrl,
+			@Nonnull final Charset charset, @Nonnull final File cacheFile, @Nonnull final DataStore fallback) {
 		super(reader, dataUrl, versionUrl, charset, fallback);
 		setUpdateOperation(new UpdateOperationWithCacheFileTask(this, cacheFile));
 	}

@@ -19,6 +19,8 @@ import java.util.SortedSet;
 import java.util.TreeSet;
 import java.util.regex.Pattern;
 
+import net.sf.qualitycheck.exception.IllegalNegativeArgumentException;
+import net.sf.qualitycheck.exception.IllegalNullArgumentException;
 import net.sf.uadetector.OperatingSystemFamily;
 import net.sf.uadetector.UserAgent;
 
@@ -27,7 +29,7 @@ import org.junit.Test;
 
 public class OperatingSystemTest {
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void construct_family_null() {
 		final int id = 1;
 		final String icon = "icon";
@@ -41,7 +43,7 @@ public class OperatingSystemTest {
 		new OperatingSystem(family, icon, id, infoUrl, name, patternSet, producer, producerUrl, url);
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void construct_icon_null() {
 		final int id = 1;
 		final String icon = null;
@@ -55,7 +57,7 @@ public class OperatingSystemTest {
 		new OperatingSystem(family, icon, id, infoUrl, name, patternSet, producer, producerUrl, url);
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNegativeArgumentException.class)
 	public void construct_id_toSmall() {
 		final int id = -1;
 		final String icon = "icon";
@@ -69,7 +71,7 @@ public class OperatingSystemTest {
 		new OperatingSystem(family, icon, id, infoUrl, name, patternSet, producer, producerUrl, url);
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void construct_infoUrl_null() {
 		final int id = 1;
 		final String icon = "icon";
@@ -83,7 +85,7 @@ public class OperatingSystemTest {
 		new OperatingSystem(family, icon, id, infoUrl, name, patternSet, producer, producerUrl, url);
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void construct_name_null() {
 		final int id = 1;
 		final String icon = "icon";
@@ -97,7 +99,7 @@ public class OperatingSystemTest {
 		new OperatingSystem(family, icon, id, infoUrl, name, patternSet, producer, producerUrl, url);
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void construct_patternSet_null() {
 		final int id = 1;
 		final String icon = "icon";
@@ -111,7 +113,7 @@ public class OperatingSystemTest {
 		new OperatingSystem(family, icon, id, infoUrl, name, patternSet, producer, producerUrl, url);
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void construct_producer_null() {
 		final int id = 1;
 		final String icon = "icon";
@@ -125,7 +127,7 @@ public class OperatingSystemTest {
 		new OperatingSystem(family, icon, id, infoUrl, name, patternSet, producer, producerUrl, url);
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void construct_producerUrl_null() {
 		final int id = 1;
 		final String icon = "icon";
@@ -153,7 +155,7 @@ public class OperatingSystemTest {
 		new OperatingSystem(family, icon, id, infoUrl, name, patternSet, producer, producerUrl, url);
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void construct_url_null() {
 		final int id = 1;
 		final String icon = "icon";

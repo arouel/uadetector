@@ -18,6 +18,8 @@ package net.sf.uadetector.datastore;
 import java.net.URL;
 import java.nio.charset.Charset;
 
+import javax.annotation.Nonnull;
+
 import net.sf.uadetector.datareader.DataReader;
 import net.sf.uadetector.internal.data.Data;
 
@@ -48,6 +50,7 @@ public interface DataStore {
 	 * 
 	 * @return current UAS data
 	 */
+	@Nonnull
 	Charset getCharset();
 
 	/**
@@ -55,6 +58,7 @@ public interface DataStore {
 	 * 
 	 * @return current UAS data
 	 */
+	@Nonnull
 	Data getData();
 
 	/**
@@ -62,6 +66,7 @@ public interface DataStore {
 	 * 
 	 * @return the data reader to read in UAS data
 	 */
+	@Nonnull
 	DataReader getDataReader();
 
 	/**
@@ -69,6 +74,7 @@ public interface DataStore {
 	 * 
 	 * @return URL to UAS data
 	 */
+	@Nonnull
 	URL getDataUrl();
 
 	/**
@@ -76,6 +82,7 @@ public interface DataStore {
 	 * 
 	 * @return URL to version information of UAS data
 	 */
+	@Nonnull
 	URL getVersionUrl();
 
 }

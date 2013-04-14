@@ -22,6 +22,9 @@ import java.io.LineNumberReader;
 import java.net.URL;
 import java.nio.charset.Charset;
 
+import javax.annotation.Nonnull;
+
+import net.sf.qualitycheck.Check;
 import net.sf.uadetector.datastore.RefreshableDataStore;
 
 import org.slf4j.Logger;
@@ -62,7 +65,7 @@ final class UpdateService implements Updater, Runnable {
 	 * @throws IOException
 	 *             if an I/O exception occurs
 	 */
-	private static String retrieveRemoteVersion(final URL url, final Charset charset) throws IOException {
+	private static String retrieveRemoteVersion(@Nonnull final URL url, @Nonnull final Charset charset) throws IOException {
 		final InputStream stream = url.openStream();
 		final InputStreamReader reader = new InputStreamReader(stream, charset);
 		final LineNumberReader lnr = new LineNumberReader(reader);
@@ -81,6 +84,7 @@ final class UpdateService implements Updater, Runnable {
 	/**
 	 * The data store for instances that implements {@link net.sf.uadetector.internal.data.Data}
 	 */
+	@Nonnull
 	private final RefreshableDataStore store;
 
 	/**
@@ -111,10 +115,8 @@ final class UpdateService implements Updater, Runnable {
 	 */
 	private static final String MSG_NO_UPDATE_AVAILABLE = "No update available. Current version is '%s'.";
 
-	public UpdateService(final RefreshableDataStore store) {
-		if (store == null) {
-			throw new IllegalArgumentException("Argument 'store' must not be null.");
-		}
+	public UpdateService(@Nonnull final RefreshableDataStore store) {
+		Check.notNull(store, "store");
 
 		this.store = store;
 	}
@@ -132,6 +134,7 @@ final class UpdateService implements Updater, Runnable {
 	 * 
 	 * @return current version of UAS data
 	 */
+	@Nonnull
 	private String getCurrentVersion() {
 		return store.getData().getVersion();
 	}

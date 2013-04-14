@@ -17,6 +17,10 @@ package net.sf.uadetector;
 
 import java.io.Serializable;
 
+import javax.annotation.Nonnull;
+
+import net.sf.qualitycheck.Check;
+
 /**
  * {@code OperatingSystem} is an immutable entity that represents the informations about an operating system like Linux,
  * Mac OS X or Windows.
@@ -33,48 +37,41 @@ public final class OperatingSystem implements ReadableOperatingSystem, Serializa
 	 */
 	private static final long serialVersionUID = 1L;
 
+	@Nonnull
 	private final OperatingSystemFamily family;
 
+	@Nonnull
 	private final String familyName;
 
+	@Nonnull
 	private final String icon;
 
+	@Nonnull
 	private final String name;
 
+	@Nonnull
 	private final String producer;
 
+	@Nonnull
 	private final String producerUrl;
 
+	@Nonnull
 	private final String url;
 
+	@Nonnull
 	private final VersionNumber versionNumber;
 
-	public OperatingSystem(final OperatingSystemFamily family, final String familyName, final String icon, final String name,
-			final String producer, final String producerUrl, final String url, final VersionNumber versionNumber) {
-		if (family == null) {
-			throw new IllegalArgumentException("Argument 'family' must not be null");
-		}
-		if (familyName == null) {
-			throw new IllegalArgumentException("Argument 'familyName' must not be null");
-		}
-		if (icon == null) {
-			throw new IllegalArgumentException("Argument 'icon' must not be null");
-		}
-		if (name == null) {
-			throw new IllegalArgumentException("Argument 'name' must not be null");
-		}
-		if (producer == null) {
-			throw new IllegalArgumentException("Argument 'producer' must not be null");
-		}
-		if (producerUrl == null) {
-			throw new IllegalArgumentException("Argument 'producerUrl' must not be null");
-		}
-		if (url == null) {
-			throw new IllegalArgumentException("Argument 'url' must not be null");
-		}
-		if (versionNumber == null) {
-			throw new IllegalArgumentException("Argument 'versionNumber' must not be null");
-		}
+	public OperatingSystem(@Nonnull final OperatingSystemFamily family, @Nonnull final String familyName, @Nonnull final String icon,
+			@Nonnull final String name, @Nonnull final String producer, @Nonnull final String producerUrl, @Nonnull final String url,
+			@Nonnull final VersionNumber versionNumber) {
+		Check.notNull(family, "family");
+		Check.notNull(familyName, "familyName");
+		Check.notNull(icon, "icon");
+		Check.notNull(name, "name");
+		Check.notNull(producer, "producer");
+		Check.notNull(producerUrl, "producerUrl");
+		Check.notNull(url, "url");
+		Check.notNull(versionNumber, "versionNumber");
 
 		this.family = family;
 		this.familyName = familyName;

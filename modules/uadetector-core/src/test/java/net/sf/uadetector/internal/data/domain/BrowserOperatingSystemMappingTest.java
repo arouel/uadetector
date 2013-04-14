@@ -15,19 +15,21 @@
  ******************************************************************************/
 package net.sf.uadetector.internal.data.domain;
 
+import net.sf.qualitycheck.exception.IllegalNegativeArgumentException;
+
 import org.junit.Assert;
 import org.junit.Test;
 
 public class BrowserOperatingSystemMappingTest {
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNegativeArgumentException.class)
 	public void construct_browserId_toSmall() {
 		final int browserId = -1;
 		final int operatingSystemId = 1;
 		new BrowserOperatingSystemMapping(browserId, operatingSystemId);
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNegativeArgumentException.class)
 	public void construct_operatingSystemId_toSmall() {
 		final int browserId = 1;
 		final int operatingSystemId = -1;

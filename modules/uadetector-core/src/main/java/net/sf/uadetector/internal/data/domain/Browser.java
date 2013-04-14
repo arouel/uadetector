@@ -18,6 +18,10 @@ package net.sf.uadetector.internal.data.domain;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
+import javax.annotation.Nonnegative;
+import javax.annotation.Nonnull;
+
+import net.sf.qualitycheck.Check;
 import net.sf.uadetector.UserAgent;
 import net.sf.uadetector.UserAgentFamily;
 
@@ -46,13 +50,11 @@ public final class Browser {
 		 * 
 		 * @param builder
 		 *            builder containing the data to be copied
-		 * @throws IllegalArgumentException
+		 * @throws net.sf.qualitycheck.exception.IllegalNullArgumentException
 		 *             if the given argument is {@code null}
 		 */
-		protected Builder(final Builder builder) {
-			if (builder == null) {
-				throw new IllegalArgumentException("Argument 'builder' must not be null.");
-			}
+		protected Builder(@Nonnull final Builder builder) {
+			Check.notNull(builder, "builder");
 
 			this.family = builder.family;
 			this.icon = builder.icon;
@@ -67,6 +69,7 @@ public final class Browser {
 			this.url = builder.url;
 		}
 
+		@Nonnull
 		public Browser build() {
 			return new Browser(id, type, family, url, producer, producerUrl, icon, infoUrl, patternSet, operatingSystem);
 		}
@@ -76,6 +79,7 @@ public final class Browser {
 		 * 
 		 * @return a new instance of the current builder, never {@code null}
 		 */
+		@Nonnull
 		public Builder copy() {
 			return new Builder(this);
 		}
@@ -124,82 +128,70 @@ public final class Browser {
 			return url;
 		}
 
-		public Builder setFamily(final UserAgentFamily family) {
-			if (family == null) {
-				throw new IllegalArgumentException("Argument 'family' must not be null.");
-			}
+		public Builder setFamily(@Nonnull final UserAgentFamily family) {
+			Check.notNull(family, "family");
 
 			this.family = family;
 			return this;
 		}
 
-		public Builder setIcon(final String icon) {
-			if (icon == null) {
-				throw new IllegalArgumentException("Argument 'icon' must not be null.");
-			}
+		public Builder setIcon(@Nonnull final String icon) {
+			Check.notNull(icon, "icon");
 
 			this.icon = icon;
 			return this;
 		}
 
-		public Builder setId(final int id) {
-			if (id < 0) {
-				throw new IllegalArgumentException("Argument 'icon' can not be smaller than 0.");
-			}
+		public Builder setId(@Nonnegative final int id) {
+			Check.notNegative(id, "id");
 
 			this.id = id;
 			return this;
 		}
 
-		public Builder setId(final String id) {
-			if (id == null) {
-				throw new IllegalArgumentException("Argument 'icon' must not be null.");
-			}
+		@Nonnull
+		public Builder setId(@Nonnull final String id) {
+			Check.notEmpty(id, "id");
 
 			this.setId(Integer.parseInt(id.trim()));
 			return this;
 		}
 
-		public Builder setInfoUrl(final String infoUrl) {
-			if (infoUrl == null) {
-				throw new IllegalArgumentException("Argument 'infoUrl' must not be null.");
-			}
+		@Nonnull
+		public Builder setInfoUrl(@Nonnull final String infoUrl) {
+			Check.notNull(infoUrl, "infoUrl");
 
 			this.infoUrl = infoUrl;
 			return this;
 		}
 
-		public Builder setOperatingSystem(final OperatingSystem operatingSystem) {
-			if (operatingSystem == null) {
-				throw new IllegalArgumentException("Argument 'operatingSystem' must not be null.");
-			}
+		@Nonnull
+		public Builder setOperatingSystem(@Nonnull final OperatingSystem operatingSystem) {
+			Check.notNull(operatingSystem, "operatingSystem");
 
 			this.operatingSystem = operatingSystem;
 			return this;
 		}
 
-		public Builder setPatternSet(final SortedSet<BrowserPattern> patternSet) {
-			if (patternSet == null) {
-				throw new IllegalArgumentException("Argument 'patternSet' must not be null.");
-			}
+		@Nonnull
+		public Builder setPatternSet(@Nonnull final SortedSet<BrowserPattern> patternSet) {
+			Check.notNull(patternSet, "patternSet");
 
 			this.patternSet = patternSet;
 			return this;
 		}
 
-		public Builder setProducer(final String producer) {
-			if (producer == null) {
-				throw new IllegalArgumentException("Argument 'producer' must not be null.");
-			}
+		@Nonnull
+		public Builder setProducer(@Nonnull final String producer) {
+			Check.notNull(producer, "producer");
 
 			this.producer = producer;
 			return this;
 		}
 
-		public Builder setProducerUrl(final String producerUrl) {
-			if (producerUrl == null) {
-				throw new IllegalArgumentException("Argument 'producerUrl' must not be null.");
-			}
+		@Nonnull
+		public Builder setProducerUrl(@Nonnull final String producerUrl) {
+			Check.notNull(producerUrl, "producerUrl");
 
 			this.producerUrl = producerUrl;
 			return this;
@@ -213,37 +205,33 @@ public final class Browser {
 		 * @param type
 		 *            A browser type
 		 */
-		public Builder setType(final BrowserType type) {
-			if (type == null) {
-				throw new IllegalArgumentException("Argument 'type' must not be null.");
-			}
+		@Nonnull
+		public Builder setType(@Nonnull final BrowserType type) {
+			Check.notNull(type, "type");
 
 			this.type = type;
 			return this;
 		}
 
-		public Builder setTypeId(final int typeId) {
-			if (typeId < 0) {
-				throw new IllegalArgumentException("Argument 'typeId' can not be smaller than 0.");
-			}
+		@Nonnull
+		public Builder setTypeId(@Nonnegative final int typeId) {
+			Check.notNegative(typeId, "typeId");
 
 			this.typeId = typeId;
 			return this;
 		}
 
-		public Builder setTypeId(final String typeId) {
-			if (typeId == null) {
-				throw new IllegalArgumentException("Argument 'typeId' must not be null.");
-			}
+		@Nonnull
+		public Builder setTypeId(@Nonnull final String typeId) {
+			Check.notEmpty(typeId, "typeId");
 
 			setTypeId(Integer.parseInt(typeId.trim()));
 			return this;
 		}
 
-		public Builder setUrl(final String url) {
-			if (url == null) {
-				throw new IllegalArgumentException("Argument 'url' must not be null.");
-			}
+		@Nonnull
+		public Builder setUrl(@Nonnull final String url) {
+			Check.notNull(url, "url");
 
 			this.url = url;
 			return this;
@@ -262,37 +250,19 @@ public final class Browser {
 	private final BrowserType type;
 	private final String url;
 
-	public Browser(final int id, final BrowserType type, final UserAgentFamily family, final String url, final String producer,
-			final String producerUrl, final String icon, final String infoUrl, final SortedSet<BrowserPattern> patternSet,
-			final OperatingSystem operatingSystem) {
-
-		if (family == null) {
-			throw new IllegalArgumentException("Argument 'family' must not be null.");
-		}
-		if (icon == null) {
-			throw new IllegalArgumentException("Argument 'icon' must not be null.");
-		}
-		if (id < 0) {
-			throw new IllegalArgumentException("Argument 'id' must not be smaller than 0.");
-		}
-		if (infoUrl == null) {
-			throw new IllegalArgumentException("Argument 'infoUrl' must not be null.");
-		}
-		if (patternSet == null) {
-			throw new IllegalArgumentException("Argument 'patternSet' must not be null.");
-		}
-		if (producer == null) {
-			throw new IllegalArgumentException("Argument 'producer' must not be null.");
-		}
-		if (producerUrl == null) {
-			throw new IllegalArgumentException("Argument 'producerUrl' must not be null.");
-		}
-		if (type == null) {
-			throw new IllegalArgumentException("Argument 'type' must not be null.");
-		}
-		if (url == null) {
-			throw new IllegalArgumentException("Argument 'url' must not be null.");
-		}
+	public Browser(@Nonnegative final int id, @Nonnull final BrowserType type, @Nonnull final UserAgentFamily family,
+			@Nonnull final String url, @Nonnull final String producer, @Nonnull final String producerUrl, @Nonnull final String icon,
+			@Nonnull final String infoUrl, @Nonnull final SortedSet<BrowserPattern> patternSet,
+			@Nonnull final OperatingSystem operatingSystem) {
+		Check.notNull(family, "family");
+		Check.notNull(icon, "icon");
+		Check.notNegative(id, "id");
+		Check.notNull(infoUrl, "infoUrl");
+		Check.notNull(patternSet, "patternSet");
+		Check.notNull(producer, "producer");
+		Check.notNull(producerUrl, "producerUrl");
+		Check.notNull(type, "type");
+		Check.notNull(url, "url");
 
 		this.family = family;
 		this.icon = icon;
@@ -309,7 +279,7 @@ public final class Browser {
 	/**
 	 * Copy values from itself to a <code>UserAgentInfo.Builder</code>.
 	 */
-	public void copyTo(final UserAgent.Builder builder) {
+	public void copyTo(@Nonnull final UserAgent.Builder builder) {
 		builder.setFamily(family);
 		builder.setIcon(icon);
 		builder.setName(family.getName());
@@ -428,6 +398,7 @@ public final class Browser {
 		return result;
 	}
 
+	@Nonnull
 	@Override
 	public String toString() {
 		final StringBuilder builder = new StringBuilder();

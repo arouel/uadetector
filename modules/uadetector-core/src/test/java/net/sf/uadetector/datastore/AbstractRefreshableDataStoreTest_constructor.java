@@ -6,6 +6,7 @@ import java.nio.charset.Charset;
 import java.util.HashSet;
 import java.util.TreeMap;
 
+import net.sf.qualitycheck.exception.IllegalNullArgumentException;
 import net.sf.uadetector.datareader.DataReader;
 import net.sf.uadetector.datareader.XmlDataReader;
 import net.sf.uadetector.internal.data.Data;
@@ -78,25 +79,25 @@ public class AbstractRefreshableDataStoreTest_constructor {
 		}
 	};
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void construct_charset_isNull() throws MalformedURLException {
 		final URL url = new URL("http://localhost");
 		new TestDataStore(new XmlDataReader(), null, url, url, FALLBACK);
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void construct_dataReader_isNull() throws MalformedURLException {
 		final URL url = new URL("http://localhost");
 		new TestDataStore(null, CHARSET, url, url, FALLBACK);
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void construct_dataUrl_isNull() throws MalformedURLException {
 		final URL url = new URL("http://localhost");
 		new TestDataStore(new XmlDataReader(), CHARSET, null, url, FALLBACK);
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void construct_fallback_isNull() throws MalformedURLException {
 		final URL url = new URL("http://localhost");
 		new TestDataStore(new XmlDataReader(), CHARSET, url, url, null);
@@ -114,7 +115,7 @@ public class AbstractRefreshableDataStoreTest_constructor {
 		Assert.assertEquals(VERSION_URL, store.getVersionUrl());
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void construct_versionUrl_isNull() throws MalformedURLException {
 		final URL url = new URL("http://localhost");
 		new TestDataStore(new XmlDataReader(), CHARSET, url, null, FALLBACK);

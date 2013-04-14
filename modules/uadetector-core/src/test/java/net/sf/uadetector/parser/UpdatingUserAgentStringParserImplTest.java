@@ -17,6 +17,7 @@ package net.sf.uadetector.parser;
 
 import java.net.MalformedURLException;
 
+import net.sf.qualitycheck.exception.IllegalNullArgumentException;
 import net.sf.uadetector.OperatingSystem;
 import net.sf.uadetector.OperatingSystemFamily;
 import net.sf.uadetector.UserAgent;
@@ -37,7 +38,7 @@ public class UpdatingUserAgentStringParserImplTest {
 
 	private static final UpdatingUserAgentStringParserImpl PARSER = UpdatingUserAgentStringParserHolder.getInstance();
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void construct_store_null() throws Exception {
 		new UpdatingUserAgentStringParserImpl(null);
 	}

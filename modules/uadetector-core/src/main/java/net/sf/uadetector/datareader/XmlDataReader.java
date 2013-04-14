@@ -21,10 +21,13 @@ import java.io.InputStream;
 import java.net.URL;
 import java.nio.charset.Charset;
 
+import javax.annotation.Nonnull;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
+import net.sf.qualitycheck.Check;
+import net.sf.qualitycheck.exception.IllegalNullArgumentException;
 import net.sf.uadetector.datastore.DataStore;
 import net.sf.uadetector.exception.CanNotOpenStreamException;
 import net.sf.uadetector.internal.data.Data;
@@ -50,8 +53,8 @@ public final class XmlDataReader implements DataReader {
 
 		private static final String MSG_NOT_PARSED_AS_EXPECTED = "The UAS data has not been parsed as expected.";
 
-		public static void parse(final InputStream stream, final Builder builder) throws ParserConfigurationException, SAXException,
-				IOException {
+		public static void parse(@Nonnull final InputStream stream, @Nonnull final Builder builder) throws ParserConfigurationException,
+				SAXException, IOException {
 			final SAXParserFactory factory = SAXParserFactory.newInstance();
 			factory.setValidating(true);
 			final SAXParser parser = factory.newSAXParser();
@@ -60,7 +63,7 @@ public final class XmlDataReader implements DataReader {
 			validate(handler);
 		}
 
-		protected static void validate(final XmlDataHandler handler) {
+		protected static void validate(@Nonnull final XmlDataHandler handler) {
 			if (handler.hasError() || handler.hasWarning()) {
 				throw new IllegalStateException(MSG_NOT_PARSED_AS_EXPECTED);
 			}
@@ -89,18 +92,14 @@ public final class XmlDataReader implements DataReader {
 	 * @param charset
 	 *            the character set in which the data should be read
 	 * @return read in <em>UAS data</em> as {@code Data} instance
-	 * @throws IllegalArgumentException
+	 * @throws net.sf.qualitycheck.exception.IllegalNullArgumentException
 	 *             if any of the given arguments is {@code null}
 	 * @throws net.sf.uadetector.exception.CanNotOpenStreamException
 	 *             if no stream to the given {@code URL} can be established
 	 */
-	protected static Data readXml(final InputStream inputStream, final Charset charset) {
-		if (inputStream == null) {
-			throw new IllegalArgumentException("Argument 'inputStream' must not be null.");
-		}
-		if (charset == null) {
-			throw new IllegalArgumentException("Argument 'charset' must not be null.");
-		}
+	protected static Data readXml(@Nonnull final InputStream inputStream, @Nonnull final Charset charset) {
+		Check.notNull(inputStream, "inputStream");
+		Check.notNull(charset, "charset");
 
 		final Builder builder = new Builder();
 		boolean hasErrors = false;
@@ -139,14 +138,12 @@ public final class XmlDataReader implements DataReader {
 	 *            <em>UAS data</em> as string
 	 * @return read in User-Agent data as {@code Data} instance otherwise {@link Data#EMPTY}
 	 * 
-	 * @throws IllegalArgumentException
+	 * @throws net.sf.qualitycheck.exception.IllegalNullArgumentException
 	 *             if any of the given argument is {@code null}
 	 */
 	@Override
-	public Data read(final String data) {
-		if (data == null) {
-			throw new IllegalArgumentException("Argument 'data' must not be null.");
-		}
+	public Data read(@Nonnull final String data) {
+		Check.notNull(data, "data");
 
 		return readXml(new ByteArrayInputStream(data.getBytes(DataStore.DEFAULT_CHARSET)), DataStore.DEFAULT_CHARSET);
 	}
@@ -160,17 +157,13 @@ public final class XmlDataReader implements DataReader {
 	 *            the character set in which the data should be read
 	 * @return read in User-Agent data as {@code Data} instance otherwise {@link Data#EMPTY}
 	 * 
-	 * @throws IllegalArgumentException
+	 * @throws net.sf.qualitycheck.exception.IllegalNullArgumentException
 	 *             if any of the given arguments is {@code null}
 	 */
 	@Override
-	public Data read(final URL url, final Charset charset) {
-		if (url == null) {
-			throw new IllegalArgumentException("Argument 'url' must not be null.");
-		}
-		if (charset == null) {
-			throw new IllegalArgumentException("Argument 'charset' must not be null.");
-		}
+	public Data read(@Nonnull final URL url, @Nonnull final Charset charset) {
+		Check.notNull(url, "url");
+		Check.notNull(charset, "charset");
 
 		Data data = Data.EMPTY;
 		try {

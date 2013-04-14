@@ -17,6 +17,9 @@ package net.sf.uadetector.internal.data.domain;
 
 import java.util.regex.Pattern;
 
+import javax.annotation.Nonnegative;
+import javax.annotation.Nonnull;
+
 public interface OrderedPattern<T extends OrderedPattern<?>> extends Comparable<T> {
 
 	/**
@@ -24,6 +27,7 @@ public interface OrderedPattern<T extends OrderedPattern<?>> extends Comparable<
 	 * 
 	 * @return compiled representation of a regular expression
 	 */
+	@Nonnull
 	Pattern getPattern();
 
 	/**
@@ -31,6 +35,7 @@ public interface OrderedPattern<T extends OrderedPattern<?>> extends Comparable<
 	 * 
 	 * @return position of a browser pattern
 	 */
+	@Nonnegative
 	int getPosition();
 
 }

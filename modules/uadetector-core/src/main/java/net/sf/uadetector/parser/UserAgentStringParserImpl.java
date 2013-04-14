@@ -15,6 +15,9 @@
  ******************************************************************************/
 package net.sf.uadetector.parser;
 
+import javax.annotation.Nonnull;
+
+import net.sf.qualitycheck.Check;
 import net.sf.uadetector.datastore.DataStore;
 
 /**
@@ -29,6 +32,7 @@ public class UserAgentStringParserImpl<T extends DataStore> extends AbstractUser
 	 * Storage for all detection informations for <i>UASparsers</i> from <a
 	 * href="http://user-agent-string.info/">http://user-agent-string.info</a>.
 	 */
+	@Nonnull
 	private final T store;
 
 	/**
@@ -36,19 +40,17 @@ public class UserAgentStringParserImpl<T extends DataStore> extends AbstractUser
 	 * 
 	 * @param store
 	 *            store for UAS data
-	 * @throws IllegalArgumentException
+	 * @throws net.sf.qualitycheck.exception.IllegalNullArgumentException
 	 *             if the given argument is {@code null}
 	 */
-	public UserAgentStringParserImpl(final T store) {
+	public UserAgentStringParserImpl(@Nonnull final T store) {
 		super();
-
-		if (store == null) {
-			throw new IllegalArgumentException("Argument 'store' must not be null.");
-		}
+		Check.notNull(store, "store");
 
 		this.store = store;
 	}
 
+	@Nonnull
 	@Override
 	protected T getDataStore() {
 		return store;

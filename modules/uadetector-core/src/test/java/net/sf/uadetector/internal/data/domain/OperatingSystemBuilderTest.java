@@ -19,12 +19,16 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.regex.Pattern;
 
+import net.sf.qualitycheck.exception.IllegalEmptyArgumentException;
+import net.sf.qualitycheck.exception.IllegalNegativeArgumentException;
+import net.sf.qualitycheck.exception.IllegalNullArgumentException;
+
 import org.junit.Assert;
 import org.junit.Test;
 
 public class OperatingSystemBuilderTest {
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void construct_builder_null() {
 		new OperatingSystem.Builder(null);
 	}
@@ -71,12 +75,12 @@ public class OperatingSystemBuilderTest {
 		Assert.assertEquals("u1", copy2.getUrl());
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void setFamily_null() {
 		new OperatingSystem.Builder().setFamily(null);
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void setIcon_null() {
 		new OperatingSystem.Builder().setIcon(null);
 	}
@@ -86,12 +90,12 @@ public class OperatingSystemBuilderTest {
 		new OperatingSystem.Builder().setId("abc");
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalEmptyArgumentException.class)
 	public void setId_emptyString() {
 		new OperatingSystem.Builder().setId("");
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void setId_null() {
 		new OperatingSystem.Builder().setId(null);
 	}
@@ -105,37 +109,37 @@ public class OperatingSystemBuilderTest {
 		Assert.assertTrue(b1.equals(b2));
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNegativeArgumentException.class)
 	public void setId_toSmall() {
 		new OperatingSystem.Builder().setId(-1);
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void setInfoUrl_null() {
 		new OperatingSystem.Builder().setInfoUrl(null);
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void setName_null() {
 		new OperatingSystem.Builder().setName(null);
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void setPatternSet_null() {
 		new OperatingSystem.Builder().addPatternSet(null);
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void setProducer_null() {
 		new OperatingSystem.Builder().setProducer(null);
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void setProducerUrl_null() {
 		new OperatingSystem.Builder().setProducerUrl(null);
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void setUrl_null() {
 		new OperatingSystem.Builder().setUrl(null);
 	}

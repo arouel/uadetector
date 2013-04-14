@@ -22,6 +22,8 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.Charset;
 
+import net.sf.qualitycheck.exception.IllegalNullArgumentException;
+import net.sf.qualitycheck.exception.IllegalStateOfArgumentException;
 import net.sf.uadetector.datastore.DataStore;
 import net.sf.uadetector.exception.CanNotOpenStreamException;
 
@@ -35,12 +37,12 @@ public class UrlUtilTest {
 	 */
 	private static final Charset CHARSET = DataStore.DEFAULT_CHARSET;
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalStateOfArgumentException.class)
 	public void build_invalid_url() throws Exception {
 		UrlUtil.build("i'm invalid");
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void build_null() throws Exception {
 		UrlUtil.build(null);
 	}
@@ -53,7 +55,7 @@ public class UrlUtilTest {
 		constructor.newInstance();
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void open_null() throws Exception {
 		UrlUtil.open(null);
 	}
@@ -64,7 +66,7 @@ public class UrlUtilTest {
 		UrlUtil.open(new URL(unreachable));
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void read_charset_null() throws IOException {
 		UrlUtil.read(new URL("http://localhost"), null);
 	}
@@ -75,7 +77,7 @@ public class UrlUtilTest {
 		UrlUtil.read(new URL(unreachable), CHARSET);
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void read_url_null() throws IOException {
 		UrlUtil.read(null, CHARSET);
 	}
@@ -86,7 +88,7 @@ public class UrlUtilTest {
 		Assert.assertNotNull(url);
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void toUrl_null() {
 		UrlUtil.toUrl(null);
 	}

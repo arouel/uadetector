@@ -15,11 +15,13 @@
  ******************************************************************************/
 package net.sf.uadetector.internal.data;
 
+import net.sf.qualitycheck.exception.IllegalNullArgumentException;
+
 import org.junit.Test;
 
 public class XmlDataHandlerTagTest {
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void constructor_null() {
 		XmlDataHandler.Tag.evaluate(null);
 	}

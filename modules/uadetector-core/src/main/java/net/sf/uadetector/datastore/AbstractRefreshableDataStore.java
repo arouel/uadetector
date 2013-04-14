@@ -18,6 +18,10 @@ package net.sf.uadetector.datastore;
 import java.net.URL;
 import java.nio.charset.Charset;
 
+import javax.annotation.Nonnull;
+
+import net.sf.qualitycheck.Check;
+import net.sf.qualitycheck.exception.IllegalStateOfArgumentException;
 import net.sf.uadetector.datareader.DataReader;
 import net.sf.uadetector.exception.CanNotOpenStreamException;
 import net.sf.uadetector.internal.data.Data;
@@ -49,12 +53,12 @@ public abstract class AbstractRefreshableDataStore implements RefreshableDataSto
 	 * 
 	 * @param data
 	 *            instance of {@code Data}
-	 * @throws IllegalStateException
+	 * @throws net.sf.qualitycheck.exception.IllegalStateOfArgumentException
 	 *             if the passed instance is empty
 	 */
 	private static Data checkData(final Data data) {
 		if (Data.EMPTY.equals(data)) {
-			throw new IllegalStateException("Argument 'data' must not be empty.");
+			throw new IllegalStateOfArgumentException("Argument 'data' must not be empty.");
 		}
 		return data;
 	}
@@ -108,13 +112,13 @@ public abstract class AbstractRefreshableDataStore implements RefreshableDataSto
 	 *            the character set in which the data should be read
 	 * @param fallback
 	 *            <em>UAS data</em> as fallback in case the data on the specified resource can not be read correctly
-	 * @throws IllegalArgumentException
+	 * @throws net.sf.qualitycheck.exception.IllegalNullArgumentException
 	 *             if one of the given arguments is {@code null}
-	 * @throws IllegalArgumentException
+	 * @throws net.sf.qualitycheck.exception.IllegalStateOfArgumentException
 	 *             if the given strings are not valid URLs
 	 */
-	protected AbstractRefreshableDataStore(final DataReader reader, final String dataUrl, final String versionUrl, final Charset charset,
-			final DataStore fallback) {
+	protected AbstractRefreshableDataStore(@Nonnull final DataReader reader, @Nonnull final String dataUrl,
+			@Nonnull final String versionUrl, @Nonnull final Charset charset, @Nonnull final DataStore fallback) {
 		this(reader, UrlUtil.build(dataUrl), UrlUtil.build(versionUrl), charset, fallback);
 	}
 
@@ -131,28 +135,18 @@ public abstract class AbstractRefreshableDataStore implements RefreshableDataSto
 	 *            the character set in which the data should be read
 	 * @param fallback
 	 *            <em>UAS data</em> as fallback in case the data on the specified resource can not be read correctly
-	 * @throws IllegalArgumentException
+	 * @throws net.sf.qualitycheck.exception.IllegalNullArgumentException
 	 *             if the given argument is {@code null}
-	 * @throws IllegalStateException
+	 * @throws net.sf.qualitycheck.exception.IllegalStateOfArgumentException
 	 *             if the created instance of {@link Data} is empty
 	 */
-	protected AbstractRefreshableDataStore(final DataReader reader, final URL dataUrl, final URL versionUrl, final Charset charset,
-			final DataStore fallback) {
-		if (reader == null) {
-			throw new IllegalArgumentException("Argument 'reader' must not be null.");
-		}
-		if (charset == null) {
-			throw new IllegalArgumentException("Argument 'charset' must not be null.");
-		}
-		if (dataUrl == null) {
-			throw new IllegalArgumentException("Argument 'dataUrl' must not be null.");
-		}
-		if (versionUrl == null) {
-			throw new IllegalArgumentException("Argument 'versionUrl' must not be null.");
-		}
-		if (fallback == null) {
-			throw new IllegalArgumentException("Argument 'fallback' must not be null.");
-		}
+	protected AbstractRefreshableDataStore(@Nonnull final DataReader reader, @Nonnull final URL dataUrl, @Nonnull final URL versionUrl,
+			@Nonnull final Charset charset, final DataStore fallback) {
+		Check.notNull(reader, "reader");
+		Check.notNull(charset, "charset");
+		Check.notNull(dataUrl, "dataUrl");
+		Check.notNull(versionUrl, "versionUrl");
+		Check.notNull(fallback, "fallback");
 
 		this.reader = reader;
 		this.dataUrl = dataUrl;
@@ -224,15 +218,13 @@ public abstract class AbstractRefreshableDataStore implements RefreshableDataSto
 	 * 
 	 * @param data
 	 *            <em>UAS data</em> to override the current ({@code null} is not allowed)
-	 * @throws IllegalArgumentException
+	 * @throws net.sf.qualitycheck.exception.IllegalNullArgumentException
 	 *             if the given argument is {@code null}
-	 * @throws IllegalArgumentException
+	 * @throws net.sf.qualitycheck.exception.IllegalStateOfArgumentException
 	 *             if the given instance of {@code Data} is empty
 	 */
-	protected void setData(final Data data) {
-		if (data == null) {
-			throw new IllegalArgumentException("Argument 'data' must not be null.");
-		}
+	protected void setData(@Nonnull final Data data) {
+		Check.notNull(data, "data");
 
 		this.data = checkData(data);
 
@@ -247,13 +239,11 @@ public abstract class AbstractRefreshableDataStore implements RefreshableDataSto
 	 * 
 	 * @param updateOperation
 	 *            operation to override the current ({@code null} is not allowed)
-	 * @throws IllegalArgumentException
+	 * @throws net.sf.qualitycheck.exception.IllegalNullArgumentException
 	 *             if the given argument is {@code null}
 	 */
-	protected void setUpdateOperation(final UpdateOperation updateOperation) {
-		if (updateOperation == null) {
-			throw new IllegalArgumentException("Argument 'updateOperation' must not be null.");
-		}
+	protected void setUpdateOperation(@Nonnull final UpdateOperation updateOperation) {
+		Check.notNull(updateOperation, "updateOperation");
 		this.updateOperation = updateOperation;
 	}
 

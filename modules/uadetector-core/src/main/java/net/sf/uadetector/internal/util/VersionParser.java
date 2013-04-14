@@ -21,6 +21,9 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javax.annotation.Nonnull;
+
+import net.sf.qualitycheck.Check;
 import net.sf.uadetector.OperatingSystemFamily;
 import net.sf.uadetector.VersionNumber;
 
@@ -53,7 +56,7 @@ public final class VersionParser {
 	 *            user agent string
 	 * @return more accurately identified version number or {@code null}
 	 */
-	public static VersionNumber identifyAndroidVersion(final String userAgent) {
+	public static VersionNumber identifyAndroidVersion(@Nonnull final String userAgent) {
 		VersionNumber version = VersionNumber.UNKNOWN;
 		final List<Pattern> patterns = new ArrayList<Pattern>();
 		patterns.add(Pattern.compile("Android\\s?((\\d+)((\\.\\d+)+)?(\\-(\\w|\\d)+)?);"));
@@ -246,10 +249,8 @@ public final class VersionParser {
 	 *            string with version information
 	 * @return an object of {@code VersionNumber}, never {@code null}
 	 */
-	protected static VersionNumber parseFirstVersionNumber(final String text) {
-		if (text == null) {
-			throw new IllegalArgumentException("Argument 'text' must not be null.");
-		}
+	protected static VersionNumber parseFirstVersionNumber(@Nonnull final String text) {
+		Check.notNull(text, "text");
 
 		final Matcher matcher = VERSIONNUMBER_WITH_SUFFIX.matcher(text);
 		String[] split = null;
@@ -272,10 +273,8 @@ public final class VersionParser {
 	 *            string with version information
 	 * @return an object of {@code VersionNumber}, never {@code null}
 	 */
-	public static VersionNumber parseLastVersionNumber(final String text) {
-		if (text == null) {
-			throw new IllegalArgumentException("Argument 'text' must not be null.");
-		}
+	public static VersionNumber parseLastVersionNumber(@Nonnull final String text) {
+		Check.notNull(text, "text");
 
 		final Matcher matcher = VERSIONNUMBER_WITH_SUFFIX.matcher(text);
 		String[] split = null;
@@ -300,13 +299,9 @@ public final class VersionParser {
 	 *            user agent string
 	 * @return extracted version number
 	 */
-	public static VersionNumber parseOperatingSystemVersion(final OperatingSystemFamily family, final String userAgent) {
-		if (family == null) {
-			throw new IllegalArgumentException("Argument 'family' must not be null.");
-		}
-		if (userAgent == null) {
-			throw new IllegalArgumentException("Argument 'userAgent' must not be null.");
-		}
+	public static VersionNumber parseOperatingSystemVersion(@Nonnull final OperatingSystemFamily family, @Nonnull final String userAgent) {
+		Check.notNull(family, "family");
+		Check.notNull(userAgent, "userAgent");
 
 		final VersionNumber v;
 		if (OperatingSystemFamily.ANDROID == family) {
@@ -340,10 +335,8 @@ public final class VersionParser {
 	 *            version as string
 	 * @return an object of {@code VersionNumber}, never {@code null}
 	 */
-	public static VersionNumber parseVersion(final String version) {
-		if (version == null) {
-			throw new IllegalArgumentException("Argument 'version' must not be null.");
-		}
+	public static VersionNumber parseVersion(@Nonnull final String version) {
+		Check.notNull(version, "version");
 
 		VersionNumber result = new VersionNumber(new ArrayList<String>(0), version);
 		final Matcher matcher = VERSIONSTRING.matcher(version);
@@ -363,7 +356,7 @@ public final class VersionParser {
 	 *            string to trim
 	 * @return trimmed string
 	 */
-	private static String trimRight(final String text) {
+	private static String trimRight(@Nonnull final String text) {
 		return text.replaceAll("\\s+$", "");
 	}
 

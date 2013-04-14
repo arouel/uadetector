@@ -52,7 +52,7 @@ public final class UpdatingUserAgentStringParserImpl extends UserAgentStringPars
 	 * 
 	 * @param store
 	 *            {@code DataStore} with reference UAS data used in fallback case
-	 * @throws IllegalArgumentException
+	 * @throws net.sf.qualitycheck.exception.IllegalNullArgumentException
 	 *             if one of the given arguments is {@code null}
 	 */
 	public UpdatingUserAgentStringParserImpl(final RefreshableDataStore store) {

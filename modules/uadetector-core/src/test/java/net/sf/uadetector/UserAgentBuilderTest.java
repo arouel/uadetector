@@ -15,6 +15,8 @@
  ******************************************************************************/
 package net.sf.uadetector;
 
+import net.sf.qualitycheck.exception.IllegalNullArgumentException;
+import net.sf.qualitycheck.exception.IllegalStateOfArgumentException;
 import net.sf.uadetector.internal.util.VersionParser;
 
 import org.easymock.EasyMock;
@@ -92,27 +94,27 @@ public class UserAgentBuilderTest {
 		Assert.assertEquals(UserAgent.EMPTY, b.build());
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void construct_null() {
 		new UserAgent.Builder(null);
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void setFamily_null() {
 		new UserAgent.Builder().setFamily(null);
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void setIcon_null() {
 		new UserAgent.Builder().setIcon(null);
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void setName_null() {
 		new UserAgent.Builder().setName(null);
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void setOperatingSystem_null() {
 		new UserAgent.Builder().setOperatingSystem((OperatingSystem) null);
 	}
@@ -132,7 +134,7 @@ public class UserAgentBuilderTest {
 		new UserAgent.Builder().setOperatingSystem(os);
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void setOperatingSystem_ReadableOperatingSystem_invalidFamily() {
 		final ReadableOperatingSystem os = EasyMock.createMock(ReadableOperatingSystem.class);
 		EasyMock.expect(os.getFamily()).andReturn(OperatingSystemFamily.LINUX).anyTimes();
@@ -147,32 +149,32 @@ public class UserAgentBuilderTest {
 		new UserAgent.Builder().setOperatingSystem(os);
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void setOperatingSystem_ReadableOperatingSystem_null() {
 		new UserAgent.Builder().setOperatingSystem((ReadableOperatingSystem) null);
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void setProducer_null() {
 		new UserAgent.Builder().setProducer(null);
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void setProducerUrl_null() {
 		new UserAgent.Builder().setProducerUrl(null);
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void setType_null() {
 		new UserAgent.Builder().setType(null);
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void setTypeName_null() {
 		new UserAgent.Builder().setTypeName(null);
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void setUrl_null() {
 		new UserAgent.Builder().setUrl(null);
 	}
@@ -184,12 +186,12 @@ public class UserAgentBuilderTest {
 		Assert.assertEquals(userAgentString, b.getUserAgentString());
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void setUserAgentString_null() {
 		new UserAgent.Builder().setUserAgentString(null);
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void setVersionNumber_null() {
 		new UserAgent.Builder().setVersionNumber(null);
 	}

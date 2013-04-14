@@ -23,6 +23,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.Charset;
 
+import net.sf.qualitycheck.exception.IllegalNullArgumentException;
 import net.sf.uadetector.datareader.XmlDataReader.XmlParser;
 import net.sf.uadetector.datastore.DataStore;
 import net.sf.uadetector.internal.data.Data;
@@ -62,17 +63,17 @@ public class XmlDataReaderTest {
 		constructor.newInstance();
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void read_charset_null() throws MalformedURLException {
 		new XmlDataReader().read(new URL("http://localhost/"), null);
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void read_data_isNull() throws MalformedURLException {
 		new XmlDataReader().read(null);
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void read_url_null() {
 		new XmlDataReader().read((URL) null, CHARSET);
 	}
@@ -128,7 +129,7 @@ public class XmlDataReaderTest {
 		Assert.assertEquals("20120817-01", data.getVersion());
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void readXml_charset_null() throws IOException {
 		XmlDataReader.readXml(new InputStream() {
 			@Override
@@ -138,7 +139,7 @@ public class XmlDataReaderTest {
 		}, null);
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void readXml_url_null() throws IOException {
 		XmlDataReader.readXml(null, CHARSET);
 	}

@@ -15,6 +15,8 @@
  ******************************************************************************/
 package net.sf.uadetector;
 
+import javax.annotation.Nonnull;
+
 /**
  * Defines an operating system.<br>
  * <br>
@@ -33,6 +35,7 @@ public interface ReadableOperatingSystem {
 	 * 
 	 * @return the family of an operating system
 	 */
+	@Nonnull
 	OperatingSystemFamily getFamily();
 
 	/**
@@ -40,6 +43,7 @@ public interface ReadableOperatingSystem {
 	 * 
 	 * @return the family of an operating system
 	 */
+	@Nonnull
 	String getFamilyName();
 
 	/**
@@ -47,6 +51,7 @@ public interface ReadableOperatingSystem {
 	 * 
 	 * @return the icon name of an operating system
 	 */
+	@Nonnull
 	String getIcon();
 
 	/**
@@ -54,6 +59,7 @@ public interface ReadableOperatingSystem {
 	 * 
 	 * @return the name of an operating system
 	 */
+	@Nonnull
 	String getName();
 
 	/**
@@ -61,6 +67,7 @@ public interface ReadableOperatingSystem {
 	 * 
 	 * @return the manufacturer
 	 */
+	@Nonnull
 	String getProducer();
 
 	/**
@@ -68,6 +75,7 @@ public interface ReadableOperatingSystem {
 	 * 
 	 * @return the URL to the website of the manufacturer
 	 */
+	@Nonnull
 	String getProducerUrl();
 
 	/**
@@ -75,6 +83,7 @@ public interface ReadableOperatingSystem {
 	 * 
 	 * @return the URL to the product page
 	 */
+	@Nonnull
 	String getUrl();
 
 	/**
@@ -82,6 +91,7 @@ public interface ReadableOperatingSystem {
 	 * 
 	 * @return version number an operating system
 	 */
+	@Nonnull
 	VersionNumber getVersionNumber();
 
 }

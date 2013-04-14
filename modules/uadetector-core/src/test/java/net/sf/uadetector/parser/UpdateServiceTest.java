@@ -19,6 +19,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.Charset;
 
+import net.sf.qualitycheck.exception.IllegalNullArgumentException;
 import net.sf.uadetector.datareader.DataReader;
 import net.sf.uadetector.datareader.XmlDataReader;
 import net.sf.uadetector.datastore.AbstractRefreshableDataStore;
@@ -132,7 +133,7 @@ public class UpdateServiceTest {
 		Assert.assertTrue(service.getLastUpdateCheck() >= nextTime);
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNullArgumentException.class)
 	public void construct_store_null() {
 		new UpdateService(null);
 	}

@@ -27,7 +27,6 @@ import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
 import net.sf.qualitycheck.Check;
-import net.sf.qualitycheck.exception.IllegalNullArgumentException;
 import net.sf.uadetector.datastore.DataStore;
 import net.sf.uadetector.exception.CanNotOpenStreamException;
 import net.sf.uadetector.internal.data.Data;

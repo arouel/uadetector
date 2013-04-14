@@ -178,13 +178,13 @@ public class DataBuilderTest {
 		b.appendOperatingSystem(os); // testing to add same one more time
 	}
 
-	@Test
+	@Test(expected = IllegalStateOfArgumentException.class)
 	public void appendOperatingSystemBuilder_addSameOneMoreTime() {
 		final OperatingSystem.Builder builder = new OperatingSystem.Builder().setId("1").setFamily("f1").setIcon("i1").setInfoUrl("iu1")
 				.setProducer("p1").setProducerUrl("pu1").setUrl("u1");
 		final Data.Builder b = new Data.Builder();
 		Assert.assertSame(b, b.appendOperatingSystemBuilder(builder));
-		b.appendOperatingSystemBuilder(builder); // testing to add same one more time
+		b.appendOperatingSystemBuilder(builder); // testing to add same one more time fails
 	}
 
 	@Test

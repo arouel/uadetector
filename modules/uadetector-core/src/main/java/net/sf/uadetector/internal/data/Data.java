@@ -300,15 +300,17 @@ public class Data {
 		 * @return this {@code Builder}, for chaining
 		 * @throws net.sf.qualitycheck.exception.IllegalNullArgumentException
 		 *             if the given argument is {@code null}
-		 * @throws IllegalArgumentException
-		 *             if the ID of the given builder is invalid
-		 * @throws IllegalArgumentException
+		 * @throws net.sf.qualitycheck.exception.IllegalNegativeArgumentException
+		 *             if the ID of the given builder is negative
+		 * @throws net.sf.qualitycheck.exception.IllegalStateOfArgumentException
 		 *             if a builder with the same ID already exists
 		 */
 		@Nonnull
 		public Builder appendOperatingSystemBuilder(@Nonnull final OperatingSystem.Builder operatingSystemBuilder) {
 			Check.notNull(operatingSystemBuilder, "operatingSystemBuilder");
 			Check.notNegative(operatingSystemBuilder.getId(), "operatingSystemBuilder.getId()");
+			Check.stateIsTrue(!operatingSystemBuilders.containsKey(operatingSystemBuilder.getId()),
+					"Operating system builder with ID '%s' already exists.", operatingSystemBuilder.getId());
 
 			final OperatingSystem.Builder builder = operatingSystemBuilder.copy();
 			operatingSystemBuilders.put(builder.getId(), builder);

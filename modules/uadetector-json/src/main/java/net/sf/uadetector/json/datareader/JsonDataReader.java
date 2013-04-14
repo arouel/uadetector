@@ -56,7 +56,7 @@ public final class JsonDataReader implements DataReader {
 	 *            the character set in which the data should be read
 	 * @return read in content as {@code Data} instance otherwise {@link Data#EMPTY}
 	 * 
-	 * @throws IllegalArgumentException
+	 * @throws net.sf.qualitycheck.exception.IllegalNullArgumentException
 	 *             if any of the given arguments is {@code null}
 	 */
 	@Override
@@ -85,7 +85,7 @@ public final class JsonDataReader implements DataReader {
 	 *            the character set in which the data should be read
 	 * @return read in content as {@code Data} instance otherwise {@link Data#EMPTY}
 	 * 
-	 * @throws IllegalArgumentException
+	 * @throws net.sf.qualitycheck.exception.IllegalNullArgumentException
 	 *             if any of the given arguments is {@code null}
 	 */
 	@Override

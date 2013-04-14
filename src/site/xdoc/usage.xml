@@ -8,10 +8,33 @@
 	<body>
 		<section name="Usage">
 			<h3>Requirements</h3>
-			<p>This library depends on the Simple Logging Facade for Java (also known as SLF4J) to allowing the end user to plug
-				in the desired logging framework at deployment time.
+			<p>
+				This library depends on Simple Logging Facade for Java (also known as SLF4J) to allow our end users to plug in
+				whatever logging framework he wants at deployment time. Additionally it depends on
+				<a href="http://qualitycheck.sourceforge.net/">Quality-Check</a>
+				to do easily technical runtime checks and
+				<i>JSR-305 Annotations</i>
+				to document possible states about methods, fields and arguments for Software Defect Detection.
 			</p>
-			<p>This means that if the UADetector library is used also the SLF4J-API must exist in your classpath.</p>
+			<p>This means that if you want to use UADetector library all compile and runtime dependencies must exist in your
+				classpath. You can get detailed informations about the required dependencies for a specific module here:
+			</p>
+			<ul>
+				<li>
+					<a href="modules/uadetector-core/dependencies.html">
+						Dependencies of
+						<i>Core</i>
+						module
+					</a>
+				</li>
+				<li>
+					<a href="modules/uadetector-resources/dependencies.html">
+						Dependencies of
+						<i>Resources</i>
+						module
+					</a>
+				</li>
+			</ul>
 			<a name="usage_in_a_servlet" />
 			<h3>Usage in a simple Servlet</h3>
 			<p>

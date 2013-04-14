@@ -38,7 +38,8 @@
 			<a name="usage_in_a_servlet" />
 			<h3>Usage in a simple Servlet</h3>
 			<p>
-				To use the library it must be added to your classpath. With Apache Maven you can start with
+				To use this library you must add them with all their sub-dependencies to your classpath. With Apache Maven you can
+				start with
 				<a href="quickstart.html">this guide</a>
 				quickly.
 			</p>

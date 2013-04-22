@@ -147,6 +147,59 @@ public class UserAgentStringParserTest {
 	}
 
 	@Test
+	public void parse_browser_EUDORA() throws Exception {
+		final String userAgent = "Eudora";
+		final UserAgent agent = PARSER.parse(userAgent);
+		System.out.println(agent);
+		Assert.assertNotNull(agent);
+		Assert.assertFalse(UserAgent.EMPTY.equals(agent));
+		Assert.assertTrue(OperatingSystem.EMPTY.equals(agent.getOperatingSystem()));
+
+		// check user agent informations
+		Assert.assertEquals(UserAgentFamily.EUDORA, agent.getFamily());
+		Assert.assertEquals("eudora.png", agent.getIcon());
+		Assert.assertEquals("Eudora", agent.getName());
+		Assert.assertEquals("Qualcomm Incorporated.", agent.getProducer());
+		Assert.assertEquals("http://www.qualcomm.com/", agent.getProducerUrl());
+		Assert.assertEquals(UserAgentType.EMAIL_CLIENT, agent.getType());
+		Assert.assertEquals("Email client", agent.getTypeName());
+		Assert.assertEquals("http://www.eudora.com/archive.html", agent.getUrl());
+		Assert.assertEquals("", agent.getVersionNumber().toVersionString());
+	}
+
+	@Test
+	public void parse_browser_EUDORA_withVersion() throws Exception {
+		final String userAgent = "Eudora/6.2.4b8 (MacOS)";
+		final UserAgent agent = PARSER.parse(userAgent);
+		System.out.println(agent);
+		Assert.assertNotNull(agent);
+		Assert.assertFalse(UserAgent.EMPTY.equals(agent));
+		Assert.assertFalse(OperatingSystem.EMPTY.equals(agent.getOperatingSystem()));
+
+		// check user agent informations
+		Assert.assertEquals(UserAgentFamily.EUDORA, agent.getFamily());
+		Assert.assertEquals("eudora.png", agent.getIcon());
+		Assert.assertEquals("Eudora", agent.getName());
+		Assert.assertEquals("Qualcomm Incorporated.", agent.getProducer());
+		Assert.assertEquals("http://www.qualcomm.com/", agent.getProducerUrl());
+		Assert.assertEquals(UserAgentType.EMAIL_CLIENT, agent.getType());
+		Assert.assertEquals("Email client", agent.getTypeName());
+		Assert.assertEquals("http://www.eudora.com/archive.html", agent.getUrl());
+		Assert.assertEquals("6.2.4b8", agent.getVersionNumber().toVersionString());
+
+		// check operating system informations
+		final OperatingSystem os = agent.getOperatingSystem();
+		Assert.assertEquals(OperatingSystemFamily.MAC_OS, os.getFamily());
+		Assert.assertEquals("Mac OS", os.getFamilyName());
+		Assert.assertEquals("macos.png", os.getIcon());
+		Assert.assertEquals("Mac OS", os.getName());
+		Assert.assertEquals("Apple Computer, Inc.", os.getProducer());
+		Assert.assertEquals("http://www.apple.com/", os.getProducerUrl());
+		Assert.assertEquals("http://en.wikipedia.org/wiki/Mac_OS", os.getUrl());
+		Assert.assertEquals("", os.getVersionNumber().toVersionString());
+	}
+
+	@Test
 	public void parse_browser_FIREFOX6() throws Exception {
 		final String userAgent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7; rv:6.0) Gecko/20100101 Firefox/6.0";
 		final UserAgent agent = PARSER.parse(userAgent);
@@ -525,8 +578,8 @@ public class UserAgentStringParserTest {
 
 		// check operating system informations
 		final OperatingSystem os = agent.getOperatingSystem();
-		//Assert.assertEquals(OperatingSystemFamily.OS_X, os.getFamily());
-		//Assert.assertEquals("OS X", os.getFamilyName());
+		// Assert.assertEquals(OperatingSystemFamily.OS_X, os.getFamily());
+		// Assert.assertEquals("OS X", os.getFamilyName());
 		Assert.assertEquals("macosx.png", os.getIcon());
 		Assert.assertEquals("OS X 10.5 Leopard", os.getName());
 		Assert.assertEquals("Apple Computer, Inc.", os.getProducer());

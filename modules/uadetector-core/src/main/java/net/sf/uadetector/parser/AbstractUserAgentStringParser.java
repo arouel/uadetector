@@ -33,6 +33,11 @@ import net.sf.uadetector.internal.util.VersionParser;
 public abstract class AbstractUserAgentStringParser implements UserAgentStringParser {
 
 	/**
+	 * The number of capturing groups if nothing matches
+	 */
+	private static final int ZERO_MATCHING_GROUPS = 0;
+
+	/**
 	 * Examines the user agent string whether it is a browser.
 	 * 
 	 * @param userAgent
@@ -42,7 +47,7 @@ public abstract class AbstractUserAgentStringParser implements UserAgentStringPa
 	 */
 	private static void examineAsBrowser(final UserAgent.Builder builder, final Data data) {
 		Matcher matcher;
-		VersionNumber version;
+		VersionNumber version = VersionNumber.UNKNOWN;
 		for (final Entry<BrowserPattern, Browser> entry : data.getPatternBrowserMap().entrySet()) {
 			matcher = entry.getKey().getPattern().matcher(builder.getUserAgentString());
 			if (matcher.find()) {
@@ -50,7 +55,9 @@ public abstract class AbstractUserAgentStringParser implements UserAgentStringPa
 				entry.getValue().copyTo(builder);
 
 				// try to get the browser version from the first subgroup
-				version = VersionParser.parseVersion(matcher.groupCount() > 0 ? matcher.group(1) : "");
+				if (matcher.groupCount() > ZERO_MATCHING_GROUPS) {
+					version = VersionParser.parseVersion(matcher.group(1) != null ? matcher.group(1) : "");
+				}
 				builder.setVersionNumber(version);
 
 				break;

@@ -44,8 +44,8 @@ public class UserAgentStringParserTest {
 
 	@Test
 	public void getCurrentVersion() {
-		Assert.assertEquals("20120817-01", PARSER.getDataStore().getData().getVersion());
-		Assert.assertEquals("20120817-01", PARSER.getDataVersion());
+		Assert.assertEquals("20130321-01", PARSER.getDataStore().getData().getVersion());
+		Assert.assertEquals("20130321-01", PARSER.getDataVersion());
 	}
 
 	@Test
@@ -346,7 +346,7 @@ public class UserAgentStringParserTest {
 		Assert.assertEquals(OperatingSystemFamily.ANDROID, os.getFamily());
 		Assert.assertEquals("Android", os.getFamilyName());
 		Assert.assertEquals("android.png", os.getIcon());
-		Assert.assertEquals("Android 4 Ice Cream Sandwich", os.getName());
+		Assert.assertEquals("Android 4.0.x Ice Cream Sandwich", os.getName());
 		Assert.assertEquals("Google, Inc.", os.getProducer());
 		Assert.assertEquals("http://www.google.com/", os.getProducerUrl());
 		Assert.assertEquals("http://en.wikipedia.org/wiki/Android_%28operating_system%29", os.getUrl());

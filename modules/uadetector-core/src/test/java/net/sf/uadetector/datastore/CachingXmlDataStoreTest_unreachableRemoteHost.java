@@ -31,7 +31,7 @@ public class CachingXmlDataStoreTest_unreachableRemoteHost {
 	/**
 	 * Version of the newer UAS data
 	 */
-	private static final String DATA_VERSION = "20120822-01";
+	private static final String DATA_VERSION = "20130329-01";
 
 	/**
 	 * {@link URL} that is not available

@@ -105,7 +105,7 @@ public class XmlDataReaderTest {
 		final XmlDataReader reader = new XmlDataReader();
 		final String dataAsString = CharStreams.toString(new InputStreamReader(DATA_URL.openStream()));
 		final Data data = reader.read(dataAsString);
-		Assert.assertEquals("20120817-01", data.getVersion());
+		Assert.assertEquals("20130321-01", data.getVersion());
 	}
 
 	@Test
@@ -126,7 +126,7 @@ public class XmlDataReaderTest {
 	public void readByUrl_versionParsing() throws IOException {
 		final DataReader reader = new XmlDataReader();
 		final Data data = reader.read(DATA_URL, CHARSET);
-		Assert.assertEquals("20120817-01", data.getVersion());
+		Assert.assertEquals("20130321-01", data.getVersion());
 	}
 
 	@Test(expected = IllegalNullArgumentException.class)

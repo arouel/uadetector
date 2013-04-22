@@ -46,12 +46,12 @@ public class TestXmlDataStore extends AbstractRefreshableDataStore {
 	/**
 	 * Version of the newer UAS data
 	 */
-	public static final String VERSION_NEWER = "20120822-01";
+	public static final String VERSION_NEWER = "20130329-01";
 
 	/**
 	 * Version of the older UAS data
 	 */
-	public static final String VERSION_OLDER = "20120817-01";
+	public static final String VERSION_OLDER = "20130321-01";
 
 	/**
 	 * URL to retrieve the version information of the UAS data

@@ -1,6 +1,6 @@
 {
   "format": "1.0",
-  "version": "20130329-01",
+  "version": "20130419-01",
   "operating-system-patterns": [
     {
       "regex": {
@@ -23423,6 +23423,17 @@
       "hash": "92e04430087239d8374637b8b29e2680b393a2e645bef5e6e62ca42b11f00c72"
     },
     {
+      "family": "YACYBOT",
+      "icon": "bot_yacybot.png",
+      "info-url": "/list-of-ua/bot-detail?bot\u003dyacybot",
+      "name": "yacybot",
+      "producer": "Michael Christen",
+      "producer-url": "",
+      "url": "",
+      "user-agent-string": "yacybot (freeworld-global; amd64 Linux 3.2.0-4-amd64; java 1.6.0_24; Europe/en) http://yacy.net/bot.html",
+      "hash": "d84873a07f8a2bd7da03acc9283144ca04c26876f2be630d5131e72061233a53"
+    },
+    {
       "family": "UNKNOWN",
       "icon": "bot.png",
       "info-url": "/list-of-ua/bot-detail?bot\u003demefgebot",
@@ -23608,6 +23619,94 @@
       "url": "",
       "user-agent-string": "Mozilla/5.0+(compatible;+PiplBot;++http://www.pipl.com/bot/)",
       "hash": "26f1dabbe8647676d2b1289f73a316408f552e870c38337d37a76db4e784fbbc"
+    },
+    {
+      "family": "UNKNOWN",
+      "icon": "bot.png",
+      "info-url": "/list-of-ua/bot-detail?bot\u003drogerbot",
+      "name": "rogerbot/1.0",
+      "producer": "SEOmoz",
+      "producer-url": "http://www.seomoz.org/",
+      "url": "",
+      "user-agent-string": "rogerbot/1.0 (http://www.seomoz.org/dp/rogerbot, rogerbot-crawler+shiny@seomoz.org)",
+      "hash": "84017433698e8e876f9e1327319b46c2526ab6bb9bd39f2261b9bc6db1f11c62"
+    },
+    {
+      "family": "UNKNOWN",
+      "icon": "bot.png",
+      "info-url": "/list-of-ua/bot-detail?bot\u003dGrahambot",
+      "name": "Grahambot/0.1",
+      "producer": "Sunagarabo",
+      "producer-url": "http://sunagae.net/",
+      "url": "",
+      "user-agent-string": "Grahambot/0.1 (+http://www.sunaga-lab.com/graham-bot)",
+      "hash": "cad97063aeeada8e49fec9139290622eb50d27f3c68c47c4e4f5cf9b9f0293e8"
+    },
+    {
+      "family": "YACYBOT",
+      "icon": "bot_yacybot.png",
+      "info-url": "/list-of-ua/bot-detail?bot\u003dyacybot",
+      "name": "yacybot",
+      "producer": "Michael Christen",
+      "producer-url": "",
+      "url": "",
+      "user-agent-string": "yacybot (freeworld/global; amd64 Linux 3.5.0-27-generic; java 1.7.0_03; Europe/de) http://yacy.net/bot.html",
+      "hash": "81fc2e9996a95ea0afe19c3d2b41ab35c0f862b2bd30ca8fb61d6c0683519ee8"
+    },
+    {
+      "family": "UNKNOWN",
+      "icon": "bot.png",
+      "info-url": "/list-of-ua/bot-detail?bot\u003dSolomonoBot",
+      "name": "SolomonoBot/1.04",
+      "producer": "Solomono",
+      "producer-url": "http://solomono.ru/",
+      "url": "",
+      "user-agent-string": "SolomonoBot/1.04 (http://www.solomono.ru)",
+      "hash": "605c3d7d513ae490b2b25d6919a4b35ba602e2c5c5f00a6ae9cf0aa6c0bf8e1e"
+    },
+    {
+      "family": "SEMRUSHBOT",
+      "icon": "bot.png",
+      "info-url": "/list-of-ua/bot-detail?bot\u003dSemrushBot",
+      "name": "SemrushBot/0.96.2",
+      "producer": "SEOQuake Team",
+      "producer-url": "http://www.seoquaketeam.com/",
+      "url": "",
+      "user-agent-string": "Mozilla/5.0 (compatible; SemrushBot/0.96.2; +http://www.semrush.com/bot.html)",
+      "hash": "c8ffe834438ebe5bd61e988ccc40b53afebe381d9ddc3d168c72c007c2dc33a1"
+    },
+    {
+      "family": "UNKNOWN",
+      "icon": "bot.png",
+      "info-url": "/list-of-ua/bot-detail?bot\u003dbl.uk_lddc_bot",
+      "name": "bl.uk_lddc_bot/3.1.1",
+      "producer": "British Library",
+      "producer-url": "http://www.bl.uk/",
+      "url": "",
+      "user-agent-string": "bl.uk_lddc_bot/3.1.1 (+http://www.bl.uk/aboutus/legaldeposit/websites/websites/faqswebmaster/index.html)",
+      "hash": "7722fe9e0d21f17e7985841a78cebab0a5e0480fda6662b6d9d48aa710a0d7ca"
+    },
+    {
+      "family": "UNKNOWN",
+      "icon": "bot_googlebot.png",
+      "info-url": "/list-of-ua/bot-detail?bot\u003dGooglebot snippet",
+      "name": "Googlebot snippet",
+      "producer": "Google Inc.",
+      "producer-url": "http://www.google.com/",
+      "url": "",
+      "user-agent-string": "Mozilla/5.0 (Windows NT 6.1; rv:6.0) Gecko/20110814 Firefox/6.0 Google (+https://developers.google.com/+/web/snippet/)",
+      "hash": "7d9be4b8d9d51150f3578b96bf3686a5c7749982b94fd35d3878569c4e210723"
+    },
+    {
+      "family": "BACKLINKCRAWLER",
+      "icon": "bot.png",
+      "info-url": "/list-of-ua/bot-detail?bot\u003dBacklinkCrawler",
+      "name": "BacklinkCrawler V",
+      "producer": "2.0Promotion GbR",
+      "producer-url": "http://2.0promotion.de/",
+      "url": "",
+      "user-agent-string": "BacklinkCrawler V (http://www.backlinktest.com/crawler.html)",
+      "hash": "2872bfb4d129ef4d1d18250df7322a95340256584a11f441a4f35c245c4d11e2"
     }
   ]
 }

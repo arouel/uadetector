@@ -15,6 +15,7 @@
  ******************************************************************************/
 package net.sf.uadetector.util;
 
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -22,12 +23,22 @@ import org.slf4j.LoggerFactory;
 
 public class FinalStaticFieldValueChangerTest {
 
+	private static final class StaticFinalField {
+		public static final Boolean FALSE = new Boolean(false);
+	}
+
 	private static final Logger LOG = LoggerFactory.getLogger(FinalStaticFieldValueChangerTest.class);
+
+	@After
+	public void tearDown() throws SecurityException, NoSuchFieldException, Exception {
+		FinalStaticFieldValueChanger.setFinalStatic(StaticFinalField.class.getField("FALSE"), false);
+	}
 
 	@Test
 	public void test() throws SecurityException, NoSuchFieldException, Exception {
-		FinalStaticFieldValueChanger.setFinalStatic(Boolean.class.getField("FALSE"), true);
-		Assert.assertEquals(true, false); // unmaintainable code ;-)
+		Assert.assertEquals(StaticFinalField.FALSE, false);
+		FinalStaticFieldValueChanger.setFinalStatic(StaticFinalField.class.getField("FALSE"), true);
+		Assert.assertEquals(StaticFinalField.FALSE, true);
 		LOG.info(String.format("%s: Everything is %s", this.getClass().getSimpleName(), false)); // "Everything is true"
 	}
 

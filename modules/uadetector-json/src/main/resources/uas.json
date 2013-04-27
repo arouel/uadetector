@@ -1,6 +1,6 @@
 {
   "format": "1.0",
-  "version": "20130419-01",
+  "version": "20130425-01",
   "operating-system-patterns": [
     {
       "regex": {
@@ -23707,6 +23707,28 @@
       "url": "",
       "user-agent-string": "BacklinkCrawler V (http://www.backlinktest.com/crawler.html)",
       "hash": "2872bfb4d129ef4d1d18250df7322a95340256584a11f441a4f35c245c4d11e2"
+    },
+    {
+      "family": "UNKNOWN",
+      "icon": "AutomatticCrawler.png",
+      "info-url": "/list-of-ua/bot-detail?bot\u003dAutomattic Analytics Crawler",
+      "name": "Automattic Analytics Crawler/0.1",
+      "producer": "Automattic Inc.",
+      "producer-url": "http://automattic.com/",
+      "url": "",
+      "user-agent-string": "Automattic Analytics Crawler/0.1; http://wordpress.com/crawler/",
+      "hash": "23c7311bfebdd7194443e8112a9b038b5e95e6faeaac549a54482b2767e2472e"
+    },
+    {
+      "family": "UNKNOWN",
+      "icon": "bot.png",
+      "info-url": "/list-of-ua/bot-detail?bot\u003dAraBot",
+      "name": "AraBot 1.0",
+      "producer": " ARA ?letişim Telekomünikasyon ?nternet Al?şveriş Reklam Tic. Ltd. Şti.",
+      "producer-url": "http://www.ara.com.tr/",
+      "url": "",
+      "user-agent-string": "Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1.6) Gecko/20070725 Firefox/2.0.0.6 Ara.com.tr AraBot 1.0",
+      "hash": "879aa4711f5b0fc7b4e8e9c89b3c96e73cd0b05d3838ec0308c422b3819056b0"
     }
   ]
 }

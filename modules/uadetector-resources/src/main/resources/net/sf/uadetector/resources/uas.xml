@@ -3,7 +3,7 @@
 <uasdata>
 	<description>
 		<label>Data (format xml) for UASparser - http://user-agent-string.info/download/UASparser</label>
-		<version>20130419-01</version>
+		<version>20130425-01</version>
 		<checksum type="MD5">http://user-agent-string.info/rpc/get_data.php?format=xml&amp;md5=y</checksum>
 		<checksum type="SHA1">http://user-agent-string.info/rpc/get_data.php?format=xml&amp;sha1=y</checksum>
 	</description>
@@ -700,6 +700,16 @@
 				<bot_info_url>/list-of-ua/bot-detail?bot=AportWorm</bot_info_url>
 			</robot>
 			<robot>
+				<id>9389</id>
+				<useragent><![CDATA[Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1.6) Gecko/20070725 Firefox/2.0.0.6 Ara.com.tr AraBot 1.0]]></useragent>
+				<family>AraBot</family>
+				<name>AraBot 1.0</name>
+				<company><![CDATA[ ARA ?letişim Telekomünikasyon ?nternet Al?şveriş Reklam Tic. Ltd. Şti.]]></company>
+				<url_company><![CDATA[http://www.ara.com.tr/]]></url_company>
+				<icon>bot.png</icon>
+				<bot_info_url>/list-of-ua/bot-detail?bot=AraBot</bot_info_url>
+			</robot>
+			<robot>
 				<id>2057</id>
 				<useragent><![CDATA[http://arachnode.net 1.2]]></useragent>
 				<family>arachnode.net</family>
@@ -788,6 +798,16 @@
 				<url_company><![CDATA[http://about.ask.com/en/docs/about/index.shtml]]></url_company>
 				<icon>bot_AskJeeves.png</icon>
 				<bot_info_url>/list-of-ua/bot-detail?bot=Ask Jeeves/Teoma</bot_info_url>
+			</robot>
+			<robot>
+				<id>9346</id>
+				<useragent><![CDATA[Automattic Analytics Crawler/0.1; http://wordpress.com/crawler/]]></useragent>
+				<family>Automattic Analytics Crawler</family>
+				<name>Automattic Analytics Crawler/0.1</name>
+				<company><![CDATA[Automattic Inc.]]></company>
+				<url_company><![CDATA[http://automattic.com/]]></url_company>
+				<icon>AutomatticCrawler.png</icon>
+				<bot_info_url>/list-of-ua/bot-detail?bot=Automattic Analytics Crawler</bot_info_url>
 			</robot>
 			<robot>
 				<id>2050</id>

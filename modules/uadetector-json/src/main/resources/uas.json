@@ -1,6 +1,6 @@
 {
   "format": "1.0",
-  "version": "20130425-01",
+  "version": "20130429-02",
   "operating-system-patterns": [
     {
       "regex": {
@@ -57,6 +57,13 @@
         "pattern": "iPhone OS 6_[0-9_]+"
       },
       "hash": "146f81bd47e7fe6917ee561a40a0666e9ac5696e7e5fedc20edeef405848948a"
+    },
+    {
+      "regex": {
+        "flags": "is",
+        "pattern": "windows nt 6\\.2.*ARM"
+      },
+      "hash": "3ab4c71ace225255f087b4fae5a4c4d680aa7161ceacb3a5573e343da2d726ac"
     },
     {
       "regex": {
@@ -2610,6 +2617,19 @@
       "producer-url": "http://www.mozilla.org/",
       "url": "http://www.mozilla.org/firefoxos/",
       "hash": "fe97be85d50fdc6b0e5557495e4473244bc1ccf7310d0cdd7a60cab29b464ba4"
+    },
+    {
+      "family": "Windows",
+      "icon": "windows8.png",
+      "info-url": "/list-of-ua/os-detail?os\u003dWindows RT",
+      "name": "Windows RT",
+      "operating-system-pattern-hashs": [
+        "3ab4c71ace225255f087b4fae5a4c4d680aa7161ceacb3a5573e343da2d726ac"
+      ],
+      "producer": "Microsoft Corporation.",
+      "producer-url": "http://www.microsoft.com/",
+      "url": "http://en.wikipedia.org/wiki/Windows_RT",
+      "hash": "6157bdd788c05f6e007983895fe7004d1c10cf8d564862468f9d612d9080988f"
     }
   ],
   "browser-types": [
@@ -2662,9 +2682,9 @@
     {
       "regex": {
         "flags": "is",
-        "pattern": "^Mozilla.*AppleWebKit.*Chrome.*OPR\\/([0-9\\.]+)"
+        "pattern": "^Mozilla.*Android.*AppleWebKit.*Chrome.*OPR\\/([0-9\\.]+)"
       },
-      "hash": "db07c1c97950af8649f55311fa1787ec6721a24d1f627b773b921a2f56a5c7f4"
+      "hash": "a9d10d439ffa6642a2c173a2ce822ca6e82337ceaaa860e122782a5c35769692"
     },
     {
       "regex": {
@@ -3225,6 +3245,20 @@
         "pattern": "^Mozilla.*AppleWebKit.*YRCWeblink\\/([0-9\\.]+).*Safari"
       },
       "hash": "f37155a65aad08169ccac5117ee7dadf755afb069af920437d424d09388494dc"
+    },
+    {
+      "regex": {
+        "flags": "is",
+        "pattern": "^Mozilla.*windows.*AppleWebKit.*Chrome.*OPR\\/([0-9\\.]+)"
+      },
+      "hash": "b1ca6e222aa176894cce24069754c92b2086462fb74ff6622ea6f13c7fe26b1e"
+    },
+    {
+      "regex": {
+        "flags": "is",
+        "pattern": "Mozilla.*Gecko.*Firefox.*IceDragon\\/([0-9\\.]+)"
+      },
+      "hash": "e9be3674b66b496bddb82f426b1a38cd47cdfbf3b34df053701325a39b92d807"
     },
     {
       "regex": {
@@ -6614,6 +6648,7 @@
       "icon": "opera.png",
       "info-url": "/list-of-ua/browser-detail?browser\u003dOpera",
       "browser-pattern-hashs": [
+        "b1ca6e222aa176894cce24069754c92b2086462fb74ff6622ea6f13c7fe26b1e",
         "1fa7a0edb195502931f148b2bf7b53554abf6477897e956c19384451913eadb6",
         "fad87aad28843a1997ca2c3f22f12ac9f54d61e1aaa8ce1b2e7f833a3bd4755a",
         "5014869614fb4d4d57b99fbe680006fe47612d9a5665aa96fb6dc6eaeedcae9d",
@@ -6623,7 +6658,7 @@
       "producer-url": "http://www.opera.com/",
       "browser-type-hash": "d31de1a5c5c8ba2a210a167cf0d0dc2425c57ea7525f4b73a4b7ab934af79dfc",
       "url": "http://www.opera.com/",
-      "hash": "c4afb884ba1428666833caf6986d19125f3c7a3d1075c11ccf6c9c4e4b8ed559"
+      "hash": "7470ddb167bcac9ea96b522885b45a7f6e2976c86801d17fce79585b4c86a45d"
     },
     {
       "family": "OMNIWEB",
@@ -10030,7 +10065,7 @@
       "icon": "opera.png",
       "info-url": "/list-of-ua/browser-detail?browser\u003dOpera Mobile",
       "browser-pattern-hashs": [
-        "db07c1c97950af8649f55311fa1787ec6721a24d1f627b773b921a2f56a5c7f4",
+        "a9d10d439ffa6642a2c173a2ce822ca6e82337ceaaa860e122782a5c35769692",
         "fe0f1e61e67ddff518e6ba9e6f172d716742b3cd6fd5e674b6cb32be5f2ceaf6",
         "2355c0968c6ef274a36e172a056a936c038b41c476678cd828bffd3e28bdc4b1",
         "3cca8cd2e6779f0f5e74f28bebfc9c0db7167d0224bbda73dede78cf012b9640",
@@ -10042,7 +10077,7 @@
       "producer-url": "http://www.opera.com/",
       "browser-type-hash": "d4f1118eb3ace8c9d67d4b72ff39234cd4f3ab260ef6f422ce24b7a1b10d14ee",
       "url": "http://www.opera.com/mobile/",
-      "hash": "08702e367c3294e2f79e620814dbc51c5747bf6117580d31c0e21cb62a5e414d"
+      "hash": "810f95929521797a6d7b774f6cb39a8d1de9ae2f2654d2c81631a35826a57be7"
     },
     {
       "family": "KIRIX_STRATA",
@@ -11968,6 +12003,19 @@
       "browser-type-hash": "d31de1a5c5c8ba2a210a167cf0d0dc2425c57ea7525f4b73a4b7ab934af79dfc",
       "url": "http://weblink.justyrc.com/",
       "hash": "50f9168132decaef27d5c767ac89bff4d6fb96e87e4fd0c230028cd8c6334df4"
+    },
+    {
+      "family": "UNKNOWN",
+      "icon": "icedragon.png",
+      "info-url": "/list-of-ua/browser-detail?browser\u003dIceDragon",
+      "browser-pattern-hashs": [
+        "e9be3674b66b496bddb82f426b1a38cd47cdfbf3b34df053701325a39b92d807"
+      ],
+      "producer": "Comodo Group, Inc.",
+      "producer-url": "http://www.comodo.com/",
+      "browser-type-hash": "d31de1a5c5c8ba2a210a167cf0d0dc2425c57ea7525f4b73a4b7ab934af79dfc",
+      "url": "http://www.comodo.com/home/browsers-toolbars/icedragon-browser.php",
+      "hash": "d0e1625bf1d0b33a067578c540cd6662caabae2df04fcf9857614379f8358a1d"
     }
   ],
   "robots": [
@@ -23729,6 +23777,28 @@
       "url": "",
       "user-agent-string": "Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1.6) Gecko/20070725 Firefox/2.0.0.6 Ara.com.tr AraBot 1.0",
       "hash": "879aa4711f5b0fc7b4e8e9c89b3c96e73cd0b05d3838ec0308c422b3819056b0"
+    },
+    {
+      "family": "ABOUNDEXBOT",
+      "icon": "bot.png",
+      "info-url": "/list-of-ua/bot-detail?bot\u003dAboundexbot",
+      "name": "Aboundexbot/0.3",
+      "producer": "Aboundex.com",
+      "producer-url": "http://www.aboundex.com/",
+      "url": "",
+      "user-agent-string": "Aboundex/0.3 (http://www.aboundex.com/crawler/)",
+      "hash": "69749f78ed103fc014e9766f5e152d7cdf1f9341cdd670a95d09038fcc6ef817"
+    },
+    {
+      "family": "UNKNOWN",
+      "icon": "bot.png",
+      "info-url": "/list-of-ua/bot-detail?bot\u003dPeeplo Screenshot Bot",
+      "name": "Peeplo Screenshot Bot/0.20",
+      "producer": "MOQU ADV Srl",
+      "producer-url": "",
+      "url": "",
+      "user-agent-string": "Peeplo Screenshot Bot/0.20 ( abuse at peeplo dot_com )",
+      "hash": "2f2453f3b0c370ef8e83836b530abad2943ad67a44fdff4a2a8763717ffb4caf"
     }
   ]
 }

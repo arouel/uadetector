@@ -111,4 +111,9 @@ public interface ReadableUserAgent {
 	@Nonnull
 	VersionNumber getVersionNumber();
 
+    /**
+     * @return the known fragments in a user agent.
+     */
+    @Nonnull
+    KnownFragments getKnownFragments();
 }

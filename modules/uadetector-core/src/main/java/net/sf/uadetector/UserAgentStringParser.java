@@ -46,6 +46,6 @@ public interface UserAgentStringParser {
 	 *            user agent string
 	 * @return the detected information of an user agent
 	 */
-	UserAgent parse(final String userAgent);
+	ReadableUserAgent parse(final String userAgent);
 
 }

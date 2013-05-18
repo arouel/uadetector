@@ -78,7 +78,7 @@ public class UserAgentStringParserIntegrationTest {
 		final Output out = new Output();
 		int i = 0;
 		for (final OperatingSystemExample example : OS_EXAMPLES) {
-			final UserAgent agent = PARSER.parse(example.getUserAgentString());
+			final ReadableUserAgent agent = PARSER.parse(example.getUserAgentString());
 
 			// comparing the name
 			Assert.assertEquals(example.getName(), agent.getOperatingSystem().getName());
@@ -106,7 +106,7 @@ public class UserAgentStringParserIntegrationTest {
 		final Output out = new Output("%-40.40s %-30.30s %s");
 		int i = 0;
 		for (final UserAgentExample example : UA_EXAMPLES) {
-			final UserAgent agent = PARSER.parse(example.getUserAgentString());
+			final ReadableUserAgent agent = PARSER.parse(example.getUserAgentString());
 
 			// comparing the name
 			UserAgentFamily family = UserAgentFamily.evaluate(example.getName());

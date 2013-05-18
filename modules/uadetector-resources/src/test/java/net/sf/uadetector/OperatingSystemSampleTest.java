@@ -26,7 +26,7 @@ public class OperatingSystemSampleTest {
 		final List<OperatingSystemSample> samples = OperatingSystemSampleReader.readAll();
 		int i = 0;
 		for (final OperatingSystemSample sample : samples) {
-			final UserAgent agent = PARSER.parse(sample.getUserAgentString());
+			final ReadableUserAgent agent = PARSER.parse(sample.getUserAgentString());
 
 			// comparing the name
 			if (!sample.getName().equals(agent.getOperatingSystem().getName())) {

@@ -114,7 +114,7 @@ public class KnownAgentsReader {
 			do {
 				userAgentString = reader.readLine();
 				if (userAgentString != null) {
-					final UserAgent agent = parser.parse(userAgentString);
+					final ReadableUserAgent agent = parser.parse(userAgentString);
 					final OperatingSystemFamily family = agent.getOperatingSystem().getFamily();
 					final String name = agent.getOperatingSystem().getName();
 					final String version = agent.getOperatingSystem().getVersionNumber().toVersionString();

@@ -22,7 +22,6 @@ import net.sf.uadetector.json.internal.data.JsonConverter.SerializationOption;
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
-import com.google.gson.JsonParseException;
 
 public final class RobotDeserializer extends AbstractDeserializer<Robot> implements JsonDeserializer<Robot> {
 
@@ -33,8 +32,7 @@ public final class RobotDeserializer extends AbstractDeserializer<Robot> impleme
 	}
 
 	@Override
-	public Robot deserialize(final JsonElement json, final Type typeOfT, final JsonDeserializationContext context)
-			throws JsonParseException {
+	public Robot deserialize(final JsonElement json, final Type typeOfT, final JsonDeserializationContext context) {
 		String hash = EMPTY_HASH_CODE;
 
 		// deserialize

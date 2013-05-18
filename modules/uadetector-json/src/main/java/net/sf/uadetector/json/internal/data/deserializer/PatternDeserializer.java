@@ -14,7 +14,6 @@ import net.sf.uadetector.json.internal.data.JsonConverter.SerializationOption;
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
-import com.google.gson.JsonParseException;
 
 public final class PatternDeserializer extends AbstractDeserializer<Pattern> implements JsonDeserializer<Pattern> {
 
@@ -29,8 +28,7 @@ public final class PatternDeserializer extends AbstractDeserializer<Pattern> imp
 	}
 
 	@Override
-	public Pattern deserialize(final JsonElement json, final Type typeOfT, final JsonDeserializationContext context)
-			throws JsonParseException {
+	public Pattern deserialize(final JsonElement json, final Type typeOfT, final JsonDeserializationContext context) {
 
 		// deserialize
 		String flags = "";

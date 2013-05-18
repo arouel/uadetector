@@ -21,7 +21,6 @@ import net.sf.uadetector.json.internal.data.JsonConverter.SerializationOption;
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
-import com.google.gson.JsonParseException;
 
 public final class OperatingSystemPatternDeserializer extends AbstractDeserializer<OperatingSystemPattern> implements
 		JsonDeserializer<OperatingSystemPattern> {
@@ -35,8 +34,7 @@ public final class OperatingSystemPatternDeserializer extends AbstractDeserializ
 	}
 
 	@Override
-	public OperatingSystemPattern deserialize(final JsonElement json, final Type typeOfT, final JsonDeserializationContext context)
-			throws JsonParseException {
+	public OperatingSystemPattern deserialize(final JsonElement json, final Type typeOfT, final JsonDeserializationContext context) {
 		String hash = EMPTY_HASH_CODE;
 
 		// deserialize

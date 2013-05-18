@@ -21,7 +21,6 @@ import net.sf.uadetector.json.internal.data.JsonConverter.SerializationOption;
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
-import com.google.gson.JsonParseException;
 
 public final class BrowserPatternDeserializer extends AbstractDeserializer<BrowserPattern> implements JsonDeserializer<BrowserPattern> {
 
@@ -34,8 +33,7 @@ public final class BrowserPatternDeserializer extends AbstractDeserializer<Brows
 	}
 
 	@Override
-	public BrowserPattern deserialize(final JsonElement json, final Type typeOfT, final JsonDeserializationContext context)
-			throws JsonParseException {
+	public BrowserPattern deserialize(final JsonElement json, final Type typeOfT, final JsonDeserializationContext context) {
 		String hash = EMPTY_HASH_CODE;
 		Pattern pattern = null;
 

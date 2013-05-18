@@ -23,7 +23,6 @@ import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import com.google.gson.JsonParseException;
 
 public final class DataDeserializer extends AbstractDeserializer<Data> implements JsonDeserializer<Data> {
 
@@ -52,7 +51,7 @@ public final class DataDeserializer extends AbstractDeserializer<Data> implement
 	}
 
 	@Override
-	public Data deserialize(final JsonElement json, final Type typeOfT, final JsonDeserializationContext context) throws JsonParseException {
+	public Data deserialize(final JsonElement json, final Type typeOfT, final JsonDeserializationContext context) {
 		final JsonObject obj = json.getAsJsonObject();
 		final Set<Map.Entry<String, JsonElement>> entrySet = obj.entrySet();
 		final Data.Builder builder = new Data.Builder();

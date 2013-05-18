@@ -1,6 +1,6 @@
 {
   "format": "1.0",
-  "version": "20130429-02",
+  "version": "20130515-01",
   "operating-system-patterns": [
     {
       "regex": {
@@ -1016,6 +1016,13 @@
         "pattern": "Windows ME"
       },
       "hash": "e0a9be0d980882af36a6785cf425a7af1050e04ace0eb4d21217ae4eef19a9c9"
+    },
+    {
+      "regex": {
+        "flags": "is",
+        "pattern": "^Mozilla.*Windows Phone 8.0"
+      },
+      "hash": "02f2e73e0bcd2529760212013d7a8365b0959bf8858d42574b5090b5045f4b6a"
     },
     {
       "regex": {
@@ -2630,6 +2637,19 @@
       "producer-url": "http://www.microsoft.com/",
       "url": "http://en.wikipedia.org/wiki/Windows_RT",
       "hash": "6157bdd788c05f6e007983895fe7004d1c10cf8d564862468f9d612d9080988f"
+    },
+    {
+      "family": "Windows",
+      "icon": "windowsPhone8.png",
+      "info-url": "/list-of-ua/os-detail?os\u003dWindows Phone 8",
+      "name": "Windows Phone 8",
+      "operating-system-pattern-hashs": [
+        "02f2e73e0bcd2529760212013d7a8365b0959bf8858d42574b5090b5045f4b6a"
+      ],
+      "producer": "Microsoft Corporation.",
+      "producer-url": "http://www.microsoft.com/",
+      "url": "http://en.wikipedia.org/wiki/Windows_Phone_8",
+      "hash": "e3d89e0344c74134b072986c8061b2bb35f28417d0dcfe593d5da53c8d05cf0f"
     }
   ],
   "browser-types": [
@@ -3116,9 +3136,9 @@
     {
       "regex": {
         "flags": "is",
-        "pattern": "^Mozilla.*AppleWebKit.*YaBrowser\\/([0-9\\.]+).*Chrome"
+        "pattern": "^Mozilla.*AppleWebKit.*Chrome.*YaBrowser\\/([0-9\\.]+)"
       },
-      "hash": "5eb408ac41ca265264a4b4a9d743cbdccc626231dfa7c30330dd1399c6415541"
+      "hash": "167bc06a3c53323f86d380dd38f7fb70a5f3d916c04dd2b00a35e93a16662485"
     },
     {
       "regex": {
@@ -3126,6 +3146,13 @@
         "pattern": "^Mozilla.*AppleWebKit.*Superbird\\/([0-9\\.]+)"
       },
       "hash": "aedf96fccafa3623559dfd799b3f3060e9e6a84e39d8aba6c8e894a475784f3f"
+    },
+    {
+      "regex": {
+        "flags": "is",
+        "pattern": "^Mozilla.*AppleWebKit.*YaBrowser\\/([0-9\\.]+).*Chrome"
+      },
+      "hash": "5eb408ac41ca265264a4b4a9d743cbdccc626231dfa7c30330dd1399c6415541"
     },
     {
       "regex": {
@@ -3259,6 +3286,27 @@
         "pattern": "Mozilla.*Gecko.*Firefox.*IceDragon\\/([0-9\\.]+)"
       },
       "hash": "e9be3674b66b496bddb82f426b1a38cd47cdfbf3b34df053701325a39b92d807"
+    },
+    {
+      "regex": {
+        "flags": "is",
+        "pattern": "^Mozilla.*AppleWebKit.*Chrome.*Safari.*Midori\\/([0-9\\.]+)"
+      },
+      "hash": "005cc890c0ba7d3ff1aff9e835f6b74b9d6c7a90e8774b1a46a222bd3ceb5541"
+    },
+    {
+      "regex": {
+        "flags": "is",
+        "pattern": "^Mozilla.*AppleWebKit.*Dooble\\/([0-9\\.]+).*Safari"
+      },
+      "hash": "36e52e825f044dc36e7f1dc303dae79e5929c82e4d0772797b20218e3e2c0f18"
+    },
+    {
+      "regex": {
+        "flags": "is",
+        "pattern": "^Mozilla.*AppleWebKit.*UCBrowser\\/([0-9\\.]+).*Mobile.*Safari"
+      },
+      "hash": "ca1a269e2e2bdbb260f73e767c10e6f0da1fd966d22a380af63eadfbf025d0bb"
     },
     {
       "regex": {
@@ -4376,9 +4424,9 @@
     {
       "regex": {
         "flags": "is",
-        "pattern": "Midori\\/([0-9\\.]+)"
+        "pattern": "^Midori\\/([0-9\\.]+)"
       },
-      "hash": "8e066b8dba69c898c6b5652df56b5741b2adaed88c793695aaac74eea8f11310"
+      "hash": "c6cc92ef1cd97cb4a413d205725d8ad71cffe283bc286183f94f4c848647699c"
     },
     {
       "regex": {
@@ -7843,13 +7891,14 @@
       "icon": "midori.png",
       "info-url": "/list-of-ua/browser-detail?browser\u003dMidori",
       "browser-pattern-hashs": [
-        "8e066b8dba69c898c6b5652df56b5741b2adaed88c793695aaac74eea8f11310"
+        "005cc890c0ba7d3ff1aff9e835f6b74b9d6c7a90e8774b1a46a222bd3ceb5541",
+        "c6cc92ef1cd97cb4a413d205725d8ad71cffe283bc286183f94f4c848647699c"
       ],
-      "producer": "TwoToasts.de",
+      "producer": "Christian Dywan",
       "producer-url": "http://www.twotoasts.de/",
       "browser-type-hash": "d31de1a5c5c8ba2a210a167cf0d0dc2425c57ea7525f4b73a4b7ab934af79dfc",
-      "url": "http://software.twotoasts.de/index.php?/pages/midori_summary.html",
-      "hash": "d712278227c27581c65c4794bd57b0c1c651af372e15a3fe2eb288cb0f7b99f5"
+      "url": "http://twotoasts.de/index.php/midori/",
+      "hash": "234135ccc70c54f129288598517e08953562dcbaa04c1d5b20b8b8ebdad89e3f"
     },
     {
       "family": "BOXXE",
@@ -8807,15 +8856,15 @@
       "family": "UC_BROWSER",
       "icon": "ucweb.png",
       "info-url": "/list-of-ua/browser-detail?browser\u003dUC Browser",
-      "operating-system-hash": "d4346e3ae27bfe0b97ddee6e0eb24886c852eb0c65e61d9116d32262a4ae3820",
       "browser-pattern-hashs": [
+        "ca1a269e2e2bdbb260f73e767c10e6f0da1fd966d22a380af63eadfbf025d0bb",
         "39738fb6d2a8ea7b122645b948e9861620bbd56de4d1f7455244b8d3e989ddcb"
       ],
       "producer": "UCWEB Technology Ltd.",
       "producer-url": "http://www.ucweb.com/",
       "browser-type-hash": "d4f1118eb3ace8c9d67d4b72ff39234cd4f3ab260ef6f422ce24b7a1b10d14ee",
       "url": "http://www.ucweb.com/English/UCbrowser/index.html",
-      "hash": "2254b19e9219579b5f49b477e2e12d068b26926df9a4de05db8b17f25daaf5dc"
+      "hash": "3ab7059081d89862682b5caa54ad39ebbfdb9702078ea1f0250e17941ff88a29"
     },
     {
       "family": "NOKIA_WEB_BROWSER",
@@ -9394,13 +9443,14 @@
       "icon": "dooble.png",
       "info-url": "/list-of-ua/browser-detail?browser\u003dDooble",
       "browser-pattern-hashs": [
+        "36e52e825f044dc36e7f1dc303dae79e5929c82e4d0772797b20218e3e2c0f18",
         "86d3425fd703318bb9c5a6cf150576ba77c3ff19f8578533adff291a760c4474"
       ],
       "producer": "Dooble team",
       "producer-url": "",
       "browser-type-hash": "d31de1a5c5c8ba2a210a167cf0d0dc2425c57ea7525f4b73a4b7ab934af79dfc",
       "url": "http://dooble.sourceforge.net/",
-      "hash": "9a923f52ad2dd8d3a9e93f2d95167c1dc7b040c468fc9d787151ff8d1a087250"
+      "hash": "909cabd03fb7c4518a3251a01ffae57c8ddbae20397600ed46ee5aa33ef7d01e"
     },
     {
       "family": "MADFOX",
@@ -11827,13 +11877,14 @@
       "icon": "Yandex.Browser.png",
       "info-url": "/list-of-ua/browser-detail?browser\u003dYandex.Browser",
       "browser-pattern-hashs": [
+        "167bc06a3c53323f86d380dd38f7fb70a5f3d916c04dd2b00a35e93a16662485",
         "5eb408ac41ca265264a4b4a9d743cbdccc626231dfa7c30330dd1399c6415541"
       ],
       "producer": "Yandex ",
       "producer-url": "http://yandex.com/",
       "browser-type-hash": "d31de1a5c5c8ba2a210a167cf0d0dc2425c57ea7525f4b73a4b7ab934af79dfc",
       "url": "http://browser.yandex.com/",
-      "hash": "04845e65b1d9f951799ff6fdc1b534388a4a8a787522b29f93c7e7ed3c9ebeb2"
+      "hash": "ce554dc90472f69346b919221bffca8d037be863c702d3df44e012b124b4299c"
     },
     {
       "family": "AMAZON_SILK",
@@ -23799,6 +23850,39 @@
       "url": "",
       "user-agent-string": "Peeplo Screenshot Bot/0.20 ( abuse at peeplo dot_com )",
       "hash": "2f2453f3b0c370ef8e83836b530abad2943ad67a44fdff4a2a8763717ffb4caf"
+    },
+    {
+      "family": "UNKNOWN",
+      "icon": "bot.png",
+      "info-url": "/list-of-ua/bot-detail?bot\u003dProCogSEOBot",
+      "name": "ProCogSEOBot/1.0",
+      "producer": "ProCog.com",
+      "producer-url": "http://www.procog.com/",
+      "url": "",
+      "user-agent-string": "Mozilla/5.0 (compatible; ProCogSEOBot/1.0; +http://www.procog.com/ )",
+      "hash": "eea9f42d209dab2d0eb333ffd80c2489bfa903c392c7e9b80097249105004046"
+    },
+    {
+      "family": "UNKNOWN",
+      "icon": "bot.png",
+      "info-url": "/list-of-ua/bot-detail?bot\u003dMetaURI API",
+      "name": "MetaURI API/2.0",
+      "producer": "stateless systems",
+      "producer-url": "http://statelesssystems.com/",
+      "url": "",
+      "user-agent-string": "MetaURI API/2.0 +metauri.com",
+      "hash": "4cf560a60113b80ce3ec1baa64ad23c41004d27b0d64322d17f7d90c990985a4"
+    },
+    {
+      "family": "UNKNOWN",
+      "icon": "bot.png",
+      "info-url": "/list-of-ua/bot-detail?bot\u003dDlvr.it/1.0",
+      "name": "Dlvr.it/1.0",
+      "producer": "dlvr.it",
+      "producer-url": "http://dlvr.it/",
+      "url": "",
+      "user-agent-string": "Dlvr.it/1.0 (http://dlvr.it/)",
+      "hash": "7239cbd0e4b37de1f1716ad76973ec1acd0aa0649f994d50901c29e89224582c"
     }
   ]
 }

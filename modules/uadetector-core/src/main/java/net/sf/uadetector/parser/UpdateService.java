@@ -48,12 +48,40 @@ final class UpdateService implements Updater, Runnable {
 	private static final Logger LOG = LoggerFactory.getLogger(UpdateService.class);
 
 	/**
+	 * Message for the log when no update is available.<br>
+	 * <br>
+	 * <b>Message sample</b>: No update available. Current version is '<em>20120301-01</em>'.<br>
+	 * <b>First placeholder</b>: current version
+	 */
+	private static final String MSG_NO_UPDATE_AVAILABLE = "No update available. Current version is '%s'.";
+
+	/**
 	 * Message for the log when an online update check is not possible.<br>
 	 * <br>
 	 * <b>Message sample</b>: Can not check for an updated version. Are you sure you have an established internet
 	 * connection?
 	 */
 	private static final String MSG_NO_UPDATE_CHECK_POSSIBLE = "Can not check for an updated version. Are you sure you have an established internet connection?";
+
+	/**
+	 * Message for the log when an exception occur during the update check.<br>
+	 * <br>
+	 * <b>Message sample</b>: Can not check for an updated version: <em>java.net.ConnectException</em>:
+	 * <em>Connection refused</em><br>
+	 * <b>First placeholder</b>: class name of exception<br>
+	 * <b>Second placeholder</b>: exception message
+	 */
+	private static final String MSG_NO_UPDATE_CHECK_POSSIBLE__DEBUG = "Can not check for an updated version: %s: %s";
+
+	/**
+	 * Message for the log when an update is available.<br>
+	 * <br>
+	 * <b>Message sample</b>: An update is available. Current version is '<em>20120301-01</em>' and remote version is '
+	 * <em>20120401-01</em>'.<br>
+	 * <b>First placeholder</b>: current version<br>
+	 * <b>Second placeholder</b>: new remote version
+	 */
+	private static final String MSG_UPDATE_AVAILABLE = "An update is available. Current version is '%s' and remote version is '%s'.";
 
 	/**
 	 * Reads the current User-Agent data version from <a
@@ -86,34 +114,6 @@ final class UpdateService implements Updater, Runnable {
 	 */
 	@Nonnull
 	private final RefreshableDataStore store;
-
-	/**
-	 * Message for the log when an exception occur during the update check.<br>
-	 * <br>
-	 * <b>Message sample</b>: Can not check for an updated version: <em>java.net.ConnectException</em>:
-	 * <em>Connection refused</em><br>
-	 * <b>First placeholder</b>: class name of exception<br>
-	 * <b>Second placeholder</b>: exception message
-	 */
-	private static final String MSG_NO_UPDATE_CHECK_POSSIBLE__DEBUG = "Can not check for an updated version: %s: %s";
-
-	/**
-	 * Message for the log when an update is available.<br>
-	 * <br>
-	 * <b>Message sample</b>: An update is available. Current version is '<em>20120301-01</em>' and remote version is '
-	 * <em>20120401-01</em>'.<br>
-	 * <b>First placeholder</b>: current version<br>
-	 * <b>Second placeholder</b>: new remote version
-	 */
-	private static final String MSG_UPDATE_AVAILABLE = "An update is available. Current version is '%s' and remote version is '%s'.";
-
-	/**
-	 * Message for the log when no update is available.<br>
-	 * <br>
-	 * <b>Message sample</b>: No update available. Current version is '<em>20120301-01</em>'.<br>
-	 * <b>First placeholder</b>: current version
-	 */
-	private static final String MSG_NO_UPDATE_AVAILABLE = "No update available. Current version is '%s'.";
 
 	public UpdateService(@Nonnull final RefreshableDataStore store) {
 		Check.notNull(store, "store");

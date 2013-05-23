@@ -105,7 +105,7 @@
 		<junit.version>4.11</junit.version>
 		<logback.version>1.0.11</logback.version>
 		<powermock.version>1.5</powermock.version>
-		<quality-check.version>1.1</quality-check.version>
+		<quality-check.version>1.2</quality-check.version>
 		<slf4j.version>1.7.5</slf4j.version>
 
 	</properties>

@@ -3,7 +3,7 @@
 <uasdata>
 	<description>
 		<label>Data (format xml) for UASparser - http://user-agent-string.info/download/UASparser</label>
-		<version>20130515-01</version>
+		<version>20130529-01</version>
 		<checksum type="MD5">http://user-agent-string.info/rpc/get_data.php?format=xml&amp;md5=y</checksum>
 		<checksum type="SHA1">http://user-agent-string.info/rpc/get_data.php?format=xml&amp;sha1=y</checksum>
 	</description>
@@ -18,6 +18,16 @@
 				<url_company><![CDATA[http://www.icdpublishing.co.uk/]]></url_company>
 				<icon>bot.png</icon>
 				<bot_info_url>/list-of-ua/bot-detail?bot=192.comAgent</bot_info_url>
+			</robot>
+			<robot>
+				<id>9655</id>
+				<useragent><![CDATA[Mozilla/5.0 (compatible; 200PleaseBot/1.0; +http://www.200please.com/bot)]]></useragent>
+				<family>200PleaseBot</family>
+				<name>200PleaseBot/1.0</name>
+				<company><![CDATA[200please.com]]></company>
+				<url_company><![CDATA[http://www.200please.com/]]></url_company>
+				<icon>bot.png</icon>
+				<bot_info_url>/list-of-ua/bot-detail?bot=200PleaseBot</bot_info_url>
 			</robot>
 			<robot>
 				<id>9010</id>
@@ -1532,12 +1542,12 @@
 			<robot>
 				<id>812</id>
 				<useragent><![CDATA[mozilla/4.0 (compatible; changedetection/1.0 (admin@changedetection.com))]]></useragent>
-				<family>changedetection</family>
+				<family>ChangeDetection</family>
 				<name>changedetection/1.0</name>
 				<company><![CDATA[FreeFind.com]]></company>
 				<url_company><![CDATA[http://www.freefind.com/]]></url_company>
-				<icon>bot.png</icon>
-				<bot_info_url>/list-of-ua/bot-detail?bot=changedetection</bot_info_url>
+				<icon>bot_ChangeDetection.png</icon>
+				<bot_info_url>/list-of-ua/bot-detail?bot=ChangeDetection</bot_info_url>
 			</robot>
 			<robot>
 				<id>959</id>
@@ -2580,6 +2590,16 @@
 				<bot_info_url>/list-of-ua/bot-detail?bot=ExB Language Crawler</bot_info_url>
 			</robot>
 			<robot>
+				<id>9653</id>
+				<useragent><![CDATA[ExB Language Crawler 2.1.1 (+http://www.exb.de/crawler)]]></useragent>
+				<family>ExB Language Crawler</family>
+				<name>ExB Language Crawler 2.1.1</name>
+				<company><![CDATA[ExB Communication Systems GmbH]]></company>
+				<url_company><![CDATA[http://www.exb.de/]]></url_company>
+				<icon>bot.png</icon>
+				<bot_info_url>/list-of-ua/bot-detail?bot=ExB Language Crawler</bot_info_url>
+			</robot>
+			<robot>
 				<id>5818</id>
 				<useragent><![CDATA[Mozilla/5.0 (compatible; Ezooms/1.0; ezooms.bot@gmail.com)]]></useragent>
 				<family>Ezooms</family>
@@ -3210,6 +3230,26 @@
 				<bot_info_url>/list-of-ua/bot-detail?bot=GarlikCrawler</bot_info_url>
 			</robot>
 			<robot>
+				<id>9691</id>
+				<useragent><![CDATA[Mozilla/5.0 (compatible; GeliyooBot/1.0beta; +http://www.geliyoo.com/)]]></useragent>
+				<family>GeliyooBot</family>
+				<name>GeliyooBot/1.0beta</name>
+				<company><![CDATA[Geliyoo Bilişim Ar-Ge Tic. Ltd. Şti.]]></company>
+				<url_company><![CDATA[http://www.geliyoobilisim.com/]]></url_company>
+				<icon>bot.png</icon>
+				<bot_info_url>/list-of-ua/bot-detail?bot=GeliyooBot</bot_info_url>
+			</robot>
+			<robot>
+				<id>9652</id>
+				<useragent><![CDATA[Mozilla/5.0 (compatible; GeliyooBot/1.0; +http://www.geliyoo.com/)]]></useragent>
+				<family>GeliyooBot</family>
+				<name>GeliyooBot/1.0</name>
+				<company><![CDATA[Geliyoo Bilişim Ar-Ge Tic. Ltd. Şti.]]></company>
+				<url_company><![CDATA[http://www.geliyoobilisim.com/]]></url_company>
+				<icon>bot.png</icon>
+				<bot_info_url>/list-of-ua/bot-detail?bot=GeliyooBot</bot_info_url>
+			</robot>
+			<robot>
 				<id>190</id>
 				<useragent><![CDATA[genieBot (wgao@genieknows.com)]]></useragent>
 				<family>genieBot</family>
@@ -3440,44 +3480,54 @@
 				<bot_info_url>/list-of-ua/bot-detail?bot=Googlebot</bot_info_url>
 			</robot>
 			<robot>
-				<id>9298</id>
-				<useragent><![CDATA[Mozilla/5.0 (Windows NT 6.1; rv:6.0) Gecko/20110814 Firefox/6.0 Google (+https://developers.google.com/+/web/snippet/)]]></useragent>
-				<family>Googlebot snippet</family>
-				<name>Googlebot snippet</name>
-				<company><![CDATA[Google Inc.]]></company>
-				<url_company><![CDATA[http://www.google.com/]]></url_company>
-				<icon>bot_googlebot.png</icon>
-				<bot_info_url>/list-of-ua/bot-detail?bot=Googlebot snippet</bot_info_url>
-			</robot>
-			<robot>
 				<id>7258</id>
 				<useragent><![CDATA[SAMSUNG-SGH-E250/1.0 Profile/MIDP-2.0 Configuration/CLDC-1.1 UP.Browser/6.2.3.3.c.1.101 (GUI) MMP/2.0 (compatible; Googlebot-Mobile/2.1; +http://www.google.com/bot.html)]]></useragent>
-				<family>Googlebot-Mobile</family>
+				<family>Googlebot</family>
 				<name>Googlebot-Mobile/2.1</name>
 				<company><![CDATA[Google Inc.]]></company>
 				<url_company><![CDATA[http://www.google.com/]]></url_company>
 				<icon>bot_googlebot.png</icon>
-				<bot_info_url>/list-of-ua/bot-detail?bot=Googlebot-Mobile</bot_info_url>
+				<bot_info_url>/list-of-ua/bot-detail?bot=Googlebot</bot_info_url>
 			</robot>
 			<robot>
 				<id>7259</id>
 				<useragent><![CDATA[DoCoMo/2.0 N905i(c100;TB;W24H16) (compatible; Googlebot-Mobile/2.1; +http://www.google.com/bot.html)]]></useragent>
-				<family>Googlebot-Mobile</family>
+				<family>Googlebot</family>
 				<name>Googlebot-Mobile/2.1</name>
 				<company><![CDATA[Google Inc.]]></company>
 				<url_company><![CDATA[http://www.google.com/]]></url_company>
 				<icon>bot_googlebot.png</icon>
-				<bot_info_url>/list-of-ua/bot-detail?bot=Googlebot-Mobile</bot_info_url>
+				<bot_info_url>/list-of-ua/bot-detail?bot=Googlebot</bot_info_url>
 			</robot>
 			<robot>
 				<id>7260</id>
 				<useragent><![CDATA[Mozilla/5.0 (iPhone; U; CPU iPhone OS 4_1 like Mac OS X; en-us) AppleWebKit/532.9 (KHTML, like Gecko) Version/4.0.5 Mobile/8B117 Safari/6531.22.7 (compatible; Googlebot-Mobile/2.1; +http://www.google.com/bot.html)]]></useragent>
-				<family>Googlebot-Mobile</family>
+				<family>Googlebot</family>
 				<name>Googlebot-Mobile/2.1</name>
 				<company><![CDATA[Google Inc.]]></company>
 				<url_company><![CDATA[http://www.google.com/]]></url_company>
 				<icon>bot_googlebot.png</icon>
-				<bot_info_url>/list-of-ua/bot-detail?bot=Googlebot-Mobile</bot_info_url>
+				<bot_info_url>/list-of-ua/bot-detail?bot=Googlebot</bot_info_url>
+			</robot>
+			<robot>
+				<id>9737</id>
+				<useragent><![CDATA[Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.4 (KHTML, like Gecko; Google Web Preview) Chrome/22.0.1229 Safari/537.4]]></useragent>
+				<family>Googlebot</family>
+				<name>Google Web Preview</name>
+				<company><![CDATA[Google Inc.]]></company>
+				<url_company><![CDATA[http://www.google.com/]]></url_company>
+				<icon>bot_googlebot.png</icon>
+				<bot_info_url>/list-of-ua/bot-detail?bot=Googlebot</bot_info_url>
+			</robot>
+			<robot>
+				<id>9298</id>
+				<useragent><![CDATA[Mozilla/5.0 (Windows NT 6.1; rv:6.0) Gecko/20110814 Firefox/6.0 Google (+https://developers.google.com/+/web/snippet/)]]></useragent>
+				<family>Googlebot</family>
+				<name>Googlebot snippet</name>
+				<company><![CDATA[Google Inc.]]></company>
+				<url_company><![CDATA[http://www.google.com/]]></url_company>
+				<icon>bot_googlebot.png</icon>
+				<bot_info_url>/list-of-ua/bot-detail?bot=Googlebot</bot_info_url>
 			</robot>
 			<robot>
 				<id>9239</id>
@@ -4672,12 +4722,12 @@
 			<robot>
 				<id>1502</id>
 				<useragent><![CDATA[Mail.Ru/1.0]]></useragent>
-				<family>Mail.Ru</family>
+				<family>Mail.Ru bot</family>
 				<name>Mail.Ru/1.0</name>
-				<company><![CDATA[Mail.Ru]]></company>
+				<company><![CDATA[Mail.Ru Group]]></company>
 				<url_company><![CDATA[http://corp.mail.ru/]]></url_company>
 				<icon>bot.png</icon>
-				<bot_info_url>/list-of-ua/bot-detail?bot=Mail.Ru</bot_info_url>
+				<bot_info_url>/list-of-ua/bot-detail?bot=Mail.Ru bot</bot_info_url>
 			</robot>
 			<robot>
 				<id>6134</id>
@@ -4712,6 +4762,16 @@
 			<robot>
 				<id>8247</id>
 				<useragent><![CDATA[Mozilla/5.0 (compatible; Mail.RU_Bot/2.0; +http://go.mail.ru/help/robots)]]></useragent>
+				<family>Mail.Ru bot</family>
+				<name>Mail.RU_Bot/2.0</name>
+				<company><![CDATA[Mail.Ru Group]]></company>
+				<url_company><![CDATA[http://corp.mail.ru/]]></url_company>
+				<icon>bot.png</icon>
+				<bot_info_url>/list-of-ua/bot-detail?bot=Mail.Ru bot</bot_info_url>
+			</robot>
+			<robot>
+				<id>9675</id>
+				<useragent><![CDATA[Mozilla/5.0 (compatible; Linux x86_64; Mail.RU_Bot/2.0; +http://go.mail.ru/help/robots)]]></useragent>
 				<family>Mail.Ru bot</family>
 				<name>Mail.RU_Bot/2.0</name>
 				<company><![CDATA[Mail.Ru Group]]></company>
@@ -7572,22 +7632,22 @@
 			<robot>
 				<id>1471</id>
 				<useragent><![CDATA[Sogou web spider/4.0(+http://www.sogou.com/docs/help/webmasters.htm#07)]]></useragent>
-				<family>Sogou</family>
+				<family>sogou spider</family>
 				<name>Sogou web spider/4.0</name>
-				<company><![CDATA[sogou.com]]></company>
+				<company><![CDATA[SOGOU.COM]]></company>
 				<url_company><![CDATA[http://www.sogou.com/]]></url_company>
 				<icon>bot.png</icon>
-				<bot_info_url>/list-of-ua/bot-detail?bot=Sogou</bot_info_url>
+				<bot_info_url>/list-of-ua/bot-detail?bot=sogou spider</bot_info_url>
 			</robot>
 			<robot>
 				<id>1470</id>
 				<useragent><![CDATA[Sogou develop spider/4.0(+http://www.sogou.com/docs/help/webmasters.htm#07)]]></useragent>
-				<family>Sogou</family>
+				<family>sogou spider</family>
 				<name>Sogou develop spider/4.0</name>
-				<company><![CDATA[sogou.com]]></company>
+				<company><![CDATA[SOGOU.COM]]></company>
 				<url_company><![CDATA[http://www.sogou.com/]]></url_company>
 				<icon>bot.png</icon>
-				<bot_info_url>/list-of-ua/bot-detail?bot=Sogou</bot_info_url>
+				<bot_info_url>/list-of-ua/bot-detail?bot=sogou spider</bot_info_url>
 			</robot>
 			<robot>
 				<id>523</id>
@@ -7603,7 +7663,7 @@
 				<id>768</id>
 				<useragent><![CDATA[sogou web spider http://www.sogou.com/docs/help/webmasters.htm#07]]></useragent>
 				<family>sogou spider</family>
-				<name>sogou spider b</name>
+				<name>sogou spider</name>
 				<company><![CDATA[SOGOU.COM]]></company>
 				<url_company><![CDATA[http://www.sogou.com/]]></url_company>
 				<icon>bot.png</icon>
@@ -7613,7 +7673,7 @@
 				<id>770</id>
 				<useragent><![CDATA[sogou web spider(+http://www.sogou.com/docs/help/webmasters.htm#07)]]></useragent>
 				<family>sogou spider</family>
-				<name>sogou spider c</name>
+				<name>sogou spider</name>
 				<company><![CDATA[SOGOU.COM]]></company>
 				<url_company><![CDATA[http://www.sogou.com/]]></url_company>
 				<icon>bot.png</icon>
@@ -7624,6 +7684,46 @@
 				<useragent><![CDATA[Sogou web spider/3.0(+http://www.sogou.com/docs/help/webmasters.htm#07)]]></useragent>
 				<family>sogou spider</family>
 				<name>Sogou web spider/3.0</name>
+				<company><![CDATA[SOGOU.COM]]></company>
+				<url_company><![CDATA[http://www.sogou.com/]]></url_company>
+				<icon>bot.png</icon>
+				<bot_info_url>/list-of-ua/bot-detail?bot=sogou spider</bot_info_url>
+			</robot>
+			<robot>
+				<id>1936</id>
+				<useragent><![CDATA[Sogou-Test-Spider/4.0 (compatible; MSIE 5.5; Windows 98)]]></useragent>
+				<family>sogou spider</family>
+				<name>Sogou-Test-Spider/4.0</name>
+				<company><![CDATA[SOGOU.COM]]></company>
+				<url_company><![CDATA[http://www.sogou.com/]]></url_company>
+				<icon>bot.png</icon>
+				<bot_info_url>/list-of-ua/bot-detail?bot=sogou spider</bot_info_url>
+			</robot>
+			<robot>
+				<id>7671</id>
+				<useragent><![CDATA[Sogou Web Spider]]></useragent>
+				<family>sogou spider</family>
+				<name>Sogou web spider</name>
+				<company><![CDATA[SOGOU.COM]]></company>
+				<url_company><![CDATA[http://www.sogou.com/]]></url_company>
+				<icon>bot.png</icon>
+				<bot_info_url>/list-of-ua/bot-detail?bot=sogou spider</bot_info_url>
+			</robot>
+			<robot>
+				<id>8329</id>
+				<useragent><![CDATA[Sogou web spider/4.0]]></useragent>
+				<family>sogou spider</family>
+				<name>Sogou web spider/4.0</name>
+				<company><![CDATA[SOGOU.COM]]></company>
+				<url_company><![CDATA[http://www.sogou.com/]]></url_company>
+				<icon>bot.png</icon>
+				<bot_info_url>/list-of-ua/bot-detail?bot=sogou spider</bot_info_url>
+			</robot>
+			<robot>
+				<id>9717</id>
+				<useragent><![CDATA[Sogou web spider/4.0l-2m!]]></useragent>
+				<family>sogou spider</family>
+				<name>Sogou web spider/4.0l-2m!</name>
 				<company><![CDATA[SOGOU.COM]]></company>
 				<url_company><![CDATA[http://www.sogou.com/]]></url_company>
 				<icon>bot.png</icon>
@@ -10140,6 +10240,26 @@
 				<bot_info_url>/list-of-ua/bot-detail?bot=yacybot</bot_info_url>
 			</robot>
 			<robot>
+				<id>9682</id>
+				<useragent><![CDATA[yacybot (freeworld/global; i386 Linux 3.4.2-linode44; java 1.6.0_27; America/en) http://yacy.net/bot.html]]></useragent>
+				<family>yacybot</family>
+				<name>yacybot</name>
+				<company><![CDATA[Michael Christen]]></company>
+				<url_company><![CDATA[]]></url_company>
+				<icon>bot_yacybot.png</icon>
+				<bot_info_url>/list-of-ua/bot-detail?bot=yacybot</bot_info_url>
+			</robot>
+			<robot>
+				<id>9694</id>
+				<useragent><![CDATA[yacybot (freeworld/global; amd64 Linux 3.8.0-21-generic; java 1.6.0_27; Pacific/en) http://yacy.net/bot.html]]></useragent>
+				<family>yacybot</family>
+				<name>yacybot</name>
+				<company><![CDATA[Michael Christen]]></company>
+				<url_company><![CDATA[]]></url_company>
+				<icon>bot_yacybot.png</icon>
+				<bot_info_url>/list-of-ua/bot-detail?bot=yacybot</bot_info_url>
+			</robot>
+			<robot>
 				<id>8297</id>
 				<useragent><![CDATA[yacybot (freeworld-global; amd64 Linux 3.2.0-4-amd64; java 1.6.0_24; Europe/en) http://yacy.net/bot.html]]></useragent>
 				<family>yacybot</family>
@@ -10150,8 +10270,28 @@
 				<bot_info_url>/list-of-ua/bot-detail?bot=yacybot</bot_info_url>
 			</robot>
 			<robot>
+				<id>9681</id>
+				<useragent><![CDATA[yacybot (freeworld/global; amd64 Linux 3.2.0-4-amd64; java 1.6.0_27; Europe/en) http://yacy.net/bot.html]]></useragent>
+				<family>yacybot</family>
+				<name>yacybot</name>
+				<company><![CDATA[Michael Christen]]></company>
+				<url_company><![CDATA[]]></url_company>
+				<icon>bot_yacybot.png</icon>
+				<bot_info_url>/list-of-ua/bot-detail?bot=yacybot</bot_info_url>
+			</robot>
+			<robot>
 				<id>8406</id>
 				<useragent><![CDATA[yacybot (freeworld-global; amd64 Linux 3.2.0-35-generic; java 1.7.0_09; Europe/en) http://yacy.net/bot.html]]></useragent>
+				<family>yacybot</family>
+				<name>yacybot</name>
+				<company><![CDATA[Michael Christen]]></company>
+				<url_company><![CDATA[]]></url_company>
+				<icon>bot_yacybot.png</icon>
+				<bot_info_url>/list-of-ua/bot-detail?bot=yacybot</bot_info_url>
+			</robot>
+			<robot>
+				<id>9673</id>
+				<useragent><![CDATA[yacybot (webportal-global; amd64 Windows 7 6.1; java 1.7.0_04; America/en) http://yacy.net/bot.html]]></useragent>
 				<family>yacybot</family>
 				<name>yacybot</name>
 				<company><![CDATA[Michael Christen]]></company>
@@ -10856,7 +10996,7 @@
 				<family>Linux</family>
 				<name>Linux (CentOS)</name>
 				<url><![CDATA[http://www.centos.org/]]></url>
-				<company><![CDATA[]]></company>
+				<company><![CDATA[CentOS Project]]></company>
 				<url_company><![CDATA[http://www.centos.org/]]></url_company>
 				<icon>linux_centos.png</icon>
 				<os_info_url>/list-of-ua/os-detail?os=Linux (CentOS)</os_info_url>
@@ -11790,6 +11930,16 @@
 				<url_company><![CDATA[http://www.microsoft.com/]]></url_company>
 				<icon>windowsPhone8.png</icon>
 				<os_info_url>/list-of-ua/os-detail?os=Windows Phone 8</os_info_url>
+			</os>
+			<os>
+				<id>128</id>
+				<family>Linux</family>
+				<name>Linux (Mageia)</name>
+				<url><![CDATA[http://www.mageia.org/]]></url>
+				<company><![CDATA[Mageia.Org]]></company>
+				<url_company><![CDATA[http://www.mageia.org/]]></url_company>
+				<icon>linux_mageia.png</icon>
+				<os_info_url>/list-of-ua/os-detail?os=Linux (Mageia)</os_info_url>
 			</os>
 		</operating_systems>
 		<browsers>
@@ -19615,221 +19765,226 @@
 			</operating_system_reg>
 			<operating_system_reg>
 				<order>132</order>
+				<os_id>128</os_id>
+				<regstring>/Linux.*Mageia/si</regstring>
+			</operating_system_reg>
+			<operating_system_reg>
+				<order>133</order>
 				<os_id>86</os_id>
 				<regstring>/Mac OS X/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>133</order>
+				<order>134</order>
 				<os_id>19</os_id>
 				<regstring>/linux/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>134</order>
+				<order>135</order>
 				<os_id>15</os_id>
 				<regstring>/Gentoo i686/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>135</order>
+				<order>136</order>
 				<os_id>22</os_id>
 				<regstring>/Konqueror.*SUSE/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>136</order>
+				<order>137</order>
 				<os_id>14</os_id>
 				<regstring>/Konqueror.*Fedora/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>137</order>
+				<order>138</order>
 				<os_id>10</os_id>
 				<regstring>/Obigo.*MIDP/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>138</order>
+				<order>139</order>
 				<os_id>10</os_id>
 				<regstring>/Teleca.*MIDP/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>139</order>
+				<order>140</order>
 				<os_id>2</os_id>
 				<regstring>/Windows 2000/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>140</order>
+				<order>141</order>
 				<os_id>46</os_id>
 				<regstring>/Windows NT 4/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>141</order>
+				<order>142</order>
 				<os_id>34</os_id>
 				<regstring>/symbian/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>142</order>
+				<order>143</order>
 				<os_id>87</os_id>
 				<regstring>/os\/2/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>143</order>
+				<order>144</order>
 				<os_id>1</os_id>
 				<regstring>/.*windows XP.*/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>144</order>
+				<order>145</order>
 				<os_id>61</os_id>
 				<regstring>/.*dragonfly.*/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>145</order>
+				<order>146</order>
 				<os_id>8</os_id>
 				<regstring>/Windows ME/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>146</order>
+				<order>147</order>
 				<os_id>127</os_id>
 				<regstring>/^Mozilla.*Windows Phone 8.0/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>147</order>
+				<order>148</order>
 				<os_id>46</os_id>
 				<regstring>/NT4\.0/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>148</order>
+				<order>149</order>
 				<os_id>94</os_id>
 				<regstring>/PlayStation Portable/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>149</order>
+				<order>150</order>
 				<os_id>43</os_id>
 				<regstring>/windows/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>150</order>
+				<order>151</order>
 				<os_id>44</os_id>
 				<regstring>/mac_powerpc/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>151</order>
+				<order>152</order>
 				<os_id>44</os_id>
 				<regstring>/Macintosh/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>152</order>
+				<order>153</order>
 				<os_id>45</os_id>
 				<regstring>/aix/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>153</order>
+				<order>154</order>
 				<os_id>43</os_id>
 				<regstring>/Win32/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>154</order>
+				<order>155</order>
 				<os_id>47</os_id>
 				<regstring>/java\/[0-9a-z\.]+/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>155</order>
+				<order>156</order>
 				<os_id>74</os_id>
 				<regstring>/Syllable/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>156</order>
+				<order>157</order>
 				<os_id>44</os_id>
 				<regstring>/powerpc\-apple/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>157</order>
+				<order>158</order>
 				<os_id>95</os_id>
 				<regstring>/AROS/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>158</order>
+				<order>159</order>
 				<os_id>47</os_id>
 				<regstring>/java[0-9a-z\.]+/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>159</order>
+				<order>160</order>
 				<os_id>34</os_id>
 				<regstring>/Series 60/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>160</order>
+				<order>161</order>
 				<os_id>44</os_id>
 				<regstring>/os=Mac/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>161</order>
+				<order>162</order>
 				<os_id>44</os_id>
 				<regstring>/SO=MAC10,6/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>162</order>
+				<order>163</order>
 				<os_id>44</os_id>
 				<regstring>/so=Mac 10.5.8/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>163</order>
+				<order>164</order>
 				<os_id>91</os_id>
 				<regstring>/Minix 3/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>164</order>
+				<order>165</order>
 				<os_id>98</os_id>
 				<regstring>/Nintendo DS/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>165</order>
+				<order>166</order>
 				<os_id>62</os_id>
 				<regstring>/^Opera.*Android/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>166</order>
+				<order>167</order>
 				<os_id>34</os_id>
 				<regstring>/NokiaN97/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>167</order>
+				<order>168</order>
 				<os_id>34</os_id>
 				<regstring>/Nokia.*XpressMusic/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>168</order>
+				<order>169</order>
 				<os_id>34</os_id>
 				<regstring>/NokiaE66/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>169</order>
+				<order>170</order>
 				<os_id>34</os_id>
 				<regstring>/Nokia6700/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>170</order>
+				<order>171</order>
 				<os_id>99</os_id>
 				<regstring>/\(GNU;/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>171</order>
+				<order>172</order>
 				<os_id>44</os_id>
 				<regstring>/macos/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>172</order>
+				<order>173</order>
 				<os_id>90</os_id>
 				<regstring>/Darwin 10\.3/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>173</order>
+				<order>174</order>
 				<os_id>65</os_id>
 				<regstring>/iPhone/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>174</order>
+				<order>175</order>
 				<os_id>19</os_id>
 				<regstring>/Unix/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>175</order>
+				<order>176</order>
 				<os_id>44</os_id>
 				<regstring>/Darwin/si</regstring>
 			</operating_system_reg>

@@ -130,16 +130,6 @@ public final class UADetectorServiceFactory {
 	}
 
 	/**
-	 * This method has been renamed in {@link UADetectorServiceFactory#getCachingAndUpdatingParser()}.
-	 * 
-	 * @return an user agent string parser with updating service
-	 */
-	@Deprecated
-	public static UserAgentStringParser getCachingAndUpdatingParserHolder() {
-		return CachingAndUpdatingParserHolder.INSTANCE;
-	}
-
-	/**
 	 * Returns an implementation of {@link UserAgentStringParser} which checks at regular intervals for new versions of
 	 * <em>UAS data</em> (also known as database). When newer data available, it automatically loads and updates it.
 	 * 

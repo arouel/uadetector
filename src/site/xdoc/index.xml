@@ -66,9 +66,9 @@
 				<span class="title">Extremely tested</span>
 				<p>
 					All classes in this library have been especially tested. The unit tests have over 90%
-					<a href="modules/uadetector-core/cobertura/index.html">branch</a>
+					<a href="modules/uadetector-core/jacoco/index.html">branch</a>
 					and
-					<a href="modules/uadetector-core/cobertura/index.html">line</a>
+					<a href="modules/uadetector-core/jacoco/index.html">line</a>
 					coverage. In addition, many integration tests performed regularly.
 				</p>
 			</div>

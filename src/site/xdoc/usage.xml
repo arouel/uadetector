@@ -68,7 +68,7 @@ public class HelloServlet extends HttpServlet {
 
 		// Get an UserAgentStringParser and analyze the requesting client
 		UserAgentStringParser parser = UADetectorServiceFactory.getResourceModuleParser();
-		UserAgent agent = parser.parse(request.getHeader("User-Agent"));
+		ReadableUserAgent agent = parser.parse(request.getHeader("User-Agent"));
 
 		out.append("You're a <em>");
 		out.append(agent.getName());
@@ -92,7 +92,7 @@ public class HelloServlet extends HttpServlet {
 			<source><![CDATA[package to.noc.uadetector.example;
 
 import java.util.concurrent.TimeUnit;
-import net.sf.uadetector.UserAgent;
+import net.sf.uadetector.ReadableUserAgent;
 import net.sf.uadetector.UserAgentStringParser;
 import net.sf.uadetector.service.UADetectorServiceFactory;
 import com.google.common.cache.Cache;
@@ -102,7 +102,7 @@ public final class CachedUserAgentStringParser implements UserAgentStringParser 
 
 	private final UserAgentStringParser parser = UADetectorServiceFactory
 							.getCachingAndUpdatingParserHolder();
-	private final Cache<String, UserAgent> cache = CacheBuilder.newBuilder()
+	private final Cache<String, ReadableUserAgent> cache = CacheBuilder.newBuilder()
 							.maximumSize(100)
 							.expireAfterWrite(2, TimeUnit.HOURS)
 							.build();
@@ -113,8 +113,8 @@ public final class CachedUserAgentStringParser implements UserAgentStringParser 
 	}
 
 	@Override
-	public UserAgent parse(final String userAgentString) {
-		UserAgent result = cache.getIfPresent(userAgentString);
+	public ReadableUserAgent parse(final String userAgentString) {
+		ReadableUserAgent result = cache.getIfPresent(userAgentString);
 		if (result == null) {
 			result = parser.parse(userAgentString);
 			cache.put(userAgentString, result);

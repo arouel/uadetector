@@ -23,7 +23,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import net.sf.uadetector.UserAgent;
+import net.sf.uadetector.ReadableUserAgent;
 import net.sf.uadetector.UserAgentStringParser;
 import net.sf.uadetector.service.UADetectorServiceFactory;
 
@@ -43,7 +43,7 @@ public class HelloServlet extends HttpServlet {
 
 		// Get an UserAgentStringParser and analyze the requesting client
 		UserAgentStringParser parser = UADetectorServiceFactory.getOnlineUpdatingParser();
-		UserAgent agent = parser.parse(request.getHeader("User-Agent"));
+		ReadableUserAgent agent = parser.parse(request.getHeader("User-Agent"));
 
 		out.append("You're a <em>");
 		out.append(agent.getName());

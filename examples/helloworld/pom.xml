@@ -13,8 +13,8 @@
 		<java.version>1.6</java.version>
 
 		<!-- dependencies versions -->
-		<logback.version>1.0.9</logback.version>
-		<slf4j.version>1.7.2</slf4j.version>
+		<logback.version>1.0.11</logback.version>
+		<slf4j.version>1.7.5</slf4j.version>
 		<uadetector-resources.version>2013.05</uadetector-resources.version>
 
 		<!-- plugins versions -->

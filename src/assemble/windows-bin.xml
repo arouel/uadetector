@@ -8,6 +8,19 @@
 		<format>zip</format>
 	</formats>
 
+	<dependencySets>
+		<dependencySet>
+			<excludes>
+				<exclude>uadetector*</exclude>
+			</excludes>
+			<includes>
+				<include>*:jar</include>
+			</includes>
+			<outputDirectory>lib</outputDirectory>
+		</dependencySet>
+	</dependencySets>
+
+
 	<fileSets>
 
 		<!-- Copy license and other files from root -->

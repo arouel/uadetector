@@ -26,14 +26,14 @@ public final class FileUtil {
 	public static boolean isEmpty(final File file, final Charset charset) throws IOException {
 		boolean empty = false;
 		BufferedReader reader = null;
+		boolean threw = true;
 		try {
 			reader = new BufferedReader(new InputStreamReader(new FileInputStream(file), charset));
 			final String line = reader.readLine();
 			empty = line == null;
+			threw = false;
 		} finally {
-			if (reader != null) {
-				reader.close();
-			}
+			Closeables.close(reader, threw);
 		}
 		return empty;
 	}

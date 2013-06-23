@@ -110,14 +110,14 @@ public final class UrlUtil {
 		final InputStream inputStream = open(url);
 		BufferedReader reader = null;
 		final StringBuilder buffer = new StringBuilder();
+		boolean threw = true;
 		try {
 			reader = new BufferedReader(new InputStreamReader(inputStream, charset));
 			buffer.append(readAll(reader));
+			threw = false;
 		} finally {
-			if (reader != null) {
-				reader.close();
-			}
-			inputStream.close();
+			Closeables.close(reader, threw);
+			Closeables.close(inputStream, false);
 		}
 		return buffer.toString();
 	}

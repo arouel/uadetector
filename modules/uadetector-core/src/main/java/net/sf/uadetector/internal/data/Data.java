@@ -256,8 +256,7 @@ public class Data {
 		}
 
 		/**
-		 * Appends a browser pattern to the map unless the ID is not already present. If the ID of the pattern is
-		 * already set an {@code IllegalArgumentException} will be thrown.
+		 * Appends a browser pattern to the map of pattern sorted by ID.
 		 * 
 		 * @param pattern
 		 *            a pattern for a browser
@@ -318,8 +317,7 @@ public class Data {
 		}
 
 		/**
-		 * Appends a operating system pattern to the map unless the ID is not already present. If the ID of the pattern
-		 * is already set an {@code IllegalArgumentException} will be thrown.
+		 * Appends an operating system pattern to the map of pattern sorted by ID.
 		 * 
 		 * @param pattern
 		 *            a pattern for a browser

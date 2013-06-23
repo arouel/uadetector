@@ -22,6 +22,7 @@ import javax.annotation.Nonnegative;
 import javax.annotation.Nonnull;
 
 import net.sf.qualitycheck.Check;
+import net.sf.qualitycheck.exception.IllegalNullArgumentException;
 import net.sf.uadetector.UserAgent;
 import net.sf.uadetector.UserAgentFamily;
 
@@ -198,12 +199,12 @@ public final class Browser {
 		}
 
 		/**
-		 * Sets the browser type.<br>
-		 * <br>
-		 * If the given type id is {@code null}, a {@code IllegalArgumentException} will be thrown.
+		 * Sets the browser type.
 		 * 
 		 * @param type
 		 *            A browser type
+		 * @throws IllegalNullArgumentException
+		 *             if the given argument is {@code null}
 		 */
 		@Nonnull
 		public Builder setType(@Nonnull final BrowserType type) {

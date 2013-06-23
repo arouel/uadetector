@@ -43,14 +43,14 @@ public final class UrlUtil {
 	/**
 	 * Creates an {@code URL} instance from the given {@code String} representation.<br>
 	 * <br>
-	 * This method tunnels a {@link MalformedURLException} by an {@link IllegalArgumentException}.
+	 * This method tunnels a {@link MalformedURLException} by an {@link IllegalStateOfArgumentException}.
 	 * 
 	 * @param url
 	 *            {@code String} representation of an {@code URL}
 	 * @return new {@code URL} instance
 	 * @throws net.sf.qualitycheck.exception.IllegalNullArgumentException
 	 *             if the given argument is {@code null}
-	 * @throws net.sf.qualitycheck.exception.IllegalStateOfArgumentException
+	 * @throws IllegalStateOfArgumentException
 	 *             if the string representation of the given URL is invalid and a {@link MalformedURLException} occurs
 	 */
 	public static URL build(@Nonnull final String url) {

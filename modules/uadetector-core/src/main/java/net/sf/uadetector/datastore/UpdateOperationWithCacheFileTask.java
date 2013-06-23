@@ -196,9 +196,6 @@ final class UpdateOperationWithCacheFileTask extends AbstractUpdateOperation {
 		} catch (final CanNotOpenStreamException e) {
 			LOG.warn(String.format(RefreshableDataStore.MSG_URL_NOT_READABLE, e.getLocalizedMessage()));
 			readFallbackData();
-		} catch (final IllegalArgumentException e) {
-			LOG.warn(RefreshableDataStore.MSG_FAULTY_CONTENT + " " + e.getLocalizedMessage());
-			readFallbackData();
 		} catch (final RuntimeException e) {
 			LOG.warn(RefreshableDataStore.MSG_FAULTY_CONTENT, e);
 			readFallbackData();
@@ -220,8 +217,6 @@ final class UpdateOperationWithCacheFileTask extends AbstractUpdateOperation {
 			}
 		} catch (final CanNotOpenStreamException e) {
 			LOG.warn(String.format(RefreshableDataStore.MSG_URL_NOT_READABLE, e.getLocalizedMessage()));
-		} catch (final IllegalArgumentException e) {
-			LOG.warn(RefreshableDataStore.MSG_FAULTY_CONTENT + " " + e.getLocalizedMessage());
 		} catch (final RuntimeException e) {
 			LOG.warn(RefreshableDataStore.MSG_FAULTY_CONTENT, e);
 		} catch (final IOException e) {

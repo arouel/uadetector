@@ -20,9 +20,6 @@ public final class DaemonThreadFactory implements ThreadFactory {
 	public DaemonThreadFactory(@Nonnull final String threadName) {
 		Check.notNull(threadName, "threadName");
 		Check.notEmpty(threadName.trim(), "threadName");
-		if (threadName.trim().isEmpty()) {
-			throw new IllegalArgumentException("Argument 'threadName' must not be empty.");
-		}
 		this.threadName = threadName;
 	}
 

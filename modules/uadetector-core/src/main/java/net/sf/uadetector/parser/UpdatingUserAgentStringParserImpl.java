@@ -20,6 +20,9 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 
+import javax.annotation.Nonnegative;
+
+import net.sf.qualitycheck.Check;
 import net.sf.uadetector.datastore.RefreshableDataStore;
 import net.sf.uadetector.internal.util.DaemonThreadFactory;
 
@@ -78,13 +81,11 @@ public final class UpdatingUserAgentStringParserImpl extends UserAgentStringPars
 	 * 
 	 * @param updateInterval
 	 *            update interval in milliseconds
-	 * @throws IllegalArgumentException
-	 *             if the given value is less than 0
+	 * @throws net.sf.qualitycheck.exception.IllegalNegativeArgumentException
+	 *             if the given update interval is less than 0
 	 */
-	public void setUpdateInterval(final long updateInterval) {
-		if (updateInterval < 0l) {
-			throw new IllegalArgumentException("Update interval must be not less than 0.");
-		}
+	public void setUpdateInterval(@Nonnegative final long updateInterval) {
+		Check.notNegative(updateInterval, "updateInterval");
 		this.updateInterval = updateInterval;
 		setUpUpdateService();
 	}

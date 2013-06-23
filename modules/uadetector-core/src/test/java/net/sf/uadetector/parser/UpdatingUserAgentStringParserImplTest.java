@@ -17,6 +17,7 @@ package net.sf.uadetector.parser;
 
 import java.net.MalformedURLException;
 
+import net.sf.qualitycheck.exception.IllegalNegativeArgumentException;
 import net.sf.qualitycheck.exception.IllegalNullArgumentException;
 import net.sf.uadetector.OperatingSystem;
 import net.sf.uadetector.OperatingSystemFamily;
@@ -237,7 +238,7 @@ public class UpdatingUserAgentStringParserImplTest {
 		parser.getDataStore().refresh();
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalNegativeArgumentException.class)
 	public void setUpdateInterval_toSmall() throws MalformedURLException {
 		final UpdatingUserAgentStringParserImpl parser = new UpdatingUserAgentStringParserImpl(new TestXmlDataStore());
 		parser.setUpdateInterval(-1l);

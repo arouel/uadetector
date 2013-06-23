@@ -26,7 +26,6 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import net.sf.qualitycheck.Check;
-import net.sf.qualitycheck.ConditionalCheck;
 import net.sf.qualitycheck.exception.IllegalStateOfArgumentException;
 import net.sf.uadetector.internal.util.AlphanumComparator;
 
@@ -273,7 +272,7 @@ public final class VersionNumber implements ReadableVersionNumber, Serializable 
 		if (other == null) {
 			result = -1;
 		} else {
-			ConditionalCheck.notNull(other != null, other.getGroups(), "other.getGroups()");
+			Check.notNull(other.getGroups(), "other.getGroups()");
 			final int length = groups.size() < other.getGroups().size() ? groups.size() : other.getGroups().size();
 			final AlphanumComparator comparator = new AlphanumComparator();
 			result = comparator.compare(toVersionString(groups.subList(0, length)), toVersionString(other.getGroups().subList(0, length)));

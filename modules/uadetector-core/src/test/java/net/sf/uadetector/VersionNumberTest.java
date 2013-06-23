@@ -149,6 +149,22 @@ public class VersionNumberTest {
 		Assert.assertEquals(-1, version.compareTo(null));
 	}
 
+	@Test
+	public void compareTo_otherGroupsIsNull() {
+		final VersionNumber version1 = new VersionNumber(Arrays.asList("1", "0", "1"));
+		final ReadableVersionNumber mockVersion = EasyMock.createStrictMock(ReadableVersionNumber.class);
+		EasyMock.expect(mockVersion.getGroups()).andReturn(null);
+		EasyMock.replay(mockVersion);
+
+		try {
+			Assert.assertEquals(1, version1.compareTo(mockVersion));
+		} catch (final IllegalNullArgumentException e) {
+			Assert.assertEquals("Argument 'other.getGroups()' must not be null.", e.getLocalizedMessage());
+		}
+
+		EasyMock.verify(mockVersion);
+	}
+
 	@Test(expected = IllegalNullArgumentException.class)
 	public void compareTo_otherImplementation_getGroups_null() {
 		final ReadableVersionNumber otherImpl = EasyMock.createMock(ReadableVersionNumber.class);

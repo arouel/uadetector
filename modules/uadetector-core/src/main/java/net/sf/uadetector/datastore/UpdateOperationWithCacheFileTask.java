@@ -11,6 +11,7 @@ import javax.annotation.Nonnull;
 import net.sf.qualitycheck.Check;
 import net.sf.uadetector.exception.CanNotOpenStreamException;
 import net.sf.uadetector.internal.data.Data;
+import net.sf.uadetector.internal.util.Closeables;
 import net.sf.uadetector.internal.util.FileUtil;
 import net.sf.uadetector.internal.util.UrlUtil;
 
@@ -115,10 +116,11 @@ final class UpdateOperationWithCacheFileTask extends AbstractUpdateOperation {
 				throw new IllegalStateException("The read in content can not be transformed to an instance of 'Data'.");
 			}
 
-			FileOutputStream outputStream = null;
-			try {
-				final File tempFile = createTemporaryFile(file);
+			final File tempFile = createTemporaryFile(file);
 
+			FileOutputStream outputStream = null;
+			boolean threw = true;
+			try {
 				// write data to temporary file
 				outputStream = new FileOutputStream(tempFile);
 				outputStream.write(data.getBytes(charset));
@@ -126,18 +128,13 @@ final class UpdateOperationWithCacheFileTask extends AbstractUpdateOperation {
 				// delete the original file
 				Check.stateIsTrue(!file.exists() || file.delete(), "Cannot delete file '%s'.", file.getPath());
 
-				// rename the new file to the original one
-				renameFile(tempFile, file);
-
+				threw = false;
 			} finally {
-				if (outputStream != null) {
-					try {
-						outputStream.close();
-					} catch (final IOException e) {
-						LOG.warn("The output stream could not be closed.");
-					}
-				}
+				Closeables.close(outputStream, threw);
 			}
+
+			// rename the new file to the original one
+			renameFile(tempFile, file);
 		} else {
 			LOG.debug(MSG_SAME_RESOURCES);
 		}

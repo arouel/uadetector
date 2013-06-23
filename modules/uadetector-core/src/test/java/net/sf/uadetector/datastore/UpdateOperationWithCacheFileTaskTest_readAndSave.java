@@ -13,7 +13,7 @@ import org.powermock.modules.junit4.PowerMockRunner;
 
 @RunWith(PowerMockRunner.class)
 @PrepareForTest({ FileOutputStream.class, UpdateOperationWithCacheFileTask.class })
-public class CachingUpdateOperationTaskTest_readAndSave {
+public class UpdateOperationWithCacheFileTaskTest_readAndSave {
 
 	@Test(expected = IOException.class)
 	public void testNullCheckBeforeClosing() throws Exception {

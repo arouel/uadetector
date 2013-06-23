@@ -22,7 +22,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 
-public class CachingUpdateOperationTaskTest {
+public class UpdateOperationWithCacheFileTaskTest {
 
 	/**
 	 * Temporary folder to cache <em>UAS data</em> in a file. Created files in this folder are guaranteed to be deleted

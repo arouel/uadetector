@@ -25,14 +25,14 @@ package net.sf.uadetector.exception;
  */
 public class CannotCloseException extends RuntimeException {
 
-	private static final long serialVersionUID = 8381680536297450770L;
+	private static final long serialVersionUID = -8641033043995976022L;
 
 	protected static final String DEFAULT_MESSAGE = "Cannot close the given Closeable.";
 
-	protected static final String MESSAGE_WITH_URL = "Cannot close the given Closeable: %s";
+	protected static final String MESSAGE_WITH_INFO = "Cannot close the given Closeable: %s";
 
 	private static String format(final String url) {
-		return String.format(MESSAGE_WITH_URL, url);
+		return String.format(MESSAGE_WITH_INFO, url);
 	}
 
 	/**
@@ -43,8 +43,8 @@ public class CannotCloseException extends RuntimeException {
 	}
 
 	/**
-	 * Constructs an {@code CannotCloseException} with the message {@link CannotCloseException#MESSAGE_WITH_URL}
-	 * including the given URL as string representation.
+	 * Constructs an {@code CannotCloseException} with the message {@link CannotCloseException#MESSAGE_WITH_INFO}
+	 * including additional information.
 	 * 
 	 * @param info
 	 *            additional information why a {@link java.io.Closeable} cannot be closed
@@ -54,8 +54,8 @@ public class CannotCloseException extends RuntimeException {
 	}
 
 	/**
-	 * Constructs a new exception with the message {@link CannotCloseException#MESSAGE_WITH_URL} including the given URL
-	 * as string representation and cause.
+	 * Constructs a new exception with the message {@link CannotCloseException#MESSAGE_WITH_INFO} including additional
+	 * information.
 	 * 
 	 * @param info
 	 *            additional information why a {@link java.io.Closeable} cannot be closed

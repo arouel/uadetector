@@ -36,7 +36,7 @@ public class CannotCloseExceptionTest {
 		final String info = "a message which describes the cause";
 		final IOException tunneled = new IOException();
 		final CannotCloseException e = new CannotCloseException(info, tunneled);
-		final String expected = String.format(CannotCloseException.MESSAGE_WITH_URL, info);
+		final String expected = String.format(CannotCloseException.MESSAGE_WITH_INFO, info);
 		Assert.assertEquals(expected, e.getMessage());
 		Assert.assertSame(tunneled, e.getCause());
 	}
@@ -50,7 +50,7 @@ public class CannotCloseExceptionTest {
 	public void construct_url_successful() {
 		final String info = "a message which describes the cause";
 		final CannotCloseException e = new CannotCloseException(info);
-		final String expected = String.format(CannotCloseException.MESSAGE_WITH_URL, info);
+		final String expected = String.format(CannotCloseException.MESSAGE_WITH_INFO, info);
 		Assert.assertEquals(expected, e.getMessage());
 	}
 

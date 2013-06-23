@@ -53,6 +53,8 @@ public final class UserAgent implements ReadableUserAgent, Serializable {
 
 		private VersionNumber versionNumber = VersionNumber.UNKNOWN;
 
+        private KnownFragments knownFragments = KnownFragments.EMPTY;
+
 		public Builder() {
 			// default constructor
 		}
@@ -60,11 +62,12 @@ public final class UserAgent implements ReadableUserAgent, Serializable {
 		public Builder(@Nonnull final String userAgentString) {
 			Check.notNull(userAgentString, "userAgentString");
 			this.userAgentString = userAgentString;
+            this.knownFragments = new KnownFragments(userAgentString);
 		}
 
 		@Nonnull
 		public UserAgent build() {
-			return new UserAgent(family, icon, name, operatingSystem, producer, producerUrl, type, typeName, url, versionNumber);
+			return new UserAgent(family, icon, name, operatingSystem, producer, producerUrl, type, typeName, url, versionNumber, knownFragments);
 		}
 
 		@Override
@@ -120,6 +123,11 @@ public final class UserAgent implements ReadableUserAgent, Serializable {
 		public VersionNumber getVersionNumber() {
 			return versionNumber;
 		}
+
+        @Override
+        public KnownFragments getKnownFragments() {
+            return knownFragments;
+        }
 
 		@Nonnull
 		public Builder setFamily(@Nonnull final UserAgentFamily family) {
@@ -198,6 +206,7 @@ public final class UserAgent implements ReadableUserAgent, Serializable {
 		public Builder setUserAgentString(@Nonnull final String userAgentString) {
 			Check.notNull(userAgentString, "userAgentString");
 			this.userAgentString = userAgentString;
+            this.knownFragments = new KnownFragments(userAgentString);
 			return this;
 		}
 
@@ -207,11 +216,10 @@ public final class UserAgent implements ReadableUserAgent, Serializable {
 			this.versionNumber = versionNumber;
 			return this;
 		}
-
-	}
+    }
 
 	public static final UserAgent EMPTY = new UserAgent(UserAgentFamily.UNKNOWN, "", "unknown", OperatingSystem.EMPTY, "", "",
-			UserAgentType.UNKNOWN, "", "", VersionNumber.UNKNOWN);
+			UserAgentType.UNKNOWN, "", "", VersionNumber.UNKNOWN, KnownFragments.EMPTY);
 
 	/**
 	 * Serialization version
@@ -248,10 +256,13 @@ public final class UserAgent implements ReadableUserAgent, Serializable {
 	@Nonnull
 	private final VersionNumber versionNumber;
 
+    @Nonnull
+    private final KnownFragments knownFragments;
+
 	public UserAgent(@Nonnull final UserAgentFamily family, @Nonnull final String icon, @Nonnull final String name,
 			@Nonnull final OperatingSystem operatingSystem, @Nonnull final String producer, @Nonnull final String producerUrl,
 			@Nonnull final UserAgentType type, @Nonnull final String typeName, @Nonnull final String url,
-			@Nonnull final VersionNumber versionNumber) {
+			@Nonnull final VersionNumber versionNumber, @Nonnull final KnownFragments knownFragments) {
 		Check.notNull(family, "family");
 		Check.notNull(icon, "icon");
 		Check.notNull(name, "name");
@@ -262,6 +273,7 @@ public final class UserAgent implements ReadableUserAgent, Serializable {
 		Check.notNull(typeName, "typeName");
 		Check.notNull(url, "url");
 		Check.notNull(versionNumber, "versionNumber");
+        Check.notNull(knownFragments, "knownFragments");
 
 		this.family = family;
 		this.icon = icon;
@@ -273,6 +285,7 @@ public final class UserAgent implements ReadableUserAgent, Serializable {
 		this.typeName = typeName;
 		this.url = url;
 		this.versionNumber = versionNumber;
+        this.knownFragments = knownFragments;
 	}
 
 	@Override
@@ -370,7 +383,13 @@ public final class UserAgent implements ReadableUserAgent, Serializable {
 		return versionNumber;
 	}
 
-	@Override
+    @Nonnull
+    @Override
+    public KnownFragments getKnownFragments() {
+        return knownFragments;
+    }
+
+    @Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;

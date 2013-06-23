@@ -16,12 +16,7 @@
 package net.sf.uadetector.parser;
 
 import net.sf.qualitycheck.exception.IllegalNullArgumentException;
-import net.sf.uadetector.OperatingSystem;
-import net.sf.uadetector.OperatingSystemFamily;
-import net.sf.uadetector.UserAgent;
-import net.sf.uadetector.UserAgentFamily;
-import net.sf.uadetector.UserAgentType;
-import net.sf.uadetector.VersionNumber;
+import net.sf.uadetector.*;
 import net.sf.uadetector.datastore.DataStore;
 import net.sf.uadetector.datastore.TestXmlDataStore;
 import net.sf.uadetector.internal.data.domain.Robot;
@@ -684,5 +679,15 @@ public class UserAgentStringParserTest {
 
 		Assert.assertEquals(OperatingSystem.EMPTY, agent.getOperatingSystem());
 	}
+
+    @Test
+    public void parse_KnownFragments() {
+        String uaString = "Mozilla/5.0 (iPad; CPU OS 5_0 like Mac OS X) AppleWebKit/534.46 (KHTML, like Gecko) Version/5.1 Mobile/9A334 Safari/7534.48.3";
+        UserAgent agent = PARSER.parse(uaString);
+        Assert.assertTrue(agent.getOperatingSystem().getFamily() == OperatingSystemFamily.IOS);
+        Assert.assertTrue(agent.getKnownFragments().containsAny(KnownFragment.IPAD));
+        Assert.assertTrue(agent.getKnownFragments().containsAny(KnownFragment.IPHONE, KnownFragment.IPAD));
+        Assert.assertFalse(agent.getKnownFragments().containsAny(KnownFragment.IPHONE));
+    }
 
 }

@@ -47,53 +47,6 @@ public class CachingUpdateOperationTaskTest {
 	}
 
 	@Test
-	public void deleteFile_doesNotExist() throws IOException {
-		final File cache = folder.newFile(); // cache file does not exist
-		UpdateOperationWithCacheFileTask.deleteFile(cache);
-	}
-
-	@Test(expected = IllegalStateException.class)
-	public void deleteFile_existsButDeletingFails() throws IOException, SecurityException, NoSuchMethodException {
-		final File file = folder.newFile(); // cache file does not exist
-		final IMockBuilder<File> builder = EasyMock.createMockBuilder(File.class);
-		builder.withConstructor(URI.class);
-		builder.withArgs(file.toURI());
-		builder.addMockedMethod(File.class.getMethod("exists"));
-		builder.addMockedMethod(File.class.getMethod("delete"));
-		final File fileMock = builder.createMock();
-		EasyMock.expect(fileMock.exists()).andReturn(true).anyTimes();
-		EasyMock.expect(fileMock.delete()).andReturn(false).anyTimes();
-		EasyMock.replay(fileMock);
-
-		UpdateOperationWithCacheFileTask.deleteFile(fileMock);
-
-		EasyMock.verify(fileMock);
-	}
-
-	@Test(expected = IllegalNullArgumentException.class)
-	public void deleteFile_null() {
-		UpdateOperationWithCacheFileTask.deleteFile(null);
-	}
-
-	@Test
-	public void deleteFile_successful() throws IOException, SecurityException, NoSuchMethodException {
-		final File file = folder.newFile(); // cache file does not exist
-		final IMockBuilder<File> builder = EasyMock.createMockBuilder(File.class);
-		builder.withConstructor(URI.class);
-		builder.withArgs(file.toURI());
-		builder.addMockedMethod(File.class.getMethod("exists"));
-		builder.addMockedMethod(File.class.getMethod("delete"));
-		final File fileMock = builder.createMock();
-		EasyMock.expect(fileMock.exists()).andReturn(true).anyTimes();
-		EasyMock.expect(fileMock.delete()).andReturn(true).anyTimes();
-		EasyMock.replay(fileMock);
-
-		UpdateOperationWithCacheFileTask.deleteFile(fileMock);
-
-		EasyMock.verify(fileMock);
-	}
-
-	@Test
 	public void readAndSave_cacheFileDoesExist() throws MalformedURLException, IOException {
 		final File cache = new File(folder.getRoot(), "test.cache"); // cache file does not exist
 		cache.createNewFile();

@@ -59,16 +59,16 @@ final class UpdateOperationWithCacheFileTask extends AbstractUpdateOperation {
 	 * Removes the given file.
 	 * 
 	 * @param file
-	 *            an existing file
-	 * @throws IllegalStateException
+	 *            a file which should be deleted
+	 * 
+	 * @throws net.sf.qualitycheck.exception.IllegalNullArgumentException
+	 *             if the given argument is {@code null}
+	 * @throws net.sf.qualitycheck.exception.IllegalStateOfArgumentException
 	 *             if the file can not be deleted
 	 */
 	protected static void deleteFile(@Nonnull final File file) {
 		Check.notNull(file, "file");
-
-		if (file.exists() && !file.delete()) {
-			throw new IllegalStateException("Passed file can not be removed: " + file.getAbsolutePath());
-		}
+		Check.stateIsTrue(!file.exists() || file.delete(), "Cannot delete file '%s'.", file.getPath());
 	}
 
 	/**
@@ -126,7 +126,7 @@ final class UpdateOperationWithCacheFileTask extends AbstractUpdateOperation {
 				outputStream.write(data.getBytes(charset));
 
 				// delete the original file
-				Check.stateIsTrue(!file.exists() || file.delete(), "Cannot delete file '%s'.", file.getPath());
+				deleteFile(file);
 
 				threw = false;
 			} finally {

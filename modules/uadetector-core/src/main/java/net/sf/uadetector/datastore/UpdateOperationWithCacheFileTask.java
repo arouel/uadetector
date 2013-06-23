@@ -144,13 +144,16 @@ final class UpdateOperationWithCacheFileTask extends AbstractUpdateOperation {
 	}
 
 	/**
-	 * Removes the given file.
+	 * Renames the given file {@code from} to the new file {@code to}.
 	 * 
 	 * @param from
 	 *            an existing file
 	 * @param to
 	 *            a new file
-	 * @throws IllegalStateException
+	 * 
+	 * @throws net.sf.qualitycheck.exception.IllegalNullArgumentException
+	 *             if one of the given arguments is {@code null}
+	 * @throws net.sf.qualitycheck.exception.IllegalStateOfArgumentException
 	 *             if the file can not be renamed
 	 */
 	protected static void renameFile(@Nonnull final File from, @Nonnull final File to) {

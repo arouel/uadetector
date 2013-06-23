@@ -89,6 +89,19 @@ final class UpdateOperationWithCacheFileTask extends AbstractUpdateOperation {
 	}
 
 	/**
+	 * Checks that {@code older} {@link Data} has a lower version number than the {@code newer} one.
+	 * 
+	 * @param older
+	 *            possibly older {@code Data}
+	 * @param newer
+	 *            possibly newer {@code Data}
+	 * @return {@code true} if the {@code newer} Data is really newer, otherwise {@code false}
+	 */
+	protected static boolean isNewerData(@Nonnull final Data older, @Nonnull final Data newer) {
+		return newer.getVersion().compareTo(older.getVersion()) > 0;
+	}
+
+	/**
 	 * Reads the content from the given {@link URL} and saves it to the passed file.
 	 * 
 	 * @param file
@@ -211,7 +224,7 @@ final class UpdateOperationWithCacheFileTask extends AbstractUpdateOperation {
 			if (isCacheFileEmpty()) {
 				readAndSave(cacheFile, store.getFallback());
 				final Data data = store.getDataReader().read(cacheFile.toURI().toURL(), store.getCharset());
-				if (data.getVersion().compareTo(store.getData().getVersion()) > 0) {
+				if (isNewerData(store.getData(), data)) {
 					store.setData(data);
 				}
 			}

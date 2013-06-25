@@ -61,6 +61,67 @@ java.lang.IllegalStateException: The read in content can not be transformed to a
 					</tr>
 				</table>
 			</subsection>
+			<subsection name="Cleanup Threads" class="knownIssues">
+				<table class="table knownIssues">
+					<tr>
+						<th>Issue Description</th>
+						<td>
+							When an application using an implementation of
+							<code>UserAgentStringParser</code>
+							with updating functionality like
+							<code>UADetectorServiceFactory.getCachingAndUpdatingParser()</code>
+							or
+							<code>UADetectorServiceFactory.getOnlineUpdatingParser()</code>
+							results in the following warnings in
+							<i>Apache Tomcat</i>
+							on shutdown:
+							<pre class="log"><![CDATA[Jun 18, 2013 10:18:57 AM org.apache.catalina.loader.WebappClassLoader clearReferencesThreads
+SEVERE: The web application [/gwx-tocs-rest] appears to have started a thread named [Thread-6] but has failed to stop it. This is very likely to create a memory leak.
+Jun 18, 2013 10:18:57 AM org.apache.catalina.loader.WebappClassLoader clearReferencesThreads
+SEVERE: The web application [/gwx-tocs-rest] appears to have started a thread named [Thread-7] but has failed to stop it. This is very likely to create a memory leak.
+Jun 18, 2013 10:18:57 AM org.apache.catalina.loader.WebappClassLoader clearReferencesThreads]]></pre>
+							When using a profiler you can see that
+							<i>Thread-6</i>
+							and
+							<i>Thread-7</i>
+							continue to run even though the application has been undeployed. It also causes the Classloader that no longer
+							required objects of the uninstalled UADetector will never be cleaned up during Garbage Collection.
+						</td>
+					</tr>
+					<tr>
+						<th>Explanation</th>
+						<td>
+							In environments where the
+							<abbr title="Java Virtual Machine">JVM</abbr>
+							will never shut down while reinstalling UADetector, it is absolutely necessary to manually shutdown running
+							threads.
+						</td>
+					</tr>
+					<tr>
+						<th>Corresponding Issue</th>
+						<td>
+							<a href="https://github.com/before/uadetector/issues/4">https://github.com/before/uadetector/issues/4</a>
+						</td>
+					</tr>
+					<tr>
+						<th>Affected Versions</th>
+						<td>
+							&gt;=
+							<code>uadetector-core-0.5.0</code>
+							and
+							&lt;=
+							<code>uadetector-core-0.9.5</code>
+							,
+							<br />
+							&gt;=
+							<code>uadetector-resources-2012.08</code>
+							and
+							&lt;=
+							<code>uadetector-resources-2013.05</code>
+						</td>
+					</tr>
+				</table>
+			</subsection>
 		</section>
 	</body>
 </document>

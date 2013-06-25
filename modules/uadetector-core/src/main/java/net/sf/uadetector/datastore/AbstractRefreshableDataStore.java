@@ -193,12 +193,12 @@ public abstract class AbstractRefreshableDataStore implements RefreshableDataSto
 	}
 
 	/**
-	 * Triggers the update of the DataStore. When this action is executed, the current data URL will be read in and the
-	 * DataReader parses and builds a new Data instance. Finally, the currently set Data reference will be replaced by
-	 * the new one.
+	 * Triggers the update of the <code>DataStore</code>. When this action is executed, the current data URL will be
+	 * read in and the <code>DataReader</code> parses and builds a new Data instance. Finally, the currently set
+	 * <code>Data</code> reference will be replaced by the new one.
 	 * <p>
-	 * <b>Attention</b>: The call of <code>refresh()</code> is implemented as background task. You can not assume that
-	 * you immediately get an updated data store.
+	 * <b>Attention</b>: This method is implemented as background task. You can not assume that you immediately get an
+	 * updated data store.
 	 */
 	@Override
 	public void refresh() {

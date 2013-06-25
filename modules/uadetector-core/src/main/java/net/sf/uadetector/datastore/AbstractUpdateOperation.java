@@ -153,6 +153,9 @@ abstract class AbstractUpdateOperation implements UpdateOperation {
 		return result;
 	}
 
+	/**
+	 * Executes the update at some time in the future (as soon as possible) within a new thread.
+	 */
 	@Override
 	public void run() {
 		executorService.execute(new Runnable() {

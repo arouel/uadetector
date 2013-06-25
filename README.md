@@ -55,7 +55,9 @@ How can You help?
 UADetector is an open source tool and welcomes contributions.
 
 * Report bugs, feature requests and other issues in the
-  [issue tracking](https://github.com/before/uadetector/issues) application.
+  [issue tracking](https://github.com/before/uadetector/issues) application, but look
+  on our [known issues](http://uadetector.sourceforge.net/known-issues.html)
+  page first before posting!
 * Help with the documentation by pointing out areas that are lacking or
   unclear, and if you are so inclined, submitting patches to correct it. You
   can quickly contribute rough thoughts by forking this project on

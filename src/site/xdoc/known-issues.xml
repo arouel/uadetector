@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+<document xmlns="http://maven.apache.org/XDOC/2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/XDOC/2.0 http://maven.apache.org/xsd/xdoc-2.0.xsd">
+	<properties>
+		<title>Known Issues when using UADetector</title>
+		<author email="andre.rouel@googlemail.com">André Rouél</author>
+	</properties>
+	<body>
+		<section name="Known Issues">
+			<subsection name="Error while reading UAS data" class="knownIssues">
+				<table class="table knownIssues">
+					<tr>
+						<th>Issue Description</th>
+						<td>
+							The log contains a message that reading of
+							<i>UAS data</i>
+							failed.
+							<pre class="log"><![CDATA[[2013-06-20 20:17:13] WARN  [ernal.data.XmlDataHandler] :265 - Error while reading UAS data: Document root element "h1", must match DOCTYPE root "null". (line: 1)
+[2013-06-20 20:17:13] WARN  [.datareader.XmlDataReader] :112 - Document root element "h1", must match DOCTYPE root "null".
+[2013-06-20 20:17:13] WARN  [perationWithCacheFileTask] :203 - The read content is faulty and can not be processed correctly.
+java.lang.IllegalStateException: The read in content can not be transformed to an instance of 'Data'.
+    at net.sf.uadetector.datastore.UpdateOperationWithCacheFileTask.readAndSave(UpdateOperationWithCacheFileTask.java:115)
+    at net.sf.uadetector.datastore.UpdateOperationWithCacheFileTask.readDataIfNewerAvailable(UpdateOperationWithCacheFileTask.java:193)
+    at net.sf.uadetector.datastore.UpdateOperationWithCacheFileTask.call(UpdateOperationWithCacheFileTask.java:183)
+    at net.sf.uadetector.datastore.AbstractUpdateOperation$1.run(AbstractUpdateOperation.java:161)
+    at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+    at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:615)
+    at java.lang.Thread.run(Thread.java:722)
+[2013-06-20 20:17:13] INFO  [perationWithCacheFileTask] :212 - Reading fallback data...
+]]></pre>
+						</td>
+					</tr>
+					<tr>
+						<th>Explanation</th>
+						<td>
+							UADetector pulls updates to its user agent database from
+							<a href="http://user-agent-string.info/">http://user-agent-string.info</a>
+							. Sometimes the website gets overloaded or has other issues.
+							<br />
+							We put a lot of work into ensuring that UADetector will continue to work with a recent version of the database
+							even if downloading or parsing of the latest version fails. (i.e. Don't worry about those errors if they are
+							occasional and intermittent.)
+						</td>
+					</tr>
+					<tr>
+						<th>Corresponding Issue</th>
+						<td>
+							<a href="https://github.com/before/uadetector/issues/31">https://github.com/before/uadetector/issues/31</a>
+						</td>
+					</tr>
+					<tr>
+						<th>Affected Versions</th>
+						<td>
+							&lt;=
+							<code>uadetector-core-0.9.5</code>
+							,
+							<br />
+							&lt;=
+							<code>uadetector-resources-2013.05</code>
+						</td>
+					</tr>
+				</table>
+			</subsection>
+		</section>
+	</body>
+</document>

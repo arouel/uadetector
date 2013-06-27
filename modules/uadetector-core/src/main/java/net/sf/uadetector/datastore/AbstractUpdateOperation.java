@@ -165,4 +165,14 @@ abstract class AbstractUpdateOperation implements UpdateOperation {
 		});
 	}
 
+	/**
+	 * Shuts down the corresponding background executor as soon as possible, but at the latest specified default time.
+	 * 
+	 * @see ExecutorServices#shutdown(ExecutorService)
+	 */
+	@Override
+	public void shutdown() {
+		ExecutorServices.shutdown(executorService);
+	}
+
 }

@@ -104,6 +104,7 @@ public final class UpdatingUserAgentStringParserImpl extends UserAgentStringPars
 	public void shutdown() {
 		currentUpdateTask.cancel(false);
 		ExecutorServices.shutdown(scheduler);
+		getDataStore().getUpdateOperation().shutdown();
 	}
 
 }

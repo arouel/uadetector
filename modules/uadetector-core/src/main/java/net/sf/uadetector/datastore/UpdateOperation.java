@@ -3,7 +3,7 @@ package net.sf.uadetector.datastore;
 import javax.annotation.Nonnegative;
 
 /**
- * Defines an update operation which can be executed within a executor service.
+ * Defines an update operation which will be executed within a executor service in background.
  * 
  * @author André Rouél
  */
@@ -28,5 +28,10 @@ public interface UpdateOperation extends Runnable {
 	 */
 	@Nonnegative
 	long getLastUpdateCheck();
+
+	/**
+	 * Shuts down the corresponding background executor.
+	 */
+	void shutdown();
 
 }

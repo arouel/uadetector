@@ -48,4 +48,24 @@ public interface UserAgentStringParser {
 	 */
 	ReadableUserAgent parse(final String userAgent);
 
+	/**
+	 * In environments where the JVM will never shut down while reinstalling UADetector, it is necessary to manually
+	 * shutdown running threads of <code>UserAgentStringParser</code>s with updating functionality like
+	 * <code>UADetectorServiceFactory.getCachingAndUpdatingParser()</code> or
+	 * <code>UADetectorServiceFactory.getOnlineUpdatingParser()</code>.
+	 * <p>
+	 * For example, when an Web Application with UADetector will be re-deployed within an <i>Apache Tomcat</i> you must
+	 * shutdown your self-created or via <code>UADetectorServiceFactory</code> retrieved updating
+	 * <code>UserAgentStringParser</code>.
+	 * <p>
+	 * An implementation of <code>UserAgentStringParser</code> has updating functionality if works with a
+	 * {@link net.sf.uadetector.datastore.RefreshableDataStore}.
+	 * <p>
+	 * If you call shutdown on a non-updating <code>UserAgentStringParser</code> implementation nothing will happen.
+	 * <p>
+	 * To shutdown all managed {@code ExecutorService} by UADetector at once, you can call
+	 * {@link net.sf.uadetector.internal.util.ExecutorServices#shutdownAll()}.
+	 */
+	void shutdown();
+
 }

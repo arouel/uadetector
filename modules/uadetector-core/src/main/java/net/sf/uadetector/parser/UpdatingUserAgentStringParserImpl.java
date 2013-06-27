@@ -15,16 +15,17 @@
  ******************************************************************************/
 package net.sf.uadetector.parser;
 
-import java.util.concurrent.Executors;
+import static java.util.concurrent.TimeUnit.MILLISECONDS;
+import static java.util.concurrent.TimeUnit.SECONDS;
+
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
-import java.util.concurrent.TimeUnit;
 
 import javax.annotation.Nonnegative;
 
 import net.sf.qualitycheck.Check;
 import net.sf.uadetector.datastore.RefreshableDataStore;
-import net.sf.uadetector.internal.util.DaemonThreadFactory;
+import net.sf.uadetector.internal.util.ExecutorServices;
 
 /**
  * This parser checks once per day if newer data are available. When newer data are available, they will be loaded, read
@@ -34,6 +35,7 @@ import net.sf.uadetector.internal.util.DaemonThreadFactory;
  */
 public final class UpdatingUserAgentStringParserImpl extends UserAgentStringParserImpl<RefreshableDataStore> {
 
+	
 	/**
 	 * Interval to check for updates in milliseconds
 	 */
@@ -47,7 +49,7 @@ public final class UpdatingUserAgentStringParserImpl extends UserAgentStringPars
 	/**
 	 * {@link ScheduledExecutorService} to schedule commands to update the UAS data in defined intervals
 	 */
-	private final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1, new DaemonThreadFactory("update-scheduler"));
+	private final ScheduledExecutorService scheduler = ExecutorServices.createScheduler();
 
 	/**
 	 * Constructs an instance of {@code OnlineUserAgentStringParser}. During construction new UAS data will be queried
@@ -97,7 +99,13 @@ public final class UpdatingUserAgentStringParserImpl extends UserAgentStringPars
 		if (currentUpdateTask != null) {
 			currentUpdateTask.cancel(false);
 		}
-		currentUpdateTask = scheduler.scheduleWithFixedDelay(getDataStore().getUpdateOperation(), 0, updateInterval, TimeUnit.MILLISECONDS);
+		currentUpdateTask = scheduler.scheduleWithFixedDelay(getDataStore().getUpdateOperation(), 0, updateInterval, MILLISECONDS);
+	}
+
+	@Override
+	public void shutdown() {
+		currentUpdateTask.cancel(false);
+		ExecutorServices.shutdown(scheduler, 5, SECONDS);
 	}
 
 }

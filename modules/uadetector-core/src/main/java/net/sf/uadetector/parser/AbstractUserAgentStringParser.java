@@ -138,4 +138,9 @@ public abstract class AbstractUserAgentStringParser implements UserAgentStringPa
 		return builder.build();
 	}
 
+	@Override
+	public void shutdown() {
+		// nothing to shutdown
+	}
+
 }

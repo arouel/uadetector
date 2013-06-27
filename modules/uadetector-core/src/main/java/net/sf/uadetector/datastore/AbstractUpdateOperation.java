@@ -7,13 +7,12 @@ import java.io.LineNumberReader;
 import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import net.sf.qualitycheck.Check;
-import net.sf.uadetector.internal.util.DaemonThreadFactory;
+import net.sf.uadetector.internal.util.ExecutorServices;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -91,7 +90,7 @@ abstract class AbstractUpdateOperation implements UpdateOperation {
 	/**
 	 * {@link ExecutorService} to run the update operation of the UAS data in background
 	 */
-	private final ExecutorService executorService = Executors.newSingleThreadExecutor(new DaemonThreadFactory("update-operation"));
+	private final ExecutorService executorService = ExecutorServices.createBackgroundExecutor();
 
 	/**
 	 * Time of last update check in milliseconds

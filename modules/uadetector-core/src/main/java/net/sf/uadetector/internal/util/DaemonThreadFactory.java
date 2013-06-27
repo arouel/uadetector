@@ -17,6 +17,12 @@ public final class DaemonThreadFactory implements ThreadFactory {
 	@Nonnull
 	private final String threadName;
 
+	/**
+	 * Creates a new {@code DaemonThreadFactory} which creates itself threads with the specified name.
+	 * 
+	 * @param threadName
+	 *            name of a thread to be created
+	 */
 	public DaemonThreadFactory(@Nonnull final String threadName) {
 		Check.notNull(threadName, "threadName");
 		Check.notEmpty(threadName.trim(), "threadName");

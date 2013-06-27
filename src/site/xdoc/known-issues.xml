@@ -85,7 +85,8 @@ Jun 18, 2013 10:18:57 AM org.apache.catalina.loader.WebappClassLoader clearRefer
 							and
 							<i>Thread-7</i>
 							continue to run even though the application has been undeployed. It also causes the Classloader that no longer
-							required objects of the uninstalled UADetector will never be cleaned up during Garbage Collection.
+							required objects of an uninstalled UADetector (within a webapp for example) will never be cleaned up during
+							Garbage Collection.
 						</td>
 					</tr>
 					<tr>
@@ -93,8 +94,14 @@ Jun 18, 2013 10:18:57 AM org.apache.catalina.loader.WebappClassLoader clearRefer
 						<td>
 							In environments where the
 							<abbr title="Java Virtual Machine">JVM</abbr>
-							will never shut down while reinstalling UADetector, it is absolutely necessary to manually shutdown running
+							will never shut down while reinstalling UADetector, it is necessary to manually shutdown running
 							threads.
+							Therefore we provide since
+							<code>uadetector-core-0.9.6</code>
+							<a href="./modules/uadetector-core/apidocs/net/sf/uadetector/UserAgentStringParser.html#shutdown()">UserAgentStringParser#shutdown()</a>
+							and
+							<a href="./modules/uadetector-core/apidocs/net/sf/uadetector/internal/util/ExecutorServices.html#shutdownAll()">ExecutorServices#shutdownAll()</a>
+							to stop running executors and schedulers if necessary.
 						</td>
 					</tr>
 					<tr>

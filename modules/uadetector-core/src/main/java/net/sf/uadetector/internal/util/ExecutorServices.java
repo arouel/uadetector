@@ -58,9 +58,9 @@ public final class ExecutorServices {
 	private static final Set<ScheduledExecutorService> SCHEDULERS = Collections.synchronizedSet(new HashSet<ScheduledExecutorService>(3));
 
 	/**
-	 * Timeout to shutdown all available executors at the latest
+	 * Timeout (in seconds) to shutdown all available executors at the latest
 	 */
-	private static final long SHUTDOWN_DURATION = 5;
+	public static final long SHUTDOWN_DURATION = 5;
 
 	/**
 	 * Creates a single-threaded executor that is registered by this class in order to shut it down later (when it
@@ -84,6 +84,18 @@ public final class ExecutorServices {
 		final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1, new DaemonThreadFactory(DEFAULT_SCHEDULER_NAME));
 		SCHEDULERS.add(scheduler);
 		return scheduler;
+	}
+
+	/**
+	 * Shutdowns the given {@code ExecutorService} as soon as possible, but not later than the specified default time
+	 * (which is {@value #SHUTDOWN_DURATION} seconds).
+	 * 
+	 * @param executorService
+	 *            executor to stop
+	 */
+	public static void shutdown(@Nonnull final ExecutorService executorService) {
+		Check.notNull(executorService, "executorService");
+		shutdown(executorService, SHUTDOWN_DURATION, TimeUnit.SECONDS);
 	}
 
 	/**
@@ -124,11 +136,11 @@ public final class ExecutorServices {
 	 */
 	public static void shutdownAll() {
 		for (final ExecutorService executor : new ArrayList<ExecutorService>(BACKGROUND_EXECUTORS)) {
-			shutdown(executor, SHUTDOWN_DURATION, TimeUnit.SECONDS);
+			shutdown(executor);
 			BACKGROUND_EXECUTORS.remove(executor);
 		}
 		for (final ScheduledExecutorService scheduler : new ArrayList<ScheduledExecutorService>(SCHEDULERS)) {
-			shutdown(scheduler, SHUTDOWN_DURATION, TimeUnit.SECONDS);
+			shutdown(scheduler);
 			SCHEDULERS.remove(scheduler);
 		}
 	}

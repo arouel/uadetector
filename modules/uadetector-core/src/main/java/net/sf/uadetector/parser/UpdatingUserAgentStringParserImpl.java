@@ -16,7 +16,6 @@
 package net.sf.uadetector.parser;
 
 import static java.util.concurrent.TimeUnit.MILLISECONDS;
-import static java.util.concurrent.TimeUnit.SECONDS;
 
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
@@ -35,7 +34,6 @@ import net.sf.uadetector.internal.util.ExecutorServices;
  */
 public final class UpdatingUserAgentStringParserImpl extends UserAgentStringParserImpl<RefreshableDataStore> {
 
-	
 	/**
 	 * Interval to check for updates in milliseconds
 	 */
@@ -105,7 +103,7 @@ public final class UpdatingUserAgentStringParserImpl extends UserAgentStringPars
 	@Override
 	public void shutdown() {
 		currentUpdateTask.cancel(false);
-		ExecutorServices.shutdown(scheduler, 5, SECONDS);
+		ExecutorServices.shutdown(scheduler);
 	}
 
 }

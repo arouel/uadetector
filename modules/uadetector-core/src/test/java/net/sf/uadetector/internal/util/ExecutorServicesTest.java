@@ -1,5 +1,6 @@
 package net.sf.uadetector.internal.util;
 
+import java.lang.reflect.Constructor;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
@@ -78,6 +79,14 @@ public class ExecutorServicesTest {
 		f2.get();
 		f1.get();
 		Assert.assertEquals(Lists.newArrayList(1, 5, 4, 3, 2), pool);
+	}
+
+	@Test
+	public void giveMeCoverageForMyPrivateConstructor() throws Exception {
+		// reduces only some noise in coverage report
+		final Constructor<ExecutorServices> constructor = ExecutorServices.class.getDeclaredConstructor();
+		constructor.setAccessible(true);
+		constructor.newInstance();
 	}
 
 	@Test

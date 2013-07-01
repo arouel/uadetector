@@ -12,12 +12,12 @@
 				This library depends on Simple Logging Facade for Java (also known as SLF4J) to allow our end users to plug in
 				whatever logging framework he wants at deployment time. Additionally it depends on
 				<a href="http://qualitycheck.sourceforge.net/">Quality-Check</a>
-				to do easily technical runtime checks and
+				to do technical runtime checks easily and
 				<i>JSR-305 Annotations</i>
 				to document possible states about methods, fields and arguments for Software Defect Detection.
 			</p>
-			<p>This means that if you want to use UADetector library all compile and runtime dependencies must exist in your
-				classpath. You can get detailed informations about the required dependencies for a specific module here:
+			<p>This means that if you use UADetector library, all compile and runtime dependencies must exists in your
+				classpath. You can get detailed informations about the required dependencies for each module here:
 			</p>
 			<ul>
 				<li>
@@ -101,7 +101,7 @@ import com.google.common.cache.CacheBuilder;
 public final class CachedUserAgentStringParser implements UserAgentStringParser {
 
 	private final UserAgentStringParser parser = UADetectorServiceFactory
-							.getCachingAndUpdatingParserHolder();
+							.getCachingAndUpdatingParser();
 	private final Cache<String, ReadableUserAgent> cache = CacheBuilder.newBuilder()
 							.maximumSize(100)
 							.expireAfterWrite(2, TimeUnit.HOURS)
@@ -122,13 +122,17 @@ public final class CachedUserAgentStringParser implements UserAgentStringParser 
 		return result;
 	}
 
+	@Override
+	public void shutdown() {
+		parser.shutdown();
+	}
+
 }]]></source>
 			<h3>Demo</h3>
 			<p>
 				You can also find a hello world demo in the Source Content Management System (SCM) under
 				<a target="_blank"
-					href="https://sourceforge.net/p/uadetector/code/ci/b07e03f255e3374e557295279ba90bace2223d55/tree/examples/helloworld/">examples/helloworld</a>
-				. Just try to load the source code from the SCM.
+					href="https://github.com/before/uadetector/tree/master/examples/helloworld">examples/helloworld</a>.
 			</p>
 		</section>
 	</body>

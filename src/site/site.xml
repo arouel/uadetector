@@ -35,6 +35,7 @@
 			<item name="Quick Start with Maven" href="quickstart.html" />
 			<item name="Usage in a Servlet" href="usage.html#usage_in_a_servlet" />
 			<item name="Improve Performance by Caching" href="usage.html#improve_performance" />
+			<item name="Redeploying / Undeploying UADetector" href="usage.html#undeploy" />
 			<item name="Building UADetector" href="building.html" />
 		</menu>
 

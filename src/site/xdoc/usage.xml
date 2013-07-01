@@ -128,6 +128,41 @@ public final class CachedUserAgentStringParser implements UserAgentStringParser 
 	}
 
 }]]></source>
+			<a name="undeploy" />
+			<h3>Redeploying / Undeploying UADetector</h3>
+			<p>
+				In environments where the
+				<abbr title="Java Virtual Machine">JVM</abbr>
+				will never shut down while reinstalling UADetector, it is necessary to manually shutdown running
+				threads.
+				Therefore we provide since
+				<code>uadetector-core-0.9.6</code>
+				<a href="./modules/uadetector-core/apidocs/net/sf/uadetector/UserAgentStringParser.html#shutdown()">UserAgentStringParser#shutdown()</a>
+				and
+				<a href="./modules/uadetector-core/apidocs/net/sf/uadetector/internal/util/ExecutorServices.html#shutdownAll()">ExecutorServices#shutdownAll()</a>
+				to stop running executors and schedulers if necessary.
+			</p>
+			<p>
+				For example, during destroying a servlet you can clean up used parsers within your web application like this.
+			</p>
+			<source><![CDATA[public class HelloServlet extends HttpServlet {
+
+	@Override
+	public void destroy() {
+		// undeploy used parser cleanly
+		UADetectorServiceFactory.getOnlineUpdatingParser().shutdown();
+	}
+
+	@Override
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// working with an updating UserAgentStringParser
+		UserAgentStringParser parser = UADetectorServiceFactory.getOnlineUpdatingParser();
+
+		// ... do something ...
+	}
+
+}
+]]></source>
 			<h3>Demo</h3>
 			<p>
 				You can also find a hello world demo in the Source Content Management System (SCM) under

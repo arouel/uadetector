@@ -436,7 +436,7 @@ public enum UserAgentFamily {
 	/**
 	 * bixolabs
 	 */
-	BIXOLABS("bixolabs", Pattern.compile("bixolabs")),
+	BIXOLABS("bixocrawler", Pattern.compile("(bixocrawler|bixolabs)")),
 
 	/**
 	 * BlackBerry Browser
@@ -1640,6 +1640,11 @@ public enum UserAgentFamily {
 	ICECAT("IceCat", Pattern.compile("IceCat")),
 
 	/**
+	 * IceDragon: A faster, more secure version of Firefox
+	 */
+	ICEDRAGON("IceDragon", Pattern.compile("IceDragon")),
+
+	/**
 	 * IceWeasel
 	 */
 	ICEWEASEL("IceWeasel", Pattern.compile("IceWeasel")),
@@ -2678,6 +2683,11 @@ public enum UserAgentFamily {
 	 * Outlook 2010
 	 */
 	OUTLOOK_2010("Outlook 2010", Pattern.compile("Outlook 2010")),
+
+	/**
+	 * Outlook 2013
+	 */
+	OUTLOOK_2013("Outlook 2013", Pattern.compile("Outlook 2013")),
 
 	/**
 	 * OWB

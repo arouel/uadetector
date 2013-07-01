@@ -1,6 +1,6 @@
 {
   "format": "1.0",
-  "version": "20130529-01",
+  "version": "20130628-01",
   "operating-system-patterns": [
     {
       "regex": {
@@ -64,6 +64,13 @@
         "pattern": "windows nt 6\\.2.*ARM"
       },
       "hash": "3ab4c71ace225255f087b4fae5a4c4d680aa7161ceacb3a5573e343da2d726ac"
+    },
+    {
+      "regex": {
+        "flags": "is",
+        "pattern": "iPhone OS 7_[0-9_]+"
+      },
+      "hash": "6b1447dae4328c7fb90024779cc4252581147aff15fbbff599de8d1c0a412a68"
     },
     {
       "regex": {
@@ -2536,8 +2543,8 @@
       ],
       "producer": "Apple Inc.",
       "producer-url": "http://www.apple.com/",
-      "url": "http://en.wikipedia.org/wiki/IOS",
-      "hash": "f11294c16e087b6d999516dfe81453b054b5c7aa11553aa173dbd1db8c4ac6ee"
+      "url": "http://en.wikipedia.org/wiki/IOS_5",
+      "hash": "f051314b53686cbbd532aa3afd177f4612147a46be572ebae5e79767f7339a29"
     },
     {
       "family": "RIM OS",
@@ -2576,8 +2583,8 @@
       ],
       "producer": "Apple Inc.",
       "producer-url": "http://www.apple.com/",
-      "url": "http://en.wikipedia.org/wiki/IOS",
-      "hash": "94a59adbe960e7e8e0dd817c1cd563ee47aa704b220ee9ab251f49bf0aed4cf9"
+      "url": "http://en.wikipedia.org/wiki/IOS_6",
+      "hash": "29f07ba2ee37b5dfe503a3de447ed4a04931fcfcc4a512de5812e74ac8f9a187"
     },
     {
       "family": "LiveArea",
@@ -2670,6 +2677,19 @@
       "producer-url": "http://www.mageia.org/",
       "url": "http://www.mageia.org/",
       "hash": "4bf49b1f2c8485ad3892172bf13be0469ad949f03d41cc2fedc4082f51cf39cc"
+    },
+    {
+      "family": "iOS",
+      "icon": "iphone.png",
+      "info-url": "/list-of-ua/os-detail?os\u003diOS 7",
+      "name": "iOS 7",
+      "operating-system-pattern-hashs": [
+        "6b1447dae4328c7fb90024779cc4252581147aff15fbbff599de8d1c0a412a68"
+      ],
+      "producer": "Apple Inc.",
+      "producer-url": "http://www.apple.com/",
+      "url": "http://en.wikipedia.org/wiki/IOS_7",
+      "hash": "6b0075b2c98521578beb4e5c2182091e796a2dba176a390b0b576288ea639ce1"
     }
   ],
   "browser-types": [
@@ -2904,6 +2924,13 @@
     {
       "regex": {
         "flags": "is",
+        "pattern": "^Microsoft Office\\/14.*MSOffice 14"
+      },
+      "hash": "23411cfef3678d4ea0be1c7f4cc1c85bd202f42a4cb3cb52a466c95e0a6edac1"
+    },
+    {
+      "regex": {
+        "flags": "is",
         "pattern": "Mozilla.*Linux.*webOS.*webOSBrowser\\/([0-9\\.]+)"
       },
       "hash": "24b8000583b8c186afebf390d25c58e98be415f4fe85e35360db7b08dfcb9608"
@@ -2914,6 +2941,13 @@
         "pattern": "^Microsoft Office\\/14.*Microsoft Outlook 14"
       },
       "hash": "f21dce2416915215061ad92dd7732083453cad06f1ab4ea6424066b450ade744"
+    },
+    {
+      "regex": {
+        "flags": "is",
+        "pattern": "^Mozilla.*MSIE.*Microsoft Outlook 15"
+      },
+      "hash": "1dfbe9a16286697673f1fbbc631a02a8081bf7875c33c047299161186aacdad0"
     },
     {
       "regex": {
@@ -3296,9 +3330,9 @@
     {
       "regex": {
         "flags": "is",
-        "pattern": "^Mozilla.*windows.*AppleWebKit.*Chrome.*OPR\\/([0-9\\.]+)"
+        "pattern": "^Mozilla.*AppleWebKit.*Chrome.*OPR\\/([0-9\\.]+)"
       },
-      "hash": "b1ca6e222aa176894cce24069754c92b2086462fb74ff6622ea6f13c7fe26b1e"
+      "hash": "db07c1c97950af8649f55311fa1787ec6721a24d1f627b773b921a2f56a5c7f4"
     },
     {
       "regex": {
@@ -5368,13 +5402,6 @@
     {
       "regex": {
         "flags": "is",
-        "pattern": "^Microsoft Office\\/14.*MSOffice 14"
-      },
-      "hash": "23411cfef3678d4ea0be1c7f4cc1c85bd202f42a4cb3cb52a466c95e0a6edac1"
-    },
-    {
-      "regex": {
-        "flags": "is",
         "pattern": "^Mozilla.*Postbox\\/([0-9a-zA-Z\\.]+)"
       },
       "hash": "79a8a03e20e6fd298efe9acd0627a605da9eae7356bf864a19d50eae43c6ab68"
@@ -5833,6 +5860,20 @@
         "pattern": "^Eudora\\/?([0-9a-z\\.]+)*"
       },
       "hash": "a73f10af6c98250b062060e3a2b3de8767ba9c1bfa83e07f3ca8c1341ce4c17f"
+    },
+    {
+      "regex": {
+        "flags": "is",
+        "pattern": "^Microsoft Office\\/15.*Microsoft Outlook 15"
+      },
+      "hash": "937f21e590a083f758df91f6b057f9e34f2b7d80bb7ebf513ba07e42a361d1fc"
+    },
+    {
+      "regex": {
+        "flags": "is",
+        "pattern": "^RestSharp ([0-9\\.]+)$"
+      },
+      "hash": "93cc70f3604933d446529bf4de4c738339fbaa829d2579ae6af42dfdcb928178"
     },
     {
       "regex": {
@@ -6467,6 +6508,13 @@
     {
       "regex": {
         "flags": "is",
+        "pattern": "^Typhoeus.*https:\\/\\/github.com\\/typhoeus\\/typhoeus"
+      },
+      "hash": "eb4bdefc6f7cace660c26358fcdecf8d3fcf3585923f0eaaf59feb96c394c0fc"
+    },
+    {
+      "regex": {
+        "flags": "is",
         "pattern": "ObigoInternetBrowser"
       },
       "hash": "45ed4a17d3407afa40e9f50d1c8688816d68e1ea326ecd3fb4cd6a5876a16079"
@@ -6716,7 +6764,7 @@
       "icon": "opera.png",
       "info-url": "/list-of-ua/browser-detail?browser\u003dOpera",
       "browser-pattern-hashs": [
-        "b1ca6e222aa176894cce24069754c92b2086462fb74ff6622ea6f13c7fe26b1e",
+        "db07c1c97950af8649f55311fa1787ec6721a24d1f627b773b921a2f56a5c7f4",
         "1fa7a0edb195502931f148b2bf7b53554abf6477897e956c19384451913eadb6",
         "fad87aad28843a1997ca2c3f22f12ac9f54d61e1aaa8ce1b2e7f833a3bd4755a",
         "5014869614fb4d4d57b99fbe680006fe47612d9a5665aa96fb6dc6eaeedcae9d",
@@ -6726,7 +6774,7 @@
       "producer-url": "http://www.opera.com/",
       "browser-type-hash": "d31de1a5c5c8ba2a210a167cf0d0dc2425c57ea7525f4b73a4b7ab934af79dfc",
       "url": "http://www.opera.com/",
-      "hash": "7470ddb167bcac9ea96b522885b45a7f6e2976c86801d17fce79585b4c86a45d"
+      "hash": "8140d9b603a18476dc6789f55ee72247721ed3d77c6add35fbdf38e2a2770ae0"
     },
     {
       "family": "OMNIWEB",
@@ -9694,13 +9742,14 @@
       "info-url": "/list-of-ua/browser-detail?browser\u003dTyphoeus",
       "browser-pattern-hashs": [
         "aea474aafdd56ab8d46def5641bfe9e01359f914d951ac304cc001f448b5a837",
-        "c7b6437c6fc580309a6c35de28ffa5c51d225576418d8c136e68af99a0ba2cd5"
+        "c7b6437c6fc580309a6c35de28ffa5c51d225576418d8c136e68af99a0ba2cd5",
+        "eb4bdefc6f7cace660c26358fcdecf8d3fcf3585923f0eaaf59feb96c394c0fc"
       ],
       "producer": "Paul Dix",
       "producer-url": "http://www.pauldix.net/",
       "browser-type-hash": "dc20b3d5d2cddf82fad332821ca5e9a4efdcede4a273aa193d2b495bdcc92825",
-      "url": "http://github.com/pauldix/typhoeus/tree/master",
-      "hash": "96ba342f53db51ebc640a16d19bf651d75740f0e5d8057a986899119b97bb6df"
+      "url": "https://github.com/typhoeus/typhoeus",
+      "hash": "86ac2dcac9fa747f3cb8ea7361edc07dfba4d933b96b3f9babf3c322c7f2ab7d"
     },
     {
       "family": "OWB",
@@ -10199,8 +10248,8 @@
       "producer": "Microsoft Corporation.",
       "producer-url": "http://www.microsoft.com/",
       "browser-type-hash": "1e88220c991000b14b14a6be9efbf0ef87e6628032d66046eaf0a50423056e65",
-      "url": "http://office.microsoft.com/outlook",
-      "hash": "095bab46272ebc32f2d9cd61e75bde020f9ac01fcaa120b7e80722ad404d764c"
+      "url": "http://en.wikipedia.org/wiki/Microsoft_Outlook",
+      "hash": "172d691c6204ed46a65caaff91e0300485e6c651ddf1a13191d4f1440059adc3"
     },
     {
       "family": "OUTLOOK_2010",
@@ -10208,14 +10257,14 @@
       "info-url": "/list-of-ua/browser-detail?browser\u003dOutlook 2010",
       "browser-pattern-hashs": [
         "2ed8f2366dc99fc43c598ef3496fd8466b9d8e8a738c4210b3a9f61e64890ba2",
-        "f21dce2416915215061ad92dd7732083453cad06f1ab4ea6424066b450ade744",
-        "23411cfef3678d4ea0be1c7f4cc1c85bd202f42a4cb3cb52a466c95e0a6edac1"
+        "23411cfef3678d4ea0be1c7f4cc1c85bd202f42a4cb3cb52a466c95e0a6edac1",
+        "f21dce2416915215061ad92dd7732083453cad06f1ab4ea6424066b450ade744"
       ],
       "producer": "Microsoft Corporation.",
       "producer-url": "http://www.microsoft.com/",
       "browser-type-hash": "1e88220c991000b14b14a6be9efbf0ef87e6628032d66046eaf0a50423056e65",
-      "url": "http://en.wikipedia.org/wiki/Microsoft_Office_2010",
-      "hash": "0447f31e1e45911a9f039793819e3a4bbd06396cb3d920263429898340f2283b"
+      "url": "http://en.wikipedia.org/wiki/Microsoft_Outlook",
+      "hash": "42bf0a753f47df97b5eb8a20351425f5f96688811a527e16b0e58be24287e2bc"
     },
     {
       "family": "WINDOWS_LIVE_MAIL",
@@ -12076,7 +12125,7 @@
       "hash": "50f9168132decaef27d5c767ac89bff4d6fb96e87e4fd0c230028cd8c6334df4"
     },
     {
-      "family": "UNKNOWN",
+      "family": "ICEDRAGON",
       "icon": "icedragon.png",
       "info-url": "/list-of-ua/browser-detail?browser\u003dIceDragon",
       "browser-pattern-hashs": [
@@ -12086,7 +12135,34 @@
       "producer-url": "http://www.comodo.com/",
       "browser-type-hash": "d31de1a5c5c8ba2a210a167cf0d0dc2425c57ea7525f4b73a4b7ab934af79dfc",
       "url": "http://www.comodo.com/home/browsers-toolbars/icedragon-browser.php",
-      "hash": "d0e1625bf1d0b33a067578c540cd6662caabae2df04fcf9857614379f8358a1d"
+      "hash": "ad8523402a5264d4cd4ac2ac4fae80baa5273a13fd809c39912491747ce3b751"
+    },
+    {
+      "family": "OUTLOOK_2013",
+      "icon": "outlook2013.png",
+      "info-url": "/list-of-ua/browser-detail?browser\u003dOutlook 2013",
+      "browser-pattern-hashs": [
+        "1dfbe9a16286697673f1fbbc631a02a8081bf7875c33c047299161186aacdad0",
+        "937f21e590a083f758df91f6b057f9e34f2b7d80bb7ebf513ba07e42a361d1fc"
+      ],
+      "producer": "Microsoft Corporation.",
+      "producer-url": "http://www.microsoft.com/",
+      "browser-type-hash": "1e88220c991000b14b14a6be9efbf0ef87e6628032d66046eaf0a50423056e65",
+      "url": "http://en.wikipedia.org/wiki/Microsoft_Outlook",
+      "hash": "46e3ae1c4e153935d83bd1258871d20f593d5cb41e9e22619b95fc958144005e"
+    },
+    {
+      "family": "UNKNOWN",
+      "icon": "DLLicon.png",
+      "info-url": "/list-of-ua/browser-detail?browser\u003dRestSharp",
+      "browser-pattern-hashs": [
+        "93cc70f3604933d446529bf4de4c738339fbaa829d2579ae6af42dfdcb928178"
+      ],
+      "producer": "John Sheehan",
+      "producer-url": "http://john-sheehan.com/",
+      "browser-type-hash": "dc20b3d5d2cddf82fad332821ca5e9a4efdcede4a273aa193d2b495bdcc92825",
+      "url": "http://restsharp.org/",
+      "hash": "216271c95304b5a910506d2f92f45de04878bc9e0baede62abac00baac2e248d"
     }
   ],
   "robots": [
@@ -18223,10 +18299,10 @@
       "info-url": "/list-of-ua/bot-detail?bot\u003daiHitBot",
       "name": "aiHitBot-DM/2.0.2",
       "producer": "aiHit Ltd.",
-      "producer-url": "http://www.aihit.com/",
+      "producer-url": "http://aihit.com/",
       "url": "",
       "user-agent-string": "Mozilla/5.0 (compatible; aiHitBot-DM/2.0.2 +http://www.aihit.com)",
-      "hash": "c344ed68a2e361cb72f79bf2590398a866ffb4057687690e87ae0bf764a9a9f7"
+      "hash": "41ec8cb2e0578e27e1c74b071211859b0834c84a1d4d1b99b62609212bf073e0"
     },
     {
       "family": "AMIBOT",
@@ -18284,15 +18360,15 @@
       "hash": "1f6c08f7f83d19573f278364552462d41ef2bce95cafa216b298f2b66ccf154d"
     },
     {
-      "family": "PTD_CRAWLER",
+      "family": "BIXOLABS",
       "icon": "bot_ptd-crawler.png",
-      "info-url": "/list-of-ua/bot-detail?bot\u003dptd-crawler",
+      "info-url": "/list-of-ua/bot-detail?bot\u003dbixocrawler",
       "name": "ptd-crawler",
-      "producer": "Bixolabs",
-      "producer-url": "http://bixolabs.com/",
+      "producer": "Bixo Labs",
+      "producer-url": "http://openbixo.org/",
       "url": "",
       "user-agent-string": "Mozilla/5.0 (compatible; ptd-crawler; +http://bixolabs.com/crawler/ptd/; crawler@bixolabs.com)",
-      "hash": "6bf1b4ee44a3525d5b8efdf491772e7f5ec0b3e7d4c2541f60c98301a49cb6a3"
+      "hash": "d9c481043b50d0613df8c4c7b34be00f32ba3a5912bdaebcaf81efdd3be5f13e"
     },
     {
       "family": "SBIDER",
@@ -18399,10 +18475,10 @@
       "info-url": "/list-of-ua/bot-detail?bot\u003daiHitBot",
       "name": "aiHitBot/1.0-DS",
       "producer": "aiHit Ltd.",
-      "producer-url": "http://www.aihit.com/",
+      "producer-url": "http://aihit.com/",
       "url": "",
       "user-agent-string": "Mozilla/5.0 (compatible; aiHitBot/1.0-DS; +http://www.aihit.com/)",
-      "hash": "0399d0b9b5636fe359d9dccab0c3ef5b2e47e2f207e52e997f862431866bda68"
+      "hash": "93fedfd1ed8b7f16a99e2984fb6e73cf3a17128fa6bb8bd4d38d018dd492bbe3"
     },
     {
       "family": "CORPUSCRAWLER",
@@ -18476,10 +18552,10 @@
       "info-url": "/list-of-ua/bot-detail?bot\u003daiHitBot",
       "name": "aiHitBot/1.0",
       "producer": "aiHit Ltd.",
-      "producer-url": "http://www.aihit.com/",
+      "producer-url": "http://aihit.com/",
       "url": "",
       "user-agent-string": "Mozilla/5.0 (compatible; aiHitBot/1.0; +http://www.aihit.com/)",
-      "hash": "c3467ee1634b1fb9a8c40d681195a429244ae05b8ae9b82a95a32413b90593f3"
+      "hash": "11c5435885ee7e055ba063797a2e359a1fd4027e111317175db121c4872b2398"
     },
     {
       "family": "ORGBYBOT",
@@ -19144,13 +19220,13 @@
     {
       "family": "BIXOLABS",
       "icon": "bot.png",
-      "info-url": "/list-of-ua/bot-detail?bot\u003dbixolabs",
+      "info-url": "/list-of-ua/bot-detail?bot\u003dbixocrawler",
       "name": "bixolabs/1.0",
       "producer": "Bixo Labs",
-      "producer-url": "http://bixolabs.com/",
+      "producer-url": "http://openbixo.org/",
       "url": "",
       "user-agent-string": "Mozilla/5.0 (compatible; bixolabs/1.0; +http://bixolabs.com/crawler/general; crawler@bixolabs.com)",
-      "hash": "82285372b21e28f3fec6ae8c3f7160708ebfc9bda10d3950d81be6de050394bb"
+      "hash": "621c9c83b7e978a268a52e0e91da43f8f008aef19ac030740d2c0d56c980ea2d"
     },
     {
       "family": "YACYBOT",
@@ -19705,13 +19781,13 @@
     {
       "family": "BIXOLABS",
       "icon": "bot.png",
-      "info-url": "/list-of-ua/bot-detail?bot\u003dbixolabs",
-      "name": "bixolabs/1.0 b",
+      "info-url": "/list-of-ua/bot-detail?bot\u003dbixocrawler",
+      "name": "bixolabs/1.0",
       "producer": "Bixo Labs",
-      "producer-url": "http://bixolabs.com/",
+      "producer-url": "http://openbixo.org/",
       "url": "",
       "user-agent-string": "Mozilla/5.0 (compatible; bixolabs/1.0; +http://bixolabs.com/crawler/general; crawler@mail.bixolabs.com)",
-      "hash": "a1ba76146396c951c0baec360931e2f59bdb78a4ae68af08ef401980c524ba15"
+      "hash": "279a9bf1ca0351627b4cc7056f4c5d601947375905c849ebfafc60d42675df0d"
     },
     {
       "family": "FINDLINKS",
@@ -21551,6 +21627,17 @@
       "hash": "aaddc22d422331f66fb47ce6ade46e1c79d2b1af21a109d1bf1ff0b2f68eb273"
     },
     {
+      "family": "SEMRUSHBOT",
+      "icon": "bot.png",
+      "info-url": "/list-of-ua/bot-detail?bot\u003dSemrushBot",
+      "name": "SemrushBot",
+      "producer": "SEOQuake Team",
+      "producer-url": "http://www.seoquaketeam.com/",
+      "url": "",
+      "user-agent-string": "SemrushBot/Nutch-1.5-SNAPSHOT",
+      "hash": "da837e3f5f393c498f4d17b808005c5f4345b0016d5369d808e851d285aaa825"
+    },
+    {
       "family": "PIXRAY_SEEKER",
       "icon": "bot_PixraySeeker.png",
       "info-url": "/list-of-ua/bot-detail?bot\u003dPixray-Seeker",
@@ -22150,10 +22237,10 @@
       "info-url": "/list-of-ua/bot-detail?bot\u003daiHitBot",
       "name": "aiHitBot/1.1",
       "producer": "aiHit Ltd.",
-      "producer-url": "http://www.aihit.com/",
+      "producer-url": "http://aihit.com/",
       "url": "",
       "user-agent-string": "Mozilla/5.0 (compatible; aiHitBot/1.1; +http://www.aihit.com/)",
-      "hash": "4f6b4e7ecd0911a7b34975097dda05ba4c66316fe7bc79a303964f4adf3c410d"
+      "hash": "cc77a4c8dff177a4afd8920c1af0417c5d461000ac480a6e03b77924802d7255"
     },
     {
       "family": "ACOONBOT",
@@ -22728,15 +22815,15 @@
       "hash": "49e77eb16fb0fe5e820249b9c3bd338b95908c74f457116e83e682738d8d0a91"
     },
     {
-      "family": "BIXO",
+      "family": "BIXOLABS",
       "icon": "bot.png",
-      "info-url": "/list-of-ua/bot-detail?bot\u003dbixo",
+      "info-url": "/list-of-ua/bot-detail?bot\u003dbixocrawler",
       "name": "bixo",
-      "producer": "Scale Unlimited, Inc.",
-      "producer-url": "http://www.scaleunlimited.com/",
+      "producer": "Bixo Labs",
+      "producer-url": "http://openbixo.org/",
       "url": "",
       "user-agent-string": "Mozilla/5.0 (compatible; Finderbots finder bot; +http://wiki.github.com/bixo/bixo/bixocrawler; bixo-dev@yahoogroups.com)",
-      "hash": "32088d7e433c5c141ef08710a770c7f1a815b50e03a7a427ec0aee634ae0fd28"
+      "hash": "767abe5659a96e0491d438d5404555f3b21dee90f87f90445459e1c69ec19260"
     },
     {
       "family": "YACYBOT",
@@ -23205,11 +23292,11 @@
       "icon": "bot.png",
       "info-url": "/list-of-ua/bot-detail?bot\u003drogerbot",
       "name": "rogerbot/1.0",
-      "producer": "SEOmoz",
-      "producer-url": "http://www.seomoz.org/",
+      "producer": "SEOmoz, Inc.",
+      "producer-url": "http://moz.com/",
       "url": "",
       "user-agent-string": "rogerbot/1.0 (http://www.seomoz.org/dp/rogerbot, rogerbot-crawler@seomoz.org)",
-      "hash": "4f948dadd9ec71d90742f9c08751c1debf784992610b59a212db998a2d9c6ba8"
+      "hash": "fb240ac1e0313588cdc066b2614bc2ba4c6288ff6f94dc4a799bd6a663cf52fe"
     },
     {
       "family": "PLUKKIE",
@@ -23777,11 +23864,11 @@
       "icon": "bot.png",
       "info-url": "/list-of-ua/bot-detail?bot\u003drogerbot",
       "name": "rogerbot/1.0",
-      "producer": "SEOmoz",
-      "producer-url": "http://www.seomoz.org/",
+      "producer": "SEOmoz, Inc.",
+      "producer-url": "http://moz.com/",
       "url": "",
       "user-agent-string": "rogerbot/1.0 (http://www.seomoz.org/dp/rogerbot, rogerbot-crawler+shiny@seomoz.org)",
-      "hash": "84017433698e8e876f9e1327319b46c2526ab6bb9bd39f2261b9bc6db1f11c62"
+      "hash": "8d2ec2e4ac5e8313357ed41af34914272ae89788657955c7a5e865823817687c"
     },
     {
       "family": "UNKNOWN",
@@ -24057,6 +24144,171 @@
       "url": "",
       "user-agent-string": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.4 (KHTML, like Gecko; Google Web Preview) Chrome/22.0.1229 Safari/537.4",
       "hash": "e0298c663cbffea82164d5b34288275b64c77ba26687e0ce543cff1cb23df51b"
+    },
+    {
+      "family": "UNKNOWN",
+      "icon": "bot.png",
+      "info-url": "/list-of-ua/bot-detail?bot\u003duMBot-FC",
+      "name": "uMBot-FC/1.0",
+      "producer": "uberMetrics Technologies GmbH",
+      "producer-url": "http://www.ubermetrics-technologies.com/",
+      "url": "",
+      "user-agent-string": "Mozilla/5.0 (compatible; uMBot-FC/1.0; mailto: crawling@ubermetrics-technologies.com)",
+      "hash": "437135538dcf62d9443b3ec7d72f326ae3f2f52f9e19ba43e22cb8d70b6fe0b0"
+    },
+    {
+      "family": "COCCOC",
+      "icon": "bot.png",
+      "info-url": "/list-of-ua/bot-detail?bot\u003dcoccoc",
+      "name": "coccoc/1.0",
+      "producer": "Coc Coc",
+      "producer-url": "http://coccoc.vn/",
+      "url": "",
+      "user-agent-string": "Mozilla/5.0 (compatible; coccoc/1.0; +http://help.coccoc.com/)",
+      "hash": "a1c289f3a1c9bdc67e149c7a8c564d2b6bf1a7f8f58cb243850bb900f084db8f"
+    },
+    {
+      "family": "BIXOLABS",
+      "icon": "bot.png",
+      "info-url": "/list-of-ua/bot-detail?bot\u003dbixocrawler",
+      "name": "bixocrawler",
+      "producer": "Bixo Labs",
+      "producer-url": "http://openbixo.org/",
+      "url": "",
+      "user-agent-string": "Mozilla/5.0 (compatible; Mozilla; +http://wiki.github.com/bixo/bixo/bixocrawler; bixo-dev@yahoogroups.com)",
+      "hash": "5d9c0a813a065389d2e001dc9a27b4fa773edb39fefe26223edc849257ea022b"
+    },
+    {
+      "family": "AIHITBOT",
+      "icon": "bot.png",
+      "info-url": "/list-of-ua/bot-detail?bot\u003daiHitBot",
+      "name": "aiHitBot/2.7",
+      "producer": "aiHit Ltd",
+      "producer-url": "http://aihit.com/",
+      "url": "",
+      "user-agent-string": "Mozilla/5.0 (compatible; aiHitBot/2.7; +http://www.aihit.com/)",
+      "hash": "6230e2431a23bdd44421b9f6a030640236e4e3825691ab26564f3d23d29a67db"
+    },
+    {
+      "family": "GIGABOT",
+      "icon": "bot_gigabot.png",
+      "info-url": "/list-of-ua/bot-detail?bot\u003dGigabot",
+      "name": "Gigabot/1.0",
+      "producer": "Gigablast Inc",
+      "producer-url": "http://www.gigablast.com/",
+      "url": "",
+      "user-agent-string": "Mozilla/5.0 (compatible; GigaBot/1.0; +http://www.gigablast.com/ )",
+      "hash": "93e0042a5f3b7f04d8d9e1285cd7ba400aca487bad3dc55b8df00a3f22290aab"
+    },
+    {
+      "family": "UNKNOWN",
+      "icon": "bot.png",
+      "info-url": "/list-of-ua/bot-detail?bot\u003dCirrusExplorer",
+      "name": "CirrusExplorer/1.1",
+      "producer": "cireu.com",
+      "producer-url": "http://www.cireu.com/",
+      "url": "",
+      "user-agent-string": "CirrusExplorer/1.1 (http://www.cireu.com/explorer.php)",
+      "hash": "24fd22ece7f042d27dc8e8bac035a3c0436bb005d256c3b3f4e179e7fc4a1904"
+    },
+    {
+      "family": "UNKNOWN",
+      "icon": "bot.png",
+      "info-url": "/list-of-ua/bot-detail?bot\u003dCrowsnest",
+      "name": "Crowsnest/0.5",
+      "producer": "Gocro, Inc.",
+      "producer-url": "http://www.gocro.jp/",
+      "url": "",
+      "user-agent-string": "Crowsnest/0.5 (+http://www.crowsnest.tv/)",
+      "hash": "81b2b9da99c75a3841757b7da4fdaca33dce4e8399757599951a0a8169f151d9"
+    },
+    {
+      "family": "UNKNOWN",
+      "icon": "bot.png",
+      "info-url": "/list-of-ua/bot-detail?bot\u003dQuerySeekerSpider",
+      "name": "QuerySeekerSpider",
+      "producer": "QueryEye Inc.",
+      "producer-url": "http://queryeye.com/",
+      "url": "",
+      "user-agent-string": "QuerySeekerSpider ( http://queryseeker.com/bot.html )",
+      "hash": "5b3ec2a163417edf432e15fe6d89538ca4c878aa60019070969b04fed5d98315"
+    },
+    {
+      "family": "UNKNOWN",
+      "icon": "bot.png",
+      "info-url": "/list-of-ua/bot-detail?bot\u003downCloud Server Crawler",
+      "name": "ownCloud Server Crawler",
+      "producer": "ownCloud comunity",
+      "producer-url": "http://owncloud.org/",
+      "url": "",
+      "user-agent-string": "ownCloud Server Crawler",
+      "hash": "0f8f416337baf713e2a510976083a9007fc9ceb01b7bb780ffec003c89debe28"
+    },
+    {
+      "family": "UNKNOWN",
+      "icon": "bot.png",
+      "info-url": "/list-of-ua/bot-detail?bot\u003drogerbot",
+      "name": "rogerbot/1.0",
+      "producer": "SEOmoz, Inc.",
+      "producer-url": "http://moz.com/",
+      "url": "",
+      "user-agent-string": "Mozilla/5.0 (compatible; rogerBot/1.0; UrlCrawler; http://www.seomoz.org/dp/rogerbot)",
+      "hash": "cc5c48d59a7ffc86e5e3a13517bc97b028d150567369eca5b5beace5e1b629e5"
+    },
+    {
+      "family": "SEMRUSHBOT",
+      "icon": "bot.png",
+      "info-url": "/list-of-ua/bot-detail?bot\u003dSemrushBot",
+      "name": "SemrushBot/0.96.3",
+      "producer": "SEOQuake Team",
+      "producer-url": "http://www.seoquaketeam.com/",
+      "url": "",
+      "user-agent-string": "Mozilla/5.0 (compatible; SemrushBot/0.96.3; +http://www.semrush.com/bot.html)",
+      "hash": "4f92f0e7c3b0d5f6a1425f0024ad4e5900a827fe169eb2891c63f83b90c09c8e"
+    },
+    {
+      "family": "YACYBOT",
+      "icon": "bot_yacybot.png",
+      "info-url": "/list-of-ua/bot-detail?bot\u003dyacybot",
+      "name": "yacybot",
+      "producer": "Michael Christen",
+      "producer-url": "",
+      "url": "",
+      "user-agent-string": "yacybot (freeworld/global; amd64 Linux 3.8.0-23-generic; java 1.6.0_27; Pacific/en) http://yacy.net/bot.html",
+      "hash": "f7d430408a8700bace70d7b82851c4fe5b0305100feaa3b25860681ec6bbdad5"
+    },
+    {
+      "family": "UNKNOWN",
+      "icon": "bot.png",
+      "info-url": "/list-of-ua/bot-detail?bot\u003dBLEXBot",
+      "name": "BLEXBot",
+      "producer": "WebMeUp",
+      "producer-url": "http://webmeup.com/",
+      "url": "",
+      "user-agent-string": "BLEXBot",
+      "hash": "6f921c97aa972c3150f5b341429bc0d50d663717a308bec9a40ec68ce2272cc7"
+    },
+    {
+      "family": "UNKNOWN",
+      "icon": "bot.png",
+      "info-url": "/list-of-ua/bot-detail?bot\u003dCloudServerMarketSpider",
+      "name": "CloudServerMarketSpider/1.0",
+      "producer": "CloudServerMarket.com",
+      "producer-url": "http://www.cloudservermarket.com/",
+      "url": "",
+      "user-agent-string": "Mozilla/5.0 (compatible; CloudServerMarketSpider/1.0; +http://www.cloudservermarket.com/spider.html)",
+      "hash": "0dcfa5b096a401a97010c670823895205bd1ffb5547bfc88b7d324effad46cc7"
+    },
+    {
+      "family": "UNKNOWN",
+      "icon": "bot.png",
+      "info-url": "/list-of-ua/bot-detail?bot\u003dBLEXBot",
+      "name": "BLEXBot/1.0",
+      "producer": "WebMeUp",
+      "producer-url": "http://webmeup.com/",
+      "url": "",
+      "user-agent-string": "Mozilla/5.0 (compatible; BLEXBot/1.0; +http://webmeup.com/crawler.html)",
+      "hash": "17b02a34c8cc2d3f80a5890352f064ceefe483655790556532afdc504f14f047"
     }
   ]
 }

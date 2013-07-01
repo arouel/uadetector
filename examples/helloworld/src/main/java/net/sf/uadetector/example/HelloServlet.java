@@ -31,6 +31,13 @@ public class HelloServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 
+	@Override
+	public void destroy() {
+		// undeploy used parsers cleanly
+		UADetectorServiceFactory.getOnlineUpdatingParser().shutdown();
+	}
+
+	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html");
 		response.setStatus(HttpServletResponse.SC_OK);

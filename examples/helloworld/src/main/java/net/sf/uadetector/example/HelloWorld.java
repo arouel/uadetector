@@ -40,6 +40,12 @@ public class HelloWorld extends AbstractHandler {
 	}
 
 	@Override
+	public void destroy() {
+		// undeploy used parsers cleanly
+		UADetectorServiceFactory.getOnlineUpdatingParser().shutdown();
+	}
+
+	@Override
 	public void handle(final String target, final Request baseRequest, final HttpServletRequest request, final HttpServletResponse response)
 			throws IOException, ServletException {
 		response.setContentType("text/html;charset=utf-8");

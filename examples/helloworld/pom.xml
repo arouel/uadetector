@@ -15,7 +15,7 @@
 		<!-- dependencies versions -->
 		<logback.version>1.0.11</logback.version>
 		<slf4j.version>1.7.5</slf4j.version>
-		<uadetector-resources.version>2013.05</uadetector-resources.version>
+		<uadetector-resources.version>2013.06</uadetector-resources.version>
 
 		<!-- plugins versions -->
 		<exec-maven-plugin.version>1.2.1</exec-maven-plugin.version>

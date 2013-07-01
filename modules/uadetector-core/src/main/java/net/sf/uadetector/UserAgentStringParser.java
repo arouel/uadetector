@@ -58,12 +58,12 @@ public interface UserAgentStringParser {
 	 * shutdown your self-created or via <code>UADetectorServiceFactory</code> retrieved updating
 	 * <code>UserAgentStringParser</code>.
 	 * <p>
-	 * An implementation of <code>UserAgentStringParser</code> has updating functionality if works with a
+	 * An implementation of <code>UserAgentStringParser</code> has updating functionality if it works with a
 	 * {@link net.sf.uadetector.datastore.RefreshableDataStore}.
 	 * <p>
 	 * If you call shutdown on a non-updating <code>UserAgentStringParser</code> implementation nothing will happen.
 	 * <p>
-	 * To shutdown all managed {@code ExecutorService} by UADetector at once, you can call
+	 * To shutdown all managed {@code ExecutorService} by UADetector at once, you can call also
 	 * {@link net.sf.uadetector.internal.util.ExecutorServices#shutdownAll()}.
 	 */
 	void shutdown();

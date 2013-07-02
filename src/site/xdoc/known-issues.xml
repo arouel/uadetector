@@ -52,11 +52,11 @@ java.lang.IllegalStateException: The read in content can not be transformed to a
 						<th>Affected Versions</th>
 						<td>
 							&lt;=
-							<code>uadetector-core-0.9.5</code>
+							<code>uadetector-core-0.9.6</code>
 							,
 							<br />
 							&lt;=
-							<code>uadetector-resources-2013.05</code>
+							<code>uadetector-resources-2013.06</code>
 						</td>
 					</tr>
 				</table>

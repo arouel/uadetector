@@ -15,7 +15,7 @@ import javax.annotation.Nullable;
 
 import net.sf.qualitycheck.Check;
 import net.sf.uadetector.internal.data.domain.BrowserType;
-import net.sf.uadetector.json.internal.data.Option;
+import net.sf.uadetector.json.SerDeOption;
 
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonDeserializer;
@@ -27,7 +27,7 @@ public final class BrowserTypeDeserializer extends AbstractDeserializer<BrowserT
 
 	private final AtomicInteger counter = new AtomicInteger(0);
 
-	public BrowserTypeDeserializer(final EnumSet<Option> options) {
+	public BrowserTypeDeserializer(final EnumSet<SerDeOption> options) {
 		super(options);
 	}
 

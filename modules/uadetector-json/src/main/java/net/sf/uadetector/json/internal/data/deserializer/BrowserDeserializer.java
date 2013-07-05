@@ -24,7 +24,7 @@ import net.sf.uadetector.internal.data.domain.Browser;
 import net.sf.uadetector.internal.data.domain.BrowserPattern;
 import net.sf.uadetector.internal.data.domain.BrowserType;
 import net.sf.uadetector.internal.data.domain.OperatingSystem;
-import net.sf.uadetector.json.internal.data.Option;
+import net.sf.uadetector.json.SerDeOption;
 
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonDeserializer;
@@ -40,7 +40,7 @@ public final class BrowserDeserializer extends AbstractDeserializer<Browser> imp
 
 	private final OperatingSystemDeserializer operatingSystemDeserializer;
 
-	public BrowserDeserializer(final EnumSet<Option> options, final BrowserPatternDeserializer browserPatternDeserializer,
+	public BrowserDeserializer(final EnumSet<SerDeOption> options, final BrowserPatternDeserializer browserPatternDeserializer,
 			final BrowserTypeDeserializer browserTypeDeserializer, final OperatingSystemDeserializer operatingSystemDeserializer) {
 		super(options);
 		this.browserPatternDeserializer = Check.notNull(browserPatternDeserializer, "browserPatternDeserializer");

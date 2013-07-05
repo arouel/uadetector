@@ -8,6 +8,7 @@ import net.sf.qualitycheck.exception.IllegalNullArgumentException;
 import net.sf.uadetector.datastore.DataStore;
 import net.sf.uadetector.internal.data.Data;
 import net.sf.uadetector.internal.util.UrlUtil;
+import net.sf.uadetector.json.SerDeOption;
 import net.sf.uadetector.json.internal.data.deserializer.Deserialization;
 
 import org.junit.Assert;
@@ -23,7 +24,7 @@ public class JsonConverterTest {
 	public void deserialize_corruptHash_doNotIgnore() throws IOException {
 		final URL dataUrl = JsonConverterTest.class.getClassLoader().getResource("samples/uas_corrupt_hash.json");
 		final Deserialization<Data> deserialization = JsonConverter.deserialize(UrlUtil.read(dataUrl, DataStore.DEFAULT_CHARSET),
-				Option.HASH_VALIDATING);
+				SerDeOption.HASH_VALIDATING);
 		for (String warn : deserialization.getWarnings()) {
 			LOG.debug(warn);
 		}
@@ -46,7 +47,7 @@ public class JsonConverterTest {
 	public void deserialize_dirtyData() throws IOException {
 		final URL dataUrl = JsonConverterTest.class.getClassLoader().getResource("samples/uas_dirty.json");
 		final Deserialization<Data> deserialization = JsonConverter.deserialize(UrlUtil.read(dataUrl, DataStore.DEFAULT_CHARSET),
-				Option.HASH_VALIDATING);
+				SerDeOption.HASH_VALIDATING);
 		for (final String warning : deserialization.getWarnings()) {
 			LOG.debug(warning);
 		}
@@ -74,7 +75,7 @@ public class JsonConverterTest {
 
 	@Test
 	public void serialize_withNullOptions() {
-		final Option[] options = null;
+		final SerDeOption[] options = null;
 		JsonConverter.serialize(Data.EMPTY, options);
 	}
 

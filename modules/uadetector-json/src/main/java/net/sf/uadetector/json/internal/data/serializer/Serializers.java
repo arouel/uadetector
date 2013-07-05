@@ -11,7 +11,7 @@ import net.sf.uadetector.internal.data.domain.BrowserType;
 import net.sf.uadetector.internal.data.domain.OperatingSystem;
 import net.sf.uadetector.internal.data.domain.OperatingSystemPattern;
 import net.sf.uadetector.internal.data.domain.Robot;
-import net.sf.uadetector.json.internal.data.Option;
+import net.sf.uadetector.json.SerDeOption;
 import net.sf.uadetector.json.internal.data.util.AbstractMessageCollector;
 
 import com.google.gson.Gson;
@@ -19,14 +19,14 @@ import com.google.gson.GsonBuilder;
 
 public final class Serializers extends AbstractMessageCollector<Data> {
 
-	public static Serialization serialize(final Data data, final EnumSet<Option> options) {
+	public static Serialization serialize(final Data data, final EnumSet<SerDeOption> options) {
 		final Serializers serializers = new Serializers(options);
 		return new Serialization(serializers.serialize(data), serializers.getWarnings());
 	}
 
 	private final Gson gson;
 
-	private Serializers(final EnumSet<Option> options) {
+	private Serializers(final EnumSet<SerDeOption> options) {
 		Check.notNull(options);
 		final GsonBuilder gsonBuilder = new GsonBuilder();
 
@@ -41,7 +41,7 @@ public final class Serializers extends AbstractMessageCollector<Data> {
 		gsonBuilder.registerTypeAdapter(Pattern.class, new PatternSerializer());
 
 		// some settings
-		if (options.contains(Option.PRETTY_PRINTING)) {
+		if (options.contains(SerDeOption.PRETTY_PRINTING)) {
 			gsonBuilder.setPrettyPrinting();
 		}
 		gsonBuilder.disableInnerClassSerialization();

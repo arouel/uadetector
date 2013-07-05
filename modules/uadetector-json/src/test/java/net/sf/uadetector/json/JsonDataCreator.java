@@ -9,7 +9,6 @@ import net.sf.qualitycheck.Check;
 import net.sf.uadetector.datastore.DataStore;
 import net.sf.uadetector.datastore.SimpleXmlDataStore;
 import net.sf.uadetector.json.internal.data.JsonConverter;
-import net.sf.uadetector.json.internal.data.Option;
 import net.sf.uadetector.json.internal.data.serializer.Serialization;
 
 public class JsonDataCreator {
@@ -25,7 +24,7 @@ public class JsonDataCreator {
 	private static final URL VERSION_URL = JsonDataCreator.class.getClassLoader().getResource("samples/uas.version");
 
 	public static void createOrUpdate(final DataStore store) throws IOException {
-		final Serialization serialization = JsonConverter.serialize(store.getData(), Option.PRETTY_PRINTING);
+		final Serialization serialization = JsonConverter.serialize(store.getData(), SerDeOption.PRETTY_PRINTING);
 		final String json = serialization.getJson();
 
 		// get resources directory

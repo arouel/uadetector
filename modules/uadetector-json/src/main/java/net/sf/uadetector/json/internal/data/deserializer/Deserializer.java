@@ -2,7 +2,7 @@ package net.sf.uadetector.json.internal.data.deserializer;
 
 import java.util.EnumSet;
 
-import net.sf.uadetector.json.internal.data.Option;
+import net.sf.uadetector.json.SerDeOption;
 import net.sf.uadetector.json.internal.data.util.MessageCollector;
 
 interface Deserializer extends MessageCollector {
@@ -16,6 +16,6 @@ interface Deserializer extends MessageCollector {
 	 * 
 	 * @return options during deserialization
 	 */
-	EnumSet<Option> getOptions();
+	EnumSet<SerDeOption> getOptions();
 
 }

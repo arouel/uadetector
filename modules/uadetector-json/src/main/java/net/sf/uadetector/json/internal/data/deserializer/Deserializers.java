@@ -16,7 +16,7 @@ import net.sf.uadetector.internal.data.domain.BrowserType;
 import net.sf.uadetector.internal.data.domain.OperatingSystem;
 import net.sf.uadetector.internal.data.domain.OperatingSystemPattern;
 import net.sf.uadetector.internal.data.domain.Robot;
-import net.sf.uadetector.json.internal.data.Option;
+import net.sf.uadetector.json.SerDeOption;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -24,11 +24,11 @@ import com.google.gson.GsonBuilder;
 @Immutable
 public final class Deserializers extends AbstractDeserializer<Data> {
 
-	public static Deserialization<Data> deserialize(final String json, final EnumSet<Option> options) {
+	public static Deserialization<Data> deserialize(final String json, final EnumSet<SerDeOption> options) {
 		return deserialize(json, options, Data.class);
 	}
 
-	public static <T> Deserialization<T> deserialize(final String json, final EnumSet<Option> options, final Class<T> classOfT) {
+	public static <T> Deserialization<T> deserialize(final String json, final EnumSet<SerDeOption> options, final Class<T> classOfT) {
 		final Deserializers deserializers = new Deserializers(options);
 		return new Deserialization<T>(deserializers.deserialize(json, classOfT), deserializers.getWarnings());
 	}
@@ -51,7 +51,7 @@ public final class Deserializers extends AbstractDeserializer<Data> {
 
 	private final RobotDeserializer robotDeserializer;
 
-	private Deserializers(final EnumSet<Option> options) {
+	private Deserializers(final EnumSet<SerDeOption> options) {
 		super(Check.notNull(options));
 		dataDeserializer = new DataDeserializer(options);
 		browserPatternDeserializer = new BrowserPatternDeserializer(options);

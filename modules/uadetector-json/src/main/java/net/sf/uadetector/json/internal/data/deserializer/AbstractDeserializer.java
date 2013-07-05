@@ -2,7 +2,7 @@ package net.sf.uadetector.json.internal.data.deserializer;
 
 import java.util.EnumSet;
 
-import net.sf.uadetector.json.internal.data.Option;
+import net.sf.uadetector.json.SerDeOption;
 import net.sf.uadetector.json.internal.data.hashcodebuilder.HashCodeGenerator;
 import net.sf.uadetector.json.internal.data.util.AbstractMessageCollector;
 
@@ -13,9 +13,9 @@ abstract class AbstractDeserializer<T> extends AbstractMessageCollector<T> imple
 	/**
 	 * Options to deserialize JSON into {@link net.sf.uadetector.internal.data.Data}
 	 */
-	private final EnumSet<Option> options;
+	private final EnumSet<SerDeOption> options;
 
-	public AbstractDeserializer(final EnumSet<Option> options) {
+	public AbstractDeserializer(final EnumSet<SerDeOption> options) {
 		this.options = options;
 	}
 
@@ -32,7 +32,7 @@ abstract class AbstractDeserializer<T> extends AbstractMessageCollector<T> imple
 	 *            Element for which a new code to be generated
 	 */
 	public final void checkHash(final JsonElement json, final String hash, final T element) {
-		if (getOptions().contains(Option.HASH_VALIDATING)) {
+		if (getOptions().contains(SerDeOption.HASH_VALIDATING)) {
 			final String newHash = HashCodeGenerator.generate(element);
 			if (!hash.equals(newHash)) {
 				final String warning = String.format(MSG_HASH_CODE_DIFFERENCE, hash, newHash, json);
@@ -42,7 +42,7 @@ abstract class AbstractDeserializer<T> extends AbstractMessageCollector<T> imple
 	}
 
 	@Override
-	public final EnumSet<Option> getOptions() {
+	public final EnumSet<SerDeOption> getOptions() {
 		return options;
 	}
 

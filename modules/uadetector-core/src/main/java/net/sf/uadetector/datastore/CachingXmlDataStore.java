@@ -216,7 +216,7 @@ public final class CachingXmlDataStore extends AbstractRefreshableDataStore {
 			try {
 				file.createNewFile();
 			} catch (final IOException e) {
-				throw new IllegalStateOfArgumentException("Can not create a cache file.");
+				throw new IllegalStateOfArgumentException("Can not create a cache file.", e);
 			}
 		}
 		return file;
@@ -235,7 +235,7 @@ public final class CachingXmlDataStore extends AbstractRefreshableDataStore {
 		try {
 			return FileUtil.isEmpty(file, charset);
 		} catch (final IOException e) {
-			throw new IllegalStateOfArgumentException("The given file could not be read.");
+			throw new IllegalStateOfArgumentException("The given file could not be read.", e);
 		}
 	}
 

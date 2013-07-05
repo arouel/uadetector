@@ -77,8 +77,8 @@ public final class UADetectorServiceFactory {
 		public static final URL UAS_VERSION = ResourceModuleXmlDataStore.class.getClassLoader().getResource(PATH + "/uas.version");
 
 		/**
-		 * Constructs an {@code ResourceModuleXmlDataStore} by reading <em>UAS data</em> by the specified URL
-		 * {@link UADetectorServiceFactory#UAS_DATA} (in XML format).
+		 * Constructs an {@code ResourceModuleXmlDataStore} by reading <em>UAS data</em> from the specified URL
+		 * {@link #UAS_DATA} (in XML format).
 		 */
 		public ResourceModuleXmlDataStore() {
 			super(DEFAULT_DATA_READER, UAS_DATA, UAS_VERSION, DEFAULT_CHARSET);
@@ -113,7 +113,7 @@ public final class UADetectorServiceFactory {
 	 * not available or slow.
 	 * 
 	 * <p>
-	 * The static class definition {@link CachingAndUpdatingParserHolder} within this factory class is <em>not</em>
+	 * The static class definition {@code CachingAndUpdatingParserHolder} within this factory class is <em>not</em>
 	 * initialized until the JVM determines that {@code CachingAndUpdatingParserHolder} must be executed. The static
 	 * class {@code CachingAndUpdatingParserHolder} is only executed when the static method
 	 * {@code getOnlineUserAgentStringParser} is invoked on the class {@code UADetectorServiceFactory}, and the first
@@ -144,7 +144,7 @@ public final class UADetectorServiceFactory {
 	 * not available or slow.
 	 * 
 	 * <p>
-	 * The static class definition {@link OnlineUpdatingParserHolder} within this factory class is <em>not</em>
+	 * The static class definition {@code OnlineUpdatingParserHolder} within this factory class is <em>not</em>
 	 * initialized until the JVM determines that {@code OnlineUpdatingParserHolder} must be executed. The static class
 	 * {@code OnlineUpdatingParserHolder} is only executed when the static method {@code getOnlineUserAgentStringParser}
 	 * is invoked on the class {@code UADetectorServiceFactory}, and the first time this happens the JVM will load and

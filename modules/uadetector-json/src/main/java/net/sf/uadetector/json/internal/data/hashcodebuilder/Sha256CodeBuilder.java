@@ -26,6 +26,11 @@ final class Sha256CodeBuilder {
 	private static final int HASH_CODE_LENGTH = 64;
 
 	/**
+	 * 8-bit maximum numeric value in range to add when converting a given integer to a string representation in base 16
+	 */
+	private static final int MAX_BYTE = 0xFF;
+
+	/**
 	 * Message for the log if the requested algorithm can not be found
 	 */
 	private static final String MSG_NO_SUCH_ALGORITHM = "The cryptographic algorithm '%s' is not available in this environment.";
@@ -38,7 +43,7 @@ final class Sha256CodeBuilder {
 		md.update(content.getBytes(CHARSET));
 		final byte byteData[] = md.digest();
 		for (final byte element : byteData) {
-			final String hex = Integer.toHexString(0xff & element);
+			final String hex = Integer.toHexString(MAX_BYTE & element);
 			if (hex.length() == 1) {
 				hexString.append('0');
 			}

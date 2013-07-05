@@ -3,7 +3,6 @@ package net.sf.uadetector.json.internal.data.hashcodebuilder;
 import java.lang.reflect.Constructor;
 
 import net.sf.qualitycheck.exception.IllegalNullArgumentException;
-import net.sf.qualitycheck.exception.IllegalStateOfArgumentException;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -15,7 +14,7 @@ public class Sha256CodeBuilderTest {
 		Sha256CodeBuilder.asHexString(null);
 	}
 
-	@Test(expected = IllegalStateOfArgumentException.class)
+	@Test(expected = UnsupportedOperationException.class)
 	public void getMessageDigest_noSuchAlgorithm() {
 		Sha256CodeBuilder.getMessageDigest("UNKNOWN-ALGORITHM");
 	}

@@ -8,9 +8,6 @@ import javax.annotation.Nonnull;
 
 import net.sf.qualitycheck.Check;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 final class Sha256CodeBuilder {
 
 	/**
@@ -29,15 +26,9 @@ final class Sha256CodeBuilder {
 	private static final int HASH_CODE_LENGTH = 64;
 
 	/**
-	 * Corresponding default logger for this class
-	 */
-	private static final Logger LOG = LoggerFactory.getLogger(Sha256CodeBuilder.class);
-
-	/**
 	 * Message for the log if the requested algorithm can not be found
 	 */
-	private static final String MSG_NO_SUCH_ALGORITHM = String.format(
-			"The cryptographic algorithm '%s' is not available in this environment.", ALGORITHM);
+	private static final String MSG_NO_SUCH_ALGORITHM = "The cryptographic algorithm '%s' is not available in this environment.";
 
 	@Nonnull
 	public static String asHexString(final String content) {
@@ -58,15 +49,11 @@ final class Sha256CodeBuilder {
 
 	@Nonnull
 	static MessageDigest getMessageDigest(final String algorithm) {
-		MessageDigest md = null;
 		try {
-			md = MessageDigest.getInstance(algorithm);
+			return MessageDigest.getInstance(algorithm);
 		} catch (final NoSuchAlgorithmException e) {
-			LOG.warn(MSG_NO_SUCH_ALGORITHM, e);
-		} finally {
-			Check.stateIsTrue(md != null, MSG_NO_SUCH_ALGORITHM);
+			throw new UnsupportedOperationException(String.format(MSG_NO_SUCH_ALGORITHM, ALGORITHM));
 		}
-		return md;
 	}
 
 	/**

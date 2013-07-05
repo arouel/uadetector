@@ -122,9 +122,6 @@ public final class ExecutorServices {
 				LOG.info("Executor was abruptly shut down. " + droppedTasks.size() + " tasks will not be executed.");
 			}
 			unregisterIfPossible(executorService);
-			if (executorService instanceof ScheduledExecutorService) {
-
-			}
 		} catch (final InterruptedException e) {
 			LOG.warn("Executor termination failed: " + e.getLocalizedMessage(), e);
 		}

@@ -28,7 +28,6 @@ import net.sf.uadetector.internal.data.domain.BrowserPattern;
 import net.sf.uadetector.internal.data.domain.OperatingSystem;
 import net.sf.uadetector.internal.data.domain.OperatingSystemPattern;
 import net.sf.uadetector.internal.data.domain.Robot;
-import net.sf.uadetector.internal.util.VersionParser;
 
 public abstract class AbstractUserAgentStringParser implements UserAgentStringParser {
 

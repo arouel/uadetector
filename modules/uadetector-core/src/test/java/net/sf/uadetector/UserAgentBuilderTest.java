@@ -16,7 +16,7 @@
 package net.sf.uadetector;
 
 import net.sf.qualitycheck.exception.IllegalNullArgumentException;
-import net.sf.uadetector.internal.util.VersionParser;
+import net.sf.uadetector.parser.VersionParser;
 
 import org.easymock.EasyMock;
 import org.junit.Assert;

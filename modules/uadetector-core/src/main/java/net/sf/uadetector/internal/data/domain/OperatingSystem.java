@@ -26,7 +26,7 @@ import net.sf.qualitycheck.Check;
 import net.sf.uadetector.OperatingSystemFamily;
 import net.sf.uadetector.UserAgent;
 import net.sf.uadetector.VersionNumber;
-import net.sf.uadetector.internal.util.VersionParser;
+import net.sf.uadetector.parser.VersionParser;
 
 public final class OperatingSystem {
 

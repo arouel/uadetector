@@ -7,7 +7,8 @@ import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.sf.uadetector.internal.util.VersionParser;
+
+import net.sf.uadetector.parser.VersionParser;
 
 import org.apache.commons.csv.CSVParser;
 import org.slf4j.Logger;

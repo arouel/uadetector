@@ -5,6 +5,9 @@ import java.util.EnumSet;
 
 import net.sf.qualitycheck.Check;
 import net.sf.uadetector.internal.data.Data;
+import net.sf.uadetector.json.internal.data.deserializer.Deserializers;
+import net.sf.uadetector.json.internal.data.serializer.Serialization;
+import net.sf.uadetector.json.internal.data.serializer.Serializers;
 
 /**
  * Converts a instance of {@link Data} into JSON representation and back.
@@ -14,16 +17,9 @@ import net.sf.uadetector.internal.data.Data;
 public final class JsonConverter {
 
 	/**
-	 * Options to serialize {@link Data}
-	 */
-	public enum SerializationOption {
-		HASH_VALIDATING, PRETTY_PRINTING
-	}
-
-	/**
 	 * Representation of no special serialization options
 	 */
-	private static final EnumSet<SerializationOption> WITHOUT_SPECIAL_OPTIONS = EnumSet.noneOf(SerializationOption.class);
+	private static final EnumSet<Option> WITHOUT_SPECIAL_OPTIONS = EnumSet.noneOf(Option.class);
 
 	/**
 	 * Converts an array of options to an {@code EnumSet}.
@@ -32,12 +28,12 @@ public final class JsonConverter {
 	 *            array of options to convert
 	 * @return {@code EnumSet} of options
 	 */
-	private static EnumSet<SerializationOption> convertOptions(final SerializationOption... options) {
-		final EnumSet<SerializationOption> opts;
+	private static EnumSet<Option> convertOptions(final Option... options) {
+		final EnumSet<Option> opts;
 		if (options != null) {
 			opts = EnumSet.copyOf(Arrays.asList(options));
 		} else {
-			opts = EnumSet.noneOf(SerializationOption.class);
+			opts = EnumSet.noneOf(Option.class);
 		}
 		return opts;
 	}
@@ -63,7 +59,7 @@ public final class JsonConverter {
 	 *            options for deserializing into {@code Data} (e.g. hash code validating)
 	 * @return instance of {@code Data}
 	 */
-	public static Deserialization<Data> deserialize(final String json, final EnumSet<SerializationOption> options) {
+	public static Deserialization<Data> deserialize(final String json, final EnumSet<Option> options) {
 		Check.notNull(json);
 		Check.notNull(options);
 		return Deserializers.deserialize(json, options);
@@ -78,7 +74,7 @@ public final class JsonConverter {
 	 *            options for deserializing into {@code Data} (e.g. hash code validating)
 	 * @return instance of {@code Data}
 	 */
-	public static Deserialization<Data> deserialize(final String json, final SerializationOption... options) {
+	public static Deserialization<Data> deserialize(final String json, final Option... options) {
 		Check.notNull(json);
 		Check.notNull(options);
 		return deserialize(json, convertOptions(options));
@@ -93,7 +89,7 @@ public final class JsonConverter {
 	 */
 	public static Serialization serialize(final Data data) {
 		Check.notNull(data);
-		return serialize(data, EnumSet.noneOf(SerializationOption.class));
+		return serialize(data, EnumSet.noneOf(Option.class));
 	}
 
 	/**
@@ -105,7 +101,7 @@ public final class JsonConverter {
 	 *            options to serialize into JSON (e.g. pretty printing)
 	 * @return JSON representation of the given {@code Data}
 	 */
-	public static Serialization serialize(final Data data, final EnumSet<SerializationOption> options) {
+	public static Serialization serialize(final Data data, final EnumSet<Option> options) {
 		Check.notNull(data);
 		Check.notNull(options);
 		return Serializers.serialize(data, options);
@@ -120,7 +116,7 @@ public final class JsonConverter {
 	 *            options to serialize into JSON (e.g. pretty printing)
 	 * @return JSON representation of the given {@code Data}
 	 */
-	public static Serialization serialize(final Data data, final SerializationOption... options) {
+	public static Serialization serialize(final Data data, final Option... options) {
 		Check.notNull(data);
 		return serialize(data, convertOptions(options));
 	}

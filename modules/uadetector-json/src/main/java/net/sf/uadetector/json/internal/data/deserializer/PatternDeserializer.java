@@ -9,7 +9,7 @@ import java.util.Map.Entry;
 import java.util.regex.Pattern;
 
 import net.sf.uadetector.internal.util.RegularExpressionConverter.Flag;
-import net.sf.uadetector.json.internal.data.JsonConverter.SerializationOption;
+import net.sf.uadetector.json.internal.data.Option;
 
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonDeserializer;
@@ -17,7 +17,7 @@ import com.google.gson.JsonElement;
 
 public final class PatternDeserializer extends AbstractDeserializer<Pattern> implements JsonDeserializer<Pattern> {
 
-	public PatternDeserializer(final EnumSet<SerializationOption> options) {
+	public PatternDeserializer(final EnumSet<Option> options) {
 		super(options);
 	}
 

@@ -7,8 +7,8 @@ import net.sf.uadetector.datastore.DataStore;
 import net.sf.uadetector.internal.data.Data;
 import net.sf.uadetector.internal.util.UrlUtil;
 import net.sf.uadetector.json.internal.data.JsonConverter;
-import net.sf.uadetector.json.internal.data.JsonConverter.SerializationOption;
-import net.sf.uadetector.json.internal.data.Serialization;
+import net.sf.uadetector.json.internal.data.Option;
+import net.sf.uadetector.json.internal.data.serializer.Serialization;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -31,7 +31,7 @@ public class DataConversionTest {
 
 	@Test
 	public void testConversionViceVersa() throws IOException, URISyntaxException {
-		final SerializationOption options = SerializationOption.PRETTY_PRINTING;
+		final Option options = Option.PRETTY_PRINTING;
 		final DataStore store = TestDataStoreFactory.produce();
 		Serialization serialization = JsonConverter.serialize(store.getData(), options);
 		Assert.assertEquals(0, serialization.getWarnings().size());

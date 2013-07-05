@@ -1,4 +1,4 @@
-package net.sf.uadetector.json.internal.data;
+package net.sf.uadetector.json.internal.data.deserializer;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -16,16 +16,8 @@ import net.sf.uadetector.internal.data.domain.BrowserType;
 import net.sf.uadetector.internal.data.domain.OperatingSystem;
 import net.sf.uadetector.internal.data.domain.OperatingSystemPattern;
 import net.sf.uadetector.internal.data.domain.Robot;
-import net.sf.uadetector.json.internal.data.JsonConverter.SerializationOption;
-import net.sf.uadetector.json.internal.data.deserializer.AbstractDeserializer;
-import net.sf.uadetector.json.internal.data.deserializer.BrowserDeserializer;
-import net.sf.uadetector.json.internal.data.deserializer.BrowserPatternDeserializer;
-import net.sf.uadetector.json.internal.data.deserializer.BrowserTypeDeserializer;
-import net.sf.uadetector.json.internal.data.deserializer.DataDeserializer;
-import net.sf.uadetector.json.internal.data.deserializer.OperatingSystemDeserializer;
-import net.sf.uadetector.json.internal.data.deserializer.OperatingSystemPatternDeserializer;
-import net.sf.uadetector.json.internal.data.deserializer.PatternDeserializer;
-import net.sf.uadetector.json.internal.data.deserializer.RobotDeserializer;
+import net.sf.uadetector.json.internal.data.Deserialization;
+import net.sf.uadetector.json.internal.data.Option;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -33,11 +25,11 @@ import com.google.gson.GsonBuilder;
 @Immutable
 public final class Deserializers extends AbstractDeserializer<Data> {
 
-	public static Deserialization<Data> deserialize(final String json, final EnumSet<SerializationOption> options) {
+	public static Deserialization<Data> deserialize(final String json, final EnumSet<Option> options) {
 		return deserialize(json, options, Data.class);
 	}
 
-	public static <T> Deserialization<T> deserialize(final String json, final EnumSet<SerializationOption> options, final Class<T> classOfT) {
+	public static <T> Deserialization<T> deserialize(final String json, final EnumSet<Option> options, final Class<T> classOfT) {
 		final Deserializers deserializers = new Deserializers(options);
 		return new Deserialization<T>(deserializers.deserialize(json, classOfT), deserializers.getWarnings());
 	}
@@ -60,17 +52,17 @@ public final class Deserializers extends AbstractDeserializer<Data> {
 
 	private final RobotDeserializer robotDeserializer;
 
-	private Deserializers(final EnumSet<SerializationOption> options) {
+	private Deserializers(final EnumSet<Option> options) {
 		super(Check.notNull(options));
-		this.dataDeserializer = new DataDeserializer(options);
-		this.browserPatternDeserializer = new BrowserPatternDeserializer(options);
-		this.browserTypeDeserializer = new BrowserTypeDeserializer(options);
-		this.operatingSystemPatternDeserializer = new OperatingSystemPatternDeserializer(options);
-		this.operatingSystemDeserializer = new OperatingSystemDeserializer(options, operatingSystemPatternDeserializer);
-		this.browserDeserializer = new BrowserDeserializer(options, browserPatternDeserializer, browserTypeDeserializer,
+		dataDeserializer = new DataDeserializer(options);
+		browserPatternDeserializer = new BrowserPatternDeserializer(options);
+		browserTypeDeserializer = new BrowserTypeDeserializer(options);
+		operatingSystemPatternDeserializer = new OperatingSystemPatternDeserializer(options);
+		operatingSystemDeserializer = new OperatingSystemDeserializer(options, operatingSystemPatternDeserializer);
+		browserDeserializer = new BrowserDeserializer(options, browserPatternDeserializer, browserTypeDeserializer,
 				operatingSystemDeserializer);
-		this.robotDeserializer = new RobotDeserializer(options);
-		this.patternDeserializer = new PatternDeserializer(options);
+		robotDeserializer = new RobotDeserializer(options);
+		patternDeserializer = new PatternDeserializer(options);
 
 		// setup deserializers
 		final GsonBuilder gsonBuilder = new GsonBuilder();

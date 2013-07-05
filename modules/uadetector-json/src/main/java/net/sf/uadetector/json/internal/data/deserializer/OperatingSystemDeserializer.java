@@ -25,7 +25,7 @@ import javax.annotation.Nullable;
 import net.sf.qualitycheck.Check;
 import net.sf.uadetector.internal.data.domain.OperatingSystem;
 import net.sf.uadetector.internal.data.domain.OperatingSystemPattern;
-import net.sf.uadetector.json.internal.data.JsonConverter.SerializationOption;
+import net.sf.uadetector.json.internal.data.Option;
 
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonDeserializer;
@@ -39,7 +39,7 @@ public final class OperatingSystemDeserializer extends AbstractDeserializer<Oper
 
 	private final Map<String, OperatingSystem> operatingSystems = new HashMap<String, OperatingSystem>();
 
-	public OperatingSystemDeserializer(final EnumSet<SerializationOption> options,
+	public OperatingSystemDeserializer(final EnumSet<Option> options,
 			final OperatingSystemPatternDeserializer operatingSystemPatternDeserializer) {
 		super(options);
 		this.operatingSystemPatternDeserializer = Check.notNull(operatingSystemPatternDeserializer, "operatingSystemPatternDeserializer");

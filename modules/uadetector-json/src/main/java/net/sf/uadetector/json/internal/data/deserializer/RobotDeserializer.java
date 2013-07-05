@@ -17,7 +17,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import net.sf.uadetector.UserAgentFamily;
 import net.sf.uadetector.internal.data.domain.Robot;
-import net.sf.uadetector.json.internal.data.JsonConverter.SerializationOption;
+import net.sf.uadetector.json.internal.data.Option;
 
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonDeserializer;
@@ -27,7 +27,7 @@ public final class RobotDeserializer extends AbstractDeserializer<Robot> impleme
 
 	private final AtomicInteger counter = new AtomicInteger(0);
 
-	public RobotDeserializer(final EnumSet<SerializationOption> options) {
+	public RobotDeserializer(final EnumSet<Option> options) {
 		super(options);
 	}
 

@@ -3,8 +3,7 @@ package net.sf.uadetector.json.internal.data.deserializer;
 import java.util.EnumSet;
 import java.util.regex.Pattern;
 
-import net.sf.uadetector.json.internal.data.Deserializers;
-import net.sf.uadetector.json.internal.data.JsonConverter.SerializationOption;
+import net.sf.uadetector.json.internal.data.Option;
 
 import org.junit.Test;
 
@@ -12,7 +11,7 @@ public class PatternDeserializerTest {
 
 	@Test
 	public void deserialize_emptyJsonObject() {
-		Deserializers.deserialize("{}", EnumSet.noneOf(SerializationOption.class), Pattern.class);
+		Deserializers.deserialize("{}", EnumSet.noneOf(Option.class), Pattern.class);
 	}
 
 }

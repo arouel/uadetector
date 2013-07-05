@@ -23,7 +23,7 @@ import net.sf.uadetector.datareader.DataReader;
 import net.sf.uadetector.internal.data.Data;
 import net.sf.uadetector.internal.util.UrlUtil;
 import net.sf.uadetector.json.internal.data.JsonConverter;
-import net.sf.uadetector.json.internal.data.JsonConverter.SerializationOption;
+import net.sf.uadetector.json.internal.data.Option;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -92,7 +92,7 @@ public final class JsonDataReader implements DataReader {
 	public Data read(final String json) {
 		Check.notNull(json, "json");
 		try {
-			return JsonConverter.deserialize(json, SerializationOption.HASH_VALIDATING).getData();
+			return JsonConverter.deserialize(json, Option.HASH_VALIDATING).getData();
 		} catch (Exception e) {
 			LOG.warn(e.getLocalizedMessage(), e);
 		}

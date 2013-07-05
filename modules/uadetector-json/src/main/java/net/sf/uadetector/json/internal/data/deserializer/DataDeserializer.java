@@ -15,7 +15,7 @@ import net.sf.uadetector.internal.data.domain.BrowserType;
 import net.sf.uadetector.internal.data.domain.OperatingSystem;
 import net.sf.uadetector.internal.data.domain.OperatingSystemPattern;
 import net.sf.uadetector.internal.data.domain.Robot;
-import net.sf.uadetector.json.internal.data.JsonConverter.SerializationOption;
+import net.sf.uadetector.json.internal.data.Option;
 import net.sf.uadetector.json.internal.data.field.SerializableDataField;
 
 import com.google.gson.JsonArray;
@@ -46,7 +46,7 @@ public final class DataDeserializer extends AbstractDeserializer<Data> implement
 		return result;
 	}
 
-	public DataDeserializer(final EnumSet<SerializationOption> options) {
+	public DataDeserializer(final EnumSet<Option> options) {
 		super(options);
 	}
 

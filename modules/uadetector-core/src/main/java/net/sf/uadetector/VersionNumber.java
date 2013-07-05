@@ -85,6 +85,45 @@ public final class VersionNumber implements ReadableVersionNumber, Serializable 
 	}
 
 	/**
+	 * Interprets a string with version information. The last version number in the string will be searched and
+	 * processed.
+	 * 
+	 * @param text
+	 *            string with version information
+	 * @return an object of {@code VersionNumber}, never {@code null}
+	 */
+	public static VersionNumber parseLastVersionNumber(@Nonnull final String text) {
+		return VersionParser.parseLastVersionNumber(Check.notNull(text, "text"));
+	}
+
+	/**
+	 * Try to determine the version number of the operating system by parsing the user agent string.
+	 * 
+	 * 
+	 * @param family
+	 *            family of the operating system
+	 * @param userAgent
+	 *            user agent string
+	 * @return extracted version number
+	 */
+	public static VersionNumber parseOperatingSystemVersion(@Nonnull final OperatingSystemFamily family, @Nonnull final String userAgent) {
+		Check.notNull(family, "family");
+		Check.notNull(userAgent, "userAgent");
+		return VersionParser.parseOperatingSystemVersion(family, userAgent);
+	}
+
+	/**
+	 * Interprets a string with version information. The first found group will be taken and processed.
+	 * 
+	 * @param version
+	 *            version as string
+	 * @return an object of {@code VersionNumber}, never {@code null}
+	 */
+	public static VersionNumber parseVersion(@Nonnull final String version) {
+		return VersionParser.parseVersion(Check.notNull(version, "version"));
+	}
+
+	/**
 	 * Replaces all {@code null} values in the given list of groups with {@code VersionNumber#EMPTY_GROUP}.
 	 * 
 	 * @param groups

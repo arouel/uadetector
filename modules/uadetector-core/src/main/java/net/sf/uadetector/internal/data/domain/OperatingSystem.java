@@ -26,7 +26,6 @@ import net.sf.qualitycheck.Check;
 import net.sf.uadetector.OperatingSystemFamily;
 import net.sf.uadetector.UserAgent;
 import net.sf.uadetector.VersionNumber;
-import net.sf.uadetector.parser.VersionParser;
 
 public final class OperatingSystem {
 
@@ -260,7 +259,7 @@ public final class OperatingSystem {
 	 */
 	public void copyTo(@Nonnull final UserAgent.Builder builder) {
 		final OperatingSystemFamily f = OperatingSystemFamily.evaluate(family);
-		final VersionNumber version = VersionParser.parseOperatingSystemVersion(f, builder.getUserAgentString());
+		final VersionNumber version = VersionNumber.parseOperatingSystemVersion(f, builder.getUserAgentString());
 		builder.setOperatingSystem(new net.sf.uadetector.OperatingSystem(f, family, icon, name, producer, producerUrl, url, version));
 	}
 

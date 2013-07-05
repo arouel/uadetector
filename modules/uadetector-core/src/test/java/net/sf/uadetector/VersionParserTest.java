@@ -13,13 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  ******************************************************************************/
-package net.sf.uadetector.parser;
+package net.sf.uadetector;
 
 import java.lang.reflect.Constructor;
 
 import net.sf.qualitycheck.exception.IllegalNullArgumentException;
-import net.sf.uadetector.OperatingSystemFamily;
-import net.sf.uadetector.VersionNumber;
 
 import org.junit.Assert;
 import org.junit.Test;

@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  ******************************************************************************/
-package net.sf.uadetector.parser;
+package net.sf.uadetector;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -24,15 +24,13 @@ import java.util.regex.Pattern;
 import javax.annotation.Nonnull;
 
 import net.sf.qualitycheck.Check;
-import net.sf.uadetector.OperatingSystemFamily;
-import net.sf.uadetector.VersionNumber;
 
 /**
- * This class is used to detect version information within strings.
+ * This class is used to detect version information within <i>User-Agent</i> strings.
  * 
  * @author André Rouél
  */
-public final class VersionParser {
+final class VersionParser {
 
 	/**
 	 * Index number of the group in a matching {@link Pattern} which contains the extension/suffix of a version string
@@ -66,7 +64,7 @@ public final class VersionParser {
 	 *            user agent string
 	 * @return more accurately identified version number or {@code null}
 	 */
-	public static VersionNumber identifyAndroidVersion(@Nonnull final String userAgent) {
+	static VersionNumber identifyAndroidVersion(@Nonnull final String userAgent) {
 		VersionNumber version = VersionNumber.UNKNOWN;
 		final List<Pattern> patterns = new ArrayList<Pattern>();
 		patterns.add(Pattern.compile("Android\\s?((\\d+)((\\.\\d+)+)?(\\-(\\w|\\d)+)?);"));
@@ -88,7 +86,7 @@ public final class VersionParser {
 	 *            user agent string
 	 * @return more accurately identified version number or {@code null}
 	 */
-	public static VersionNumber identifyBadaVersion(final String userAgent) {
+	static VersionNumber identifyBadaVersion(final String userAgent) {
 		VersionNumber version = VersionNumber.UNKNOWN;
 		final Pattern pattern = Pattern.compile("Bada/((\\d+)((\\.\\d+)+)?)");
 		final Matcher m = pattern.matcher(userAgent);
@@ -105,7 +103,7 @@ public final class VersionParser {
 	 *            user agent string
 	 * @return more accurately identified version number or {@code null}
 	 */
-	public static VersionNumber identifyBSDVersion(final String userAgent) {
+	static VersionNumber identifyBSDVersion(final String userAgent) {
 		VersionNumber version = VersionNumber.UNKNOWN;
 		final Pattern pattern = Pattern.compile("\\w+bsd\\s?((\\d+)((\\.\\d+)+)?((\\-|_)[\\w\\d\\-]+)?)", Pattern.CASE_INSENSITIVE);
 		final Matcher m = pattern.matcher(userAgent);
@@ -122,7 +120,7 @@ public final class VersionParser {
 	 *            user agent string
 	 * @return more accurately identified version number or {@code null}
 	 */
-	public static VersionNumber identifyIOSVersion(final String userAgent) {
+	static VersionNumber identifyIOSVersion(final String userAgent) {
 		VersionNumber version = VersionNumber.UNKNOWN;
 		final List<Pattern> patterns = new ArrayList<Pattern>();
 		patterns.add(Pattern.compile("iPhone OS\\s?((\\d+)((\\_\\d+)+)?) like Mac OS X"));
@@ -145,7 +143,7 @@ public final class VersionParser {
 	 *            user agent string
 	 * @return more accurately identified version number or {@code null}
 	 */
-	public static VersionNumber identifyJavaVersion(final String userAgent) {
+	static VersionNumber identifyJavaVersion(final String userAgent) {
 		VersionNumber version = VersionNumber.UNKNOWN;
 		final List<Pattern> patterns = new ArrayList<Pattern>();
 		patterns.add(Pattern.compile("Java/((\\d+)((\\.\\d+)+)?((\\-|_)[\\w\\d\\-]+)?)"));
@@ -167,7 +165,7 @@ public final class VersionParser {
 	 *            user agent string
 	 * @return more accurately identified version number or {@code null}
 	 */
-	public static VersionNumber identifyOSXVersion(final String userAgent) {
+	static VersionNumber identifyOSXVersion(final String userAgent) {
 		VersionNumber version = VersionNumber.UNKNOWN;
 		final List<Pattern> patterns = new ArrayList<Pattern>();
 		patterns.add(Pattern.compile("Mac OS X\\s?((\\d+)((\\.\\d+)+)?);"));
@@ -190,7 +188,7 @@ public final class VersionParser {
 	 *            user agent string
 	 * @return more accurately identified version number or {@code null}
 	 */
-	public static VersionNumber identifySymbianVersion(final String userAgent) {
+	static VersionNumber identifySymbianVersion(final String userAgent) {
 		VersionNumber version = VersionNumber.UNKNOWN;
 		final Pattern pattern = Pattern.compile("SymbianOS/((\\d+)((\\.\\d+)+)?s?)");
 		final Matcher m = pattern.matcher(userAgent);
@@ -207,7 +205,7 @@ public final class VersionParser {
 	 *            user agent string
 	 * @return more accurately identified version number or {@code null}
 	 */
-	public static VersionNumber identifyWebOSVersion(final String userAgent) {
+	static VersionNumber identifyWebOSVersion(final String userAgent) {
 		VersionNumber version = VersionNumber.UNKNOWN;
 		final List<Pattern> patterns = new ArrayList<Pattern>();
 		patterns.add(Pattern.compile("hpwOS/((\\d+)((\\.\\d+)+)?);"));
@@ -229,7 +227,7 @@ public final class VersionParser {
 	 *            user agent string
 	 * @return more accurately identified version number or {@code null}
 	 */
-	public static VersionNumber identifyWindowsVersion(final String userAgent) {
+	static VersionNumber identifyWindowsVersion(final String userAgent) {
 		VersionNumber version = VersionNumber.UNKNOWN;
 		final List<Pattern> patterns = new ArrayList<Pattern>();
 		patterns.add(Pattern.compile("Windows NT\\s?((\\d+)((\\.\\d+)+)?)"));
@@ -259,7 +257,7 @@ public final class VersionParser {
 	 *            string with version information
 	 * @return an object of {@code VersionNumber}, never {@code null}
 	 */
-	protected static VersionNumber parseFirstVersionNumber(@Nonnull final String text) {
+	static VersionNumber parseFirstVersionNumber(@Nonnull final String text) {
 		Check.notNull(text, "text");
 
 		final Matcher matcher = VERSIONNUMBER_WITH_SUFFIX.matcher(text);

@@ -16,7 +16,6 @@
 package net.sf.uadetector;
 
 import net.sf.qualitycheck.exception.IllegalNullArgumentException;
-import net.sf.uadetector.parser.VersionParser;
 
 import org.junit.Assert;
 import org.junit.Test;

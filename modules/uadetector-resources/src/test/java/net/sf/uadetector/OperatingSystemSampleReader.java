@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-import net.sf.uadetector.parser.VersionParser;
 
 import org.apache.commons.csv.CSVParser;
 import org.slf4j.Logger;

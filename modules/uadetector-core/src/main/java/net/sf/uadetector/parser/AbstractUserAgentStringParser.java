@@ -55,7 +55,7 @@ public abstract class AbstractUserAgentStringParser implements UserAgentStringPa
 
 				// try to get the browser version from the first subgroup
 				if (matcher.groupCount() > ZERO_MATCHING_GROUPS) {
-					version = VersionParser.parseVersion(matcher.group(1) != null ? matcher.group(1) : "");
+					version = VersionNumber.parseVersion(matcher.group(1) != null ? matcher.group(1) : "");
 				}
 				builder.setVersionNumber(version);
 
@@ -82,7 +82,7 @@ public abstract class AbstractUserAgentStringParser implements UserAgentStringPa
 				robot.copyTo(builder);
 
 				// try to get the version from the last found group
-				version = VersionParser.parseLastVersionNumber(robot.getName());
+				version = VersionNumber.parseLastVersionNumber(robot.getName());
 				builder.setVersionNumber(version);
 
 				break;

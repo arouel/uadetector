@@ -15,9 +15,11 @@
  ******************************************************************************/
 package net.sf.uadetector.internal.data;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
@@ -199,7 +201,7 @@ public class Data {
 		private final Set<OperatingSystem> operatingSystems = new HashSet<OperatingSystem>();
 
 		@Nonnull
-		private final Set<Robot> robots = new HashSet<Robot>();
+		private final List<Robot> robots = new ArrayList<Robot>();
 
 		private String version;
 
@@ -379,7 +381,7 @@ public class Data {
 	/**
 	 * An <i>immutable</i> empty {@code Data} object.
 	 */
-	public static final Data EMPTY = new Data(new HashSet<Browser>(), new HashSet<OperatingSystem>(), new HashSet<Robot>(0),
+	public static final Data EMPTY = new Data(new HashSet<Browser>(), new HashSet<OperatingSystem>(), new ArrayList<Robot>(0),
 			new TreeMap<BrowserPattern, Browser>(), new TreeMap<OperatingSystemPattern, OperatingSystem>(), "");
 
 	@Nonnull
@@ -389,7 +391,7 @@ public class Data {
 	private final Set<OperatingSystem> operatingSystems;
 
 	@Nonnull
-	private final Set<Robot> robots;
+	private final List<Robot> robots;
 
 	/**
 	 * Version information of the UAS data
@@ -404,7 +406,7 @@ public class Data {
 	private final SortedMap<OperatingSystemPattern, OperatingSystem> patternOsMap;
 
 	public Data(@Nonnull final Set<Browser> browsers, @Nonnull final Set<OperatingSystem> operatingSystems,
-			@Nonnull final Set<Robot> robots, @Nonnull final SortedMap<BrowserPattern, Browser> patternBrowserMap,
+			@Nonnull final List<Robot> robots, @Nonnull final SortedMap<BrowserPattern, Browser> patternBrowserMap,
 			@Nonnull final SortedMap<OperatingSystemPattern, OperatingSystem> patternOsMap, @Nonnull final String version) {
 		Check.notNull(browsers, "browsers");
 		Check.notNull(operatingSystems, "operatingSystems");
@@ -475,8 +477,8 @@ public class Data {
 	}
 
 	@Nonnull
-	public Set<Robot> getRobots() {
-		return Collections.unmodifiableSet(robots);
+	public List<Robot> getRobots() {
+		return Collections.unmodifiableList(robots);
 	}
 
 	/**

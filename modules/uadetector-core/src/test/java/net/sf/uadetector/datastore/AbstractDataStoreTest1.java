@@ -18,6 +18,7 @@ package net.sf.uadetector.datastore;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.Charset;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.TreeMap;
 
@@ -92,7 +93,7 @@ public class AbstractDataStoreTest1 {
 	@Test
 	public void construct_successful() {
 
-		final Data data = new Data(new HashSet<Browser>(), new HashSet<OperatingSystem>(), new HashSet<Robot>(0),
+		final Data data = new Data(new HashSet<Browser>(), new HashSet<OperatingSystem>(), new ArrayList<Robot>(0),
 				new TreeMap<BrowserPattern, Browser>(), new TreeMap<OperatingSystemPattern, OperatingSystem>(), "test-version");
 		final DataReader reader = new XmlDataReader();
 		final TestDataStore store = new TestDataStore(data, reader, CHARSET, DATA_URL, VERSION_URL);

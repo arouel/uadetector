@@ -1,5 +1,6 @@
 package net.sf.uadetector.datastore;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.TreeMap;
 
@@ -26,7 +27,7 @@ public class AbstractRefreshableDataStoreTest {
 	@Test
 	public void setData_successful() {
 		final TestXmlDataStore store = new TestXmlDataStore();
-		final Data data2 = new Data(new HashSet<Browser>(), new HashSet<OperatingSystem>(), new HashSet<Robot>(0),
+		final Data data2 = new Data(new HashSet<Browser>(), new HashSet<OperatingSystem>(), new ArrayList<Robot>(0),
 				new TreeMap<BrowserPattern, Browser>(), new TreeMap<OperatingSystemPattern, OperatingSystem>(), "test-version");
 		store.setData(data2);
 		Assert.assertSame(data2, store.getData());

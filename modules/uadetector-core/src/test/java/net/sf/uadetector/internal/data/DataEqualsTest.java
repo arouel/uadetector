@@ -15,7 +15,9 @@
  ******************************************************************************/
 package net.sf.uadetector.internal.data;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeMap;
@@ -68,13 +70,13 @@ public class DataEqualsTest {
 		final TreeMap<BrowserPattern, Browser> patterns4 = new TreeMap<BrowserPattern, Browser>();
 		patterns4.put(pattern4, browser);
 
-		final Data data1 = new Data(new HashSet<Browser>(), new HashSet<OperatingSystem>(), new HashSet<Robot>(0), patterns1,
+		final Data data1 = new Data(new HashSet<Browser>(), new HashSet<OperatingSystem>(), new ArrayList<Robot>(0), patterns1,
 				new TreeMap<OperatingSystemPattern, OperatingSystem>(), "");
-		final Data data2 = new Data(new HashSet<Browser>(), new HashSet<OperatingSystem>(), new HashSet<Robot>(0), patterns2,
+		final Data data2 = new Data(new HashSet<Browser>(), new HashSet<OperatingSystem>(), new ArrayList<Robot>(0), patterns2,
 				new TreeMap<OperatingSystemPattern, OperatingSystem>(), "");
-		final Data data3 = new Data(new HashSet<Browser>(), new HashSet<OperatingSystem>(), new HashSet<Robot>(0), patterns3,
+		final Data data3 = new Data(new HashSet<Browser>(), new HashSet<OperatingSystem>(), new ArrayList<Robot>(0), patterns3,
 				new TreeMap<OperatingSystemPattern, OperatingSystem>(), "");
-		final Data data4 = new Data(new HashSet<Browser>(), new HashSet<OperatingSystem>(), new HashSet<Robot>(0), patterns4,
+		final Data data4 = new Data(new HashSet<Browser>(), new HashSet<OperatingSystem>(), new ArrayList<Robot>(0), patterns4,
 				new TreeMap<OperatingSystemPattern, OperatingSystem>(), "");
 
 		Assert.assertFalse(data1.equals(data2));
@@ -108,9 +110,9 @@ public class DataEqualsTest {
 		browsers2.add(browser3);
 		browsers2.add(browser2);
 		browsers2.add(browser1);
-		final Data data1 = new Data(browsers1, new HashSet<OperatingSystem>(), new HashSet<Robot>(0),
+		final Data data1 = new Data(browsers1, new HashSet<OperatingSystem>(), new ArrayList<Robot>(0),
 				new TreeMap<BrowserPattern, Browser>(), new TreeMap<OperatingSystemPattern, OperatingSystem>(), "");
-		final Data data2 = new Data(browsers2, new HashSet<OperatingSystem>(), new HashSet<Robot>(0),
+		final Data data2 = new Data(browsers2, new HashSet<OperatingSystem>(), new ArrayList<Robot>(0),
 				new TreeMap<BrowserPattern, Browser>(), new TreeMap<OperatingSystemPattern, OperatingSystem>(), "");
 		Assert.assertFalse(data1.equals(data2));
 	}
@@ -132,13 +134,13 @@ public class DataEqualsTest {
 		final TreeMap<OperatingSystemPattern, OperatingSystem> patterns4 = new TreeMap<OperatingSystemPattern, OperatingSystem>();
 		patterns4.put(pattern4, operatingSystem);
 
-		final Data data1 = new Data(new HashSet<Browser>(), new HashSet<OperatingSystem>(), new HashSet<Robot>(0),
+		final Data data1 = new Data(new HashSet<Browser>(), new HashSet<OperatingSystem>(), new ArrayList<Robot>(0),
 				new TreeMap<BrowserPattern, Browser>(), patterns1, "");
-		final Data data2 = new Data(new HashSet<Browser>(), new HashSet<OperatingSystem>(), new HashSet<Robot>(0),
+		final Data data2 = new Data(new HashSet<Browser>(), new HashSet<OperatingSystem>(), new ArrayList<Robot>(0),
 				new TreeMap<BrowserPattern, Browser>(), patterns2, "");
-		final Data data3 = new Data(new HashSet<Browser>(), new HashSet<OperatingSystem>(), new HashSet<Robot>(0),
+		final Data data3 = new Data(new HashSet<Browser>(), new HashSet<OperatingSystem>(), new ArrayList<Robot>(0),
 				new TreeMap<BrowserPattern, Browser>(), patterns3, "");
-		final Data data4 = new Data(new HashSet<Browser>(), new HashSet<OperatingSystem>(), new HashSet<Robot>(0),
+		final Data data4 = new Data(new HashSet<Browser>(), new HashSet<OperatingSystem>(), new ArrayList<Robot>(0),
 				new TreeMap<BrowserPattern, Browser>(), patterns4, "");
 
 		Assert.assertFalse(data1.equals(data2));
@@ -171,9 +173,9 @@ public class DataEqualsTest {
 		final Set<OperatingSystem> operatingSystems2 = new HashSet<OperatingSystem>();
 		operatingSystems2.add(os1);
 		operatingSystems2.add(os3);
-		final Data data1 = new Data(new HashSet<Browser>(), operatingSystems1, new HashSet<Robot>(0),
+		final Data data1 = new Data(new HashSet<Browser>(), operatingSystems1, new ArrayList<Robot>(0),
 				new TreeMap<BrowserPattern, Browser>(), new TreeMap<OperatingSystemPattern, OperatingSystem>(), "");
-		final Data data2 = new Data(new HashSet<Browser>(), operatingSystems2, new HashSet<Robot>(0),
+		final Data data2 = new Data(new HashSet<Browser>(), operatingSystems2, new ArrayList<Robot>(0),
 				new TreeMap<BrowserPattern, Browser>(), new TreeMap<OperatingSystemPattern, OperatingSystem>(), "");
 		Assert.assertFalse(data1.equals(data2));
 		Assert.assertFalse(data1.hashCode() == data2.hashCode());
@@ -183,10 +185,10 @@ public class DataEqualsTest {
 	public void equals_different_robots() {
 		final Robot robot1 = createRobot(1);
 		final Robot robot2 = createRobot(2);
-		final Set<Robot> robots1 = new HashSet<Robot>();
+		final List<Robot> robots1 = new ArrayList<Robot>();
 		robots1.add(robot1);
 		robots1.add(robot2);
-		final Set<Robot> robots2 = new HashSet<Robot>();
+		final List<Robot> robots2 = new ArrayList<Robot>();
 		robots2.add(robot1);
 		final Data data1 = new Data(new HashSet<Browser>(), new HashSet<OperatingSystem>(), robots1,
 				new TreeMap<BrowserPattern, Browser>(), new TreeMap<OperatingSystemPattern, OperatingSystem>(), "");
@@ -198,9 +200,9 @@ public class DataEqualsTest {
 
 	@Test
 	public void equals_different_version() {
-		final Data data1 = new Data(new HashSet<Browser>(), new HashSet<OperatingSystem>(), new HashSet<Robot>(0),
+		final Data data1 = new Data(new HashSet<Browser>(), new HashSet<OperatingSystem>(), new ArrayList<Robot>(0),
 				new TreeMap<BrowserPattern, Browser>(), new TreeMap<OperatingSystemPattern, OperatingSystem>(), "v1");
-		final Data data2 = new Data(new HashSet<Browser>(), new HashSet<OperatingSystem>(), new HashSet<Robot>(0),
+		final Data data2 = new Data(new HashSet<Browser>(), new HashSet<OperatingSystem>(), new ArrayList<Robot>(0),
 				new TreeMap<BrowserPattern, Browser>(), new TreeMap<OperatingSystemPattern, OperatingSystem>(), "v2");
 		Assert.assertFalse(data1.equals(data2));
 		Assert.assertFalse(data1.hashCode() == data2.hashCode());
@@ -212,7 +214,7 @@ public class DataEqualsTest {
 		Assert.assertSame(Data.EMPTY, Data.EMPTY);
 
 		// create new empty instance
-		final Data empty = new Data(new HashSet<Browser>(), new HashSet<OperatingSystem>(), new HashSet<Robot>(0),
+		final Data empty = new Data(new HashSet<Browser>(), new HashSet<OperatingSystem>(), new ArrayList<Robot>(0),
 				new TreeMap<BrowserPattern, Browser>(), new TreeMap<OperatingSystemPattern, OperatingSystem>(), "");
 		Assert.assertEquals(Data.EMPTY, empty);
 		Assert.assertTrue(Data.EMPTY.hashCode() == empty.hashCode());
@@ -220,9 +222,9 @@ public class DataEqualsTest {
 
 	@Test
 	public void equals_identical() {
-		final Data data1 = new Data(new HashSet<Browser>(), new HashSet<OperatingSystem>(), new HashSet<Robot>(0),
+		final Data data1 = new Data(new HashSet<Browser>(), new HashSet<OperatingSystem>(), new ArrayList<Robot>(0),
 				new TreeMap<BrowserPattern, Browser>(), new TreeMap<OperatingSystemPattern, OperatingSystem>(), "");
-		final Data data2 = new Data(new HashSet<Browser>(), new HashSet<OperatingSystem>(), new HashSet<Robot>(0),
+		final Data data2 = new Data(new HashSet<Browser>(), new HashSet<OperatingSystem>(), new ArrayList<Robot>(0),
 				new TreeMap<BrowserPattern, Browser>(), new TreeMap<OperatingSystemPattern, OperatingSystem>(), "");
 		Assert.assertTrue(data1.equals(data2));
 		Assert.assertTrue(data1.hashCode() == data2.hashCode());
@@ -230,14 +232,14 @@ public class DataEqualsTest {
 
 	@Test
 	public void equals_null() {
-		final Data data = new Data(new HashSet<Browser>(), new HashSet<OperatingSystem>(), new HashSet<Robot>(0),
+		final Data data = new Data(new HashSet<Browser>(), new HashSet<OperatingSystem>(), new ArrayList<Robot>(0),
 				new TreeMap<BrowserPattern, Browser>(), new TreeMap<OperatingSystemPattern, OperatingSystem>(), "same");
 		Assert.assertFalse(data.equals(null));
 	}
 
 	@Test
 	public void equals_otherClass() {
-		final Data data = new Data(new HashSet<Browser>(), new HashSet<OperatingSystem>(), new HashSet<Robot>(0),
+		final Data data = new Data(new HashSet<Browser>(), new HashSet<OperatingSystem>(), new ArrayList<Robot>(0),
 				new TreeMap<BrowserPattern, Browser>(), new TreeMap<OperatingSystemPattern, OperatingSystem>(), "same");
 		final String otherClass = "";
 		Assert.assertFalse(data.equals(otherClass));
@@ -245,7 +247,7 @@ public class DataEqualsTest {
 
 	@Test
 	public void equals_same() {
-		final Data data = new Data(new HashSet<Browser>(), new HashSet<OperatingSystem>(), new HashSet<Robot>(0),
+		final Data data = new Data(new HashSet<Browser>(), new HashSet<OperatingSystem>(), new ArrayList<Robot>(0),
 				new TreeMap<BrowserPattern, Browser>(), new TreeMap<OperatingSystemPattern, OperatingSystem>(), "same");
 		Assert.assertTrue(data.equals(data));
 		Assert.assertTrue(data.hashCode() == data.hashCode());

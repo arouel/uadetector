@@ -1,5 +1,6 @@
 package net.sf.uadetector.internal.data;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.TreeMap;
 
@@ -16,7 +17,7 @@ public class DataBlueprint {
 	}
 
 	public static Data buildEmptyTestData(final String version) {
-		return new Data(new HashSet<Browser>(0), new HashSet<OperatingSystem>(0), new HashSet<Robot>(0),
+		return new Data(new HashSet<Browser>(0), new HashSet<OperatingSystem>(0), new ArrayList<Robot>(0),
 				new TreeMap<BrowserPattern, Browser>(), new TreeMap<OperatingSystemPattern, OperatingSystem>(), version);
 	}
 

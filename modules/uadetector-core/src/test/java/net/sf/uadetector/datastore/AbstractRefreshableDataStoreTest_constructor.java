@@ -3,6 +3,7 @@ package net.sf.uadetector.datastore;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.Charset;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.TreeMap;
 
@@ -59,7 +60,7 @@ public class AbstractRefreshableDataStoreTest_constructor {
 
 		@Override
 		public Data getData() {
-			return new Data(new HashSet<Browser>(), new HashSet<OperatingSystem>(), new HashSet<Robot>(0),
+			return new Data(new HashSet<Browser>(), new HashSet<OperatingSystem>(), new ArrayList<Robot>(0),
 					new TreeMap<BrowserPattern, Browser>(), new TreeMap<OperatingSystemPattern, OperatingSystem>(), "20120801-fallback");
 		}
 

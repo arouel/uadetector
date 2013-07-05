@@ -15,7 +15,9 @@
  ******************************************************************************/
 package net.sf.uadetector.internal.data;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.SortedMap;
 import java.util.TreeMap;
@@ -35,7 +37,7 @@ public class DataTest {
 	@Test(expected = IllegalNullArgumentException.class)
 	public void construct_browsers_null() {
 		final Set<Browser> browsers = null;
-		final Set<Robot> robots = new HashSet<Robot>();
+		final List<Robot> robots = new ArrayList<Robot>();
 		final Set<OperatingSystem> operatingSystems = new HashSet<OperatingSystem>();
 		final SortedMap<BrowserPattern, Browser> patternBrowserMap = new TreeMap<BrowserPattern, Browser>();
 		final String version = "test";
@@ -46,7 +48,7 @@ public class DataTest {
 	@Test(expected = IllegalNullArgumentException.class)
 	public void construct_operatingSystems_null() {
 		final Set<Browser> browsers = new HashSet<Browser>();
-		final Set<Robot> robots = new HashSet<Robot>();
+		final List<Robot> robots = new ArrayList<Robot>();
 		final Set<OperatingSystem> operatingSystems = null;
 		final SortedMap<BrowserPattern, Browser> patternBrowserMap = new TreeMap<BrowserPattern, Browser>();
 		final String version = "test";
@@ -57,7 +59,7 @@ public class DataTest {
 	@Test(expected = IllegalNullArgumentException.class)
 	public void construct_patternBrowserMap_null() {
 		final Set<Browser> browsers = new HashSet<Browser>();
-		final Set<Robot> robots = new HashSet<Robot>();
+		final List<Robot> robots = new ArrayList<Robot>();
 		final Set<OperatingSystem> operatingSystems = new HashSet<OperatingSystem>();
 		final SortedMap<BrowserPattern, Browser> patternBrowserMap = null;
 		final String version = "test";
@@ -68,7 +70,7 @@ public class DataTest {
 	@Test(expected = IllegalNullArgumentException.class)
 	public void construct_patternOsMap_null() {
 		final Set<Browser> browsers = new HashSet<Browser>();
-		final Set<Robot> robots = new HashSet<Robot>();
+		final List<Robot> robots = new ArrayList<Robot>();
 		final Set<OperatingSystem> operatingSystems = new HashSet<OperatingSystem>();
 		final SortedMap<BrowserPattern, Browser> patternBrowserMap = new TreeMap<BrowserPattern, Browser>();
 		final String version = "test";
@@ -79,7 +81,7 @@ public class DataTest {
 	@Test(expected = IllegalNullArgumentException.class)
 	public void construct_robots_null() {
 		final Set<Browser> browsers = new HashSet<Browser>();
-		final Set<Robot> robots = null;
+		final List<Robot> robots = null;
 		final Set<OperatingSystem> operatingSystems = new HashSet<OperatingSystem>();
 		final SortedMap<BrowserPattern, Browser> patternBrowserMap = new TreeMap<BrowserPattern, Browser>();
 		final String version = "test";
@@ -90,7 +92,7 @@ public class DataTest {
 	@Test(expected = IllegalNullArgumentException.class)
 	public void construct_version_null() {
 		final Set<Browser> browsers = new HashSet<Browser>();
-		final Set<Robot> robots = new HashSet<Robot>();
+		final List<Robot> robots = new ArrayList<Robot>();
 		final Set<OperatingSystem> operatingSystems = new HashSet<OperatingSystem>();
 		final SortedMap<BrowserPattern, Browser> patternBrowserMap = new TreeMap<BrowserPattern, Browser>();
 		final String version = null;
@@ -101,7 +103,7 @@ public class DataTest {
 	@Test
 	public void testGetters() {
 		final Set<Browser> browsers = new HashSet<Browser>();
-		final Set<Robot> robots = new HashSet<Robot>();
+		final List<Robot> robots = new ArrayList<Robot>();
 		final Set<OperatingSystem> operatingSystems = new HashSet<OperatingSystem>();
 		final SortedMap<BrowserPattern, Browser> patternBrowserMap = new TreeMap<BrowserPattern, Browser>();
 		final String version = "test";
@@ -119,7 +121,7 @@ public class DataTest {
 	public void testToString() {
 		// reduces only some noise in coverage report
 		final Set<Browser> browsers = new HashSet<Browser>();
-		final Set<Robot> robots = new HashSet<Robot>();
+		final List<Robot> robots = new ArrayList<Robot>();
 		final Set<OperatingSystem> operatingSystems = new HashSet<OperatingSystem>();
 		final SortedMap<BrowserPattern, Browser> patternBrowserMap = new TreeMap<BrowserPattern, Browser>();
 		final String version = "test";

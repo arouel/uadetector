@@ -52,7 +52,7 @@ final class Sha256CodeBuilder {
 		try {
 			return MessageDigest.getInstance(algorithm);
 		} catch (final NoSuchAlgorithmException e) {
-			throw new UnsupportedOperationException(String.format(MSG_NO_SUCH_ALGORITHM, ALGORITHM));
+			throw new UnsupportedOperationException(String.format(MSG_NO_SUCH_ALGORITHM, ALGORITHM), e);
 		}
 	}
 

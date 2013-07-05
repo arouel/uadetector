@@ -1,4 +1,4 @@
-package net.sf.uadetector.json.internal.data;
+package net.sf.uadetector.json.internal.data.deserializer;
 
 import java.util.List;
 

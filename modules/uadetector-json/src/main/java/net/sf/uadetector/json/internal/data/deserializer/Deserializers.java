@@ -16,7 +16,6 @@ import net.sf.uadetector.internal.data.domain.BrowserType;
 import net.sf.uadetector.internal.data.domain.OperatingSystem;
 import net.sf.uadetector.internal.data.domain.OperatingSystemPattern;
 import net.sf.uadetector.internal.data.domain.Robot;
-import net.sf.uadetector.json.internal.data.Deserialization;
 import net.sf.uadetector.json.internal.data.Option;
 
 import com.google.gson.Gson;

@@ -5,6 +5,7 @@ import java.util.EnumSet;
 
 import net.sf.qualitycheck.Check;
 import net.sf.uadetector.internal.data.Data;
+import net.sf.uadetector.json.internal.data.deserializer.Deserialization;
 import net.sf.uadetector.json.internal.data.deserializer.Deserializers;
 import net.sf.uadetector.json.internal.data.serializer.Serialization;
 import net.sf.uadetector.json.internal.data.serializer.Serializers;

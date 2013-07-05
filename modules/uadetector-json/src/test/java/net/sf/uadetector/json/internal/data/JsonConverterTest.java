@@ -8,6 +8,7 @@ import net.sf.qualitycheck.exception.IllegalNullArgumentException;
 import net.sf.uadetector.datastore.DataStore;
 import net.sf.uadetector.internal.data.Data;
 import net.sf.uadetector.internal.util.UrlUtil;
+import net.sf.uadetector.json.internal.data.deserializer.Deserialization;
 
 import org.junit.Assert;
 import org.junit.Test;

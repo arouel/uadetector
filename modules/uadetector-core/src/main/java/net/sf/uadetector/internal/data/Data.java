@@ -68,25 +68,25 @@ public class Data {
 	private final String version;
 
 	@Nonnull
-	private final SortedMap<BrowserPattern, Browser> patternBrowserMap;
+	private final SortedMap<BrowserPattern, Browser> patternToBrowserMap;
 
 	@Nonnull
-	private final SortedMap<OperatingSystemPattern, OperatingSystem> patternOsMap;
+	private final SortedMap<OperatingSystemPattern, OperatingSystem> patternToOperatingSystemMap;
 
 	public Data(@Nonnull final Set<Browser> browsers, @Nonnull final Set<OperatingSystem> operatingSystems,
-			@Nonnull final List<Robot> robots, @Nonnull final SortedMap<BrowserPattern, Browser> patternBrowserMap,
-			@Nonnull final SortedMap<OperatingSystemPattern, OperatingSystem> patternOsMap, @Nonnull final String version) {
+			@Nonnull final List<Robot> robots, @Nonnull final SortedMap<BrowserPattern, Browser> patternToBrowserMap,
+			@Nonnull final SortedMap<OperatingSystemPattern, OperatingSystem> patternToOperatingSystemMap, @Nonnull final String version) {
 		Check.notNull(browsers, "browsers");
 		Check.notNull(operatingSystems, "operatingSystems");
 		Check.notNull(robots, "robots");
-		Check.notNull(patternBrowserMap, "patternBrowserMap");
-		Check.notNull(patternOsMap, "patternOsMap");
+		Check.notNull(patternToBrowserMap, "patternToBrowserMap");
+		Check.notNull(patternToOperatingSystemMap, "patternToOperatingSystemMap");
 		Check.notNull(version, "version");
 
 		this.browsers = browsers;
 		this.operatingSystems = operatingSystems;
-		this.patternBrowserMap = patternBrowserMap;
-		this.patternOsMap = patternOsMap;
+		this.patternToBrowserMap = patternToBrowserMap;
+		this.patternToOperatingSystemMap = patternToOperatingSystemMap;
 		this.robots = robots;
 		this.version = version;
 	}
@@ -109,10 +109,10 @@ public class Data {
 		if (!operatingSystems.equals(other.operatingSystems)) {
 			return false;
 		}
-		if (!patternBrowserMap.equals(other.patternBrowserMap)) {
+		if (!patternToBrowserMap.equals(other.patternToBrowserMap)) {
 			return false;
 		}
-		if (!patternOsMap.equals(other.patternOsMap)) {
+		if (!patternToOperatingSystemMap.equals(other.patternToOperatingSystemMap)) {
 			return false;
 		}
 		if (!robots.equals(other.robots)) {
@@ -135,13 +135,13 @@ public class Data {
 	}
 
 	@Nonnull
-	public SortedMap<BrowserPattern, Browser> getPatternBrowserMap() {
-		return patternBrowserMap;
+	public SortedMap<BrowserPattern, Browser> getPatternToBrowserMap() {
+		return patternToBrowserMap;
 	}
 
 	@Nonnull
-	public SortedMap<OperatingSystemPattern, OperatingSystem> getPatternOsMap() {
-		return patternOsMap;
+	public SortedMap<OperatingSystemPattern, OperatingSystem> getPatternToOperatingSystemMap() {
+		return patternToOperatingSystemMap;
 	}
 
 	@Nonnull
@@ -165,8 +165,8 @@ public class Data {
 		int result = 1;
 		result = prime * result + browsers.hashCode();
 		result = prime * result + operatingSystems.hashCode();
-		result = prime * result + patternBrowserMap.hashCode();
-		result = prime * result + patternOsMap.hashCode();
+		result = prime * result + patternToBrowserMap.hashCode();
+		result = prime * result + patternToOperatingSystemMap.hashCode();
 		result = prime * result + robots.hashCode();
 		result = prime * result + version.hashCode();
 		return result;
@@ -203,13 +203,13 @@ public class Data {
 			builder.append('\n');
 		}
 		builder.append("browser patterns:\t");
-		builder.append(patternBrowserMap.size());
+		builder.append(patternToBrowserMap.size());
 		builder.append('\n');
 		builder.append("operating systems:\t");
 		builder.append(operatingSystems.size());
 		builder.append('\n');
 		builder.append("os patterns:\t\t");
-		builder.append(patternOsMap.size());
+		builder.append(patternToOperatingSystemMap.size());
 		builder.append('\n');
 		builder.append("robots:\t\t\t");
 		builder.append(robots.size());
@@ -230,9 +230,9 @@ public class Data {
 		builder.append(", version=");
 		builder.append(version);
 		builder.append(", patternBrowserMap=");
-		builder.append(patternBrowserMap);
+		builder.append(patternToBrowserMap);
 		builder.append(", patternOsMap=");
-		builder.append(patternOsMap);
+		builder.append(patternToOperatingSystemMap);
 		builder.append("]");
 		return builder.toString();
 	}

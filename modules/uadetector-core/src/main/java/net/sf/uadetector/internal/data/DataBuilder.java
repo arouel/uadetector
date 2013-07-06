@@ -117,7 +117,7 @@ public class DataBuilder {
 		return operatingSystems;
 	}
 
-	private static SortedMap<BrowserPattern, Browser> buildPatternBrowserMap(final Set<Browser> browserSet) {
+	private static SortedMap<BrowserPattern, Browser> buildPatternToBrowserMap(final Set<Browser> browserSet) {
 		final SortedMap<BrowserPattern, Browser> patternBrowser = new TreeMap<BrowserPattern, Browser>(BROWSER_PATTERN_COMPARATOR);
 		for (final Browser browser : browserSet) {
 			for (final BrowserPattern pattern : browser.getPatternSet()) {
@@ -127,7 +127,7 @@ public class DataBuilder {
 		return patternBrowser;
 	}
 
-	private static SortedMap<OperatingSystemPattern, OperatingSystem> buildPatternOperatingSystemMap(final Set<OperatingSystem> osSet) {
+	private static SortedMap<OperatingSystemPattern, OperatingSystem> buildPatternToOperatingSystemMap(final Set<OperatingSystem> osSet) {
 		final SortedMap<OperatingSystemPattern, OperatingSystem> map = new TreeMap<OperatingSystemPattern, OperatingSystem>(
 				OS_PATTERN_COMPARATOR);
 		for (final OperatingSystem os : osSet) {
@@ -337,10 +337,10 @@ public class DataBuilder {
 		final Set<Browser> browserSet = buildBrowsers(browserBuilders);
 		browserSet.addAll(browsers);
 
-		final SortedMap<BrowserPattern, Browser> patternBrowserMap = buildPatternBrowserMap(browserSet);
-		final SortedMap<OperatingSystemPattern, OperatingSystem> patternOsMap = buildPatternOperatingSystemMap(osSet);
+		final SortedMap<BrowserPattern, Browser> patternToBrowserMap = buildPatternToBrowserMap(browserSet);
+		final SortedMap<OperatingSystemPattern, OperatingSystem> patternToOperatingSystemMap = buildPatternToOperatingSystemMap(osSet);
 
-		return new Data(browserSet, osSet, robots, patternBrowserMap, patternOsMap, version);
+		return new Data(browserSet, osSet, robots, patternToBrowserMap, patternToOperatingSystemMap, version);
 	}
 
 	@Nonnull

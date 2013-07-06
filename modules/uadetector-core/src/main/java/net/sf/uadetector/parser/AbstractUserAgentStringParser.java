@@ -47,7 +47,7 @@ public abstract class AbstractUserAgentStringParser implements UserAgentStringPa
 	private static void examineAsBrowser(final UserAgent.Builder builder, final Data data) {
 		Matcher matcher;
 		VersionNumber version = VersionNumber.UNKNOWN;
-		for (final Entry<BrowserPattern, Browser> entry : data.getPatternBrowserMap().entrySet()) {
+		for (final Entry<BrowserPattern, Browser> entry : data.getPatternToBrowserMap().entrySet()) {
 			matcher = entry.getKey().getPattern().matcher(builder.getUserAgentString());
 			if (matcher.find()) {
 
@@ -101,7 +101,7 @@ public abstract class AbstractUserAgentStringParser implements UserAgentStringPa
 	 */
 	private static void examineOperatingSystem(final UserAgent.Builder builder, final Data data) {
 		if (net.sf.uadetector.OperatingSystem.EMPTY.equals(builder.getOperatingSystem())) {
-			for (final Entry<OperatingSystemPattern, OperatingSystem> entry : data.getPatternOsMap().entrySet()) {
+			for (final Entry<OperatingSystemPattern, OperatingSystem> entry : data.getPatternToOperatingSystemMap().entrySet()) {
 				final Matcher matcher = entry.getKey().getPattern().matcher(builder.getUserAgentString());
 				if (matcher.find()) {
 					entry.getValue().copyTo(builder);

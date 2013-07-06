@@ -112,9 +112,9 @@ public class DataTest {
 		Assert.assertEquals(browsers, data.getBrowsers());
 		Assert.assertEquals(robots, data.getRobots());
 		Assert.assertEquals(operatingSystems, data.getOperatingSystems());
-		Assert.assertEquals(patternBrowserMap, data.getPatternBrowserMap());
+		Assert.assertEquals(patternBrowserMap, data.getPatternToBrowserMap());
 		Assert.assertSame(version, data.getVersion());
-		Assert.assertEquals(patternOsMap, data.getPatternOsMap());
+		Assert.assertEquals(patternOsMap, data.getPatternToOperatingSystemMap());
 	}
 
 	@Test

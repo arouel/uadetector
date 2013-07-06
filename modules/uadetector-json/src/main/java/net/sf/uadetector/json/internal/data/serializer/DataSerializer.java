@@ -49,7 +49,7 @@ public final class DataSerializer implements JsonSerializer<Data> {
 		jsonObj.add(DataJsonFormat.VERSION_1_0.getKey(), context.serialize(DataJsonFormat.VERSION_1_0.getVersion()));
 		jsonObj.add(VERSION.getName(), context.serialize(data.getVersion()));
 
-		final List<OperatingSystemPattern> osPatterns = new ArrayList<OperatingSystemPattern>(data.getPatternOsMap().keySet());
+		final List<OperatingSystemPattern> osPatterns = new ArrayList<OperatingSystemPattern>(data.getPatternToOperatingSystemMap().keySet());
 		Collections.sort(osPatterns, new OrderedPatternPositionComparator<OperatingSystemPattern>());
 		jsonObj.add(OPERATINGSYSTEMPATTERNS.getName(), context.serialize(osPatterns));
 
@@ -61,7 +61,7 @@ public final class DataSerializer implements JsonSerializer<Data> {
 		Collections.sort(browserTypes, new BrowserTypeIdComparator());
 		jsonObj.add(BROWSERTYPES.getName(), context.serialize(browserTypes));
 
-		final List<BrowserPattern> browserPatterns = new ArrayList<BrowserPattern>(data.getPatternBrowserMap().keySet());
+		final List<BrowserPattern> browserPatterns = new ArrayList<BrowserPattern>(data.getPatternToBrowserMap().keySet());
 		Collections.sort(browserPatterns, new OrderedPatternPositionComparator<BrowserPattern>());
 		jsonObj.add(BROWSERPATTERNS.getName(), context.serialize(browserPatterns));
 

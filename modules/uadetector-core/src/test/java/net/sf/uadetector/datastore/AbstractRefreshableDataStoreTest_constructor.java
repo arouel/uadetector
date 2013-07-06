@@ -3,19 +3,12 @@ package net.sf.uadetector.datastore;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.Charset;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.TreeMap;
 
 import net.sf.qualitycheck.exception.IllegalNullArgumentException;
 import net.sf.uadetector.datareader.DataReader;
 import net.sf.uadetector.datareader.XmlDataReader;
 import net.sf.uadetector.internal.data.Data;
-import net.sf.uadetector.internal.data.domain.Browser;
-import net.sf.uadetector.internal.data.domain.BrowserPattern;
-import net.sf.uadetector.internal.data.domain.OperatingSystem;
-import net.sf.uadetector.internal.data.domain.OperatingSystemPattern;
-import net.sf.uadetector.internal.data.domain.Robot;
+import net.sf.uadetector.internal.data.DataBlueprint;
 import net.sf.uadetector.internal.util.UrlUtil;
 
 import org.junit.Assert;
@@ -60,8 +53,7 @@ public class AbstractRefreshableDataStoreTest_constructor {
 
 		@Override
 		public Data getData() {
-			return new Data(new HashSet<Browser>(), new HashSet<OperatingSystem>(), new ArrayList<Robot>(0),
-					new TreeMap<BrowserPattern, Browser>(), new TreeMap<OperatingSystemPattern, OperatingSystem>(), "20120801-fallback");
+			return new DataBlueprint().version("20120801-fallback").build();
 		}
 
 		@Override

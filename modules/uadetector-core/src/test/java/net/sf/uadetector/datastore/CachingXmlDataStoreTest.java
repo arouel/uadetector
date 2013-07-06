@@ -128,7 +128,7 @@ public class CachingXmlDataStoreTest {
 
 			@Override
 			public Data getData() {
-				return DataBlueprint.buildEmptyTestData(version);
+				return new DataBlueprint().version(version).build();
 			}
 
 			@Override

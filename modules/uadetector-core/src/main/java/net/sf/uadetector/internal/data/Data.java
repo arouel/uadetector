@@ -15,6 +15,7 @@
  ******************************************************************************/
 package net.sf.uadetector.internal.data;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -24,39 +25,65 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 import java.util.SortedMap;
+import java.util.SortedSet;
 import java.util.TreeMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import javax.annotation.Nonnull;
+import javax.annotation.concurrent.Immutable;
 
 import net.sf.qualitycheck.Check;
 import net.sf.uadetector.internal.data.domain.Browser;
+import net.sf.uadetector.internal.data.domain.BrowserOperatingSystemMapping;
 import net.sf.uadetector.internal.data.domain.BrowserPattern;
+import net.sf.uadetector.internal.data.domain.BrowserType;
 import net.sf.uadetector.internal.data.domain.OperatingSystem;
 import net.sf.uadetector.internal.data.domain.OperatingSystemPattern;
 import net.sf.uadetector.internal.data.domain.Robot;
 
 /**
- * The {@code Data} class represents the detection information for <i>UASparsers</i> from <a
- * href="http://user-agent-string.info/">http://user-agent-string.info</a><br>
- * <br>
- * A {@code Data} object is immutable, their values cannot be changed after creation.
+ * This class represents the detection information of <i>UADetector</i>.
+ * <p>
+ * An instance of {@code Data} is immutable, their values cannot be changed after creation.
  * 
  * @author André Rouél
  */
-public class Data {
+@Immutable
+public class Data implements Serializable {
 
 	/**
 	 * An <i>immutable</i> empty {@code Data} object.
 	 */
-	public static final Data EMPTY = new Data(new HashSet<Browser>(), new HashSet<OperatingSystem>(), new ArrayList<Robot>(0),
-			new TreeMap<BrowserPattern, Browser>(), new TreeMap<OperatingSystemPattern, OperatingSystem>(), "");
+	public static final Data EMPTY = new Data(new HashSet<Browser>(0), new HashMap<Integer, SortedSet<BrowserPattern>>(0),
+			new HashMap<Integer, BrowserType>(0), new TreeMap<BrowserPattern, Browser>(), new HashSet<BrowserOperatingSystemMapping>(0),
+			new HashSet<OperatingSystem>(0), new HashMap<Integer, SortedSet<OperatingSystemPattern>>(0),
+			new TreeMap<OperatingSystemPattern, OperatingSystem>(), new ArrayList<Robot>(0), "");
+
+	private static final long serialVersionUID = 8522012551928801089L;
+
+	@Nonnull
+	private final Map<Integer, SortedSet<BrowserPattern>> browserPatterns;
 
 	@Nonnull
 	private final Set<Browser> browsers;
 
 	@Nonnull
+	private final Set<BrowserOperatingSystemMapping> browserToOperatingSystemMappings;
+
+	@Nonnull
+	private final Map<Integer, BrowserType> browserTypes;
+
+	@Nonnull
+	private final Map<Integer, SortedSet<OperatingSystemPattern>> operatingSystemPatterns;
+
+	@Nonnull
 	private final Set<OperatingSystem> operatingSystems;
+
+	@Nonnull
+	private final SortedMap<BrowserPattern, Browser> patternToBrowserMap;
+
+	@Nonnull
+	private final SortedMap<OperatingSystemPattern, OperatingSystem> patternToOperatingSystemMap;
 
 	@Nonnull
 	private final List<Robot> robots;
@@ -67,28 +94,37 @@ public class Data {
 	@Nonnull
 	private final String version;
 
-	@Nonnull
-	private final SortedMap<BrowserPattern, Browser> patternToBrowserMap;
-
-	@Nonnull
-	private final SortedMap<OperatingSystemPattern, OperatingSystem> patternToOperatingSystemMap;
-
-	public Data(@Nonnull final Set<Browser> browsers, @Nonnull final Set<OperatingSystem> operatingSystems,
-			@Nonnull final List<Robot> robots, @Nonnull final SortedMap<BrowserPattern, Browser> patternToBrowserMap,
-			@Nonnull final SortedMap<OperatingSystemPattern, OperatingSystem> patternToOperatingSystemMap, @Nonnull final String version) {
+	public Data(@Nonnull final Set<Browser> browsers, @Nonnull final Map<Integer, SortedSet<BrowserPattern>> browserPatterns,
+			@Nonnull final Map<Integer, BrowserType> browserTypes, @Nonnull final SortedMap<BrowserPattern, Browser> patternToBrowserMap,
+			@Nonnull final Set<BrowserOperatingSystemMapping> browserToOperatingSystemMappings,
+			@Nonnull final Set<OperatingSystem> operatingSystems,
+			@Nonnull final Map<Integer, SortedSet<OperatingSystemPattern>> operatingSystemPatterns,
+			@Nonnull final SortedMap<OperatingSystemPattern, OperatingSystem> patternToOperatingSystemMap,
+			@Nonnull final List<Robot> robots, @Nonnull final String version) {
 		Check.notNull(browsers, "browsers");
-		Check.notNull(operatingSystems, "operatingSystems");
-		Check.notNull(robots, "robots");
+		Check.notNull(browserPatterns, "browserPatterns");
+		Check.notNull(browserTypes, "browserTypes");
 		Check.notNull(patternToBrowserMap, "patternToBrowserMap");
+		Check.notNull(browserToOperatingSystemMappings, "browserToOperatingSystemMap");
+		Check.notNull(operatingSystems, "operatingSystems");
+		Check.notNull(operatingSystemPatterns, "operatingSystemPatterns");
 		Check.notNull(patternToOperatingSystemMap, "patternToOperatingSystemMap");
+		Check.notNull(robots, "robots");
 		Check.notNull(version, "version");
 
-		this.browsers = browsers;
-		this.operatingSystems = operatingSystems;
-		this.patternToBrowserMap = patternToBrowserMap;
-		this.patternToOperatingSystemMap = patternToOperatingSystemMap;
-		this.robots = robots;
-		this.version = version;
+		this.browsers = Collections.unmodifiableSet(new HashSet<Browser>(browsers));
+		this.browserPatterns = Collections.unmodifiableMap(new HashMap<Integer, SortedSet<BrowserPattern>>(browserPatterns));
+		this.browserTypes = Collections.unmodifiableMap(new HashMap<Integer, BrowserType>(Check.notNull(browserTypes, "browserTypes")));
+		this.patternToBrowserMap = Collections.unmodifiableSortedMap(new TreeMap<BrowserPattern, Browser>(patternToBrowserMap));
+		this.browserToOperatingSystemMappings = Collections.unmodifiableSet(new HashSet<BrowserOperatingSystemMapping>(
+				browserToOperatingSystemMappings));
+		this.operatingSystems = Collections.unmodifiableSet(new HashSet<OperatingSystem>(operatingSystems));
+		this.operatingSystemPatterns = Collections.unmodifiableMap(new HashMap<Integer, SortedSet<OperatingSystemPattern>>(
+				operatingSystemPatterns));
+		this.patternToOperatingSystemMap = Collections.unmodifiableSortedMap(new TreeMap<OperatingSystemPattern, OperatingSystem>(
+				patternToOperatingSystemMap));
+		this.robots = Collections.unmodifiableList(new ArrayList<Robot>(robots));
+		this.version = Check.notNull(version, "version");
 	}
 
 	@Override
@@ -106,10 +142,22 @@ public class Data {
 		if (!browsers.equals(other.browsers)) {
 			return false;
 		}
-		if (!operatingSystems.equals(other.operatingSystems)) {
+		if (!browserPatterns.equals(other.browserPatterns)) {
+			return false;
+		}
+		if (!browserTypes.equals(other.browserTypes)) {
 			return false;
 		}
 		if (!patternToBrowserMap.equals(other.patternToBrowserMap)) {
+			return false;
+		}
+		if (!browserToOperatingSystemMappings.equals(other.browserToOperatingSystemMappings)) {
+			return false;
+		}
+		if (!operatingSystems.equals(other.operatingSystems)) {
+			return false;
+		}
+		if (!operatingSystemPatterns.equals(other.operatingSystemPatterns)) {
 			return false;
 		}
 		if (!patternToOperatingSystemMap.equals(other.patternToOperatingSystemMap)) {
@@ -125,13 +173,33 @@ public class Data {
 	}
 
 	@Nonnull
+	public Map<Integer, SortedSet<BrowserPattern>> getBrowserPatterns() {
+		return browserPatterns;
+	}
+
+	@Nonnull
 	public Set<Browser> getBrowsers() {
-		return Collections.unmodifiableSet(browsers);
+		return browsers;
+	}
+
+	@Nonnull
+	public Set<BrowserOperatingSystemMapping> getBrowserToOperatingSystemMappings() {
+		return browserToOperatingSystemMappings;
+	}
+
+	@Nonnull
+	public Map<Integer, BrowserType> getBrowserTypes() {
+		return browserTypes;
+	}
+
+	@Nonnull
+	public Map<Integer, SortedSet<OperatingSystemPattern>> getOperatingSystemPatterns() {
+		return operatingSystemPatterns;
 	}
 
 	@Nonnull
 	public Set<OperatingSystem> getOperatingSystems() {
-		return Collections.unmodifiableSet(operatingSystems);
+		return operatingSystems;
 	}
 
 	@Nonnull
@@ -146,7 +214,7 @@ public class Data {
 
 	@Nonnull
 	public List<Robot> getRobots() {
-		return Collections.unmodifiableList(robots);
+		return robots;
 	}
 
 	/**
@@ -164,8 +232,12 @@ public class Data {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + browsers.hashCode();
-		result = prime * result + operatingSystems.hashCode();
+		result = prime * result + browserPatterns.hashCode();
+		result = prime * result + browserTypes.hashCode();
 		result = prime * result + patternToBrowserMap.hashCode();
+		result = prime * result + browserToOperatingSystemMappings.hashCode();
+		result = prime * result + operatingSystems.hashCode();
+		result = prime * result + operatingSystemPatterns.hashCode();
 		result = prime * result + patternToOperatingSystemMap.hashCode();
 		result = prime * result + robots.hashCode();
 		result = prime * result + version.hashCode();
@@ -223,16 +295,24 @@ public class Data {
 		final StringBuilder builder = new StringBuilder();
 		builder.append("Data [browsers=");
 		builder.append(browsers);
+		builder.append(", browserPatterns=");
+		builder.append(browserPatterns);
+		builder.append(", browserTypes=");
+		builder.append(browserTypes);
+		builder.append(", patternToBrowserMap=");
+		builder.append(patternToBrowserMap);
+		builder.append(", browserToOperatingSystemMap=");
+		builder.append(browserToOperatingSystemMappings);
 		builder.append(", operatingSystems=");
 		builder.append(operatingSystems);
+		builder.append(", operatingSystemPatterns=");
+		builder.append(operatingSystemPatterns);
+		builder.append(", patternToOperatingSystemMap=");
+		builder.append(patternToOperatingSystemMap);
 		builder.append(", robots=");
 		builder.append(robots);
 		builder.append(", version=");
 		builder.append(version);
-		builder.append(", patternBrowserMap=");
-		builder.append(patternToBrowserMap);
-		builder.append(", patternOsMap=");
-		builder.append(patternToOperatingSystemMap);
 		builder.append("]");
 		return builder.toString();
 	}

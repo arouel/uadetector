@@ -56,7 +56,7 @@ public class UpdateServiceTest {
 
 				@Override
 				public Data getData() {
-					return DataBlueprint.buildEmptyTestData();
+					return new DataBlueprint().version("empty-test-data").build();
 				}
 
 				@Override

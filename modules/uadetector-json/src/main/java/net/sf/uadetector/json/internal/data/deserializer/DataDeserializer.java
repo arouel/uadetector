@@ -9,6 +9,7 @@ import java.util.Set;
 
 import net.sf.qualitycheck.Check;
 import net.sf.uadetector.internal.data.Data;
+import net.sf.uadetector.internal.data.DataBuilder;
 import net.sf.uadetector.internal.data.domain.Browser;
 import net.sf.uadetector.internal.data.domain.BrowserPattern;
 import net.sf.uadetector.internal.data.domain.BrowserType;
@@ -54,7 +55,7 @@ public final class DataDeserializer extends AbstractDeserializer<Data> implement
 	public Data deserialize(final JsonElement json, final Type typeOfT, final JsonDeserializationContext context) {
 		final JsonObject obj = json.getAsJsonObject();
 		final Set<Map.Entry<String, JsonElement>> entrySet = obj.entrySet();
-		final Data.Builder builder = new Data.Builder();
+		final DataBuilder builder = new DataBuilder();
 		for (final Map.Entry<String, JsonElement> entry : entrySet) {
 			final List<BrowserPattern> browserPatterns = deserializeType(context, entry, SerializableDataField.BROWSERPATTERNS,
 					BrowserPattern.class);

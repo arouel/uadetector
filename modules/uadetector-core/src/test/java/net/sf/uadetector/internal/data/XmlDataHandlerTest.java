@@ -49,14 +49,14 @@ public class XmlDataHandlerTest {
 
 	@Test
 	public void resolveEntity_knownUrl() throws IOException, SAXException {
-		final XmlDataHandler handler = new XmlDataHandler(new Data.Builder());
+		final XmlDataHandler handler = new XmlDataHandler(new DataBuilder());
 		final InputSource input = handler.resolveEntity("publicId is irrelevant", XmlDataHandler.UASDATA_DEF_URL);
 		Assert.assertNotNull(input);
 	}
 
 	@Test(expected = SAXException.class)
 	public void resolveEntity_unknownUrl() throws IOException, SAXException {
-		final XmlDataHandler handler = new XmlDataHandler(new Data.Builder());
+		final XmlDataHandler handler = new XmlDataHandler(new DataBuilder());
 		handler.resolveEntity("publicId unknown", "systemId unknown");
 	}
 

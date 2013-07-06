@@ -30,7 +30,7 @@ import net.sf.qualitycheck.Check;
 import net.sf.uadetector.datastore.DataStore;
 import net.sf.uadetector.exception.CanNotOpenStreamException;
 import net.sf.uadetector.internal.data.Data;
-import net.sf.uadetector.internal.data.Data.Builder;
+import net.sf.uadetector.internal.data.DataBuilder;
 import net.sf.uadetector.internal.data.XmlDataHandler;
 import net.sf.uadetector.internal.util.UrlUtil;
 
@@ -52,7 +52,7 @@ public final class XmlDataReader implements DataReader {
 
 		private static final String MSG_NOT_PARSED_AS_EXPECTED = "The UAS data has not been parsed as expected.";
 
-		public static void parse(@Nonnull final InputStream stream, @Nonnull final Builder builder) throws ParserConfigurationException,
+		public static void parse(@Nonnull final InputStream stream, @Nonnull final DataBuilder builder) throws ParserConfigurationException,
 				SAXException, IOException {
 			final SAXParserFactory factory = SAXParserFactory.newInstance();
 			factory.setValidating(true);
@@ -100,7 +100,7 @@ public final class XmlDataReader implements DataReader {
 		Check.notNull(inputStream, "inputStream");
 		Check.notNull(charset, "charset");
 
-		final Builder builder = new Builder();
+		final DataBuilder builder = new DataBuilder();
 		boolean hasErrors = false;
 		try {
 			XmlParser.parse(inputStream, builder);

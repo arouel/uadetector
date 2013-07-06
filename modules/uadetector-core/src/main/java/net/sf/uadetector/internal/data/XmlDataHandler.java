@@ -278,7 +278,7 @@ public final class XmlDataHandler extends DefaultHandler {
 	private Tag currentTag = null;
 
 	@Nonnull
-	private final Data.Builder dataBuilder;
+	private final DataBuilder dataBuilder;
 
 	/**
 	 * Flag to note that a fatal error occurred while parsing the document
@@ -310,7 +310,7 @@ public final class XmlDataHandler extends DefaultHandler {
 	 */
 	private boolean warning = false;
 
-	public XmlDataHandler(@Nonnull final Data.Builder builder) {
+	public XmlDataHandler(@Nonnull final DataBuilder builder) {
 		Check.notNull(builder, "builder");
 
 		dataBuilder = builder;

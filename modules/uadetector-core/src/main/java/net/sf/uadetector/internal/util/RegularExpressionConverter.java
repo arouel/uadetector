@@ -15,6 +15,8 @@
  ******************************************************************************/
 package net.sf.uadetector.internal.util;
 
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.TreeSet;
@@ -90,7 +92,7 @@ public final class RegularExpressionConverter {
 		 *            a set of flags
 		 * @return sum of numerical values of passed flags or 0
 		 */
-		public static int convertToBitmask(@Nonnull final Set<Flag> flags) {
+		public static int convertToBitmask(@Nonnull final Collection<Flag> flags) {
 			Check.notNull(flags, "flags");
 
 			int bitmask = 0;
@@ -109,11 +111,11 @@ public final class RegularExpressionConverter {
 		 *            a set of flags
 		 * @return sum of numerical values of passed flags or 0
 		 */
-		public static String convertToModifiers(@Nonnull final Set<Flag> flags) {
+		public static String convertToModifiers(@Nonnull final Collection<Flag> flags) {
 			Check.notNull(flags, "flags");
 
 			final StringBuilder modifiers = new StringBuilder(8);
-			final Set<Flag> sortedFlags = new TreeSet<Flag>(FLAG_COMPARATOR);
+			final Set<Flag> sortedFlags = new TreeSet<Flag>(Collections.reverseOrder(FLAG_COMPARATOR));
 			sortedFlags.addAll(flags);
 			for (final Flag flag : sortedFlags) {
 				modifiers.append(flag.getCharacter());
@@ -218,7 +220,7 @@ public final class RegularExpressionConverter {
 		private final int number;
 
 		private Flag(final int value, final char character) {
-			this.number = value;
+			number = value;
 			this.character = character;
 		}
 
@@ -243,6 +245,11 @@ public final class RegularExpressionConverter {
 	}
 
 	/**
+	 * Template to support the conversion into a PERL style regular expression
+	 */
+	private static final String PATTERN_TO_REGEX_TEMPLATE = "/%s/%s";
+
+	/**
 	 * Pattern for PERL style regular expression strings
 	 */
 	private static final Pattern PERL_STYLE = Pattern.compile("^/.*/((i|m|s|x)*)?$");
@@ -251,6 +258,19 @@ public final class RegularExpressionConverter {
 	 * Pattern for PERL style regular expression strings with more fault-tolerance to the modifiers
 	 */
 	private static final Pattern PERL_STYLE_TOLERANT = Pattern.compile("^/.*/(([A-z])*)?$");
+
+	/**
+	 * Converts a given {@code Pattern} into a PERL style regular expression.
+	 * 
+	 * @param pattern
+	 *            regular expression pattern
+	 * @return PERL style regular expression as string
+	 */
+	public static String convertPatternToPerlRegex(@Nonnull final Pattern pattern) {
+		Check.notNull(pattern, "pattern");
+		final String modifiers = Flag.convertToModifiers(Flag.parse(pattern.flags()));
+		return String.format(PATTERN_TO_REGEX_TEMPLATE, pattern.pattern(), modifiers);
+	}
 
 	/**
 	 * Converts a PERL style regular expression into Java style.<br>

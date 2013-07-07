@@ -122,8 +122,8 @@ public class FlagTest {
 		Assert.assertTrue(expected.containsAll(convertedTwice));
 
 		// testing character ordering
-		Assert.assertEquals(modifiers, Flag.convertToModifiers(convertedOnce));
-		Assert.assertEquals(modifiers, Flag.convertToModifiers(convertedTwice));
+		Assert.assertEquals(new StringBuffer(modifiers).reverse().toString(), Flag.convertToModifiers(convertedOnce));
+		Assert.assertEquals(new StringBuffer(modifiers).reverse().toString(), Flag.convertToModifiers(convertedTwice));
 	}
 
 }

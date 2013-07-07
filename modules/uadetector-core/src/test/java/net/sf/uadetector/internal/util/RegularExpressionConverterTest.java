@@ -26,6 +26,13 @@ import org.junit.Test;
 public class RegularExpressionConverterTest {
 
 	@Test
+	public void convertPerlRegexToPattern_andBack() {
+		final String perlStyleRegex = "/^test[a-z0-9]\\w+$/si";
+		final Pattern pattern = RegularExpressionConverter.convertPerlRegexToPattern(perlStyleRegex);
+		Assert.assertEquals(perlStyleRegex, RegularExpressionConverter.convertPatternToPerlRegex(pattern));
+	}
+
+	@Test
 	public void convertPerlRegexToPattern_faultTolerantModifierRegexConverting_NintendoDS() {
 		final String perlStyleRegex = "/Nintendo DS/Si";
 		final Pattern pattern = RegularExpressionConverter.convertPerlRegexToPattern(perlStyleRegex, true);

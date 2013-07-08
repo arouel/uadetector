@@ -15,24 +15,30 @@
  ******************************************************************************/
 package net.sf.uadetector.internal.data.domain;
 
+import java.io.Serializable;
+
 import javax.annotation.Nonnegative;
 import javax.annotation.Nonnull;
+import javax.annotation.concurrent.Immutable;
+import javax.annotation.concurrent.NotThreadSafe;
 
 import net.sf.qualitycheck.Check;
 
-public final class BrowserOperatingSystemMapping {
+@Immutable
+public final class BrowserOperatingSystemMapping implements Serializable {
 
+	@NotThreadSafe
 	public static final class Builder {
 
 		/**
 		 * ID of a browser entry
 		 */
-		private int browserId;
+		private int browserId = Integer.MIN_VALUE;
 
 		/**
 		 * ID of a operating system entry
 		 */
-		private int operatingSystemId;
+		private int operatingSystemId = Integer.MIN_VALUE;
 
 		/**
 		 * Build an instance of {@code BrowserOperatingSystemMapping}.
@@ -142,6 +148,8 @@ public final class BrowserOperatingSystemMapping {
 
 	}
 
+	private static final long serialVersionUID = 6074931648810031757L;
+
 	/**
 	 * ID of a browser entry
 	 */
@@ -189,10 +197,12 @@ public final class BrowserOperatingSystemMapping {
 		return true;
 	}
 
+	@Nonnegative
 	public int getBrowserId() {
 		return browserId;
 	}
 
+	@Nonnegative
 	public int getOperatingSystemId() {
 		return operatingSystemId;
 	}

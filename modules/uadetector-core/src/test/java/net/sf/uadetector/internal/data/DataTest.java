@@ -192,10 +192,10 @@ public class DataTest {
 
 	@Test
 	public void equals_different_ROBOTS() {
-		final Robot robot1 = new Robot(UserAgentFamily.BINGBOT, "i1", 1, "iu1", "n1", "p1", "pu1", "u1", "uas1");
+		final Robot robot1 = new Robot(1, "n1", UserAgentFamily.BINGBOT, "fn1", "iu1", "p1", "pu1", "uas1", "icn1");
 		final Data a = new DataBlueprint().robots(Lists.newArrayList(robot1)).build();
 
-		final Robot robot2 = new Robot(UserAgentFamily.YAHOOFEEDSEEKER, "i1", 1, "iu1", "n1", "p1", "pu1", "u1", "uas1");
+		final Robot robot2 = new Robot(2, "n2", UserAgentFamily.YAHOOFEEDSEEKER, "fn2", "iu2", "p2", "pu2", "uas2", "icn2");
 		final Data b = new DataBlueprint().robots(Lists.newArrayList(robot2)).build();
 
 		assertFalse(a.equals(b));
@@ -335,8 +335,7 @@ public class DataTest {
 		browsers.add(browser);
 		patternToBrowserMap.put(browserPattern, browser);
 		browserToOperatingSystemMappings.add(new BrowserOperatingSystemMapping(browser.getId(), operatingSystem.getId()));
-		final Robot robot = new Robot(UserAgentFamily.GOOGLEBOT, "i1", 1, "iu1", "n1", "p1", "pu1", "u1",
-				"Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)");
+		final Robot robot = new Robot(123, "r-name", UserAgentFamily.MJ12BOT, "MJ-12 bot", "info-url", "prod-1", "p-url-1", "uas", "icn1");
 		robots.add(robot);
 
 		// create Data instance

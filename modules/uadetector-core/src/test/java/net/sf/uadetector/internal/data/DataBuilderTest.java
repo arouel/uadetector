@@ -303,10 +303,13 @@ public class DataBuilderTest {
 
 	@Test
 	public void appendRobot_successful() {
-		final Robot robot = new Robot(UserAgentFamily.BINGBOT, "i1", 1, "iu1", "n1", "p1", "pu1", "u1", "uas1");
+		final Robot robot = new Robot(12, "Majestic-12", UserAgentFamily.MJ12BOT, "Majestic-12 bot", "http://majestic12.co.uk/bot.php",
+				"Majestic-12", "http://www.majestic12.co.uk/", "MJ12bot/v1.4.3", "mj12.png");
 		final DataBuilder b = new DataBuilder();
 		Assert.assertSame(b, b.appendRobot(robot));
-		b.appendRobot(robot); // testing to add same one more time
+
+		// test to add same robot one more time
+		b.appendRobot(robot);
 	}
 
 	@Test

@@ -15,12 +15,12 @@ public class RobotHashCodeBuilderTest {
 		final String icon = "icon";
 		final String infoUrl = "info url";
 		final String name = "name";
-		final String url = "url";
 		final UserAgentFamily family = UserAgentFamily.YAHOO;
+		final String familyName = "family-name";
 		final String producerUrl = "producer url";
 		final String producer = "producer";
 		final String userAgentString = "I'm a robot";
-		return new Robot(family, icon, id, infoUrl, name, producer, producerUrl, url, userAgentString);
+		return new Robot(id, name, family, familyName, infoUrl, producer, producerUrl, userAgentString, icon);
 	}
 
 	@Test
@@ -36,7 +36,7 @@ public class RobotHashCodeBuilderTest {
 		final String hash1 = RobotHashCodeBuilder.build(create());
 		final String hash2 = RobotHashCodeBuilder.build(create());
 		Assert.assertEquals(hash1, hash2);
-		Assert.assertEquals("daee7cddc2cc153a54be5440e9310b1d46c3188c2b73c00db6df539132937c88", hash1);
+		Assert.assertEquals("4287c4d5a3ddd9d7ce99c47f89557d65bb2ba66fee889ac16ecd83fc023bd521", hash1);
 	}
 
 }

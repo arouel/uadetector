@@ -26,8 +26,8 @@ import org.junit.Test;
 public class RobotBuilderTest {
 
 	@Test(expected = IllegalNullArgumentException.class)
-	public void setFamily_null() {
-		new Robot.Builder().setFamily(null);
+	public void setFamilyName_null() {
+		new Robot.Builder().setFamilyName(null);
 	}
 
 	@Test(expected = IllegalNullArgumentException.class)
@@ -52,10 +52,10 @@ public class RobotBuilderTest {
 
 	@Test
 	public void setId_numericString() {
-		final Robot b1 = new Robot.Builder().setId("1").setFamily(UserAgentFamily.GOOGLEBOT).setIcon("i1").setInfoUrl("iu1").setName("n1")
-				.setProducer("p1").setProducerUrl("pu1").setUrl("u1").build();
-		final Robot b2 = new Robot.Builder().setId(1).setFamily(UserAgentFamily.GOOGLEBOT).setIcon("i1").setInfoUrl("iu1").setName("n1")
-				.setProducer("p1").setProducerUrl("pu1").setUrl("u1").build();
+		final Robot b1 = new Robot.Builder().setId("1").setFamilyName(UserAgentFamily.GOOGLEBOT.getName()).setIcon("i1").setInfoUrl("iu1")
+				.setName("n1").setProducer("p1").setProducerUrl("pu1").setUserAgentString("uas1").build();
+		final Robot b2 = new Robot.Builder().setId(1).setFamilyName(UserAgentFamily.GOOGLEBOT.getName()).setIcon("i1").setInfoUrl("iu1")
+				.setName("n1").setProducer("p1").setProducerUrl("pu1").setUserAgentString("uas1").build();
 		Assert.assertTrue(b1.equals(b2));
 		Assert.assertTrue(b1.hashCode() == b2.hashCode());
 	}
@@ -86,47 +86,8 @@ public class RobotBuilderTest {
 	}
 
 	@Test(expected = IllegalNullArgumentException.class)
-	public void setUrl_null() {
-		new Robot.Builder().setUrl(null);
-	}
-
-	@Test(expected = IllegalNullArgumentException.class)
 	public void setUserAgentString_null() {
 		new Robot.Builder().setUserAgentString(null);
-	}
-
-	@Test
-	public void testGetters() throws Exception {
-		final Robot.Builder builder = new Robot.Builder();
-		Assert.assertSame(builder, builder.setFamily(UserAgentFamily.GOOGLEBOT));
-		Assert.assertSame(builder, builder.setIcon("i1"));
-		Assert.assertSame(builder, builder.setId(1));
-		Assert.assertSame(builder, builder.setInfoUrl("iu1"));
-		Assert.assertSame(builder, builder.setName("n1"));
-		Assert.assertSame(builder, builder.setProducer("p1"));
-		Assert.assertSame(builder, builder.setProducerUrl("pu1"));
-		Assert.assertSame(builder, builder.setUrl("u1"));
-		Assert.assertSame(builder, builder.setUserAgentString("uas1"));
-
-		Assert.assertEquals(UserAgentFamily.GOOGLEBOT, builder.getFamily());
-		Assert.assertEquals("i1", builder.getIcon());
-		Assert.assertEquals(1, builder.getId());
-		Assert.assertEquals("iu1", builder.getInfoUrl());
-		Assert.assertEquals("n1", builder.getName());
-		Assert.assertEquals("p1", builder.getProducer());
-		Assert.assertEquals("pu1", builder.getProducerUrl());
-		Assert.assertEquals("u1", builder.getUrl());
-		Assert.assertEquals("uas1", builder.getUserAgentString());
-
-		final Robot browser = builder.build();
-		Assert.assertEquals(UserAgentFamily.GOOGLEBOT, browser.getFamily());
-		Assert.assertEquals("i1", browser.getIcon());
-		Assert.assertEquals(1, browser.getId());
-		Assert.assertEquals("iu1", browser.getInfoUrl());
-		Assert.assertEquals("n1", browser.getName());
-		Assert.assertEquals("p1", browser.getProducer());
-		Assert.assertEquals("pu1", browser.getProducerUrl());
-		Assert.assertEquals("u1", browser.getUrl());
 	}
 
 }

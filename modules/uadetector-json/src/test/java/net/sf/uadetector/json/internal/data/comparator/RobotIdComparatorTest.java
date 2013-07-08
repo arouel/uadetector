@@ -14,14 +14,14 @@ public class RobotIdComparatorTest {
 
 	private static final Robot create(final int id) {
 		final UserAgentFamily family = UserAgentFamily.GOOGLEBOT;
+		final String familyName = "family-name";
 		final String icon = "icon";
 		final String infoUrl = "info url";
 		final String name = "name";
 		final String producer = "producer";
 		final String producerUrl = "producer url";
-		final String url = "url";
 		final String userAgentString = "uas";
-		return new Robot(family, icon, id, infoUrl, name, producer, producerUrl, url, userAgentString);
+		return new Robot(id, name, family, familyName, infoUrl, producer, producerUrl, userAgentString, icon);
 	}
 
 	@Test

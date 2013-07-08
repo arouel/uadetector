@@ -2,7 +2,7 @@ package net.sf.uadetector.json.internal.data.field;
 
 public enum SerializableRobotField {
 
-	FAMILY("family"),
+	FAMILY_NAME("family-name"),
 
 	HASH("hash"),
 
@@ -17,8 +17,6 @@ public enum SerializableRobotField {
 	PRODUCER_URL("producer-url"),
 
 	TYPE("type"),
-
-	URL("url"),
 
 	USER_AGENT_STRING("user-agent-string");
 

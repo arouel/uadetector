@@ -1,13 +1,12 @@
 package net.sf.uadetector.json.internal.data.deserializer;
 
-import static net.sf.uadetector.json.internal.data.field.SerializableRobotField.FAMILY;
+import static net.sf.uadetector.json.internal.data.field.SerializableRobotField.FAMILY_NAME;
 import static net.sf.uadetector.json.internal.data.field.SerializableRobotField.HASH;
 import static net.sf.uadetector.json.internal.data.field.SerializableRobotField.ICON;
 import static net.sf.uadetector.json.internal.data.field.SerializableRobotField.INFO_URL;
 import static net.sf.uadetector.json.internal.data.field.SerializableRobotField.NAME;
 import static net.sf.uadetector.json.internal.data.field.SerializableRobotField.PRODUCER;
 import static net.sf.uadetector.json.internal.data.field.SerializableRobotField.PRODUCER_URL;
-import static net.sf.uadetector.json.internal.data.field.SerializableRobotField.URL;
 import static net.sf.uadetector.json.internal.data.field.SerializableRobotField.USER_AGENT_STRING;
 
 import java.lang.reflect.Type;
@@ -15,7 +14,6 @@ import java.util.EnumSet;
 import java.util.Map.Entry;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import net.sf.uadetector.UserAgentFamily;
 import net.sf.uadetector.internal.data.domain.Robot;
 import net.sf.uadetector.json.SerDeOption;
 
@@ -39,8 +37,8 @@ public final class RobotDeserializer extends AbstractDeserializer<Robot> impleme
 		final Robot.Builder b = new Robot.Builder();
 		b.setId(counter.incrementAndGet());
 		for (final Entry<String, JsonElement> entry : json.getAsJsonObject().entrySet()) {
-			if (FAMILY.getName().equals(entry.getKey())) {
-				b.setFamily(UserAgentFamily.valueOf(entry.getValue().getAsString()));
+			if (FAMILY_NAME.getName().equals(entry.getKey())) {
+				b.setFamilyName(entry.getValue().getAsString());
 			} else if (HASH.getName().equals(entry.getKey())) {
 				hash = entry.getValue().getAsString();
 			} else if (ICON.getName().equals(entry.getKey())) {
@@ -53,8 +51,6 @@ public final class RobotDeserializer extends AbstractDeserializer<Robot> impleme
 				b.setProducer(entry.getValue().getAsString());
 			} else if (PRODUCER_URL.getName().equals(entry.getKey())) {
 				b.setProducerUrl(entry.getValue().getAsString());
-			} else if (URL.getName().equals(entry.getKey())) {
-				b.setUrl(entry.getValue().getAsString());
 			} else if (USER_AGENT_STRING.getName().equals(entry.getKey())) {
 				b.setUserAgentString(entry.getValue().getAsString());
 			}

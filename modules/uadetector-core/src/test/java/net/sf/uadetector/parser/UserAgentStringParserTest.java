@@ -642,7 +642,7 @@ public class UserAgentStringParserTest {
 		Assert.assertEquals("http://www.google.com/", agent.getProducerUrl());
 		Assert.assertEquals(UserAgentType.ROBOT, agent.getType());
 		Assert.assertEquals(Robot.TYPENAME, agent.getTypeName());
-		Assert.assertEquals("", agent.getUrl());
+		Assert.assertEquals("/list-of-ua/bot-detail?bot=Googlebot", agent.getUrl());
 		Assert.assertEquals("2.1", agent.getVersionNumber().toVersionString());
 	}
 
@@ -662,7 +662,7 @@ public class UserAgentStringParserTest {
 		Assert.assertEquals("http://www.setusoftware.com/", agent.getProducerUrl());
 		Assert.assertEquals(UserAgentType.ROBOT, agent.getType());
 		Assert.assertEquals(Robot.TYPENAME, agent.getTypeName());
-		Assert.assertEquals("", agent.getUrl());
+		Assert.assertEquals("/list-of-ua/bot-detail?bot=Setoozbot", agent.getUrl());
 		Assert.assertEquals("0.20 b", agent.getVersionNumber().toVersionString());
 	}
 

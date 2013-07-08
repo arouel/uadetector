@@ -15,9 +15,15 @@
  ******************************************************************************/
 package net.sf.uadetector.internal.data.domain;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
+
+import javax.annotation.Nonnull;
+
 import net.sf.qualitycheck.exception.IllegalNegativeArgumentException;
 import net.sf.qualitycheck.exception.IllegalNullArgumentException;
-import net.sf.uadetector.UserAgent;
 import net.sf.uadetector.UserAgentFamily;
 
 import org.junit.Assert;
@@ -25,258 +31,221 @@ import org.junit.Test;
 
 public class RobotTest {
 
-	@Test(expected = IllegalNullArgumentException.class)
-	public void construct_family_null() {
-		final int id = 1;
-		final String icon = "icon";
-		final String infoUrl = "info url";
-		final String name = "name";
-		final String url = "url";
-		final UserAgentFamily family = null;
-		final String producerUrl = "producer url";
-		final String producer = "producer";
-		final String userAgentString = "I'm a robot";
-		new Robot(family, icon, id, infoUrl, name, producer, producerUrl, url, userAgentString);
-	}
+	private static final class Blueprint {
 
-	@Test(expected = IllegalNullArgumentException.class)
-	public void construct_icon_null() {
-		final int id = 1;
-		final String icon = null;
-		final String infoUrl = "info url";
-		final String name = "name";
-		final String url = "url";
-		final UserAgentFamily family = UserAgentFamily.GOOGLEBOT;
-		final String producerUrl = "producer url";
-		final String producer = "producer";
-		final String userAgentString = "I'm a robot";
-		new Robot(family, icon, id, infoUrl, name, producer, producerUrl, url, userAgentString);
-	}
+		private UserAgentFamily family = UserAgentFamily.MJ12BOT;
 
-	@Test(expected = IllegalNegativeArgumentException.class)
-	public void construct_id_toSmall() {
-		final int id = -1;
-		final String icon = "icon";
-		final String infoUrl = "info url";
-		final String name = "name";
-		final String url = "url";
-		final UserAgentFamily family = UserAgentFamily.GOOGLEBOT;
-		final String producerUrl = "producer url";
-		final String producer = "producer";
-		final String userAgentString = "I'm a robot";
-		new Robot(family, icon, id, infoUrl, name, producer, producerUrl, url, userAgentString);
-	}
+		private String familyName = "test-family-name";
 
-	@Test(expected = IllegalNullArgumentException.class)
-	public void construct_infoUrl_null() {
-		final int id = 1;
-		final String icon = "icon";
-		final String infoUrl = null;
-		final String name = "name";
-		final String url = "url";
-		final UserAgentFamily family = UserAgentFamily.GOOGLEBOT;
-		final String producerUrl = "producer url";
-		final String producer = "producer";
-		final String userAgentString = "I'm a robot";
-		new Robot(family, icon, id, infoUrl, name, producer, producerUrl, url, userAgentString);
-	}
+		private String icon = "test-icon-name";
 
-	@Test(expected = IllegalNullArgumentException.class)
-	public void construct_name_null() {
-		final int id = 1;
-		final String icon = "icon";
-		final String infoUrl = "info url";
-		final String url = "url";
-		final String name = null;
-		final UserAgentFamily family = UserAgentFamily.GOOGLEBOT;
-		final String producerUrl = "producer url";
-		final String producer = "producer";
-		final String userAgentString = "I'm a robot";
-		new Robot(family, icon, id, infoUrl, name, producer, producerUrl, url, userAgentString);
-	}
+		private int id = 1234;
 
-	@Test(expected = IllegalNullArgumentException.class)
-	public void construct_producer_null() {
-		final int id = 1;
-		final String icon = "icon";
-		final String infoUrl = "info url";
-		final String name = "name";
-		final String url = "url";
-		final UserAgentFamily family = UserAgentFamily.GOOGLEBOT;
-		final String producerUrl = "producer url";
-		final String producer = null;
-		final String userAgentString = "I'm a robot";
-		new Robot(family, icon, id, infoUrl, name, producer, producerUrl, url, userAgentString);
-	}
+		private String infoUrl = "test-info.url";
 
-	@Test(expected = IllegalNullArgumentException.class)
-	public void construct_producerUrl_null() {
-		final int id = 1;
-		final String icon = "icon";
-		final String infoUrl = "info url";
-		final String name = "name";
-		final String url = "url";
-		final UserAgentFamily family = UserAgentFamily.GOOGLEBOT;
-		final String producerUrl = null;
-		final String producer = "producer";
-		final String userAgentString = "I'm a robot";
-		new Robot(family, icon, id, infoUrl, name, producer, producerUrl, url, userAgentString);
+		private String name = "test-name";
+
+		private String producer = "test-producer";
+
+		private String producerUrl = "test-producer-url";
+
+		private String userAgentString = "test-uas";
+
+		@Nonnull
+		public Robot build() {
+			return new Robot(id, name, family, familyName, infoUrl, producer, producerUrl, userAgentString, icon);
+		}
+
+		public Blueprint family(final UserAgentFamily family) {
+			this.family = family;
+			return this;
+		}
+
+		public Blueprint familyName(final String familyName) {
+			this.familyName = familyName;
+			return this;
+		}
+
+		public Blueprint icon(final String icon) {
+			this.icon = icon;
+			return this;
+		}
+
+		public Blueprint id(final int id) {
+			this.id = id;
+			return this;
+		}
+
+		public Blueprint infoUrl(final String infoUrl) {
+			this.infoUrl = infoUrl;
+			return this;
+		}
+
+		public Blueprint name(final String name) {
+			this.name = name;
+			return this;
+		}
+
+		public Blueprint producer(final String producer) {
+			this.producer = producer;
+			return this;
+		}
+
+		public Blueprint producerUrl(final String producerUrl) {
+			this.producerUrl = producerUrl;
+			return this;
+		}
+
+		public Blueprint userAgentString(final String userAgentString) {
+			this.userAgentString = userAgentString;
+			return this;
+		}
+
 	}
 
 	@Test
-	public void construct_successful() {
-		final int id = 1;
-		final String icon = "icon";
-		final String infoUrl = "info url";
-		final String name = "name";
-		final String url = "url";
-		final UserAgentFamily family = UserAgentFamily.GOOGLEBOT;
-		final String producerUrl = "producer url";
-		final String producer = "producer";
-		final String userAgentString = "I'm a robot";
-		new Robot(family, icon, id, infoUrl, name, producer, producerUrl, url, userAgentString);
-	}
-
-	@Test(expected = IllegalNullArgumentException.class)
-	public void construct_url_null() {
-		final int id = 1;
-		final String icon = "icon";
-		final String infoUrl = "info url";
-		final String name = "name";
-		final String url = null;
-		final UserAgentFamily family = UserAgentFamily.GOOGLEBOT;
-		final String producerUrl = "producer url";
-		final String producer = "producer";
-		final String userAgentString = "I'm a robot";
-		new Robot(family, icon, id, infoUrl, name, producer, producerUrl, url, userAgentString);
-	}
-
-	@Test(expected = IllegalNullArgumentException.class)
-	public void construct_userAgentString_null() {
-		final int id = 1;
-		final String icon = "icon";
-		final String infoUrl = "info url";
-		final String name = "name";
-		final String url = "url";
-		final UserAgentFamily family = UserAgentFamily.GOOGLEBOT;
-		final String producerUrl = "producer url";
-		final String producer = "producer";
-		final String userAgentString = null;
-		new Robot(family, icon, id, infoUrl, name, producer, producerUrl, url, userAgentString);
+	public void equals_different_FAMILY() {
+		final Robot a = new Blueprint().family(UserAgentFamily.GOOGLEBOT).build();
+		final Robot b = new Blueprint().family(UserAgentFamily.YAHOO).build();
+		assertFalse(a.equals(b));
+		assertFalse(a.hashCode() == b.hashCode());
 	}
 
 	@Test
-	public void copyTo_successful() {
-		final Robot robot = new Robot(UserAgentFamily.GOOGLEBOT, "i1", 1, "iu1", "n1", "p1", "pu1", "u1", "uas1");
-		final UserAgent.Builder builder = new UserAgent.Builder();
-		robot.copyTo(builder);
-		Assert.assertEquals(robot.getFamily(), builder.getFamily());
-		Assert.assertEquals(robot.getName(), builder.getName());
-		Assert.assertEquals(robot.getProducer(), builder.getProducer());
-		Assert.assertEquals(robot.getProducerUrl(), builder.getProducerUrl());
-		Assert.assertEquals(robot.getUrl(), builder.getUrl());
-		Assert.assertNotNull(builder.getOperatingSystem());
+	public void equals_different_FAMILYNAME() {
+		final Robot a = new Blueprint().familyName("f1").build();
+		final Robot b = new Blueprint().familyName("f2").build();
+		assertFalse(a.equals(b));
+		assertFalse(a.hashCode() == b.hashCode());
 	}
 
 	@Test
-	public void equals_differentFamily() {
-		final Robot robot1 = new Robot(UserAgentFamily.GOOGLEBOT, "i1", 1, "iu1", "n1", "p1", "pu1", "u1", "uas1");
-		final Robot robot2 = new Robot(UserAgentFamily.BINGBOT, "i1", 1, "iu1", "n1", "p1", "pu1", "u1", "uas1");
-		Assert.assertFalse(robot1.hashCode() == robot2.hashCode());
-		Assert.assertFalse(robot1.equals(robot2));
+	public void equals_different_ICON() {
+		final Robot a = new Blueprint().icon("icon-name-1").build();
+		final Robot b = new Blueprint().icon("icon-name-2").build();
+		assertFalse(a.equals(b));
+		assertFalse(a.hashCode() == b.hashCode());
 	}
 
 	@Test
-	public void equals_differentIcon() {
-		final Robot robot1 = new Robot(UserAgentFamily.GOOGLEBOT, "i1", 1, "iu1", "n1", "p1", "pu1", "u1", "uas1");
-		final Robot robot2 = new Robot(UserAgentFamily.GOOGLEBOT, "i2", 1, "iu1", "n1", "p1", "pu1", "u1", "uas1");
-		Assert.assertFalse(robot1.hashCode() == robot2.hashCode());
-		Assert.assertFalse(robot1.equals(robot2));
+	public void equals_different_ID() {
+		final Robot a = new Blueprint().id(123).build();
+		final Robot b = new Blueprint().id(987).build();
+		assertFalse(a.equals(b));
+		assertFalse(a.hashCode() == b.hashCode());
 	}
 
 	@Test
-	public void equals_differentId() {
-		final Robot robot1 = new Robot(UserAgentFamily.GOOGLEBOT, "i1", 1, "iu1", "n1", "p1", "pu1", "u1", "uas1");
-		final Robot robot2 = new Robot(UserAgentFamily.GOOGLEBOT, "i1", 2, "iu1", "n1", "p1", "pu1", "u1", "uas1");
-		Assert.assertFalse(robot1.hashCode() == robot2.hashCode());
-		Assert.assertFalse(robot1.equals(robot2));
+	public void equals_different_INFOURL() {
+		final Robot a = new Blueprint().infoUrl("info-url-1").build();
+		final Robot b = new Blueprint().infoUrl("info-url-2").build();
+		assertFalse(a.equals(b));
+		assertFalse(a.hashCode() == b.hashCode());
 	}
 
 	@Test
-	public void equals_differentInfoUrl() {
-		final Robot robot1 = new Robot(UserAgentFamily.GOOGLEBOT, "i1", 1, "iu1", "n1", "p1", "pu1", "u1", "uas1");
-		final Robot robot2 = new Robot(UserAgentFamily.GOOGLEBOT, "i1", 1, "iu2", "n1", "p1", "pu1", "u1", "uas1");
-		Assert.assertFalse(robot1.hashCode() == robot2.hashCode());
-		Assert.assertFalse(robot1.equals(robot2));
+	public void equals_different_NAME() {
+		final Robot a = new Blueprint().name("name-1").build();
+		final Robot b = new Blueprint().name("name-2").build();
+		assertFalse(a.equals(b));
+		assertFalse(a.hashCode() == b.hashCode());
 	}
 
 	@Test
-	public void equals_differentName() {
-		final Robot robot1 = new Robot(UserAgentFamily.GOOGLEBOT, "i1", 1, "iu1", "n1", "p1", "pu1", "u1", "uas1");
-		final Robot robot2 = new Robot(UserAgentFamily.GOOGLEBOT, "i1", 1, "iu1", "n2", "p1", "pu1", "u1", "uas1");
-		Assert.assertFalse(robot1.hashCode() == robot2.hashCode());
-		Assert.assertFalse(robot1.equals(robot2));
+	public void equals_different_PRODUCER() {
+		final Robot a = new Blueprint().producer("p1").build();
+		final Robot b = new Blueprint().producer("p2").build();
+		assertFalse(a.equals(b));
+		assertFalse(a.hashCode() == b.hashCode());
 	}
 
 	@Test
-	public void equals_differentProducer() {
-		final Robot robot1 = new Robot(UserAgentFamily.GOOGLEBOT, "i1", 1, "iu1", "n1", "p1", "pu1", "u1", "uas1");
-		final Robot robot2 = new Robot(UserAgentFamily.GOOGLEBOT, "i1", 1, "iu1", "n1", "p2", "pu1", "u1", "uas1");
-		Assert.assertFalse(robot1.hashCode() == robot2.hashCode());
-		Assert.assertFalse(robot1.equals(robot2));
+	public void equals_different_PRODUCERURL() {
+		final Robot a = new Blueprint().producerUrl("pu1").build();
+		final Robot b = new Blueprint().producerUrl("pu2").build();
+		assertFalse(a.equals(b));
+		assertFalse(a.hashCode() == b.hashCode());
 	}
 
 	@Test
-	public void equals_differentProducerUrl() {
-		final Robot robot1 = new Robot(UserAgentFamily.GOOGLEBOT, "i1", 1, "iu1", "n1", "p1", "pu1", "u1", "uas1");
-		final Robot robot2 = new Robot(UserAgentFamily.GOOGLEBOT, "i1", 1, "iu1", "n1", "p1", "pu2", "u1", "uas1");
-		Assert.assertFalse(robot1.hashCode() == robot2.hashCode());
-		Assert.assertFalse(robot1.equals(robot2));
-	}
-
-	@Test
-	public void equals_differentUrl() {
-		final Robot robot1 = new Robot(UserAgentFamily.GOOGLEBOT, "i1", 1, "iu1", "n1", "p1", "pu1", "u1", "uas1");
-		final Robot robot2 = new Robot(UserAgentFamily.GOOGLEBOT, "i1", 1, "iu1", "n1", "p1", "pu1", "u2", "uas1");
-		Assert.assertFalse(robot1.hashCode() == robot2.hashCode());
-		Assert.assertFalse(robot1.equals(robot2));
-	}
-
-	@Test
-	public void equals_differentUserAgentString() {
-		final Robot robot1 = new Robot(UserAgentFamily.GOOGLEBOT, "i1", 1, "iu1", "n1", "p1", "pu1", "u1", "uas1");
-		final Robot robot2 = new Robot(UserAgentFamily.GOOGLEBOT, "i1", 1, "iu1", "n1", "p1", "pu1", "u1", "uas2");
-		Assert.assertFalse(robot1.hashCode() == robot2.hashCode());
-		Assert.assertFalse(robot1.equals(robot2));
-		Assert.assertFalse(robot2.equals(robot1));
+	public void equals_different_USERAGENTSTRING() {
+		final Robot a = new Blueprint().userAgentString("uas.1").build();
+		final Robot b = new Blueprint().userAgentString("uas.2").build();
+		assertFalse(a.equals(b));
+		assertFalse(a.hashCode() == b.hashCode());
 	}
 
 	@Test
 	public void equals_identical() {
-		final Robot robot1 = new Robot(UserAgentFamily.GOOGLEBOT, "i1", 1, "iu1", "n1", "p1", "pu1", "u1", "uas1");
-		final Robot robot2 = new Robot(UserAgentFamily.GOOGLEBOT, "i1", 1, "iu1", "n1", "p1", "pu1", "u1", "uas1");
-		Assert.assertTrue(robot1.hashCode() == robot2.hashCode());
-		Assert.assertTrue(robot1.equals(robot2));
+		final Robot a = new Blueprint().build();
+		final Robot b = new Blueprint().build();
+		assertEquals(a, b);
+		assertTrue(a.hashCode() == b.hashCode());
 	}
 
 	@Test
 	public void equals_null() {
-		final Robot robot = new Robot(UserAgentFamily.GOOGLEBOT, "i1", 1, "iu1", "n1", "p1", "pu1", "u1", "uas1");
-		Assert.assertFalse(robot.equals(null));
+		final Robot a = new Blueprint().build();
+		assertFalse(a.equals(null));
 	}
 
 	@Test
 	public void equals_otherClass() {
-		final Robot robot = new Robot(UserAgentFamily.GOOGLEBOT, "i1", 1, "iu1", "n1", "p1", "pu1", "u1", "uas1");
-		final String otherClass = "";
-		Assert.assertFalse(robot.equals(otherClass));
+		final Robot a = new Blueprint().build();
+		assertFalse(a.equals(""));
 	}
 
 	@Test
 	public void equals_same() {
-		final Robot robot = new Robot(UserAgentFamily.GOOGLEBOT, "i1", 1, "iu1", "n1", "p1", "pu1", "u1", "uas1");
-		Assert.assertTrue(robot.equals(robot));
-		Assert.assertTrue(robot.hashCode() == robot.hashCode());
+		final Robot a = new Blueprint().build();
+		assertEquals(a, a);
+		assertSame(a, a);
+		assertTrue(a.hashCode() == a.hashCode());
+	}
+
+	@Test(expected = IllegalNullArgumentException.class)
+	public void precondition_FAMILY() {
+		new Blueprint().family(null).build();
+	}
+
+	@Test(expected = IllegalNullArgumentException.class)
+	public void precondition_FAMILYNAME() {
+		new Blueprint().familyName(null).build();
+	}
+
+	@Test(expected = IllegalNullArgumentException.class)
+	public void precondition_ICON() {
+		new Blueprint().icon(null).build();
+	}
+
+	@Test(expected = IllegalNegativeArgumentException.class)
+	public void precondition_ID() {
+		new Blueprint().id(-1).build();
+	}
+
+	@Test(expected = IllegalNullArgumentException.class)
+	public void precondition_INFOURL() {
+		new Blueprint().infoUrl(null).build();
+	}
+
+	@Test(expected = IllegalNullArgumentException.class)
+	public void precondition_NAME() {
+		new Blueprint().name(null).build();
+	}
+
+	@Test(expected = IllegalNullArgumentException.class)
+	public void precondition_PRODUCER() {
+		new Blueprint().producer(null).build();
+	}
+
+	@Test(expected = IllegalNullArgumentException.class)
+	public void precondition_PRODUCERURL() {
+		new Blueprint().producerUrl(null).build();
+	}
+
+	@Test(expected = IllegalNullArgumentException.class)
+	public void precondition_USERAGENTSTRING() {
+		new Blueprint().userAgentString(null).build();
 	}
 
 	@Test
@@ -286,29 +255,39 @@ public class RobotTest {
 		final String infoUrl = "http://programming-motherfucker.com/";
 		final String name = "Programming, Motherfucker";
 		final UserAgentFamily family = UserAgentFamily.GOOGLEBOT;
+		final String familyName = UserAgentFamily.GOOGLEBOT.getName();
 		final String producerUrl = "https://github.com/before";
 		final String producer = "Our Values";
-		final String url = "http://user-agent-string.info/";
 		final String userAgentString = "I'm a robot";
-		final Robot b = new Robot(family, icon, id, infoUrl, name, producer, producerUrl, url, userAgentString);
-		Assert.assertEquals(family, b.getFamily());
-		Assert.assertEquals("bunt.png", b.getIcon());
-		Assert.assertEquals(12354, b.getId());
-		Assert.assertEquals("http://programming-motherfucker.com/", b.getInfoUrl());
-		Assert.assertEquals("Programming, Motherfucker", b.getName());
-		Assert.assertEquals("Our Values", b.getProducer());
-		Assert.assertEquals("https://github.com/before", b.getProducerUrl());
-		Assert.assertEquals("http://user-agent-string.info/", b.getUrl());
-		Assert.assertEquals("I'm a robot", b.getUserAgentString());
+		final Robot r = new Robot(id, name, family, familyName, infoUrl, producer, producerUrl, userAgentString, icon);
+
+		Assert.assertEquals(family, r.getFamily());
+		Assert.assertEquals(familyName, r.getFamilyName());
+		Assert.assertEquals("bunt.png", r.getIcon());
+		Assert.assertEquals(12354, r.getId());
+		Assert.assertEquals("http://programming-motherfucker.com/", r.getInfoUrl());
+		Assert.assertEquals("Programming, Motherfucker", r.getName());
+		Assert.assertEquals("Our Values", r.getProducer());
+		Assert.assertEquals("https://github.com/before", r.getProducerUrl());
+		Assert.assertEquals("I'm a robot", r.getUserAgentString());
 	}
 
 	@Test
 	public void testToString() {
-		// reduces only some noise in coverage report
-		final Robot robot = new Robot(UserAgentFamily.GOOGLEBOT, "i1", 1, "iu1", "n1", "p1", "pu1", "u1", "uas1");
+		// reduces some noise in coverage report
+		final int id = 12354;
+		final String icon = "bunt.png";
+		final String infoUrl = "http://programming-motherfucker.com/";
+		final String name = "Programming, Motherfucker";
+		final UserAgentFamily family = UserAgentFamily.MJ12BOT;
+		final String familyName = "Majestic-12";
+		final String producerUrl = "https://github.com/before";
+		final String producer = "Our Values";
+		final String userAgentString = "I'm a robot";
+		final Robot r = new Robot(id, name, family, familyName, infoUrl, producer, producerUrl, userAgentString, icon);
 		Assert.assertEquals(
-				"Robot [family=GOOGLEBOT, icon=i1, id=1, infoUrl=iu1, name=n1, producer=p1, producerUrl=pu1, url=u1, userAgentString=uas1]",
-				robot.toString());
+				"ReadableRobot [id=12354, name=Programming, Motherfucker, family=MJ12BOT, familyName=Majestic-12, infoUrl=http://programming-motherfucker.com/, producer=Our Values, producerUrl=https://github.com/before, userAgentString=I'm a robot, icon=bunt.png]",
+				r.toString());
 	}
 
 }

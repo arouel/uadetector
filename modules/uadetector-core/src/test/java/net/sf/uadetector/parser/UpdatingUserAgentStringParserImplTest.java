@@ -211,7 +211,7 @@ public class UpdatingUserAgentStringParserImplTest {
 		Assert.assertEquals("Google Inc.", agent.getProducer());
 		Assert.assertEquals("http://www.google.com/", agent.getProducerUrl());
 		Assert.assertEquals(Robot.TYPENAME, agent.getTypeName());
-		Assert.assertEquals("", agent.getUrl());
+		Assert.assertEquals("/list-of-ua/bot-detail?bot=Googlebot", agent.getUrl());
 		Assert.assertEquals("2.1", agent.getVersionNumber().toVersionString());
 	}
 

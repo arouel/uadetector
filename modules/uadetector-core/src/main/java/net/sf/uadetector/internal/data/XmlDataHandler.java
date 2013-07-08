@@ -398,7 +398,7 @@ public final class XmlDataHandler extends DefaultHandler {
 		} else if (isRobot && currentTag == Tag.USERAGENT) {
 			robotBuilder.setUserAgentString(buffer.toString());
 		} else if (isRobot && currentTag == Tag.FAMILY) {
-			robotBuilder.setFamily(UserAgentFamily.evaluate(buffer.toString()));
+			robotBuilder.setFamilyName(buffer.toString());
 		} else if (isRobot && currentTag == Tag.NAME) {
 			robotBuilder.setName(buffer.toString());
 		} else if (isRobot && currentTag == Tag.COMPANY) {

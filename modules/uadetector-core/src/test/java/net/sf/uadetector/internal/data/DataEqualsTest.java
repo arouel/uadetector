@@ -50,7 +50,8 @@ public class DataEqualsTest {
 	}
 
 	private static final Robot createRobot(final int id) {
-		return new Robot(UserAgentFamily.GOOGLEBOT, "i1", id, "iu1", "n1", "p1", "pu1", "u1", "uas1");
+		return new Robot(id, "Majestic-12", UserAgentFamily.MJ12BOT, "Majestic-12 bot", "http://majestic12.co.uk/bot.php", "Majestic-12",
+				"http://www.majestic12.co.uk/", "MJ12bot/v1.4.3", "mj12.png");
 	}
 
 	@Test

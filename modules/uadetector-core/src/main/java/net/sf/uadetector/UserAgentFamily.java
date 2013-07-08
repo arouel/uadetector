@@ -4380,6 +4380,7 @@ public enum UserAgentFamily {
 	 * @throws net.sf.qualitycheck.exception.IllegalNullArgumentException
 	 *             if the given argument is {@code null}
 	 */
+	@Nonnull
 	public static UserAgentFamily evaluate(@Nonnull final String family) {
 		Check.notNull(family, "family");
 
@@ -4406,6 +4407,7 @@ public enum UserAgentFamily {
 	 * @throws net.sf.qualitycheck.exception.IllegalNullArgumentException
 	 *             if the given argument is {@code null}
 	 */
+	@Nonnull
 	protected static UserAgentFamily evaluateByName(@Nonnull final String family) {
 		Check.notNull(family, "family");
 
@@ -4430,6 +4432,7 @@ public enum UserAgentFamily {
 	 * @throws net.sf.qualitycheck.exception.IllegalNullArgumentException
 	 *             if the given argument is {@code null}
 	 */
+	@Nonnull
 	protected static UserAgentFamily evaluateByPattern(@Nonnull final String family) {
 		Check.notNull(family, "family");
 

@@ -60,7 +60,7 @@ public class DataBuilder {
 			final Map<Integer, SortedSet<BrowserPattern>> patterns) {
 		for (final Map.Entry<Integer, Browser.Builder> entry : builders.entrySet()) {
 			if (patterns.containsKey(entry.getKey())) {
-				entry.getValue().setPatternSet(patterns.get(entry.getKey()));
+				entry.getValue().setPatterns(patterns.get(entry.getKey()));
 			} else {
 				LOG.warn("No pattern available for '" + entry.getValue().getProducer() + " " + entry.getValue().getFamily() + "'.");
 			}
@@ -120,7 +120,7 @@ public class DataBuilder {
 	private static SortedMap<BrowserPattern, Browser> buildPatternToBrowserMap(final Set<Browser> browserSet) {
 		final SortedMap<BrowserPattern, Browser> patternBrowser = new TreeMap<BrowserPattern, Browser>(BROWSER_PATTERN_COMPARATOR);
 		for (final Browser browser : browserSet) {
-			for (final BrowserPattern pattern : browser.getPatternSet()) {
+			for (final BrowserPattern pattern : browser.getPatterns()) {
 				patternBrowser.put(pattern, browser);
 			}
 		}

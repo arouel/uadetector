@@ -15,34 +15,80 @@
  ******************************************************************************/
 package net.sf.uadetector.internal.data.domain;
 
+import java.io.Serializable;
+import java.util.Collections;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
 import javax.annotation.Nonnegative;
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import javax.annotation.concurrent.Immutable;
+import javax.annotation.concurrent.NotThreadSafe;
 
 import net.sf.qualitycheck.Check;
 import net.sf.uadetector.UserAgent;
 import net.sf.uadetector.UserAgentFamily;
 
-public final class Browser {
+@Immutable
+public final class Browser implements Serializable {
 
+	@NotThreadSafe
 	public static final class Builder {
 
+		private static final String EMPTY = "";
+
+		@Nonnull
 		private UserAgentFamily family = UserAgentFamily.UNKNOWN;
-		private String icon = "";
+
+		@Nonnull
+		private String familyName = EMPTY;
+
+		@Nonnull
+		private String icon = EMPTY;
+
 		private int id = Integer.MIN_VALUE;
-		private String infoUrl = "";
+
+		@Nonnull
+		private String infoUrl = EMPTY;
+
+		@Nullable
 		private OperatingSystem operatingSystem;
-		private SortedSet<BrowserPattern> patternSet = new TreeSet<BrowserPattern>();
-		private String producer = "";
-		private String producerUrl = "";
+
+		@Nonnull
+		private SortedSet<BrowserPattern> patterns = new TreeSet<BrowserPattern>();
+
+		@Nonnull
+		private String producer = EMPTY;
+
+		@Nonnull
+		private String producerUrl = EMPTY;
+
+		@Nullable
 		private BrowserType type;
-		private int typeId = Integer.MIN_VALUE;
-		private String url = "";
+
+		private transient int typeId = Integer.MIN_VALUE;
+
+		@Nonnull
+		private String url = EMPTY;
 
 		public Builder() {
 			// default constructor
+		}
+
+		public Builder(@Nonnull final Browser browser) {
+			Check.notNull(browser, "browser");
+			id = Check.notNegative(browser.getId(), "browser.getId()");
+			family = Check.notNull(browser.getFamily(), "browser.getFamily()");
+			familyName = Check.notNull(browser.getFamilyName(), "browser.getFamilyName()");
+			patterns = new TreeSet<BrowserPattern>(Check.notNull(browser.getPatterns(), "browser.getPatterns()"));
+			type = Check.notNull(browser.getType(), "browser.getType()");
+			operatingSystem = Check.notNull(browser.getOperatingSystem(), "browser.getOperatingSystem()");
+			icon = Check.notNull(browser.getIcon(), "browser.getIcon()");
+			infoUrl = Check.notNull(browser.getInfoUrl(), "browser.getInfoUrl()");
+			producer = Check.notNull(browser.getProducer(), "browser.getProducer()");
+			producerUrl = Check.notNull(browser.getProducerUrl(), "browser.getProducerUrl()");
+			url = Check.notNull(browser.getUrl(), "browser.getUrl()");
 		}
 
 		/**
@@ -56,22 +102,23 @@ public final class Browser {
 		protected Builder(@Nonnull final Builder builder) {
 			Check.notNull(builder, "builder");
 
-			this.family = builder.family;
-			this.icon = builder.icon;
-			this.id = builder.id;
-			this.infoUrl = builder.infoUrl;
-			this.operatingSystem = builder.operatingSystem;
-			this.patternSet = builder.patternSet;
-			this.producer = builder.producer;
-			this.producerUrl = builder.producerUrl;
-			this.type = builder.type;
-			this.typeId = builder.typeId;
-			this.url = builder.url;
+			family = builder.family;
+			familyName = builder.familyName;
+			icon = builder.icon;
+			id = builder.id;
+			infoUrl = builder.infoUrl;
+			operatingSystem = builder.operatingSystem;
+			patterns = builder.patterns;
+			producer = builder.producer;
+			producerUrl = builder.producerUrl;
+			type = builder.type;
+			typeId = builder.typeId;
+			url = builder.url;
 		}
 
 		@Nonnull
 		public Browser build() {
-			return new Browser(id, type, family, url, producer, producerUrl, icon, infoUrl, patternSet, operatingSystem);
+			return new Browser(id, family, familyName, patterns, type, operatingSystem, icon, infoUrl, producer, producerUrl, url);
 		}
 
 		/**
@@ -84,10 +131,17 @@ public final class Browser {
 			return new Builder(this);
 		}
 
+		@Nonnull
 		public UserAgentFamily getFamily() {
 			return family;
 		}
 
+		@Nonnull
+		public String getFamilyName() {
+			return familyName;
+		}
+
+		@Nonnull
 		public String getIcon() {
 			return icon;
 		}
@@ -96,26 +150,32 @@ public final class Browser {
 			return id;
 		}
 
+		@Nonnull
 		public String getInfoUrl() {
 			return infoUrl;
 		}
 
+		@Nullable
 		public OperatingSystem getOperatingSystem() {
 			return operatingSystem;
 		}
 
-		public SortedSet<BrowserPattern> getPatternSet() {
-			return patternSet;
+		@Nonnull
+		public SortedSet<BrowserPattern> getPatterns() {
+			return patterns;
 		}
 
+		@Nonnull
 		public String getProducer() {
 			return producer;
 		}
 
+		@Nonnull
 		public String getProducerUrl() {
 			return producerUrl;
 		}
 
+		@Nonnull
 		public BrowserType getType() {
 			return type;
 		}
@@ -124,156 +184,171 @@ public final class Browser {
 			return typeId;
 		}
 
+		@Nonnull
 		public String getUrl() {
 			return url;
 		}
 
-		public Builder setFamily(@Nonnull final UserAgentFamily family) {
-			Check.notNull(family, "family");
-
-			this.family = family;
+		@Nonnull
+		private Builder setFamily(@Nonnull final UserAgentFamily family) {
+			this.family = Check.notNull(family, "family");
 			return this;
 		}
 
+		@Nonnull
+		public Builder setFamilyName(@Nonnull final String familyName) {
+			this.familyName = Check.notNull(familyName, "familyName");
+			return setFamily(UserAgentFamily.evaluate(familyName));
+		}
+
+		@Nonnull
 		public Builder setIcon(@Nonnull final String icon) {
-			Check.notNull(icon, "icon");
-
-			this.icon = icon;
+			this.icon = Check.notNull(icon, "icon");
 			return this;
 		}
 
+		@Nonnull
 		public Builder setId(@Nonnegative final int id) {
-			Check.notNegative(id, "id");
-
-			this.id = id;
+			this.id = Check.notNegative(id, "id");
 			return this;
 		}
 
 		@Nonnull
 		public Builder setId(@Nonnull final String id) {
-			Check.notEmpty(id, "id");
-
-			this.setId(Integer.parseInt(id.trim()));
+			setId(Integer.parseInt(Check.notEmpty(id, "id")));
 			return this;
 		}
 
 		@Nonnull
 		public Builder setInfoUrl(@Nonnull final String infoUrl) {
-			Check.notNull(infoUrl, "infoUrl");
-
-			this.infoUrl = infoUrl;
+			this.infoUrl = Check.notNull(infoUrl, "infoUrl");
 			return this;
 		}
 
 		@Nonnull
 		public Builder setOperatingSystem(@Nonnull final OperatingSystem operatingSystem) {
-			Check.notNull(operatingSystem, "operatingSystem");
-
-			this.operatingSystem = operatingSystem;
+			this.operatingSystem = Check.notNull(operatingSystem, "operatingSystem");
 			return this;
 		}
 
 		@Nonnull
-		public Builder setPatternSet(@Nonnull final SortedSet<BrowserPattern> patternSet) {
-			Check.notNull(patternSet, "patternSet");
-
-			this.patternSet = patternSet;
+		public Builder setPatterns(@Nonnull final SortedSet<BrowserPattern> patterns) {
+			this.patterns = new TreeSet<BrowserPattern>(Check.notNull(patterns, "patterns"));
 			return this;
 		}
 
 		@Nonnull
 		public Builder setProducer(@Nonnull final String producer) {
-			Check.notNull(producer, "producer");
-
-			this.producer = producer;
+			this.producer = Check.notNull(producer, "producer");
 			return this;
 		}
 
 		@Nonnull
 		public Builder setProducerUrl(@Nonnull final String producerUrl) {
-			Check.notNull(producerUrl, "producerUrl");
-
-			this.producerUrl = producerUrl;
+			this.producerUrl = Check.notNull(producerUrl, "producerUrl");
 			return this;
 		}
 
-		/**
-		 * Sets the browser type.
-		 * 
-		 * @param type
-		 *            A browser type
-		 * @throws net.sf.qualitycheck.exception.IllegalNullArgumentException
-		 *             if the given argument is {@code null}
-		 */
 		@Nonnull
 		public Builder setType(@Nonnull final BrowserType type) {
-			Check.notNull(type, "type");
-
-			this.type = type;
+			this.type = Check.notNull(type, "type");
+			setTypeId(type.getId());
 			return this;
 		}
 
 		@Nonnull
 		public Builder setTypeId(@Nonnegative final int typeId) {
-			Check.notNegative(typeId, "typeId");
-
-			this.typeId = typeId;
+			this.typeId = Check.notNegative(typeId, "typeId");
 			return this;
 		}
 
 		@Nonnull
 		public Builder setTypeId(@Nonnull final String typeId) {
-			Check.notEmpty(typeId, "typeId");
-
-			setTypeId(Integer.parseInt(typeId.trim()));
+			setTypeId(Integer.parseInt(Check.notEmpty(typeId, "typeId")));
 			return this;
 		}
 
 		@Nonnull
 		public Builder setUrl(@Nonnull final String url) {
-			Check.notNull(url, "url");
-
-			this.url = url;
+			this.url = Check.notNull(url, "url");
 			return this;
 		}
 
 	}
 
+	private static final long serialVersionUID = 6741143419664475577L;
+
+	private static int buildHashCode(@Nonnegative final int id, @Nonnull final UserAgentFamily family, @Nonnull final String familyName,
+			@Nonnull final SortedSet<BrowserPattern> patterns, @Nonnull final BrowserType type,
+			@Nullable final OperatingSystem operatingSystem, @Nonnull final String icon, @Nonnull final String infoUrl,
+			@Nonnull final String producer, @Nonnull final String producerUrl, @Nonnull final String url) {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + id;
+		result = prime * result + family.hashCode();
+		result = prime * result + familyName.hashCode();
+		result = prime * result + patterns.hashCode();
+		result = prime * result + type.hashCode();
+		result = prime * result + (operatingSystem == null ? 0 : operatingSystem.hashCode());
+		result = prime * result + icon.hashCode();
+		result = prime * result + infoUrl.hashCode();
+		result = prime * result + producer.hashCode();
+		result = prime * result + producerUrl.hashCode();
+		result = prime * result + url.hashCode();
+		return result;
+	}
+
+	@Nonnull
 	private final UserAgentFamily family;
+
+	@Nonnull
+	private final String familyName;
+
+	private final int hash;
+
+	@Nonnull
 	private final String icon;
+
+	@Nonnegative
 	private final int id;
+
+	@Nonnull
 	private final String infoUrl;
+
+	@Nullable
 	private final OperatingSystem operatingSystem;
-	private final SortedSet<BrowserPattern> patternSet;
+
+	@Nonnull
+	private final SortedSet<BrowserPattern> patterns;
+
+	@Nonnull
 	private final String producer;
+
+	@Nonnull
 	private final String producerUrl;
+
+	@Nonnull
 	private final BrowserType type;
+
+	@Nonnull
 	private final String url;
 
-	public Browser(@Nonnegative final int id, @Nonnull final BrowserType type, @Nonnull final UserAgentFamily family,
-			@Nonnull final String url, @Nonnull final String producer, @Nonnull final String producerUrl, @Nonnull final String icon,
-			@Nonnull final String infoUrl, @Nonnull final SortedSet<BrowserPattern> patternSet,
-			@Nonnull final OperatingSystem operatingSystem) {
-		Check.notNull(family, "family");
-		Check.notNull(icon, "icon");
-		Check.notNegative(id, "id");
-		Check.notNull(infoUrl, "infoUrl");
-		Check.notNull(patternSet, "patternSet");
-		Check.notNull(producer, "producer");
-		Check.notNull(producerUrl, "producerUrl");
-		Check.notNull(type, "type");
-		Check.notNull(url, "url");
-
-		this.family = family;
-		this.icon = icon;
-		this.id = id;
-		this.infoUrl = infoUrl;
+	public Browser(@Nonnegative final int id, @Nonnull final UserAgentFamily family, @Nonnull final String familyName,
+			@Nonnull final SortedSet<BrowserPattern> patterns, @Nonnull final BrowserType type,
+			@Nonnull final OperatingSystem operatingSystem, @Nonnull final String icon, @Nonnull final String infoUrl,
+			@Nonnull final String producer, @Nonnull final String producerUrl, @Nonnull final String url) {
+		this.id = Check.notNegative(id, "id");
+		this.family = Check.notNull(family, "family");
+		this.familyName = Check.notNull(familyName, "familyName");
+		this.patterns = Collections.unmodifiableSortedSet(new TreeSet<BrowserPattern>(Check.notNull(patterns, "patterns")));
+		this.type = Check.notNull(type, "type");
 		this.operatingSystem = operatingSystem;
-		this.patternSet = patternSet;
-		this.producer = producer;
-		this.producerUrl = producerUrl;
-		this.type = type;
-		this.url = url;
+		this.icon = Check.notNull(icon, "icon");
+		this.infoUrl = Check.notNull(infoUrl, "infoUrl");
+		this.producer = Check.notNull(producer, "producer");
+		this.producerUrl = Check.notNull(producerUrl, "producerUrl");
+		this.url = Check.notNull(url, "url");
+		hash = buildHashCode(id, family, familyName, patterns, type, operatingSystem, icon, infoUrl, producer, producerUrl, url);
 	}
 
 	/**
@@ -304,16 +379,19 @@ public final class Browser {
 			return false;
 		}
 		final Browser other = (Browser) obj;
-		if (!family.equals(other.family)) {
-			return false;
-		}
-		if (!icon.equals(other.icon)) {
-			return false;
-		}
 		if (id != other.id) {
 			return false;
 		}
-		if (!infoUrl.equals(other.infoUrl)) {
+		if (!family.equals(other.family)) {
+			return false;
+		}
+		if (!familyName.equals(other.familyName)) {
+			return false;
+		}
+		if (!patterns.equals(other.patterns)) {
+			return false;
+		}
+		if (!type.equals(other.type)) {
 			return false;
 		}
 		if (operatingSystem == null) {
@@ -323,7 +401,10 @@ public final class Browser {
 		} else if (!operatingSystem.equals(other.operatingSystem)) {
 			return false;
 		}
-		if (!patternSet.equals(other.patternSet)) {
+		if (!icon.equals(other.icon)) {
+			return false;
+		}
+		if (!infoUrl.equals(other.infoUrl)) {
 			return false;
 		}
 		if (!producer.equals(other.producer)) {
@@ -332,94 +413,95 @@ public final class Browser {
 		if (!producerUrl.equals(other.producerUrl)) {
 			return false;
 		}
-		if (!type.equals(other.type)) {
-			return false;
-		}
 		if (!url.equals(other.url)) {
 			return false;
 		}
 		return true;
 	}
 
+	@Nonnull
 	public UserAgentFamily getFamily() {
 		return family;
 	}
 
+	@Nonnull
+	public String getFamilyName() {
+		return familyName;
+	}
+
+	@Nonnull
 	public String getIcon() {
 		return icon;
 	}
 
+	@Nonnegative
 	public int getId() {
 		return id;
 	}
 
+	@Nonnull
 	public String getInfoUrl() {
 		return infoUrl;
 	}
 
+	@Nullable
 	public OperatingSystem getOperatingSystem() {
 		return operatingSystem;
 	}
 
-	public SortedSet<BrowserPattern> getPatternSet() {
-		return patternSet;
+	@Nonnull
+	public SortedSet<BrowserPattern> getPatterns() {
+		return patterns;
 	}
 
+	@Nonnull
 	public String getProducer() {
 		return producer;
 	}
 
+	@Nonnull
 	public String getProducerUrl() {
 		return producerUrl;
 	}
 
+	@Nonnull
 	public BrowserType getType() {
 		return type;
 	}
 
+	@Nonnull
 	public String getUrl() {
 		return url;
 	}
 
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + family.hashCode();
-		result = prime * result + icon.hashCode();
-		result = prime * result + id;
-		result = prime * result + infoUrl.hashCode();
-		result = prime * result + ((operatingSystem == null) ? 0 : operatingSystem.hashCode());
-		result = prime * result + patternSet.hashCode();
-		result = prime * result + producer.hashCode();
-		result = prime * result + producerUrl.hashCode();
-		result = prime * result + type.hashCode();
-		result = prime * result + url.hashCode();
-		return result;
+		return hash;
 	}
 
-	@Nonnull
 	@Override
 	public String toString() {
 		final StringBuilder builder = new StringBuilder();
-		builder.append("Browser [family=");
-		builder.append(family);
-		builder.append(", icon=");
-		builder.append(icon);
-		builder.append(", id=");
+		builder.append("Browser [id=");
 		builder.append(id);
-		builder.append(", infoUrl=");
-		builder.append(infoUrl);
+		builder.append(", family=");
+		builder.append(family);
+		builder.append(", familyName=");
+		builder.append(familyName);
+		builder.append(", patterns=");
+		builder.append(patterns);
+		builder.append(", type=");
+		builder.append(type);
 		builder.append(", operatingSystem=");
 		builder.append(operatingSystem);
-		builder.append(", patternSet=");
-		builder.append(patternSet);
+		builder.append(", icon=");
+		builder.append(icon);
+		builder.append(", infoUrl=");
+		builder.append(infoUrl);
 		builder.append(", producer=");
 		builder.append(producer);
 		builder.append(", producerUrl=");
 		builder.append(producerUrl);
-		builder.append(", type=");
-		builder.append(type);
 		builder.append(", url=");
 		builder.append(url);
 		builder.append("]");

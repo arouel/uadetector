@@ -74,12 +74,14 @@ public class DataTest {
 		final SortedSet<OperatingSystemPattern> patternSet = new TreeSet<OperatingSystemPattern>();
 		final OperatingSystem os = new OperatingSystem("f1", "i1", 1, "iu1", "n1", patternSet, "p1", "pu1", "u1");
 
-		final Browser browser1 = new Browser(1, new BrowserType(1, "Browser"), UserAgentFamily.CHROME, "u", "p", "pu", "i", "iu",
-				new TreeSet<BrowserPattern>(), os);
+		final BrowserType browserType = new BrowserType(2, "Browser");
+
+		final Browser browser1 = new Browser(1, UserAgentFamily.CHROMIUM, UserAgentFamily.CHROMIUM.getName(),
+				new TreeSet<BrowserPattern>(), browserType, os, "icn", "iu", "p", "pu", "u");
 		final Data a = new DataBlueprint().browsers(Sets.newHashSet(browser1)).build();
 
-		final Browser browser2 = new Browser(1, new BrowserType(1, "Browser"), UserAgentFamily.FIREFOX, "u", "p", "pu", "i", "iu",
-				new TreeSet<BrowserPattern>(), os);
+		final Browser browser2 = new Browser(1, UserAgentFamily.FIREFOX, UserAgentFamily.FIREFOX.getName(), new TreeSet<BrowserPattern>(),
+				browserType, os, "icn", "iu", "p", "pu", "u");
 		final Data b = new DataBlueprint().browsers(Sets.newHashSet(browser2)).build();
 
 		assertFalse(a.equals(b));
@@ -152,15 +154,16 @@ public class DataTest {
 		final OperatingSystem os = new OperatingSystem("f1", "i1", 1, "iu1", "n1", patternSet, "p1", "pu1", "u1");
 
 		final BrowserPattern pattern1 = new BrowserPattern(1, Pattern.compile("1"), 1);
-		final Browser browser1 = new Browser(1, new BrowserType(1, "Browser"), UserAgentFamily.CHROME, "u", "p", "pu", "i", "iu",
-				new TreeSet<BrowserPattern>(), os);
+		final BrowserType browserType = new BrowserType(1, "Browser");
+		final Browser browser1 = new Browser(1, UserAgentFamily.CHROME, UserAgentFamily.CHROME.getName(), new TreeSet<BrowserPattern>(),
+				browserType, os, "icn", "iu", "p", "pu", "u");
 		final SortedMap<BrowserPattern, Browser> map1 = Maps.newTreeMap();
 		map1.put(pattern1, browser1);
 		final Data a = new DataBlueprint().patternToBrowserMap(map1).build();
 
 		final BrowserPattern pattern2 = new BrowserPattern(1, Pattern.compile("2"), 1);
-		final Browser browser2 = new Browser(1, new BrowserType(1, "Browser"), UserAgentFamily.CHROME, "u", "p", "pu", "i", "iu",
-				new TreeSet<BrowserPattern>(), os);
+		final Browser browser2 = new Browser(1, UserAgentFamily.CHROME, UserAgentFamily.CHROME.getName(), new TreeSet<BrowserPattern>(),
+				browserType, os, "icn", "iu", "p", "pu", "u");
 		final SortedMap<BrowserPattern, Browser> map2 = Maps.newTreeMap();
 		map2.put(pattern2, browser2);
 		final Data b = new DataBlueprint().patternToBrowserMap(map2).build();
@@ -330,8 +333,8 @@ public class DataTest {
 		patternToOperatingSystemMap.put(operatingSystemPattern, operatingSystem);
 		final BrowserType browserType = new BrowserType(2, "Browser");
 		browserTypes.put(browserType.getId(), browserType);
-		final Browser browser = new Browser(1234, browserType, UserAgentFamily.NCSA_MOSAIC, "u", "NCSA", "http://www.ncsa.uiuc.edu/", "i",
-				"iu", browserPatternSet, operatingSystem);
+		final Browser browser = new Browser(1, UserAgentFamily.NCSA_MOSAIC, UserAgentFamily.NCSA_MOSAIC.getName(),
+				new TreeSet<BrowserPattern>(), browserType, operatingSystem, "icn", "iu", "p", "pu", "http://www.ncsa.uiuc.edu/");
 		browsers.add(browser);
 		patternToBrowserMap.put(browserPattern, browser);
 		browserToOperatingSystemMappings.add(new BrowserOperatingSystemMapping(browser.getId(), operatingSystem.getId()));

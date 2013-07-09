@@ -30,10 +30,10 @@ public class BrowserIdComparatorTest {
 		final BrowserType type = new BrowserType(1, "Browser");
 		final SortedSet<OperatingSystemPattern> osPatternSet = new TreeSet<OperatingSystemPattern>();
 		final OperatingSystem operatingSystem = new OperatingSystem("f1", "i1", 1, "iu1", "n1", osPatternSet, "p1", "pu1", "u1");
-		final SortedSet<BrowserPattern> patternSet = new TreeSet<BrowserPattern>();
-		patternSet.add(new BrowserPattern(1, Pattern.compile("[0-9]"), 1));
-		patternSet.add(new BrowserPattern(2, Pattern.compile("[a-z]"), 2));
-		return new Browser(id, type, family, url, producer, producerUrl, icon, infoUrl, patternSet, operatingSystem);
+		final SortedSet<BrowserPattern> patterns = new TreeSet<BrowserPattern>();
+		patterns.add(new BrowserPattern(1, Pattern.compile("[0-9]"), 1));
+		patterns.add(new BrowserPattern(2, Pattern.compile("[a-z]"), 2));
+		return new Browser(id, family, family.getName(), patterns, type, operatingSystem, icon, infoUrl, producer, producerUrl, url);
 	}
 
 	@Test

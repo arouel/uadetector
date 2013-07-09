@@ -68,8 +68,8 @@ public final class DataBlueprint {
 		final BrowserType browserType = new BrowserType(1, "Browser");
 		browserTypes.put(browserType.getId(), browserType);
 
-		final Browser browser = new Browser(1, browserType, UserAgentFamily.FIREBIRD, "u", "p", "pu", "i", "iu", browserPatternSet,
-				operatingSystem);
+		final Browser browser = new Browser(4256, UserAgentFamily.FIREBIRD, UserAgentFamily.FIREBIRD.getName(), browserPatternSet,
+				browserType, operatingSystem, "icn", "iu1", "p1", "pu1", "u1");
 		browsers.add(browser);
 
 		patternToBrowserMap.put(browserPattern, browser);

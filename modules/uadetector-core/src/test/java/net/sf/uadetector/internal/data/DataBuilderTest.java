@@ -41,10 +41,11 @@ public class DataBuilderTest {
 		final DataBuilder b = new DataBuilder();
 		final SortedSet<OperatingSystemPattern> osPatternSet = new TreeSet<OperatingSystemPattern>();
 		final OperatingSystem os = new OperatingSystem("f1", "i1", 1, "iu1", "n1", osPatternSet, "p1", "pu1", "u1");
-		final Browser br = new Browser(1, new BrowserType(1, "Browser"), UserAgentFamily.FIREFOX, "u", "p", "pu", "i", "iu",
-				new TreeSet<BrowserPattern>(), os);
-		Assert.assertSame(b, b.appendBrowser(br));
-		Assert.assertSame(b, b.appendBrowser(br)); // testing to add same one more time
+		final BrowserType browserType = new BrowserType(1, "Browser");
+		final Browser browser = new Browser(4256, UserAgentFamily.FIREBIRD, UserAgentFamily.FIREBIRD.getName(),
+				new TreeSet<BrowserPattern>(), browserType, os, "icn", "iu1", "p1", "pu1", "u1");
+		Assert.assertSame(b, b.appendBrowser(browser));
+		Assert.assertSame(b, b.appendBrowser(browser)); // testing to add same, one more time
 	}
 
 	@Test(expected = IllegalNullArgumentException.class)
@@ -58,7 +59,7 @@ public class DataBuilderTest {
 		final DataBuilder b = new DataBuilder();
 		final Browser.Builder builder = new Browser.Builder();
 		builder.setId(1);
-		builder.setFamily(UserAgentFamily.FIREFOX);
+		builder.setFamilyName(UserAgentFamily.FIREFOX.getName());
 		builder.setType(new BrowserType(1, "Browser"));
 		Assert.assertSame(b, b.appendBrowserBuilder(builder));
 		Assert.assertSame(b, b.appendBrowserBuilder(builder)); // testing to add same one more time
@@ -81,11 +82,11 @@ public class DataBuilderTest {
 		final DataBuilder d = new DataBuilder().setVersion("test version");
 		final Browser.Builder builder = new Browser.Builder();
 		builder.setId(1);
-		builder.setFamily(UserAgentFamily.FIREFOX);
+		builder.setFamilyName(UserAgentFamily.FIREFOX.getName());
 		builder.setType(new BrowserType(1, "Browser"));
 		Assert.assertSame(d, d.appendBrowserBuilder(builder));
 		builder.setId(2);
-		builder.setFamily(UserAgentFamily.CHROME);
+		builder.setFamilyName(UserAgentFamily.CHROME.getName());
 		builder.setType(new BrowserType(1, "Browser"));
 		Assert.assertSame(d, d.appendBrowserBuilder(builder));
 		final Data data = d.build();
@@ -97,12 +98,12 @@ public class DataBuilderTest {
 		final DataBuilder d = new DataBuilder().setVersion("test version");
 		final Browser.Builder b1 = new Browser.Builder();
 		b1.setId(1);
-		b1.setFamily(UserAgentFamily.FIREFOX);
+		b1.setFamilyName(UserAgentFamily.FIREFOX.getName());
 		b1.setType(new BrowserType(1, "Browser"));
 		Assert.assertSame(d, d.appendBrowserBuilder(b1));
 		final Browser.Builder b2 = new Browser.Builder();
 		b2.setId(2);
-		b2.setFamily(UserAgentFamily.CHROME);
+		b2.setFamilyName(UserAgentFamily.CHROME.getName());
 		b2.setType(new BrowserType(1, "Browser"));
 		Assert.assertSame(d, d.appendBrowserBuilder(b2));
 		final Data data = d.build();
@@ -114,7 +115,7 @@ public class DataBuilderTest {
 		final DataBuilder b = new DataBuilder();
 		final Browser.Builder builder = new Browser.Builder();
 		builder.setId(1);
-		builder.setFamily(UserAgentFamily.FIREFOX);
+		builder.setFamilyName(UserAgentFamily.FIREFOX.getName());
 		b.appendBrowserBuilder(builder);
 	}
 
@@ -125,7 +126,7 @@ public class DataBuilderTest {
 		d.appendBrowserType(type);
 		final Browser.Builder builder = new Browser.Builder();
 		builder.setId(1);
-		builder.setFamily(UserAgentFamily.FIREFOX);
+		builder.setFamilyName(UserAgentFamily.FIREFOX.getName());
 		builder.setTypeId(2);
 		Assert.assertSame(d, d.appendBrowserBuilder(builder));
 		final Data data = d.build();
@@ -138,7 +139,7 @@ public class DataBuilderTest {
 		final DataBuilder d = new DataBuilder().setVersion("test version");
 		final Browser.Builder builder = new Browser.Builder();
 		builder.setId(1);
-		builder.setFamily(UserAgentFamily.FIREFOX);
+		builder.setFamilyName(UserAgentFamily.FIREFOX.getName());
 		builder.setTypeId(1); // type does not exist, a log message occur
 		Assert.assertSame(d, d.appendBrowserBuilder(builder));
 		final Data data = d.build();
@@ -185,51 +186,6 @@ public class DataBuilderTest {
 		final DataBuilder b = new DataBuilder();
 		Assert.assertSame(b, b.appendOperatingSystemBuilder(builder));
 		b.appendOperatingSystemBuilder(builder); // testing to add same one more time fails
-	}
-
-	@Test
-	public void testOperatingSystemToBrowserMapping_withoutMatchingEntries() {
-		final DataBuilder d = new DataBuilder().setVersion("test version");
-
-		// add mapping
-		d.appendBrowserOperatingSystemMapping(new BrowserOperatingSystemMapping(909, 303));
-
-		final Data data = d.build();
-		Assert.assertNotNull(data);
-		Assert.assertEquals(0, data.getOperatingSystems().size());
-	}
-
-	@Test
-	public void testOperatingSystemToBrowserMapping_withMatchingEntries() {
-		final DataBuilder d = new DataBuilder().setVersion("test version");
-		d.appendOperatingSystemPattern(new OperatingSystemPattern(303, Pattern.compile("[0-9]"), 1));
-
-		// browser builder entry
-		final Browser.Builder browserBuilder = new Browser.Builder();
-		browserBuilder.setId(1);
-		browserBuilder.setFamily(UserAgentFamily.FIREFOX);
-		browserBuilder.setType(new BrowserType(1, "Browser"));
-		d.appendBrowserBuilder(browserBuilder);
-		browserBuilder.setId(2);
-		browserBuilder.setFamily(UserAgentFamily.CHROME);
-		browserBuilder.setType(new BrowserType(1, "Browser"));
-		d.appendBrowserBuilder(browserBuilder);
-
-		// operating system entry
-		final OperatingSystem.Builder builder = new OperatingSystem.Builder();
-		builder.setId(303);
-		builder.setName("MyOS");
-		d.appendOperatingSystemBuilder(builder);
-
-		// add mapping
-		d.appendBrowserOperatingSystemMapping(new BrowserOperatingSystemMapping(1, 303));
-		d.appendBrowserOperatingSystemMapping(new BrowserOperatingSystemMapping(2, 909));
-
-		final Data data = d.build();
-		Assert.assertEquals(2, data.getBrowsers().size());
-		Assert.assertEquals(1, data.getOperatingSystems().size());
-		final OperatingSystem os = data.getOperatingSystems().iterator().next();
-		Assert.assertEquals("MyOS", os.getName());
 	}
 
 	@Test(expected = IllegalNegativeArgumentException.class)
@@ -326,6 +282,51 @@ public class DataBuilderTest {
 	public void setVersion_null() {
 		final DataBuilder b = new DataBuilder();
 		b.setVersion(null);
+	}
+
+	@Test
+	public void testOperatingSystemToBrowserMapping_withMatchingEntries() {
+		final DataBuilder d = new DataBuilder().setVersion("test version");
+		d.appendOperatingSystemPattern(new OperatingSystemPattern(303, Pattern.compile("[0-9]"), 1));
+
+		// browser builder entry
+		final Browser.Builder browserBuilder = new Browser.Builder();
+		browserBuilder.setId(1);
+		browserBuilder.setFamilyName(UserAgentFamily.FIREFOX.getName());
+		browserBuilder.setType(new BrowserType(1, "Browser"));
+		d.appendBrowserBuilder(browserBuilder);
+		browserBuilder.setId(2);
+		browserBuilder.setFamilyName(UserAgentFamily.CHROME.getName());
+		browserBuilder.setType(new BrowserType(1, "Browser"));
+		d.appendBrowserBuilder(browserBuilder);
+
+		// operating system entry
+		final OperatingSystem.Builder builder = new OperatingSystem.Builder();
+		builder.setId(303);
+		builder.setName("MyOS");
+		d.appendOperatingSystemBuilder(builder);
+
+		// add mapping
+		d.appendBrowserOperatingSystemMapping(new BrowserOperatingSystemMapping(1, 303));
+		d.appendBrowserOperatingSystemMapping(new BrowserOperatingSystemMapping(2, 909));
+
+		final Data data = d.build();
+		Assert.assertEquals(2, data.getBrowsers().size());
+		Assert.assertEquals(1, data.getOperatingSystems().size());
+		final OperatingSystem os = data.getOperatingSystems().iterator().next();
+		Assert.assertEquals("MyOS", os.getName());
+	}
+
+	@Test
+	public void testOperatingSystemToBrowserMapping_withoutMatchingEntries() {
+		final DataBuilder d = new DataBuilder().setVersion("test version");
+
+		// add mapping
+		d.appendBrowserOperatingSystemMapping(new BrowserOperatingSystemMapping(909, 303));
+
+		final Data data = d.build();
+		Assert.assertNotNull(data);
+		Assert.assertEquals(0, data.getOperatingSystems().size());
 	}
 
 }

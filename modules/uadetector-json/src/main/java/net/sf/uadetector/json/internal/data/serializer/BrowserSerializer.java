@@ -38,13 +38,13 @@ public final class BrowserSerializer implements JsonSerializer<Browser> {
 	@Override
 	public JsonElement serialize(final Browser browser, final Type typeOfSrc, final JsonSerializationContext context) {
 		final JsonObject jsonObj = new JsonObject();
-		jsonObj.add(FAMILY.getName(), context.serialize(browser.getFamily()));
+		jsonObj.addProperty(FAMILY.getName(), browser.getFamilyName());
 		jsonObj.addProperty(ICON.getName(), browser.getIcon());
 		jsonObj.addProperty(INFO_URL.getName(), browser.getInfoUrl());
 		if (browser.getOperatingSystem() != null) {
 			jsonObj.addProperty(OPERATING_SYSTEM_HASH.getName(), HashCodeGenerator.generate(browser.getOperatingSystem()));
 		}
-		jsonObj.add(PATTERNS.getName(), context.serialize(createHashCodeList(browser.getPatternSet())));
+		jsonObj.add(PATTERNS.getName(), context.serialize(createHashCodeList(browser.getPatterns())));
 		jsonObj.addProperty(PRODUCER.getName(), browser.getProducer());
 		jsonObj.addProperty(PRODUCER_URL.getName(), browser.getProducerUrl());
 		jsonObj.addProperty(BROWSER_TYPE_HASH.getName(), HashCodeGenerator.generate(browser.getType()));

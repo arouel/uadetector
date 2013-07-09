@@ -15,9 +15,16 @@
  ******************************************************************************/
 package net.sf.uadetector.internal.data.domain;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
+
 import java.util.SortedSet;
 import java.util.TreeSet;
 import java.util.regex.Pattern;
+
+import javax.annotation.Nonnull;
 
 import net.sf.qualitycheck.exception.IllegalNegativeArgumentException;
 import net.sf.qualitycheck.exception.IllegalNullArgumentException;
@@ -28,173 +35,109 @@ import net.sf.uadetector.UserAgentFamily;
 import org.junit.Assert;
 import org.junit.Test;
 
+import com.google.common.collect.Sets;
+
 public class BrowserTest {
 
-	@Test(expected = IllegalNullArgumentException.class)
-	public void construct_family_null() {
-		final int id = 1;
-		final String icon = "icon";
-		final String infoUrl = "info url";
-		final String url = "url";
-		final UserAgentFamily family = null;
-		final String producerUrl = "producer url";
-		final String producer = "producer";
-		final BrowserType type = new BrowserType(1, "Browser");
-		final SortedSet<OperatingSystemPattern> osPatternSet = new TreeSet<OperatingSystemPattern>();
-		final OperatingSystem operatingSystem = new OperatingSystem("f1", "i1", 1, "iu1", "n1", osPatternSet, "p1", "pu1", "u1");
-		final SortedSet<BrowserPattern> patternSet = new TreeSet<BrowserPattern>();
-		new Browser(id, type, family, url, producer, producerUrl, icon, infoUrl, patternSet, operatingSystem);
-	}
+	private static final class Blueprint {
 
-	@Test(expected = IllegalNullArgumentException.class)
-	public void construct_icon_null() {
-		final int id = 1;
-		final String icon = null;
-		final String infoUrl = "info url";
-		final String url = "url";
-		final UserAgentFamily family = UserAgentFamily.UNKNOWN;
-		final String producerUrl = "producer url";
-		final String producer = "producer";
-		final BrowserType type = new BrowserType(1, "Browser");
-		final SortedSet<OperatingSystemPattern> osPatternSet = new TreeSet<OperatingSystemPattern>();
-		final OperatingSystem operatingSystem = new OperatingSystem("f1", "i1", 1, "iu1", "n1", osPatternSet, "p1", "pu1", "u1");
-		final SortedSet<BrowserPattern> patternSet = new TreeSet<BrowserPattern>();
-		new Browser(id, type, family, url, producer, producerUrl, icon, infoUrl, patternSet, operatingSystem);
-	}
+		private UserAgentFamily family = UserAgentFamily.NCSA_MOSAIC;
 
-	@Test(expected = IllegalNegativeArgumentException.class)
-	public void construct_id_toSmall() {
-		final int id = -1;
-		final String icon = "icon";
-		final String infoUrl = "info url";
-		final String url = "url";
-		final UserAgentFamily family = UserAgentFamily.UNKNOWN;
-		final String producerUrl = "producer url";
-		final String producer = "producer";
-		final BrowserType type = new BrowserType(1, "Browser");
-		final SortedSet<OperatingSystemPattern> osPatternSet = new TreeSet<OperatingSystemPattern>();
-		final OperatingSystem operatingSystem = new OperatingSystem("f1", "i1", 1, "iu1", "n1", osPatternSet, "p1", "pu1", "u1");
-		final SortedSet<BrowserPattern> patternSet = new TreeSet<BrowserPattern>();
-		new Browser(id, type, family, url, producer, producerUrl, icon, infoUrl, patternSet, operatingSystem);
-	}
+		private String familyName = "test-family-name";
 
-	@Test(expected = IllegalNullArgumentException.class)
-	public void construct_infoUrl_null() {
-		final int id = 1;
-		final String icon = "icon";
-		final String infoUrl = null;
-		final String url = "url";
-		final UserAgentFamily family = UserAgentFamily.UNKNOWN;
-		final String producerUrl = "producer url";
-		final String producer = "producer";
-		final BrowserType type = new BrowserType(1, "Browser");
-		final SortedSet<OperatingSystemPattern> osPatternSet = new TreeSet<OperatingSystemPattern>();
-		final OperatingSystem operatingSystem = new OperatingSystem("f1", "i1", 1, "iu1", "n1", osPatternSet, "p1", "pu1", "u1");
-		final SortedSet<BrowserPattern> patternSet = new TreeSet<BrowserPattern>();
-		new Browser(id, type, family, url, producer, producerUrl, icon, infoUrl, patternSet, operatingSystem);
-	}
+		private String icon = "test-icon.png";
 
-	@Test
-	public void construct_operatingSystem_null() {
-		final int id = 1;
-		final String icon = "icon";
-		final String infoUrl = "info url";
-		final String url = "url";
-		final UserAgentFamily family = UserAgentFamily.UNKNOWN;
-		final String producerUrl = "producer url";
-		final String producer = "producer";
-		final BrowserType type = new BrowserType(1, "Browser");
-		final OperatingSystem operatingSystem = null; // can be null
-		final SortedSet<BrowserPattern> patternSet = new TreeSet<BrowserPattern>();
-		new Browser(id, type, family, url, producer, producerUrl, icon, infoUrl, patternSet, operatingSystem);
-	}
+		private int id = 9876543;
 
-	@Test(expected = IllegalNullArgumentException.class)
-	public void construct_patternSet_null() {
-		final int id = 1;
-		final String icon = "icon";
-		final String infoUrl = "info url";
-		final String url = "url";
-		final UserAgentFamily family = UserAgentFamily.UNKNOWN;
-		final String producerUrl = "producer url";
-		final String producer = "producer";
-		final BrowserType type = new BrowserType(1, "Browser");
-		final SortedSet<OperatingSystemPattern> osPatternSet = new TreeSet<OperatingSystemPattern>();
-		final OperatingSystem operatingSystem = new OperatingSystem("f1", "i1", 1, "iu1", "n1", osPatternSet, "p1", "pu1", "u1");
-		final SortedSet<BrowserPattern> patternSet = null;
-		new Browser(id, type, family, url, producer, producerUrl, icon, infoUrl, patternSet, operatingSystem);
-	}
+		private String infoUrl = "test-info-url";
 
-	@Test(expected = IllegalNullArgumentException.class)
-	public void construct_producer_null() {
-		final int id = 1;
-		final String icon = "icon";
-		final String infoUrl = "info url";
-		final String url = "url";
-		final UserAgentFamily family = UserAgentFamily.UNKNOWN;
-		final String producerUrl = "producer url";
-		final String producer = null;
-		final BrowserType type = new BrowserType(1, "Browser");
-		final SortedSet<OperatingSystemPattern> osPatternSet = new TreeSet<OperatingSystemPattern>();
-		final OperatingSystem operatingSystem = new OperatingSystem("f1", "i1", 1, "iu1", "n1", osPatternSet, "p1", "pu1", "u1");
-		final SortedSet<BrowserPattern> patternSet = new TreeSet<BrowserPattern>();
-		new Browser(id, type, family, url, producer, producerUrl, icon, infoUrl, patternSet, operatingSystem);
-	}
+		private OperatingSystem operatingSystem;
 
-	@Test(expected = IllegalNullArgumentException.class)
-	public void construct_producerUrl_null() {
-		final int id = 1;
-		final String icon = "icon";
-		final String infoUrl = "info url";
-		final String url = "url";
-		final UserAgentFamily family = UserAgentFamily.UNKNOWN;
-		final String producerUrl = null;
-		final String producer = "producer";
-		final BrowserType type = new BrowserType(1, "Browser");
-		final SortedSet<OperatingSystemPattern> osPatternSet = new TreeSet<OperatingSystemPattern>();
-		final OperatingSystem operatingSystem = new OperatingSystem("f1", "i1", 1, "iu1", "n1", osPatternSet, "p1", "pu1", "u1");
-		final SortedSet<BrowserPattern> patternSet = new TreeSet<BrowserPattern>();
-		new Browser(id, type, family, url, producer, producerUrl, icon, infoUrl, patternSet, operatingSystem);
-	}
+		private SortedSet<BrowserPattern> patterns = Sets.newTreeSet();
 
-	@Test(expected = IllegalNullArgumentException.class)
-	public void construct_type_null() {
-		final int id = 1;
-		final String icon = "icon";
-		final String infoUrl = "info url";
-		final String url = "url";
-		final UserAgentFamily family = UserAgentFamily.UNKNOWN;
-		final String producerUrl = "producer url";
-		final String producer = "producer";
-		final BrowserType type = null;
-		final SortedSet<OperatingSystemPattern> osPatternSet = new TreeSet<OperatingSystemPattern>();
-		final OperatingSystem operatingSystem = new OperatingSystem("f1", "i1", 1, "iu1", "n1", osPatternSet, "p1", "pu1", "u1");
-		final SortedSet<BrowserPattern> patternSet = new TreeSet<BrowserPattern>();
-		new Browser(id, type, family, url, producer, producerUrl, icon, infoUrl, patternSet, operatingSystem);
-	}
+		private String producer = "test-producer";
 
-	@Test(expected = IllegalNullArgumentException.class)
-	public void construct_url_null() {
-		final int id = 1;
-		final String icon = "icon";
-		final String infoUrl = "info url";
-		final String url = null;
-		final UserAgentFamily family = UserAgentFamily.UNKNOWN;
-		final String producerUrl = "producer url";
-		final String producer = "producer";
-		final BrowserType type = new BrowserType(1, "Browser");
-		final SortedSet<OperatingSystemPattern> osPatternSet = new TreeSet<OperatingSystemPattern>();
-		final OperatingSystem operatingSystem = new OperatingSystem("f1", "i1", 1, "iu1", "n1", osPatternSet, "p1", "pu1", "u1");
-		final SortedSet<BrowserPattern> patternSet = new TreeSet<BrowserPattern>();
-		new Browser(id, type, family, url, producer, producerUrl, icon, infoUrl, patternSet, operatingSystem);
+		private String producerUrl = "test-producer-url";
+
+		private BrowserType type = new BrowserType(9876, "test-type");
+
+		private String url = "test-url";
+
+		public Blueprint() {
+			patterns.add(new BrowserPattern(9876, Pattern.compile("[a-z]+"), 1));
+			patterns.add(new BrowserPattern(7652, Pattern.compile("[0-9]+"), 2));
+			final SortedSet<OperatingSystemPattern> osPatterns = Sets.newTreeSet();
+			osPatterns.add(new OperatingSystemPattern(3265, Pattern.compile(".*"), 1));
+			operatingSystem = new OperatingSystem("f1", "i1", 1, "iu1", "n1", osPatterns, "p1", "pu1", "u1");
+		}
+
+		@Nonnull
+		public Browser build() {
+			return new Browser(id, family, familyName, patterns, type, operatingSystem, icon, infoUrl, producer, producerUrl, url);
+		}
+
+		public Blueprint family(final UserAgentFamily family) {
+			this.family = family;
+			return this;
+		}
+
+		public Blueprint familyName(final String familyName) {
+			this.familyName = familyName;
+			return this;
+		}
+
+		public Blueprint icon(final String icon) {
+			this.icon = icon;
+			return this;
+		}
+
+		public Blueprint id(final int id) {
+			this.id = id;
+			return this;
+		}
+
+		public Blueprint infoUrl(final String infoUrl) {
+			this.infoUrl = infoUrl;
+			return this;
+		}
+
+		public Blueprint operatingSystem(final OperatingSystem operatingSystem) {
+			this.operatingSystem = operatingSystem;
+			return this;
+		}
+
+		public Blueprint patterns(final SortedSet<BrowserPattern> patterns) {
+			this.patterns = patterns;
+			return this;
+		}
+
+		public Blueprint producer(final String producer) {
+			this.producer = producer;
+			return this;
+		}
+
+		public Blueprint producerUrl(final String producerUrl) {
+			this.producerUrl = producerUrl;
+			return this;
+		}
+
+		public Blueprint type(final BrowserType type) {
+			this.type = type;
+			return this;
+		}
+
+		public Blueprint url(final String url) {
+			this.url = url;
+			return this;
+		}
+
 	}
 
 	@Test
-	public void copyTo_successful_withOperatingSystem() {
+	public void copyTo_withOperatingSystem() {
 		final SortedSet<OperatingSystemPattern> patternSet = new TreeSet<OperatingSystemPattern>();
 		final OperatingSystem os = new OperatingSystem("f1", "i1", 1, "iu1", "n1", patternSet, "p1", "pu1", "u1");
-		final Browser b = new Browser(1, new BrowserType(1, "Browser"), UserAgentFamily.CHROME, "u", "p", "pu", "i", "iu",
-				new TreeSet<BrowserPattern>(), os);
+		final Browser b = new Blueprint().operatingSystem(os).build();
 		final Builder builder = new UserAgent.Builder();
 		b.copyTo(builder);
 		Assert.assertEquals(b.getFamily(), builder.getFamily());
@@ -206,9 +149,8 @@ public class BrowserTest {
 	}
 
 	@Test
-	public void copyTo_successful_withoutOperatingSystem() {
-		final Browser b = new Browser(1, new BrowserType(1, "Browser"), UserAgentFamily.CHROME, "u", "p", "pu", "i", "iu",
-				new TreeSet<BrowserPattern>(), null);
+	public void copyTo_withoutOperatingSystem() {
+		final Browser b = new Blueprint().operatingSystem(null).build();
 		final Builder builder = new UserAgent.Builder();
 		b.copyTo(builder);
 		Assert.assertEquals(b.getFamily(), builder.getFamily());
@@ -220,211 +162,186 @@ public class BrowserTest {
 	}
 
 	@Test
-	public void equals_differentFamily() {
-		final SortedSet<OperatingSystemPattern> osPatternSet = new TreeSet<OperatingSystemPattern>();
-		final OperatingSystem os = new OperatingSystem("f1", "i1", 1, "iu1", "n1", osPatternSet, "p1", "pu1", "u1");
-		final Browser b1 = new Browser(1, new BrowserType(1, "Browser"), UserAgentFamily.CHROME, "u", "p", "pu", "i", "iu",
-				new TreeSet<BrowserPattern>(), os);
-		final Browser b2 = new Browser(1, new BrowserType(1, "Browser"), UserAgentFamily.FIREFOX, "u", "p", "pu", "i", "iu",
-				new TreeSet<BrowserPattern>(), os);
-		Assert.assertFalse(b1.hashCode() == b2.hashCode());
-		Assert.assertFalse(b1.equals(b2));
+	public void equals_different_FAMILY() {
+		final Browser a = new Blueprint().family(UserAgentFamily.FIREBIRD).build();
+		final Browser b = new Blueprint().family(UserAgentFamily.FIREFOX).build();
+		assertFalse(a.equals(b));
+		assertFalse(a.hashCode() == b.hashCode());
 	}
 
 	@Test
-	public void equals_differentIcon() {
-		final SortedSet<OperatingSystemPattern> osPatternSet = new TreeSet<OperatingSystemPattern>();
-		final OperatingSystem os = new OperatingSystem("f1", "i1", 1, "iu1", "n1", osPatternSet, "p1", "pu1", "u1");
-		final Browser b1 = new Browser(1, new BrowserType(1, "Browser"), UserAgentFamily.CHROME, "u", "p", "pu", "i1", "iu",
-				new TreeSet<BrowserPattern>(), os);
-		final Browser b2 = new Browser(1, new BrowserType(1, "Browser"), UserAgentFamily.CHROME, "u", "p", "pu", "i2", "iu",
-				new TreeSet<BrowserPattern>(), os);
-		Assert.assertFalse(b1.hashCode() == b2.hashCode());
-		Assert.assertFalse(b1.equals(b2));
+	public void equals_different_FAMILYNAME() {
+		final Browser a = new Blueprint().familyName("name1").build();
+		final Browser b = new Blueprint().familyName("name2").build();
+		assertFalse(a.equals(b));
+		assertFalse(a.hashCode() == b.hashCode());
 	}
 
 	@Test
-	public void equals_differentId() {
-		final SortedSet<OperatingSystemPattern> osPatternSet = new TreeSet<OperatingSystemPattern>();
-		final OperatingSystem os = new OperatingSystem("f1", "i1", 1, "iu1", "n1", osPatternSet, "p1", "pu1", "u1");
-		final Browser b1 = new Browser(1, new BrowserType(1, "Browser"), UserAgentFamily.CHROME, "u", "p", "pu", "i", "iu",
-				new TreeSet<BrowserPattern>(), os);
-		final Browser b2 = new Browser(2, new BrowserType(1, "Browser"), UserAgentFamily.CHROME, "u", "p", "pu", "i", "iu",
-				new TreeSet<BrowserPattern>(), os);
-		Assert.assertFalse(b1.hashCode() == b2.hashCode());
-		Assert.assertFalse(b1.equals(b2));
+	public void equals_different_ICON() {
+		final Browser a = new Blueprint().icon("icon.png").build();
+		final Browser b = new Blueprint().icon("icon.gif").build();
+		assertFalse(a.equals(b));
+		assertFalse(a.hashCode() == b.hashCode());
 	}
 
 	@Test
-	public void equals_differentInfoUrl() {
-		final SortedSet<OperatingSystemPattern> osPatternSet = new TreeSet<OperatingSystemPattern>();
-		final OperatingSystem os = new OperatingSystem("f1", "i1", 1, "iu1", "n1", osPatternSet, "p1", "pu1", "u1");
-		final Browser b1 = new Browser(1, new BrowserType(1, "Browser"), UserAgentFamily.CHROME, "u", "p", "pu", "i", "iu1",
-				new TreeSet<BrowserPattern>(), os);
-		final Browser b2 = new Browser(1, new BrowserType(1, "Browser"), UserAgentFamily.CHROME, "u", "p", "pu", "i", "iu2",
-				new TreeSet<BrowserPattern>(), os);
-		Assert.assertFalse(b1.hashCode() == b2.hashCode());
-		Assert.assertFalse(b1.equals(b2));
+	public void equals_different_ID() {
+		final Browser a = new Blueprint().id(725).build();
+		final Browser b = new Blueprint().id(289).build();
+		assertFalse(a.equals(b));
+		assertFalse(a.hashCode() == b.hashCode());
 	}
 
 	@Test
-	public void equals_differentOperatingSystem() {
-		final SortedSet<OperatingSystemPattern> osPatternSet = new TreeSet<OperatingSystemPattern>();
-		final OperatingSystem os1 = new OperatingSystem("f1", "i1", 1, "iu1", "n1", osPatternSet, "p1", "pu1", "u1");
-		final OperatingSystem os2 = new OperatingSystem("f2", "i2", 2, "iu2", "n2", osPatternSet, "p2", "pu2", "u2");
-		final Browser b1 = new Browser(1, new BrowserType(1, "Browser"), UserAgentFamily.CHROME, "u", "p", "pu", "i", "iu",
-				new TreeSet<BrowserPattern>(), os1);
-		final Browser b2 = new Browser(1, new BrowserType(1, "Browser"), UserAgentFamily.CHROME, "u", "p", "pu", "i", "iu",
-				new TreeSet<BrowserPattern>(), os2);
-		Assert.assertFalse(b1.hashCode() == b2.hashCode());
-		Assert.assertFalse(b1.equals(b2));
+	public void equals_different_INFOURL() {
+		final Browser a = new Blueprint().infoUrl("info-1").build();
+		final Browser b = new Blueprint().infoUrl("info-2").build();
+		assertFalse(a.equals(b));
+		assertFalse(a.hashCode() == b.hashCode());
 	}
 
 	@Test
-	public void equals_differentOperatingSystem_oneIsNull() {
-		final SortedSet<OperatingSystemPattern> osPatternSet = new TreeSet<OperatingSystemPattern>();
-		final OperatingSystem os1 = new OperatingSystem("f1", "i1", 1, "iu1", "n1", osPatternSet, "p1", "pu1", "u1");
-		final OperatingSystem os2 = null;
-		final Browser b1 = new Browser(1, new BrowserType(1, "Browser"), UserAgentFamily.CHROME, "u", "p", "pu", "i", "iu",
-				new TreeSet<BrowserPattern>(), os1);
-		final Browser b2 = new Browser(1, new BrowserType(1, "Browser"), UserAgentFamily.CHROME, "u", "p", "pu", "i", "iu",
-				new TreeSet<BrowserPattern>(), os2);
-		Assert.assertFalse(b1.hashCode() == b2.hashCode());
-		Assert.assertFalse(b1.equals(b2));
-		Assert.assertFalse(b2.equals(b1));
+	public void equals_different_OPERATINGSYSTEM() {
+		final OperatingSystem os1 = new OperatingSystem("Linux", "tux.png", 132, "info", "Gentoo", new TreeSet<OperatingSystemPattern>(),
+				"Gentoo Org.", "http://gentoo.org", "http://gentoo.org");
+		final Browser a = new Blueprint().operatingSystem(os1).build();
+
+		final OperatingSystem os2 = new OperatingSystem("Linux", "tux.png", 764, "info", "Suse", new TreeSet<OperatingSystemPattern>(),
+				"SUSE Linux GmbH", "https://www.suse.com", "https://www.suse.com");
+		final Browser b = new Blueprint().operatingSystem(os2).build();
+
+		assertFalse(a.equals(b));
+		assertFalse(a.hashCode() == b.hashCode());
 	}
 
 	@Test
-	public void equals_differentPatternSet_differentEntries() {
-		final SortedSet<OperatingSystemPattern> osPatternSet = new TreeSet<OperatingSystemPattern>();
-		final OperatingSystem os = new OperatingSystem("f1", "i1", 1, "iu1", "n1", osPatternSet, "p1", "pu1", "u1");
-		final TreeSet<BrowserPattern> ps1 = new TreeSet<BrowserPattern>();
-		ps1.add(new BrowserPattern(1, Pattern.compile("[0-9]"), 1));
-		final TreeSet<BrowserPattern> ps2 = new TreeSet<BrowserPattern>();
-		ps2.add(new BrowserPattern(2, Pattern.compile("[0-9]"), 2));
-		final Browser b1 = new Browser(1, new BrowserType(1, "Browser"), UserAgentFamily.CHROME, "u", "p", "pu", "i", "iu", ps1, os);
-		final Browser b2 = new Browser(1, new BrowserType(1, "Browser"), UserAgentFamily.CHROME, "u", "p", "pu", "i", "iu", ps2, os);
-		Assert.assertFalse(b1.hashCode() == b2.hashCode());
-		Assert.assertFalse(b1.equals(b2));
+	public void equals_different_PATTERNS() {
+		final SortedSet<BrowserPattern> patterns1 = Sets.newTreeSet();
+		patterns1.add(new BrowserPattern(7654, Pattern.compile("d*[a-f]+"), 46));
+		final Browser a = new Blueprint().patterns(patterns1).build();
+
+		final SortedSet<BrowserPattern> patterns2 = Sets.newTreeSet();
+		patterns2.add(new BrowserPattern(1932, Pattern.compile("f*[1-4]+"), 733));
+		final Browser b = new Blueprint().patterns(patterns2).build();
+
+		assertFalse(a.equals(b));
+		assertFalse(a.hashCode() == b.hashCode());
 	}
 
 	@Test
-	public void equals_differentPatternSet_differentEntrySize() {
-		final SortedSet<OperatingSystemPattern> osPatternSet = new TreeSet<OperatingSystemPattern>();
-		final OperatingSystem os = new OperatingSystem("f1", "i1", 1, "iu1", "n1", osPatternSet, "p1", "pu1", "u1");
-		final TreeSet<BrowserPattern> ps1 = new TreeSet<BrowserPattern>();
-		ps1.add(new BrowserPattern(1, Pattern.compile("[0-9]"), 1));
-		ps1.add(new BrowserPattern(2, Pattern.compile("[0-9]+"), 2));
-		final TreeSet<BrowserPattern> ps2 = new TreeSet<BrowserPattern>();
-		ps2.add(new BrowserPattern(2, Pattern.compile("[0-9]+"), 2));
-		final Browser b1 = new Browser(1, new BrowserType(1, "Browser"), UserAgentFamily.CHROME, "u", "p", "pu", "i", "iu", ps1, os);
-		final Browser b2 = new Browser(1, new BrowserType(1, "Browser"), UserAgentFamily.CHROME, "u", "p", "pu", "i", "iu", ps2, os);
-		Assert.assertFalse(b1.hashCode() == b2.hashCode());
-		Assert.assertFalse(b1.equals(b2));
+	public void equals_different_PRODUCER() {
+		final Browser a = new Blueprint().producer("prod-1").build();
+		final Browser b = new Blueprint().producer("prod-2").build();
+		assertFalse(a.equals(b));
+		assertFalse(a.hashCode() == b.hashCode());
 	}
 
 	@Test
-	public void equals_differentPatternSet_identicalEntries() {
-		final SortedSet<OperatingSystemPattern> osPatternSet = new TreeSet<OperatingSystemPattern>();
-		final OperatingSystem os = new OperatingSystem("f1", "i1", 1, "iu1", "n1", osPatternSet, "p1", "pu1", "u1");
-		final TreeSet<BrowserPattern> ps1 = new TreeSet<BrowserPattern>();
-		ps1.add(new BrowserPattern(1, Pattern.compile("[0-9]"), 1));
-		final TreeSet<BrowserPattern> ps2 = new TreeSet<BrowserPattern>();
-		ps2.add(new BrowserPattern(1, Pattern.compile("[0-9]"), 1));
-		final Browser b1 = new Browser(1, new BrowserType(1, "Browser"), UserAgentFamily.CHROME, "u", "p", "pu", "i", "iu", ps1, os);
-		final Browser b2 = new Browser(1, new BrowserType(1, "Browser"), UserAgentFamily.CHROME, "u", "p", "pu", "i", "iu", ps2, os);
-		Assert.assertTrue(b1.hashCode() == b2.hashCode());
-		Assert.assertTrue(b1.equals(b2));
+	public void equals_different_PRODUCERURL() {
+		final Browser a = new Blueprint().producerUrl("prod-url-1").build();
+		final Browser b = new Blueprint().producerUrl("prod-url-2").build();
+		assertFalse(a.equals(b));
+		assertFalse(a.hashCode() == b.hashCode());
 	}
 
 	@Test
-	public void equals_differentProducer() {
-		final SortedSet<OperatingSystemPattern> osPatternSet = new TreeSet<OperatingSystemPattern>();
-		final OperatingSystem os = new OperatingSystem("f1", "i1", 1, "iu1", "n1", osPatternSet, "p1", "pu1", "u1");
-		final Browser b1 = new Browser(1, new BrowserType(1, "Browser"), UserAgentFamily.CHROME, "u", "p1", "pu", "i", "iu",
-				new TreeSet<BrowserPattern>(), os);
-		final Browser b2 = new Browser(1, new BrowserType(1, "Browser"), UserAgentFamily.CHROME, "u", "p2", "pu", "i", "iu",
-				new TreeSet<BrowserPattern>(), os);
-		Assert.assertFalse(b1.hashCode() == b2.hashCode());
-		Assert.assertFalse(b1.equals(b2));
+	public void equals_different_TYPE() {
+		final Browser a = new Blueprint().type(new BrowserType(1, "Type 1")).build();
+		final Browser b = new Blueprint().type(new BrowserType(2, "Type 2")).build();
+		assertFalse(a.equals(b));
+		assertFalse(a.hashCode() == b.hashCode());
 	}
 
 	@Test
-	public void equals_differentProducerUrl() {
-		final SortedSet<OperatingSystemPattern> osPatternSet = new TreeSet<OperatingSystemPattern>();
-		final OperatingSystem os = new OperatingSystem("f1", "i1", 1, "iu1", "n1", osPatternSet, "p1", "pu1", "u1");
-		final Browser b1 = new Browser(1, new BrowserType(1, "Browser"), UserAgentFamily.CHROME, "u", "p", "pu1", "i", "iu",
-				new TreeSet<BrowserPattern>(), os);
-		final Browser b2 = new Browser(1, new BrowserType(1, "Browser"), UserAgentFamily.CHROME, "u", "p", "pu2", "i", "iu",
-				new TreeSet<BrowserPattern>(), os);
-		Assert.assertFalse(b1.hashCode() == b2.hashCode());
-		Assert.assertFalse(b1.equals(b2));
+	public void equals_different_URL() {
+		final Browser a = new Blueprint().url("url.net").build();
+		final Browser b = new Blueprint().url("url.org").build();
+		assertFalse(a.equals(b));
+		assertFalse(a.hashCode() == b.hashCode());
 	}
 
 	@Test
-	public void equals_differentType() {
-		final SortedSet<OperatingSystemPattern> osPatternSet = new TreeSet<OperatingSystemPattern>();
-		final OperatingSystem os = new OperatingSystem("f1", "i1", 1, "iu1", "n1", osPatternSet, "p1", "pu1", "u1");
-		final Browser b1 = new Browser(1, new BrowserType(1, "Browser"), UserAgentFamily.CHROME, "u", "p", "pu", "i", "iu",
-				new TreeSet<BrowserPattern>(), os);
-		final Browser b2 = new Browser(1, new BrowserType(2, "Email client"), UserAgentFamily.CHROME, "u", "p", "pu", "i", "iu",
-				new TreeSet<BrowserPattern>(), os);
-		Assert.assertFalse(b1.hashCode() == b2.hashCode());
-		Assert.assertFalse(b1.equals(b2));
-	}
-
-	@Test
-	public void equals_differentUrl() {
-		final SortedSet<OperatingSystemPattern> osPatternSet = new TreeSet<OperatingSystemPattern>();
-		final OperatingSystem os = new OperatingSystem("f1", "i1", 1, "iu1", "n1", osPatternSet, "p1", "pu1", "u1");
-		final Browser b1 = new Browser(1, new BrowserType(1, "Browser"), UserAgentFamily.CHROME, "u1", "p", "pu", "i", "iu",
-				new TreeSet<BrowserPattern>(), os);
-		final Browser b2 = new Browser(1, new BrowserType(1, "Browser"), UserAgentFamily.CHROME, "u2", "p", "pu", "i", "iu",
-				new TreeSet<BrowserPattern>(), os);
-		Assert.assertFalse(b1.hashCode() == b2.hashCode());
-		Assert.assertFalse(b1.equals(b2));
-	}
-
-	@Test
-	public void equals_identical_nullOperatingSystem() {
-		final OperatingSystem os1 = null;
-		final OperatingSystem os2 = null;
-		final Browser b1 = new Browser(1, new BrowserType(1, "Browser"), UserAgentFamily.CHROME, "u", "p", "pu", "i", "iu",
-				new TreeSet<BrowserPattern>(), os1);
-		final Browser b2 = new Browser(1, new BrowserType(1, "Browser"), UserAgentFamily.CHROME, "u", "p", "pu", "i", "iu",
-				new TreeSet<BrowserPattern>(), os2);
-		Assert.assertTrue(b1.equals(b2));
-		Assert.assertTrue(b2.equals(b1));
-		Assert.assertTrue(b1.hashCode() == b2.hashCode());
+	public void equals_identical() {
+		final Browser a = new Blueprint().build();
+		final Browser b = new Blueprint().build();
+		assertEquals(a, b);
+		assertTrue(a.hashCode() == b.hashCode());
 	}
 
 	@Test
 	public void equals_null() {
-		final SortedSet<OperatingSystemPattern> osPatternSet = new TreeSet<OperatingSystemPattern>();
-		final OperatingSystem os = new OperatingSystem("f1", "i1", 1, "iu1", "n1", osPatternSet, "p1", "pu1", "u1");
-		final Browser b = new Browser(1, new BrowserType(1, "Browser"), UserAgentFamily.CHROME, "u", "p", "pu", "i", "iu",
-				new TreeSet<BrowserPattern>(), os);
-		Assert.assertFalse(b.equals(null));
+		final Browser a = new Blueprint().build();
+		assertFalse(a.equals(null));
 	}
 
 	@Test
 	public void equals_otherClass() {
-		final SortedSet<OperatingSystemPattern> osPatternSet = new TreeSet<OperatingSystemPattern>();
-		final OperatingSystem os = new OperatingSystem("f1", "i1", 1, "iu1", "n1", osPatternSet, "p1", "pu1", "u1");
-		final Browser b = new Browser(1, new BrowserType(1, "Browser"), UserAgentFamily.CHROME, "u", "p", "pu", "i", "iu",
-				new TreeSet<BrowserPattern>(), os);
-		final String otherClass = "";
-		Assert.assertFalse(b.equals(otherClass));
+		final Browser a = new Blueprint().build();
+		assertFalse(a.equals(""));
 	}
 
 	@Test
 	public void equals_same() {
-		final SortedSet<OperatingSystemPattern> osPatternSet = new TreeSet<OperatingSystemPattern>();
-		final OperatingSystem os = new OperatingSystem("f1", "i1", 1, "iu1", "n1", osPatternSet, "p1", "pu1", "u1");
-		final Browser b = new Browser(1, new BrowserType(1, "Browser"), UserAgentFamily.CHROME, "u", "p", "pu", "i", "iu",
-				new TreeSet<BrowserPattern>(), os);
-		Assert.assertTrue(b.equals(b));
-		Assert.assertTrue(b.hashCode() == b.hashCode());
+		final Browser a = new Blueprint().build();
+		assertEquals(a, a);
+		assertSame(a, a);
+		assertTrue(a.hashCode() == a.hashCode());
+	}
+
+	@Test(expected = IllegalNullArgumentException.class)
+	public void precondition_FAMILY() {
+		new Blueprint().family(null).build();
+	}
+
+	@Test(expected = IllegalNullArgumentException.class)
+	public void precondition_FAMILYNAME() {
+		new Blueprint().familyName(null).build();
+	}
+
+	@Test(expected = IllegalNullArgumentException.class)
+	public void precondition_ICON() {
+		new Blueprint().icon(null).build();
+	}
+
+	@Test(expected = IllegalNegativeArgumentException.class)
+	public void precondition_ID() {
+		new Blueprint().id(-1).build();
+	}
+
+	@Test(expected = IllegalNullArgumentException.class)
+	public void precondition_INFOURL() {
+		new Blueprint().infoUrl(null).build();
+	}
+
+	@Test
+	public void precondition_OPERATINGSYSTEM_nullIsAllowed() {
+		new Blueprint().operatingSystem(null).build();
+	}
+
+	@Test(expected = IllegalNullArgumentException.class)
+	public void precondition_PATTERNS() {
+		new Blueprint().patterns(null).build();
+	}
+
+	@Test(expected = IllegalNullArgumentException.class)
+	public void precondition_PRODUCER() {
+		new Blueprint().producer(null).build();
+	}
+
+	@Test(expected = IllegalNullArgumentException.class)
+	public void precondition_PRODUCERURL() {
+		new Blueprint().producerUrl(null).build();
+	}
+
+	@Test(expected = IllegalNullArgumentException.class)
+	public void precondition_TYPE() {
+		new Blueprint().type(null).build();
+	}
+
+	@Test(expected = IllegalNullArgumentException.class)
+	public void precondition_URL() {
+		new Blueprint().url(null).build();
 	}
 
 	@Test
@@ -439,35 +356,40 @@ public class BrowserTest {
 		final BrowserType type = new BrowserType(1, "Browser");
 		final SortedSet<OperatingSystemPattern> osPatternSet = new TreeSet<OperatingSystemPattern>();
 		final OperatingSystem operatingSystem = new OperatingSystem("f1", "i1", 1, "iu1", "n1", osPatternSet, "p1", "pu1", "u1");
-		final SortedSet<BrowserPattern> patternSet = new TreeSet<BrowserPattern>();
-		final Browser b = new Browser(id, type, family, url, producer, producerUrl, icon, infoUrl, patternSet, operatingSystem);
+		final SortedSet<BrowserPattern> patterns = new TreeSet<BrowserPattern>();
+		final Browser b = new Browser(id, family, family.getName(), patterns, type, operatingSystem, icon, infoUrl, producer, producerUrl,
+				url);
 		Assert.assertEquals(family, b.getFamily());
 		Assert.assertEquals("bunt.png", b.getIcon());
 		Assert.assertEquals(12354, b.getId());
 		Assert.assertEquals("http://programming-motherfucker.com/", b.getInfoUrl());
-		Assert.assertSame(operatingSystem, b.getOperatingSystem());
-		Assert.assertSame(patternSet, b.getPatternSet());
+		Assert.assertEquals(operatingSystem, b.getOperatingSystem());
+		Assert.assertEquals(patterns, b.getPatterns());
 		Assert.assertEquals("Our Values", b.getProducer());
 		Assert.assertEquals("https://github.com/before", b.getProducerUrl());
-		Assert.assertSame(type, b.getType());
+		Assert.assertEquals(type, b.getType());
 		Assert.assertEquals("http://user-agent-string.info/", b.getUrl());
 	}
 
 	@Test
 	public void testToString() {
 		// reduces only some noise in coverage report
-		final BrowserType browserType = new BrowserType(1, "Browser");
+		final int id = 12354;
+		final String icon = "bunt.png";
+		final String infoUrl = "http://programming-motherfucker.com/";
+		final String url = "http://user-agent-string.info/";
+		final UserAgentFamily family = UserAgentFamily.FIREFOX;
+		final String producerUrl = "https://github.com/before";
+		final String producer = "Our Values";
+		final BrowserType type = new BrowserType(1, "Browser");
 		final SortedSet<OperatingSystemPattern> osPatternSet = new TreeSet<OperatingSystemPattern>();
-		final OperatingSystem operatingSystem = new OperatingSystem("f1", "i1", 1, "iu1", "n1", osPatternSet, "p1", "pu1", "u1");
-		final SortedSet<BrowserPattern> patternSet = new TreeSet<BrowserPattern>();
-		final Browser b = new Browser(1, browserType, UserAgentFamily.CHROME, "u2", "p2", "pu2", "i2", "iu2", patternSet, operatingSystem);
-		final StringBuilder expected = new StringBuilder();
-		expected.append("Browser [family=CHROME, icon=i2, id=1, infoUrl=iu2, operatingSystem=");
-		expected.append(operatingSystem.toString());
-		expected.append(", patternSet=[], producer=p2, producerUrl=pu2, type=");
-		expected.append(browserType.toString());
-		expected.append(", url=u2]");
-		Assert.assertEquals(expected.toString(), b.toString());
+		final OperatingSystem os = new OperatingSystem("f1", "i1", 1, "iu1", "n1", osPatternSet, "p1", "pu1", "u1");
+		final SortedSet<BrowserPattern> patterns = new TreeSet<BrowserPattern>();
+		final Browser b = new Browser(id, family, family.getName(), patterns, type, os, icon, infoUrl, producer, producerUrl, url);
+
+		Assert.assertEquals(
+				"Browser [id=12354, family=FIREFOX, familyName=Firefox, patterns=[], type=BrowserType [id=1, name=Browser], operatingSystem=OperatingSystem [family=f1, icon=i1, id=1, infoUrl=iu1, name=n1, patternSet=[], producer=p1, producerUrl=pu1, url=u1], icon=bunt.png, infoUrl=http://programming-motherfucker.com/, producer=Our Values, producerUrl=https://github.com/before, url=http://user-agent-string.info/]",
+				b.toString());
 	}
 
 }

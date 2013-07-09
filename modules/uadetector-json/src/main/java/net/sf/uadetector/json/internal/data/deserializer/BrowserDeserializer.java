@@ -19,7 +19,6 @@ import java.util.TreeSet;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import net.sf.qualitycheck.Check;
-import net.sf.uadetector.UserAgentFamily;
 import net.sf.uadetector.internal.data.domain.Browser;
 import net.sf.uadetector.internal.data.domain.BrowserPattern;
 import net.sf.uadetector.internal.data.domain.BrowserType;
@@ -57,7 +56,7 @@ public final class BrowserDeserializer extends AbstractDeserializer<Browser> imp
 		// deserialize
 		for (final Entry<String, JsonElement> entry : json.getAsJsonObject().entrySet()) {
 			if (FAMILY.getName().equals(entry.getKey())) {
-				b.setFamily(UserAgentFamily.valueOf(entry.getValue().getAsString()));
+				b.setFamilyName(entry.getValue().getAsString());
 			} else if (HASH.getName().equals(entry.getKey())) {
 				hash = entry.getValue().getAsString();
 			} else if (ICON.getName().equals(entry.getKey())) {
@@ -70,14 +69,14 @@ public final class BrowserDeserializer extends AbstractDeserializer<Browser> imp
 					b.setOperatingSystem(os);
 				}
 			} else if (PATTERNS.getName().equals(entry.getKey())) {
-				final SortedSet<BrowserPattern> patternSet = new TreeSet<BrowserPattern>();
+				final SortedSet<BrowserPattern> patterns = new TreeSet<BrowserPattern>();
 				for (final JsonElement element : entry.getValue().getAsJsonArray()) {
 					final BrowserPattern browserPattern = browserPatternDeserializer.findBrowserPattern(element.getAsString());
 					if (browserPattern != null) {
-						patternSet.add(browserPattern);
+						patterns.add(browserPattern);
 					}
 				}
-				b.setPatternSet(patternSet);
+				b.setPatterns(patterns);
 			} else if (PRODUCER.getName().equals(entry.getKey())) {
 				b.setProducer(entry.getValue().getAsString());
 			} else if (PRODUCER_URL.getName().equals(entry.getKey())) {

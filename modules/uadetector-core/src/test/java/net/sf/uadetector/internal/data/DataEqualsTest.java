@@ -40,8 +40,9 @@ public class DataEqualsTest {
 	private static Browser createBrowser(final int id) {
 		final SortedSet<OperatingSystemPattern> osPatternSet = new TreeSet<OperatingSystemPattern>();
 		final OperatingSystem os = new OperatingSystem("f1", "i1", 1, "iu1", "n1", osPatternSet, "p1", "pu1", "u1");
-		return new Browser(id, new BrowserType(1, "Browser"), UserAgentFamily.CHROME, "u", "p", "pu", "i", "iu",
-				new TreeSet<BrowserPattern>(), os);
+		final BrowserType browserType = new BrowserType(1, "Browser");
+		return new Browser(id, UserAgentFamily.FIREBIRD, UserAgentFamily.FIREBIRD.getName(), new TreeSet<BrowserPattern>(), browserType,
+				os, "icn", "iu1", "p1", "pu1", "u1");
 	}
 
 	private static OperatingSystem createOperatingSystem(final int id) {

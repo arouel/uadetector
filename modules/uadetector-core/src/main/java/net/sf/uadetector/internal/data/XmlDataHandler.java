@@ -22,7 +22,6 @@ import java.io.InputStreamReader;
 import javax.annotation.Nonnull;
 
 import net.sf.qualitycheck.Check;
-import net.sf.uadetector.UserAgentFamily;
 import net.sf.uadetector.internal.data.domain.Browser;
 import net.sf.uadetector.internal.data.domain.BrowserOperatingSystemMapping;
 import net.sf.uadetector.internal.data.domain.BrowserPattern;
@@ -322,7 +321,7 @@ public final class XmlDataHandler extends DefaultHandler {
 		} else if (isBrowser && currentTag == Tag.BROWSER_TYPE_ID) {
 			browserBuilder.setTypeId(buffer.toString());
 		} else if (isBrowser && currentTag == Tag.NAME) {
-			browserBuilder.setFamily(UserAgentFamily.evaluate(buffer.toString()));
+			browserBuilder.setFamilyName(buffer.toString());
 		} else if (isBrowser && currentTag == Tag.URL) {
 			browserBuilder.setUrl(buffer.toString());
 		} else if (isBrowser && currentTag == Tag.COMPANY) {

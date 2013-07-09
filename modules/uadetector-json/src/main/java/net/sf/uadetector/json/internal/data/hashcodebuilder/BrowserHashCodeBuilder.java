@@ -7,13 +7,13 @@ final class BrowserHashCodeBuilder {
 
 	public static String build(final Browser browser) {
 		final StringBuilder builder = new StringBuilder();
-		builder.append(UserAgentFamilyHashCodeBuilder.build(browser.getFamily()));
+		builder.append(browser.getFamilyName());
 		builder.append(browser.getIcon());
 		builder.append(browser.getInfoUrl());
 		if (browser.getOperatingSystem() != null) {
 			builder.append(OperatingSystemHashCodeBuilder.build(browser.getOperatingSystem()));
 		}
-		for (final BrowserPattern pattern : browser.getPatternSet()) {
+		for (final BrowserPattern pattern : browser.getPatterns()) {
 			builder.append(OrderedPatternHashCodeBuilder.build(pattern));
 		}
 		builder.append(browser.getProducer());

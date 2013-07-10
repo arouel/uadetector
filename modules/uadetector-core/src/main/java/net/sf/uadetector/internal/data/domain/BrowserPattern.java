@@ -15,10 +15,13 @@
  ******************************************************************************/
 package net.sf.uadetector.internal.data.domain;
 
+import java.io.Serializable;
 import java.util.regex.Pattern;
 
 import javax.annotation.Nonnegative;
 import javax.annotation.Nonnull;
+import javax.annotation.concurrent.Immutable;
+import javax.annotation.concurrent.NotThreadSafe;
 
 import net.sf.qualitycheck.Check;
 import net.sf.uadetector.internal.util.RegularExpressionConverter;
@@ -30,13 +33,15 @@ import net.sf.uadetector.internal.util.RegularExpressionConverter;
  * 
  * @author André Rouél
  */
-public final class BrowserPattern implements OrderedPattern<BrowserPattern> {
+@Immutable
+public final class BrowserPattern implements OrderedPattern<BrowserPattern>, Serializable {
 
 	/**
 	 * Factory that creates instances of {@code BrowserPattern} via method calls.
 	 * 
 	 * @author André Rouél
 	 */
+	@NotThreadSafe
 	public static final class Builder {
 
 		/**
@@ -134,7 +139,7 @@ public final class BrowserPattern implements OrderedPattern<BrowserPattern> {
 		public Builder setPerlRegularExpression(@Nonnull final String regex) {
 			Check.notEmpty(regex, "regex");
 
-			this.setPattern(RegularExpressionConverter.convertPerlRegexToPattern(regex));
+			setPattern(RegularExpressionConverter.convertPerlRegexToPattern(regex));
 			return this;
 		}
 
@@ -178,6 +183,8 @@ public final class BrowserPattern implements OrderedPattern<BrowserPattern> {
 		}
 
 	}
+
+	private static final long serialVersionUID = 2845531314485836348L;
 
 	/**
 	 * Compares to integers.

@@ -15,8 +15,12 @@
  ******************************************************************************/
 package net.sf.uadetector.internal.data.domain;
 
+import java.io.Serializable;
+
 import javax.annotation.Nonnegative;
 import javax.annotation.Nonnull;
+import javax.annotation.concurrent.Immutable;
+import javax.annotation.concurrent.NotThreadSafe;
 
 import net.sf.qualitycheck.Check;
 
@@ -27,8 +31,10 @@ import net.sf.qualitycheck.Check;
  * 
  * @author André Rouél
  */
-public final class BrowserType {
+@Immutable
+public final class BrowserType implements Serializable {
 
+	@NotThreadSafe
 	public static final class Builder {
 
 		/**
@@ -59,8 +65,9 @@ public final class BrowserType {
 		 * Sets the identification number (ID).
 		 * 
 		 * @param id
-		 *            ID
+		 *            ID of browser type
 		 */
+		@Nonnull
 		public Builder setId(@Nonnegative final int id) {
 			Check.notNegative(id, "id");
 
@@ -75,7 +82,9 @@ public final class BrowserType {
 		 * parsed as a long, a {@code NumberFormatException} will be thrown.
 		 * 
 		 * @param id
+		 *            ID of browser type
 		 */
+		@Nonnull
 		public Builder setId(@Nonnull final String id) {
 			Check.notNull(id, "id");
 
@@ -87,7 +96,9 @@ public final class BrowserType {
 		 * Sets the name.
 		 * 
 		 * @param name
+		 *            name of the browser type
 		 */
+		@Nonnull
 		public Builder setName(@Nonnull final String name) {
 			Check.notNull(name, "name");
 
@@ -96,6 +107,8 @@ public final class BrowserType {
 		}
 
 	}
+
+	private static final long serialVersionUID = 2643535063309729806L;
 
 	@Nonnegative
 	private final int id;

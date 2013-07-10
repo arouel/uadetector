@@ -19,11 +19,30 @@ import net.sf.qualitycheck.exception.IllegalEmptyArgumentException;
 import net.sf.qualitycheck.exception.IllegalNegativeArgumentException;
 import net.sf.qualitycheck.exception.IllegalNullArgumentException;
 import net.sf.uadetector.UserAgentFamily;
+import net.sf.uadetector.internal.data.domain.Robot.Builder;
 
 import org.junit.Assert;
 import org.junit.Test;
 
 public class RobotBuilderTest {
+
+	@Test
+	public void construct_withCopy() {
+		final Builder builder = new Robot.Builder();
+		builder.setFamilyName(UserAgentFamily.GOOGLEBOT.getName());
+		builder.setIcon("i1");
+		builder.setId(2138);
+		builder.setInfoUrl("iu1");
+		builder.setName("n1");
+		builder.setProducer("p1");
+		builder.setProducerUrl("pu1");
+		builder.setUserAgentString("uas1");
+
+		final Robot r1 = builder.build();
+		final Robot r2 = new Robot.Builder(r1).build();
+		Assert.assertTrue(r1.equals(r2));
+		Assert.assertTrue(r1.hashCode() == r2.hashCode());
+	}
 
 	@Test(expected = IllegalNullArgumentException.class)
 	public void setFamilyName_null() {

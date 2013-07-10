@@ -33,32 +33,33 @@ public final class Robot implements Serializable {
 	@NotThreadSafe
 	public static final class Builder {
 
-		@Nonnull
-		private UserAgentFamily family;
+		private static final String EMPTY = "";
 
 		@Nonnull
-		private String familyName;
+		private UserAgentFamily family = UserAgentFamily.UNKNOWN;
 
 		@Nonnull
-		private String icon;
-
-		@Nonnegative
-		private int id;
+		private String familyName = EMPTY;
 
 		@Nonnull
-		private String infoUrl;
+		private String icon = EMPTY;
+
+		private int id = Integer.MIN_VALUE;
 
 		@Nonnull
-		private String name;
+		private String infoUrl = EMPTY;
 
 		@Nonnull
-		private String producer;
+		private String name = EMPTY;
 
 		@Nonnull
-		private String producerUrl;
+		private String producer = EMPTY;
 
 		@Nonnull
-		private String userAgentString;
+		private String producerUrl = EMPTY;
+
+		@Nonnull
+		private String userAgentString = EMPTY;
 
 		public Builder() {
 			// default constructor

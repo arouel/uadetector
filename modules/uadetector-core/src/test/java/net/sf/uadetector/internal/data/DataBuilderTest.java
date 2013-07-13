@@ -40,7 +40,7 @@ public class DataBuilderTest {
 	public void appendBrowser() {
 		final DataBuilder b = new DataBuilder();
 		final SortedSet<OperatingSystemPattern> osPatternSet = new TreeSet<OperatingSystemPattern>();
-		final OperatingSystem os = new OperatingSystem("f1", "i1", 1, "iu1", "n1", osPatternSet, "p1", "pu1", "u1");
+		final OperatingSystem os = new OperatingSystem(1, "n1", "f1", "iu1", osPatternSet, "p1", "pu1", "u1", "i1");
 		final BrowserType browserType = new BrowserType(1, "Browser");
 		final Browser browser = new Browser(4256, UserAgentFamily.FIREBIRD, UserAgentFamily.FIREBIRD.getName(),
 				new TreeSet<BrowserPattern>(), browserType, os, "icn", "iu1", "p1", "pu1", "u1");
@@ -172,8 +172,8 @@ public class DataBuilderTest {
 
 	@Test
 	public void appendOperatingSystem_successful() {
-		final SortedSet<OperatingSystemPattern> patternSet = new TreeSet<OperatingSystemPattern>();
-		final OperatingSystem os = new OperatingSystem("f1", "i1", 1, "iu1", "n1", patternSet, "p1", "pu1", "u1");
+		final SortedSet<OperatingSystemPattern> patterns = new TreeSet<OperatingSystemPattern>();
+		final OperatingSystem os = new OperatingSystem(1, "n1", "f1", "iu1", patterns, "p1", "pu1", "u1", "i1");
 		final DataBuilder b = new DataBuilder();
 		Assert.assertSame(b, b.appendOperatingSystem(os));
 		b.appendOperatingSystem(os); // testing to add same one more time
@@ -212,7 +212,7 @@ public class DataBuilderTest {
 		final Data data = d.build();
 		Assert.assertEquals(1, data.getOperatingSystems().size());
 		final OperatingSystem os = data.getOperatingSystems().iterator().next();
-		Assert.assertEquals("unknown", os.getName());
+		Assert.assertEquals("", os.getName());
 	}
 
 	@Test

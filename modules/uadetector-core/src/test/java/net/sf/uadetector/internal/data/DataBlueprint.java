@@ -60,7 +60,7 @@ public final class DataBlueprint {
 		final SortedSet<OperatingSystemPattern> osPatternSet = new TreeSet<OperatingSystemPattern>();
 		final OperatingSystemPattern operatingSystemPattern = new OperatingSystemPattern(1, Pattern.compile("1"), 1);
 		osPatternSet.add(operatingSystemPattern);
-		final OperatingSystem operatingSystem = new OperatingSystem("f1", "i1", 1, "iu1", "n1", osPatternSet, "p1", "pu1", "u1");
+		final OperatingSystem operatingSystem = new OperatingSystem(1, "n1", "f1", "iu1", osPatternSet, "p1", "pu1", "u1", "i1");
 		operatingSystems.add(operatingSystem);
 
 		patternToOperatingSystemMap.put(operatingSystemPattern, operatingSystem);

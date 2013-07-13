@@ -54,7 +54,6 @@ public final class OperatingSystemDeserializer extends AbstractDeserializer<Oper
 		b.setId(counter.incrementAndGet());
 		for (final Entry<String, JsonElement> entry : json.getAsJsonObject().entrySet()) {
 			if (FAMILY.getName().equals(entry.getKey())) {
-				// TODO change to enum in 'uadetector-core'
 				b.setFamily(entry.getValue().getAsString());
 			} else if (HASH.getName().equals(entry.getKey())) {
 				hash = entry.getValue().getAsString();
@@ -73,7 +72,7 @@ public final class OperatingSystemDeserializer extends AbstractDeserializer<Oper
 						patternSet.add(osPattern);
 					}
 				}
-				b.addPatternSet(patternSet);
+				b.addPatterns(patternSet);
 			} else if (PRODUCER.getName().equals(entry.getKey())) {
 				b.setProducer(entry.getValue().getAsString());
 			} else if (PRODUCER_URL.getName().equals(entry.getKey())) {

@@ -15,9 +15,16 @@
  ******************************************************************************/
 package net.sf.uadetector.internal.data.domain;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
+
 import java.util.SortedSet;
 import java.util.TreeSet;
 import java.util.regex.Pattern;
+
+import javax.annotation.Nonnull;
 
 import net.sf.qualitycheck.exception.IllegalNegativeArgumentException;
 import net.sf.qualitycheck.exception.IllegalNullArgumentException;
@@ -29,116 +36,84 @@ import org.junit.Test;
 
 public class OperatingSystemTest {
 
-	@Test(expected = IllegalNullArgumentException.class)
-	public void construct_family_null() {
-		final int id = 1;
-		final String icon = "icon";
-		final String infoUrl = "info url";
-		final String name = "name";
-		final String url = "url";
-		final String family = null;
-		final String producerUrl = "producer url";
-		final String producer = "producer";
-		final SortedSet<OperatingSystemPattern> patternSet = new TreeSet<OperatingSystemPattern>();
-		new OperatingSystem(family, icon, id, infoUrl, name, patternSet, producer, producerUrl, url);
-	}
+	private static final class Blueprint {
 
-	@Test(expected = IllegalNullArgumentException.class)
-	public void construct_icon_null() {
-		final int id = 1;
-		final String icon = null;
-		final String infoUrl = "info url";
-		final String name = "name";
-		final String url = "url";
-		final String family = "family";
-		final String producerUrl = "producer url";
-		final String producer = "producer";
-		final SortedSet<OperatingSystemPattern> patternSet = new TreeSet<OperatingSystemPattern>();
-		new OperatingSystem(family, icon, id, infoUrl, name, patternSet, producer, producerUrl, url);
-	}
+		private String family = "test-family";
 
-	@Test(expected = IllegalNegativeArgumentException.class)
-	public void construct_id_toSmall() {
-		final int id = -1;
-		final String icon = "icon";
-		final String infoUrl = "info url";
-		final String name = "name";
-		final String url = "url";
-		final String family = "family";
-		final String producerUrl = "producer url";
-		final String producer = "producer";
-		final SortedSet<OperatingSystemPattern> patternSet = new TreeSet<OperatingSystemPattern>();
-		new OperatingSystem(family, icon, id, infoUrl, name, patternSet, producer, producerUrl, url);
-	}
+		private String icon = "test-icon";
 
-	@Test(expected = IllegalNullArgumentException.class)
-	public void construct_infoUrl_null() {
-		final int id = 1;
-		final String icon = "icon";
-		final String infoUrl = null;
-		final String name = "name";
-		final String url = "url";
-		final String family = "family";
-		final String producerUrl = "producer url";
-		final String producer = "producer";
-		final SortedSet<OperatingSystemPattern> patternSet = new TreeSet<OperatingSystemPattern>();
-		new OperatingSystem(family, icon, id, infoUrl, name, patternSet, producer, producerUrl, url);
-	}
+		private int id = 34567;
 
-	@Test(expected = IllegalNullArgumentException.class)
-	public void construct_name_null() {
-		final int id = 1;
-		final String icon = "icon";
-		final String infoUrl = "info url";
-		final String url = "url";
-		final String name = null;
-		final String family = "family";
-		final String producerUrl = "producer url";
-		final String producer = "producer";
-		final SortedSet<OperatingSystemPattern> patternSet = new TreeSet<OperatingSystemPattern>();
-		new OperatingSystem(family, icon, id, infoUrl, name, patternSet, producer, producerUrl, url);
-	}
+		private String infoUrl = "test-info-url";
 
-	@Test(expected = IllegalNullArgumentException.class)
-	public void construct_patternSet_null() {
-		final int id = 1;
-		final String icon = "icon";
-		final String infoUrl = "info url";
-		final String name = "name";
-		final String url = "url";
-		final String family = "family";
-		final String producerUrl = "producer url";
-		final String producer = "producer";
-		final SortedSet<OperatingSystemPattern> patternSet = null;
-		new OperatingSystem(family, icon, id, infoUrl, name, patternSet, producer, producerUrl, url);
-	}
+		private String name = "test-name";
 
-	@Test(expected = IllegalNullArgumentException.class)
-	public void construct_producer_null() {
-		final int id = 1;
-		final String icon = "icon";
-		final String infoUrl = "info url";
-		final String name = "name";
-		final String url = "url";
-		final String family = "family";
-		final String producerUrl = "producer url";
-		final String producer = null;
-		final SortedSet<OperatingSystemPattern> patternSet = new TreeSet<OperatingSystemPattern>();
-		new OperatingSystem(family, icon, id, infoUrl, name, patternSet, producer, producerUrl, url);
-	}
+		private SortedSet<OperatingSystemPattern> patterns;
 
-	@Test(expected = IllegalNullArgumentException.class)
-	public void construct_producerUrl_null() {
-		final int id = 1;
-		final String icon = "icon";
-		final String infoUrl = "info url";
-		final String name = "name";
-		final String url = "url";
-		final String family = "family";
-		final String producerUrl = null;
-		final String producer = "producer";
-		final SortedSet<OperatingSystemPattern> patternSet = new TreeSet<OperatingSystemPattern>();
-		new OperatingSystem(family, icon, id, infoUrl, name, patternSet, producer, producerUrl, url);
+		private String producer = "test-producer";
+
+		private String producerUrl = "test-producer-url";
+
+		private String url = "test-url";
+
+		public Blueprint() {
+			// default constructor
+			patterns = new TreeSet<OperatingSystemPattern>();
+			patterns.add(new OperatingSystemPattern(1, Pattern.compile("[0-1]+"), 1));
+			patterns.add(new OperatingSystemPattern(1, Pattern.compile("[3-5]+"), 1));
+			patterns.add(new OperatingSystemPattern(986, Pattern.compile("456"), 243));
+		}
+
+		@Nonnull
+		public OperatingSystem build() {
+			return new OperatingSystem(id, name, family, infoUrl, patterns, producer, producerUrl, url, icon);
+		}
+
+		public Blueprint family(final String family) {
+			this.family = family;
+			return this;
+		}
+
+		public Blueprint icon(final String icon) {
+			this.icon = icon;
+			return this;
+		}
+
+		public Blueprint id(final int id) {
+			this.id = id;
+			return this;
+		}
+
+		public Blueprint infoUrl(final String infoUrl) {
+			this.infoUrl = infoUrl;
+			return this;
+		}
+
+		public Blueprint name(final String name) {
+			this.name = name;
+			return this;
+		}
+
+		public Blueprint patterns(final SortedSet<OperatingSystemPattern> patterns) {
+			this.patterns = patterns;
+			return this;
+		}
+
+		public Blueprint producer(final String producer) {
+			this.producer = producer;
+			return this;
+		}
+
+		public Blueprint producerUrl(final String producerUrl) {
+			this.producerUrl = producerUrl;
+			return this;
+		}
+
+		public Blueprint url(final String url) {
+			this.url = url;
+			return this;
+		}
+
 	}
 
 	@Test
@@ -151,28 +126,14 @@ public class OperatingSystemTest {
 		final String family = "family";
 		final String producerUrl = "producer url";
 		final String producer = "producer";
-		final SortedSet<OperatingSystemPattern> patternSet = new TreeSet<OperatingSystemPattern>();
-		new OperatingSystem(family, icon, id, infoUrl, name, patternSet, producer, producerUrl, url);
-	}
-
-	@Test(expected = IllegalNullArgumentException.class)
-	public void construct_url_null() {
-		final int id = 1;
-		final String icon = "icon";
-		final String infoUrl = "info url";
-		final String name = "name";
-		final String url = null;
-		final String family = "family";
-		final String producerUrl = "producer url";
-		final String producer = "producer";
-		final SortedSet<OperatingSystemPattern> patternSet = new TreeSet<OperatingSystemPattern>();
-		new OperatingSystem(family, icon, id, infoUrl, name, patternSet, producer, producerUrl, url);
+		final SortedSet<OperatingSystemPattern> patterns = new TreeSet<OperatingSystemPattern>();
+		new OperatingSystem(id, name, family, infoUrl, patterns, producer, producerUrl, url, icon);
 	}
 
 	@Test
 	public void copyTo_successful() {
 		final SortedSet<OperatingSystemPattern> osPatternSet = new TreeSet<OperatingSystemPattern>();
-		final OperatingSystem os = new OperatingSystem("Linux", "i1", 1, "iu1", "n1", osPatternSet, "p1", "pu1", "u1");
+		final OperatingSystem os = new OperatingSystem(1, "n1", "Linux", "iu1", osPatternSet, "p1", "pu1", "u1", "i1");
 		final UserAgent.Builder builder = new UserAgent.Builder();
 		os.copyTo(builder);
 		Assert.assertEquals(OperatingSystemFamily.LINUX, builder.getOperatingSystem().getFamily());
@@ -184,132 +145,155 @@ public class OperatingSystemTest {
 	}
 
 	@Test
-	public void equals_differentFamily() {
-		final SortedSet<OperatingSystemPattern> osPatternSet = new TreeSet<OperatingSystemPattern>();
-		final OperatingSystem os1 = new OperatingSystem("f1", "i1", 1, "iu1", "n1", osPatternSet, "p1", "pu1", "u1");
-		final OperatingSystem os2 = new OperatingSystem("f2", "i1", 1, "iu1", "n1", osPatternSet, "p1", "pu1", "u1");
-		Assert.assertFalse(os1.hashCode() == os2.hashCode());
-		Assert.assertFalse(os1.equals(os2));
+	public void equals_different_FAMILY() {
+		final OperatingSystem a = new Blueprint().family("family-1").build();
+		final OperatingSystem b = new Blueprint().family("family-2").build();
+		assertFalse(a.equals(b));
+		assertFalse(a.hashCode() == b.hashCode());
 	}
 
 	@Test
-	public void equals_differentIcon() {
-		final SortedSet<OperatingSystemPattern> osPatternSet = new TreeSet<OperatingSystemPattern>();
-		final OperatingSystem os1 = new OperatingSystem("f1", "i1", 1, "iu1", "n1", osPatternSet, "p1", "pu1", "u1");
-		final OperatingSystem os2 = new OperatingSystem("f1", "i2", 1, "iu1", "n1", osPatternSet, "p1", "pu1", "u1");
-		Assert.assertFalse(os1.hashCode() == os2.hashCode());
-		Assert.assertFalse(os1.equals(os2));
+	public void equals_different_ICON() {
+		final OperatingSystem a = new Blueprint().icon("icon-1").build();
+		final OperatingSystem b = new Blueprint().icon("icon-2").build();
+		assertFalse(a.equals(b));
+		assertFalse(a.hashCode() == b.hashCode());
 	}
 
 	@Test
-	public void equals_differentId() {
-		final SortedSet<OperatingSystemPattern> osPatternSet = new TreeSet<OperatingSystemPattern>();
-		final OperatingSystem os1 = new OperatingSystem("f1", "i1", 1, "iu1", "n1", osPatternSet, "p1", "pu1", "u1");
-		final OperatingSystem os2 = new OperatingSystem("f1", "i1", 2, "iu1", "n1", osPatternSet, "p1", "pu1", "u1");
-		Assert.assertFalse(os1.hashCode() == os2.hashCode());
-		Assert.assertFalse(os1.equals(os2));
+	public void equals_different_ID() {
+		final OperatingSystem a = new Blueprint().id(1234).build();
+		final OperatingSystem b = new Blueprint().id(9876).build();
+		assertFalse(a.equals(b));
+		assertFalse(a.hashCode() == b.hashCode());
 	}
 
 	@Test
-	public void equals_differentInfoUrl() {
-		final SortedSet<OperatingSystemPattern> osPatternSet = new TreeSet<OperatingSystemPattern>();
-		final OperatingSystem os1 = new OperatingSystem("f1", "i1", 1, "iu1", "n1", osPatternSet, "p1", "pu1", "u1");
-		final OperatingSystem os2 = new OperatingSystem("f1", "i1", 1, "iu2", "n1", osPatternSet, "p1", "pu1", "u1");
-		Assert.assertFalse(os1.hashCode() == os2.hashCode());
-		Assert.assertFalse(os1.equals(os2));
+	public void equals_different_INFOURL() {
+		final OperatingSystem a = new Blueprint().infoUrl("info-url-1").build();
+		final OperatingSystem b = new Blueprint().infoUrl("info-url-2").build();
+		assertFalse(a.equals(b));
+		assertFalse(a.hashCode() == b.hashCode());
 	}
 
 	@Test
-	public void equals_differentName() {
-		final SortedSet<OperatingSystemPattern> osPatternSet = new TreeSet<OperatingSystemPattern>();
-		final OperatingSystem os1 = new OperatingSystem("f1", "i1", 1, "iu1", "n1", osPatternSet, "p1", "pu1", "u1");
-		final OperatingSystem os2 = new OperatingSystem("f1", "i1", 1, "iu1", "n2", osPatternSet, "p1", "pu1", "u1");
-		Assert.assertFalse(os1.hashCode() == os2.hashCode());
-		Assert.assertFalse(os1.equals(os2));
+	public void equals_different_NAME() {
+		final OperatingSystem a = new Blueprint().name("name-1").build();
+		final OperatingSystem b = new Blueprint().name("name-2").build();
+		assertFalse(a.equals(b));
+		assertFalse(a.hashCode() == b.hashCode());
 	}
 
 	@Test
-	public void equals_differentPatternSet() {
-		final SortedSet<OperatingSystemPattern> patternSet1 = new TreeSet<OperatingSystemPattern>();
-		patternSet1.add(new OperatingSystemPattern(1, Pattern.compile("[0-9]"), 1));
-		final SortedSet<OperatingSystemPattern> patternSet2 = new TreeSet<OperatingSystemPattern>();
-		patternSet2.add(new OperatingSystemPattern(1, Pattern.compile("[0-9]"), 2));
-		final OperatingSystem os1 = new OperatingSystem("f1", "i1", 1, "iu1", "n1", patternSet1, "p1", "pu1", "u1");
-		final OperatingSystem os2 = new OperatingSystem("f1", "i1", 1, "iu1", "n1", patternSet2, "p1", "pu1", "u1");
-		Assert.assertFalse(os1.hashCode() == os2.hashCode());
-		Assert.assertFalse(os1.equals(os2));
-		Assert.assertFalse(os2.equals(os1));
+	public void equals_different_PATTERNS() {
+		final SortedSet<OperatingSystemPattern> patterns1 = new TreeSet<OperatingSystemPattern>();
+		patterns1.add(new OperatingSystemPattern(1, Pattern.compile("[0-9]+"), 1));
+		patterns1.add(new OperatingSystemPattern(2, Pattern.compile("[a-z]+"), 2));
+		final OperatingSystem a = new Blueprint().patterns(patterns1).build();
+
+		final SortedSet<OperatingSystemPattern> patterns2 = new TreeSet<OperatingSystemPattern>();
+		patterns2.add(new OperatingSystemPattern(1, Pattern.compile("[0-9]+"), 1));
+		final OperatingSystem b = new Blueprint().patterns(patterns2).build();
+
+		assertFalse(a.equals(b));
+		assertFalse(a.hashCode() == b.hashCode());
 	}
 
 	@Test
-	public void equals_differentProducer() {
-		final SortedSet<OperatingSystemPattern> osPatternSet = new TreeSet<OperatingSystemPattern>();
-		final OperatingSystem os1 = new OperatingSystem("f1", "i1", 1, "iu1", "n1", osPatternSet, "p1", "pu1", "u1");
-		final OperatingSystem os2 = new OperatingSystem("f1", "i1", 1, "iu1", "n1", osPatternSet, "p2", "pu1", "u1");
-		Assert.assertFalse(os1.hashCode() == os2.hashCode());
-		Assert.assertFalse(os1.equals(os2));
+	public void equals_different_PRODUCER() {
+		final OperatingSystem a = new Blueprint().producer("prod-1").build();
+		final OperatingSystem b = new Blueprint().producer("prod-2").build();
+		assertFalse(a.equals(b));
+		assertFalse(a.hashCode() == b.hashCode());
 	}
 
 	@Test
-	public void equals_differentProducerUrl() {
-		final SortedSet<OperatingSystemPattern> osPatternSet = new TreeSet<OperatingSystemPattern>();
-		final OperatingSystem os1 = new OperatingSystem("f1", "i1", 1, "iu1", "n1", osPatternSet, "p1", "pu1", "u1");
-		final OperatingSystem os2 = new OperatingSystem("f1", "i1", 1, "iu1", "n1", osPatternSet, "p1", "pu2", "u1");
-		Assert.assertFalse(os1.hashCode() == os2.hashCode());
-		Assert.assertFalse(os1.equals(os2));
+	public void equals_different_PRODUCERURL() {
+		final OperatingSystem a = new Blueprint().producerUrl("prod-url-1").build();
+		final OperatingSystem b = new Blueprint().producerUrl("prod-url-2").build();
+		assertFalse(a.equals(b));
+		assertFalse(a.hashCode() == b.hashCode());
 	}
 
 	@Test
-	public void equals_differentUrl() {
-		final SortedSet<OperatingSystemPattern> osPatternSet = new TreeSet<OperatingSystemPattern>();
-		final OperatingSystem os1 = new OperatingSystem("f1", "i1", 1, "iu1", "n1", osPatternSet, "p1", "pu1", "u1");
-		final OperatingSystem os2 = new OperatingSystem("f1", "i1", 1, "iu1", "n1", osPatternSet, "p1", "pu1", "u2");
-		Assert.assertFalse(os1.hashCode() == os2.hashCode());
-		Assert.assertFalse(os1.equals(os2));
+	public void equals_different_URL() {
+		final OperatingSystem a = new Blueprint().url("url-1").build();
+		final OperatingSystem b = new Blueprint().url("url-2").build();
+		assertFalse(a.equals(b));
+		assertFalse(a.hashCode() == b.hashCode());
 	}
 
 	@Test
-	public void equals_identical_withIdenticalPatternSet() {
-		final SortedSet<OperatingSystemPattern> patternSet1 = new TreeSet<OperatingSystemPattern>();
-		patternSet1.add(new OperatingSystemPattern(1, Pattern.compile("[0-9]"), 2));
-		final SortedSet<OperatingSystemPattern> patternSet2 = new TreeSet<OperatingSystemPattern>();
-		patternSet2.add(new OperatingSystemPattern(1, Pattern.compile("[0-9]"), 2));
-		final OperatingSystem os1 = new OperatingSystem("f1", "i1", 1, "iu1", "n1", patternSet1, "p1", "pu1", "u1");
-		final OperatingSystem os2 = new OperatingSystem("f1", "i1", 1, "iu1", "n1", patternSet2, "p1", "pu1", "u1");
-		Assert.assertTrue(os1.hashCode() == os2.hashCode());
-		Assert.assertTrue(os1.equals(os2));
-	}
-
-	@Test
-	public void equals_identical_withSamePatternSet() {
-		final SortedSet<OperatingSystemPattern> osPatternSet = new TreeSet<OperatingSystemPattern>();
-		final OperatingSystem os1 = new OperatingSystem("f1", "i1", 1, "iu1", "n1", osPatternSet, "p1", "pu1", "u1");
-		final OperatingSystem os2 = new OperatingSystem("f1", "i1", 1, "iu1", "n1", osPatternSet, "p1", "pu1", "u1");
-		Assert.assertTrue(os1.hashCode() == os2.hashCode());
-		Assert.assertTrue(os1.equals(os2));
+	public void equals_identical() {
+		final OperatingSystem a = new Blueprint().build();
+		final OperatingSystem b = new Blueprint().build();
+		assertEquals(a, b);
+		assertTrue(a.hashCode() == b.hashCode());
 	}
 
 	@Test
 	public void equals_null() {
-		final SortedSet<OperatingSystemPattern> osPatternSet = new TreeSet<OperatingSystemPattern>();
-		final OperatingSystem os = new OperatingSystem("f1", "i1", 1, "iu1", "n1", osPatternSet, "p1", "pu1", "u1");
-		Assert.assertFalse(os.equals(null));
+		final OperatingSystem a = new Blueprint().build();
+		assertFalse(a.equals(null));
 	}
 
 	@Test
 	public void equals_otherClass() {
-		final SortedSet<OperatingSystemPattern> osPatternSet = new TreeSet<OperatingSystemPattern>();
-		final OperatingSystem os = new OperatingSystem("f1", "i1", 1, "iu1", "n1", osPatternSet, "p1", "pu1", "u1");
-		final String otherClass = "";
-		Assert.assertFalse(os.equals(otherClass));
+		final OperatingSystem a = new Blueprint().build();
+		assertFalse(a.equals(""));
 	}
 
 	@Test
 	public void equals_same() {
-		final SortedSet<OperatingSystemPattern> osPatternSet = new TreeSet<OperatingSystemPattern>();
-		final OperatingSystem os = new OperatingSystem("f1", "i1", 1, "iu1", "n1", osPatternSet, "p1", "pu1", "u1");
-		Assert.assertTrue(os.equals(os));
-		Assert.assertTrue(os.hashCode() == os.hashCode());
+		final OperatingSystem a = new Blueprint().build();
+		assertEquals(a, a);
+		assertSame(a, a);
+		assertTrue(a.hashCode() == a.hashCode());
+	}
+
+	@Test(expected = IllegalNullArgumentException.class)
+	public void precondition_FAMILY() {
+		new Blueprint().family(null).build();
+	}
+
+	@Test(expected = IllegalNullArgumentException.class)
+	public void precondition_ICON() {
+		new Blueprint().icon(null).build();
+	}
+
+	@Test(expected = IllegalNegativeArgumentException.class)
+	public void precondition_ID() {
+		new Blueprint().id(-1).build();
+	}
+
+	@Test(expected = IllegalNullArgumentException.class)
+	public void precondition_INFOURL() {
+		new Blueprint().infoUrl(null).build();
+	}
+
+	@Test(expected = IllegalNullArgumentException.class)
+	public void precondition_NAME() {
+		new Blueprint().name(null).build();
+	}
+
+	@Test(expected = IllegalNullArgumentException.class)
+	public void precondition_PATTERNS() {
+		new Blueprint().patterns(null).build();
+	}
+
+	@Test(expected = IllegalNullArgumentException.class)
+	public void precondition_PRODUCER() {
+		new Blueprint().producer(null).build();
+	}
+
+	@Test(expected = IllegalNullArgumentException.class)
+	public void precondition_PRODUCERURL() {
+		new Blueprint().producerUrl(null).build();
+	}
+
+	@Test(expected = IllegalNullArgumentException.class)
+	public void precondition_URL() {
+		new Blueprint().url(null).build();
 	}
 
 	@Test
@@ -322,14 +306,15 @@ public class OperatingSystemTest {
 		final String family = "Learn Code The Hard Way";
 		final String producerUrl = "https://github.com/before";
 		final String producer = "Our Values";
-		final SortedSet<OperatingSystemPattern> patternSet = new TreeSet<OperatingSystemPattern>();
-		final OperatingSystem b = new OperatingSystem(family, icon, id, infoUrl, name, patternSet, producer, producerUrl, url);
+		final SortedSet<OperatingSystemPattern> patterns = new TreeSet<OperatingSystemPattern>();
+		patterns.add(new OperatingSystemPattern(1, Pattern.compile("1"), 1));
+		final OperatingSystem b = new OperatingSystem(id, name, family, infoUrl, patterns, producer, producerUrl, url, icon);
 		Assert.assertEquals("Learn Code The Hard Way", b.getFamily());
 		Assert.assertEquals("bunt.png", b.getIcon());
 		Assert.assertEquals(12354, b.getId());
 		Assert.assertEquals("http://programming-motherfucker.com/", b.getInfoUrl());
 		Assert.assertEquals("Programming, Motherfucker", b.getName());
-		Assert.assertSame(patternSet, b.getPatternSet());
+		Assert.assertEquals(patterns, b.getPatterns());
 		Assert.assertEquals("Our Values", b.getProducer());
 		Assert.assertEquals("https://github.com/before", b.getProducerUrl());
 		Assert.assertEquals("http://user-agent-string.info/", b.getUrl());
@@ -338,10 +323,11 @@ public class OperatingSystemTest {
 	@Test
 	public void testToString() {
 		// reduces only some noise in coverage report
-		final SortedSet<OperatingSystemPattern> patternSet = new TreeSet<OperatingSystemPattern>();
-		final OperatingSystem os = new OperatingSystem("f1", "i1", 1, "iu1", "n1", patternSet, "p1", "pu1", "u1");
+		final SortedSet<OperatingSystemPattern> patterns = new TreeSet<OperatingSystemPattern>();
+		patterns.add(new OperatingSystemPattern(1, Pattern.compile("1"), 1));
+		final OperatingSystem os = new OperatingSystem(1, "n1", "f1", "iu1", patterns, "p1", "pu1", "u1", "i1");
 		Assert.assertEquals(
-				"OperatingSystem [family=f1, icon=i1, id=1, infoUrl=iu1, name=n1, patternSet=[], producer=p1, producerUrl=pu1, url=u1]",
+				"OperatingSystem [id=1, name=n1, family=f1, infoUrl=iu1, patterns=[OperatingSystemPattern [id=1, pattern=1, position=1]], producer=p1, producerUrl=pu1, url=u1, icon=i1]",
 				os.toString());
 	}
 

@@ -72,7 +72,7 @@ public class DataBuilder {
 		for (final Map.Entry<Integer, OperatingSystem.Builder> entry : builders.entrySet()) {
 			final SortedSet<OperatingSystemPattern> patternSet = patterns.get(entry.getKey());
 			if (patternSet != null) {
-				entry.getValue().addPatternSet(patternSet);
+				entry.getValue().addPatterns(patternSet);
 			} else {
 				LOG.debug("No patterns for operating system entry (with id '" + entry.getKey() + "') available.");
 			}
@@ -131,7 +131,7 @@ public class DataBuilder {
 		final SortedMap<OperatingSystemPattern, OperatingSystem> map = new TreeMap<OperatingSystemPattern, OperatingSystem>(
 				OS_PATTERN_COMPARATOR);
 		for (final OperatingSystem os : osSet) {
-			for (final OperatingSystemPattern pattern : os.getPatternSet()) {
+			for (final OperatingSystemPattern pattern : os.getPatterns()) {
 				map.put(pattern, os);
 			}
 		}

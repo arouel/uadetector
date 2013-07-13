@@ -72,7 +72,7 @@ public class DataTest {
 	@Test
 	public void equals_different_BROWSERS() {
 		final SortedSet<OperatingSystemPattern> patternSet = new TreeSet<OperatingSystemPattern>();
-		final OperatingSystem os = new OperatingSystem("f1", "i1", 1, "iu1", "n1", patternSet, "p1", "pu1", "u1");
+		final OperatingSystem os = new OperatingSystem(1, "n1", "f1", "iu1", patternSet, "p1", "pu1", "u1", "i1");
 
 		final BrowserType browserType = new BrowserType(2, "Browser");
 
@@ -136,12 +136,12 @@ public class DataTest {
 
 	@Test
 	public void equals_different_OPERATINGSYSTEMS() {
-		final OperatingSystem os1 = new OperatingSystem("f1", "i1", 1, "iu1", "n1", new TreeSet<OperatingSystemPattern>(), "p1", "pu1",
-				"u1");
+		final OperatingSystem os1 = new OperatingSystem(1, "n1", "f1", "iu1", new TreeSet<OperatingSystemPattern>(), "p1", "pu1", "u1",
+				"i1");
 		final Data a = new DataBlueprint().operatingSystems(Sets.newHashSet(os1)).build();
 
-		final OperatingSystem os2 = new OperatingSystem("f1", "i1", 2, "iu1", "n1", new TreeSet<OperatingSystemPattern>(), "p1", "pu1",
-				"u1");
+		final OperatingSystem os2 = new OperatingSystem(2, "n1", "f1", "iu1", new TreeSet<OperatingSystemPattern>(), "p1", "pu1", "u1",
+				"i1");
 		final Data b = new DataBlueprint().operatingSystems(Sets.newHashSet(os2)).build();
 
 		assertFalse(a.equals(b));
@@ -151,7 +151,7 @@ public class DataTest {
 	@Test
 	public void equals_different_PATTERNTOBROWSERMAP() {
 		final SortedSet<OperatingSystemPattern> patternSet = new TreeSet<OperatingSystemPattern>();
-		final OperatingSystem os = new OperatingSystem("f1", "i1", 1, "iu1", "n1", patternSet, "p1", "pu1", "u1");
+		final OperatingSystem os = new OperatingSystem(1, "n1", "f1", "iu1", patternSet, "p1", "pu1", "u1", "i1");
 
 		final BrowserPattern pattern1 = new BrowserPattern(1, Pattern.compile("1"), 1);
 		final BrowserType browserType = new BrowserType(1, "Browser");
@@ -178,7 +178,7 @@ public class DataTest {
 		final OperatingSystemPattern pattern1 = new OperatingSystemPattern(1, Pattern.compile("1"), 1);
 		final SortedSet<OperatingSystemPattern> osPatternSet1 = new TreeSet<OperatingSystemPattern>();
 		osPatternSet1.add(pattern1);
-		final OperatingSystem os1 = new OperatingSystem("f1", "i1", 1, "iu1", "n1", osPatternSet1, "p1", "pu1", "u1");
+		final OperatingSystem os1 = new OperatingSystem(1, "n1", "f1", "iu1", osPatternSet1, "p1", "pu1", "u1", "i1");
 		map1.put(pattern1, os1);
 		final Data a = new DataBlueprint().patternToOperatingSystemMap(map1).build();
 
@@ -186,7 +186,7 @@ public class DataTest {
 		final OperatingSystemPattern pattern2 = new OperatingSystemPattern(1, Pattern.compile("1"), 1);
 		final SortedSet<OperatingSystemPattern> osPatternSet2 = new TreeSet<OperatingSystemPattern>();
 		osPatternSet2.add(pattern2);
-		final OperatingSystem os2 = new OperatingSystem("f1", "i1", 2, "iu1", "n1", osPatternSet2, "p1", "pu1", "u1");
+		final OperatingSystem os2 = new OperatingSystem(2, "n1", "f1", "iu1", osPatternSet2, "p1", "pu1", "u1", "i1");
 		map2.put(pattern2, os2);
 		final Data b = new DataBlueprint().patternToOperatingSystemMap(map2).build();
 		assertFalse(a.equals(b));
@@ -327,8 +327,8 @@ public class DataTest {
 		final SortedSet<OperatingSystemPattern> osPatternSet = new TreeSet<OperatingSystemPattern>();
 		final OperatingSystemPattern operatingSystemPattern = new OperatingSystemPattern(21435, Pattern.compile("[0-9]+"), 1);
 		osPatternSet.add(operatingSystemPattern);
-		final OperatingSystem operatingSystem = new OperatingSystem("Solaris", "i1", 9765, "iu1", "Solaris", osPatternSet, "p1", "pu1",
-				"http://en.wikipedia.org/wiki/Sun_Microsystems");
+		final OperatingSystem operatingSystem = new OperatingSystem(9765, "Solaris", "Unix",
+				"http://en.wikipedia.org/wiki/Sun_Microsystems", osPatternSet, "Sun", "http://sun.com", "http://sun.com", "solaris.png");
 		operatingSystems.add(operatingSystem);
 		patternToOperatingSystemMap.put(operatingSystemPattern, operatingSystem);
 		final BrowserType browserType = new BrowserType(2, "Browser");

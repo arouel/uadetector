@@ -34,7 +34,7 @@ public class BrowserSerializerTest {
 		final SortedSet<OperatingSystemPattern> osPatternSet = new TreeSet<OperatingSystemPattern>();
 		osPatternSet.add(new OperatingSystemPattern(1, Pattern.compile("12345"), 123));
 		osPatternSet.add(new OperatingSystemPattern(2, Pattern.compile("82378"), 987));
-		final OperatingSystem operatingSystem = new OperatingSystem("f1", "i1", 1, "iu1", "n1", osPatternSet, "p1", "pu1", "u1");
+		final OperatingSystem operatingSystem = new OperatingSystem(1, "n1", "f1", "iu1", osPatternSet, "p1", "pu1", "u1", "i1");
 		final SortedSet<BrowserPattern> patterns = new TreeSet<BrowserPattern>();
 		return new Browser(id, family, family.getName(), patterns, type, operatingSystem, icon, infoUrl, producer, producerUrl, url);
 	}

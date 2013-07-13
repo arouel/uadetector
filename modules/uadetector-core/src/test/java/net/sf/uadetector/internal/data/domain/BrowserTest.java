@@ -68,7 +68,7 @@ public class BrowserTest {
 			patterns.add(new BrowserPattern(7652, Pattern.compile("[0-9]+"), 2));
 			final SortedSet<OperatingSystemPattern> osPatterns = Sets.newTreeSet();
 			osPatterns.add(new OperatingSystemPattern(3265, Pattern.compile(".*"), 1));
-			operatingSystem = new OperatingSystem("f1", "i1", 1, "iu1", "n1", osPatterns, "p1", "pu1", "u1");
+			operatingSystem = new OperatingSystem(1, "n1", "f1", "iu1", osPatterns, "p1", "pu1", "u1", "i1");
 		}
 
 		@Nonnull
@@ -136,7 +136,7 @@ public class BrowserTest {
 	@Test
 	public void copyTo_withOperatingSystem() {
 		final SortedSet<OperatingSystemPattern> patternSet = new TreeSet<OperatingSystemPattern>();
-		final OperatingSystem os = new OperatingSystem("f1", "i1", 1, "iu1", "n1", patternSet, "p1", "pu1", "u1");
+		final OperatingSystem os = new OperatingSystem(1, "n1", "f1", "iu1", patternSet, "p1", "pu1", "u1", "i1");
 		final Browser b = new Blueprint().operatingSystem(os).build();
 		final Builder builder = new UserAgent.Builder();
 		b.copyTo(builder);
@@ -203,12 +203,12 @@ public class BrowserTest {
 
 	@Test
 	public void equals_different_OPERATINGSYSTEM() {
-		final OperatingSystem os1 = new OperatingSystem("Linux", "tux.png", 132, "info", "Gentoo", new TreeSet<OperatingSystemPattern>(),
-				"Gentoo Org.", "http://gentoo.org", "http://gentoo.org");
+		final OperatingSystem os1 = new OperatingSystem(141, "Gentoo", "Linux", "iu1", new TreeSet<OperatingSystemPattern>(),
+				"Gentoo project", "http://gentoo.org", "http://gentoo.org", "tux.png");
 		final Browser a = new Blueprint().operatingSystem(os1).build();
 
-		final OperatingSystem os2 = new OperatingSystem("Linux", "tux.png", 764, "info", "Suse", new TreeSet<OperatingSystemPattern>(),
-				"SUSE Linux GmbH", "https://www.suse.com", "https://www.suse.com");
+		final OperatingSystem os2 = new OperatingSystem(734, "SUSE Linux", "Linux", "iu1", new TreeSet<OperatingSystemPattern>(),
+				"SUSE Linux GmbH", "https://www.suse.com", "https://www.suse.com", "tux.png");
 		final Browser b = new Blueprint().operatingSystem(os2).build();
 
 		assertFalse(a.equals(b));
@@ -355,7 +355,7 @@ public class BrowserTest {
 		final String producer = "Our Values";
 		final BrowserType type = new BrowserType(1, "Browser");
 		final SortedSet<OperatingSystemPattern> osPatternSet = new TreeSet<OperatingSystemPattern>();
-		final OperatingSystem operatingSystem = new OperatingSystem("f1", "i1", 1, "iu1", "n1", osPatternSet, "p1", "pu1", "u1");
+		final OperatingSystem operatingSystem = new OperatingSystem(1, "n1", "f1", "iu1", osPatternSet, "p1", "pu1", "u1", "i1");
 		final SortedSet<BrowserPattern> patterns = new TreeSet<BrowserPattern>();
 		final Browser b = new Browser(id, family, family.getName(), patterns, type, operatingSystem, icon, infoUrl, producer, producerUrl,
 				url);
@@ -383,12 +383,12 @@ public class BrowserTest {
 		final String producer = "Our Values";
 		final BrowserType type = new BrowserType(1, "Browser");
 		final SortedSet<OperatingSystemPattern> osPatternSet = new TreeSet<OperatingSystemPattern>();
-		final OperatingSystem os = new OperatingSystem("f1", "i1", 1, "iu1", "n1", osPatternSet, "p1", "pu1", "u1");
+		final OperatingSystem os = new OperatingSystem(1, "n1", "f1", "iu1", osPatternSet, "p1", "pu1", "u1", "i1");
 		final SortedSet<BrowserPattern> patterns = new TreeSet<BrowserPattern>();
 		final Browser b = new Browser(id, family, family.getName(), patterns, type, os, icon, infoUrl, producer, producerUrl, url);
 
 		Assert.assertEquals(
-				"Browser [id=12354, family=FIREFOX, familyName=Firefox, patterns=[], type=BrowserType [id=1, name=Browser], operatingSystem=OperatingSystem [family=f1, icon=i1, id=1, infoUrl=iu1, name=n1, patternSet=[], producer=p1, producerUrl=pu1, url=u1], icon=bunt.png, infoUrl=http://programming-motherfucker.com/, producer=Our Values, producerUrl=https://github.com/before, url=http://user-agent-string.info/]",
+				"Browser [id=12354, family=FIREFOX, familyName=Firefox, patterns=[], type=BrowserType [id=1, name=Browser], operatingSystem=OperatingSystem [id=1, name=n1, family=f1, infoUrl=iu1, patterns=[], producer=p1, producerUrl=pu1, url=u1, icon=i1], icon=bunt.png, infoUrl=http://programming-motherfucker.com/, producer=Our Values, producerUrl=https://github.com/before, url=http://user-agent-string.info/]",
 				b.toString());
 	}
 

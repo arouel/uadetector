@@ -22,10 +22,10 @@ public class OperatingSystemHashCodeBuilderTest {
 		final String family = "f1";
 		final String producerUrl = "producer url";
 		final String producer = "producer";
-		final SortedSet<OperatingSystemPattern> patternSet = new TreeSet<OperatingSystemPattern>();
-		patternSet.add(new OperatingSystemPattern(1, Pattern.compile("[0-9]"), 1));
-		patternSet.add(new OperatingSystemPattern(2, Pattern.compile("[a-z]"), 2));
-		return new OperatingSystem(family, icon, id, infoUrl, name, patternSet, producer, producerUrl, url);
+		final SortedSet<OperatingSystemPattern> patterns = new TreeSet<OperatingSystemPattern>();
+		patterns.add(new OperatingSystemPattern(1, Pattern.compile("[0-9]"), 1));
+		patterns.add(new OperatingSystemPattern(2, Pattern.compile("[a-z]"), 2));
+		return new OperatingSystem(id, name, family, infoUrl, patterns, producer, producerUrl, url, icon);
 	}
 
 	@Test

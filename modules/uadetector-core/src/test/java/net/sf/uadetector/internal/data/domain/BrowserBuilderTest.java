@@ -38,7 +38,7 @@ public class BrowserBuilderTest {
 	public void construct_copy_successful() {
 		final BrowserType browserType = new BrowserType.Builder().setId("1").setName("browser type test").build();
 		final SortedSet<OperatingSystemPattern> osPatternSet = new TreeSet<OperatingSystemPattern>();
-		final OperatingSystem operatingSystem = new OperatingSystem("f1", "i1", 1, "iu1", "n1", osPatternSet, "p1", "pu1", "u1");
+		final OperatingSystem operatingSystem = new OperatingSystem(1, "n1", "f1", "iu1", osPatternSet, "p1", "pu1", "u1", "i1");
 		final SortedSet<BrowserPattern> patternSet = new TreeSet<BrowserPattern>();
 
 		final Browser.Builder original = new Browser.Builder();
@@ -194,7 +194,7 @@ public class BrowserBuilderTest {
 	public void testGetters() throws Exception {
 		final BrowserType browserType = new BrowserType.Builder().setId("1").setName("browser type test").build();
 		final SortedSet<OperatingSystemPattern> osPatternSet = new TreeSet<OperatingSystemPattern>();
-		final OperatingSystem operatingSystem = new OperatingSystem("f1", "i1", 1, "iu1", "n1", osPatternSet, "p1", "pu1", "u1");
+		final OperatingSystem operatingSystem = new OperatingSystem(1, "n1", "f1", "iu1", osPatternSet, "p1", "pu1", "u1", "i1");
 		final SortedSet<BrowserPattern> patterns = new TreeSet<BrowserPattern>();
 
 		final Browser.Builder builder = new Browser.Builder();

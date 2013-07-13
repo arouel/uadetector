@@ -11,7 +11,7 @@ final class OperatingSystemHashCodeBuilder {
 		builder.append(os.getIcon());
 		builder.append(os.getInfoUrl());
 		builder.append(os.getName());
-		for (final OperatingSystemPattern pattern : os.getPatternSet()) {
+		for (final OperatingSystemPattern pattern : os.getPatterns()) {
 			builder.append(OrderedPatternHashCodeBuilder.build(pattern));
 		}
 		builder.append(os.getProducer());

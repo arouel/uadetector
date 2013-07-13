@@ -29,15 +29,20 @@ import org.junit.Test;
 public class OperatingSystemBuilderTest {
 
 	@Test(expected = IllegalNullArgumentException.class)
-	public void construct_builder_null() {
-		new OperatingSystem.Builder(null);
+	public void construct_builder_builderIsNull() {
+		new OperatingSystem.Builder((OperatingSystem.Builder) null);
+	}
+
+	@Test(expected = IllegalNullArgumentException.class)
+	public void construct_builder_osIsNull() {
+		new OperatingSystem.Builder((OperatingSystem) null);
 	}
 
 	@Test
 	public void construct_copy_successful() {
-		final Set<OperatingSystemPattern> patternSet = new HashSet<OperatingSystemPattern>();
-		patternSet.add(new OperatingSystemPattern(2, Pattern.compile("[0-9]+"), 2));
-		patternSet.add(new OperatingSystemPattern(1, Pattern.compile("[0-9]"), 1));
+		final Set<OperatingSystemPattern> patterns = new HashSet<OperatingSystemPattern>();
+		patterns.add(new OperatingSystemPattern(2, Pattern.compile("[0-9]+"), 2));
+		patterns.add(new OperatingSystemPattern(1, Pattern.compile("[0-9]"), 1));
 
 		final OperatingSystem.Builder original = new OperatingSystem.Builder();
 		original.setFamily("f1");
@@ -45,7 +50,7 @@ public class OperatingSystemBuilderTest {
 		original.setId(1);
 		original.setInfoUrl("iu1");
 		original.setName("n1");
-		original.addPatternSet(patternSet);
+		original.addPatterns(patterns);
 		original.setProducer("p1");
 		original.setProducerUrl("pu1");
 		original.setUrl("u1");
@@ -56,8 +61,8 @@ public class OperatingSystemBuilderTest {
 		Assert.assertEquals(1, copy1.getId());
 		Assert.assertEquals("iu1", copy1.getInfoUrl());
 		Assert.assertEquals("n1", copy1.getName());
-		Assert.assertEquals(2, copy1.getPatternSet().size());
-		Assert.assertEquals(patternSet, copy1.getPatternSet());
+		Assert.assertEquals(2, copy1.getPatterns().size());
+		Assert.assertEquals(patterns, copy1.getPatterns());
 		Assert.assertEquals("p1", copy1.getProducer());
 		Assert.assertEquals("pu1", copy1.getProducerUrl());
 		Assert.assertEquals("u1", copy1.getUrl());
@@ -68,8 +73,8 @@ public class OperatingSystemBuilderTest {
 		Assert.assertEquals(1, copy2.getId());
 		Assert.assertEquals("iu1", copy2.getInfoUrl());
 		Assert.assertEquals("n1", copy2.getName());
-		Assert.assertEquals(2, copy2.getPatternSet().size());
-		Assert.assertEquals(patternSet, copy2.getPatternSet());
+		Assert.assertEquals(2, copy2.getPatterns().size());
+		Assert.assertEquals(patterns, copy2.getPatterns());
 		Assert.assertEquals("p1", copy2.getProducer());
 		Assert.assertEquals("pu1", copy2.getProducerUrl());
 		Assert.assertEquals("u1", copy2.getUrl());
@@ -125,8 +130,8 @@ public class OperatingSystemBuilderTest {
 	}
 
 	@Test(expected = IllegalNullArgumentException.class)
-	public void setPatternSet_null() {
-		new OperatingSystem.Builder().addPatternSet(null);
+	public void setPatterns_null() {
+		new OperatingSystem.Builder().addPatterns(null);
 	}
 
 	@Test(expected = IllegalNullArgumentException.class)
@@ -146,9 +151,9 @@ public class OperatingSystemBuilderTest {
 
 	@Test
 	public void testGetters() throws Exception {
-		final Set<OperatingSystemPattern> patternSet = new HashSet<OperatingSystemPattern>();
-		patternSet.add(new OperatingSystemPattern(2, Pattern.compile("[0-9]+"), 2));
-		patternSet.add(new OperatingSystemPattern(1, Pattern.compile("[0-9]"), 1));
+		final Set<OperatingSystemPattern> patterns = new HashSet<OperatingSystemPattern>();
+		patterns.add(new OperatingSystemPattern(2, Pattern.compile("[0-9]+"), 2));
+		patterns.add(new OperatingSystemPattern(1, Pattern.compile("[0-9]"), 1));
 
 		final OperatingSystem.Builder builder = new OperatingSystem.Builder();
 		Assert.assertSame(builder, builder.setFamily("f1"));
@@ -156,7 +161,7 @@ public class OperatingSystemBuilderTest {
 		Assert.assertSame(builder, builder.setId(1));
 		Assert.assertSame(builder, builder.setInfoUrl("iu1"));
 		Assert.assertSame(builder, builder.setName("n1"));
-		Assert.assertSame(builder, builder.addPatternSet(patternSet));
+		Assert.assertSame(builder, builder.addPatterns(patterns));
 		Assert.assertSame(builder, builder.setProducer("p1"));
 		Assert.assertSame(builder, builder.setProducerUrl("pu1"));
 		Assert.assertSame(builder, builder.setUrl("u1"));
@@ -166,7 +171,7 @@ public class OperatingSystemBuilderTest {
 		Assert.assertEquals(1, builder.getId());
 		Assert.assertEquals("iu1", builder.getInfoUrl());
 		Assert.assertEquals("n1", builder.getName());
-		Assert.assertEquals(patternSet, builder.getPatternSet());
+		Assert.assertEquals(patterns, builder.getPatterns());
 		Assert.assertEquals("p1", builder.getProducer());
 		Assert.assertEquals("pu1", builder.getProducerUrl());
 		Assert.assertEquals("u1", builder.getUrl());

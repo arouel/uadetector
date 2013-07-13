@@ -23,8 +23,8 @@ public class OperatingSystemIdComparatorTest {
 		final String url = "url";
 		final String producerUrl = "producer url";
 		final String producer = "producer";
-		final SortedSet<OperatingSystemPattern> patternSet = new TreeSet<OperatingSystemPattern>();
-		return new OperatingSystem(family, icon, id, infoUrl, name, patternSet, producer, producerUrl, url);
+		final SortedSet<OperatingSystemPattern> patterns = new TreeSet<OperatingSystemPattern>();
+		return new OperatingSystem(id, name, family, infoUrl, patterns, producer, producerUrl, url, icon);
 	}
 
 	@Test

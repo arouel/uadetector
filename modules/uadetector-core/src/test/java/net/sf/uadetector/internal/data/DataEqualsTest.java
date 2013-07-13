@@ -39,7 +39,7 @@ public class DataEqualsTest {
 
 	private static Browser createBrowser(final int id) {
 		final SortedSet<OperatingSystemPattern> osPatternSet = new TreeSet<OperatingSystemPattern>();
-		final OperatingSystem os = new OperatingSystem("f1", "i1", 1, "iu1", "n1", osPatternSet, "p1", "pu1", "u1");
+		final OperatingSystem os = new OperatingSystem(1, "n1", "f1", "iu1", osPatternSet, "p1", "pu1", "u1", "i1");
 		final BrowserType browserType = new BrowserType(1, "Browser");
 		return new Browser(id, UserAgentFamily.FIREBIRD, UserAgentFamily.FIREBIRD.getName(), new TreeSet<BrowserPattern>(), browserType,
 				os, "icn", "iu1", "p1", "pu1", "u1");
@@ -47,7 +47,7 @@ public class DataEqualsTest {
 
 	private static OperatingSystem createOperatingSystem(final int id) {
 		final SortedSet<OperatingSystemPattern> osPatternSet = new TreeSet<OperatingSystemPattern>();
-		return new OperatingSystem("f1", "i1", id, "iu1", "n1", osPatternSet, "p1", "pu1", "u1");
+		return new OperatingSystem(id, "n1", "f1", "iu1", osPatternSet, "p1", "pu1", "u1", "i1");
 	}
 
 	private static final Robot createRobot(final int id) {

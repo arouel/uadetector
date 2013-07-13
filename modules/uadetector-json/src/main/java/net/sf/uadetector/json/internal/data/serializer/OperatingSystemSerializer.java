@@ -41,7 +41,7 @@ public final class OperatingSystemSerializer implements JsonSerializer<Operating
 		jsonObj.addProperty(ICON.getName(), os.getIcon());
 		jsonObj.addProperty(INFO_URL.getName(), os.getInfoUrl());
 		jsonObj.addProperty(NAME.getName(), os.getName());
-		jsonObj.add(PATTERN_HASHS.getName(), context.serialize(createHashCodeList(os.getPatternSet())));
+		jsonObj.add(PATTERN_HASHS.getName(), context.serialize(createHashCodeList(os.getPatterns())));
 		jsonObj.addProperty(PRODUCER.getName(), os.getProducer());
 		jsonObj.addProperty(PRODUCER_URL.getName(), os.getProducerUrl());
 		jsonObj.addProperty(URL.getName(), os.getUrl());

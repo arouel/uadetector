@@ -465,7 +465,9 @@ public final class XmlDataHandler extends DefaultHandler {
 	@Override
 	public void fatalError(final SAXParseException e) throws SAXException {
 		logParsingIssue("Fatal error", e);
-		super.fatalError(e); // throws a SAXException
+
+		// this call throws a SAXException
+		super.fatalError(e);
 	}
 
 	/**

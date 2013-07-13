@@ -316,22 +316,24 @@ public final class XmlDataHandler extends DefaultHandler {
 	}
 
 	private void addToBrowserBuilder() {
-		if (isBrowser && currentTag == Tag.ID) {
-			browserBuilder.setId(buffer.toString());
-		} else if (isBrowser && currentTag == Tag.BROWSER_TYPE_ID) {
-			browserBuilder.setTypeId(buffer.toString());
-		} else if (isBrowser && currentTag == Tag.NAME) {
-			browserBuilder.setFamilyName(buffer.toString());
-		} else if (isBrowser && currentTag == Tag.URL) {
-			browserBuilder.setUrl(buffer.toString());
-		} else if (isBrowser && currentTag == Tag.COMPANY) {
-			browserBuilder.setProducer(buffer.toString());
-		} else if (isBrowser && currentTag == Tag.COMPANY_URL) {
-			browserBuilder.setProducerUrl(buffer.toString());
-		} else if (isBrowser && currentTag == Tag.ICON) {
-			browserBuilder.setIcon(buffer.toString());
-		} else if (isBrowser && currentTag == Tag.BROWSER_INFO_URL) {
-			browserBuilder.setInfoUrl(buffer.toString());
+		if (isBrowser) {
+			if (currentTag == Tag.ID) {
+				browserBuilder.setId(buffer.toString());
+			} else if (currentTag == Tag.BROWSER_TYPE_ID) {
+				browserBuilder.setTypeId(buffer.toString());
+			} else if (currentTag == Tag.NAME) {
+				browserBuilder.setFamilyName(buffer.toString());
+			} else if (currentTag == Tag.URL) {
+				browserBuilder.setUrl(buffer.toString());
+			} else if (currentTag == Tag.COMPANY) {
+				browserBuilder.setProducer(buffer.toString());
+			} else if (currentTag == Tag.COMPANY_URL) {
+				browserBuilder.setProducerUrl(buffer.toString());
+			} else if (currentTag == Tag.ICON) {
+				browserBuilder.setIcon(buffer.toString());
+			} else if (currentTag == Tag.BROWSER_INFO_URL) {
+				browserBuilder.setInfoUrl(buffer.toString());
+			}
 		}
 	}
 
@@ -362,52 +364,58 @@ public final class XmlDataHandler extends DefaultHandler {
 	}
 
 	private void addToOperatingSystemBuilder() {
-		if (isOperatingSystem && currentTag == Tag.ID) {
-			operatingSystemBuilder.setId(buffer.toString());
-		} else if (isOperatingSystem && currentTag == Tag.FAMILY) {
-			operatingSystemBuilder.setFamily(buffer.toString());
-		} else if (isOperatingSystem && currentTag == Tag.NAME) {
-			operatingSystemBuilder.setName(buffer.toString());
-		} else if (isOperatingSystem && currentTag == Tag.URL) {
-			operatingSystemBuilder.setUrl(buffer.toString());
-		} else if (isOperatingSystem && currentTag == Tag.COMPANY) {
-			operatingSystemBuilder.setProducer(buffer.toString());
-		} else if (isOperatingSystem && currentTag == Tag.COMPANY_URL) {
-			operatingSystemBuilder.setProducerUrl(buffer.toString());
-		} else if (isOperatingSystem && currentTag == Tag.ICON) {
-			operatingSystemBuilder.setIcon(buffer.toString());
-		} else if (isOperatingSystem && currentTag == Tag.OPERATING_SYSTEM_INFO_URL) {
-			operatingSystemBuilder.setInfoUrl(buffer.toString());
+		if (isOperatingSystem) {
+			if (currentTag == Tag.ID) {
+				operatingSystemBuilder.setId(buffer.toString());
+			} else if (currentTag == Tag.FAMILY) {
+				operatingSystemBuilder.setFamily(buffer.toString());
+			} else if (currentTag == Tag.NAME) {
+				operatingSystemBuilder.setName(buffer.toString());
+			} else if (currentTag == Tag.URL) {
+				operatingSystemBuilder.setUrl(buffer.toString());
+			} else if (currentTag == Tag.COMPANY) {
+				operatingSystemBuilder.setProducer(buffer.toString());
+			} else if (currentTag == Tag.COMPANY_URL) {
+				operatingSystemBuilder.setProducerUrl(buffer.toString());
+			} else if (currentTag == Tag.ICON) {
+				operatingSystemBuilder.setIcon(buffer.toString());
+			} else if (currentTag == Tag.OPERATING_SYSTEM_INFO_URL) {
+				operatingSystemBuilder.setInfoUrl(buffer.toString());
+			}
 		}
 	}
 
 	private void addToOperatingSystemPatternBuilder() {
-		if (isOperatingSystemPattern && currentTag == Tag.PATTERN_ORDER) {
-			operatingSystemPatternBuilder.setPosition(buffer.toString());
-		} else if (isOperatingSystemPattern && currentTag == Tag.OPERATING_SYSTEM_ID) {
-			operatingSystemPatternBuilder.setId(buffer.toString());
-		} else if (isOperatingSystemPattern && currentTag == Tag.PATTERN_REGEX) {
-			operatingSystemPatternBuilder.setPerlRegularExpression(buffer.toString());
+		if (isOperatingSystemPattern) {
+			if (currentTag == Tag.PATTERN_ORDER) {
+				operatingSystemPatternBuilder.setPosition(buffer.toString());
+			} else if (currentTag == Tag.OPERATING_SYSTEM_ID) {
+				operatingSystemPatternBuilder.setId(buffer.toString());
+			} else if (currentTag == Tag.PATTERN_REGEX) {
+				operatingSystemPatternBuilder.setPerlRegularExpression(buffer.toString());
+			}
 		}
 	}
 
 	private void addToRobotBuilder() {
-		if (isRobot && currentTag == Tag.ID) {
-			robotBuilder.setId(buffer.toString());
-		} else if (isRobot && currentTag == Tag.USERAGENT) {
-			robotBuilder.setUserAgentString(buffer.toString());
-		} else if (isRobot && currentTag == Tag.FAMILY) {
-			robotBuilder.setFamilyName(buffer.toString());
-		} else if (isRobot && currentTag == Tag.NAME) {
-			robotBuilder.setName(buffer.toString());
-		} else if (isRobot && currentTag == Tag.COMPANY) {
-			robotBuilder.setProducer(buffer.toString());
-		} else if (isRobot && currentTag == Tag.COMPANY_URL) {
-			robotBuilder.setProducerUrl(buffer.toString());
-		} else if (isRobot && currentTag == Tag.ICON) {
-			robotBuilder.setIcon(buffer.toString());
-		} else if (isRobot && currentTag == Tag.ROBOT_INFO_URL) {
-			robotBuilder.setInfoUrl(buffer.toString());
+		if (isRobot) {
+			if (currentTag == Tag.ID) {
+				robotBuilder.setId(buffer.toString());
+			} else if (currentTag == Tag.USERAGENT) {
+				robotBuilder.setUserAgentString(buffer.toString());
+			} else if (currentTag == Tag.FAMILY) {
+				robotBuilder.setFamilyName(buffer.toString());
+			} else if (currentTag == Tag.NAME) {
+				robotBuilder.setName(buffer.toString());
+			} else if (currentTag == Tag.COMPANY) {
+				robotBuilder.setProducer(buffer.toString());
+			} else if (currentTag == Tag.COMPANY_URL) {
+				robotBuilder.setProducerUrl(buffer.toString());
+			} else if (currentTag == Tag.ICON) {
+				robotBuilder.setIcon(buffer.toString());
+			} else if (currentTag == Tag.ROBOT_INFO_URL) {
+				robotBuilder.setInfoUrl(buffer.toString());
+			}
 		}
 	}
 

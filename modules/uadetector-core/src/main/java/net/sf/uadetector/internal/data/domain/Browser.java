@@ -175,7 +175,7 @@ public final class Browser implements Serializable {
 			return producerUrl;
 		}
 
-		@Nonnull
+		@Nullable
 		public BrowserType getType() {
 			return type;
 		}

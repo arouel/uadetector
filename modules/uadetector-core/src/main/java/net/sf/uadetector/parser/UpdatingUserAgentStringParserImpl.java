@@ -35,9 +35,14 @@ import net.sf.uadetector.internal.util.ExecutorServices;
 public final class UpdatingUserAgentStringParserImpl extends UserAgentStringParserImpl<RefreshableDataStore> {
 
 	/**
+	 * The default interval to check for updates is once per day
+	 */
+	public static final long DEFAULT_UPDATE_INTERVAL = 1000 * 60 * 60 * 24;
+
+	/**
 	 * Interval to check for updates in milliseconds
 	 */
-	private long updateInterval = Updater.DEFAULT_UPDATE_INTERVAL;
+	private long updateInterval = DEFAULT_UPDATE_INTERVAL;
 
 	/**
 	 * Current update task of {@link UpdatingUserAgentStringParserImpl#scheduler}

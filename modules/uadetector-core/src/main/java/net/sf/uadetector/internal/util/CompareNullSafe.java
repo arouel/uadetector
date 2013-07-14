@@ -29,6 +29,19 @@ public abstract class CompareNullSafe<T> implements Comparator<T>, Serializable 
 	private static final long serialVersionUID = -704997500621650775L;
 
 	/**
+	 * Compares to integers.
+	 * 
+	 * @param a
+	 *            first integer
+	 * @param b
+	 *            second integer
+	 * @return {@code -1} if {@code a} is less, {@code 0} if equal, or {@code 1} if greater than {@code b}
+	 */
+	public static int compareInt(final int a, final int b) {
+		return a > b ? 1 : (a == b ? 0 : -1);
+	}
+
+	/**
 	 * Compares two objects null safe to each other.
 	 * 
 	 * @param o1

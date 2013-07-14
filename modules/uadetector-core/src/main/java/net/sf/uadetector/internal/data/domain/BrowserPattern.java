@@ -34,7 +34,7 @@ import net.sf.uadetector.internal.util.RegularExpressionConverter;
  * @author André Rouél
  */
 @Immutable
-public final class BrowserPattern implements OrderedPattern<BrowserPattern>, Serializable {
+public final class BrowserPattern implements Identifiable, OrderedPattern<BrowserPattern>, Serializable {
 
 	/**
 	 * Factory that creates instances of {@code BrowserPattern} via method calls.
@@ -295,6 +295,7 @@ public final class BrowserPattern implements OrderedPattern<BrowserPattern>, Ser
 	 * 
 	 * @return identification number (ID) of a browser pattern
 	 */
+	@Override
 	public int getId() {
 		return id;
 	}

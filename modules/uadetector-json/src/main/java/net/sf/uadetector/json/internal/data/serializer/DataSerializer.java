@@ -31,17 +31,14 @@ import java.util.List;
 import java.util.Set;
 
 import net.sf.uadetector.internal.data.Data;
+import net.sf.uadetector.internal.data.IdentifiableComparator;
 import net.sf.uadetector.internal.data.domain.Browser;
 import net.sf.uadetector.internal.data.domain.BrowserPattern;
 import net.sf.uadetector.internal.data.domain.BrowserType;
 import net.sf.uadetector.internal.data.domain.OperatingSystem;
 import net.sf.uadetector.internal.data.domain.OperatingSystemPattern;
 import net.sf.uadetector.internal.data.domain.Robot;
-import net.sf.uadetector.json.internal.data.comparator.BrowserIdComparator;
-import net.sf.uadetector.json.internal.data.comparator.BrowserTypeIdComparator;
-import net.sf.uadetector.json.internal.data.comparator.OperatingSystemIdComparator;
 import net.sf.uadetector.json.internal.data.comparator.OrderedPatternPositionComparator;
-import net.sf.uadetector.json.internal.data.comparator.RobotIdComparator;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -69,11 +66,11 @@ public final class DataSerializer implements JsonSerializer<Data> {
 		jsonObj.add(OPERATINGSYSTEMPATTERNS.getName(), context.serialize(osPatterns));
 
 		final List<OperatingSystem> systems = new ArrayList<OperatingSystem>(data.getOperatingSystems());
-		Collections.sort(systems, new OperatingSystemIdComparator());
+		Collections.sort(systems, IdentifiableComparator.INSTANCE);
 		jsonObj.add(OPERATINGSYSTEMS.getName(), context.serialize(systems));
 
 		final List<BrowserType> browserTypes = new ArrayList<BrowserType>(findAllBrowserTypes(data.getBrowsers()));
-		Collections.sort(browserTypes, new BrowserTypeIdComparator());
+		Collections.sort(browserTypes, IdentifiableComparator.INSTANCE);
 		jsonObj.add(BROWSERTYPES.getName(), context.serialize(browserTypes));
 
 		final List<BrowserPattern> browserPatterns = new ArrayList<BrowserPattern>(data.getPatternToBrowserMap().keySet());
@@ -81,11 +78,11 @@ public final class DataSerializer implements JsonSerializer<Data> {
 		jsonObj.add(BROWSERPATTERNS.getName(), context.serialize(browserPatterns));
 
 		final List<Browser> browsers = new ArrayList<Browser>(data.getBrowsers());
-		Collections.sort(browsers, new BrowserIdComparator());
+		Collections.sort(browsers, IdentifiableComparator.INSTANCE);
 		jsonObj.add(BROWSERS.getName(), context.serialize(browsers));
 
 		final List<Robot> robots = new ArrayList<Robot>(data.getRobots());
-		Collections.sort(robots, new RobotIdComparator());
+		Collections.sort(robots, IdentifiableComparator.INSTANCE);
 		jsonObj.add(ROBOTS.getName(), context.serialize(robots));
 		return jsonObj;
 	}

@@ -28,7 +28,7 @@ import net.sf.uadetector.UserAgentFamily;
 import net.sf.uadetector.UserAgentType;
 
 @Immutable
-public final class Robot implements Serializable {
+public final class Robot implements Identifiable, Serializable {
 
 	@NotThreadSafe
 	public static final class Builder {
@@ -275,6 +275,7 @@ public final class Robot implements Serializable {
 		return icon;
 	}
 
+	@Override
 	@Nonnegative
 	public int getId() {
 		return id;

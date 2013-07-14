@@ -31,7 +31,7 @@ import net.sf.uadetector.UserAgent;
 import net.sf.uadetector.UserAgentFamily;
 
 @Immutable
-public final class Browser implements Serializable {
+public final class Browser implements Identifiable, Serializable {
 
 	@NotThreadSafe
 	public static final class Builder {
@@ -434,6 +434,7 @@ public final class Browser implements Serializable {
 		return icon;
 	}
 
+	@Override
 	@Nonnegative
 	public int getId() {
 		return id;

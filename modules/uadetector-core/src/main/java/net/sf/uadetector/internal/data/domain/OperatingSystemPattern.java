@@ -34,7 +34,7 @@ import net.sf.uadetector.internal.util.RegularExpressionConverter;
  * @author André Rouél
  */
 @Immutable
-public final class OperatingSystemPattern implements OrderedPattern<OperatingSystemPattern>, Serializable {
+public final class OperatingSystemPattern implements Identifiable, OrderedPattern<OperatingSystemPattern>, Serializable {
 
 	/**
 	 * Factory that creates instances of {@code OperatingSystemPattern} via method calls.
@@ -288,6 +288,7 @@ public final class OperatingSystemPattern implements OrderedPattern<OperatingSys
 	 * 
 	 * @return identification number (ID) of an operating system pattern
 	 */
+	@Override
 	public int getId() {
 		return id;
 	}

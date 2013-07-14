@@ -32,7 +32,7 @@ import net.sf.qualitycheck.Check;
  * @author André Rouél
  */
 @Immutable
-public final class BrowserType implements Serializable {
+public final class BrowserType implements Identifiable, Serializable {
 
 	@NotThreadSafe
 	public static final class Builder {
@@ -150,6 +150,7 @@ public final class BrowserType implements Serializable {
 	 * 
 	 * @return identification number (ID) of a browser type
 	 */
+	@Override
 	public int getId() {
 		return id;
 	}

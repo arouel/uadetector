@@ -32,7 +32,7 @@ import net.sf.uadetector.UserAgent;
 import net.sf.uadetector.VersionNumber;
 
 @Immutable
-public final class OperatingSystem implements Serializable {
+public final class OperatingSystem implements Identifiable, Serializable {
 
 	@NotThreadSafe
 	public static final class Builder {
@@ -360,6 +360,7 @@ public final class OperatingSystem implements Serializable {
 		return icon;
 	}
 
+	@Override
 	@Nonnegative
 	public int getId() {
 		return id;

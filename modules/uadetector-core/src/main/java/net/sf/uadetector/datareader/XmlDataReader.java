@@ -27,7 +27,6 @@ import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
 import net.sf.qualitycheck.Check;
-import net.sf.uadetector.datastore.DataStore;
 import net.sf.uadetector.exception.CanNotOpenStreamException;
 import net.sf.uadetector.internal.data.Data;
 import net.sf.uadetector.internal.data.DataBuilder;
@@ -52,8 +51,8 @@ public final class XmlDataReader implements DataReader {
 
 		private static final String MSG_NOT_PARSED_AS_EXPECTED = "The UAS data has not been parsed as expected.";
 
-		public static void parse(@Nonnull final InputStream stream, @Nonnull final DataBuilder builder) throws ParserConfigurationException,
-				SAXException, IOException {
+		public static void parse(@Nonnull final InputStream stream, @Nonnull final DataBuilder builder)
+				throws ParserConfigurationException, SAXException, IOException {
 			final SAXParserFactory factory = SAXParserFactory.newInstance();
 			factory.setValidating(true);
 			final SAXParser parser = factory.newSAXParser();
@@ -73,6 +72,11 @@ public final class XmlDataReader implements DataReader {
 		}
 
 	}
+
+	/**
+	 * Default character set to read UAS data
+	 */
+	private static final Charset DEFAULT_CHARSET = Charset.forName("UTF-8");
 
 	/**
 	 * Corresponding default logger for this class
@@ -144,7 +148,7 @@ public final class XmlDataReader implements DataReader {
 	public Data read(@Nonnull final String data) {
 		Check.notNull(data, "data");
 
-		return readXml(new ByteArrayInputStream(data.getBytes(DataStore.DEFAULT_CHARSET)), DataStore.DEFAULT_CHARSET);
+		return readXml(new ByteArrayInputStream(data.getBytes(DEFAULT_CHARSET)), DEFAULT_CHARSET);
 	}
 
 	/**

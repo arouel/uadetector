@@ -324,8 +324,7 @@ public final class XmlDataWriter {
 	@Nonnull
 	static DocumentBuilder newDocumentBuilder() throws ParserConfigurationException {
 		final DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
-		final DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
-		return docBuilder;
+		return docFactory.newDocumentBuilder();
 	}
 
 	static void transform(@Nonnull final Source xmlInput, @Nonnull final Result xmlOutput) throws TransformerException {
@@ -382,6 +381,13 @@ public final class XmlDataWriter {
 		final DOMSource source = new DOMSource(doc);
 		final StreamResult result = new StreamResult(outputStream);
 		transform(source, result);
+	}
+
+	/**
+	 * <strong>Attention:</strong> This class is not intended to create objects from it.
+	 */
+	private XmlDataWriter() {
+		// This class is not intended to create objects from it.
 	}
 
 }

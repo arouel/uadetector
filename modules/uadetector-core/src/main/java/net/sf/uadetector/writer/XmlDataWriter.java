@@ -62,7 +62,7 @@ import org.w3c.dom.Element;
 @ThreadSafe
 public final class XmlDataWriter {
 
-	static interface Tag {
+	interface Tag {
 		String BOT_INFO_URL = "bot_info_url";
 		String BROWSER = "browser";
 		String BROWSER_ID = "browser_id";

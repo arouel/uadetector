@@ -39,6 +39,11 @@ public class CachingXmlDataStoreTest_unreachableRemoteHost {
 	private static final Charset CHARSET = DataStore.DEFAULT_CHARSET;
 
 	/**
+	 * Time to wait before the test can be aborted (in milliseconds)
+	 */
+	private static final long WAIT_UNTIL_ABORT = 30000;
+
+	/**
 	 * URL to retrieve a newer UAS data as XML
 	 */
 	private static final URL DATA_URL = TestXmlDataStore.class.getClassLoader().getResource("uas_newer.xml");
@@ -98,7 +103,7 @@ public class CachingXmlDataStoreTest_unreachableRemoteHost {
 		final long lookupStartTime = System.currentTimeMillis();
 		do {
 			Thread.sleep(1000);
-		} while (!readFile(cache).contains(DATA_VERSION) && !(System.currentTimeMillis() - lookupStartTime > 1000 * 10));
+		} while (!readFile(cache).contains(DATA_VERSION) && !(System.currentTimeMillis() - lookupStartTime > WAIT_UNTIL_ABORT));
 		Assert.assertEquals(DATA_VERSION, store.getData().getVersion());
 
 		final String readIn = readFile(cache);
@@ -143,7 +148,7 @@ public class CachingXmlDataStoreTest_unreachableRemoteHost {
 		final long lookupStartTime = System.currentTimeMillis();
 		do {
 			Thread.sleep(1000l);
-		} while (!readFile(cache).contains(newerVersionOfFallback) && !(System.currentTimeMillis() - lookupStartTime > 1000 * 10));
+		} while (!readFile(cache).contains(newerVersionOfFallback) && !(System.currentTimeMillis() - lookupStartTime > WAIT_UNTIL_ABORT));
 
 		Assert.assertEquals(newerVersionOfFallback, store.getData().getVersion());
 		Assert.assertTrue(readFile(cache).contains(newerVersionOfFallback));

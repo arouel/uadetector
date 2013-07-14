@@ -216,6 +216,19 @@ public class BrowserTest {
 	}
 
 	@Test
+	public void equals_different_OPERATINGSYSTEM_canBeNull() {
+		final Browser a = new Blueprint().operatingSystem(null).build();
+
+		final OperatingSystem os2 = new OperatingSystem(734, "SUSE Linux", "Linux", "iu1", new TreeSet<OperatingSystemPattern>(),
+				"SUSE Linux GmbH", "https://www.suse.com", "https://www.suse.com", "tux.png");
+		final Browser b = new Blueprint().operatingSystem(os2).build();
+
+		assertFalse(a.equals(b));
+		assertFalse(b.equals(a));
+		assertFalse(a.hashCode() == b.hashCode());
+	}
+
+	@Test
 	public void equals_different_PATTERNS() {
 		final SortedSet<BrowserPattern> patterns1 = Sets.newTreeSet();
 		patterns1.add(new BrowserPattern(7654, Pattern.compile("d*[a-f]+"), 46));
@@ -315,7 +328,7 @@ public class BrowserTest {
 	}
 
 	@Test
-	public void precondition_OPERATINGSYSTEM_nullIsAllowed() {
+	public void precondition_OPERATINGSYSTEM_canBeNull() {
 		new Blueprint().operatingSystem(null).build();
 	}
 

@@ -17,6 +17,8 @@ package net.sf.uadetector.internal.data.domain;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.SortedSet;
+import java.util.TreeSet;
 import java.util.regex.Pattern;
 
 import net.sf.qualitycheck.exception.IllegalEmptyArgumentException;
@@ -27,6 +29,11 @@ import org.junit.Assert;
 import org.junit.Test;
 
 public class OperatingSystemBuilderTest {
+
+	@Test(expected = IllegalNullArgumentException.class)
+	public void addPatterns_null() {
+		new OperatingSystem.Builder().addPatterns(null);
+	}
 
 	@Test(expected = IllegalNullArgumentException.class)
 	public void construct_builder_builderIsNull() {
@@ -78,6 +85,18 @@ public class OperatingSystemBuilderTest {
 		Assert.assertEquals("p1", copy2.getProducer());
 		Assert.assertEquals("pu1", copy2.getProducerUrl());
 		Assert.assertEquals("u1", copy2.getUrl());
+
+		final OperatingSystem.Builder copy3 = new OperatingSystem.Builder(original.build());
+		Assert.assertEquals("f1", copy3.getFamily());
+		Assert.assertEquals("i1", copy3.getIcon());
+		Assert.assertEquals(1, copy3.getId());
+		Assert.assertEquals("iu1", copy3.getInfoUrl());
+		Assert.assertEquals("n1", copy3.getName());
+		Assert.assertEquals(2, copy3.getPatterns().size());
+		Assert.assertEquals(patterns, copy3.getPatterns());
+		Assert.assertEquals("p1", copy3.getProducer());
+		Assert.assertEquals("pu1", copy3.getProducerUrl());
+		Assert.assertEquals("u1", copy3.getUrl());
 	}
 
 	@Test(expected = IllegalNullArgumentException.class)
@@ -131,7 +150,17 @@ public class OperatingSystemBuilderTest {
 
 	@Test(expected = IllegalNullArgumentException.class)
 	public void setPatterns_null() {
-		new OperatingSystem.Builder().addPatterns(null);
+		new OperatingSystem.Builder().setPatterns(null);
+	}
+
+	@Test
+	public void setPatterns_successful() {
+		final SortedSet<OperatingSystemPattern> patterns = new TreeSet<OperatingSystemPattern>();
+		patterns.add(new OperatingSystemPattern(1, Pattern.compile("d"), 2));
+		patterns.add(new OperatingSystemPattern(4, Pattern.compile("g"), 8));
+		final OperatingSystem.Builder builder = new OperatingSystem.Builder().setPatterns(patterns);
+		Assert.assertNotSame(patterns, builder.getPatterns());
+		Assert.assertEquals(patterns, builder.getPatterns());
 	}
 
 	@Test(expected = IllegalNullArgumentException.class)

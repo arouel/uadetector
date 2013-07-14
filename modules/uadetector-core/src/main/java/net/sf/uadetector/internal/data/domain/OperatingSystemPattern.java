@@ -24,6 +24,7 @@ import javax.annotation.concurrent.Immutable;
 import javax.annotation.concurrent.NotThreadSafe;
 
 import net.sf.qualitycheck.Check;
+import net.sf.uadetector.internal.util.CompareNullSafe;
 import net.sf.uadetector.internal.util.RegularExpressionConverter;
 
 /**
@@ -180,25 +181,6 @@ public final class OperatingSystemPattern implements Identifiable, OrderedPatter
 	private static final long serialVersionUID = 1583732916568404647L;
 
 	/**
-	 * Compares to integers.
-	 * 
-	 * @param a
-	 *            first integer
-	 * @param b
-	 *            second integer
-	 * @return {@code -1} if {@code a} is less, {@code 0} if equal, or {@code 1} if greater than {@code b}
-	 */
-	private static int compareInt(final int a, final int b) {
-		int result = 0;
-		if (a > b) {
-			result = 1;
-		} else if (a < b) {
-			result = -1;
-		}
-		return result;
-	}
-
-	/**
 	 * Identification number (ID) of an operating system pattern
 	 */
 	@Nonnegative
@@ -242,15 +224,15 @@ public final class OperatingSystemPattern implements Identifiable, OrderedPatter
 	public int compareTo(final OperatingSystemPattern other) {
 		int result = other == null ? -1 : 0;
 		if (result == 0) {
-			result = compareInt(getPosition(), other.getPosition());
+			result = CompareNullSafe.compareInt(getPosition(), other.getPosition());
 			if (result == 0) {
-				result = compareInt(getId(), other.getId());
+				result = CompareNullSafe.compareInt(getId(), other.getId());
 			}
 			if (result == 0) {
 				result = getPattern().pattern().compareTo(other.getPattern().pattern());
 			}
 			if (result == 0) {
-				result = compareInt(getPattern().flags(), other.getPattern().flags());
+				result = CompareNullSafe.compareInt(getPattern().flags(), other.getPattern().flags());
 			}
 		}
 		return result;

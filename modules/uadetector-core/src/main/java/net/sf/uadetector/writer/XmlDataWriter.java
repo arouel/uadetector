@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  ******************************************************************************/
-package net.sf.uadetector.internal.util;
+package net.sf.uadetector.writer;
 
 import java.io.OutputStream;
 import java.util.ArrayList;
@@ -48,6 +48,7 @@ import net.sf.uadetector.internal.data.domain.BrowserType;
 import net.sf.uadetector.internal.data.domain.OperatingSystem;
 import net.sf.uadetector.internal.data.domain.OperatingSystemPattern;
 import net.sf.uadetector.internal.data.domain.Robot;
+import net.sf.uadetector.internal.util.RegularExpressionConverter;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;

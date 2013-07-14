@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  ******************************************************************************/
-package net.sf.uadetector.internal.util;
+package net.sf.uadetector.writer;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -28,6 +28,7 @@ import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
 import net.sf.uadetector.datastore.TestXmlDataStore;
+import net.sf.uadetector.internal.util.UrlUtil;
 
 import org.junit.Assert;
 import org.junit.Test;

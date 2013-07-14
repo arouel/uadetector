@@ -31,6 +31,7 @@ import net.sf.uadetector.exception.CanNotOpenStreamException;
 import net.sf.uadetector.internal.data.Data;
 import net.sf.uadetector.internal.data.DataBuilder;
 import net.sf.uadetector.internal.data.XmlDataHandler;
+import net.sf.uadetector.internal.util.Closeables;
 import net.sf.uadetector.internal.util.UrlUtil;
 
 import org.slf4j.Logger;
@@ -124,11 +125,7 @@ public final class XmlDataReader implements DataReader {
 			hasErrors = true;
 			LOG.warn(e.getLocalizedMessage(), e);
 		} finally {
-			try {
-				inputStream.close();
-			} catch (final IOException e) {
-				LOG.warn(e.getLocalizedMessage(), e);
-			}
+			Closeables.closeAndConvert(inputStream, true);
 		}
 
 		return hasErrors ? Data.EMPTY : builder.build();

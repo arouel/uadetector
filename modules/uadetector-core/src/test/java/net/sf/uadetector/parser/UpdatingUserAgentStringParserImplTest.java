@@ -245,6 +245,12 @@ public class UpdatingUserAgentStringParserImplTest {
 	}
 
 	@Test
+	public void shutdown() {
+		// shutdown must not interrupt the caller
+		new UpdatingUserAgentStringParserImpl(new TestXmlDataStore()).shutdown();
+	}
+
+	@Test
 	public void testUpdateMechanismWhileParsing() throws InterruptedException {
 		final UpdatingUserAgentStringParserImpl parser = new UpdatingUserAgentStringParserImpl(new TestXmlDataStore());
 		final long firstLastUpdateCheck = parser.getDataStore().getUpdateOperation().getLastUpdateCheck();

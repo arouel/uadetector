@@ -685,4 +685,10 @@ public class UserAgentStringParserTest {
 		Assert.assertEquals(OperatingSystem.EMPTY, agent.getOperatingSystem());
 	}
 
+	@Test
+	public void shutdown() {
+		// shutdown must not interrupt the caller
+		new UserAgentStringParserImpl<DataStore>(new TestXmlDataStore()).shutdown();
+	}
+
 }

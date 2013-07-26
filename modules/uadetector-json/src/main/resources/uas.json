@@ -1,6 +1,6 @@
 {
   "format": "1.0",
-  "version": "20130628-01",
+  "version": "20130725-02",
   "operating-system-patterns": [
     {
       "regex": {
@@ -134,6 +134,13 @@
         "pattern": "Android 4\\.2"
       },
       "hash": "d8e4643a93e7a252985ff5f894233d3a7ea23b87436a8e5f6949887710f3c124"
+    },
+    {
+      "regex": {
+        "flags": "si",
+        "pattern": "Android 4\\.3"
+      },
+      "hash": "fb4f5343b9a8e39e6c41630028d91e87a7824db22e769b67fd6cdb5083ef6f2f"
     },
     {
       "regex": {
@@ -932,6 +939,13 @@
         "pattern": "Linux.*Mageia"
       },
       "hash": "a843a4de794c8dbe6eec7173a9f0a919f55dfee4ff7cbb3c2025a2e613f1f366"
+    },
+    {
+      "regex": {
+        "flags": "si",
+        "pattern": "Windows NT 6\\.3"
+      },
+      "hash": "bffc0dbeaca021de82db8b60ad71b122516cfb31f53261e49fed72de4a02d623"
     },
     {
       "regex": {
@@ -2690,6 +2704,32 @@
       "producer-url": "http://www.apple.com/",
       "url": "http://en.wikipedia.org/wiki/IOS_7",
       "hash": "6b0075b2c98521578beb4e5c2182091e796a2dba176a390b0b576288ea639ce1"
+    },
+    {
+      "family": "Windows",
+      "icon": "win81.png",
+      "info-url": "/list-of-ua/os-detail?os\u003dWindows 8.1",
+      "name": "Windows 8.1",
+      "operating-system-pattern-hashs": [
+        "bffc0dbeaca021de82db8b60ad71b122516cfb31f53261e49fed72de4a02d623"
+      ],
+      "producer": "Microsoft Corporation.",
+      "producer-url": "http://www.microsoft.com/",
+      "url": "http://en.wikipedia.org/wiki/Windows_8#Windows_8.1",
+      "hash": "2d5fa932f5ff058b55eab7b23fa236d00224d8b3be08571e53131b80cd35e548"
+    },
+    {
+      "family": "Android",
+      "icon": "android.png",
+      "info-url": "/list-of-ua/os-detail?os\u003dAndroid 4.3 Jelly Bean",
+      "name": "Android 4.3 Jelly Bean",
+      "operating-system-pattern-hashs": [
+        "fb4f5343b9a8e39e6c41630028d91e87a7824db22e769b67fd6cdb5083ef6f2f"
+      ],
+      "producer": "Google, Inc.",
+      "producer-url": "http://www.google.com/",
+      "url": "http://en.wikipedia.org/wiki/Android_%28operating_system%29",
+      "hash": "5a4e96f11e1bddb49e96c0ad88cea2e07f56fb5776a5fa3eb0bb66d8cf06de73"
     }
   ],
   "browser-types": [
@@ -2773,6 +2813,13 @@
         "pattern": "^Mozilla.*Android.*Silk\\/([0-9\\.\\-]+).*Mobile"
       },
       "hash": "a5679dd40b7f0a650c676f71892ac517381cdf1bf6ec2bc0044732237c6c5d37"
+    },
+    {
+      "regex": {
+        "flags": "si",
+        "pattern": "^Mozilla.*Android.*AppleWebKit.*Chrome.*YaBrowser\\/([0-9\\.]+).*Mobile"
+      },
+      "hash": "90f43f06ea2d1ef3cd682deb898bcb304d97dcb0e00be96fca503a2db3ff9d0b"
     },
     {
       "regex": {
@@ -2899,6 +2946,13 @@
         "pattern": "^Mozilla.*ASUS Transformer Pad.*AppleWebKit.*Chrome\\/([0-9\\.]+).*Safari"
       },
       "hash": "92fedbbd8a9aa418544d15d0527ec308b7033075c8ca3b9a4407921e545c3073"
+    },
+    {
+      "regex": {
+        "flags": "si",
+        "pattern": "Mozilla.*AppleWebKit.*Chrome.*Safari.*Puffin\\/([0-9\\.]+)"
+      },
+      "hash": "3dcb34b73c0b4b6ef1361b82730fcb724b4c24bd10cd145df8c4c67b3572aea0"
     },
     {
       "regex": {
@@ -5878,6 +5932,13 @@
     {
       "regex": {
         "flags": "si",
+        "pattern": "Mozilla.*Windows NT 6\\.3.*Trident\\/7\\.0.*rv:([0-9\\.]+)"
+      },
+      "hash": "1b1fccccee9dd1dbcaf0c0e9f6cd9e1aa71fee4268ae35b48e584602c2239dac"
+    },
+    {
+      "regex": {
+        "flags": "si",
         "pattern": "mozilla.*opera ([0-9][0-9a-z\\+\\-\\.]+).*"
       },
       "hash": "fad87aad28843a1997ca2c3f22f12ac9f54d61e1aaa8ce1b2e7f833a3bd4755a"
@@ -6984,6 +7045,7 @@
       "icon": "msie.png",
       "info-url": "/list-of-ua/browser-detail?browser\u003dIE",
       "browser-pattern-hashs": [
+        "1b1fccccee9dd1dbcaf0c0e9f6cd9e1aa71fee4268ae35b48e584602c2239dac",
         "74de7df9d2fe4f30fae073650a4c5e3a93bdd4e6429afacad14a9dadd4b1d6dc",
         "b059293f30ff2378391bdccab40160d3029f7e4ac01e0a38acb5d470ddc68896"
       ],
@@ -6991,7 +7053,7 @@
       "producer-url": "http://www.microsoft.com/",
       "browser-type-hash": "d31de1a5c5c8ba2a210a167cf0d0dc2425c57ea7525f4b73a4b7ab934af79dfc",
       "url": "http://en.wikipedia.org/wiki/Internet_Explorer",
-      "hash": "9b8a54d9b1bf0eae60c244103eb3c694ed95d8f4263aabfcba75b1c47c8bc579"
+      "hash": "bddd95c1bf36d663cee8c50e3b1292d4bcd0773c8070698b2e9e0943c2f6588f"
     },
     {
       "family": "Offline Explorer",
@@ -12163,6 +12225,32 @@
       "browser-type-hash": "dc20b3d5d2cddf82fad332821ca5e9a4efdcede4a273aa193d2b495bdcc92825",
       "url": "http://restsharp.org/",
       "hash": "e9dc5545edee135a1e4a51a6f616ecb8c6ed5f722d206d272a4b2f1541dc50e4"
+    },
+    {
+      "family": "Yandex.Browser mobile",
+      "icon": "Yandex.Browser.png",
+      "info-url": "/list-of-ua/browser-detail?browser\u003dYandex.Browser mobile",
+      "browser-pattern-hashs": [
+        "90f43f06ea2d1ef3cd682deb898bcb304d97dcb0e00be96fca503a2db3ff9d0b"
+      ],
+      "producer": "Yandex ",
+      "producer-url": "http://yandex.com/",
+      "browser-type-hash": "d4f1118eb3ace8c9d67d4b72ff39234cd4f3ab260ef6f422ce24b7a1b10d14ee",
+      "url": "http://mobil.yandex.com/",
+      "hash": "bffabe2c3556f3a4f562faec815edd3807f6afb902acd4b6962ea9e1e74bae59"
+    },
+    {
+      "family": "Puffin",
+      "icon": "puffin.png",
+      "info-url": "/list-of-ua/browser-detail?browser\u003dPuffin",
+      "browser-pattern-hashs": [
+        "3dcb34b73c0b4b6ef1361b82730fcb724b4c24bd10cd145df8c4c67b3572aea0"
+      ],
+      "producer": "CloudMosa Inc.",
+      "producer-url": "http://www.cloudmosa.com/",
+      "browser-type-hash": "d4f1118eb3ace8c9d67d4b72ff39234cd4f3ab260ef6f422ce24b7a1b10d14ee",
+      "url": "http://www.puffinbrowser.com/",
+      "hash": "159129005b6e7cc220dc891a28edabd81e1ba1fb5d8a3ef704ed2569d8d707ee"
     }
   ],
   "robots": [
@@ -16361,10 +16449,10 @@
       "icon": "bot.png",
       "info-url": "/list-of-ua/bot-detail?bot\u003dworiobot",
       "name": "woriobot",
-      "producer": "http://worio.com/",
-      "producer-url": "",
+      "producer": "Zite",
+      "producer-url": "http://zite.com/",
       "user-agent-string": "Mozilla/5.0 (compatible; woriobot +http://worio.com)",
-      "hash": "fb100b47dcb7a22d2ed04a880f0c0d5c040ca3b5243c68b51b689e73883fb54d"
+      "hash": "6aff458e0b208549268fb6c05ed45af08fe2b3ecb85478ddfac946c749e759b4"
     },
     {
       "family-name": "Mail.Ru bot",
@@ -23205,6 +23293,166 @@
       "producer-url": "http://webmeup.com/",
       "user-agent-string": "Mozilla/5.0 (compatible; BLEXBot/1.0; +http://webmeup.com/crawler.html)",
       "hash": "4fc302f0940f696a18d39584cb01dbed6c6475ec20beb065bcc0da7c5dc667f0"
+    },
+    {
+      "family-name": "Sosospider",
+      "icon": "bot_soso.png",
+      "info-url": "/list-of-ua/bot-detail?bot\u003dSosospider",
+      "name": "Sosospider/2.0",
+      "producer": "Tencent, Inc.",
+      "producer-url": "http://www.tencent.com/",
+      "user-agent-string": "Mozilla/5.0(compatible;Sosospider/2.0;+http://help.soso.com/webspider.htm)",
+      "hash": "d4b0ad62988a5f248ef35fd68ef845d5733bf19dbe25bc058baf20b9d4182916"
+    },
+    {
+      "family-name": "firmilybot",
+      "icon": "bot.png",
+      "info-url": "/list-of-ua/bot-detail?bot\u003dfirmilybot",
+      "name": "firmilybot/0.3",
+      "producer": "Firmily",
+      "producer-url": "http://www.firmily.com/",
+      "user-agent-string": "Mozilla/5.0 (compatible; firmilybot/0.3; +http://www.firmily.com/bot.php",
+      "hash": "f4750a7b1052920ae7cc7f056c0df078f1113208c647391a08e80c6bfc0a4bc3"
+    },
+    {
+      "family-name": "MetaHeadersBot",
+      "icon": "bot.png",
+      "info-url": "/list-of-ua/bot-detail?bot\u003dMetaHeadersBot",
+      "name": "MetaHeadersBot",
+      "producer": "metaheaders.net",
+      "producer-url": "http://www.metaheaders.net/",
+      "user-agent-string": "MetaHeadersBot (+http://www.metaheaders.com/bot.html)",
+      "hash": "bb0f0fd4ac7bc105f8af77fb454e1acddd5d7790e3ac98fce4d7a5bda36eb3cb"
+    },
+    {
+      "family-name": "meanpathbot",
+      "icon": "bot.png",
+      "info-url": "/list-of-ua/bot-detail?bot\u003dmeanpathbot",
+      "name": "meanpathbot/1.0",
+      "producer": "meanpath, Inc.",
+      "producer-url": "https://meanpath.com/",
+      "user-agent-string": "Mozilla/5.0 (compatible; meanpathbot/1.0; +http://www.meanpath.com/meanpathbot.html)",
+      "hash": "2db78154048ca3f3005d6013d66f948db9f5545713f146cc35e93a6764e1b4ec"
+    },
+    {
+      "family-name": "yacybot",
+      "icon": "bot_yacybot.png",
+      "info-url": "/list-of-ua/bot-detail?bot\u003dyacybot",
+      "name": "yacybot",
+      "producer": "Michael Christen",
+      "producer-url": "",
+      "user-agent-string": "yacybot (freeworld/global; amd64 Windows 7 6.1; java 1.7.0_09; Europe/de) http://yacy.net/bot.html",
+      "hash": "289d77433f98b2eb5e4601fb348553c77e610b4b24e8e5cde34d468eabdf06cb"
+    },
+    {
+      "family-name": "yacybot",
+      "icon": "bot_yacybot.png",
+      "info-url": "/list-of-ua/bot-detail?bot\u003dyacybot",
+      "name": "yacybot",
+      "producer": "Michael Christen",
+      "producer-url": "",
+      "user-agent-string": "yacybot (freeworld/global; amd64 Windows XP 5.2; java 1.7.0_04; America/en) http://yacy.net/bot.html",
+      "hash": "49220b826849d7a1a20a371620b05df3a26c0313c8cf763152a35e50976feb19"
+    },
+    {
+      "family-name": "yacybot",
+      "icon": "bot_yacybot.png",
+      "info-url": "/list-of-ua/bot-detail?bot\u003dyacybot",
+      "name": "yacybot",
+      "producer": "Michael Christen",
+      "producer-url": "",
+      "user-agent-string": "yacybot (freeworld/global; amd64 Linux 3.8.13-gentoo; java 1.7.0_21; Europe/de) http://yacy.net/bot.html",
+      "hash": "ea028d75d407fa7cfb0ed3bd5c18caebbd2223b62cb9cd5f9d08bf597ddb96be"
+    },
+    {
+      "family-name": "AMZNKAssocBot",
+      "icon": "bot.png",
+      "info-url": "/list-of-ua/bot-detail?bot\u003dAMZNKAssocBot",
+      "name": "AMZNKAssocBot/4.0",
+      "producer": "Amazon.com, Inc.",
+      "producer-url": "http://www.amazon.com/",
+      "user-agent-string": "Mozilla/5.0 (compatible; AMZNKAssocBot/4.0 +http://affiliate-program.amazon.com)",
+      "hash": "a89bf4c715cf31e3f6c7cd884956cf6fddf5ea9e1b62c4e428116d9fabdc6e36"
+    },
+    {
+      "family-name": "yacybot",
+      "icon": "bot_yacybot.png",
+      "info-url": "/list-of-ua/bot-detail?bot\u003dyacybot",
+      "name": "yacybot",
+      "producer": "Michael Christen",
+      "producer-url": "",
+      "user-agent-string": "yacybot (freeworld/global; amd64 Linux 2.6.32-49-server; java 1.6.0_27; Europe/en) http://yacy.net/bot.html",
+      "hash": "89534f126072548aac4e18fc4ee4f9fde90aeeae381eea1712790bc225530c52"
+    },
+    {
+      "family-name": "AcoonBot",
+      "icon": "bot_Acoon.png",
+      "info-url": "/list-of-ua/bot-detail?bot\u003dAcoonBot",
+      "name": "AcoonBot/4.12.1",
+      "producer": "Acoon GmbH",
+      "producer-url": "",
+      "user-agent-string": "Mozilla/5.0 (compatible; AcoonBot/4.12.1; +http://www.acoon.de/robot.asp)",
+      "hash": "7e30d3b2cd265bcac4bbbc515637b97a4d6b6e07a0bab27db08c66aee6243705"
+    },
+    {
+      "family-name": "SeznamBot",
+      "icon": "seznam.png",
+      "info-url": "/list-of-ua/bot-detail?bot\u003dSeznamBot",
+      "name": "SeznamBot/3.1-test",
+      "producer": "",
+      "producer-url": "",
+      "user-agent-string": "Mozilla/5.0 (compatible; SeznamBot/3.1-test1; +http://fulltext.sblog.cz/)",
+      "hash": "0d77d947384e96d8d5d1d885fc80d848487025474826ee24f4a2f2672a63cc6b"
+    },
+    {
+      "family-name": "yacybot",
+      "icon": "bot_yacybot.png",
+      "info-url": "/list-of-ua/bot-detail?bot\u003dyacybot",
+      "name": "yacybot",
+      "producer": "Michael Christen",
+      "producer-url": "",
+      "user-agent-string": "yacybot (webportal-global; x86 Windows Vista 6.0; java 1.7.0_25; Europe/en) http://yacy.net/bot.html",
+      "hash": "3463bd4627499aaec5538d74a9c87393ab45b1028cb5555f6ea108d3340714b7"
+    },
+    {
+      "family-name": "yacybot",
+      "icon": "bot_yacybot.png",
+      "info-url": "/list-of-ua/bot-detail?bot\u003dyacybot",
+      "name": "yacybot",
+      "producer": "Michael Christen",
+      "producer-url": "",
+      "user-agent-string": "yacybot (freeworld/global; amd64 Windows 7 6.1; java 1.7.0_25; Europe/de) http://yacy.net/bot.html",
+      "hash": "648868a438e909e5d4e82783f598ecc667a9632d177914fbb8952d04ea2ce9c7"
+    },
+    {
+      "family-name": "SeoCheckBot",
+      "icon": "bot.png",
+      "info-url": "/list-of-ua/bot-detail?bot\u003dSeoCheckBot",
+      "name": "SeoCheckBot",
+      "producer": "Kristian Fischer",
+      "producer-url": "http://www.kfsw.de/",
+      "user-agent-string": "SeoCheckBot (FischerNetzDesign Seo Checker, info@fischernetzdesign.de)",
+      "hash": "06b5d11aff69e8b42c6e91ee13b332b1abdb059a765401e5c66bf5a0ebdeb5c3"
+    },
+    {
+      "family-name": "woriobot",
+      "icon": "bot.png",
+      "info-url": "/list-of-ua/bot-detail?bot\u003dworiobot",
+      "name": "woriobot",
+      "producer": "Zite",
+      "producer-url": "http://zite.com/",
+      "user-agent-string": "Mozilla/5.0 (compatible; woriobot support [at] zite [dot] com +http://zite.com)",
+      "hash": "4c4f68e4e4bdc9d7b55c7f95120c1c5423e8755e48bb98e20ea3a305d5a4aa83"
+    },
+    {
+      "family-name": "SeoCheckBot",
+      "icon": "bot.png",
+      "info-url": "/list-of-ua/bot-detail?bot\u003dSeoCheckBot",
+      "name": "SeoCheck",
+      "producer": "Kristian Fischer",
+      "producer-url": "http://www.kfsw.de/",
+      "user-agent-string": "SeoCheck (FischerNetzDesign Seo Checker, info@fischernetzdesign.de)",
+      "hash": "92fc872292e42bd5f601c69ad53f0ec7a4646228a8cf5d9593924cc53e129537"
     }
   ]
 }

@@ -3,7 +3,7 @@
 <uasdata>
 	<description>
 		<label>Data (format xml) for UASparser - http://user-agent-string.info/download/UASparser</label>
-		<version>20130725-02</version>
+		<version>20130731-01</version>
 		<checksum type="MD5">http://user-agent-string.info/rpc/get_data.php?format=xml&amp;md5=y</checksum>
 		<checksum type="SHA1">http://user-agent-string.info/rpc/get_data.php?format=xml&amp;sha1=y</checksum>
 	</description>
@@ -10600,6 +10600,16 @@
 				<bot_info_url>/list-of-ua/bot-detail?bot=yacybot</bot_info_url>
 			</robot>
 			<robot>
+				<id>10374</id>
+				<useragent><![CDATA[yacybot (freeworld/global; amd64 Linux 3.2.0-4-amd64; java 1.7.0_03; Etc/de) http://yacy.net/bot.html]]></useragent>
+				<family>yacybot</family>
+				<name>yacybot</name>
+				<company><![CDATA[Michael Christen]]></company>
+				<url_company><![CDATA[]]></url_company>
+				<icon>bot_yacybot.png</icon>
+				<bot_info_url>/list-of-ua/bot-detail?bot=yacybot</bot_info_url>
+			</robot>
+			<robot>
 				<id>10301</id>
 				<useragent><![CDATA[yacybot (webportal-global; x86 Windows Vista 6.0; java 1.7.0_25; Europe/en) http://yacy.net/bot.html]]></useragent>
 				<family>yacybot</family>
@@ -16543,773 +16553,773 @@
 			</browser_reg>
 			<browser_reg>
 				<order>7</order>
+				<browser_id>11</browser_id>
+				<regstring>/mozilla.*gecko.*kazehakase\/([0-9a-z\+\-\.]+).*/si</regstring>
+			</browser_reg>
+			<browser_reg>
+				<order>8</order>
 				<browser_id>43</browser_id>
 				<regstring>/mozilla.*Blazer\/([0-9a-z\+\-\.]+)/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>8</order>
+				<order>9</order>
 				<browser_id>61</browser_id>
 				<regstring>/mozilla.*rv:[0-9\.]+.*gecko\/[0-9]+.*firefox\/([0-9a-z\+\-\.]+).*swiftfox/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>9</order>
+				<order>10</order>
 				<browser_id>79</browser_id>
 				<regstring>/^Mozilla.*Thunderbird\/([0-9a-zA-Z\.]+)/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>10</order>
+				<order>11</order>
 				<browser_id>119</browser_id>
 				<regstring>/mozilla.*rv:[0-9\.]+.*gecko.*kapiko\/([0-9a-z\+\-\.]+).*/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>11</order>
+				<order>12</order>
 				<browser_id>157</browser_id>
 				<regstring>/IEMobile ([0-9\.]+)/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>12</order>
+				<order>13</order>
 				<browser_id>175</browser_id>
 				<regstring>/Miro\/([0-9a-z\-\.]+).*http:\/\/www\.getmiro\.com\//si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>13</order>
+				<order>14</order>
 				<browser_id>284</browser_id>
 				<regstring>/\/szn-mobile-transcoder/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>14</order>
+				<order>15</order>
 				<browser_id>285</browser_id>
 				<regstring>/Google Wireless Transcoder/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>15</order>
+				<order>16</order>
 				<browser_id>332</browser_id>
 				<regstring>/^Mozilla.*Shredder\/([0-9a-zA-Z\.]+)/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>16</order>
+				<order>17</order>
 				<browser_id>354</browser_id>
 				<regstring>/Mozilla.*Linux.*Android.*AppleWebKit.*Version\/([0-9\.]+)/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>17</order>
+				<order>18</order>
 				<browser_id>423</browser_id>
 				<regstring>/Mozilla.*Android.*AppleWebKit.*CrMo\/([0-9\.]+)/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>18</order>
+				<order>19</order>
 				<browser_id>423</browser_id>
 				<regstring>/^Mozilla.*AppleWebKit.*Chrome\/([0-9\.]+).*Mobile Safari/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>19</order>
+				<order>20</order>
 				<browser_id>423</browser_id>
 				<regstring>/^Mozilla.*iPhone.*AppleWebKit.*CriOS\/([0-9\.]+).*Mobile.*Safari/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>20</order>
+				<order>21</order>
 				<browser_id>450</browser_id>
 				<regstring>/^Mozilla.*OS X.*AppleWebKit.*KHTML.*Sparrow\/([0-9\.]+)/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>21</order>
+				<order>22</order>
 				<browser_id>423</browser_id>
 				<regstring>/^Mozilla.*iPad.*AppleWebKit.*CriOS\/([0-9\.]+).*Mobile.*Safari/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>22</order>
+				<order>23</order>
 				<browser_id>455</browser_id>
 				<regstring>/^MQQBrowser\/([0-9\.]+)/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>23</order>
+				<order>24</order>
 				<browser_id>455</browser_id>
 				<regstring>/^MQQBrowser\/(Mini[0-9\.]+)/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>24</order>
+				<order>25</order>
 				<browser_id>423</browser_id>
 				<regstring>/^Mozilla.*ASUS Transformer Pad.*AppleWebKit.*Chrome\/([0-9\.]+).*Safari/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>25</order>
+				<order>26</order>
 				<browser_id>476</browser_id>
 				<regstring>/Mozilla.*AppleWebKit.*Chrome.*Safari.*Puffin\/([0-9\.]+)/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>26</order>
+				<order>27</order>
 				<browser_id>158</browser_id>
 				<regstring>/BlackBerry/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>27</order>
+				<order>28</order>
 				<browser_id>325</browser_id>
 				<regstring>/^Mozilla.*MSIE.*MSOffice 12/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>28</order>
+				<order>29</order>
 				<browser_id>326</browser_id>
 				<regstring>/^Mozilla.*MSIE.*MSOffice 14/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>29</order>
+				<order>30</order>
 				<browser_id>326</browser_id>
 				<regstring>/^Microsoft Office\/14.*MSOffice 14/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>30</order>
+				<order>31</order>
 				<browser_id>428</browser_id>
 				<regstring>/Mozilla.*Linux.*webOS.*webOSBrowser\/([0-9\.]+)/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>31</order>
+				<order>32</order>
 				<browser_id>326</browser_id>
 				<regstring>/^Microsoft Office\/14.*Microsoft Outlook 14/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>32</order>
+				<order>33</order>
 				<browser_id>473</browser_id>
 				<regstring>/^Mozilla.*MSIE.*Microsoft Outlook 15/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>33</order>
+				<order>34</order>
 				<browser_id>5</browser_id>
 				<regstring>/mozilla.*gecko\/[0-9]+.*epiphany\/([0-9a-z\+\-\.]+).*/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>34</order>
+				<order>35</order>
 				<browser_id>467</browser_id>
 				<regstring>/^Mozilla.*Windows.*Gecko.*Polarity\/([0-9\.]+)/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>35</order>
+				<order>36</order>
 				<browser_id>52</browser_id>
 				<regstring>/mozilla.*Lunascape\/([0-9a-z\+\-\.]+).*/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>36</order>
+				<order>37</order>
 				<browser_id>43</browser_id>
 				<regstring>/Blazer ([0-9\.]+)/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>37</order>
+				<order>38</order>
 				<browser_id>126</browser_id>
 				<regstring>/mozilla.*applewebkit.*arora\/([0-9a-z\+\-\.]+).*/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>38</order>
+				<order>39</order>
 				<browser_id>138</browser_id>
 				<regstring>/^W3C-checklink\/([0-9a-z\+\-\.]+).*/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>39</order>
+				<order>40</order>
 				<browser_id>141</browser_id>
 				<regstring>/Bolt\/([0-9\.]+)/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>40</order>
+				<order>41</order>
 				<browser_id>142</browser_id>
 				<regstring>/Demeter\/([0-9\.]+)/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>41</order>
+				<order>42</order>
 				<browser_id>145</browser_id>
 				<regstring>/mozilla.*applewebkit.*fluid\/([0-9a-z\+\-\.]+).*/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>42</order>
+				<order>43</order>
 				<browser_id>160</browser_id>
 				<regstring>/Hv3\/([0-9a-z\.])/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>43</order>
+				<order>44</order>
 				<browser_id>185</browser_id>
 				<regstring>/Cheshire\/([0-9a-z\.]+)/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>44</order>
+				<order>45</order>
 				<browser_id>187</browser_id>
 				<regstring>/mozilla.*rv:[0-9\.]+.*gecko.*CometBird\/([0-9a-z\+\-\.]+).*/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>45</order>
+				<order>46</order>
 				<browser_id>188</browser_id>
 				<regstring>/mozilla.*rv:[0-9\.]+.*gecko.*IceCat\/([0-9a-z\+\-\.]+).*/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>46</order>
+				<order>47</order>
 				<browser_id>189</browser_id>
 				<regstring>/mozilla.*applewebkit.*Stainless\/([0-9a-z\+\-\.]+).*safari/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>47</order>
+				<order>48</order>
 				<browser_id>190</browser_id>
 				<regstring>/mozilla.*rv:[0-9\.]+.*gecko.*Prism\/([0-9a-z\+\-\.]+).*/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>48</order>
+				<order>49</order>
 				<browser_id>211</browser_id>
 				<regstring>/^Mozilla\/.*webOS\/[0-9\.]+.*AppleWebKit.*Pre\/([0-9\.]+)$/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>49</order>
+				<order>50</order>
 				<browser_id>253</browser_id>
 				<regstring>/^Mozilla\/.*Mobile Content Viewer\/([0-9\.]+).*NetFront/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>50</order>
+				<order>51</order>
 				<browser_id>318</browser_id>
 				<regstring>/mozilla.*Comodo_Dragon\/([0-9a-z\+\-\.]+).*/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>51</order>
+				<order>52</order>
 				<browser_id>322</browser_id>
 				<regstring>/^Mozilla.*Gecko.*Strata\/([0-9\.]+)/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>52</order>
+				<order>53</order>
 				<browser_id>324</browser_id>
 				<regstring>/^Mozilla.*rv:[0-9\.]+.*Gecko.*Firefox.*LBrowser\/([0-9a-z\-\.]+)/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>53</order>
+				<order>54</order>
 				<browser_id>327</browser_id>
 				<regstring>/^Outlook-Express\/7\.0 \(MSIE 7\.0.*Windows/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>54</order>
+				<order>55</order>
 				<browser_id>350</browser_id>
 				<regstring>/^Mozilla.*Windows.*AppleWebKit.*MiniBrowser\/([0-9\.]+)/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>55</order>
+				<order>56</order>
 				<browser_id>357</browser_id>
 				<regstring>/^Mozilla.*AppleWebKit.*Element Browser ([0-9\.]+)/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>56</order>
+				<order>57</order>
 				<browser_id>327</browser_id>
 				<regstring>/^Outlook-Express\/7\.0 \(MSIE 6\.0.*Windows/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>57</order>
+				<order>58</order>
 				<browser_id>400</browser_id>
 				<regstring>/^Mozilla\/.*Gecko\/.*Firefox\/.*Kylo\/([0-9\.]+)$/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>58</order>
+				<order>59</order>
 				<browser_id>327</browser_id>
 				<regstring>/^Outlook-Express\/7\.0 \(MSIE 8.*Windows/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>59</order>
+				<order>60</order>
 				<browser_id>5</browser_id>
 				<regstring>/mozilla.*AppleWebKit\/.*epiphany\/([0-9a-z\+\-\.]+).*/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>60</order>
+				<order>61</order>
 				<browser_id>422</browser_id>
 				<regstring>/^Mozilla.*AppleWebKit.*SLP Browser\/([0-9\.]+)/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>61</order>
+				<order>62</order>
 				<browser_id>422</browser_id>
 				<regstring>/^Mozilla.*AppleWebKit.*Tizen Browser\/([0-9\.]+)/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>62</order>
+				<order>63</order>
 				<browser_id>327</browser_id>
 				<regstring>/^Outlook-Express\/7\.0 \(MSIE 9.*Windows/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>63</order>
+				<order>64</order>
 				<browser_id>443</browser_id>
 				<regstring>/Mozilla.*AppleWebKit.*KHTML.*SlimBoat\/([0-9\.]+)/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>64</order>
+				<order>65</order>
 				<browser_id>454</browser_id>
 				<regstring>/^Mozilla.*Playstation Vita.*AppleWebKit.*Silk\/([0-9\.]+)/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>65</order>
+				<order>66</order>
 				<browser_id>456</browser_id>
 				<regstring>/^Mozilla.*AppleWebKit.*Chrome.*Beamrise\/([0-9\.]+)/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>66</order>
+				<order>67</order>
 				<browser_id>456</browser_id>
 				<regstring>/^Mozilla.*AppleWebKit.*Beamrise\/([0-9\.]+).*Chrome/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>67</order>
+				<order>68</order>
 				<browser_id>457</browser_id>
 				<regstring>/^Mozilla.*AppleWebKit.*Chrome.*YaBrowser\/([0-9\.]+)/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>68</order>
+				<order>69</order>
 				<browser_id>468</browser_id>
 				<regstring>/^Mozilla.*AppleWebKit.*Superbird\/([0-9\.]+)/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>69</order>
+				<order>70</order>
 				<browser_id>457</browser_id>
 				<regstring>/^Mozilla.*AppleWebKit.*YaBrowser\/([0-9\.]+).*Chrome/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>70</order>
+				<order>71</order>
 				<browser_id>133</browser_id>
 				<regstring>/mozilla.*rv:[0-9\.]+.*gecko\/[0-9]+.*fennec\/([0-9a-z\+\-\.]+).*/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>71</order>
+				<order>72</order>
 				<browser_id>222</browser_id>
 				<regstring>/^Mozilla\/.*AppleWebKit.*NetNewsWire\/([0-9a-z\.]+)$/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>72</order>
+				<order>73</order>
 				<browser_id>328</browser_id>
 				<regstring>/^Mozilla.*MSIE.*Windows.*Tjusig ([0-9\.]+)/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>73</order>
+				<order>74</order>
 				<browser_id>329</browser_id>
 				<regstring>/^Mozilla.*MSIE.*Windows.*SiteKiosk ([0-9\.]+)/s</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>74</order>
+				<order>75</order>
 				<browser_id>355</browser_id>
 				<regstring>/Mozilla.*AppleWebKit.*WeltweitimnetzBrowser\/([0-9\.]+)/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>75</order>
+				<order>76</order>
 				<browser_id>385</browser_id>
 				<regstring>/^Mozilla.*AppleWebKit.*Skyfire\/([0-9\.]+)/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>76</order>
+				<order>77</order>
 				<browser_id>405</browser_id>
 				<regstring>/^Mozilla.*Chromium\/([0-9a-z\+\-\.]+).*chrome.*/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>77</order>
+				<order>78</order>
 				<browser_id>406</browser_id>
 				<regstring>/Mozilla\/.*AppleWebKit.*Columbus\/([0-9\.]+)/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>78</order>
+				<order>79</order>
 				<browser_id>408</browser_id>
 				<regstring>/Mozilla.*AppleWebKit.* WebRender/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>79</order>
+				<order>80</order>
 				<browser_id>409</browser_id>
 				<regstring>/Mozilla.*Chrome.*CoolNovo\/([a-z0-9\.]+)/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>80</order>
+				<order>81</order>
 				<browser_id>226</browser_id>
 				<regstring>/Symbian.* NokiaBrowser/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>81</order>
+				<order>82</order>
 				<browser_id>133</browser_id>
 				<regstring>/^Mozilla.*Mobile.*rv.*Gecko.*Firefox\/([0-9\.]+)/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>82</order>
+				<order>83</order>
 				<browser_id>439</browser_id>
 				<regstring>/Mozilla.*Mac.*rv.*Gecko.*Firefox\/([0-9a-b\.]+).*TenFourFox/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>83</order>
+				<order>84</order>
 				<browser_id>41</browser_id>
 				<regstring>/Mozilla.*Windows.*Gecko.*Firefox.*AvantBrowser\/Tri-Core/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>84</order>
+				<order>85</order>
 				<browser_id>442</browser_id>
 				<regstring>/Mozilla.*AppleWebKit.*zBrowser\/SpringSun-([0-9\.]+)/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>85</order>
+				<order>86</order>
 				<browser_id>442</browser_id>
 				<regstring>/Mozilla.*AppleWebKit.*zBrowser\/NigtSky-([0-9\.]+)/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>86</order>
+				<order>87</order>
 				<browser_id>470</browser_id>
 				<regstring>/^Mozilla.*AppleWebKit.*YRCWeblink\/([0-9\.]+).*Safari/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>87</order>
+				<order>88</order>
 				<browser_id>17</browser_id>
 				<regstring>/^Mozilla.*AppleWebKit.*Chrome.*OPR\/([0-9\.]+)/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>88</order>
+				<order>89</order>
 				<browser_id>471</browser_id>
 				<regstring>/Mozilla.*Gecko.*Firefox.*IceDragon\/([0-9\.]+)/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>89</order>
+				<order>90</order>
 				<browser_id>148</browser_id>
 				<regstring>/^Mozilla.*AppleWebKit.*Chrome.*Safari.*Midori\/([0-9\.]+)/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>90</order>
+				<order>91</order>
 				<browser_id>269</browser_id>
 				<regstring>/^Mozilla.*AppleWebKit.*Dooble\/([0-9\.]+).*Safari/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>91</order>
+				<order>92</order>
 				<browser_id>225</browser_id>
 				<regstring>/^Mozilla.*AppleWebKit.*UCBrowser\/([0-9\.]+).*Mobile.*Safari/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>92</order>
+				<order>93</order>
 				<browser_id>7</browser_id>
 				<regstring>/mozilla.*gecko\/[0-9]+.*flock\/([0-9a-z\+\-\.]+).*/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>93</order>
+				<order>94</order>
 				<browser_id>130</browser_id>
 				<regstring>/mozilla.*applewebkit.*iron\/([0-9a-z\+\-\.]+).*/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>94</order>
+				<order>95</order>
 				<browser_id>21</browser_id>
 				<regstring>/mozilla.*applewebkit.*shiira\/([0-9a-z\+\-\.]+).*safari/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>95</order>
+				<order>96</order>
 				<browser_id>47</browser_id>
 				<regstring>/mozilla.*rv:[0-9\.]+.*gecko\/[0-9]+.*IceWeasel\/([0-9a-z\+\-\.]+).*/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>96</order>
+				<order>97</order>
 				<browser_id>53</browser_id>
 				<regstring>/mozilla.*Maxthon ([0-9a-z\+\-\.]+)/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>97</order>
+				<order>98</order>
 				<browser_id>53</browser_id>
 				<regstring>/mozilla.*MSIE [0-9a-z\+\-\.]+.*MyIE2/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>98</order>
+				<order>99</order>
 				<browser_id>21</browser_id>
 				<regstring>/^Mozilla.*AppleWebKit.*Shiira\/([0-9a-zA-z\.\-]+)/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>99</order>
+				<order>100</order>
 				<browser_id>131</browser_id>
 				<regstring>/mozilla..*lobo\/([0-9a-z\+\-\.]+).*/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>100</order>
+				<order>101</order>
 				<browser_id>21</browser_id>
 				<regstring>/mozilla.*applewebkit.*shiira.*safari/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>101</order>
+				<order>102</order>
 				<browser_id>144</browser_id>
 				<regstring>/mozilla.*firefox.*orca\/([0-9a-z\+\-\.]+).*/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>102</order>
+				<order>103</order>
 				<browser_id>245</browser_id>
 				<regstring>/^Mozilla\/.*Gecko.* Firefox.*Wyzo\/([0-9a-z\.]+)/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>103</order>
+				<order>104</order>
 				<browser_id>53</browser_id>
 				<regstring>/^Mozilla\/.*AppleWebKit\/.*Maxthon\/([0-9\.]+)/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>104</order>
+				<order>105</order>
 				<browser_id>268</browser_id>
 				<regstring>/Opera\/.*Opera Mini\/([0-9\.]+)/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>105</order>
+				<order>106</order>
 				<browser_id>292</browser_id>
 				<regstring>/mozilla.*rv:[0-9\.]+.*gecko.*GlobalMojo\/([0-9a-z\+\-\.]+).*/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>106</order>
+				<order>107</order>
 				<browser_id>345</browser_id>
 				<regstring>/mozilla.*rv:[0-9\.]+.*gecko.*Palemoon\/([0-9a-z\+\-\.]+).*/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>107</order>
+				<order>108</order>
 				<browser_id>7</browser_id>
 				<regstring>/mozilla.*flock\/([0-9\.]+).*chrome/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>108</order>
+				<order>109</order>
 				<browser_id>320</browser_id>
 				<regstring>/mozilla.*rv:[0-9\.]+.*gecko.*myibrow\/([0-9a-z\.]+)/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>109</order>
+				<order>110</order>
 				<browser_id>351</browser_id>
 				<regstring>/^Mozilla.*Escape ([0-9\.]+)/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>110</order>
+				<order>111</order>
 				<browser_id>352</browser_id>
 				<regstring>/^Mozilla.*Windows.*UltraBrowser ([0-9\.]+)/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>111</order>
+				<order>112</order>
 				<browser_id>353</browser_id>
 				<regstring>/^Mozilla.*BrowseX \(([0-9\.]+)/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>112</order>
+				<order>113</order>
 				<browser_id>362</browser_id>
 				<regstring>/^Mozilla.*Dolfin\/([0-9\.]+)/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>113</order>
+				<order>114</order>
 				<browser_id>371</browser_id>
 				<regstring>/^Mozilla\/.*Gecko.*lolifox\/([0-9\.]+)/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>114</order>
+				<order>115</order>
 				<browser_id>377</browser_id>
 				<regstring>/Mozilla.*AppleWebKit.*RockMelt\/([0-9a-z\.]+)/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>115</order>
+				<order>116</order>
 				<browser_id>378</browser_id>
 				<regstring>/^Mozilla.*rv:[0-9\.]+.*gecko\/[0-9]+.*Epic\/([0-9\.]+)/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>116</order>
+				<order>117</order>
 				<browser_id>379</browser_id>
 				<regstring>/Mozilla.*AppleWebKit.*InternetSurfboard\/([0-9\.a-z]+)/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>117</order>
+				<order>118</order>
 				<browser_id>380</browser_id>
 				<regstring>/^Mozilla.*Gecko.*Vonkeror\/([0-9\.]+)/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>118</order>
+				<order>119</order>
 				<browser_id>390</browser_id>
 				<regstring>/^Mozilla.*WebKi.*BlackHawk\/([0-9\.]+).*Chrome/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>119</order>
+				<order>120</order>
 				<browser_id>394</browser_id>
 				<regstring>/mozilla.*applewebkit.*version\/([0-9a-z\+\-\.]+).*mobile.*safari\/[0-9a-z\+\-\.]+.*/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>120</order>
+				<order>121</order>
 				<browser_id>401</browser_id>
 				<regstring>/^Mozilla\/.*Treco.*Fireweb Navigator\/([0-9a-z\.]+)/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>121</order>
+				<order>122</order>
 				<browser_id>157</browser_id>
 				<regstring>/^Mozilla.*MSIE.*Windows Phone.*IEMobile\/([0-9\.]+)/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>122</order>
+				<order>123</order>
 				<browser_id>394</browser_id>
 				<regstring>/^Mozilla.* AppleWebKit.*Mobile/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>123</order>
+				<order>124</order>
 				<browser_id>158</browser_id>
 				<regstring>/^Mozilla.*RIM Tablet OS.*AppleWebKit.*Safari/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>124</order>
+				<order>125</order>
 				<browser_id>411</browser_id>
 				<regstring>/Mozilla.*Gecko.*Sundial\/([0-9a-z_\.]+)/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>125</order>
+				<order>126</order>
 				<browser_id>412</browser_id>
 				<regstring>/Mozilla.*Gecko.*Alienforce\/([0-9a-z\.]+)/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>126</order>
+				<order>127</order>
 				<browser_id>416</browser_id>
 				<regstring>/Mozilla.*AppleWebKit.*Chrome.*baidubrowser\/([0-9a-z\.]+)/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>127</order>
+				<order>128</order>
 				<browser_id>416</browser_id>
 				<regstring>/Mozilla.*MSIE.*Windows.*baidubrowser ([0-9a-z\.]+)/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>128</order>
+				<order>129</order>
 				<browser_id>417</browser_id>
 				<regstring>/Mozilla.*AppleWebKit.*Chrome.*SE ([0-9a-z\.]+) MetaSr/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>129</order>
+				<order>130</order>
 				<browser_id>417</browser_id>
 				<regstring>/Mozilla.*MSIE.* Windows.*SE ([0-9a-z\.]+) MetaSr/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>130</order>
+				<order>131</order>
 				<browser_id>419</browser_id>
 				<regstring>/^Mozilla.*AppleWebKit.*Chrome.*ZipZap ([0-9\.]+)/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>131</order>
+				<order>132</order>
 				<browser_id>420</browser_id>
 				<regstring>/Mozilla.*AppleWebKit.*QupZilla\/([0-9a-z\.\-]+)/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>132</order>
+				<order>133</order>
 				<browser_id>421</browser_id>
 				<regstring>/Mozilla.*AppleWebKit.*Patriott::Browser\/([0-9\.]+)/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>133</order>
+				<order>134</order>
 				<browser_id>448</browser_id>
 				<regstring>/^Mozilla.*AppleWebKit.*Qt\/[0-9\.]+.*Ryouko\/([0-9\.]+).*Safari/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>134</order>
+				<order>135</order>
 				<browser_id>320</browser_id>
 				<regstring>/mozilla.*rv:[0-9\.]+.*Whistler.*myibrow\/([0-9a-z\.]+)/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>135</order>
+				<order>136</order>
 				<browser_id>4</browser_id>
 				<regstring>/mozilla.*rv:[0-9\.]+.*gecko.*Navigator\/([0-9a-z\+\-\.]+).*/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>136</order>
+				<order>137</order>
 				<browser_id>321</browser_id>
 				<regstring>/Opera mobi.*Version\/([0-9\.]+)/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>137</order>
+				<order>138</order>
 				<browser_id>321</browser_id>
 				<regstring>/Opera Mobi.*Opera ([0-9\.]+)/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>138</order>
+				<order>139</order>
 				<browser_id>321</browser_id>
 				<regstring>/Opera ([0-9\.]+).*Opera Mobi/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>139</order>
+				<order>140</order>
 				<browser_id>394</browser_id>
 				<regstring>/mozilla.*iphone.*os.*/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>140</order>
+				<order>141</order>
 				<browser_id>394</browser_id>
 				<regstring>/mozilla.*ipad.*os.*/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>141</order>
+				<order>142</order>
 				<browser_id>321</browser_id>
 				<regstring>/Opera.*Opera Tablet.*Presto.*Version\/([0-9\.]+)/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>142</order>
+				<order>143</order>
 				<browser_id>321</browser_id>
 				<regstring>/HTC.*Opera\/([0-9\.]+).*Windows/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>143</order>
+				<order>144</order>
 				<browser_id>321</browser_id>
 				<regstring>/Opera.*Opera Mobi/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>144</order>
+				<order>145</order>
 				<browser_id>394</browser_id>
 				<regstring>/nokiac3.*safari/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>145</order>
+				<order>146</order>
 				<browser_id>120</browser_id>
 				<regstring>/mozilla.*chrome\/([0-9a-z\+\-\.]+).*/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>146</order>
+				<order>147</order>
 				<browser_id>17</browser_id>
 				<regstring>/^Opera\/[0-9\.]+.*Presto\/[0-9\.]+ Version\/([0-9\.]+)$/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>147</order>
+				<order>148</order>
 				<browser_id>260</browser_id>
 				<regstring>/mozilla.*rv:[0-9\.]+.*gecko\/[0-9]+.*Tablet browser ([0-9a-z\+\-\.]+).*/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>148</order>
+				<order>149</order>
 				<browser_id>270</browser_id>
 				<regstring>/Mozilla\/.*Gecko.*Firefox.*Madfox\/([0-9a-z\.]+)/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>149</order>
+				<order>150</order>
 				<browser_id>336</browser_id>
 				<regstring>/^2Bone_LinkChecker\/([0-9\.]+)/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>150</order>
+				<order>151</order>
 				<browser_id>392</browser_id>
 				<regstring>/^Mozilla.*Linux.*Kindle\/([0-9\.]+)/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>151</order>
+				<order>152</order>
 				<browser_id>226</browser_id>
 				<regstring>/series60.*applewebkit.*/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>152</order>
+				<order>153</order>
 				<browser_id>2</browser_id>
 				<regstring>/mozilla.*rv:[0-9\.]+.*gecko\/[0-9]+.*seamonkey\/([0-9a-z\+\-\.]+).*/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>153</order>
+				<order>154</order>
 				<browser_id>1</browser_id>
 				<regstring>/mozilla.*rv:[0-9\.]+.*gecko\/[0-9]+.*camino\/([0-9a-z\+\-\.]+).*/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>154</order>
+				<order>155</order>
 				<browser_id>3</browser_id>
 				<regstring>/mozilla.*rv:[0-9\.]+.*gecko.*firefox\/([0-9a-z\+\-\.]+).*/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>155</order>
+				<order>156</order>
 				<browser_id>4</browser_id>
 				<regstring>/mozilla.*netscape[0-9]?\/([0-9a-z\+\-\.]+).*/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>156</order>
+				<order>157</order>
 				<browser_id>6</browser_id>
 				<regstring>/mozilla.*gecko\/[0-9]+.*galeon\/([0-9a-z\+\-\.]+).*/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>157</order>
+				<order>158</order>
 				<browser_id>8</browser_id>
 				<regstring>/mozilla.*gecko\/[0-9]+.*minimo\/([0-9a-z\+\-\.]+).*/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>158</order>
+				<order>159</order>
 				<browser_id>9</browser_id>
 				<regstring>/mozilla.*gecko\/[0-9]+.*k\-meleon\/([0-9a-z\+\-\.]+).*/si</regstring>
 			</browser_reg>
 			<browser_reg>
-				<order>159</order>
+				<order>160</order>
 				<browser_id>10</browser_id>
 				<regstring>/mozilla.*gecko\/[0-9]+.*k-ninja\/([0-9a-z\+\-\.]+).*/si</regstring>
-			</browser_reg>
-			<browser_reg>
-				<order>160</order>
-				<browser_id>11</browser_id>
-				<regstring>/mozilla.*gecko.*kazehakase\/([0-9a-z\+\-\.]+).*/si</regstring>
 			</browser_reg>
 			<browser_reg>
 				<order>161</order>

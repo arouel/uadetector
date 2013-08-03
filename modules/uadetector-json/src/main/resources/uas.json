@@ -1,6 +1,6 @@
 {
   "format": "1.0",
-  "version": "20130725-02",
+  "version": "20130731-01",
   "operating-system-patterns": [
     {
       "regex": {
@@ -2824,6 +2824,13 @@
     {
       "regex": {
         "flags": "si",
+        "pattern": "mozilla.*gecko.*kazehakase\\/([0-9a-z\\+\\-\\.]+).*"
+      },
+      "hash": "7f71b2f8060629a5bb61f4379ae11eadac440d6adcfbb49eb0d7a3082959c40f"
+    },
+    {
+      "regex": {
+        "flags": "si",
         "pattern": "mozilla.*Blazer\\/([0-9a-z\\+\\-\\.]+)"
       },
       "hash": "35f99e1d551c6bd182d2fd6840c7ca9a2c211b44708ecea079cec5042c0eea7e"
@@ -3891,13 +3898,6 @@
         "pattern": "mozilla.*gecko\\/[0-9]+.*k-ninja\\/([0-9a-z\\+\\-\\.]+).*"
       },
       "hash": "fe74d61589dbb756e53b26d2700f934f0a173aadf22cc1d5bc2370b44fde9d7c"
-    },
-    {
-      "regex": {
-        "flags": "si",
-        "pattern": "mozilla.*gecko.*kazehakase\\/([0-9a-z\\+\\-\\.]+).*"
-      },
-      "hash": "7f71b2f8060629a5bb61f4379ae11eadac440d6adcfbb49eb0d7a3082959c40f"
     },
     {
       "regex": {
@@ -23453,6 +23453,16 @@
       "producer-url": "http://www.kfsw.de/",
       "user-agent-string": "SeoCheck (FischerNetzDesign Seo Checker, info@fischernetzdesign.de)",
       "hash": "92fc872292e42bd5f601c69ad53f0ec7a4646228a8cf5d9593924cc53e129537"
+    },
+    {
+      "family-name": "yacybot",
+      "icon": "bot_yacybot.png",
+      "info-url": "/list-of-ua/bot-detail?bot\u003dyacybot",
+      "name": "yacybot",
+      "producer": "Michael Christen",
+      "producer-url": "",
+      "user-agent-string": "yacybot (freeworld/global; amd64 Linux 3.2.0-4-amd64; java 1.7.0_03; Etc/de) http://yacy.net/bot.html",
+      "hash": "563b0c53af4a7b37119ec03e69e7a43092bbfd1b4fc8eb79c9bf857a30eaebf9"
     }
   ]
 }

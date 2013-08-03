@@ -22,7 +22,7 @@ public final class BrowserOperatingSystemMappingComparator extends CompareNullSa
 
 	@Override
 	public int compareType(final BrowserOperatingSystemMapping o1, final BrowserOperatingSystemMapping o2) {
-		return o1.getBrowserId() < o2.getBrowserId() ? -1 : (o1.getBrowserId() == o2.getBrowserId() ? 0 : 1);
+		return o1.getBrowserId() < o2.getBrowserId() ? -1 : o1.getBrowserId() == o2.getBrowserId() ? 0 : 1;
 	}
 
 }

@@ -38,7 +38,7 @@ public abstract class CompareNullSafe<T> implements Comparator<T>, Serializable 
 	 * @return {@code -1} if {@code a} is less, {@code 0} if equal, or {@code 1} if greater than {@code b}
 	 */
 	public static int compareInt(final int a, final int b) {
-		return a > b ? 1 : (a == b ? 0 : -1);
+		return a > b ? 1 : a == b ? 0 : -1;
 	}
 
 	/**

@@ -22,6 +22,7 @@ import java.io.LineNumberReader;
 import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.concurrent.ExecutorService;
+import java.util.regex.Pattern;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -79,6 +80,24 @@ abstract class AbstractUpdateOperation implements UpdateOperation {
 	 * <b>Second placeholder</b>: new remote version
 	 */
 	private static final String MSG_UPDATE_AVAILABLE = "An update is available. Current version is '%s' and remote version is '%s'.";
+
+	/**
+	 * Pattern of a typical version of <i>UAS data</i>
+	 */
+	private static final Pattern VERSION_PATTERN = Pattern.compile("\\d{8}\\-\\d{2}");
+
+	/**
+	 * Checks a given newer version against an older one.
+	 * 
+	 * @param newer
+	 *            possible newer version
+	 * @param older
+	 *            possible older version
+	 * @return {@code true} if the first argument is newer than the second argument, otherwise {@code false}
+	 */
+	static boolean hasUpdate(final String newer, final String older) {
+		return VERSION_PATTERN.matcher(newer).matches() && VERSION_PATTERN.matcher(older).matches() ? newer.compareTo(older) > 0 : false;
+	}
 
 	/**
 	 * Reads the current User-Agent data version from <a
@@ -157,7 +176,7 @@ abstract class AbstractUpdateOperation implements UpdateOperation {
 			LOG.info(MSG_NO_UPDATE_CHECK_POSSIBLE);
 			LOG.debug(String.format(MSG_NO_UPDATE_CHECK_POSSIBLE__DEBUG, e.getClass().getName(), e.getLocalizedMessage()));
 		}
-		if (version.compareTo(getCurrentVersion()) > 0) {
+		if (hasUpdate(version, getCurrentVersion())) {
 			LOG.debug(String.format(MSG_UPDATE_AVAILABLE, getCurrentVersion(), version));
 			result = true;
 		} else {

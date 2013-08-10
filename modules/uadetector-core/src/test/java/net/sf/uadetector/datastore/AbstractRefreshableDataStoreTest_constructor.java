@@ -68,7 +68,7 @@ public class AbstractRefreshableDataStoreTest_constructor {
 
 		@Override
 		public Data getData() {
-			return new DataBlueprint().version("20120801-fallback").build();
+			return new DataBlueprint().version("20120801-00").build();
 		}
 
 		@Override

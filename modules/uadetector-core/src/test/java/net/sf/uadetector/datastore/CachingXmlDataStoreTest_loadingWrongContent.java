@@ -16,6 +16,7 @@
 package net.sf.uadetector.datastore;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.io.File;
@@ -56,13 +57,14 @@ public class CachingXmlDataStoreTest_loadingWrongContent {
 	@Rule
 	public final TemporaryFolder folder = new TemporaryFolder();
 
-	@Test(expected = IllegalStateException.class)
-	public void loadCorruptedCacheFile_useFallback_overrideCacheFileWithWorkingData() throws IOException, InterruptedException,
+	@Test
+	public void loadCorruptedCacheFile_useFallback_doNotOverrideCacheFileWithFallbackData() throws IOException, InterruptedException,
 			URISyntaxException {
 		final File cache = folder.newFile();
 
 		// fill cache file with false content
-		Files.write(ByteStreams.toByteArray(DATA_CONNECTION_ERROR_URL.openStream()), cache);
+		final byte[] wrongContent = ByteStreams.toByteArray(DATA_CONNECTION_ERROR_URL.openStream());
+		Files.write(wrongContent, cache);
 
 		// create working fallback data store
 		final TestXmlDataStore fallback = new TestXmlDataStore();
@@ -73,25 +75,26 @@ public class CachingXmlDataStoreTest_loadingWrongContent {
 
 		assertEquals(TestXmlDataStore.VERSION_OLDER, store.getData().getVersion());
 
-		// check that cache file's content is still correctly filled
-		assertEquals(Files.toString(new File(TestXmlDataStore.DATA_URL_NEWER.toURI()), CHARSET), Files.toString(cache, CHARSET));
+		// check that cache was removed
+		assertFalse(cache.exists());
 
 		// try to update the content
 		store.refresh();
 		Thread.sleep(1000L);
 
-		// test that no corrupt data will be saved into cache file
-		assertEquals(TestXmlDataStore.VERSION_NEWER, store.getData().getVersion());
-		assertEquals(Files.toString(new File(TestXmlDataStore.DATA_URL_NEWER.toURI()), CHARSET), Files.toString(cache, CHARSET));
+		// test that no fallback data will be written to cache file
+		assertEquals(TestXmlDataStore.VERSION_OLDER, store.getData().getVersion());
+		assertFalse(cache.exists());
 	}
 
-	@Test(expected = IllegalStateException.class)
+	@Test
 	public void loadCorruptedCacheFile_useRemoteData_overrideCacheFileWithWorkingData() throws IOException, InterruptedException,
 			URISyntaxException {
 		final File cache = folder.newFile();
 
 		// fill cache file with false content
-		Files.write(ByteStreams.toByteArray(DATA_CONNECTION_ERROR_URL.openStream()), cache);
+		final byte[] wrongContent = ByteStreams.toByteArray(DATA_CONNECTION_ERROR_URL.openStream());
+		Files.write(wrongContent, cache);
 
 		// create working fallback data store
 		final DataStore fallback = new SimpleXmlDataStore(TestXmlDataStore.DATA_URL, TestXmlDataStore.VERSION_URL);
@@ -102,8 +105,8 @@ public class CachingXmlDataStoreTest_loadingWrongContent {
 
 		assertEquals(TestXmlDataStore.VERSION_OLDER, store.getData().getVersion());
 
-		// check that cache file's content is still correctly filled
-		assertEquals(Files.toString(new File(TestXmlDataStore.DATA_URL_NEWER.toURI()), CHARSET), Files.toString(cache, CHARSET));
+		// check that cache was removed
+		assertFalse(cache.exists());
 
 		// try to update the content
 		store.refresh();

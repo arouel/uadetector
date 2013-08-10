@@ -37,6 +37,9 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 
+import com.google.common.base.Charsets;
+import com.google.common.io.Files;
+
 public class UpdateOperationWithCacheFileTaskTest {
 
 	/**
@@ -45,6 +48,39 @@ public class UpdateOperationWithCacheFileTaskTest {
 	 */
 	@Rule
 	public final TemporaryFolder folder = new TemporaryFolder();
+
+	@Test
+	public void call_cacheContainsUnexpectedData_willBeOverriddenIfUpdateAvailable() throws MalformedURLException, IOException {
+		final File cache = folder.newFile("test.cache");
+		Files.write("unexpected data".getBytes(Charsets.UTF_8), cache);
+		Assert.assertTrue(cache.exists());
+
+		// file will be created
+		final UpdateOperationWithCacheFileTask task = new UpdateOperationWithCacheFileTask(new TestXmlDataStore(), cache);
+		task.call();
+		Assert.assertTrue(cache.length() >= 722015);
+
+		// file will be overwritten (delete and rename)
+		task.call();
+		Assert.assertTrue(cache.length() >= 722015);
+	}
+
+	@Test
+	public void call_cacheContainsUnexpectedData_willNotBeOverriddenIfNoUpdateAvailable() throws MalformedURLException, IOException {
+		final File cache = folder.newFile("test.cache");
+		final String unexpectedContent = "unexpected data";
+		Files.write(unexpectedContent.getBytes(Charsets.UTF_8), cache);
+		Assert.assertTrue(cache.exists());
+
+		// file will be created
+		final UpdateOperationWithCacheFileTask task = new UpdateOperationWithCacheFileTask(new NotUpdateableXmlDataStore(), cache);
+		task.call();
+		Assert.assertEquals(unexpectedContent.getBytes(Charsets.UTF_8).length, cache.length());
+
+		// file will be overwritten (delete and rename)
+		task.call();
+		Assert.assertEquals(unexpectedContent.getBytes(Charsets.UTF_8).length, cache.length());
+	}
 
 	@Test(expected = IllegalNullArgumentException.class)
 	public void construct_cacheFile_isNull() {

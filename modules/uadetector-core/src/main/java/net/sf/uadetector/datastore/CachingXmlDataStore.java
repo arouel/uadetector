@@ -74,6 +74,16 @@ public final class CachingXmlDataStore extends AbstractRefreshableDataStore {
 	private static final String MSG_CACHE_FILE_IS_FILLED = "The cache file is filled and will be imported.";
 
 	/**
+	 * Message if the cache file contains unexpected data and must be deleted manually
+	 */
+	private static final String MSG_CACHE_FILE_IS_DAMAGED = "The cache file '%s' is damaged and must be removed manually.";
+
+	/**
+	 * Message if the cache file contains unexpected data and has been removed
+	 */
+	private static final String MSG_CACHE_FILE_IS_DAMAGED_AND_DELETED = "The cache file '%s' is damaged and has been deleted.";
+
+	/**
 	 * The prefix string to be used in generating the cache file's name; must be at least three characters long
 	 */
 	private static final String PREFIX = "uas";
@@ -160,17 +170,7 @@ public final class CachingXmlDataStore extends AbstractRefreshableDataStore {
 		Check.notNull(versionUrl, "versionUrl");
 
 		final DataReader reader = new XmlDataReader();
-
-		final DataStore fallbackDataStore;
-		if (!isEmpty(cacheFile, charset)) {
-			final URL cacheFileUrl = UrlUtil.toUrl(cacheFile);
-			fallbackDataStore = new CacheFileDataStore(reader.read(cacheFileUrl, charset), reader, cacheFileUrl, versionUrl, charset);
-			LOG.debug(MSG_CACHE_FILE_IS_FILLED);
-		} else {
-			fallbackDataStore = fallback;
-			LOG.debug(MSG_CACHE_FILE_IS_EMPTY);
-		}
-
+		final DataStore fallbackDataStore = readCacheFileAsFallback(reader, cacheFile, dataUrl, versionUrl, charset, fallback);
 		return new CachingXmlDataStore(reader, dataUrl, versionUrl, charset, cacheFile, fallbackDataStore);
 	}
 
@@ -198,6 +198,24 @@ public final class CachingXmlDataStore extends AbstractRefreshableDataStore {
 	public static CachingXmlDataStore createCachingXmlDataStore(@Nonnull final URL dataUrl, @Nonnull final URL versionUrl,
 			@Nonnull final Charset charset, @Nonnull final DataStore fallback) {
 		return createCachingXmlDataStore(findOrCreateCacheFile(), dataUrl, versionUrl, charset, fallback);
+	}
+
+	/**
+	 * Removes the given cache file because it contains damaged content.
+	 * 
+	 * @param cacheFile
+	 *            cache file to delete
+	 */
+	private static void deleteCacheFile(final File cacheFile) {
+		try {
+			if (cacheFile.delete()) {
+				LOG.warn(String.format(MSG_CACHE_FILE_IS_DAMAGED_AND_DELETED, cacheFile.getPath()));
+			} else {
+				LOG.warn(String.format(MSG_CACHE_FILE_IS_DAMAGED, cacheFile.getPath()));
+			}
+		} catch (final Exception e) {
+			LOG.warn(String.format(MSG_CACHE_FILE_IS_DAMAGED, cacheFile.getPath()));
+		}
 	}
 
 	/**
@@ -237,6 +255,43 @@ public final class CachingXmlDataStore extends AbstractRefreshableDataStore {
 		} catch (final IOException e) {
 			throw new IllegalStateOfArgumentException("The given file could not be read.", e);
 		}
+	}
+
+	/**
+	 * Tries to read the content of specified cache file and returns them as fallback data store. If the cache file
+	 * contains unexpected data the given fallback data store will be returned instead.
+	 * 
+	 * @param reader
+	 *            data reader to read the given {@code dataUrl}
+	 * @param cacheFile
+	 *            file with cached <em>UAS data</em> in XML format or empty file
+	 * @param dataUrl
+	 *            URL to <em>UAS data</em>
+	 * @param versionUrl
+	 *            URL to version information about the given <em>UAS data</em>
+	 * @param charset
+	 *            the character set in which the data should be read
+	 * @param fallback
+	 *            <em>UAS data</em> as fallback in case the data on the specified resource can not be read correctly
+	 * @return a fallback data store
+	 */
+	private static DataStore readCacheFileAsFallback(@Nonnull final DataReader reader, @Nonnull final File cacheFile,
+			@Nonnull final URL dataUrl, @Nonnull final URL versionUrl, @Nonnull final Charset charset, @Nonnull final DataStore fallback) {
+		DataStore fallbackDataStore;
+		if (!isEmpty(cacheFile, charset)) {
+			final URL cacheFileUrl = UrlUtil.toUrl(cacheFile);
+			try {
+				fallbackDataStore = new CacheFileDataStore(reader.read(cacheFileUrl, charset), reader, cacheFileUrl, versionUrl, charset);
+				LOG.debug(MSG_CACHE_FILE_IS_FILLED);
+			} catch (final RuntimeException e) {
+				fallbackDataStore = fallback;
+				deleteCacheFile(cacheFile);
+			}
+		} else {
+			fallbackDataStore = fallback;
+			LOG.debug(MSG_CACHE_FILE_IS_EMPTY);
+		}
+		return fallbackDataStore;
 	}
 
 	/**

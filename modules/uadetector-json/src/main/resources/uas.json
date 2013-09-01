@@ -1,6 +1,6 @@
 {
   "format": "1.0",
-  "version": "20130731-01",
+  "version": "20130830-01",
   "operating-system-patterns": [
     {
       "regex": {
@@ -3272,6 +3272,13 @@
     {
       "regex": {
         "flags": "si",
+        "pattern": "Mozilla.*AppleWebKit.*Safari.*Roccat\\/([0-9\\.]+).*R"
+      },
+      "hash": "a510de4f7acd51aa28ed177721dfe67692d5f4e296f8d39ca72c6d978d5e1900"
+    },
+    {
+      "regex": {
+        "flags": "si",
         "pattern": "mozilla.*rv:[0-9\\.]+.*gecko\\/[0-9]+.*fennec\\/([0-9a-z\\+\\-\\.]+).*"
       },
       "hash": "c5698c32a8fa8c2e881227d6f5491a541b5289947430ae88a45450c4926eb39a"
@@ -5932,9 +5939,16 @@
     {
       "regex": {
         "flags": "si",
-        "pattern": "Mozilla.*Windows NT 6\\.3.*Trident\\/7\\.0.*rv:([0-9\\.]+)"
+        "pattern": "Mozilla.*Windows NT 6\\..*Trident\\/7\\.0.*rv:([0-9\\.]+)"
       },
-      "hash": "1b1fccccee9dd1dbcaf0c0e9f6cd9e1aa71fee4268ae35b48e584602c2239dac"
+      "hash": "440f62f03cc54a891fdbdfc9c3bd711fc4a721da84b2da2e8b2b8802d5df313c"
+    },
+    {
+      "regex": {
+        "flags": "si",
+        "pattern": "^Airmail ([0-9\\.]+).*Mac OS X"
+      },
+      "hash": "098f6c3b5d8a834fa67a1af35157dc9a55e4b1dd484b96472e535a4d9d4416fa"
     },
     {
       "regex": {
@@ -7045,7 +7059,7 @@
       "icon": "msie.png",
       "info-url": "/list-of-ua/browser-detail?browser\u003dIE",
       "browser-pattern-hashs": [
-        "1b1fccccee9dd1dbcaf0c0e9f6cd9e1aa71fee4268ae35b48e584602c2239dac",
+        "440f62f03cc54a891fdbdfc9c3bd711fc4a721da84b2da2e8b2b8802d5df313c",
         "74de7df9d2fe4f30fae073650a4c5e3a93bdd4e6429afacad14a9dadd4b1d6dc",
         "b059293f30ff2378391bdccab40160d3029f7e4ac01e0a38acb5d470ddc68896"
       ],
@@ -7053,7 +7067,7 @@
       "producer-url": "http://www.microsoft.com/",
       "browser-type-hash": "d31de1a5c5c8ba2a210a167cf0d0dc2425c57ea7525f4b73a4b7ab934af79dfc",
       "url": "http://en.wikipedia.org/wiki/Internet_Explorer",
-      "hash": "bddd95c1bf36d663cee8c50e3b1292d4bcd0773c8070698b2e9e0943c2f6588f"
+      "hash": "eaec1999395457d23da1ce514b1228e732ba6774804ddde6e6118846bc5142c0"
     },
     {
       "family": "Offline Explorer",
@@ -12251,6 +12265,32 @@
       "browser-type-hash": "d4f1118eb3ace8c9d67d4b72ff39234cd4f3ab260ef6f422ce24b7a1b10d14ee",
       "url": "http://www.puffinbrowser.com/",
       "hash": "159129005b6e7cc220dc891a28edabd81e1ba1fb5d8a3ef704ed2569d8d707ee"
+    },
+    {
+      "family": "Roccat browser",
+      "icon": "roccat.png",
+      "info-url": "/list-of-ua/browser-detail?browser\u003dRoccat browser",
+      "browser-pattern-hashs": [
+        "a510de4f7acd51aa28ed177721dfe67692d5f4e296f8d39ca72c6d978d5e1900"
+      ],
+      "producer": "Runecats",
+      "producer-url": "http://runecats.com/",
+      "browser-type-hash": "d31de1a5c5c8ba2a210a167cf0d0dc2425c57ea7525f4b73a4b7ab934af79dfc",
+      "url": "http://www.runecats.com/roccat.html",
+      "hash": "8d32f3a5d0965e3dfc8c1a8822408c402e3787123cd92f7488d175d85fe96c2e"
+    },
+    {
+      "family": "AirMail",
+      "icon": "airmail.png",
+      "info-url": "/list-of-ua/browser-detail?browser\u003dAirMail",
+      "browser-pattern-hashs": [
+        "098f6c3b5d8a834fa67a1af35157dc9a55e4b1dd484b96472e535a4d9d4416fa"
+      ],
+      "producer": "Bloop S.R.L.",
+      "producer-url": "http://bloop.info/",
+      "browser-type-hash": "1e88220c991000b14b14a6be9efbf0ef87e6628032d66046eaf0a50423056e65",
+      "url": "http://airmailapp.com/",
+      "hash": "5bd0e0af755461a3fd7e15a801b5ac5fe3fa0a371af5b41609af550df32aa269"
     }
   ],
   "robots": [
@@ -16269,10 +16309,10 @@
       "icon": "bot.png",
       "info-url": "/list-of-ua/bot-detail?bot\u003dSetoozbot",
       "name": "OOZBOT/0.20",
-      "producer": "SETU Software Systems P. Ltd.",
+      "producer": "SETU Software Systems (P) Ltd.",
       "producer-url": "http://www.setusoftware.com/",
       "user-agent-string": "OOZBOT/0.20 ( -- ; http://www.setooz.com/oozbot.html ; agentname at setooz dot_com )",
-      "hash": "82b52355dbf203490a2b70476d9b6a6c334717d8c1289049f6b16f6cbfa18afe"
+      "hash": "4a5ba882d854549662a0469cc31501c82c6a6f1ade8ba356da3adbf73af01566"
     },
     {
       "family-name": "sogou spider",
@@ -16549,10 +16589,10 @@
       "icon": "bot.png",
       "info-url": "/list-of-ua/bot-detail?bot\u003dSetoozbot",
       "name": "OOZBOT/0.20 b",
-      "producer": "SETU Software Systems P. Ltd.",
+      "producer": "SETU Software Systems (P) Ltd.",
       "producer-url": "http://www.setusoftware.com/",
       "user-agent-string": "OOZBOT/0.20 ( Setooz výrazný ako say-th-uuz, znamená mosty.  ; http://www.setooz.com/oozbot.html ; agentname at setooz dot_com )",
-      "hash": "f7783332ecbdb01dc4900dd356f2c099532087801f31fca3a3811d26abbb3cb8"
+      "hash": "5d8625b39ff46e68cb318b5cd6f96244cf950e50cb6b12b423e846baff0e0dfe"
     },
     {
       "family-name": "FacebookExternalHit",
@@ -16969,10 +17009,10 @@
       "icon": "bot.png",
       "info-url": "/list-of-ua/bot-detail?bot\u003dSetoozbot ",
       "name": "OOZBOT/0.20 c",
-      "producer": "SETU Software Systems P. Ltd.",
+      "producer": "SETU Software Systems (P) Ltd.",
       "producer-url": "http://www.setusoftware.com/",
       "user-agent-string": "OOZBOT/0.20 ( http://www.setooz.com/oozbot.html ; agentname at setooz dot_com )",
-      "hash": "5a7d0d21aadc7f947b0ace296904cdcf978ac69888e02ad0bb444e0771e1e00c"
+      "hash": "7287697d59cf52cf7cb3c6deec11d31c487a55e6b9041c061d806d7a2d4b3802"
     },
     {
       "family-name": "heritrix",
@@ -18749,10 +18789,10 @@
       "icon": "bot.png",
       "info-url": "/list-of-ua/bot-detail?bot\u003dSetoozbot",
       "name": "SETOOZBOT/0.30 a",
-      "producer": "SETU Software Systems P. Ltd.",
+      "producer": "SETU Software Systems (P) Ltd.",
       "producer-url": "http://www.setusoftware.com/",
       "user-agent-string": "Mozilla/5.0 ( compatible; SETOOZBOT/0.30 ; http://www.setooz.com/bot.html )",
-      "hash": "e2614cf37d8e99200bb053605c8441e344cedcecbdbf2764f56d6302b5099837"
+      "hash": "cee92a3f236b86e3fcc6e6951c22bb7433d5d6f946fa1bc4e74d24774076a03b"
     },
     {
       "family-name": "Yaanb",
@@ -18769,10 +18809,10 @@
       "icon": "bot.png",
       "info-url": "/list-of-ua/bot-detail?bot\u003dSetoozbot",
       "name": "SETOOZBOT/0.30 b",
-      "producer": "SETU Software Systems P. Ltd.",
+      "producer": "SETU Software Systems (P) Ltd.",
       "producer-url": "http://www.setusoftware.com/",
       "user-agent-string": "Mozilla/5.0 ( compatible; SETOOZBOT/0.30 ; http://www.setooz.com/bot.html ; agentname at setooz dot_com )",
-      "hash": "e064fa07c2756577ec7044cb563fc0b31c8d5ab4f21b41c314c20aac435703e2"
+      "hash": "79a07284febc716316ab0cf64d2e1c06c56eeb222676060ccfff08042f4dd534"
     },
     {
       "family-name": "spbot",
@@ -19999,10 +20039,10 @@
       "icon": "bot.png",
       "info-url": "/list-of-ua/bot-detail?bot\u003dSetoozbot",
       "name": "Setoozbot/1.0",
-      "producer": "SETU Software Systems",
+      "producer": "SETU Software Systems (P) Ltd.",
       "producer-url": "http://www.setusoftware.com/",
       "user-agent-string": "Setooz/Nutch-1.0 (http://www.setooz.com)",
-      "hash": "29f5b0525a2ae85458676a9e1de06210560f829875a9280fc40b3cc2c1e85ac3"
+      "hash": "f4500c7fb92d621af54c5a7fa3e8bc1ab84bce4b96345036ecb8949586a733fc"
     },
     {
       "family-name": "BacklinkCrawler",
@@ -20479,20 +20519,20 @@
       "icon": "bot.png",
       "info-url": "/list-of-ua/bot-detail?bot\u003dSetoozbot",
       "name": "SETOOZBOT/0.30",
-      "producer": "SETU Software Systems P. Ltd.",
+      "producer": "SETU Software Systems (P) Ltd.",
       "producer-url": "http://www.setusoftware.com/",
       "user-agent-string": "SETOOZBOT/5.0 ( compatible; SETOOZBOT/0.30 ; http://www.setooz.com/bot.html )",
-      "hash": "aff3bfec871df843aa9cc731440bdb52592438146b94c9d2f19929739694b386"
+      "hash": "9caff26f90b6d7a05398152944b6d1edb806354458e75e0cde6dabb0d64383ff"
     },
     {
       "family-name": "Setoozbot",
       "icon": "bot.png",
       "info-url": "/list-of-ua/bot-detail?bot\u003dSetoozbot",
       "name": "SETOOZBOT/5.0",
-      "producer": "SETU Software Systems P. Ltd.",
+      "producer": "SETU Software Systems (P) Ltd.",
       "producer-url": "http://www.setusoftware.com/",
       "user-agent-string": "SETOOZBOT/5.0 ( http://www.setooz.com/bot.html )",
-      "hash": "4c3f42526a48205801b0b73afc9808fe5dc8856f0e024c079315b78b1d8dab47"
+      "hash": "7257296626bd51033935596936fc58b0ad13638270337fd0fb42c278488cee05"
     },
     {
       "family-name": "Updownerbot",
@@ -23005,6 +23045,16 @@
       "hash": "1d6fb31f09591c23e438d2fa7678ac7f0b8a66b7b53e02c0dccca2efa01bce15"
     },
     {
+      "family-name": "CCBot",
+      "icon": "bot.png",
+      "info-url": "/list-of-ua/bot-detail?bot\u003dCCBot",
+      "name": "CCBot/2.0",
+      "producer": "CommonCrawl Foundation",
+      "producer-url": "http://www.commoncrawl.org/",
+      "user-agent-string": "CCBot/2.0",
+      "hash": "90a5a56b7e66bae5d67bb5face2e08f1f6eb9446f51324ec1d939681b891f22f"
+    },
+    {
       "family-name": "ProCogSEOBot",
       "icon": "bot.png",
       "info-url": "/list-of-ua/bot-detail?bot\u003dProCogSEOBot",
@@ -23463,6 +23513,136 @@
       "producer-url": "",
       "user-agent-string": "yacybot (freeworld/global; amd64 Linux 3.2.0-4-amd64; java 1.7.0_03; Etc/de) http://yacy.net/bot.html",
       "hash": "563b0c53af4a7b37119ec03e69e7a43092bbfd1b4fc8eb79c9bf857a30eaebf9"
+    },
+    {
+      "family-name": "SemrushBot",
+      "icon": "bot.png",
+      "info-url": "/list-of-ua/bot-detail?bot\u003dSemrushBot",
+      "name": "SemrushBot/0.96.4",
+      "producer": "SEOQuake Team",
+      "producer-url": "http://www.seoquaketeam.com/",
+      "user-agent-string": "Mozilla/5.0 (compatible; SemrushBot/0.96.4; +http://www.semrush.com/bot.html)",
+      "hash": "f63e9bf40895b7fa28508ea8e0fff722f2fc1d1fbb6f08a08ede2d1edd61de28"
+    },
+    {
+      "family-name": "yacybot",
+      "icon": "bot_yacybot.png",
+      "info-url": "/list-of-ua/bot-detail?bot\u003dyacybot",
+      "name": "yacybot",
+      "producer": "Michael Christen",
+      "producer-url": "",
+      "user-agent-string": "yacybot (freeworld/global; amd64 Windows NT (unknown) 6.2; java 1.7.0_05; Africa/en) http://yacy.net/bot.html",
+      "hash": "a42ba6f20552951aaff2de66f51a30ef71fd9d277aaec922a184e5b1957fb5b8"
+    },
+    {
+      "family-name": "yacybot",
+      "icon": "bot_yacybot.png",
+      "info-url": "/list-of-ua/bot-detail?bot\u003dyacybot",
+      "name": "yacybot",
+      "producer": "Michael Christen",
+      "producer-url": "",
+      "user-agent-string": "yacybot (freeworld/global; amd64 Windows 7 6.1; java 1.7.0_04; Asia/ja) http://yacy.net/bot.html",
+      "hash": "2cad6e6c36c24c4dd08b86beac1f787b2f057c4fb1651327bcbcead215923217"
+    },
+    {
+      "family-name": "yacybot",
+      "icon": "bot_yacybot.png",
+      "info-url": "/list-of-ua/bot-detail?bot\u003dyacybot",
+      "name": "yacybot",
+      "producer": "Michael Christen",
+      "producer-url": "",
+      "user-agent-string": "yacybot (freeworld/global; amd64 Windows Server 2008 R2 6.1; java 1.7.0_25; Europe/de) http://yacy.net/bot.html",
+      "hash": "e6a8c879a406669fe6d936f2d7d9f8feea3125c0a8439ae27189398bc89758ae"
+    },
+    {
+      "family-name": "ScreenerBot Crawler",
+      "icon": "bot.png",
+      "info-url": "/list-of-ua/bot-detail?bot\u003dScreenerBot Crawler",
+      "name": "ScreenerBot Crawler Beta 2.0",
+      "producer": "",
+      "producer-url": "",
+      "user-agent-string": "ScreenerBot Crawler Beta 2.0 (+http://www.ScreenerBot.com)",
+      "hash": "7d809f25c8cb918cc09eca2af9a8b8e61a0d9666e9d0b56a9496f2157add4136"
+    },
+    {
+      "family-name": "Semantifire",
+      "icon": "bot.png",
+      "info-url": "/list-of-ua/bot-detail?bot\u003dSemantifire",
+      "name": "Semantifire1/0.20",
+      "producer": "SETU Software Systems (P) Ltd.",
+      "producer-url": "http://www.setusoftware.com/",
+      "user-agent-string": "Semantifire1/0.20 ( http://www.setooz.com/oozbot.html ; agentname at setooz dot_com )",
+      "hash": "f60eea15e03abfb74758e9d573dc4f5c03fcae77dad30c65ceedaf5e0670eeed"
+    },
+    {
+      "family-name": "socialbm_bot",
+      "icon": "bot.png",
+      "info-url": "/list-of-ua/bot-detail?bot\u003dsocialbm_bot",
+      "name": "socialbm_bot/1.0",
+      "producer": "Martin Junker - social-bookmarking.net",
+      "producer-url": "http://www.social-bookmarking.net/",
+      "user-agent-string": "Mozilla/5.0 (compatible; socialbm_bot/1.0; +http://spider.socialbm.net)",
+      "hash": "dca339bde2a4bcf538b34d432e7bf26b70309427cf75aecf4414ab32d8e9de75"
+    },
+    {
+      "family-name": "rogerbot",
+      "icon": "bot.png",
+      "info-url": "/list-of-ua/bot-detail?bot\u003drogerbot",
+      "name": "rogerbot/1.0",
+      "producer": "SEOmoz, Inc.",
+      "producer-url": "http://moz.com/",
+      "user-agent-string": "rogerbot/1.0 (http://moz.com/help/pro/what-is-rogerbot-, rogerbot-crawler+shiny@moz.com)",
+      "hash": "8b8375c1a4b6a38f473a4d5a249fc1ed540f44f17fa8522c3f0ea5a5598f4cf0"
+    },
+    {
+      "family-name": "CCResearchBot",
+      "icon": "bot.png",
+      "info-url": "/list-of-ua/bot-detail?bot\u003dCCResearchBot",
+      "name": "CCResearchBot/1.0",
+      "producer": "CommonCrawl Foundation",
+      "producer-url": "http://www.commoncrawl.org/",
+      "user-agent-string": "CCResearchBot/1.0 commoncrawl.org/research//Nutch-1.7-SNAPSHOT",
+      "hash": "671a6b5359172ecbcbccede1a67204b02c9704c9a4b80ffad996161058df18de"
+    },
+    {
+      "family-name": "MJ12bot",
+      "icon": "bot_mj12bot.png",
+      "info-url": "/list-of-ua/bot-detail?bot\u003dMJ12bot",
+      "name": "MJ12bot/v1.4.4",
+      "producer": "Majestic-12",
+      "producer-url": "http://www.majestic12.co.uk/",
+      "user-agent-string": "Mozilla/5.0 (compatible; MJ12bot/v1.4.4; http://www.majestic12.co.uk/bot.php?+)",
+      "hash": "bd65c3bd118835b59bec283bd768c1a143d15db0e543a668721544238506c499"
+    },
+    {
+      "family-name": "yacybot",
+      "icon": "bot_yacybot.png",
+      "info-url": "/list-of-ua/bot-detail?bot\u003dyacybot",
+      "name": "yacybot",
+      "producer": "Michael Christen",
+      "producer-url": "",
+      "user-agent-string": "yacybot (freeworld/global; amd64 Linux 3.5.0-27-generic; java 1.7.0_25; Europe/en) http://yacy.net/bot.html",
+      "hash": "f23f0fb216faa1fc46c399513b26a0d1b37afc3f1c5570522ad683179b6b4fef"
+    },
+    {
+      "family-name": "SemrushBot",
+      "icon": "bot.png",
+      "info-url": "/list-of-ua/bot-detail?bot\u003dSemrushBot",
+      "name": "SemrushBot/0.97",
+      "producer": "SEOQuake Team",
+      "producer-url": "http://www.seoquaketeam.com/",
+      "user-agent-string": "Mozilla/5.0 (compatible; SemrushBot/0.97; +http://www.semrush.com/bot.html)",
+      "hash": "fb7b95b83b870dee2f4224a8c120bdcd13056fb5cb5a4199bc2662972622df00"
+    },
+    {
+      "family-name": "spbot",
+      "icon": "bot_spbot.png",
+      "info-url": "/list-of-ua/bot-detail?bot\u003dspbot",
+      "name": "spbot/4.0a",
+      "producer": "Axandra GmbH",
+      "producer-url": "http://www.axandra.com/",
+      "user-agent-string": "Mozilla/5.0 (compatible; spbot/4.0a; +http://www.seoprofiler.com/bot )",
+      "hash": "d69628500ba3489568f206ea505cb2926c80cdd25bce40b1d7a912e10272baa8"
     }
   ]
 }

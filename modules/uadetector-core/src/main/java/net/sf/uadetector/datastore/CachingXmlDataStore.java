@@ -47,9 +47,8 @@ public final class CachingXmlDataStore extends AbstractRefreshableDataStore {
 	 * Internal data store which will be used to load previously saved <em>UAS data</em> from a cache file.
 	 */
 	private static class CacheFileDataStore extends AbstractDataStore {
-		protected CacheFileDataStore(final Data data, final DataReader reader, final URL dataUrl, final URL versionUrl,
-				final Charset charset) {
-			super(data, reader, dataUrl, versionUrl, charset);
+		protected CacheFileDataStore(final Data data, final DataReader reader, final URL dataUrl, final Charset charset) {
+			super(data, reader, dataUrl, dataUrl, charset);
 		}
 	}
 
@@ -170,7 +169,7 @@ public final class CachingXmlDataStore extends AbstractRefreshableDataStore {
 		Check.notNull(versionUrl, "versionUrl");
 
 		final DataReader reader = new XmlDataReader();
-		final DataStore fallbackDataStore = readCacheFileAsFallback(reader, cacheFile, dataUrl, versionUrl, charset, fallback);
+		final DataStore fallbackDataStore = readCacheFileAsFallback(reader, cacheFile, charset, fallback);
 		return new CachingXmlDataStore(reader, dataUrl, versionUrl, charset, cacheFile, fallbackDataStore);
 	}
 
@@ -265,8 +264,6 @@ public final class CachingXmlDataStore extends AbstractRefreshableDataStore {
 	 *            data reader to read the given {@code dataUrl}
 	 * @param cacheFile
 	 *            file with cached <em>UAS data</em> in XML format or empty file
-	 * @param dataUrl
-	 *            URL to <em>UAS data</em>
 	 * @param versionUrl
 	 *            URL to version information about the given <em>UAS data</em>
 	 * @param charset
@@ -276,12 +273,12 @@ public final class CachingXmlDataStore extends AbstractRefreshableDataStore {
 	 * @return a fallback data store
 	 */
 	private static DataStore readCacheFileAsFallback(@Nonnull final DataReader reader, @Nonnull final File cacheFile,
-			@Nonnull final URL dataUrl, @Nonnull final URL versionUrl, @Nonnull final Charset charset, @Nonnull final DataStore fallback) {
+			@Nonnull final Charset charset, @Nonnull final DataStore fallback) {
 		DataStore fallbackDataStore;
 		if (!isEmpty(cacheFile, charset)) {
 			final URL cacheFileUrl = UrlUtil.toUrl(cacheFile);
 			try {
-				fallbackDataStore = new CacheFileDataStore(reader.read(cacheFileUrl, charset), reader, cacheFileUrl, versionUrl, charset);
+				fallbackDataStore = new CacheFileDataStore(reader.read(cacheFileUrl, charset), reader, cacheFileUrl, charset);
 				LOG.debug(MSG_CACHE_FILE_IS_FILLED);
 			} catch (final RuntimeException e) {
 				fallbackDataStore = fallback;

@@ -3272,7 +3272,7 @@
     {
       "regex": {
         "flags": "si",
-        "pattern": "Mozilla.*AppleWebKit.*Safari.*Roccat\\/([0-9\\.]+).*R"
+        "pattern": "Mozilla.*AppleWebKit.*Roccat\\/([0-9\\.]+).*R"
       },
       "hash": "a510de4f7acd51aa28ed177721dfe67692d5f4e296f8d39ca72c6d978d5e1900"
     },

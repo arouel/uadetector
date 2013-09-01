@@ -17034,7 +17034,7 @@
 			<browser_reg>
 				<order>71</order>
 				<browser_id>477</browser_id>
-				<regstring>/Mozilla.*AppleWebKit.*Safari.*Roccat\/([0-9\.]+).*R/si</regstring>
+				<regstring>/Mozilla.*AppleWebKit.*Roccat\/([0-9\.]+).*R/si</regstring>
 			</browser_reg>
 			<browser_reg>
 				<order>72</order>

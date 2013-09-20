@@ -50,7 +50,7 @@
 
 import java.io.IOException;
 import javax.servlet.*;
-import net.sf.uadetector.UADetectorServiceFactory;
+import net.sf.uadetector.service.UADetectorServiceFactory;
 import net.sf.uadetector.UserAgent;
 import net.sf.uadetector.UserAgentStringParser;
 

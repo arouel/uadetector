@@ -3,7 +3,7 @@
 <uasdata>
 	<description>
 		<label>Data (format xml) for UASparser - http://user-agent-string.info/download/UASparser</label>
-		<version>20130830-01</version>
+		<version>20130927-01</version>
 		<checksum type="MD5">http://user-agent-string.info/rpc/get_data.php?format=xml&amp;md5=y</checksum>
 		<checksum type="SHA1">http://user-agent-string.info/rpc/get_data.php?format=xml&amp;sha1=y</checksum>
 	</description>
@@ -1200,6 +1200,16 @@
 				<bot_info_url>/list-of-ua/bot-detail?bot=BLEXBot</bot_info_url>
 			</robot>
 			<robot>
+				<id>10823</id>
+				<useragent><![CDATA[Mozilla/5.0 (compatible; BLEXBot/1.0; +http://webmeup-crawler.com/)]]></useragent>
+				<family>BLEXBot</family>
+				<name>BLEXBot/1.0</name>
+				<company><![CDATA[WebMeUp]]></company>
+				<url_company><![CDATA[http://webmeup.com/]]></url_company>
+				<icon>bot.png</icon>
+				<bot_info_url>/list-of-ua/bot-detail?bot=BLEXBot</bot_info_url>
+			</robot>
+			<robot>
 				<id>4519</id>
 				<useragent><![CDATA[Mozilla/5.0 (compatible; BlinkaCrawler/1.0; +http://www.blinka.jp/crawler/)]]></useragent>
 				<family>BlinkaCrawler</family>
@@ -1708,6 +1718,16 @@
 				<url_company><![CDATA[http://www.cligoo.de/]]></url_company>
 				<icon>bot.png</icon>
 				<bot_info_url>/list-of-ua/bot-detail?bot=CligooRobot</bot_info_url>
+			</robot>
+			<robot>
+				<id>10923</id>
+				<useragent><![CDATA[Cliqz Bot (+http://www.cliqz.com)]]></useragent>
+				<family>Cliqz Bot</family>
+				<name>Cliqz Bot</name>
+				<company><![CDATA[10betterpages GmbH]]></company>
+				<url_company><![CDATA[http://www.10betterpages.com/]]></url_company>
+				<icon>bot.png</icon>
+				<bot_info_url>/list-of-ua/bot-detail?bot=Cliqz Bot</bot_info_url>
 			</robot>
 			<robot>
 				<id>10035</id>
@@ -4550,6 +4570,16 @@
 				<bot_info_url>/list-of-ua/bot-detail?bot=KRetrieve</bot_info_url>
 			</robot>
 			<robot>
+				<id>10990</id>
+				<useragent><![CDATA[KrOWLer/0.0.1, matentzn at cs dot man dot ac dot uk]]></useragent>
+				<family>KrOWLer</family>
+				<name>KrOWLer/0.0.1</name>
+				<company><![CDATA[Nico Matentzoglu]]></company>
+				<url_company><![CDATA[http://nico.matentzoglu.net/]]></url_company>
+				<icon>bot.png</icon>
+				<bot_info_url>/list-of-ua/bot-detail?bot=KrOWLer</bot_info_url>
+			</robot>
+			<robot>
 				<id>396</id>
 				<useragent><![CDATA[Krugle/Krugle,Nutch/0.8+ (Krugle web crawler; http://www.krugle.com/crawler/info.html; webcrawler@krugle.com)]]></useragent>
 				<family>Krugle</family>
@@ -5354,6 +5384,16 @@
 				<useragent><![CDATA[Mozilla/5.0 (compatible; MojeekBot/0.2; http://www.mojeek.com/bot.html)]]></useragent>
 				<family>MojeekBot</family>
 				<name>MojeekBot/0.2</name>
+				<company><![CDATA[Mojeek Ltd.]]></company>
+				<url_company><![CDATA[http://www.mojeek.com/]]></url_company>
+				<icon>bot_MojeekBot.png</icon>
+				<bot_info_url>/list-of-ua/bot-detail?bot=MojeekBot</bot_info_url>
+			</robot>
+			<robot>
+				<id>10847</id>
+				<useragent><![CDATA[Mozilla/5.0 (compatible; MojeekBot/0.5; http://www.mojeek.com/bot.html)]]></useragent>
+				<family>MojeekBot</family>
+				<name>MojeekBot/0.5</name>
 				<company><![CDATA[Mojeek Ltd.]]></company>
 				<url_company><![CDATA[http://www.mojeek.com/]]></url_company>
 				<icon>bot_MojeekBot.png</icon>
@@ -10710,6 +10750,16 @@
 				<bot_info_url>/list-of-ua/bot-detail?bot=yacybot</bot_info_url>
 			</robot>
 			<robot>
+				<id>10913</id>
+				<useragent><![CDATA[yacybot (freeworld/global; amd64 Linux 3.8.0-19-generic; java 1.7.0_25; Europe/en) http://yacy.net/bot.html]]></useragent>
+				<family>yacybot</family>
+				<name>yacybot</name>
+				<company><![CDATA[Michael Christen]]></company>
+				<url_company><![CDATA[]]></url_company>
+				<icon>bot_yacybot.png</icon>
+				<bot_info_url>/list-of-ua/bot-detail?bot=yacybot</bot_info_url>
+			</robot>
+			<robot>
 				<id>10498</id>
 				<useragent><![CDATA[yacybot (freeworld/global; amd64 Windows Server 2008 R2 6.1; java 1.7.0_25; Europe/de) http://yacy.net/bot.html]]></useragent>
 				<family>yacybot</family>
@@ -10762,6 +10812,16 @@
 			<robot>
 				<id>10308</id>
 				<useragent><![CDATA[yacybot (freeworld/global; amd64 Windows 7 6.1; java 1.7.0_25; Europe/de) http://yacy.net/bot.html]]></useragent>
+				<family>yacybot</family>
+				<name>yacybot</name>
+				<company><![CDATA[Michael Christen]]></company>
+				<url_company><![CDATA[]]></url_company>
+				<icon>bot_yacybot.png</icon>
+				<bot_info_url>/list-of-ua/bot-detail?bot=yacybot</bot_info_url>
+			</robot>
+			<robot>
+				<id>10822</id>
+				<useragent><![CDATA[yacybot (freeworld/global; amd64 Windows 8 6.2; java 1.7.0_25; Europe/de) http://yacy.net/bot.html]]></useragent>
 				<family>yacybot</family>
 				<name>yacybot</name>
 				<company><![CDATA[Michael Christen]]></company>
@@ -12440,6 +12500,16 @@
 				<url_company><![CDATA[http://www.google.com/]]></url_company>
 				<icon>android.png</icon>
 				<os_info_url>/list-of-ua/os-detail?os=Android 4.3 Jelly Bean</os_info_url>
+			</os>
+			<os>
+				<id>132</id>
+				<family>OS X</family>
+				<name>OS X 10.9 Mavericks</name>
+				<url><![CDATA[http://www.apple.com/osx/]]></url>
+				<company><![CDATA[Apple Computer, Inc.]]></company>
+				<url_company><![CDATA[http://www.apple.com/]]></url_company>
+				<icon>macosx.png</icon>
+				<os_info_url>/list-of-ua/os-detail?os=OS X 10.9 Mavericks</os_info_url>
 			</os>
 		</operating_systems>
 		<browsers>
@@ -18409,7 +18479,7 @@
 			<browser_reg>
 				<order>346</order>
 				<browser_id>279</browser_id>
-				<regstring>/mozilla.*applewebkit.*rekonq/si</regstring>
+				<regstring>/mozilla.*applewebkit.*rekonq[\/]{0,1}([0-9a-z\.]+){0,1}.*/si</regstring>
 			</browser_reg>
 			<browser_reg>
 				<order>347</order>
@@ -19765,846 +19835,856 @@
 			</operating_system_reg>
 			<operating_system_reg>
 				<order>11</order>
+				<os_id>129</os_id>
+				<regstring>/iPad.*OS 7_[0-9_]+/si</regstring>
+			</operating_system_reg>
+			<operating_system_reg>
+				<order>12</order>
 				<os_id>65</os_id>
 				<regstring>/iPhone OS ([0-9_]+) like Mac OS X/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>12</order>
+				<order>13</order>
 				<os_id>29</os_id>
 				<regstring>/Solaris/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>13</order>
+				<order>14</order>
 				<os_id>65</os_id>
 				<regstring>/iPhone OS 2_0/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>14</order>
+				<order>15</order>
 				<os_id>34</os_id>
 				<regstring>/Series60/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>15</order>
+				<order>16</order>
 				<os_id>65</os_id>
 				<regstring>/iPhone.*like Mac OS X/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>16</order>
+				<order>17</order>
 				<os_id>96</os_id>
 				<regstring>/^HTC_HD2.*Opera.*windows/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>17</order>
+				<order>18</order>
 				<os_id>123</os_id>
 				<regstring>/^Mozilla.*MSIE.*Windows NT 6.1.* Xbox/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>18</order>
+				<order>19</order>
 				<os_id>120</os_id>
 				<regstring>/Android 4\.1/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>19</order>
+				<order>20</order>
 				<os_id>124</os_id>
 				<regstring>/Android 4\.2/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>20</order>
+				<order>21</order>
 				<os_id>131</os_id>
 				<regstring>/Android 4\.3/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>21</order>
+				<order>22</order>
 				<os_id>50</os_id>
 				<regstring>/BlackBerry/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>22</order>
+				<order>23</order>
 				<os_id>70</os_id>
 				<regstring>/BeOS.*Haiku BePC/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>23</order>
+				<order>24</order>
 				<os_id>96</os_id>
 				<regstring>/^Mozilla.*MSIE.*Windows.* XBLWP7/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>24</order>
+				<order>25</order>
 				<os_id>110</os_id>
 				<regstring>/Android 1.0/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>25</order>
+				<order>26</order>
 				<os_id>103</os_id>
 				<regstring>/Android 1.5/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>26</order>
+				<order>27</order>
 				<os_id>104</os_id>
 				<regstring>/Android 1.6/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>27</order>
+				<order>28</order>
 				<os_id>105</os_id>
 				<regstring>/Android 2.0|Android 2.1/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>28</order>
+				<order>29</order>
 				<os_id>106</os_id>
 				<regstring>/Android 2.2/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>29</order>
+				<order>30</order>
 				<os_id>107</os_id>
 				<regstring>/Android 2.3|Android 2.4/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>30</order>
+				<order>31</order>
 				<os_id>108</os_id>
 				<regstring>/Android 3./si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>31</order>
+				<order>32</order>
 				<os_id>104</os_id>
 				<regstring>/Android Donut/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>32</order>
+				<order>33</order>
 				<os_id>105</os_id>
 				<regstring>/Android Eclair/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>33</order>
+				<order>34</order>
 				<os_id>111</os_id>
 				<regstring>/Android 4./si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>34</order>
+				<order>35</order>
 				<os_id>113</os_id>
 				<regstring>/^Mozilla.*Tizen\/1.0/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>35</order>
+				<order>36</order>
 				<os_id>111</os_id>
 				<regstring>/Android-4./si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>36</order>
+				<order>37</order>
 				<os_id>108</os_id>
 				<regstring>/Android\/3/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>37</order>
+				<order>38</order>
 				<os_id>88</os_id>
 				<regstring>/Windows Mobile/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>38</order>
+				<order>39</order>
 				<os_id>1</os_id>
 				<regstring>/windows nt 5\.1/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>39</order>
+				<order>40</order>
 				<os_id>4</os_id>
 				<regstring>/.*windows 95.*/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>40</order>
+				<order>41</order>
 				<os_id>2</os_id>
 				<regstring>/windows nt 5\.0/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>41</order>
+				<order>42</order>
 				<os_id>3</os_id>
 				<regstring>/.*windows nt 5\.2( |;).*/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>42</order>
+				<order>43</order>
 				<os_id>34</os_id>
 				<regstring>/Series80\/2\.0/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>43</order>
+				<order>44</order>
 				<os_id>4</os_id>
 				<regstring>/.*win95.*/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>44</order>
+				<order>45</order>
 				<os_id>5</os_id>
 				<regstring>/windows 98/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>45</order>
+				<order>46</order>
 				<os_id>6</os_id>
 				<regstring>/.*win16( |;).*/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>46</order>
+				<order>47</order>
 				<os_id>5</os_id>
 				<regstring>/.*win98( |;).*/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>47</order>
+				<order>48</order>
 				<os_id>5</os_id>
 				<regstring>/.*windows 4\.10( |;).*/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>48</order>
+				<order>49</order>
 				<os_id>7</os_id>
 				<regstring>/windows ce|PocketPC/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>49</order>
+				<order>50</order>
 				<os_id>8</os_id>
 				<regstring>/.*windows me( |;).*/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>50</order>
+				<order>51</order>
 				<os_id>9</os_id>
 				<regstring>/.*windows nt 6\.0( |;).*/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>51</order>
+				<order>52</order>
 				<os_id>10</os_id>
 				<regstring>/j2me/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>52</order>
+				<order>53</order>
 				<os_id>11</os_id>
 				<regstring>/centos/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>53</order>
+				<order>54</order>
 				<os_id>12</os_id>
 				<regstring>/ubuntu/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>54</order>
+				<order>55</order>
 				<os_id>13</os_id>
 				<regstring>/linux.*debian/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>55</order>
+				<order>56</order>
 				<os_id>14</os_id>
 				<regstring>/linux.*fedora/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>56</order>
+				<order>57</order>
 				<os_id>15</os_id>
 				<regstring>/linux.*gentoo/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>57</order>
+				<order>58</order>
 				<os_id>16</os_id>
 				<regstring>/linux.*linspire/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>58</order>
+				<order>59</order>
 				<os_id>17</os_id>
 				<regstring>/linux.*mandriva/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>59</order>
+				<order>60</order>
 				<os_id>17</os_id>
 				<regstring>/linux.*mdk/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>60</order>
+				<order>61</order>
 				<os_id>18</os_id>
 				<regstring>/linux.*redhat/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>61</order>
+				<order>62</order>
 				<os_id>20</os_id>
 				<regstring>/linux.*slackware/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>62</order>
+				<order>63</order>
 				<os_id>21</os_id>
 				<regstring>/linux.*kanotix/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>63</order>
+				<order>64</order>
 				<os_id>22</os_id>
 				<regstring>/linux.*suse/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>64</order>
+				<order>65</order>
 				<os_id>23</os_id>
 				<regstring>/linux.*knoppix/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>65</order>
+				<order>66</order>
 				<os_id>24</os_id>
 				<regstring>/.*netbsd.*/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>66</order>
+				<order>67</order>
 				<os_id>25</os_id>
 				<regstring>/.*freebsd.*/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>67</order>
+				<order>68</order>
 				<os_id>26</os_id>
 				<regstring>/.*openbsd.*/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>68</order>
+				<order>69</order>
 				<os_id>85</os_id>
 				<regstring>/Mac OS X (10_6|10\.6)/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>69</order>
+				<order>70</order>
 				<os_id>29</os_id>
 				<regstring>/sunos/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>70</order>
+				<order>71</order>
 				<os_id>30</os_id>
 				<regstring>/amiga/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>71</order>
+				<order>72</order>
 				<os_id>31</os_id>
 				<regstring>/irix/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>72</order>
+				<order>73</order>
 				<os_id>32</os_id>
 				<regstring>/open.*vms/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>73</order>
+				<order>74</order>
 				<os_id>33</os_id>
 				<regstring>/beos/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>74</order>
+				<order>75</order>
 				<os_id>37</os_id>
 				<regstring>/webtv/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>75</order>
+				<order>76</order>
 				<os_id>39</os_id>
 				<regstring>/os\/2.*warp/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>76</order>
+				<order>77</order>
 				<os_id>40</os_id>
 				<regstring>/RISC.OS/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>77</order>
+				<order>78</order>
 				<os_id>41</os_id>
 				<regstring>/hp-ux/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>78</order>
+				<order>79</order>
 				<os_id>42</os_id>
 				<regstring>/Nintendo.Wii/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>79</order>
+				<order>80</order>
 				<os_id>46</os_id>
 				<regstring>/winnt/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>80</order>
+				<order>81</order>
 				<os_id>34</os_id>
 				<regstring>/SonyEricssonP900/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>81</order>
+				<order>82</order>
 				<os_id>49</os_id>
 				<regstring>/plan 9/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>82</order>
+				<order>83</order>
 				<os_id>10</os_id>
 				<regstring>/NetFront.*Profile\/MIDP/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>83</order>
+				<order>84</order>
 				<os_id>34</os_id>
 				<regstring>/Series90.*Nokia7710/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>84</order>
+				<order>85</order>
 				<os_id>20</os_id>
 				<regstring>/linux.*\(Dropline GNOME\).*/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>85</order>
+				<order>86</order>
 				<os_id>46</os_id>
 				<regstring>/WinNT4\.0/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>86</order>
+				<order>87</order>
 				<os_id>18</os_id>
 				<regstring>/linux.*red hat/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>87</order>
+				<order>88</order>
 				<os_id>52</os_id>
 				<regstring>/QNX x86pc/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>88</order>
+				<order>89</order>
 				<os_id>18</os_id>
 				<regstring>/Red Hat modified/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>89</order>
+				<order>90</order>
 				<os_id>46</os_id>
 				<regstring>/Windows\-NT/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>90</order>
+				<order>91</order>
 				<os_id>65</os_id>
 				<regstring>/iPad.*OS.*like Mac OS X/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>91</order>
+				<order>92</order>
 				<os_id>2</os_id>
 				<regstring>/CYGWIN_NT\-5.0/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>92</order>
+				<order>93</order>
 				<os_id>34</os_id>
 				<regstring>/^DoCoMo.*F900i/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>93</order>
+				<order>94</order>
 				<os_id>55</os_id>
 				<regstring>/Vector Linux/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>94</order>
+				<order>95</order>
 				<os_id>40</os_id>
 				<regstring>/riscos/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>95</order>
+				<order>96</order>
 				<os_id>56</os_id>
 				<regstring>/Linux Mint/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>96</order>
+				<order>97</order>
 				<os_id>57</os_id>
 				<regstring>/SCO_SV/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>97</order>
+				<order>98</order>
 				<os_id>22</os_id>
 				<regstring>/suse\-linux/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>98</order>
+				<order>99</order>
 				<os_id>58</os_id>
 				<regstring>/Arch Linux ([0-9a-zA-Z\.\-]+)/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>99</order>
+				<order>100</order>
 				<os_id>59</os_id>
 				<regstring>/SkyOS/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>100</order>
+				<order>101</order>
 				<os_id>6</os_id>
 				<regstring>/.*windows 3\.1.*/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>101</order>
+				<order>102</order>
 				<os_id>62</os_id>
 				<regstring>/Android ([0-9\.]+)/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>102</order>
+				<order>103</order>
 				<os_id>64</os_id>
 				<regstring>/windows nt 6\.1/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>103</order>
+				<order>104</order>
 				<os_id>2</os_id>
 				<regstring>/.*windows 2000( |;).*/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>104</order>
+				<order>105</order>
 				<os_id>84</os_id>
 				<regstring>/Mac OS X (10_5|10\.5)/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>105</order>
+				<order>106</order>
 				<os_id>69</os_id>
 				<regstring>/webOS\/.*AppleWebKit/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>106</order>
+				<order>107</order>
 				<os_id>9</os_id>
 				<regstring>/Windows NT 6\.0/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>107</order>
+				<order>108</order>
 				<os_id>83</os_id>
 				<regstring>/Mac OS X (10_4|10\.4)/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>108</order>
+				<order>109</order>
 				<os_id>72</os_id>
 				<regstring>/Danger hiptop [0-9\.]+/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>109</order>
+				<order>110</order>
 				<os_id>1</os_id>
 				<regstring>/Windows_XP\/5.1/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>110</order>
+				<order>111</order>
 				<os_id>34</os_id>
 				<regstring>/SymbianOS/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>111</order>
+				<order>112</order>
 				<os_id>64</os_id>
 				<regstring>/.*windows 7.*/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>112</order>
+				<order>113</order>
 				<os_id>65</os_id>
 				<regstring>/iPhone OS [0-9\.]+/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>113</order>
+				<order>114</order>
 				<os_id>75</os_id>
 				<regstring>/Mozilla.*Linux.*Maemo/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>114</order>
+				<order>115</order>
 				<os_id>34</os_id>
 				<regstring>/S60; SymbOS/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>115</order>
+				<order>116</order>
 				<os_id>92</os_id>
 				<regstring>/PCLinuxOS\/([0-9a-z\.\-]+)/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>116</order>
+				<order>117</order>
 				<os_id>93</os_id>
 				<regstring>/^Mozilla\/.*Linux.*Jolicloud/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>117</order>
+				<order>118</order>
 				<os_id>94</os_id>
 				<regstring>/PLAYSTATION 3/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>118</order>
+				<order>119</order>
 				<os_id>97</os_id>
 				<regstring>/^Mozilla.*CrOS.*Chrome/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>119</order>
+				<order>120</order>
 				<os_id>62</os_id>
 				<regstring>/Android.*Linux.*Opera Mobi/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>120</order>
+				<order>121</order>
 				<os_id>96</os_id>
 				<regstring>/Windows Phone OS 7/</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>121</order>
+				<order>122</order>
 				<os_id>100</os_id>
 				<regstring>/windows nt 6\.2/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>122</order>
+				<order>123</order>
 				<os_id>101</os_id>
 				<regstring>/RIM Tablet OS 1[0-9\.]+/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>123</order>
+				<order>124</order>
 				<os_id>62</os_id>
 				<regstring>/Android/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>124</order>
+				<order>125</order>
 				<os_id>102</os_id>
 				<regstring>/Bada\/[0-9\.]+/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>125</order>
+				<order>126</order>
 				<os_id>112</os_id>
 				<regstring>/Mac OS X (10_7|10\.7)/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>126</order>
+				<order>127</order>
 				<os_id>69</os_id>
 				<regstring>/Linux.*hpwOS/</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>127</order>
+				<order>128</order>
 				<os_id>115</os_id>
 				<regstring>/^Mozilla.*Charon.*Inferno/</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>128</order>
+				<order>129</order>
 				<os_id>116</os_id>
 				<regstring>/Mac OS X (10_8|10\.8)/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>129</order>
+				<order>130</order>
 				<os_id>9</os_id>
 				<regstring>/.*Windows\-Vista/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>130</order>
+				<order>131</order>
 				<os_id>119</os_id>
 				<regstring>/RIM Tablet OS 2[0-9\.]+/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>131</order>
+				<order>132</order>
 				<os_id>122</os_id>
 				<regstring>/PlayStation Vita/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>132</order>
+				<order>133</order>
 				<os_id>123</os_id>
 				<regstring>/^XBMC.*Xbox.*www\.xbmc\.org/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>133</order>
+				<order>134</order>
 				<os_id>125</os_id>
 				<regstring>/^Mozilla\/5\.0 \(Mobile; rv:[0-9\.]+\) Gecko\/[0-9\.]+ Firefox\/[0-9\.]+$/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>134</order>
+				<order>135</order>
 				<os_id>128</os_id>
 				<regstring>/Linux.*Mageia/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>135</order>
+				<order>136</order>
 				<os_id>130</os_id>
 				<regstring>/Windows NT 6\.3/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>136</order>
+				<order>137</order>
+				<os_id>132</os_id>
+				<regstring>/Mac OS X (10_9|10\.9)/si</regstring>
+			</operating_system_reg>
+			<operating_system_reg>
+				<order>138</order>
 				<os_id>86</os_id>
 				<regstring>/Mac OS X/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>137</order>
+				<order>139</order>
 				<os_id>19</os_id>
 				<regstring>/linux/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>138</order>
+				<order>140</order>
 				<os_id>15</os_id>
 				<regstring>/Gentoo i686/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>139</order>
+				<order>141</order>
 				<os_id>22</os_id>
 				<regstring>/Konqueror.*SUSE/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>140</order>
+				<order>142</order>
 				<os_id>14</os_id>
 				<regstring>/Konqueror.*Fedora/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>141</order>
+				<order>143</order>
 				<os_id>10</os_id>
 				<regstring>/Obigo.*MIDP/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>142</order>
+				<order>144</order>
 				<os_id>10</os_id>
 				<regstring>/Teleca.*MIDP/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>143</order>
+				<order>145</order>
 				<os_id>2</os_id>
 				<regstring>/Windows 2000/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>144</order>
+				<order>146</order>
 				<os_id>46</os_id>
 				<regstring>/Windows NT 4/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>145</order>
+				<order>147</order>
 				<os_id>34</os_id>
 				<regstring>/symbian/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>146</order>
+				<order>148</order>
 				<os_id>87</os_id>
 				<regstring>/os\/2/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>147</order>
+				<order>149</order>
 				<os_id>1</os_id>
 				<regstring>/.*windows XP.*/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>148</order>
+				<order>150</order>
 				<os_id>61</os_id>
 				<regstring>/.*dragonfly.*/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>149</order>
+				<order>151</order>
 				<os_id>8</os_id>
 				<regstring>/Windows ME/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>150</order>
+				<order>152</order>
 				<os_id>127</os_id>
 				<regstring>/^Mozilla.*Windows Phone 8.0/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>151</order>
+				<order>153</order>
 				<os_id>46</os_id>
 				<regstring>/NT4\.0/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>152</order>
+				<order>154</order>
 				<os_id>94</os_id>
 				<regstring>/PlayStation Portable/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>153</order>
+				<order>155</order>
 				<os_id>43</os_id>
 				<regstring>/windows/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>154</order>
+				<order>156</order>
 				<os_id>44</os_id>
 				<regstring>/mac_powerpc/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>155</order>
+				<order>157</order>
 				<os_id>44</os_id>
 				<regstring>/Macintosh/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>156</order>
+				<order>158</order>
 				<os_id>45</os_id>
 				<regstring>/aix/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>157</order>
+				<order>159</order>
 				<os_id>43</os_id>
 				<regstring>/Win32/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>158</order>
+				<order>160</order>
 				<os_id>47</os_id>
 				<regstring>/java\/[0-9a-z\.]+/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>159</order>
+				<order>161</order>
 				<os_id>74</os_id>
 				<regstring>/Syllable/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>160</order>
+				<order>162</order>
 				<os_id>44</os_id>
 				<regstring>/powerpc\-apple/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>161</order>
+				<order>163</order>
 				<os_id>95</os_id>
 				<regstring>/AROS/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>162</order>
+				<order>164</order>
 				<os_id>47</os_id>
 				<regstring>/java[0-9a-z\.]+/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>163</order>
+				<order>165</order>
 				<os_id>34</os_id>
 				<regstring>/Series 60/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>164</order>
+				<order>166</order>
 				<os_id>44</os_id>
 				<regstring>/os=Mac/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>165</order>
+				<order>167</order>
 				<os_id>44</os_id>
 				<regstring>/SO=MAC10,6/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>166</order>
+				<order>168</order>
 				<os_id>44</os_id>
 				<regstring>/so=Mac 10.5.8/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>167</order>
+				<order>169</order>
 				<os_id>91</os_id>
 				<regstring>/Minix 3/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>168</order>
+				<order>170</order>
 				<os_id>98</os_id>
 				<regstring>/Nintendo DS/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>169</order>
+				<order>171</order>
 				<os_id>62</os_id>
 				<regstring>/^Opera.*Android/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>170</order>
+				<order>172</order>
 				<os_id>34</os_id>
 				<regstring>/NokiaN97/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>171</order>
+				<order>173</order>
 				<os_id>34</os_id>
 				<regstring>/Nokia.*XpressMusic/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>172</order>
+				<order>174</order>
 				<os_id>34</os_id>
 				<regstring>/NokiaE66/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>173</order>
+				<order>175</order>
 				<os_id>34</os_id>
 				<regstring>/Nokia6700/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>174</order>
+				<order>176</order>
 				<os_id>99</os_id>
 				<regstring>/\(GNU;/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>175</order>
+				<order>177</order>
 				<os_id>44</os_id>
 				<regstring>/macos/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>176</order>
+				<order>178</order>
 				<os_id>90</os_id>
 				<regstring>/Darwin 10\.3/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>177</order>
+				<order>179</order>
 				<os_id>65</os_id>
 				<regstring>/iPhone/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>178</order>
+				<order>180</order>
 				<os_id>19</os_id>
 				<regstring>/Unix/si</regstring>
 			</operating_system_reg>
 			<operating_system_reg>
-				<order>179</order>
+				<order>181</order>
 				<os_id>44</os_id>
 				<regstring>/Darwin/si</regstring>
 			</operating_system_reg>

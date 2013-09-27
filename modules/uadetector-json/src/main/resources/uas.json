@@ -1,6 +1,6 @@
 {
   "format": "1.0",
-  "version": "20130830-01",
+  "version": "20130927-01",
   "operating-system-patterns": [
     {
       "regex": {
@@ -71,6 +71,13 @@
         "pattern": "iPhone OS 7_[0-9_]+"
       },
       "hash": "6b1447dae4328c7fb90024779cc4252581147aff15fbbff599de8d1c0a412a68"
+    },
+    {
+      "regex": {
+        "flags": "si",
+        "pattern": "iPad.*OS 7_[0-9_]+"
+      },
+      "hash": "c725429356658e88c8520f70e32f9a89a01cd93ab56bd825cdcf695a955e6800"
     },
     {
       "regex": {
@@ -946,6 +953,13 @@
         "pattern": "Windows NT 6\\.3"
       },
       "hash": "bffc0dbeaca021de82db8b60ad71b122516cfb31f53261e49fed72de4a02d623"
+    },
+    {
+      "regex": {
+        "flags": "si",
+        "pattern": "Mac OS X (10_9|10\\.9)"
+      },
+      "hash": "f60a2afd94bc4bee8bf278c876e12b3cd1b11a81448955a59bf801e2fa1b312a"
     },
     {
       "regex": {
@@ -2698,12 +2712,13 @@
       "info-url": "/list-of-ua/os-detail?os\u003diOS 7",
       "name": "iOS 7",
       "operating-system-pattern-hashs": [
-        "6b1447dae4328c7fb90024779cc4252581147aff15fbbff599de8d1c0a412a68"
+        "6b1447dae4328c7fb90024779cc4252581147aff15fbbff599de8d1c0a412a68",
+        "c725429356658e88c8520f70e32f9a89a01cd93ab56bd825cdcf695a955e6800"
       ],
       "producer": "Apple Inc.",
       "producer-url": "http://www.apple.com/",
       "url": "http://en.wikipedia.org/wiki/IOS_7",
-      "hash": "6b0075b2c98521578beb4e5c2182091e796a2dba176a390b0b576288ea639ce1"
+      "hash": "2cce02f7ace2a3da00eef637b65de42a94e2dcc5245e78753116f91dd08135cd"
     },
     {
       "family": "Windows",
@@ -2730,6 +2745,19 @@
       "producer-url": "http://www.google.com/",
       "url": "http://en.wikipedia.org/wiki/Android_%28operating_system%29",
       "hash": "5a4e96f11e1bddb49e96c0ad88cea2e07f56fb5776a5fa3eb0bb66d8cf06de73"
+    },
+    {
+      "family": "OS X",
+      "icon": "macosx.png",
+      "info-url": "/list-of-ua/os-detail?os\u003dOS X 10.9 Mavericks",
+      "name": "OS X 10.9 Mavericks",
+      "operating-system-pattern-hashs": [
+        "f60a2afd94bc4bee8bf278c876e12b3cd1b11a81448955a59bf801e2fa1b312a"
+      ],
+      "producer": "Apple Computer, Inc.",
+      "producer-url": "http://www.apple.com/",
+      "url": "http://www.apple.com/osx/",
+      "hash": "17def05b8c99bc0c4d0677eca91997fddc6b417b7f9025fd5dcb7e4a42317d05"
     }
   ],
   "browser-types": [
@@ -3274,7 +3302,7 @@
         "flags": "si",
         "pattern": "Mozilla.*AppleWebKit.*Roccat\\/([0-9\\.]+).*R"
       },
-      "hash": "a510de4f7acd51aa28ed177721dfe67692d5f4e296f8d39ca72c6d978d5e1900"
+      "hash": "24ce3d39c4af4cf5bac5015062457bdc709b9dcc73c706ab4cde73b8d57531cf"
     },
     {
       "regex": {
@@ -5197,9 +5225,9 @@
     {
       "regex": {
         "flags": "si",
-        "pattern": "mozilla.*applewebkit.*rekonq"
+        "pattern": "mozilla.*applewebkit.*rekonq[\\/]{0,1}([0-9a-z\\.]+){0,1}.*"
       },
-      "hash": "b1e66a675d5b5e10cc52eb144fd887963593a4dd3d00212ec79f87d062f9c613"
+      "hash": "e54a02c4ebddc49fe2a60caf637d1666866277319874759085bf6ad5859a39dc"
     },
     {
       "regex": {
@@ -9707,13 +9735,13 @@
       "icon": "rekonq.png",
       "info-url": "/list-of-ua/browser-detail?browser\u003dRekonq",
       "browser-pattern-hashs": [
-        "b1e66a675d5b5e10cc52eb144fd887963593a4dd3d00212ec79f87d062f9c613"
+        "e54a02c4ebddc49fe2a60caf637d1666866277319874759085bf6ad5859a39dc"
       ],
       "producer": "Andrea Diamantini",
       "producer-url": "http://www.adjam.org/",
       "browser-type-hash": "d31de1a5c5c8ba2a210a167cf0d0dc2425c57ea7525f4b73a4b7ab934af79dfc",
       "url": "http://rekonq.kde.org/",
-      "hash": "8bc89185cbeabb3922dea0236785d01420cb95214a43e9037f347c331cfc5050"
+      "hash": "bec9d89c308c4a1ebf10c4445b19d0d2b6f210198d1f6ad2a61fe484b0f8a12a"
     },
     {
       "family": "Multipage Validator",
@@ -12271,13 +12299,13 @@
       "icon": "roccat.png",
       "info-url": "/list-of-ua/browser-detail?browser\u003dRoccat browser",
       "browser-pattern-hashs": [
-        "a510de4f7acd51aa28ed177721dfe67692d5f4e296f8d39ca72c6d978d5e1900"
+        "24ce3d39c4af4cf5bac5015062457bdc709b9dcc73c706ab4cde73b8d57531cf"
       ],
       "producer": "Runecats",
       "producer-url": "http://runecats.com/",
       "browser-type-hash": "d31de1a5c5c8ba2a210a167cf0d0dc2425c57ea7525f4b73a4b7ab934af79dfc",
       "url": "http://www.runecats.com/roccat.html",
-      "hash": "8d32f3a5d0965e3dfc8c1a8822408c402e3787123cd92f7488d175d85fe96c2e"
+      "hash": "de37c9d36c7f4a1c8c10fefe15cc5d26aa5dd0d54a99862dbdb7909af8574e4a"
     },
     {
       "family": "AirMail",
@@ -23643,6 +23671,66 @@
       "producer-url": "http://www.axandra.com/",
       "user-agent-string": "Mozilla/5.0 (compatible; spbot/4.0a; +http://www.seoprofiler.com/bot )",
       "hash": "d69628500ba3489568f206ea505cb2926c80cdd25bce40b1d7a912e10272baa8"
+    },
+    {
+      "family-name": "yacybot",
+      "icon": "bot_yacybot.png",
+      "info-url": "/list-of-ua/bot-detail?bot\u003dyacybot",
+      "name": "yacybot",
+      "producer": "Michael Christen",
+      "producer-url": "",
+      "user-agent-string": "yacybot (freeworld/global; amd64 Windows 8 6.2; java 1.7.0_25; Europe/de) http://yacy.net/bot.html",
+      "hash": "87a432c50ab50d1117f45c353c351a7b68c527482e842d3316b56c0d661cbbf6"
+    },
+    {
+      "family-name": "BLEXBot",
+      "icon": "bot.png",
+      "info-url": "/list-of-ua/bot-detail?bot\u003dBLEXBot",
+      "name": "BLEXBot/1.0",
+      "producer": "WebMeUp",
+      "producer-url": "http://webmeup.com/",
+      "user-agent-string": "Mozilla/5.0 (compatible; BLEXBot/1.0; +http://webmeup-crawler.com/)",
+      "hash": "6a5cd791260ae55998e12fe17cb3f958957b9225d2e17fee8c4c8c7b44b7debf"
+    },
+    {
+      "family-name": "MojeekBot",
+      "icon": "bot_MojeekBot.png",
+      "info-url": "/list-of-ua/bot-detail?bot\u003dMojeekBot",
+      "name": "MojeekBot/0.5",
+      "producer": "Mojeek Ltd.",
+      "producer-url": "http://www.mojeek.com/",
+      "user-agent-string": "Mozilla/5.0 (compatible; MojeekBot/0.5; http://www.mojeek.com/bot.html)",
+      "hash": "ee7409420ee7ccda1de99593e6d7d3a4aa31e65116a2b1af8e32c10543e78f56"
+    },
+    {
+      "family-name": "yacybot",
+      "icon": "bot_yacybot.png",
+      "info-url": "/list-of-ua/bot-detail?bot\u003dyacybot",
+      "name": "yacybot",
+      "producer": "Michael Christen",
+      "producer-url": "",
+      "user-agent-string": "yacybot (freeworld/global; amd64 Linux 3.8.0-19-generic; java 1.7.0_25; Europe/en) http://yacy.net/bot.html",
+      "hash": "9ebc3cb06fc4543fda5428e2aab94b90851bfc6e393158547cf9461c09fdafc9"
+    },
+    {
+      "family-name": "Cliqz Bot",
+      "icon": "bot.png",
+      "info-url": "/list-of-ua/bot-detail?bot\u003dCliqz Bot",
+      "name": "Cliqz Bot",
+      "producer": "10betterpages GmbH",
+      "producer-url": "http://www.10betterpages.com/",
+      "user-agent-string": "Cliqz Bot (+http://www.cliqz.com)",
+      "hash": "fa765347fed788d5c1fb30d2e7c9cda0c62c919a4d12c661389c31c9075d211a"
+    },
+    {
+      "family-name": "KrOWLer",
+      "icon": "bot.png",
+      "info-url": "/list-of-ua/bot-detail?bot\u003dKrOWLer",
+      "name": "KrOWLer/0.0.1",
+      "producer": "Nico Matentzoglu",
+      "producer-url": "http://nico.matentzoglu.net/",
+      "user-agent-string": "KrOWLer/0.0.1, matentzn at cs dot man dot ac dot uk",
+      "hash": "a9dbc2372b7d34eaba62f0ffd197e04140ce2f6235cbccbcb57f841d4414f72c"
     }
   ]
 }

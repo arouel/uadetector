@@ -18,7 +18,7 @@
 		</section>
 
 		<section name="Releases">
-			<subsection name="Release 2013.08">
+			<subsection name="Release 2013.09">
 				<table>
 					<tr>
 						<th>Module</th>
@@ -72,26 +72,26 @@
 						<td>Resources Module</td>
 						<td>
 							<a
-								href="http://search.maven.org/remotecontent?filepath=net/sf/uadetector/uadetector-resources/2013.08/uadetector-resources-2013.08.jar">
-								uadetector-resources-2013.08.jar
+								href="http://search.maven.org/remotecontent?filepath=net/sf/uadetector/uadetector-resources/2013.09/uadetector-resources-2013.09.jar">
+								uadetector-resources-2013.09.jar
 							</a>
 						</td>
 						<td>
 							<a
-								href="http://search.maven.org/remotecontent?filepath=net/sf/uadetector/uadetector-resources/2013.08/uadetector-resources-2013.08.jar.md5">
+								href="http://search.maven.org/remotecontent?filepath=net/sf/uadetector/uadetector-resources/2013.09/uadetector-resources-2013.09.jar.md5">
 								md5
 							</a>
 						</td>
 						<td>
 							<a
-								href="http://search.maven.org/remotecontent?filepath=net/sf/uadetector/uadetector-resources/2013.08/uadetector-resources-2013.08.jar.asc">
+								href="http://search.maven.org/remotecontent?filepath=net/sf/uadetector/uadetector-resources/2013.09/uadetector-resources-2013.09.jar.asc">
 								pgp
 							</a>
 						</td>
 					</tr>
 				</table>
 			</subsection>
-			<subsection name="Release 2013.07">
+			<subsection name="Release 2013.08">
 				<table>
 					<tr>
 						<th>Module</th>

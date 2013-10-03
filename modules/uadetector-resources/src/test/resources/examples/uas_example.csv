@@ -1504,6 +1504,7 @@
 "robot","HomeTags","Mozilla/5.0 (compatible; HomeTags/1.0;  http://www.hometags.nl/bot)"
 "robot","HooWWWer","HooWWWer/2.1.3 (debugging run) (+http://cosco.hiit.fi/search/hoowwwer/ | mailto:crawler-info<at>hiit.fi)"
 "robot","HooWWWer","HooWWWer/2.2.0 (debugging run) (+http://cosco.hiit.fi/search/hoowwwer/ | mailto:crawler-info<at>hiit.fi)"
+"robot","HostTracker","Mozilla/4.0 (compatible;HostTracker/2.0;+http://www.host-tracker.com/)"
 "robot","HostTracker.com","Mozilla/4.0 (compatible; HostTracker.com/1.0;+http://host-tracker.com/)"
 "robot","ht://Dig","cinetic_htdig"
 "robot","HuaweiSymantecSpider","HuaweiSymantecSpider/1.0+DSE-support@huaweisymantec.com+(compatible; MSIE 7.0; Windows NT 5.1; Trident/4.0; .NET CLR 2.0.50727; .NET CLR 3.0.4506.2152; .NET CLR ; http://www.huaweisymantec.com/en/IRL/spider)"

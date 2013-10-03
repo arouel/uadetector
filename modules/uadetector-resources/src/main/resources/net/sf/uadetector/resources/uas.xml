@@ -3,7 +3,7 @@
 <uasdata>
 	<description>
 		<label>Data (format xml) for UASparser - http://user-agent-string.info/download/UASparser</label>
-		<version>20130927-01</version>
+		<version>20130930-02</version>
 		<checksum type="MD5">http://user-agent-string.info/rpc/get_data.php?format=xml&amp;md5=y</checksum>
 		<checksum type="SHA1">http://user-agent-string.info/rpc/get_data.php?format=xml&amp;sha1=y</checksum>
 	</description>
@@ -3988,6 +3988,16 @@
 				<url_company><![CDATA[http://cosco.hiit.fi/]]></url_company>
 				<icon>bot.png</icon>
 				<bot_info_url>/list-of-ua/bot-detail?bot=HooWWWer</bot_info_url>
+			</robot>
+			<robot>
+				<id>11039</id>
+				<useragent><![CDATA[Mozilla/4.0 (compatible;HostTracker/2.0;+http://www.host-tracker.com/)]]></useragent>
+				<family>HostTracker</family>
+				<name>HostTracker/2.0</name>
+				<company><![CDATA[HostTracker, Ltd.]]></company>
+				<url_company><![CDATA[http://www.host-tracker.com/]]></url_company>
+				<icon>bot.png</icon>
+				<bot_info_url>/list-of-ua/bot-detail?bot=HostTracker</bot_info_url>
 			</robot>
 			<robot>
 				<id>3235</id>

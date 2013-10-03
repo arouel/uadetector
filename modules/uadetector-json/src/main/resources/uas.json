@@ -1,6 +1,6 @@
 {
   "format": "1.0",
-  "version": "20130927-01",
+  "version": "20130930-02",
   "operating-system-patterns": [
     {
       "regex": {
@@ -23731,6 +23731,16 @@
       "producer-url": "http://nico.matentzoglu.net/",
       "user-agent-string": "KrOWLer/0.0.1, matentzn at cs dot man dot ac dot uk",
       "hash": "a9dbc2372b7d34eaba62f0ffd197e04140ce2f6235cbccbcb57f841d4414f72c"
+    },
+    {
+      "family-name": "HostTracker",
+      "icon": "bot.png",
+      "info-url": "/list-of-ua/bot-detail?bot\u003dHostTracker",
+      "name": "HostTracker/2.0",
+      "producer": "HostTracker, Ltd.",
+      "producer-url": "http://www.host-tracker.com/",
+      "user-agent-string": "Mozilla/4.0 (compatible;HostTracker/2.0;+http://www.host-tracker.com/)",
+      "hash": "d478111ba2798e2f284cf6f678615db8a9a12f3cddca655890c9c06cd66c6ba3"
     }
   ]
 }

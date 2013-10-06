@@ -1,72 +1,89 @@
-<!ELEMENT bot_info_url ( #PCDATA ) >
+<?xml version='1.0' encoding='UTF-8'?>
 
-<!ELEMENT browser ( id, type, name, url, company, url_company, icon, browser_info_url ) >
+<!ELEMENT uasdata (data|description)*>
 
-<!ELEMENT browser_id ( #PCDATA ) >
+<!ELEMENT description (checksum|version|label)*>
 
-<!ELEMENT browser_info_url ( #PCDATA ) >
+<!ELEMENT label (#PCDATA)>
 
-<!ELEMENT browser_os ( browser_id, os_id ) >
+<!ELEMENT version (#PCDATA)>
 
-<!ELEMENT browser_reg ( order, browser_id, regstring ) >
+<!ELEMENT checksum (#PCDATA)>
+<!ATTLIST checksum
+    type CDATA #IMPLIED
+  >
 
-<!ELEMENT browser_type ( id, type ) >
+<!ELEMENT data (devices_reg|devices|operating_systems_reg|browsers_os|browsers_reg|browser_types|browsers|operating_systems|robots)*>
 
-<!ELEMENT browser_types ( browser_type+ ) >
+<!ELEMENT robots (robot)*>
 
-<!ELEMENT browsers ( browser+ ) >
+<!ELEMENT robot (bot_info_url|icon|url_company|company|name|family|useragent|id)*>
 
-<!ELEMENT browsers_os ( browser_os+ ) >
+<!ELEMENT id (#PCDATA)>
 
-<!ELEMENT browsers_reg ( browser_reg+ ) >
+<!ELEMENT useragent (#PCDATA)>
 
-<!ELEMENT checksum ( #PCDATA ) >
-<!ATTLIST checksum type NMTOKEN #REQUIRED >
+<!ELEMENT family (#PCDATA)>
 
-<!ELEMENT company ( #PCDATA ) >
 
-<!ELEMENT data ( robots, operating_systems, browsers, browser_types, browsers_reg, browsers_os, operating_systems_reg ) >
+<!ELEMENT name (#PCDATA)>
 
-<!ELEMENT description ( label, version, checksum+ ) >
+<!ELEMENT company (#PCDATA)>
 
-<!ELEMENT family ( #PCDATA ) >
+<!ELEMENT url_company (#PCDATA)>
 
-<!ELEMENT icon ( #PCDATA ) >
+<!ELEMENT icon (#PCDATA)>
 
-<!ELEMENT id ( #PCDATA ) >
+<!ELEMENT bot_info_url (#PCDATA)>
 
-<!ELEMENT label ( #PCDATA ) >
+<!ELEMENT operating_systems (os)*>
 
-<!ELEMENT name ( #PCDATA ) >
+<!ELEMENT os (os_info_url|icon|url_company|company|url|name|family|id)*>
 
-<!ELEMENT operating_system_reg ( order, os_id, regstring ) >
+<!ELEMENT url (#PCDATA)>
 
-<!ELEMENT operating_systems ( os+ ) >
+<!ELEMENT os_info_url (#PCDATA)>
 
-<!ELEMENT operating_systems_reg ( operating_system_reg+ ) >
+<!ELEMENT browsers (browser)*>
 
-<!ELEMENT order ( #PCDATA ) >
+<!ELEMENT browser (browser_info_url|icon|url_company|company|url|name|type|id)*>
 
-<!ELEMENT os ( id, family, name, url, company, url_company, icon, os_info_url ) >
+<!ELEMENT type (#PCDATA)>
 
-<!ELEMENT os_id ( #PCDATA ) >
+<!ELEMENT browser_info_url (#PCDATA)>
 
-<!ELEMENT os_info_url ( #PCDATA ) >
+<!ELEMENT browser_types (browser_type)*>
 
-<!ELEMENT regstring ( #PCDATA ) >
+<!ELEMENT browser_type (type|id)*>
 
-<!ELEMENT robot ( id, useragent, family, name, company, url_company, icon, bot_info_url ) >
+<!ELEMENT browsers_reg (browser_reg)*>
 
-<!ELEMENT robots ( robot+ ) >
+<!ELEMENT browser_reg (regstring|browser_id|order)*>
 
-<!ELEMENT type ( #PCDATA ) >
+<!ELEMENT order (#PCDATA)>
 
-<!ELEMENT uasdata ( description, data ) >
+<!ELEMENT browser_id (#PCDATA)>
 
-<!ELEMENT url ( #PCDATA ) >
+<!ELEMENT regstring (#PCDATA)>
 
-<!ELEMENT url_company ( #PCDATA ) >
+<!ELEMENT browsers_os (browser_os)*>
 
-<!ELEMENT useragent ( #PCDATA ) >
+<!ELEMENT browser_os (os_id|browser_id)*>
 
-<!ELEMENT version ( #PCDATA ) >
+<!ELEMENT os_id (#PCDATA)>
+
+<!ELEMENT operating_systems_reg (operating_system_reg)*>
+
+<!ELEMENT operating_system_reg (regstring|os_id|order)*>
+
+<!ELEMENT devices (device)*>
+
+<!ELEMENT device (device_info_url|icon|name|id)*>
+
+<!ELEMENT device_info_url (#PCDATA)>
+
+<!ELEMENT devices_reg (device_reg)*>
+
+<!ELEMENT device_reg (regstring|device_id|order)*>
+
+<!ELEMENT device_id (#PCDATA)>

@@ -38,6 +38,8 @@ import net.sf.uadetector.internal.data.domain.Browser;
 import net.sf.uadetector.internal.data.domain.BrowserOperatingSystemMapping;
 import net.sf.uadetector.internal.data.domain.BrowserPattern;
 import net.sf.uadetector.internal.data.domain.BrowserType;
+import net.sf.uadetector.internal.data.domain.Device;
+import net.sf.uadetector.internal.data.domain.DevicePattern;
 import net.sf.uadetector.internal.data.domain.OperatingSystem;
 import net.sf.uadetector.internal.data.domain.OperatingSystemPattern;
 import net.sf.uadetector.internal.data.domain.Robot;
@@ -64,6 +66,24 @@ public class DataTest {
 		pattern2.add(new BrowserPattern(1, Pattern.compile("2"), 1));
 		patterns2.put(1, pattern2);
 		final Data b = new DataBlueprint().browserPatterns(patterns2).build();
+
+		assertFalse(a.equals(b));
+		assertFalse(a.hashCode() == b.hashCode());
+	}
+
+	@Test
+	public void equals_different_DEVICEPATTERNS() {
+		final Map<Integer, SortedSet<DevicePattern>> patterns1 = Maps.newHashMap();
+		final TreeSet<DevicePattern> pattern1 = Sets.newTreeSet();
+		pattern1.add(new DevicePattern(1, Pattern.compile("1"), 1));
+		patterns1.put(1, pattern1);
+		final Data a = new DataBlueprint().devicePatterns(patterns1).build();
+
+		final Map<Integer, SortedSet<DevicePattern>> patterns2 = Maps.newHashMap();
+		final TreeSet<DevicePattern> pattern2 = Sets.newTreeSet();
+		pattern2.add(new DevicePattern(1, Pattern.compile("2"), 1));
+		patterns2.put(1, pattern2);
+		final Data b = new DataBlueprint().devicePatterns(patterns2).build();
 
 		assertFalse(a.equals(b));
 		assertFalse(a.hashCode() == b.hashCode());
@@ -111,6 +131,18 @@ public class DataTest {
 		final Map<Integer, BrowserType> types2 = Maps.newHashMap();
 		types2.put(1, new BrowserType(2, "Feedreader"));
 		final Data b = new DataBlueprint().browserTypes(types2).build();
+
+		assertFalse(a.equals(b));
+		assertFalse(a.hashCode() == b.hashCode());
+	}
+
+	@Test
+	public void equals_different_DEVICES() {
+		final Device device1 = new Device("icon", 123, "infoUrl", "dev1", new TreeSet<DevicePattern>());
+		final Data a = new DataBlueprint().devices(Sets.newHashSet(device1)).build();
+
+		final Device device2 = new Device("icon", 234, "infoUrl", "dev2", new TreeSet<DevicePattern>());
+		final Data b = new DataBlueprint().devices(Sets.newHashSet(device2)).build();
 
 		assertFalse(a.equals(b));
 		assertFalse(a.hashCode() == b.hashCode());
@@ -173,6 +205,24 @@ public class DataTest {
 	}
 
 	@Test
+	public void equals_different_PATTERNTODEVICEMAP() {
+		final DevicePattern pattern1 = new DevicePattern(1, Pattern.compile("1"), 1);
+		final Device device1 = new Device("icon", 234, "infoUrl", "dev1", new TreeSet<DevicePattern>());
+		final SortedMap<DevicePattern, Device> map1 = Maps.newTreeMap();
+		map1.put(pattern1, device1);
+		final Data a = new DataBlueprint().patternToDeviceMap(map1).build();
+
+		final DevicePattern pattern2 = new DevicePattern(1, Pattern.compile("2"), 1);
+		final Device device2 = new Device("icon", 235, "infoUrl", "dev2", new TreeSet<DevicePattern>());
+		final SortedMap<DevicePattern, Device> map2 = Maps.newTreeMap();
+		map2.put(pattern2, device2);
+		final Data b = new DataBlueprint().patternToDeviceMap(map2).build();
+
+		assertFalse(a.equals(b));
+		assertFalse(a.hashCode() == b.hashCode());
+	}
+
+	@Test
 	public void equals_different_PATTERNTOOPERATINGSYSTEMMAP() {
 		final SortedMap<OperatingSystemPattern, OperatingSystem> map1 = Maps.newTreeMap();
 		final OperatingSystemPattern pattern1 = new OperatingSystemPattern(1, Pattern.compile("1"), 1);
@@ -222,7 +272,8 @@ public class DataTest {
 				new HashMap<Integer, BrowserType>(0), new TreeMap<BrowserPattern, Browser>(),
 				new HashSet<BrowserOperatingSystemMapping>(0), new HashSet<OperatingSystem>(0),
 				new HashMap<Integer, SortedSet<OperatingSystemPattern>>(0), new TreeMap<OperatingSystemPattern, OperatingSystem>(),
-				new ArrayList<Robot>(0), "");
+				new ArrayList<Robot>(0), new HashSet<Device>(0), new HashMap<Integer, SortedSet<DevicePattern>>(0),
+				new TreeMap<DevicePattern, Device>(), "");
 		assertThat(empty).isEqualTo(Data.EMPTY);
 		assertThat(Data.EMPTY.hashCode() == empty.hashCode()).isTrue();
 	}
@@ -381,6 +432,9 @@ public class DataTest {
 		final Map<Integer, SortedSet<OperatingSystemPattern>> operatingSystemPatterns = Maps.newHashMap();
 		final SortedMap<OperatingSystemPattern, OperatingSystem> patternToOperatingSystemMap = new TreeMap<OperatingSystemPattern, OperatingSystem>();
 		final List<Robot> robots = new ArrayList<Robot>();
+		final Set<Device> devices = new HashSet<Device>(0);
+		final Map<Integer, SortedSet<DevicePattern>> devicePatterns = new HashMap<Integer, SortedSet<DevicePattern>>(0);
+		final SortedMap<DevicePattern, Device> patternToDeviceMap = new TreeMap<DevicePattern, Device>();
 		final String version = "test";
 
 		final DataBlueprint dataBlueprint = new DataBlueprint();
@@ -393,11 +447,14 @@ public class DataTest {
 		dataBlueprint.operatingSystemPatterns(operatingSystemPatterns);
 		dataBlueprint.patternToOperatingSystemMap(patternToOperatingSystemMap);
 		dataBlueprint.robots(robots);
+		dataBlueprint.devices(devices);
+		dataBlueprint.devicePatterns(devicePatterns);
+		dataBlueprint.patternToDeviceMap(patternToDeviceMap);
 		dataBlueprint.version(version);
 		final Data data = dataBlueprint.build();
 
 		assertThat(data.toString())
 				.isEqualTo(
-						"Data [browsers=[], browserPatterns={}, browserTypes={}, patternToBrowserMap={}, browserToOperatingSystemMap=[], operatingSystems=[], operatingSystemPatterns={}, patternToOperatingSystemMap={}, robots=[], version=test]");
+						"Data [browsers=[], browserPatterns={}, browserTypes={}, patternToBrowserMap={}, browserToOperatingSystemMap=[], operatingSystems=[], operatingSystemPatterns={}, patternToOperatingSystemMap={}, robots=[], devices=[], devicePatterns={}, patternToDeviceMap={}, version=test]");
 	}
 }

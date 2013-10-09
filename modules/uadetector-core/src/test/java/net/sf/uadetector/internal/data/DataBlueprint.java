@@ -31,6 +31,8 @@ import net.sf.uadetector.internal.data.domain.Browser;
 import net.sf.uadetector.internal.data.domain.BrowserOperatingSystemMapping;
 import net.sf.uadetector.internal.data.domain.BrowserPattern;
 import net.sf.uadetector.internal.data.domain.BrowserType;
+import net.sf.uadetector.internal.data.domain.Device;
+import net.sf.uadetector.internal.data.domain.DevicePattern;
 import net.sf.uadetector.internal.data.domain.OperatingSystem;
 import net.sf.uadetector.internal.data.domain.OperatingSystemPattern;
 import net.sf.uadetector.internal.data.domain.Robot;
@@ -64,6 +66,12 @@ public final class DataBlueprint {
 
 	private List<Robot> robots = Lists.newArrayList();
 
+	private Set<Device> devices = Sets.newHashSet();
+
+	private Map<Integer, SortedSet<DevicePattern>> devicePatterns = Maps.newHashMap();
+
+	private SortedMap<DevicePattern, Device> patternToDeviceMap = Maps.newTreeMap();
+
 	private String version = "test-version";
 
 	public DataBlueprint() {
@@ -90,6 +98,16 @@ public final class DataBlueprint {
 		patternToBrowserMap.put(browserPattern, browser);
 
 		browserToOperatingSystemMappings.add(new BrowserOperatingSystemMapping(browser.getId(), operatingSystem.getId()));
+
+		final TreeSet<DevicePattern> devicePatternSet = Sets.newTreeSet();
+		final DevicePattern devicePattern = new DevicePattern(1, Pattern.compile("[a-z]+"), 1);
+		devicePatternSet.add(devicePattern);
+		devicePatterns.put(1, devicePatternSet);
+
+		final Device device = new Device("device.png", 1, "device-info", "device-category-name", devicePatternSet);
+		devices.add(device);
+
+		patternToDeviceMap.put(devicePattern, device);
 
 		final Robot robot = new Robot(12, "Majestic-12", UserAgentFamily.MJ12BOT, "Majestic-12 bot", "http://majestic12.co.uk/bot.php",
 				"Majestic-12", "http://www.majestic12.co.uk/", "MJ12bot/v1.4.3", "mj12.png");
@@ -119,7 +137,17 @@ public final class DataBlueprint {
 	@Nonnull
 	public Data build() {
 		return new Data(browsers, browserPatterns, browserTypes, patternToBrowserMap, browserToOperatingSystemMappings, operatingSystems,
-				operatingSystemPatterns, patternToOperatingSystemMap, robots, version);
+				operatingSystemPatterns, patternToOperatingSystemMap, robots, devices, devicePatterns, patternToDeviceMap, version);
+	}
+
+	public DataBlueprint devicePatterns(final Map<Integer, SortedSet<DevicePattern>> devicePatterns) {
+		this.devicePatterns = devicePatterns;
+		return this;
+	}
+
+	public DataBlueprint devices(final Set<Device> devices) {
+		this.devices = devices;
+		return this;
 	}
 
 	public DataBlueprint operatingSystemPatterns(final Map<Integer, SortedSet<OperatingSystemPattern>> operatingSystemPatterns) {
@@ -134,6 +162,11 @@ public final class DataBlueprint {
 
 	public DataBlueprint patternToBrowserMap(final SortedMap<BrowserPattern, Browser> patternToBrowserMap) {
 		this.patternToBrowserMap = patternToBrowserMap;
+		return this;
+	}
+
+	public DataBlueprint patternToDeviceMap(final SortedMap<DevicePattern, Device> patternToDeviceMap) {
+		this.patternToDeviceMap = patternToDeviceMap;
 		return this;
 	}
 

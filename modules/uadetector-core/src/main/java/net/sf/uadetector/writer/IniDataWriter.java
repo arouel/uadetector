@@ -37,6 +37,8 @@ import net.sf.uadetector.internal.data.domain.Browser;
 import net.sf.uadetector.internal.data.domain.BrowserOperatingSystemMapping;
 import net.sf.uadetector.internal.data.domain.BrowserPattern;
 import net.sf.uadetector.internal.data.domain.BrowserType;
+import net.sf.uadetector.internal.data.domain.Device;
+import net.sf.uadetector.internal.data.domain.DevicePattern;
 import net.sf.uadetector.internal.data.domain.Identifiable;
 import net.sf.uadetector.internal.data.domain.OperatingSystem;
 import net.sf.uadetector.internal.data.domain.OperatingSystemPattern;
@@ -67,6 +69,8 @@ public final class IniDataWriter {
 		String BROWSER_OS = "browser_os";
 		String BROWSER_REG = "browser_reg";
 		String BROWSER_TYPE = "browser_type";
+		String DEVICE = "device";
+		String DEVICE_REG = "device_reg";
 		String OS = "os";
 		String OS_REG = "os_reg";
 		String ROBOTS = "robots";
@@ -159,6 +163,40 @@ public final class IniDataWriter {
 		createComment("SHA1 - http://user-agent-string.info/rpc/get_data.php?format=ini&sha1=y", builder);
 		builder.append(Char.SEMICOLON);
 		builder.append(Char.NEWLINE);
+	}
+
+	private static void createDevice(final Device device, final StringBuilder builder) {
+		createKeyValuePair(device, device.getName(), builder);
+		createKeyValuePair(device, device.getIcon(), builder);
+		createKeyValuePair(device, device.getInfoUrl(), builder);
+	}
+
+	private static void createDevicePatterns(final Data data, final StringBuilder builder) {
+		final List<DevicePattern> patterns = new ArrayList<DevicePattern>(data.getDevicePatterns().size());
+		for (final Entry<Integer, SortedSet<DevicePattern>> entry : data.getDevicePatterns().entrySet()) {
+			patterns.addAll(entry.getValue());
+		}
+		Collections.sort(patterns, new OrderedPatternComparator<DevicePattern>());
+		createCategory(Tag.DEVICE_REG, builder);
+		createComment("device_reg_id[] = \"Device regstring\"", builder);
+		createComment("device_reg_id[] = \"Device id\"", builder);
+		for (final DevicePattern pattern : patterns) {
+			final String regex = RegularExpressionConverter.convertPatternToPerlRegex(pattern.getPattern());
+			createKeyValuePair(pattern.getPosition(), regex, builder);
+			createKeyValuePair(pattern.getPosition(), String.valueOf(pattern.getId()), builder);
+		}
+	}
+
+	private static void createDevices(final Data data, final StringBuilder builder) {
+		createCategory(Tag.DEVICE, builder);
+		createComment("device_id[] = \"Device type\"", builder);
+		createComment("device_id[] = \"Device ico\"", builder);
+		createComment("device_id[] = \"Device info URL\"", builder);
+		final List<Device> devices = new ArrayList<Device>(data.getDevices());
+		Collections.sort(devices, IdentifiableComparator.INSTANCE);
+		for (final Device device : devices) {
+			createDevice(device, builder);
+		}
 	}
 
 	private static void createKeyValuePair(@Nonnull final Identifiable identifiable, @Nonnull final String value,
@@ -277,6 +315,8 @@ public final class IniDataWriter {
 		createBrowserPatterns(data, doc);
 		createBrowserOperatingSystemMappings(data, doc);
 		createOperatingSystemPatterns(data, doc);
+		createDevices(data, doc);
+		createDevicePatterns(data, doc);
 
 		// write the content to output stream
 		outputStream.write(doc.toString().getBytes("UTF-8"));

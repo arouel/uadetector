@@ -37,6 +37,8 @@ import net.sf.uadetector.internal.data.domain.Browser;
 import net.sf.uadetector.internal.data.domain.BrowserOperatingSystemMapping;
 import net.sf.uadetector.internal.data.domain.BrowserPattern;
 import net.sf.uadetector.internal.data.domain.BrowserType;
+import net.sf.uadetector.internal.data.domain.Device;
+import net.sf.uadetector.internal.data.domain.DevicePattern;
 import net.sf.uadetector.internal.data.domain.OperatingSystem;
 import net.sf.uadetector.internal.data.domain.OperatingSystemPattern;
 import net.sf.uadetector.internal.data.domain.Robot;
@@ -57,7 +59,8 @@ public class Data implements Serializable {
 	public static final Data EMPTY = new Data(new HashSet<Browser>(0), new HashMap<Integer, SortedSet<BrowserPattern>>(0),
 			new HashMap<Integer, BrowserType>(0), new TreeMap<BrowserPattern, Browser>(), new HashSet<BrowserOperatingSystemMapping>(0),
 			new HashSet<OperatingSystem>(0), new HashMap<Integer, SortedSet<OperatingSystemPattern>>(0),
-			new TreeMap<OperatingSystemPattern, OperatingSystem>(), new ArrayList<Robot>(0), "");
+			new TreeMap<OperatingSystemPattern, OperatingSystem>(), new ArrayList<Robot>(0), new HashSet<Device>(0),
+			new HashMap<Integer, SortedSet<DevicePattern>>(0), new TreeMap<DevicePattern, Device>(), "");
 
 	private static final long serialVersionUID = 8522012551928801089L;
 
@@ -66,6 +69,15 @@ public class Data implements Serializable {
 
 	@Nonnull
 	private final Set<Browser> browsers;
+
+	@Nonnull
+	private final Map<Integer, SortedSet<DevicePattern>> devicePatterns;
+
+	@Nonnull
+	private final Set<Device> devices;
+
+	@Nonnull
+	private final SortedMap<DevicePattern, Device> patternToDeviceMap;
 
 	@Nonnull
 	private final Set<BrowserOperatingSystemMapping> browserToOperatingSystemMappings;
@@ -100,7 +112,9 @@ public class Data implements Serializable {
 			@Nonnull final Set<OperatingSystem> operatingSystems,
 			@Nonnull final Map<Integer, SortedSet<OperatingSystemPattern>> operatingSystemPatterns,
 			@Nonnull final SortedMap<OperatingSystemPattern, OperatingSystem> patternToOperatingSystemMap,
-			@Nonnull final List<Robot> robots, @Nonnull final String version) {
+			@Nonnull final List<Robot> robots, @Nonnull final Set<Device> devices,
+			@Nonnull final Map<Integer, SortedSet<DevicePattern>> devicePatterns,
+			@Nonnull final SortedMap<DevicePattern, Device> patternToDeviceMap, @Nonnull final String version) {
 		Check.notNull(browsers, "browsers");
 		Check.notNull(browserPatterns, "browserPatterns");
 		Check.notNull(browserTypes, "browserTypes");
@@ -110,6 +124,9 @@ public class Data implements Serializable {
 		Check.notNull(operatingSystemPatterns, "operatingSystemPatterns");
 		Check.notNull(patternToOperatingSystemMap, "patternToOperatingSystemMap");
 		Check.notNull(robots, "robots");
+		Check.notNull(devices, "devices");
+		Check.notNull(devicePatterns, "devicePatterns");
+		Check.notNull(patternToDeviceMap, "patternToDeviceMap");
 		Check.notNull(version, "version");
 
 		this.browsers = Collections.unmodifiableSet(new HashSet<Browser>(browsers));
@@ -124,6 +141,9 @@ public class Data implements Serializable {
 		this.patternToOperatingSystemMap = Collections.unmodifiableSortedMap(new TreeMap<OperatingSystemPattern, OperatingSystem>(
 				patternToOperatingSystemMap));
 		this.robots = Collections.unmodifiableList(new ArrayList<Robot>(robots));
+		this.devices = Collections.unmodifiableSet(new HashSet<Device>(devices));
+		this.devicePatterns = Collections.unmodifiableMap(new HashMap<Integer, SortedSet<DevicePattern>>(devicePatterns));
+		this.patternToDeviceMap = Collections.unmodifiableSortedMap(new TreeMap<DevicePattern, Device>(patternToDeviceMap));
 		this.version = Check.notNull(version, "version");
 	}
 
@@ -166,6 +186,15 @@ public class Data implements Serializable {
 		if (!robots.equals(other.robots)) {
 			return false;
 		}
+		if (!devices.equals(other.devices)) {
+			return false;
+		}
+		if (!devicePatterns.equals(other.devicePatterns)) {
+			return false;
+		}
+		if (!patternToDeviceMap.equals(other.patternToDeviceMap)) {
+			return false;
+		}
 		if (!version.equals(other.version)) {
 			return false;
 		}
@@ -193,6 +222,16 @@ public class Data implements Serializable {
 	}
 
 	@Nonnull
+	public Map<Integer, SortedSet<DevicePattern>> getDevicePatterns() {
+		return devicePatterns;
+	}
+
+	@Nonnull
+	public Set<Device> getDevices() {
+		return devices;
+	}
+
+	@Nonnull
 	public Map<Integer, SortedSet<OperatingSystemPattern>> getOperatingSystemPatterns() {
 		return operatingSystemPatterns;
 	}
@@ -205,6 +244,11 @@ public class Data implements Serializable {
 	@Nonnull
 	public SortedMap<BrowserPattern, Browser> getPatternToBrowserMap() {
 		return patternToBrowserMap;
+	}
+
+	@Nonnull
+	public SortedMap<DevicePattern, Device> getPatternToDeviceMap() {
+		return patternToDeviceMap;
 	}
 
 	@Nonnull
@@ -240,6 +284,9 @@ public class Data implements Serializable {
 		result = prime * result + operatingSystemPatterns.hashCode();
 		result = prime * result + patternToOperatingSystemMap.hashCode();
 		result = prime * result + robots.hashCode();
+		result = prime * result + devices.hashCode();
+		result = prime * result + devicePatterns.hashCode();
+		result = prime * result + patternToDeviceMap.hashCode();
 		result = prime * result + version.hashCode();
 		return result;
 	}
@@ -286,6 +333,12 @@ public class Data implements Serializable {
 		builder.append("robots:\t\t\t");
 		builder.append(robots.size());
 		builder.append('\n');
+		builder.append("devices:\t");
+		builder.append(devices.size());
+		builder.append('\n');
+		builder.append("device patterns:\t");
+		builder.append(patternToDeviceMap.size());
+		builder.append('\n');
 		builder.append("----------------------------------------------------------------");
 		return builder.toString();
 	}
@@ -311,6 +364,12 @@ public class Data implements Serializable {
 		builder.append(patternToOperatingSystemMap);
 		builder.append(", robots=");
 		builder.append(robots);
+		builder.append(", devices=");
+		builder.append(devices);
+		builder.append(", devicePatterns=");
+		builder.append(devicePatterns);
+		builder.append(", patternToDeviceMap=");
+		builder.append(patternToDeviceMap);
 		builder.append(", version=");
 		builder.append(version);
 		builder.append("]");

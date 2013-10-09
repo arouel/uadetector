@@ -32,6 +32,14 @@ import javax.annotation.Nonnull;
 public interface ReadableUserAgent {
 
 	/**
+	 * Gets the detected device category.
+	 * 
+	 * @return detected device category
+	 */
+	@Nonnull
+	DeviceCategory getDeviceCategory();
+
+	/**
 	 * Gets the family of an user agent.
 	 * 
 	 * @return family of an user agent

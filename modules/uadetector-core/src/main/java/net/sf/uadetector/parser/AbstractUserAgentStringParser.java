@@ -18,13 +18,17 @@ package net.sf.uadetector.parser;
 import java.util.Map.Entry;
 import java.util.regex.Matcher;
 
+import net.sf.uadetector.DeviceCategory;
 import net.sf.uadetector.UserAgent;
 import net.sf.uadetector.UserAgentStringParser;
+import net.sf.uadetector.UserAgentType;
 import net.sf.uadetector.VersionNumber;
 import net.sf.uadetector.datastore.DataStore;
 import net.sf.uadetector.internal.data.Data;
 import net.sf.uadetector.internal.data.domain.Browser;
 import net.sf.uadetector.internal.data.domain.BrowserPattern;
+import net.sf.uadetector.internal.data.domain.Device;
+import net.sf.uadetector.internal.data.domain.DevicePattern;
 import net.sf.uadetector.internal.data.domain.OperatingSystem;
 import net.sf.uadetector.internal.data.domain.OperatingSystemPattern;
 import net.sf.uadetector.internal.data.domain.Robot;
@@ -62,6 +66,48 @@ public abstract class AbstractUserAgentStringParser implements UserAgentStringPa
 				break;
 			}
 		}
+	}
+
+	/**
+	 * Examines the user agent string whether it is a device.
+	 * 
+	 * @param userAgent
+	 *            String of an user agent
+	 * @param builder
+	 *            Builder for an user agent information
+	 */
+	private static void examineAsDevice(final UserAgent.Builder builder, final Data data) {
+
+		// a robot will be classified as 'Other'
+		if (UserAgentType.ROBOT == builder.getType()) {
+			builder.setDeviceCategory(DeviceCategory.OTHER);
+			return;
+		}
+
+		// classification depends on matching order
+		for (final Entry<DevicePattern, Device> entry : data.getPatternToDeviceMap().entrySet()) {
+			Matcher matcher = entry.getKey().getPattern().matcher(builder.getUserAgentString());
+			if (matcher.find()) {
+				builder.setDeviceCategory(DeviceCategory.evaluate(entry.getValue().getName()));
+				return;
+			}
+		}
+
+		// if no pattern is available but the type is Other, Library, Validator or UA Anonymizer
+		// than classify it as 'Other'
+		if (UserAgentType.OTHER == builder.getType() || UserAgentType.LIBRARY == builder.getType()
+				|| UserAgentType.VALIDATOR == builder.getType() || UserAgentType.USERAGENT_ANONYMIZER == builder.getType()) {
+			builder.setDeviceCategory(DeviceCategory.OTHER);
+			return;
+		}
+
+		// if no pattern is available but the type is a mobile or WAP browser than classify it as 'Smartphone'
+		if (UserAgentType.MOBILE_BROWSER == builder.getType() || UserAgentType.WAP_BROWSER == builder.getType()) {
+			builder.setDeviceCategory(DeviceCategory.SMARTPHONE);
+			return;
+		}
+
+		builder.setDeviceCategory(DeviceCategory.PERSONAL_COMPUTER);
 	}
 
 	/**
@@ -134,6 +180,7 @@ public abstract class AbstractUserAgentStringParser implements UserAgentStringPa
 			examineAsBrowser(builder, data);
 			examineOperatingSystem(builder, data);
 		}
+		examineAsDevice(builder, data);
 		return builder.build();
 	}
 

@@ -36,6 +36,8 @@ import net.sf.uadetector.internal.data.domain.Browser;
 import net.sf.uadetector.internal.data.domain.BrowserOperatingSystemMapping;
 import net.sf.uadetector.internal.data.domain.BrowserPattern;
 import net.sf.uadetector.internal.data.domain.BrowserType;
+import net.sf.uadetector.internal.data.domain.Device;
+import net.sf.uadetector.internal.data.domain.DevicePattern;
 import net.sf.uadetector.internal.data.domain.OperatingSystem;
 import net.sf.uadetector.internal.data.domain.OperatingSystemPattern;
 import net.sf.uadetector.internal.data.domain.Robot;
@@ -82,6 +84,17 @@ public class DataBuilder {
 		}
 	}
 
+	private static void addPatternToDevice(final Map<Integer, Device.Builder> builders,
+			final Map<Integer, SortedSet<DevicePattern>> patterns) {
+		for (final Map.Entry<Integer, Device.Builder> entry : builders.entrySet()) {
+			if (patterns.containsKey(entry.getKey())) {
+				entry.getValue().setPatterns(patterns.get(entry.getKey()));
+			} else {
+				LOG.info("No pattern available for '" + entry.getValue().getName() + "'.");
+			}
+		}
+	}
+
 	private static void addPatternToOperatingSystem(final Map<Integer, OperatingSystem.Builder> builders,
 			final Map<Integer, SortedSet<OperatingSystemPattern>> patterns) {
 		for (final Map.Entry<Integer, OperatingSystem.Builder> entry : builders.entrySet()) {
@@ -120,6 +133,18 @@ public class DataBuilder {
 		return browsers;
 	}
 
+	private static Set<Device> buildDevices(final Map<Integer, Device.Builder> deviceBuilders) {
+		final Set<Device> devices = new HashSet<Device>();
+		for (final Map.Entry<Integer, Device.Builder> entry : deviceBuilders.entrySet()) {
+			try {
+				devices.add(entry.getValue().build());
+			} catch (final Exception e) {
+				LOG.warn("Can not build device '" + entry.getValue().getName() + "': " + e.getLocalizedMessage());
+			}
+		}
+		return devices;
+	}
+
 	private static Map<Integer, OperatingSystem> buildOperatingSystems(final Map<Integer, OperatingSystem.Builder> osBuilders) {
 		final Map<Integer, OperatingSystem> operatingSystems = new HashMap<Integer, OperatingSystem>();
 		for (final Map.Entry<Integer, OperatingSystem.Builder> entry : osBuilders.entrySet()) {
@@ -140,6 +165,16 @@ public class DataBuilder {
 			}
 		}
 		return patternBrowser;
+	}
+
+	private static SortedMap<DevicePattern, Device> buildPatternToDeviceMap(final Set<Device> devices) {
+		final SortedMap<DevicePattern, Device> patternDevice = new TreeMap<DevicePattern, Device>(DEVICE_PATTERN_COMPARATOR);
+		for (final Device device : devices) {
+			for (final DevicePattern pattern : device.getPatterns()) {
+				patternDevice.put(pattern, device);
+			}
+		}
+		return patternDevice;
 	}
 
 	private static SortedMap<OperatingSystemPattern, OperatingSystem> buildPatternToOperatingSystemMap(final Set<OperatingSystem> osSet) {
@@ -185,6 +220,12 @@ public class DataBuilder {
 	private final Set<Browser> browsers = new HashSet<Browser>();
 
 	@Nonnull
+	private final Map<Integer, Device.Builder> deviceBuilders = new HashMap<Integer, Device.Builder>();
+
+	@Nonnull
+	private final Map<Integer, SortedSet<DevicePattern>> devicePatterns = new HashMap<Integer, SortedSet<DevicePattern>>();
+
+	@Nonnull
 	private final Map<Integer, OperatingSystem.Builder> operatingSystemBuilders = new HashMap<Integer, OperatingSystem.Builder>();
 
 	@Nonnull
@@ -199,6 +240,8 @@ public class DataBuilder {
 	private final Set<BrowserOperatingSystemMapping> browserToOperatingSystemMap = new HashSet<BrowserOperatingSystemMapping>();
 
 	private static final OrderedPatternComparator<BrowserPattern> BROWSER_PATTERN_COMPARATOR = new OrderedPatternComparator<BrowserPattern>();
+
+	private static final OrderedPatternComparator<DevicePattern> DEVICE_PATTERN_COMPARATOR = new OrderedPatternComparator<DevicePattern>();
 
 	private static final OrderedPatternComparator<OperatingSystemPattern> OS_PATTERN_COMPARATOR = new OrderedPatternComparator<OperatingSystemPattern>();
 
@@ -275,6 +318,52 @@ public class DataBuilder {
 		return this;
 	}
 
+	/**
+	 * Appends a copy of the given {@code Device.Builder} to the internal data structure.
+	 * 
+	 * @param deviceBuilder
+	 *            {@code Device.Builder} to be copied and appended
+	 * @return this {@code Builder}, for chaining
+	 * @throws net.sf.qualitycheck.exception.IllegalNullArgumentException
+	 *             if the given argument is {@code null}
+	 * @throws net.sf.qualitycheck.exception.IllegalStateOfArgumentException
+	 *             if the ID of the given builder is invalid
+	 * @throws net.sf.qualitycheck.exception.IllegalStateOfArgumentException
+	 *             if a builder with the same ID already exists
+	 */
+	@Nonnull
+	public DataBuilder appendDeviceBuilder(@Nonnull final Device.Builder deviceBuilder) {
+		Check.notNull(deviceBuilder, "deviceBuilder");
+		Check.notNegative(deviceBuilder.getId(), "deviceBuilder.getId()");
+		if (deviceBuilders.containsKey(deviceBuilder.getId())) {
+			throw new IllegalStateOfArgumentException("The device builder '" + deviceBuilder.getName() + "' is already in the map.");
+		}
+
+		final Device.Builder builder = deviceBuilder.copy();
+		deviceBuilders.put(builder.getId(), builder);
+		return this;
+	}
+
+	/**
+	 * Appends a device pattern to the map of pattern sorted by ID.
+	 * 
+	 * @param pattern
+	 *            a pattern for a device
+	 * @return itself
+	 * @throws net.sf.qualitycheck.exception.IllegalNullArgumentException
+	 *             if the given argument is {@code null}
+	 */
+	@Nonnull
+	public DataBuilder appendDevicePattern(@Nonnull final DevicePattern pattern) {
+		Check.notNull(pattern, "pattern");
+		if (!devicePatterns.containsKey(pattern.getId())) {
+			devicePatterns.put(pattern.getId(), new TreeSet<DevicePattern>(DEVICE_PATTERN_COMPARATOR));
+		}
+
+		devicePatterns.get(pattern.getId()).add(pattern);
+		return this;
+	}
+
 	@Nonnull
 	public DataBuilder appendOperatingSystem(@Nonnull final OperatingSystem operatingSystem) {
 		Check.notNull(operatingSystem, "operatingSystem");
@@ -342,6 +431,7 @@ public class DataBuilder {
 		addTypeToBrowser(browserBuilders, browserTypes);
 		addPatternToBrowser(browserBuilders, browserPatterns);
 		addPatternToOperatingSystem(operatingSystemBuilders, operatingSystemPatterns);
+		addPatternToDevice(deviceBuilders, devicePatterns);
 
 		final Map<Integer, OperatingSystem> systems = buildOperatingSystems(operatingSystemBuilders);
 		addOperatingSystemToBrowser(browserBuilders, systems, convertBrowserOsMapping(browserToOperatingSystemMap));
@@ -352,11 +442,14 @@ public class DataBuilder {
 		final Set<Browser> browserSet = buildBrowsers(browserBuilders);
 		browserSet.addAll(browsers);
 
+		final Set<Device> devices = buildDevices(deviceBuilders);
+
 		final SortedMap<BrowserPattern, Browser> patternToBrowserMap = buildPatternToBrowserMap(browserSet);
 		final SortedMap<OperatingSystemPattern, OperatingSystem> patternToOperatingSystemMap = buildPatternToOperatingSystemMap(osSet);
+		final SortedMap<DevicePattern, Device> patternToDeviceMap = buildPatternToDeviceMap(devices);
 
 		return new Data(browserSet, browserPatterns, browserTypes, patternToBrowserMap, browserToOperatingSystemMap, osSet,
-				operatingSystemPatterns, patternToOperatingSystemMap, robots, version);
+				operatingSystemPatterns, patternToOperatingSystemMap, robots, devices, devicePatterns, patternToDeviceMap, version);
 	}
 
 	@Nonnull

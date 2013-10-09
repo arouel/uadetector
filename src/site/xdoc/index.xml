@@ -35,6 +35,28 @@
 				integration-tested against a specific Core module. Therefore we can guarantee that the parsing works like expected.
 			</p>
 		</section>
+		<section name="Device categorization">
+			<p>
+				Since version
+				<code>0.9.10</code>
+				we support device categorization which means that for instance an
+				<i>iPhone</i>
+				or
+				<i>Nexus 4</i>
+				will be classified as
+				<code>Smartphone</code>
+				and an
+				<i>iPad</i>,
+				<i>Kindle</i>
+				or
+				<i>Surface RT</i>
+				as
+				<code>Tablet</code>.
+				Please take a look into our
+				<a href="modules/uadetector-core/apidocs/net/sf/uadetector/ReadableUserAgent.html">API documentation</a>
+				to get an idea what you can get when parsing an user agent string.
+			</p>
+		</section>
 		<section name="News">
 			<a class="twitter-timeline" href="https://twitter.com/UADetector">Tweets von @UADetector</a>
 			<script type="text/javascript" src="./js/widget.js"></script>

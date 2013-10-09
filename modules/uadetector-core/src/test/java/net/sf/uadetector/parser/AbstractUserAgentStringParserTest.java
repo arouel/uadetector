@@ -3,6 +3,7 @@ package net.sf.uadetector.parser;
 import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -23,6 +24,8 @@ import net.sf.uadetector.internal.data.domain.Browser;
 import net.sf.uadetector.internal.data.domain.BrowserOperatingSystemMapping;
 import net.sf.uadetector.internal.data.domain.BrowserPattern;
 import net.sf.uadetector.internal.data.domain.BrowserType;
+import net.sf.uadetector.internal.data.domain.Device;
+import net.sf.uadetector.internal.data.domain.DevicePattern;
 import net.sf.uadetector.internal.data.domain.OperatingSystem;
 import net.sf.uadetector.internal.data.domain.OperatingSystemPattern;
 import net.sf.uadetector.internal.data.domain.Robot;
@@ -48,6 +51,9 @@ public class AbstractUserAgentStringParserTest {
 		final Map<Integer, SortedSet<OperatingSystemPattern>> operatingSystemPatterns = Maps.newHashMap();
 		final SortedMap<OperatingSystemPattern, OperatingSystem> patternToOperatingSystemMap = new TreeMap<OperatingSystemPattern, OperatingSystem>();
 		final List<Robot> robots = new ArrayList<Robot>();
+		final Set<Device> devices = new HashSet<Device>(0);
+		final Map<Integer, SortedSet<DevicePattern>> devicePatterns = new HashMap<Integer, SortedSet<DevicePattern>>(0);
+		final SortedMap<DevicePattern, Device> patternToDeviceMap = new TreeMap<DevicePattern, Device>();
 		final String version = "test-version";
 
 		// fill structures with data
@@ -67,7 +73,8 @@ public class AbstractUserAgentStringParserTest {
 
 		// create Data instance
 		final Data data = new Data(browsers, browserPatterns, browserTypes, patternToBrowserMap, browserToOperatingSystemMappings,
-				operatingSystems, operatingSystemPatterns, patternToOperatingSystemMap, robots, version);
+				operatingSystems, operatingSystemPatterns, patternToOperatingSystemMap, robots, devices, devicePatterns,
+				patternToDeviceMap, version);
 
 		final UserAgentStringParser parser = new UserAgentStringParserImpl<DataStore>(new DataStore() {
 			@Override

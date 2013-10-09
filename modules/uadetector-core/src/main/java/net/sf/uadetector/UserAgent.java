@@ -31,6 +31,8 @@ public final class UserAgent implements ReadableUserAgent, Serializable {
 
 	public static final class Builder implements ReadableUserAgent {
 
+		private DeviceCategory deviceCategory = EMPTY.deviceCategory;
+
 		private UserAgentFamily family = EMPTY.family;
 
 		private String icon = EMPTY.icon;
@@ -64,7 +66,13 @@ public final class UserAgent implements ReadableUserAgent, Serializable {
 
 		@Nonnull
 		public UserAgent build() {
-			return new UserAgent(family, icon, name, operatingSystem, producer, producerUrl, type, typeName, url, versionNumber);
+			return new UserAgent(deviceCategory, family, icon, name, operatingSystem, producer, producerUrl, type, typeName, url,
+					versionNumber);
+		}
+
+		@Override
+		public DeviceCategory getDeviceCategory() {
+			return deviceCategory;
 		}
 
 		@Override
@@ -119,6 +127,13 @@ public final class UserAgent implements ReadableUserAgent, Serializable {
 		@Override
 		public VersionNumber getVersionNumber() {
 			return versionNumber;
+		}
+
+		@Nonnull
+		public Builder setDeviceCategory(@Nonnull final DeviceCategory deviceCategory) {
+			Check.notNull(deviceCategory, "deviceCategory");
+			this.deviceCategory = deviceCategory;
+			return this;
 		}
 
 		@Nonnull
@@ -210,13 +225,16 @@ public final class UserAgent implements ReadableUserAgent, Serializable {
 
 	}
 
-	public static final UserAgent EMPTY = new UserAgent(UserAgentFamily.UNKNOWN, "", "unknown", OperatingSystem.EMPTY, "", "",
-			UserAgentType.UNKNOWN, "", "", VersionNumber.UNKNOWN);
+	public static final UserAgent EMPTY = new UserAgent(DeviceCategory.UNKNOWN, UserAgentFamily.UNKNOWN, "", "unknown",
+			OperatingSystem.EMPTY, "", "", UserAgentType.UNKNOWN, "", "", VersionNumber.UNKNOWN);
 
 	/**
 	 * Serialization version
 	 */
 	private static final long serialVersionUID = 1L;
+
+	@Nonnull
+	private final DeviceCategory deviceCategory;
 
 	@Nonnull
 	private final UserAgentFamily family;
@@ -248,10 +266,11 @@ public final class UserAgent implements ReadableUserAgent, Serializable {
 	@Nonnull
 	private final VersionNumber versionNumber;
 
-	public UserAgent(@Nonnull final UserAgentFamily family, @Nonnull final String icon, @Nonnull final String name,
-			@Nonnull final OperatingSystem operatingSystem, @Nonnull final String producer, @Nonnull final String producerUrl,
-			@Nonnull final UserAgentType type, @Nonnull final String typeName, @Nonnull final String url,
-			@Nonnull final VersionNumber versionNumber) {
+	public UserAgent(@Nonnull final DeviceCategory deviceType, @Nonnull final UserAgentFamily family, @Nonnull final String icon,
+			@Nonnull final String name, @Nonnull final OperatingSystem operatingSystem, @Nonnull final String producer,
+			@Nonnull final String producerUrl, @Nonnull final UserAgentType type, @Nonnull final String typeName,
+			@Nonnull final String url, @Nonnull final VersionNumber versionNumber) {
+		Check.notNull(deviceType, "deviceType");
 		Check.notNull(family, "family");
 		Check.notNull(icon, "icon");
 		Check.notNull(name, "name");
@@ -263,6 +282,7 @@ public final class UserAgent implements ReadableUserAgent, Serializable {
 		Check.notNull(url, "url");
 		Check.notNull(versionNumber, "versionNumber");
 
+		this.deviceCategory = deviceType;
 		this.family = family;
 		this.icon = icon;
 		this.name = name;
@@ -287,6 +307,9 @@ public final class UserAgent implements ReadableUserAgent, Serializable {
 			return false;
 		}
 		final UserAgent other = (UserAgent) obj;
+		if (deviceCategory != other.deviceCategory) {
+			return false;
+		}
 		if (!family.equals(other.family)) {
 			return false;
 		}
@@ -318,6 +341,12 @@ public final class UserAgent implements ReadableUserAgent, Serializable {
 			return false;
 		}
 		return true;
+	}
+
+	@Nonnull
+	@Override
+	public DeviceCategory getDeviceCategory() {
+		return deviceCategory;
 	}
 
 	@Override
@@ -374,6 +403,7 @@ public final class UserAgent implements ReadableUserAgent, Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + deviceCategory.hashCode();
 		result = prime * result + family.hashCode();
 		result = prime * result + icon.hashCode();
 		result = prime * result + name.hashCode();
@@ -391,7 +421,9 @@ public final class UserAgent implements ReadableUserAgent, Serializable {
 	@Override
 	public String toString() {
 		final StringBuilder builder = new StringBuilder();
-		builder.append("UserAgent [family=");
+		builder.append("UserAgent [deviceType=");
+		builder.append(deviceCategory);
+		builder.append(", family=");
 		builder.append(family);
 		builder.append(", icon=");
 		builder.append(icon);

@@ -45,6 +45,8 @@ import net.sf.uadetector.internal.data.domain.Browser;
 import net.sf.uadetector.internal.data.domain.BrowserOperatingSystemMapping;
 import net.sf.uadetector.internal.data.domain.BrowserPattern;
 import net.sf.uadetector.internal.data.domain.BrowserType;
+import net.sf.uadetector.internal.data.domain.Device;
+import net.sf.uadetector.internal.data.domain.DevicePattern;
 import net.sf.uadetector.internal.data.domain.OperatingSystem;
 import net.sf.uadetector.internal.data.domain.OperatingSystemPattern;
 import net.sf.uadetector.internal.data.domain.Robot;
@@ -77,6 +79,12 @@ public final class XmlDataWriter {
 		String COMPANY = "company";
 		String DATA = "data";
 		String DESCRIPTION = "description";
+		String DEVICE = "device";
+		String DEVICE_ID = "device_id";
+		String DEVICE_INFO_URL = "device_info_url";
+		String DEVICE_REG = "device_reg";
+		String DEVICES = "devices";
+		String DEVICES_REG = "devices_reg";
 		String FAMILY = "family";
 		String ICON = "icon";
 		String ID = "id";
@@ -220,6 +228,57 @@ public final class XmlDataWriter {
 		description.appendChild(shaChecksum).appendChild(
 				doc.createTextNode("http://user-agent-string.info/rpc/get_data.php?format=xml&sha1=y"));
 		return description;
+	}
+
+	private static Element createDevice(final Device device, final Document doc) {
+		final Element b = doc.createElement(Tag.DEVICE);
+		final Element id = doc.createElement(Tag.ID);
+		id.appendChild(doc.createTextNode(String.valueOf(device.getId())));
+		b.appendChild(id);
+		final Element name = doc.createElement(Tag.NAME);
+		name.appendChild(doc.createTextNode(device.getName()));
+		b.appendChild(name);
+		final Element icon = doc.createElement(Tag.ICON);
+		icon.appendChild(doc.createTextNode(device.getIcon()));
+		b.appendChild(icon);
+		final Element botInfoUrl = doc.createElement(Tag.DEVICE_INFO_URL);
+		botInfoUrl.appendChild(doc.createTextNode(device.getInfoUrl()));
+		b.appendChild(botInfoUrl);
+		return b;
+	}
+
+	private static Element createDevicePatterns(final Data data, final Document doc) {
+		final List<DevicePattern> patterns = new ArrayList<DevicePattern>(data.getDevicePatterns().size());
+		for (final Entry<Integer, SortedSet<DevicePattern>> entry : data.getDevicePatterns().entrySet()) {
+			patterns.addAll(entry.getValue());
+		}
+		Collections.sort(patterns, new OrderedPatternComparator<DevicePattern>());
+
+		final Element deviceTypesElement = doc.createElement(Tag.DEVICES_REG);
+		for (final DevicePattern pattern : patterns) {
+			final Element t = doc.createElement(Tag.DEVICE_REG);
+			final Element order = doc.createElement(Tag.ORDER);
+			order.appendChild(doc.createTextNode(String.valueOf(pattern.getPosition())));
+			t.appendChild(order);
+			final Element id = doc.createElement(Tag.DEVICE_ID);
+			id.appendChild(doc.createTextNode(String.valueOf(pattern.getId())));
+			t.appendChild(id);
+			final Element family = doc.createElement(Tag.REGSTRING);
+			family.appendChild(doc.createTextNode(RegularExpressionConverter.convertPatternToPerlRegex(pattern.getPattern())));
+			t.appendChild(family);
+			deviceTypesElement.appendChild(t);
+		}
+		return deviceTypesElement;
+	}
+
+	private static Element createDevices(final Data data, final Document doc) {
+		final Element devicesElement = doc.createElement(Tag.DEVICES);
+		final List<Device> devices = new ArrayList<Device>(data.getDevices());
+		Collections.sort(devices, IdentifiableComparator.INSTANCE);
+		for (final Device device : devices) {
+			devicesElement.appendChild(createDevice(device, doc));
+		}
+		return devicesElement;
 	}
 
 	private static Element createOperatingSystem(final OperatingSystem operatingSystem, final Document doc) {
@@ -377,6 +436,8 @@ public final class XmlDataWriter {
 		dataElement.appendChild(createBrowserPatterns(data, doc));
 		dataElement.appendChild(createBrowserOperatingSystemMappings(data, doc));
 		dataElement.appendChild(createOperatingSystemPatterns(data, doc));
+		dataElement.appendChild(createDevices(data, doc));
+		dataElement.appendChild(createDevicePatterns(data, doc));
 
 		// write the content to output stream
 		final DOMSource source = new DOMSource(doc);

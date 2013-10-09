@@ -15,6 +15,8 @@
  ******************************************************************************/
 package net.sf.uadetector.internal.data;
 
+import static org.fest.assertions.Assertions.assertThat;
+
 import java.util.SortedSet;
 import java.util.TreeSet;
 import java.util.regex.Pattern;
@@ -22,16 +24,17 @@ import java.util.regex.Pattern;
 import net.sf.qualitycheck.exception.IllegalNegativeArgumentException;
 import net.sf.qualitycheck.exception.IllegalNullArgumentException;
 import net.sf.qualitycheck.exception.IllegalStateOfArgumentException;
+import net.sf.uadetector.DeviceCategory;
 import net.sf.uadetector.UserAgentFamily;
 import net.sf.uadetector.internal.data.domain.Browser;
 import net.sf.uadetector.internal.data.domain.BrowserOperatingSystemMapping;
 import net.sf.uadetector.internal.data.domain.BrowserPattern;
 import net.sf.uadetector.internal.data.domain.BrowserType;
+import net.sf.uadetector.internal.data.domain.Device;
 import net.sf.uadetector.internal.data.domain.OperatingSystem;
 import net.sf.uadetector.internal.data.domain.OperatingSystemPattern;
 import net.sf.uadetector.internal.data.domain.Robot;
 
-import static org.fest.assertions.Assertions.assertThat;
 import org.junit.Test;
 
 public class DataBuilderTest {
@@ -162,6 +165,57 @@ public class DataBuilderTest {
 	public void appendBrowserType() {
 		final DataBuilder b = new DataBuilder();
 		b.appendBrowserType(null);
+	}
+
+	@Test(expected = IllegalStateOfArgumentException.class)
+	public void appendDeviceBuilder_addSameOneMoreTime() {
+		final DataBuilder b = new DataBuilder();
+		final Device.Builder builder = new Device.Builder();
+		builder.setId(1);
+		builder.setName(DeviceCategory.TABLET.getName());
+		assertThat(b.appendDeviceBuilder(builder)).isSameAs(b);
+		assertThat(b.appendDeviceBuilder(builder)).isSameAs(b); // testing to add same one more time
+	}
+
+	@Test(expected = IllegalNegativeArgumentException.class)
+	public void appendDeviceBuilder_id_toSmall() {
+		final DataBuilder b = new DataBuilder();
+		b.appendDeviceBuilder(new Device.Builder());
+	}
+
+	@Test(expected = IllegalNullArgumentException.class)
+	public void appendDeviceBuilder_null() {
+		final DataBuilder b = new DataBuilder();
+		b.appendDeviceBuilder(null);
+	}
+
+	@Test
+	public void appendDeviceBuilder_successful_testCopyFunction() {
+		final DataBuilder d = new DataBuilder().setVersion("test version");
+		final Device.Builder builder = new Device.Builder();
+		builder.setId(1);
+		builder.setName(DeviceCategory.TABLET.getName());
+		assertThat(d.appendDeviceBuilder(builder)).isSameAs(d);
+		builder.setId(2);
+		builder.setName(DeviceCategory.SMARTPHONE.getName());
+		assertThat(d.appendDeviceBuilder(builder)).isSameAs(d);
+		final Data data = d.build();
+		assertThat(data.getDevices()).hasSize(2);
+	}
+
+	@Test
+	public void appendDeviceBuilder_successful_withoutPattern() {
+		final DataBuilder d = new DataBuilder().setVersion("test version");
+		final Device.Builder b1 = new Device.Builder();
+		b1.setId(1);
+		b1.setName(DeviceCategory.TABLET.getName());
+		assertThat(d.appendDeviceBuilder(b1)).isSameAs(d);
+		final Device.Builder b2 = new Device.Builder();
+		b2.setId(2);
+		b2.setName(DeviceCategory.SMARTPHONE.getName());
+		assertThat(d.appendDeviceBuilder(b2)).isSameAs(d);
+		final Data data = d.build();
+		assertThat(data.getDevices()).hasSize(2);
 	}
 
 	@Test(expected = IllegalNullArgumentException.class)

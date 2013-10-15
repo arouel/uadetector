@@ -20931,7 +20931,7 @@
 			<device_reg>
 				<order>18</order>
 				<device_id>4</device_id>
-				<regstring>/^Mozilla.*Android.*LG\-F200K|F200L\F200S/si</regstring>
+				<regstring>/^Mozilla.*Android.*LG\-F200K|F200L|F200S/si</regstring>
 			</device_reg>
 			<device_reg>
 				<order>19</order>

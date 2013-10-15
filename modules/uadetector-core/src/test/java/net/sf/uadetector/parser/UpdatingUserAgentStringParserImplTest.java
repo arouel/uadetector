@@ -23,6 +23,7 @@ import net.sf.uadetector.OperatingSystem;
 import net.sf.uadetector.OperatingSystemFamily;
 import net.sf.uadetector.UserAgent;
 import net.sf.uadetector.UserAgentFamily;
+import net.sf.uadetector.UserAgentType;
 import net.sf.uadetector.VersionNumber;
 import net.sf.uadetector.datastore.NotUpdateableXmlDataStore;
 import net.sf.uadetector.datastore.TestXmlDataStore;
@@ -54,6 +55,33 @@ public class UpdatingUserAgentStringParserImplTest {
 	public void getDataStore() {
 		assertThat(PARSER.getDataStore()).isNotNull();
 		assertThat(PARSER.getDataStore().getData()).isNotNull();
+	}
+
+	@Test
+	public void parse_anonymizer_ANONYMOUSE() throws Exception {
+		final String userAgent = "http://Anonymouse.org/ (Unix)";
+		final UserAgent agent = PARSER.parse(userAgent);
+		assertThat(agent).isNotNull();
+		assertThat(UserAgent.EMPTY.equals(agent)).isFalse();
+
+		// check user agent informations
+		assertThat(agent.getFamily()).isEqualTo(UserAgentFamily.ANONYMOUSE_ORG);
+		assertThat(agent.getName()).isEqualTo("Anonymouse.org");
+		assertThat(agent.getProducer()).isEqualTo("Anonymous S.A.");
+		assertThat(agent.getProducerUrl()).isEqualTo("http://anonymouse.org/");
+		assertThat(agent.getType()).isEqualTo(UserAgentType.USERAGENT_ANONYMIZER);
+		assertThat(agent.getTypeName()).isEqualTo("Useragent Anonymizer");
+		assertThat(agent.getUrl()).isEqualTo("http://anonymouse.org/");
+		assertThat(agent.getVersionNumber().toVersionString()).isEmpty();
+
+		// check operating system informations
+		final OperatingSystem os = agent.getOperatingSystem();
+		assertThat(os.getFamily()).isEqualTo(OperatingSystemFamily.LINUX);
+		assertThat(os.getFamilyName()).isEqualTo("Linux");
+		assertThat(os.getName()).isEqualTo("Linux");
+		assertThat(os.getProducer()).isEmpty();
+		assertThat(os.getProducerUrl()).isEmpty();
+		assertThat(os.getUrl()).isEqualTo("http://en.wikipedia.org/wiki/Linux");
 	}
 
 	@Test

@@ -1,6 +1,6 @@
 {
   "format": "1.0",
-  "version": "20130930-02",
+  "version": "20131011-02",
   "operating-system-patterns": [
     {
       "regex": {
@@ -243,9 +243,9 @@
     {
       "regex": {
         "flags": "si",
-        "pattern": "^Mozilla.*Tizen\\/1.0"
+        "pattern": "^Mozilla.*Tizen\\/1"
       },
-      "hash": "26b0c4af9730ec30b960fc65568b3fe05f2ef4946cfdbcd390d6ef91c197da2a"
+      "hash": "4404c94a2f2ad5b61c98a38ef24c212d16c8e560866df7fe9ea5da942b08581b"
     },
     {
       "regex": {
@@ -260,6 +260,13 @@
         "pattern": "Android\\/3"
       },
       "hash": "eb82541a5151f04c2e57e2695301cb6cfe8630bfd78ddb4115e71e90e2c868f5"
+    },
+    {
+      "regex": {
+        "flags": "si",
+        "pattern": "^Mozilla.*Tizen 2"
+      },
+      "hash": "caeebcec68e601d314e275a0947ff52f9f80daa904913cd295cb97d83b6f4595"
     },
     {
       "regex": {
@@ -936,9 +943,9 @@
     {
       "regex": {
         "flags": "si",
-        "pattern": "^Mozilla\\/5\\.0 \\(Mobile; rv:[0-9\\.]+\\) Gecko\\/[0-9\\.]+ Firefox\\/[0-9\\.]+$"
+        "pattern": "^Mozilla\\/5\\.0 \\(Mobile; rv:[0-9\\.]+.*\\) Gecko\\/[0-9\\.]+ Firefox\\/[0-9\\.]+$"
       },
-      "hash": "27d28013f335c1e47183a24edd10b0d64aaa363bc405a5f0a83c7227b5fefee0"
+      "hash": "ada30592afbff309aaec080cf0d45cc8cc93c92594f9d6fe6f4a0aac25cb1e4d"
     },
     {
       "regex": {
@@ -960,6 +967,34 @@
         "pattern": "Mac OS X (10_9|10\\.9)"
       },
       "hash": "f60a2afd94bc4bee8bf278c876e12b3cd1b11a81448955a59bf801e2fa1b312a"
+    },
+    {
+      "regex": {
+        "flags": "si",
+        "pattern": "Samsung.*SmartTV"
+      },
+      "hash": "616ba5bc4bdea28e28683eb8719cda388aebae22b4e61a8157c752fdb9a2b073"
+    },
+    {
+      "regex": {
+        "flags": "si",
+        "pattern": "AppleTV"
+      },
+      "hash": "101bdae8012c39ba5c12a2521a3b2c87a8b336221e02990dc48adc44b8add60e"
+    },
+    {
+      "regex": {
+        "flags": "si",
+        "pattern": "VectorLinux"
+      },
+      "hash": "9386c9fc6a059dd7feee8d7df1ff85b1011d5449914318b551f4a03815b842c3"
+    },
+    {
+      "regex": {
+        "flags": "si",
+        "pattern": "^Mozilla.*Nintendo 3DS"
+      },
+      "hash": "783bd33d8354d03525c9c90a4cfb0972308193d6d1138bd27823a7637e01a18c"
     },
     {
       "regex": {
@@ -1532,13 +1567,14 @@
       "info-url": "/list-of-ua/os-detail?os\u003dLinux",
       "name": "Linux",
       "operating-system-pattern-hashs": [
+        "616ba5bc4bdea28e28683eb8719cda388aebae22b4e61a8157c752fdb9a2b073",
         "29d829ca3d7ee5120670d8b4f210b94f72397a5dd88365169e8769577549b161",
         "146ce828a16f05fc1e793297e9bd79445adbf2090e666953bbb5043b7443112a"
       ],
       "producer": "",
       "producer-url": "",
       "url": "http://en.wikipedia.org/wiki/Linux",
-      "hash": "3ac0f9433ab56f519bdbbc7f44f4e54013a0b7a3b4d939cb5777f9cdc9f3a024"
+      "hash": "34bf2c734a5c713c78509054ccaa77b5443e639576efe76251ea0e528e025062"
     },
     {
       "family": "Linux",
@@ -1940,12 +1976,13 @@
       "info-url": "/list-of-ua/os-detail?os\u003dLinux (VectorLinux)",
       "name": "Linux (VectorLinux)",
       "operating-system-pattern-hashs": [
-        "99ba207f52e12cff3accef1a8cd639b97afd6029dd84d4088e815b5fe58c2308"
+        "99ba207f52e12cff3accef1a8cd639b97afd6029dd84d4088e815b5fe58c2308",
+        "9386c9fc6a059dd7feee8d7df1ff85b1011d5449914318b551f4a03815b842c3"
       ],
       "producer": "Robert S. Lange",
       "producer-url": "",
       "url": "http://vectorlinux.com/",
-      "hash": "4fcb9e5179339f95a41245b855d181391bafd439d71d2aaa498974ad92354b18"
+      "hash": "2e678a7d8689c58b3aaf43f6eb5036977a1cc2879d643466d43d2f9c94546e45"
     },
     {
       "family": "Linux",
@@ -2171,12 +2208,13 @@
       "info-url": "/list-of-ua/os-detail?os\u003dOS X",
       "name": "OS X",
       "operating-system-pattern-hashs": [
+        "101bdae8012c39ba5c12a2521a3b2c87a8b336221e02990dc48adc44b8add60e",
         "79ba200a62cf50b377cd2b1538b7719b758304e074a2b06b31230c7cd05b9775"
       ],
       "producer": "Apple Computer, Inc.",
       "producer-url": "http://www.apple.com/",
       "url": "http://www.apple.com/osx/",
-      "hash": "8bc34e6938111ad3c21752df236329e117f2b629a1f31276878b85584a135f74"
+      "hash": "ae2f6e85ba795f5839c34de511a28a6256445d1e8eee9bc175fc3ed6deb27be3"
     },
     {
       "family": "OS/2",
@@ -2313,7 +2351,7 @@
     },
     {
       "family": "Nintendo",
-      "icon": "nintendo_ds.png",
+      "icon": "nintendoDS.png",
       "info-url": "/list-of-ua/os-detail?os\u003dNintendo DS",
       "name": "Nintendo DS",
       "operating-system-pattern-hashs": [
@@ -2322,7 +2360,7 @@
       "producer": "Nintendo of America Inc.",
       "producer-url": "http://www.nintendo.com/",
       "url": "http://www.nintendods.com/",
-      "hash": "a5226bacbbadbde08444db7ec6dae05da3c5404cdcc8666af514fde971d319d7"
+      "hash": "3b31b734aa7c45bb9e0cc2b132e330e3714af5e7f4576bcf022eeeda323f4843"
     },
     {
       "family": "Linux",
@@ -2500,15 +2538,15 @@
     {
       "family": "Tizen",
       "icon": "tizen.png",
-      "info-url": "/list-of-ua/os-detail?os\u003dTizen 1.0",
-      "name": "Tizen 1.0",
+      "info-url": "/list-of-ua/os-detail?os\u003dTizen 1",
+      "name": "Tizen 1",
       "operating-system-pattern-hashs": [
-        "26b0c4af9730ec30b960fc65568b3fe05f2ef4946cfdbcd390d6ef91c197da2a"
+        "4404c94a2f2ad5b61c98a38ef24c212d16c8e560866df7fe9ea5da942b08581b"
       ],
-      "producer": "Linux Foundation",
-      "producer-url": "http://www.linuxfoundation.org/",
+      "producer": "Tizen Project",
+      "producer-url": "https://www.tizen.org/",
       "url": "https://www.tizen.org/",
-      "hash": "542ca9ca29126f4ed0a950e92f4daa22c1a7df48860816c3b6bccc7aa2617815"
+      "hash": "a0583464be9d9a1fbe7b55f12b46ae3ee84fe84ab02a37494556c4c5e801526a"
     },
     {
       "family": "unknown",
@@ -2660,12 +2698,12 @@
       "info-url": "/list-of-ua/os-detail?os\u003dFirefox OS",
       "name": "Firefox OS",
       "operating-system-pattern-hashs": [
-        "27d28013f335c1e47183a24edd10b0d64aaa363bc405a5f0a83c7227b5fefee0"
+        "ada30592afbff309aaec080cf0d45cc8cc93c92594f9d6fe6f4a0aac25cb1e4d"
       ],
       "producer": "Mozilla Foundation",
       "producer-url": "http://www.mozilla.org/",
       "url": "http://www.mozilla.org/firefoxos/",
-      "hash": "fe97be85d50fdc6b0e5557495e4473244bc1ccf7310d0cdd7a60cab29b464ba4"
+      "hash": "0bce2aae5b47350389998c82f052c77eedb91bfac947046f812e02aed614a41a"
     },
     {
       "family": "Windows",
@@ -2758,6 +2796,32 @@
       "producer-url": "http://www.apple.com/",
       "url": "http://www.apple.com/osx/",
       "hash": "17def05b8c99bc0c4d0677eca91997fddc6b417b7f9025fd5dcb7e4a42317d05"
+    },
+    {
+      "family": "Nintendo",
+      "icon": "nintendoDS.png",
+      "info-url": "/list-of-ua/os-detail?os\u003dNintendo 3DS",
+      "name": "Nintendo 3DS",
+      "operating-system-pattern-hashs": [
+        "783bd33d8354d03525c9c90a4cfb0972308193d6d1138bd27823a7637e01a18c"
+      ],
+      "producer": "Nintendo of America Inc.",
+      "producer-url": "http://www.nintendo.com/",
+      "url": "http://www.nintendo.com/3ds",
+      "hash": "7e48a003ad5d9f108aef402f35aab09daf6523e653b44fc42163be49818914cf"
+    },
+    {
+      "family": "Tizen",
+      "icon": "tizen.png",
+      "info-url": "/list-of-ua/os-detail?os\u003dTizen 2",
+      "name": "Tizen 2",
+      "operating-system-pattern-hashs": [
+        "caeebcec68e601d314e275a0947ff52f9f80daa904913cd295cb97d83b6f4595"
+      ],
+      "producer": "Tizen Project",
+      "producer-url": "https://www.tizen.org/",
+      "url": "https://www.tizen.org/",
+      "hash": "e778e95c35bd1c1cd6e6ef029e5a3923be1010f4a36deab163ed07a2becd2519"
     }
   ],
   "browser-types": [
@@ -3237,9 +3301,9 @@
     {
       "regex": {
         "flags": "si",
-        "pattern": "^Mozilla.*AppleWebKit.*Tizen Browser\\/([0-9\\.]+)"
+        "pattern": "^Mozilla.*AppleWebKit.*Tizen Browser|Tizenbrowser\\/([0-9\\.]+)"
       },
-      "hash": "9c6a5abc0007405013cda69d443554bf0db03538f338649f972c441869ac4610"
+      "hash": "ac35d48a2126710f031a1cce5faef17143f63cdc0a93c6a06a40603a58351b15"
     },
     {
       "regex": {
@@ -3303,6 +3367,13 @@
         "pattern": "Mozilla.*AppleWebKit.*Roccat\\/([0-9\\.]+).*R"
       },
       "hash": "24ce3d39c4af4cf5bac5015062457bdc709b9dcc73c706ab4cde73b8d57531cf"
+    },
+    {
+      "regex": {
+        "flags": "si",
+        "pattern": "^Mozilla.*Tizen 2.*Version\\/([0-9\\.]+).*Mobile Safari"
+      },
+      "hash": "110e7114a488b4760f03e190841d0bff876f3fef8aa56105d1b9f06eec08b45d"
     },
     {
       "regex": {
@@ -5981,6 +6052,13 @@
     {
       "regex": {
         "flags": "si",
+        "pattern": "^Mozilla.*Nintendo 3DS"
+      },
+      "hash": "783bd33d8354d03525c9c90a4cfb0972308193d6d1138bd27823a7637e01a18c"
+    },
+    {
+      "regex": {
+        "flags": "si",
         "pattern": "mozilla.*opera ([0-9][0-9a-z\\+\\-\\.]+).*"
       },
       "hash": "fad87aad28843a1997ca2c3f22f12ac9f54d61e1aaa8ce1b2e7f833a3bd4755a"
@@ -6942,7 +7020,7 @@
       "family": "Dillo",
       "icon": "dillo.png",
       "info-url": "/list-of-ua/browser-detail?browser\u003dDillo",
-      "operating-system-hash": "3ac0f9433ab56f519bdbbc7f44f4e54013a0b7a3b4d939cb5777f9cdc9f3a024",
+      "operating-system-hash": "34bf2c734a5c713c78509054ccaa77b5443e639576efe76251ea0e528e025062",
       "browser-pattern-hashs": [
         "302e1bf02c02bf2c6cd1bc4d735ce614dd0ab5ce88c7e99e5a983d32df34ab37"
       ],
@@ -6950,7 +7028,7 @@
       "producer-url": "",
       "browser-type-hash": "d31de1a5c5c8ba2a210a167cf0d0dc2425c57ea7525f4b73a4b7ab934af79dfc",
       "url": "http://www.dillo.org/",
-      "hash": "76865d10aefdc912ac382cef283aa45d71f4d1a7af00d129d125ef12e45ead9b"
+      "hash": "6467f75553bc747d03bcbd32b8c5388a7f9553477b81a940132f8ad6e3d37695"
     },
     {
       "family": "iCab",
@@ -7575,8 +7653,8 @@
       "producer": "Sakamoto Hironori",
       "producer-url": "http://www2u.biglobe.ne.jp/%7Ehsaka/",
       "browser-type-hash": "d31de1a5c5c8ba2a210a167cf0d0dc2425c57ea7525f4b73a4b7ab934af79dfc",
-      "url": "http://www.w3m.org/",
-      "hash": "d9e6835e19f70635f074f639abaeb833e0a76a7b192c47e9f5b2f35109d173c5"
+      "url": "http://w3m.sourceforge.net/",
+      "hash": "0da7148c6c08592609ce5c2a4dc3af018c3a577a4eabe345576a10a2e2e55220"
     },
     {
       "family": "WebZIP",
@@ -8184,7 +8262,7 @@
     },
     {
       "family": "IE Mobile",
-      "icon": "msie.png",
+      "icon": "iemobile.png",
       "info-url": "/list-of-ua/browser-detail?browser\u003dIE Mobile",
       "browser-pattern-hashs": [
         "ad0e32f673556ebdcf5f2016edd36b886ac5c03148ba9ebf44b15ef1a39bcf2f",
@@ -8196,7 +8274,7 @@
       "producer-url": "http://www.microsoft.com/",
       "browser-type-hash": "d4f1118eb3ace8c9d67d4b72ff39234cd4f3ab260ef6f422ce24b7a1b10d14ee",
       "url": "http://www.microsoft.com/windowsmobile/en-us/downloads/microsoft/internet-explorer-mobile.mspx",
-      "hash": "62fd4a91f24248729509677698aeb414ebbe5b1d0e98344d060494728ddeee65"
+      "hash": "cce4c39b814d81a6cd6d6248f95c21319f0e89213d28750ea6905fc3d58adae3"
     },
     {
       "family": "BlackBerry Browser",
@@ -8987,7 +9065,7 @@
       "family": "LibSoup",
       "icon": "libsoup.png",
       "info-url": "/list-of-ua/browser-detail?browser\u003dLibSoup",
-      "operating-system-hash": "3ac0f9433ab56f519bdbbc7f44f4e54013a0b7a3b4d939cb5777f9cdc9f3a024",
+      "operating-system-hash": "34bf2c734a5c713c78509054ccaa77b5443e639576efe76251ea0e528e025062",
       "browser-pattern-hashs": [
         "51024aab1db7c24fe05495e31a8f19b050967c5dd438340bf6659694706bd48b"
       ],
@@ -8995,7 +9073,7 @@
       "producer-url": "http://www.gnome.org/",
       "browser-type-hash": "dc20b3d5d2cddf82fad332821ca5e9a4efdcede4a273aa193d2b495bdcc92825",
       "url": "http://live.gnome.org/LibSoup",
-      "hash": "ffc5c3477827f028067652d169728e4a8010682888b6f36e2708ea8a6fa3c65e"
+      "hash": "0cd1b71614514c2d3b4f495a0da3b5c6397c8fc9555cb547765b5c2d9173f3bb"
     },
     {
       "family": "NetNewsWire",
@@ -9163,7 +9241,7 @@
       "family": "xine",
       "icon": "xine.png",
       "info-url": "/list-of-ua/browser-detail?browser\u003dxine",
-      "operating-system-hash": "3ac0f9433ab56f519bdbbc7f44f4e54013a0b7a3b4d939cb5777f9cdc9f3a024",
+      "operating-system-hash": "34bf2c734a5c713c78509054ccaa77b5443e639576efe76251ea0e528e025062",
       "browser-pattern-hashs": [
         "8ea3d221c7ac2fb728d414208348949641d4ff87a4efd4d501a2fe18e4fdb3d8"
       ],
@@ -9171,7 +9249,7 @@
       "producer-url": "http://www.xine-project.org/authors",
       "browser-type-hash": "dc20b3d5d2cddf82fad332821ca5e9a4efdcede4a273aa193d2b495bdcc92825",
       "url": "http://www.xine-project.org/",
-      "hash": "4bd7a2db2c16709a42068abd0502dc616b96051e720a52ffd813921a2da7a5a1"
+      "hash": "a8735be6e5d6cb2fbd703347415964d7989ae611480ecf8e6dbf56d8bcb64ef4"
     },
     {
       "family": "webfs",
@@ -9230,7 +9308,7 @@
       "family": "GnomeVFS",
       "icon": "webdav.png",
       "info-url": "/list-of-ua/browser-detail?browser\u003dGnomeVFS",
-      "operating-system-hash": "3ac0f9433ab56f519bdbbc7f44f4e54013a0b7a3b4d939cb5777f9cdc9f3a024",
+      "operating-system-hash": "34bf2c734a5c713c78509054ccaa77b5443e639576efe76251ea0e528e025062",
       "browser-pattern-hashs": [
         "a3297875dde7d54531954614b20f61482fc45377318ed41322c7e5e52985189c"
       ],
@@ -9238,7 +9316,7 @@
       "producer-url": "http://www.gnome.org/",
       "browser-type-hash": "f97e9da0e3b879f0a9df979ae260a5f7e1371edb127c1862d4f861981166cdc1",
       "url": "http://developer.gnome.org/doc/API/2.0/gnome-vfs-2",
-      "hash": "f8672dc68fd0a1f7ed27221e725cf7da8d0ef3dacdff69351b1b58d7c0315bb4"
+      "hash": "5e4db82d6f1edba77d3874e369b3975de0d57abb0627f2c0fd672c787a4f88b1"
     },
     {
       "family": "Uzbl",
@@ -10669,7 +10747,7 @@
       "family": "Akregator",
       "icon": "akregator.png",
       "info-url": "/list-of-ua/browser-detail?browser\u003dAkregator",
-      "operating-system-hash": "3ac0f9433ab56f519bdbbc7f44f4e54013a0b7a3b4d939cb5777f9cdc9f3a024",
+      "operating-system-hash": "34bf2c734a5c713c78509054ccaa77b5443e639576efe76251ea0e528e025062",
       "browser-pattern-hashs": [
         "a9a76bf39edeccaf9e49af689640d1fc132cafe47afc0aa971bcafefb314bd05"
       ],
@@ -10677,7 +10755,7 @@
       "producer-url": "s",
       "browser-type-hash": "5fa04e9ebd5155094546faa58f26a23c83ab2b1f413e76eba83b588d793609d9",
       "url": "http://akregator.kde.org/",
-      "hash": "07647d7a9045b756b207b945265c898abdb9f8cd96f39ff61466e83ca42120a3"
+      "hash": "ed6d1dc88a90ef7ae45f1b9fa3367bfdb57b2b611bf44234782884f3bf215639"
     },
     {
       "family": "Mini Browser",
@@ -11189,7 +11267,7 @@
       "family": "iGooMap",
       "icon": "igoomap.png",
       "info-url": "/list-of-ua/browser-detail?browser\u003diGooMap",
-      "operating-system-hash": "8bc34e6938111ad3c21752df236329e117f2b629a1f31276878b85584a135f74",
+      "operating-system-hash": "ae2f6e85ba795f5839c34de511a28a6256445d1e8eee9bc175fc3ed6deb27be3",
       "browser-pattern-hashs": [
         "3e1ece2c43ed65d0127f65ec29a42443bfedca2f98c5c0360a71de5480fa4d31"
       ],
@@ -11197,7 +11275,7 @@
       "producer-url": "http://www.pointworks.de/",
       "browser-type-hash": "f97e9da0e3b879f0a9df979ae260a5f7e1371edb127c1862d4f861981166cdc1",
       "url": "http://www.pointworks.de/software/igoomap/index.php",
-      "hash": "adb5bdceb30ad33dbba59c18093e44b5ab805d45c93d1c5184fcbf3a40057b7e"
+      "hash": "cb7343325b32e0b9134f5a66f0f9c0e99f205cc49a2565beaea6590362b7acc5"
     },
     {
       "family": "iTunes",
@@ -11619,13 +11697,14 @@
       "info-url": "/list-of-ua/browser-detail?browser\u003dTizen Browser",
       "browser-pattern-hashs": [
         "d964335dcaf47fc1e5b4ce09398299cf3db00aa74941aae137ff7e2a1683c535",
-        "9c6a5abc0007405013cda69d443554bf0db03538f338649f972c441869ac4610"
+        "ac35d48a2126710f031a1cce5faef17143f63cdc0a93c6a06a40603a58351b15",
+        "110e7114a488b4760f03e190841d0bff876f3fef8aa56105d1b9f06eec08b45d"
       ],
-      "producer": "Linux Foundation",
-      "producer-url": "http://www.linuxfoundation.org/",
-      "browser-type-hash": "d31de1a5c5c8ba2a210a167cf0d0dc2425c57ea7525f4b73a4b7ab934af79dfc",
+      "producer": "Tizen Project",
+      "producer-url": "https://www.tizen.org/",
+      "browser-type-hash": "d4f1118eb3ace8c9d67d4b72ff39234cd4f3ab260ef6f422ce24b7a1b10d14ee",
       "url": "https://www.tizen.org/",
-      "hash": "a35d258c109218f63ff44d20b4248020b4ee626ce7618bf12032d79387c34e2c"
+      "hash": "acca081a80738930e2ea53ce60f8b729cf37c39de6b74ed183622edc4e21969c"
     },
     {
       "family": "Chrome Mobile",
@@ -12319,6 +12398,19 @@
       "browser-type-hash": "1e88220c991000b14b14a6be9efbf0ef87e6628032d66046eaf0a50423056e65",
       "url": "http://airmailapp.com/",
       "hash": "5bd0e0af755461a3fd7e15a801b5ac5fe3fa0a371af5b41609af550df32aa269"
+    },
+    {
+      "family": "3DS Browser",
+      "icon": "3DS-Browser.png",
+      "info-url": "/list-of-ua/browser-detail?browser\u003d3DS Browser",
+      "browser-pattern-hashs": [
+        "783bd33d8354d03525c9c90a4cfb0972308193d6d1138bd27823a7637e01a18c"
+      ],
+      "producer": "Nintendo of America Inc.",
+      "producer-url": "http://www.nintendo.com/",
+      "browser-type-hash": "d31de1a5c5c8ba2a210a167cf0d0dc2425c57ea7525f4b73a4b7ab934af79dfc",
+      "url": "http://en.wikipedia.org/wiki/Internet_Browser_(Nintendo_3DS)",
+      "hash": "dd33c32310b69fde5b6ccf427b9f01d3cc5e6fe810e3d4f2a3a7996648762145"
     }
   ],
   "robots": [
@@ -16381,6 +16473,16 @@
       "producer-url": "http://www.baidu.jp/",
       "user-agent-string": "Baiduspider+(+http://www.baidu.jp/spider/)",
       "hash": "925b13823bbc1332b5ed2415c8139f51f902918ea6531fab77f3fdd1295c287a"
+    },
+    {
+      "family-name": "linkdexbot",
+      "icon": "bot.png",
+      "info-url": "/list-of-ua/bot-detail?bot\u003dlinkdexbot",
+      "name": "linkdexbot",
+      "producer": "Linkdex Limited.",
+      "producer-url": "",
+      "user-agent-string": "linkdexbot/Nutch-1.0-dev (http://www.linkdex.com/; crawl at linkdex dot com)",
+      "hash": "0cf2cdf33578f8f9cfec376061e0d9c00b5b72f0daea3557abb7b9d95d2f0395"
     },
     {
       "family-name": "NaverBot",
@@ -23473,6 +23575,16 @@
       "hash": "7e30d3b2cd265bcac4bbbc515637b97a4d6b6e07a0bab27db08c66aee6243705"
     },
     {
+      "family-name": "linkdexbot",
+      "icon": "bot.png",
+      "info-url": "/list-of-ua/bot-detail?bot\u003dlinkdexbot",
+      "name": "linkdexbot/2.0",
+      "producer": "Linkdex Limited.",
+      "producer-url": "",
+      "user-agent-string": "Mozilla/5.0 (compatible; linkdexbot/2.0; +http://www.linkdex.com/about/bots/)",
+      "hash": "c8f1888bc06019dd3b1b2c3e48467878dc86d9203aaf7e76a1527675732961b9"
+    },
+    {
       "family-name": "SeznamBot",
       "icon": "seznam.png",
       "info-url": "/list-of-ua/bot-detail?bot\u003dSeznamBot",
@@ -23741,6 +23853,46 @@
       "producer-url": "http://www.host-tracker.com/",
       "user-agent-string": "Mozilla/4.0 (compatible;HostTracker/2.0;+http://www.host-tracker.com/)",
       "hash": "d478111ba2798e2f284cf6f678615db8a9a12f3cddca655890c9c06cd66c6ba3"
+    },
+    {
+      "family-name": "linkdexbot",
+      "icon": "bot.png",
+      "info-url": "/list-of-ua/bot-detail?bot\u003dlinkdexbot",
+      "name": "linkdexbot/2.1",
+      "producer": "Linkdex Limited.",
+      "producer-url": "",
+      "user-agent-string": "Mozilla/5.0 (compatible; linkdexbot/2.1; +http://www.linkdex.com/about/bots/)",
+      "hash": "7cbeb027a92a8d373982247b98e551dfe1193d673a61d67cfa2a5773d84b3b17"
+    },
+    {
+      "family-name": "BUbiNG",
+      "icon": "bot.png",
+      "info-url": "/list-of-ua/bot-detail?bot\u003dBUbiNG",
+      "name": "BUbiNG",
+      "producer": " Università degli studi di Milano.",
+      "producer-url": "http://www.unimi.it/",
+      "user-agent-string": "BUbiNG (+http://law.di.unimi.it/BUbiNG.html)",
+      "hash": "ac3d78efe4bee25c85994c98dba78cfd22ddf7822c2f0513f59d0c6350e6f7da"
+    },
+    {
+      "family-name": "parsijoo",
+      "icon": "bot.png",
+      "info-url": "/list-of-ua/bot-detail?bot\u003dparsijoo",
+      "name": "parsijoo",
+      "producer": " Community Atmosphere",
+      "producer-url": "http://parsijoo.ir/",
+      "user-agent-string": "Mozilla/5.0 (compatible; parsijoo; +http://www.parsijoo.ir/; ehsan.mousakazemi@gmail.com)",
+      "hash": "d26feb8750d8a59cf25f7c3cb4fc477fb13a7aa170c8c3e2f38d67a4f2f3b8d4"
+    },
+    {
+      "family-name": "spbot",
+      "icon": "bot_spbot.png",
+      "info-url": "/list-of-ua/bot-detail?bot\u003dspbot",
+      "name": "spbot/4.0b",
+      "producer": "Axandra GmbH",
+      "producer-url": "http://www.axandra.com/",
+      "user-agent-string": "Mozilla/5.0 (compatible; spbot/4.0b; +http://www.seoprofiler.com/bot )",
+      "hash": "cfec9816fd013f9f889518c1683c0ebf6b05d5f59d79ae834ed4106b1d3d0d2b"
     }
   ]
 }

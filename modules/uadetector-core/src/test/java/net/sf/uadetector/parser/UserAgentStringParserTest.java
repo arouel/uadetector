@@ -44,8 +44,8 @@ public class UserAgentStringParserTest {
 
 	@Test
 	public void getCurrentVersion() {
-		assertThat(PARSER.getDataStore().getData().getVersion()).isEqualTo("20130321-01");
-		assertThat(PARSER.getDataVersion()).isEqualTo("20130321-01");
+		assertThat(PARSER.getDataStore().getData().getVersion()).isEqualTo(TestXmlDataStore.VERSION_OLDER);
+		assertThat(PARSER.getDataVersion()).isEqualTo(TestXmlDataStore.VERSION_OLDER);
 	}
 
 	@Test
@@ -417,7 +417,7 @@ public class UserAgentStringParserTest {
 		assertThat(os.getName()).isEqualTo("iOS 5");
 		assertThat(os.getProducer()).isEqualTo("Apple Inc.");
 		assertThat(os.getProducerUrl()).isEqualTo("http://www.apple.com/");
-		assertThat(os.getUrl()).isEqualTo("http://en.wikipedia.org/wiki/IOS");
+		assertThat(os.getUrl()).isEqualTo("http://en.wikipedia.org/wiki/IOS_5");
 		assertThat(os.getVersionNumber().toVersionString()).isEqualTo("5.0");
 
 		// distinguish as iPad
@@ -454,7 +454,7 @@ public class UserAgentStringParserTest {
 		assertThat(os.getName()).isEqualTo("iOS 5");
 		assertThat(os.getProducer()).isEqualTo("Apple Inc.");
 		assertThat(os.getProducerUrl()).isEqualTo("http://www.apple.com/");
-		assertThat(os.getUrl()).isEqualTo("http://en.wikipedia.org/wiki/IOS");
+		assertThat(os.getUrl()).isEqualTo("http://en.wikipedia.org/wiki/IOS_5");
 		assertThat(os.getVersionNumber().toVersionString()).isEqualTo("5.1.1");
 
 		// distinguish as iPhone
@@ -658,7 +658,7 @@ public class UserAgentStringParserTest {
 		assertThat(agent.getFamily()).isEqualTo(UserAgentFamily.SETOOZBOT);
 		assertThat(agent.getIcon()).isEqualTo("bot.png");
 		assertThat(agent.getName()).isEqualTo("OOZBOT/0.20 b");
-		assertThat(agent.getProducer()).isEqualTo("SETU Software Systems P. Ltd.");
+		assertThat(agent.getProducer()).isEqualTo("SETU Software Systems (P) Ltd.");
 		assertThat(agent.getProducerUrl()).isEqualTo("http://www.setusoftware.com/");
 		assertThat(agent.getType()).isEqualTo(UserAgentType.ROBOT);
 		assertThat(agent.getTypeName()).isEqualTo(Robot.TYPENAME);

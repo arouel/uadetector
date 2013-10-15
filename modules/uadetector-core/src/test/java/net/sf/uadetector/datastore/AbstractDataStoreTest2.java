@@ -71,7 +71,7 @@ public class AbstractDataStoreTest2 {
 		final DataReader reader = new XmlDataReader();
 		final DataStore store = new TestDataStore(reader, DATA_URL, VERSION_URL, CHARSET);
 
-		assertThat(store.getData().getVersion()).isEqualTo("20130329-01");
+		assertThat(store.getData().getVersion()).isEqualTo(TestXmlDataStore.VERSION_NEWER);
 		assertThat(store.getDataReader()).isEqualTo(reader);
 		assertThat(store.getDataUrl()).isEqualTo(DATA_URL);
 		assertThat(store.getVersionUrl()).isEqualTo(VERSION_URL);

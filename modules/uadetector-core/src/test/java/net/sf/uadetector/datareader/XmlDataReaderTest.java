@@ -26,6 +26,7 @@ import java.nio.charset.Charset;
 import net.sf.qualitycheck.exception.IllegalNullArgumentException;
 import net.sf.uadetector.datareader.XmlDataReader.XmlParser;
 import net.sf.uadetector.datastore.DataStore;
+import net.sf.uadetector.datastore.TestXmlDataStore;
 import net.sf.uadetector.internal.data.Data;
 
 import static org.fest.assertions.Assertions.assertThat;
@@ -105,7 +106,7 @@ public class XmlDataReaderTest {
 		final XmlDataReader reader = new XmlDataReader();
 		final String dataAsString = CharStreams.toString(new InputStreamReader(DATA_URL.openStream()));
 		final Data data = reader.read(dataAsString);
-		assertThat(data.getVersion()).isEqualTo("20130321-01");
+		assertThat(data.getVersion()).isEqualTo(TestXmlDataStore.VERSION_OLDER);
 	}
 
 	@Test
@@ -126,7 +127,7 @@ public class XmlDataReaderTest {
 	public void readByUrl_versionParsing() throws IOException {
 		final DataReader reader = new XmlDataReader();
 		final Data data = reader.read(DATA_URL, CHARSET);
-		assertThat(data.getVersion()).isEqualTo("20130321-01");
+		assertThat(data.getVersion()).isEqualTo(TestXmlDataStore.VERSION_OLDER);
 	}
 
 	@Test(expected = IllegalNullArgumentException.class)

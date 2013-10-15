@@ -46,7 +46,7 @@ public class CachingXmlDataStoreTest_differentCacheFileAndUpdateStates {
 	/**
 	 * Version of the older UAS data
 	 */
-	private static final String DATA_VERSION_OLDER = "20130321-01";
+	private static final String DATA_VERSION_OLDER = TestXmlDataStore.VERSION_OLDER;
 
 	/**
 	 * URL to retrieve a newer UAS data as XML
@@ -61,7 +61,7 @@ public class CachingXmlDataStoreTest_differentCacheFileAndUpdateStates {
 	/**
 	 * Version of the newer UAS data
 	 */
-	private static final String DATA_VERSION_NEWER = "20130329-01";
+	private static final String DATA_VERSION_NEWER = TestXmlDataStore.VERSION_NEWER;
 
 	/**
 	 * The character set to read UAS data

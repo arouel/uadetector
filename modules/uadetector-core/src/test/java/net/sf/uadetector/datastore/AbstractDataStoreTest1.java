@@ -126,7 +126,7 @@ public class AbstractDataStoreTest1 {
 	@Test
 	public void readData_successful() {
 		final Data data = AbstractDataStore.readData(new XmlDataReader(), DATA_URL, CHARSET);
-		assertThat(data.getVersion()).isEqualTo("20130321-01");
+		assertThat(data.getVersion()).isEqualTo(TestXmlDataStore.VERSION_OLDER);
 	}
 
 	@Test(expected = IllegalStateException.class)

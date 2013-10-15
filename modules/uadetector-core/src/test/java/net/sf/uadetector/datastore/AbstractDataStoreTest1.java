@@ -26,7 +26,7 @@ import net.sf.uadetector.internal.data.Data;
 import net.sf.uadetector.internal.data.DataBlueprint;
 import net.sf.uadetector.internal.util.UrlUtil;
 
-import org.junit.Assert;
+import static org.fest.assertions.Assertions.assertThat;
 import org.junit.Test;
 
 public class AbstractDataStoreTest1 {
@@ -89,11 +89,11 @@ public class AbstractDataStoreTest1 {
 		final DataReader reader = new XmlDataReader();
 		final TestDataStore store = new TestDataStore(data, reader, CHARSET, DATA_URL, VERSION_URL);
 
-		Assert.assertEquals("test-version", store.getData().getVersion());
-		Assert.assertSame(data, store.getData());
-		Assert.assertEquals(reader, store.getDataReader());
-		Assert.assertEquals(DATA_URL, store.getDataUrl());
-		Assert.assertEquals(VERSION_URL, store.getVersionUrl());
+		assertThat(store.getData().getVersion()).isEqualTo("test-version");
+		assertThat(store.getData()).isSameAs(data);
+		assertThat(store.getDataReader()).isEqualTo(reader);
+		assertThat(store.getDataUrl()).isEqualTo(DATA_URL);
+		assertThat(store.getVersionUrl()).isEqualTo(VERSION_URL);
 	}
 
 	@Test(expected = IllegalNullArgumentException.class)
@@ -115,7 +115,7 @@ public class AbstractDataStoreTest1 {
 	@Test
 	public void readData_failsAndReturnsEMPTY() {
 		final Data data = AbstractDataStore.readData(new XmlDataReader(), UNREACHABLE_URL, CHARSET);
-		Assert.assertEquals(Data.EMPTY, data);
+		assertThat(data).isEqualTo(Data.EMPTY);
 	}
 
 	@Test(expected = IllegalNullArgumentException.class)
@@ -126,7 +126,7 @@ public class AbstractDataStoreTest1 {
 	@Test
 	public void readData_successful() {
 		final Data data = AbstractDataStore.readData(new XmlDataReader(), DATA_URL, CHARSET);
-		Assert.assertEquals("20130321-01", data.getVersion());
+		assertThat(data.getVersion()).isEqualTo("20130321-01");
 	}
 
 	@Test(expected = IllegalStateException.class)

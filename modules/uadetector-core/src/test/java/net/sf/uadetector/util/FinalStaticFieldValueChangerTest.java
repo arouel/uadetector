@@ -16,7 +16,7 @@
 package net.sf.uadetector.util;
 
 import org.junit.After;
-import org.junit.Assert;
+import static org.fest.assertions.Assertions.assertThat;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -36,9 +36,9 @@ public class FinalStaticFieldValueChangerTest {
 
 	@Test
 	public void test() throws SecurityException, NoSuchFieldException, Exception {
-		Assert.assertEquals(StaticFinalField.FALSE, false);
+		assertThat(false).isEqualTo(StaticFinalField.FALSE);
 		FinalStaticFieldValueChanger.setFinalStatic(StaticFinalField.class.getField("FALSE"), true);
-		Assert.assertEquals(StaticFinalField.FALSE, true);
+		assertThat(true).isEqualTo(StaticFinalField.FALSE);
 		LOG.info(String.format("%s: Everything is %s", this.getClass().getSimpleName(), false)); // "Everything is true"
 	}
 

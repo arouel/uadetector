@@ -18,24 +18,24 @@ package net.sf.uadetector;
 import net.sf.qualitycheck.exception.IllegalNullArgumentException;
 import net.sf.uadetector.internal.data.domain.Robot;
 
-import org.junit.Assert;
+import static org.fest.assertions.Assertions.assertThat;
 import org.junit.Test;
 
 public class UserAgentTypeTest {
 
 	@Test
 	public void evaluateByType_emptyString() {
-		Assert.assertEquals(UserAgentType.UNKNOWN, UserAgentType.evaluateByTypeName(""));
+		assertThat(UserAgentType.evaluateByTypeName("")).isEqualTo(UserAgentType.UNKNOWN);
 	}
 
 	@Test
 	public void evaluateByType_knownString_BROWSER() {
-		Assert.assertEquals(UserAgentType.BROWSER, UserAgentType.evaluateByTypeName("Browser"));
+		assertThat(UserAgentType.evaluateByTypeName("Browser")).isEqualTo(UserAgentType.BROWSER);
 	}
 
 	@Test
 	public void evaluateByType_knownString_ROBOT() {
-		Assert.assertEquals(UserAgentType.ROBOT, UserAgentType.evaluateByTypeName(Robot.TYPENAME));
+		assertThat(UserAgentType.evaluateByTypeName(Robot.TYPENAME)).isEqualTo(UserAgentType.ROBOT);
 	}
 
 	@Test(expected = IllegalNullArgumentException.class)
@@ -45,7 +45,7 @@ public class UserAgentTypeTest {
 
 	@Test
 	public void evaluateByType_unknownString() {
-		Assert.assertEquals(UserAgentType.UNKNOWN, UserAgentType.evaluateByTypeName("abcdefghijklmnopqrstuvw"));
+		assertThat(UserAgentType.evaluateByTypeName("abcdefghijklmnopqrstuvw")).isEqualTo(UserAgentType.UNKNOWN);
 	}
 
 }

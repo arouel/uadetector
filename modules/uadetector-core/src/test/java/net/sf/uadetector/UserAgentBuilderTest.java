@@ -18,7 +18,7 @@ package net.sf.uadetector;
 import net.sf.qualitycheck.exception.IllegalNullArgumentException;
 
 import org.easymock.EasyMock;
-import org.junit.Assert;
+import static org.fest.assertions.Assertions.assertThat;
 import org.junit.Test;
 
 public class UserAgentBuilderTest {
@@ -29,67 +29,67 @@ public class UserAgentBuilderTest {
 				"url", new VersionNumber("1"));
 
 		final UserAgent.Builder b = new UserAgent.Builder();
-		Assert.assertSame(b, b.setFamily(UserAgentFamily.CHROMIUM));
-		Assert.assertSame(b, b.setIcon("i1"));
-		Assert.assertSame(b, b.setName("n1"));
-		Assert.assertSame(b, b.setOperatingSystem(os));
-		Assert.assertSame(b, b.setProducer("p1"));
-		Assert.assertSame(b, b.setProducerUrl("pu1"));
-		Assert.assertSame(b, b.setType(UserAgentType.BROWSER));
-		Assert.assertSame(b, b.setTypeName("t1"));
-		Assert.assertSame(b, b.setUrl("u1"));
-		Assert.assertSame(b, b.setVersionNumber(VersionParser.parseVersion("1.0.0")));
+		assertThat(b.setFamily(UserAgentFamily.CHROMIUM)).isSameAs(b);
+		assertThat(b.setIcon("i1")).isSameAs(b);
+		assertThat(b.setName("n1")).isSameAs(b);
+		assertThat(b.setOperatingSystem(os)).isSameAs(b);
+		assertThat(b.setProducer("p1")).isSameAs(b);
+		assertThat(b.setProducerUrl("pu1")).isSameAs(b);
+		assertThat(b.setType(UserAgentType.BROWSER)).isSameAs(b);
+		assertThat(b.setTypeName("t1")).isSameAs(b);
+		assertThat(b.setUrl("u1")).isSameAs(b);
+		assertThat(b.setVersionNumber(VersionParser.parseVersion("1.0.0"))).isSameAs(b);
 
-		Assert.assertEquals(UserAgentFamily.CHROMIUM, b.getFamily());
-		Assert.assertEquals("i1", b.getIcon());
-		Assert.assertEquals("n1", b.getName());
-		Assert.assertEquals(os, b.getOperatingSystem());
-		Assert.assertEquals("p1", b.getProducer());
-		Assert.assertEquals("pu1", b.getProducerUrl());
-		Assert.assertEquals("t1", b.getTypeName());
-		Assert.assertEquals("u1", b.getUrl());
-		Assert.assertEquals("1.0.0", b.getVersionNumber().toVersionString());
+		assertThat(b.getFamily()).isEqualTo(UserAgentFamily.CHROMIUM);
+		assertThat(b.getIcon()).isEqualTo("i1");
+		assertThat(b.getName()).isEqualTo("n1");
+		assertThat(b.getOperatingSystem()).isEqualTo(os);
+		assertThat(b.getProducer()).isEqualTo("p1");
+		assertThat(b.getProducerUrl()).isEqualTo("pu1");
+		assertThat(b.getTypeName()).isEqualTo("t1");
+		assertThat(b.getUrl()).isEqualTo("u1");
+		assertThat(b.getVersionNumber().toVersionString()).isEqualTo("1.0.0");
 
 		final UserAgent ua = b.build();
-		Assert.assertNotNull(ua);
-		Assert.assertEquals(UserAgentFamily.CHROMIUM, ua.getFamily());
-		Assert.assertEquals("i1", ua.getIcon());
-		Assert.assertEquals("n1", ua.getName());
-		Assert.assertEquals(os, ua.getOperatingSystem());
-		Assert.assertEquals("p1", ua.getProducer());
-		Assert.assertEquals("pu1", ua.getProducerUrl());
-		Assert.assertEquals("t1", ua.getTypeName());
-		Assert.assertEquals("u1", ua.getUrl());
-		Assert.assertEquals("1.0.0", ua.getVersionNumber().toVersionString());
+		assertThat(ua).isNotNull();
+		assertThat(ua.getFamily()).isEqualTo(UserAgentFamily.CHROMIUM);
+		assertThat(ua.getIcon()).isEqualTo("i1");
+		assertThat(ua.getName()).isEqualTo("n1");
+		assertThat(ua.getOperatingSystem()).isEqualTo(os);
+		assertThat(ua.getProducer()).isEqualTo("p1");
+		assertThat(ua.getProducerUrl()).isEqualTo("pu1");
+		assertThat(ua.getTypeName()).isEqualTo("t1");
+		assertThat(ua.getUrl()).isEqualTo("u1");
+		assertThat(ua.getVersionNumber().toVersionString()).isEqualTo("1.0.0");
 	}
 
 	@Test
 	public void build_empty() {
 		final UserAgent.Builder b = new UserAgent.Builder();
-		Assert.assertEquals(UserAgent.EMPTY.getFamily(), b.getFamily());
-		Assert.assertEquals(UserAgent.EMPTY.getIcon(), b.getIcon());
-		Assert.assertEquals(UserAgent.EMPTY.getName(), b.getName());
-		Assert.assertEquals(UserAgent.EMPTY.getOperatingSystem(), b.getOperatingSystem());
-		Assert.assertEquals(UserAgent.EMPTY.getProducer(), b.getProducer());
-		Assert.assertEquals(UserAgent.EMPTY.getProducerUrl(), b.getProducerUrl());
-		Assert.assertEquals(UserAgent.EMPTY.getType(), b.getType());
-		Assert.assertEquals(UserAgent.EMPTY.getTypeName(), b.getTypeName());
-		Assert.assertEquals(UserAgent.EMPTY.getUrl(), b.getUrl());
-		Assert.assertEquals(VersionNumber.UNKNOWN, b.getVersionNumber());
-		Assert.assertEquals(UserAgent.EMPTY, b.build());
+		assertThat(b.getFamily()).isEqualTo(UserAgent.EMPTY.getFamily());
+		assertThat(b.getIcon()).isEqualTo(UserAgent.EMPTY.getIcon());
+		assertThat(b.getName()).isEqualTo(UserAgent.EMPTY.getName());
+		assertThat(b.getOperatingSystem()).isEqualTo(UserAgent.EMPTY.getOperatingSystem());
+		assertThat(b.getProducer()).isEqualTo(UserAgent.EMPTY.getProducer());
+		assertThat(b.getProducerUrl()).isEqualTo(UserAgent.EMPTY.getProducerUrl());
+		assertThat(b.getType()).isEqualTo(UserAgent.EMPTY.getType());
+		assertThat(b.getTypeName()).isEqualTo(UserAgent.EMPTY.getTypeName());
+		assertThat(b.getUrl()).isEqualTo(UserAgent.EMPTY.getUrl());
+		assertThat(b.getVersionNumber()).isEqualTo(VersionNumber.UNKNOWN);
+		assertThat(b.build()).isEqualTo(UserAgent.EMPTY);
 
 		final UserAgent ua = b.build();
-		Assert.assertEquals(UserAgent.EMPTY.getFamily(), ua.getFamily());
-		Assert.assertEquals(UserAgent.EMPTY.getIcon(), ua.getIcon());
-		Assert.assertEquals(UserAgent.EMPTY.getName(), ua.getName());
-		Assert.assertEquals(UserAgent.EMPTY.getOperatingSystem(), ua.getOperatingSystem());
-		Assert.assertEquals(UserAgent.EMPTY.getProducer(), ua.getProducer());
-		Assert.assertEquals(UserAgent.EMPTY.getProducerUrl(), ua.getProducerUrl());
-		Assert.assertEquals(UserAgent.EMPTY.getType(), ua.getType());
-		Assert.assertEquals(UserAgent.EMPTY.getTypeName(), ua.getTypeName());
-		Assert.assertEquals(UserAgent.EMPTY.getUrl(), ua.getUrl());
-		Assert.assertEquals(VersionNumber.UNKNOWN, ua.getVersionNumber());
-		Assert.assertEquals(UserAgent.EMPTY, b.build());
+		assertThat(ua.getFamily()).isEqualTo(UserAgent.EMPTY.getFamily());
+		assertThat(ua.getIcon()).isEqualTo(UserAgent.EMPTY.getIcon());
+		assertThat(ua.getName()).isEqualTo(UserAgent.EMPTY.getName());
+		assertThat(ua.getOperatingSystem()).isEqualTo(UserAgent.EMPTY.getOperatingSystem());
+		assertThat(ua.getProducer()).isEqualTo(UserAgent.EMPTY.getProducer());
+		assertThat(ua.getProducerUrl()).isEqualTo(UserAgent.EMPTY.getProducerUrl());
+		assertThat(ua.getType()).isEqualTo(UserAgent.EMPTY.getType());
+		assertThat(ua.getTypeName()).isEqualTo(UserAgent.EMPTY.getTypeName());
+		assertThat(ua.getUrl()).isEqualTo(UserAgent.EMPTY.getUrl());
+		assertThat(ua.getVersionNumber()).isEqualTo(VersionNumber.UNKNOWN);
+		assertThat(b.build()).isEqualTo(UserAgent.EMPTY);
 	}
 
 	@Test(expected = IllegalNullArgumentException.class)
@@ -181,7 +181,7 @@ public class UserAgentBuilderTest {
 	public void setUserAgentString() {
 		final String userAgentString = "a user agent string";
 		final UserAgent.Builder b = new UserAgent.Builder().setUserAgentString(userAgentString);
-		Assert.assertEquals(userAgentString, b.getUserAgentString());
+		assertThat(b.getUserAgentString()).isEqualTo(userAgentString);
 	}
 
 	@Test(expected = IllegalNullArgumentException.class)

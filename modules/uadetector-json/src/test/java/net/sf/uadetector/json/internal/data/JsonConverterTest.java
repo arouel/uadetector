@@ -26,7 +26,7 @@ import net.sf.uadetector.internal.util.UrlUtil;
 import net.sf.uadetector.json.SerDeOption;
 import net.sf.uadetector.json.internal.data.deserializer.Deserialization;
 
-import org.junit.Assert;
+import static org.fest.assertions.Assertions.assertThat;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -43,8 +43,8 @@ public class JsonConverterTest {
 		for (String warn : deserialization.getWarnings()) {
 			LOG.debug(warn);
 		}
-		Assert.assertEquals(12, deserialization.getWarnings().size());
-		Assert.assertNotSame(Data.EMPTY, deserialization.getData());
+		assertThat(deserialization.getWarnings()).hasSize(12);
+		assertThat(deserialization.getData()).isNotSameAs(Data.EMPTY);
 	}
 
 	@Test
@@ -54,8 +54,8 @@ public class JsonConverterTest {
 		for (String warn : deserialization.getWarnings()) {
 			LOG.debug(warn);
 		}
-		Assert.assertEquals(5, deserialization.getWarnings().size());
-		Assert.assertNotSame(Data.EMPTY, deserialization.getData());
+		assertThat(deserialization.getWarnings()).hasSize(5);
+		assertThat(deserialization.getData()).isNotSameAs(Data.EMPTY);
 	}
 
 	@Test
@@ -66,8 +66,8 @@ public class JsonConverterTest {
 		for (final String warning : deserialization.getWarnings()) {
 			LOG.debug(warning);
 		}
-		Assert.assertEquals(0, deserialization.getWarnings().size());
-		Assert.assertNotSame(Data.EMPTY, deserialization.getData());
+		assertThat(deserialization.getWarnings()).isEmpty();
+		assertThat(deserialization.getData()).isNotSameAs(Data.EMPTY);
 	}
 
 	@Test(expected = IllegalNullArgumentException.class)

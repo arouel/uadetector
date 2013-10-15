@@ -23,7 +23,7 @@ import net.sf.qualitycheck.exception.IllegalNegativeArgumentException;
 import net.sf.qualitycheck.exception.IllegalNullArgumentException;
 import net.sf.uadetector.internal.util.RegularExpressionConverter.Flag;
 
-import org.junit.Assert;
+import static org.fest.assertions.Assertions.assertThat;
 import org.junit.Test;
 
 public class FlagTest {
@@ -40,22 +40,22 @@ public class FlagTest {
 
 	@Test
 	public void evaluateByCharacter_i() {
-		Assert.assertEquals(Flag.CASE_INSENSITIVE, Flag.evaluateByCharacter('i'));
+		assertThat(Flag.evaluateByCharacter('i')).isEqualTo(Flag.CASE_INSENSITIVE);
 	}
 
 	@Test
 	public void evaluateByCharacter_s() {
-		Assert.assertEquals(Flag.DOTALL, Flag.evaluateByCharacter('s'));
+		assertThat(Flag.evaluateByCharacter('s')).isEqualTo(Flag.DOTALL);
 	}
 
 	@Test
 	public void evaluateByCharacter_unknown() {
-		Assert.assertEquals(null, Flag.evaluateByCharacter('1'));
+		assertThat(Flag.evaluateByCharacter('1')).isEqualTo(null);
 	}
 
 	@Test
 	public void evaluateByNumber_maxInteger() {
-		Assert.assertEquals(null, Flag.evaluateByNumber(Integer.MAX_VALUE));
+		assertThat(Flag.evaluateByNumber(Integer.MAX_VALUE)).isEqualTo(null);
 	}
 
 	@Test(expected = IllegalNegativeArgumentException.class)
@@ -65,28 +65,28 @@ public class FlagTest {
 
 	@Test
 	public void evaluateByNumber_UNIX_LINES() {
-		Assert.assertEquals(Flag.UNIX_LINES, Flag.evaluateByNumber(1));
+		assertThat(Flag.evaluateByNumber(1)).isEqualTo(Flag.UNIX_LINES);
 	}
 
 	@Test
 	public void parse_bitmaskThree() {
-		Assert.assertEquals(EnumSet.of(Flag.CASE_INSENSITIVE, Flag.UNIX_LINES), Flag.parse(3));
+		assertThat(Flag.parse(3)).isEqualTo(EnumSet.of(Flag.CASE_INSENSITIVE, Flag.UNIX_LINES));
 	}
 
 	@Test
 	public void parse_imsx() {
 		final Set<Flag> flags = Flag.parse("imsx");
 		final EnumSet<Flag> expected = EnumSet.of(Flag.CASE_INSENSITIVE, Flag.DOTALL, Flag.MULTILINE, Flag.COMMENTS);
-		Assert.assertTrue(flags.containsAll(expected));
-		Assert.assertTrue(expected.containsAll(flags));
+		assertThat(flags.containsAll(expected)).isTrue();
+		assertThat(expected.containsAll(flags)).isTrue();
 	}
 
 	@Test
 	public void parse_is() {
 		final Set<Flag> flags = Flag.parse("is");
 		final EnumSet<Flag> expected = EnumSet.of(Flag.CASE_INSENSITIVE, Flag.DOTALL);
-		Assert.assertTrue(flags.containsAll(expected));
-		Assert.assertTrue(expected.containsAll(flags));
+		assertThat(flags.containsAll(expected)).isTrue();
+		assertThat(expected.containsAll(flags)).isTrue();
 	}
 
 	@Test(expected = IllegalNegativeArgumentException.class)
@@ -103,26 +103,26 @@ public class FlagTest {
 	public void parse_si() {
 		final Set<Flag> flags = Flag.parse("si");
 		final EnumSet<Flag> expected = EnumSet.of(Flag.CASE_INSENSITIVE, Flag.DOTALL);
-		Assert.assertTrue(flags.containsAll(expected));
-		Assert.assertTrue(expected.containsAll(flags));
+		assertThat(flags.containsAll(expected)).isTrue();
+		assertThat(expected.containsAll(flags)).isTrue();
 	}
 
 	@Test
 	public void parse_Si() {
 		final Set<Flag> flags = Flag.parse("Si");
 		final EnumSet<Flag> expected = EnumSet.of(Flag.CASE_INSENSITIVE);
-		Assert.assertTrue(flags.containsAll(expected));
-		Assert.assertTrue(expected.containsAll(flags));
+		assertThat(flags.containsAll(expected)).isTrue();
+		assertThat(expected.containsAll(flags)).isTrue();
 	}
 
 	@Test
 	public void parse_unknownBigBitmask() {
-		Assert.assertEquals(EnumSet.allOf(Flag.class), Flag.parse(Integer.MAX_VALUE));
+		assertThat(Flag.parse(Integer.MAX_VALUE)).isEqualTo(EnumSet.allOf(Flag.class));
 	}
 
 	@Test
 	public void parse_zero() {
-		Assert.assertEquals(new HashSet<Flag>(0), Flag.parse(0));
+		assertThat(Flag.parse(0)).isEqualTo(new HashSet<Flag>(0));
 	}
 
 	@Test
@@ -133,12 +133,12 @@ public class FlagTest {
 		final Set<Flag> convertedTwice = Flag.parse(Flag.convertToModifiers(convertedOnce));
 
 		// testing completeness of all flags
-		Assert.assertTrue(convertedTwice.containsAll(expected));
-		Assert.assertTrue(expected.containsAll(convertedTwice));
+		assertThat(convertedTwice.containsAll(expected)).isTrue();
+		assertThat(expected.containsAll(convertedTwice)).isTrue();
 
 		// testing character ordering
-		Assert.assertEquals(new StringBuffer(modifiers).reverse().toString(), Flag.convertToModifiers(convertedOnce));
-		Assert.assertEquals(new StringBuffer(modifiers).reverse().toString(), Flag.convertToModifiers(convertedTwice));
+		assertThat(Flag.convertToModifiers(convertedOnce)).isEqualTo(new StringBuffer(modifiers).reverse().toString());
+		assertThat(Flag.convertToModifiers(convertedTwice)).isEqualTo(new StringBuffer(modifiers).reverse().toString());
 	}
 
 }

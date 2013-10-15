@@ -15,7 +15,7 @@
  ******************************************************************************/
 package net.sf.uadetector.datastore;
 
-import org.junit.Assert;
+import static org.fest.assertions.Assertions.assertThat;
 import org.junit.Test;
 
 public class OnlineXmlDataStoreTest {
@@ -26,10 +26,10 @@ public class OnlineXmlDataStoreTest {
 		final TestXmlDataStore fallbackDataStore = new TestXmlDataStore();
 
 		final OnlineXmlDataStore store = new OnlineXmlDataStore(fallbackDataStore);
-		Assert.assertTrue(!store.getData().getVersion().isEmpty());
-		Assert.assertNotNull(store.getDataReader());
-		Assert.assertNotNull(store.getDataUrl());
-		Assert.assertNotNull(store.getVersionUrl().toExternalForm());
+		assertThat(!store.getData().getVersion().isEmpty()).isTrue();
+		assertThat(store.getDataReader()).isNotNull();
+		assertThat(store.getDataUrl()).isNotNull();
+		assertThat(store.getVersionUrl().toExternalForm()).isNotNull();
 		store.refresh();
 	}
 
@@ -39,10 +39,10 @@ public class OnlineXmlDataStoreTest {
 		final TestXmlDataStore fallbackDataStore = new TestXmlDataStore();
 
 		final OnlineXmlDataStore store = new OnlineXmlDataStore(fallbackDataStore);
-		Assert.assertEquals(fallbackDataStore.getData().getVersion(), store.getData().getVersion());
-		Assert.assertNotNull(store.getDataReader());
-		Assert.assertNotNull(store.getDataUrl());
-		Assert.assertNotNull(store.getVersionUrl().toExternalForm());
+		assertThat(store.getData().getVersion()).isEqualTo(fallbackDataStore.getData().getVersion());
+		assertThat(store.getDataReader()).isNotNull();
+		assertThat(store.getDataUrl()).isNotNull();
+		assertThat(store.getVersionUrl().toExternalForm()).isNotNull();
 		store.refresh();
 	}
 

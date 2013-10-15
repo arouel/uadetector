@@ -21,7 +21,9 @@ import java.io.IOException;
 import net.sf.uadetector.exception.CannotCloseException;
 
 import org.easymock.EasyMock;
-import org.junit.Assert;
+
+import static org.fest.assertions.Assertions.assertThat;
+import static org.fest.assertions.Fail.*;
 import org.junit.Test;
 
 public class CloseablesTest {
@@ -100,11 +102,11 @@ public class CloseablesTest {
 		try {
 			Closeables.close(closeable, swallowException);
 			if (expectThrown && !swallowException) {
-				Assert.fail("An IOException must be thrown.");
+				fail("An IOException must be thrown.");
 			}
 		} catch (final IOException e) {
 			if (!expectThrown) {
-				Assert.fail("An IOException must be thrown.");
+				fail("An IOException must be thrown.");
 			}
 		}
 		EasyMock.verify(closeable);
@@ -114,13 +116,13 @@ public class CloseablesTest {
 		try {
 			Closeables.closeAndConvert(closeable, swallowException);
 			if (expectThrown && !swallowException) {
-				Assert.fail("A CannotCloseException must be thrown.");
+				fail("A CannotCloseException must be thrown.");
 			}
 		} catch (final CannotCloseException e) {
 			if (!expectThrown) {
-				Assert.fail("A CannotCloseException must be thrown.");
+				fail("A CannotCloseException must be thrown.");
 			} else {
-				Assert.assertNotNull(e.getCause());
+				assertThat(e.getCause()).isNotNull();
 			}
 		}
 		EasyMock.verify(closeable);

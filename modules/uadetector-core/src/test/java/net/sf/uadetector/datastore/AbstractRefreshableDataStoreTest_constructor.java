@@ -26,7 +26,7 @@ import net.sf.uadetector.internal.data.Data;
 import net.sf.uadetector.internal.data.DataBlueprint;
 import net.sf.uadetector.internal.util.UrlUtil;
 
-import org.junit.Assert;
+import static org.fest.assertions.Assertions.assertThat;
 import org.junit.Test;
 
 public class AbstractRefreshableDataStoreTest_constructor {
@@ -115,12 +115,12 @@ public class AbstractRefreshableDataStoreTest_constructor {
 	public void construct_successful() throws Exception {
 		final DataReader reader = new XmlDataReader();
 		final TestDataStore store = new TestDataStore(reader, CHARSET, DATA_URL, VERSION_URL, FALLBACK);
-		Assert.assertEquals(FALLBACK.getData().getVersion(), store.getData().getVersion());
+		assertThat(store.getData().getVersion()).isEqualTo(FALLBACK.getData().getVersion());
 		store.getUpdateOperation().call();
-		Assert.assertEquals(UrlUtil.read(VERSION_URL, CHARSET), store.getData().getVersion());
-		Assert.assertEquals(reader, store.getDataReader());
-		Assert.assertEquals(DATA_URL, store.getDataUrl());
-		Assert.assertEquals(VERSION_URL, store.getVersionUrl());
+		assertThat(store.getData().getVersion()).isEqualTo(UrlUtil.read(VERSION_URL, CHARSET));
+		assertThat(store.getDataReader()).isEqualTo(reader);
+		assertThat(store.getDataUrl()).isEqualTo(DATA_URL);
+		assertThat(store.getVersionUrl()).isEqualTo(VERSION_URL);
 	}
 
 	@Test(expected = IllegalNullArgumentException.class)

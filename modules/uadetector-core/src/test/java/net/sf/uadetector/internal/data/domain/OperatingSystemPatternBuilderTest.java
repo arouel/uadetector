@@ -21,7 +21,7 @@ import net.sf.qualitycheck.exception.IllegalEmptyArgumentException;
 import net.sf.qualitycheck.exception.IllegalNegativeArgumentException;
 import net.sf.qualitycheck.exception.IllegalNullArgumentException;
 
-import org.junit.Assert;
+import static org.fest.assertions.Assertions.assertThat;
 import org.junit.Test;
 
 public class OperatingSystemPatternBuilderTest {
@@ -47,7 +47,7 @@ public class OperatingSystemPatternBuilderTest {
 				.setPattern(Pattern.compile("[0-9]+")).build();
 		final OperatingSystemPattern pattern2 = new OperatingSystemPattern.Builder().setId(1).setPosition(1)
 				.setPattern(Pattern.compile("[0-9]+")).build();
-		Assert.assertTrue(pattern1.equals(pattern2));
+		assertThat(pattern1.equals(pattern2)).isTrue();
 	}
 
 	@Test(expected = NumberFormatException.class)
@@ -71,7 +71,7 @@ public class OperatingSystemPatternBuilderTest {
 				.setPattern(Pattern.compile("[0-9]+")).build();
 		final OperatingSystemPattern pattern2 = new OperatingSystemPattern.Builder().setId(1).setPosition(1)
 				.setPattern(Pattern.compile("[0-9]+")).build();
-		Assert.assertTrue(pattern1.equals(pattern2));
+		assertThat(pattern1.equals(pattern2)).isTrue();
 	}
 
 	@Test(expected = IllegalNegativeArgumentException.class)

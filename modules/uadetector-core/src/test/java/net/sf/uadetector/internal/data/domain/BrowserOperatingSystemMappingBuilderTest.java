@@ -19,7 +19,7 @@ import net.sf.qualitycheck.exception.IllegalNegativeArgumentException;
 import net.sf.qualitycheck.exception.IllegalNullArgumentException;
 import net.sf.uadetector.internal.data.domain.BrowserOperatingSystemMapping.Builder;
 
-import org.junit.Assert;
+import static org.fest.assertions.Assertions.assertThat;
 import org.junit.Test;
 
 public class BrowserOperatingSystemMappingBuilderTest {
@@ -42,9 +42,9 @@ public class BrowserOperatingSystemMappingBuilderTest {
 	@Test
 	public void setBrowserId_successful() {
 		final Builder b = new BrowserOperatingSystemMapping.Builder().setBrowserId("12345");
-		Assert.assertEquals(12345, b.getBrowserId());
+		assertThat(b.getBrowserId()).isEqualTo(12345);
 		b.setBrowserId(98765);
-		Assert.assertEquals(98765, b.getBrowserId());
+		assertThat(b.getBrowserId()).isEqualTo(98765);
 	}
 
 	@Test(expected = IllegalNegativeArgumentException.class)
@@ -70,9 +70,9 @@ public class BrowserOperatingSystemMappingBuilderTest {
 	@Test
 	public void setOperatingSystemId_successful() {
 		final Builder b = new BrowserOperatingSystemMapping.Builder().setOperatingSystemId("12345");
-		Assert.assertEquals(12345, b.getOperatingSystemId());
+		assertThat(b.getOperatingSystemId()).isEqualTo(12345);
 		b.setOperatingSystemId(98765);
-		Assert.assertEquals(98765, b.getOperatingSystemId());
+		assertThat(b.getOperatingSystemId()).isEqualTo(98765);
 	}
 
 	@Test(expected = IllegalNegativeArgumentException.class)
@@ -83,17 +83,17 @@ public class BrowserOperatingSystemMappingBuilderTest {
 	@Test
 	public void testGetters() {
 		final BrowserOperatingSystemMapping.Builder builder = new BrowserOperatingSystemMapping.Builder();
-		Assert.assertSame(builder, builder.setBrowserId(1));
-		Assert.assertSame(builder, builder.setBrowserId("2"));
-		Assert.assertSame(builder, builder.setOperatingSystemId(3));
-		Assert.assertSame(builder, builder.setOperatingSystemId("4"));
+		assertThat(builder.setBrowserId(1)).isSameAs(builder);
+		assertThat(builder.setBrowserId("2")).isSameAs(builder);
+		assertThat(builder.setOperatingSystemId(3)).isSameAs(builder);
+		assertThat(builder.setOperatingSystemId("4")).isSameAs(builder);
 
-		Assert.assertEquals(2, builder.getBrowserId());
-		Assert.assertEquals(4, builder.getOperatingSystemId());
+		assertThat(builder.getBrowserId()).isEqualTo(2);
+		assertThat(builder.getOperatingSystemId()).isEqualTo(4);
 
 		final BrowserOperatingSystemMapping m = builder.build();
-		Assert.assertEquals(2, m.getBrowserId());
-		Assert.assertEquals(4, m.getOperatingSystemId());
+		assertThat(m.getBrowserId()).isEqualTo(2);
+		assertThat(m.getOperatingSystemId()).isEqualTo(4);
 	}
 
 }

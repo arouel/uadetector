@@ -24,7 +24,7 @@ import net.sf.qualitycheck.exception.IllegalNullArgumentException;
 import net.sf.qualitycheck.exception.IllegalStateOfArgumentException;
 
 import org.easymock.EasyMock;
-import org.junit.Assert;
+import static org.fest.assertions.Assertions.assertThat;
 import org.junit.Test;
 
 public class VersionNumberTest {
@@ -33,55 +33,55 @@ public class VersionNumberTest {
 	public void compareTo_differentBugfix() {
 		final VersionNumber version1 = new VersionNumber(Arrays.asList("0", "0", "1"));
 		final VersionNumber version2 = new VersionNumber(Arrays.asList("0", "0", "2"));
-		Assert.assertEquals(-1, version1.compareTo(version2));
-		Assert.assertEquals(1, version2.compareTo(version1));
+		assertThat(version1.compareTo(version2)).isEqualTo(-1);
+		assertThat(version2.compareTo(version1)).isEqualTo(1);
 	}
 
 	@Test
 	public void compareTo_differentExtension() {
 		final VersionNumber version1 = new VersionNumber("1", "12", "1", "pre");
 		final VersionNumber version2 = new VersionNumber("1", "12", "1", "");
-		Assert.assertTrue(version1.compareTo(version2) > 0);
-		Assert.assertTrue(version2.compareTo(version1) < 0);
+		assertThat(version1.compareTo(version2) > 0).isTrue();
+		assertThat(version2.compareTo(version1) < 0).isTrue();
 
 		final VersionNumber version3 = new VersionNumber("1", "12", "1", "a");
 		final VersionNumber version4 = new VersionNumber("1", "12", "1", "b");
-		Assert.assertTrue(version3.compareTo(version4) < 0);
-		Assert.assertTrue(version4.compareTo(version3) > 0);
+		assertThat(version3.compareTo(version4) < 0).isTrue();
+		assertThat(version4.compareTo(version3) > 0).isTrue();
 
 		final VersionNumber version5 = new VersionNumber(Arrays.asList("1", "12", "1", "0"));
 		final VersionNumber version6 = new VersionNumber("1", "12", "1", "b");
-		Assert.assertTrue(version5.compareTo(version6) > 0);
-		Assert.assertTrue(version6.compareTo(version5) < 0);
+		assertThat(version5.compareTo(version6) > 0).isTrue();
+		assertThat(version6.compareTo(version5) < 0).isTrue();
 
 		final VersionNumber version7 = new VersionNumber(Arrays.asList("1", "12", "1", "0"), "a");
 		final VersionNumber version8 = new VersionNumber("1", "12", "1", "b");
-		Assert.assertTrue(version7.compareTo(version8) > 0);
-		Assert.assertTrue(version8.compareTo(version7) < 0);
+		assertThat(version7.compareTo(version8) > 0).isTrue();
+		assertThat(version8.compareTo(version7) < 0).isTrue();
 	}
 
 	@Test
 	public void compareTo_differentMajor() {
 		final VersionNumber version1 = new VersionNumber(Arrays.asList("1", "0", "1"));
 		final VersionNumber version2 = new VersionNumber(Arrays.asList("0", "0", "2"));
-		Assert.assertEquals(1, version1.compareTo(version2));
-		Assert.assertEquals(-1, version2.compareTo(version1));
+		assertThat(version1.compareTo(version2)).isEqualTo(1);
+		assertThat(version2.compareTo(version1)).isEqualTo(-1);
 	}
 
 	@Test
 	public void compareTo_differentMinor() {
 		final VersionNumber version1 = new VersionNumber(Arrays.asList("1", "102", "1"));
 		final VersionNumber version2 = new VersionNumber(Arrays.asList("1", "12", "1"));
-		Assert.assertEquals(1, version1.compareTo(version2));
-		Assert.assertEquals(-1, version2.compareTo(version1));
+		assertThat(version1.compareTo(version2)).isEqualTo(1);
+		assertThat(version2.compareTo(version1)).isEqualTo(-1);
 	}
 
 	@Test
 	public void compareTo_differentRevisionNumber() {
 		final VersionNumber version1 = new VersionNumber(Arrays.asList("11", "0", "0", "1"));
 		final VersionNumber version2 = new VersionNumber(Arrays.asList("11", "0", "0"));
-		Assert.assertEquals(1, version1.compareTo(version2));
-		Assert.assertEquals(-1, version2.compareTo(version1));
+		assertThat(version1.compareTo(version2)).isEqualTo(1);
+		assertThat(version2.compareTo(version1)).isEqualTo(-1);
 	}
 
 	@Test
@@ -108,7 +108,7 @@ public class VersionNumberTest {
 		Collections.shuffle(scrambled);
 		Collections.sort(scrambled);
 
-		Assert.assertEquals(src, scrambled);
+		assertThat(scrambled).isEqualTo(src);
 	}
 
 	@Test
@@ -139,14 +139,14 @@ public class VersionNumberTest {
 		Collections.shuffle(scrambled);
 		Collections.sort(scrambled);
 
-		Assert.assertEquals(src, scrambled);
+		assertThat(scrambled).isEqualTo(src);
 	}
 
 	@Test
 	public void compareTo_null() {
 		final VersionNumber version = new VersionNumber(Arrays.asList("0", "0", "0"));
-		Assert.assertFalse(version.equals(null));
-		Assert.assertEquals(-1, version.compareTo(null));
+		assertThat(version.equals(null)).isFalse();
+		assertThat(version.compareTo(null)).isEqualTo(-1);
 	}
 
 	@Test
@@ -157,9 +157,9 @@ public class VersionNumberTest {
 		EasyMock.replay(mockVersion);
 
 		try {
-			Assert.assertEquals(1, version1.compareTo(mockVersion));
+			assertThat(version1.compareTo(mockVersion)).isEqualTo(1);
 		} catch (final IllegalNullArgumentException e) {
-			Assert.assertEquals("Argument 'other.getGroups()' must not be null.", e.getLocalizedMessage());
+			assertThat(e.getLocalizedMessage()).isEqualTo("Argument 'other.getGroups()' must not be null.");
 		}
 
 		EasyMock.verify(mockVersion);
@@ -177,10 +177,10 @@ public class VersionNumberTest {
 	@Test
 	public void construct_0() {
 		final VersionNumber version = new VersionNumber("0");
-		Assert.assertEquals("0", version.getMajor());
-		Assert.assertEquals(VersionNumber.EMPTY_GROUP, version.getMinor());
-		Assert.assertEquals(VersionNumber.EMPTY_GROUP, version.getBugfix());
-		Assert.assertEquals("0", version.toVersionString());
+		assertThat(version.getMajor()).isEqualTo("0");
+		assertThat(version.getMinor()).isEqualTo(VersionNumber.EMPTY_GROUP);
+		assertThat(version.getBugfix()).isEqualTo(VersionNumber.EMPTY_GROUP);
+		assertThat(version.toVersionString()).isEqualTo("0");
 	}
 
 	@Test(expected = IllegalStateOfArgumentException.class)
@@ -201,17 +201,17 @@ public class VersionNumberTest {
 	@Test
 	public void construct_groups_null_null_null_0() {
 		final VersionNumber v = new VersionNumber(Arrays.asList(null, null, null, "0"));
-		Assert.assertFalse(VersionNumber.UNKNOWN.equals(v));
-		Assert.assertEquals(VersionNumber.UNKNOWN.toVersionString(), v.toVersionString());
+		assertThat(VersionNumber.UNKNOWN.equals(v)).isFalse();
+		assertThat(v.toVersionString()).isEqualTo(VersionNumber.UNKNOWN.toVersionString());
 	}
 
 	@Test
 	public void construct_hasNullValues() {
 		final VersionNumber version = new VersionNumber(Arrays.asList("4"));
-		Assert.assertEquals("4", version.getMajor());
-		Assert.assertEquals(VersionNumber.EMPTY_GROUP, version.getMinor());
-		Assert.assertEquals(VersionNumber.EMPTY_GROUP, version.getBugfix());
-		Assert.assertEquals("4", version.toVersionString());
+		assertThat(version.getMajor()).isEqualTo("4");
+		assertThat(version.getMinor()).isEqualTo(VersionNumber.EMPTY_GROUP);
+		assertThat(version.getBugfix()).isEqualTo(VersionNumber.EMPTY_GROUP);
+		assertThat(version.toVersionString()).isEqualTo("4");
 	}
 
 	@Test(expected = IllegalStateOfArgumentException.class)
@@ -222,10 +222,10 @@ public class VersionNumberTest {
 	@Test
 	public void construct_longVersion() {
 		final VersionNumber version = new VersionNumber(Arrays.asList("18", "0", "1025", "162"));
-		Assert.assertEquals("18", version.getMajor());
-		Assert.assertEquals("0", version.getMinor());
-		Assert.assertEquals("1025", version.getBugfix());
-		Assert.assertEquals("18.0.1025.162", version.toVersionString());
+		assertThat(version.getMajor()).isEqualTo("18");
+		assertThat(version.getMinor()).isEqualTo("0");
+		assertThat(version.getBugfix()).isEqualTo("1025");
+		assertThat(version.toVersionString()).isEqualTo("18.0.1025.162");
 	}
 
 	@Test(expected = IllegalStateOfArgumentException.class)
@@ -236,10 +236,10 @@ public class VersionNumberTest {
 	@Test
 	public void construct_minimal() {
 		final VersionNumber version = new VersionNumber(Arrays.asList("1", VersionNumber.EMPTY_GROUP, VersionNumber.EMPTY_GROUP));
-		Assert.assertEquals("1", version.getMajor());
-		Assert.assertEquals(VersionNumber.EMPTY_GROUP, version.getMinor());
-		Assert.assertEquals(VersionNumber.EMPTY_GROUP, version.getBugfix());
-		Assert.assertEquals("1", version.toVersionString());
+		assertThat(version.getMajor()).isEqualTo("1");
+		assertThat(version.getMinor()).isEqualTo(VersionNumber.EMPTY_GROUP);
+		assertThat(version.getBugfix()).isEqualTo(VersionNumber.EMPTY_GROUP);
+		assertThat(version.toVersionString()).isEqualTo("1");
 	}
 
 	@Test(expected = IllegalStateOfArgumentException.class)
@@ -256,76 +256,76 @@ public class VersionNumberTest {
 	public void construct_noVersion() {
 		final VersionNumber v = new VersionNumber(Arrays.asList(VersionNumber.EMPTY_GROUP, VersionNumber.EMPTY_GROUP,
 				VersionNumber.EMPTY_GROUP));
-		Assert.assertTrue(VersionNumber.UNKNOWN.equals(v));
+		assertThat(VersionNumber.UNKNOWN.equals(v)).isTrue();
 	}
 
 	@Test
 	public void construct_sizeOfListToSmall() {
-		Assert.assertEquals("1.0", new VersionNumber(Arrays.asList("1", "0")).toVersionString());
+		assertThat(new VersionNumber(Arrays.asList("1", "0")).toVersionString()).isEqualTo("1.0");
 	}
 
 	@Test
 	public void construct_version_0() {
 		final VersionNumber version = new VersionNumber(Arrays.asList("0", VersionNumber.EMPTY_GROUP, "0"));
-		Assert.assertEquals("0", version.getMajor());
-		Assert.assertEquals(VersionNumber.EMPTY_GROUP, version.getMinor());
-		Assert.assertEquals("0", version.getBugfix());
-		Assert.assertEquals(new VersionNumber("0").toVersionString(), version.toVersionString());
-		Assert.assertEquals("0", version.toVersionString());
+		assertThat(version.getMajor()).isEqualTo("0");
+		assertThat(version.getMinor()).isEqualTo(VersionNumber.EMPTY_GROUP);
+		assertThat(version.getBugfix()).isEqualTo("0");
+		assertThat(version.toVersionString()).isEqualTo(new VersionNumber("0").toVersionString());
+		assertThat(version.toVersionString()).isEqualTo("0");
 	}
 
 	@Test
 	public void construct_version_0_0_0() {
 		final VersionNumber version = new VersionNumber(Arrays.asList("0", "0", "0"));
-		Assert.assertEquals("0", version.getMajor());
-		Assert.assertEquals("0", version.getMinor());
-		Assert.assertEquals("0", version.getBugfix());
-		Assert.assertEquals("0.0.0", version.toVersionString());
+		assertThat(version.getMajor()).isEqualTo("0");
+		assertThat(version.getMinor()).isEqualTo("0");
+		assertThat(version.getBugfix()).isEqualTo("0");
+		assertThat(version.toVersionString()).isEqualTo("0.0.0");
 	}
 
 	@Test
 	public void construct_version_0_0_0_001() {
 		final VersionNumber version = new VersionNumber(Arrays.asList("0", "0", "0", "001"));
-		Assert.assertEquals("0", version.getMajor());
-		Assert.assertEquals("0", version.getMinor());
-		Assert.assertEquals("0", version.getBugfix());
-		Assert.assertEquals("0.0.0.001", version.toVersionString());
+		assertThat(version.getMajor()).isEqualTo("0");
+		assertThat(version.getMinor()).isEqualTo("0");
+		assertThat(version.getBugfix()).isEqualTo("0");
+		assertThat(version.toVersionString()).isEqualTo("0.0.0.001");
 	}
 
 	@Test
 	public void construct_version_1_2() {
 		final VersionNumber version = new VersionNumber(Arrays.asList("1", "2"));
-		Assert.assertEquals("1", version.getMajor());
-		Assert.assertEquals("2", version.getMinor());
-		Assert.assertEquals(VersionNumber.EMPTY_GROUP, version.getBugfix());
-		Assert.assertEquals("1.2", version.toVersionString());
+		assertThat(version.getMajor()).isEqualTo("1");
+		assertThat(version.getMinor()).isEqualTo("2");
+		assertThat(version.getBugfix()).isEqualTo(VersionNumber.EMPTY_GROUP);
+		assertThat(version.toVersionString()).isEqualTo("1.2");
 	}
 
 	@Test
 	public void construct_version_1_2_0() {
 		final VersionNumber version = new VersionNumber(Arrays.asList("1", "2", "0"));
-		Assert.assertEquals("1", version.getMajor());
-		Assert.assertEquals("2", version.getMinor());
-		Assert.assertEquals("0", version.getBugfix());
-		Assert.assertEquals("1.2.0", version.toVersionString());
+		assertThat(version.getMajor()).isEqualTo("1");
+		assertThat(version.getMinor()).isEqualTo("2");
+		assertThat(version.getBugfix()).isEqualTo("0");
+		assertThat(version.toVersionString()).isEqualTo("1.2.0");
 	}
 
 	@Test
 	public void construct_version_1_2_0_null() {
 		final VersionNumber version = new VersionNumber(Arrays.asList("1", "2", "0", null));
-		Assert.assertEquals("1", version.getMajor());
-		Assert.assertEquals("2", version.getMinor());
-		Assert.assertEquals("0", version.getBugfix());
-		Assert.assertEquals("1.2.0", version.toVersionString());
+		assertThat(version.getMajor()).isEqualTo("1");
+		assertThat(version.getMinor()).isEqualTo("2");
+		assertThat(version.getBugfix()).isEqualTo("0");
+		assertThat(version.toVersionString()).isEqualTo("1.2.0");
 	}
 
 	@Test
 	public void construct_version_1_2_EMPTY_GROUP() {
 		final VersionNumber version = new VersionNumber(Arrays.asList("1", "2", VersionNumber.EMPTY_GROUP));
-		Assert.assertEquals("1", version.getMajor());
-		Assert.assertEquals("2", version.getMinor());
-		Assert.assertEquals(VersionNumber.EMPTY_GROUP, version.getBugfix());
-		Assert.assertEquals("1.2", version.toVersionString());
+		assertThat(version.getMajor()).isEqualTo("1");
+		assertThat(version.getMinor()).isEqualTo("2");
+		assertThat(version.getBugfix()).isEqualTo(VersionNumber.EMPTY_GROUP);
+		assertThat(version.toVersionString()).isEqualTo("1.2");
 	}
 
 	@Test(expected = IllegalStateOfArgumentException.class)
@@ -336,10 +336,10 @@ public class VersionNumberTest {
 	@Test
 	public void construct_version_1_2_null() {
 		final VersionNumber version = new VersionNumber(Arrays.asList("1", "2", null));
-		Assert.assertEquals("1", version.getMajor());
-		Assert.assertEquals("2", version.getMinor());
-		Assert.assertEquals(VersionNumber.EMPTY_GROUP, version.getBugfix());
-		Assert.assertEquals("1.2", version.toVersionString());
+		assertThat(version.getMajor()).isEqualTo("1");
+		assertThat(version.getMinor()).isEqualTo("2");
+		assertThat(version.getBugfix()).isEqualTo(VersionNumber.EMPTY_GROUP);
+		assertThat(version.toVersionString()).isEqualTo("1.2");
 	}
 
 	@Test(expected = IllegalStateOfArgumentException.class)
@@ -350,87 +350,87 @@ public class VersionNumberTest {
 	@Test
 	public void construct_version_1_null_1() {
 		final VersionNumber version = new VersionNumber(Arrays.asList("1", null, "1"));
-		Assert.assertEquals("1", version.getMajor());
-		Assert.assertEquals(VersionNumber.EMPTY_GROUP, version.getMinor());
-		Assert.assertEquals("1", version.getBugfix());
-		Assert.assertEquals("1", version.toVersionString());
+		assertThat(version.getMajor()).isEqualTo("1");
+		assertThat(version.getMinor()).isEqualTo(VersionNumber.EMPTY_GROUP);
+		assertThat(version.getBugfix()).isEqualTo("1");
+		assertThat(version.toVersionString()).isEqualTo("1");
 	}
 
 	@Test
 	public void equals_differentBugfix() {
 		final VersionNumber version1 = new VersionNumber(Arrays.asList("0", "0", "1"));
 		final VersionNumber version2 = new VersionNumber(Arrays.asList("0", "0", "2"));
-		Assert.assertFalse(version1.equals(version2));
-		Assert.assertFalse(version2.equals(version1));
-		Assert.assertFalse(version1.hashCode() == version2.hashCode());
+		assertThat(version1.equals(version2)).isFalse();
+		assertThat(version2.equals(version1)).isFalse();
+		assertThat(version1.hashCode() == version2.hashCode()).isFalse();
 	}
 
 	@Test
 	public void equals_differentExtension() {
 		final VersionNumber version1 = new VersionNumber("1", "0", "0", "-beta5");
 		final VersionNumber version2 = new VersionNumber("1", "0", "0", "-stable");
-		Assert.assertFalse(version1.equals(version2));
-		Assert.assertFalse(version2.equals(version1));
-		Assert.assertFalse(version1.hashCode() == version2.hashCode());
+		assertThat(version1.equals(version2)).isFalse();
+		assertThat(version2.equals(version1)).isFalse();
+		assertThat(version1.hashCode() == version2.hashCode()).isFalse();
 	}
 
 	@Test
 	public void equals_differentMajor() {
 		final VersionNumber version1 = new VersionNumber(Arrays.asList("0", "0", "0"));
 		final VersionNumber version2 = new VersionNumber(Arrays.asList("1", "0", "0"));
-		Assert.assertFalse(version1.equals(version2));
-		Assert.assertFalse(version2.equals(version1));
-		Assert.assertFalse(version1.hashCode() == version2.hashCode());
+		assertThat(version1.equals(version2)).isFalse();
+		assertThat(version2.equals(version1)).isFalse();
+		assertThat(version1.hashCode() == version2.hashCode()).isFalse();
 	}
 
 	@Test
 	public void equals_differentMinor() {
 		final VersionNumber version1 = new VersionNumber(Arrays.asList("0", "0", "0"));
 		final VersionNumber version2 = new VersionNumber(Arrays.asList("0", "12", "0"));
-		Assert.assertFalse(version1.equals(version2));
-		Assert.assertFalse(version2.equals(version1));
-		Assert.assertFalse(version1.hashCode() == version2.hashCode());
+		assertThat(version1.equals(version2)).isFalse();
+		assertThat(version2.equals(version1)).isFalse();
+		assertThat(version1.hashCode() == version2.hashCode()).isFalse();
 	}
 
 	@Test
 	public void equals_differentRevisionNumber() {
 		final VersionNumber version1 = new VersionNumber(Arrays.asList("0", "0", "0"));
 		final VersionNumber version2 = new VersionNumber(Arrays.asList("0", "0", "0", "1"));
-		Assert.assertFalse(version1.equals(version2));
-		Assert.assertFalse(version2.equals(version1));
-		Assert.assertFalse(version1.hashCode() == version2.hashCode());
+		assertThat(version1.equals(version2)).isFalse();
+		assertThat(version2.equals(version1)).isFalse();
+		assertThat(version1.hashCode() == version2.hashCode()).isFalse();
 	}
 
 	@Test
 	public void equals_identical() {
 		final VersionNumber version1 = new VersionNumber("18", "0", "1025", "-stable");
 		final VersionNumber version2 = new VersionNumber("18", "0", "1025", "-stable");
-		Assert.assertTrue(version1.equals(version2));
-		Assert.assertTrue(version1.hashCode() == version2.hashCode());
+		assertThat(version1.equals(version2)).isTrue();
+		assertThat(version1.hashCode() == version2.hashCode()).isTrue();
 	}
 
 	@Test
 	public void equals_null() {
 		final VersionNumber version = new VersionNumber(Arrays.asList("0", "0", "0"));
-		Assert.assertFalse(version.equals(null));
+		assertThat(version.equals(null)).isFalse();
 	}
 
 	@Test
 	public void equals_otherClass() {
 		final VersionNumber version = new VersionNumber(Arrays.asList("0", "0", "0"));
-		Assert.assertFalse(version.equals(""));
+		assertThat(version.equals("")).isFalse();
 	}
 
 	@Test
 	public void equals_same() {
 		final VersionNumber version = new VersionNumber(Arrays.asList("0", "0", "0"));
-		Assert.assertTrue(version.equals(version));
+		assertThat(version.equals(version)).isTrue();
 	}
 
 	@Test
 	public void getGroups() {
 		final VersionNumber version = new VersionNumber(Arrays.asList("1", "2", "0"));
-		Assert.assertEquals(Arrays.asList("1", "2", "0"), version.getGroups());
+		assertThat(version.getGroups()).isEqualTo(Arrays.asList("1", "2", "0"));
 	}
 
 	@Test(expected = UnsupportedOperationException.class)
@@ -446,47 +446,47 @@ public class VersionNumberTest {
 	@Test
 	public void replaceNullValueWithEmptyGroup_toShort() {
 		final List<String> groups1 = VersionNumber.replaceNullValueWithEmptyGroup(Arrays.asList("1"));
-		Assert.assertEquals(3, groups1.size());
-		Assert.assertEquals("1", groups1.get(0));
-		Assert.assertEquals(VersionNumber.EMPTY_GROUP, groups1.get(1));
-		Assert.assertEquals(VersionNumber.EMPTY_GROUP, groups1.get(2));
+		assertThat(groups1).hasSize(3);
+		assertThat(groups1.get(0)).isEqualTo("1");
+		assertThat(groups1.get(1)).isEqualTo(VersionNumber.EMPTY_GROUP);
+		assertThat(groups1.get(2)).isEqualTo(VersionNumber.EMPTY_GROUP);
 
 		final List<String> groups2 = VersionNumber.replaceNullValueWithEmptyGroup(Arrays.asList("1", "2"));
-		Assert.assertEquals(3, groups2.size());
-		Assert.assertEquals("1", groups2.get(0));
-		Assert.assertEquals("2", groups2.get(1));
-		Assert.assertEquals(VersionNumber.EMPTY_GROUP, groups2.get(2));
+		assertThat(groups2).hasSize(3);
+		assertThat(groups2.get(0)).isEqualTo("1");
+		assertThat(groups2.get(1)).isEqualTo("2");
+		assertThat(groups2.get(2)).isEqualTo(VersionNumber.EMPTY_GROUP);
 
 		final List<String> groups3 = VersionNumber.replaceNullValueWithEmptyGroup(Arrays.asList("1", null));
-		Assert.assertEquals(3, groups3.size());
-		Assert.assertEquals("1", groups3.get(0));
-		Assert.assertEquals(VersionNumber.EMPTY_GROUP, groups3.get(1));
-		Assert.assertEquals(VersionNumber.EMPTY_GROUP, groups3.get(2));
+		assertThat(groups3).hasSize(3);
+		assertThat(groups3.get(0)).isEqualTo("1");
+		assertThat(groups3.get(1)).isEqualTo(VersionNumber.EMPTY_GROUP);
+		assertThat(groups3.get(2)).isEqualTo(VersionNumber.EMPTY_GROUP);
 	}
 
 	@Test
 	public void replaceNullValueWithEmptyGroup_withNullValues() {
 		final List<String> groups = VersionNumber.replaceNullValueWithEmptyGroup(Arrays.asList(null, null, "1"));
-		Assert.assertEquals(3, groups.size());
-		Assert.assertEquals(VersionNumber.EMPTY_GROUP, groups.get(0));
-		Assert.assertEquals(VersionNumber.EMPTY_GROUP, groups.get(1));
-		Assert.assertEquals("1", groups.get(2));
+		assertThat(groups).hasSize(3);
+		assertThat(groups.get(0)).isEqualTo(VersionNumber.EMPTY_GROUP);
+		assertThat(groups.get(1)).isEqualTo(VersionNumber.EMPTY_GROUP);
+		assertThat(groups.get(2)).isEqualTo("1");
 	}
 
 	@Test
 	public void replaceNullValueWithEmptyGroup_withoutNullValues() {
 		final List<String> groups = VersionNumber.replaceNullValueWithEmptyGroup(Arrays.asList("-1", VersionNumber.EMPTY_GROUP, "1"));
-		Assert.assertEquals(3, groups.size());
-		Assert.assertEquals("-1", groups.get(0));
-		Assert.assertEquals(VersionNumber.EMPTY_GROUP, groups.get(1));
-		Assert.assertEquals("1", groups.get(2));
+		assertThat(groups).hasSize(3);
+		assertThat(groups.get(0)).isEqualTo("-1");
+		assertThat(groups.get(1)).isEqualTo(VersionNumber.EMPTY_GROUP);
+		assertThat(groups.get(2)).isEqualTo("1");
 	}
 
 	@Test
 	public void testToString() {
 		// reduces only some noise in coverage report
 		final VersionNumber version = new VersionNumber("1", "2", "0", "-stable");
-		Assert.assertEquals("VersionNumber [groups=[1, 2, 0], extension=-stable]", version.toString());
+		assertThat(version.toString()).isEqualTo("VersionNumber [groups=[1, 2, 0], extension=-stable]");
 	}
 
 }

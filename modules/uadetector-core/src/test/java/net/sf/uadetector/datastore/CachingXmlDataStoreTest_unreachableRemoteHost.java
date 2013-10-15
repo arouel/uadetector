@@ -26,7 +26,7 @@ import java.nio.charset.Charset;
 import net.sf.uadetector.internal.util.UrlUtil;
 import net.sf.uadetector.parser.UpdatingUserAgentStringParserImpl;
 
-import org.junit.Assert;
+import static org.fest.assertions.Assertions.assertThat;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
@@ -93,9 +93,9 @@ public class CachingXmlDataStoreTest_unreachableRemoteHost {
 		// create caching data store without a cache file
 		final long startTime = System.currentTimeMillis();
 		final CachingXmlDataStore store = CachingXmlDataStore.createCachingXmlDataStore(cache, DATA_URL, VERSION_URL, CHARSET, fallback);
-		Assert.assertEquals(fallback.getData().getVersion(), store.getData().getVersion());
+		assertThat(store.getData().getVersion()).isEqualTo(fallback.getData().getVersion());
 		final long duration = System.currentTimeMillis() - startTime;
-		Assert.assertTrue("loading unreachable remote data takes too long", duration < 1000);
+		assertThat(duration < 1000).as("loading unreachable remote data takes too long").isTrue();
 
 		final UpdatingUserAgentStringParserImpl parser = new UpdatingUserAgentStringParserImpl(store);
 		parser.parse("test");
@@ -104,11 +104,11 @@ public class CachingXmlDataStoreTest_unreachableRemoteHost {
 		do {
 			Thread.sleep(1000);
 		} while (!readFile(cache).contains(DATA_VERSION) && !(System.currentTimeMillis() - lookupStartTime > WAIT_UNTIL_ABORT));
-		Assert.assertEquals(DATA_VERSION, store.getData().getVersion());
+		assertThat(store.getData().getVersion()).isEqualTo(DATA_VERSION);
 
 		final String readIn = readFile(cache);
-		Assert.assertTrue(readIn.contains(DATA_VERSION));
-		Assert.assertTrue(readIn.length() >= 721915);
+		assertThat(readIn.contains(DATA_VERSION)).isTrue();
+		assertThat(readIn.length() >= 721915).isTrue();
 	}
 
 	@Test
@@ -123,9 +123,9 @@ public class CachingXmlDataStoreTest_unreachableRemoteHost {
 		final long startTime = System.currentTimeMillis();
 		final CachingXmlDataStore store = CachingXmlDataStore.createCachingXmlDataStore(cache, UNREACHABLE_URL, UNREACHABLE_URL, CHARSET,
 				fallback);
-		Assert.assertEquals(fallback.getData().getVersion(), store.getData().getVersion());
+		assertThat(store.getData().getVersion()).isEqualTo(fallback.getData().getVersion());
 		final long duration = System.currentTimeMillis() - startTime;
-		Assert.assertTrue("loading unreachable remote data takes too long", duration < 1000);
+		assertThat(duration < 1000).as("loading unreachable remote data takes too long").isTrue();
 	}
 
 	@Test
@@ -139,7 +139,7 @@ public class CachingXmlDataStoreTest_unreachableRemoteHost {
 		// create caching data store without a cache file
 		final CachingXmlDataStore store = CachingXmlDataStore.createCachingXmlDataStore(cache, UNREACHABLE_URL, UNREACHABLE_URL, CHARSET,
 				fallback);
-		Assert.assertEquals(fallback.getData().getVersion(), store.getData().getVersion());
+		assertThat(store.getData().getVersion()).isEqualTo(fallback.getData().getVersion());
 
 		final UpdatingUserAgentStringParserImpl parser = new UpdatingUserAgentStringParserImpl(store);
 		parser.parse("test");
@@ -150,8 +150,8 @@ public class CachingXmlDataStoreTest_unreachableRemoteHost {
 			Thread.sleep(1000l);
 		} while (!readFile(cache).contains(newerVersionOfFallback) && !(System.currentTimeMillis() - lookupStartTime > WAIT_UNTIL_ABORT));
 
-		Assert.assertEquals(newerVersionOfFallback, store.getData().getVersion());
-		Assert.assertTrue(readFile(cache).contains(newerVersionOfFallback));
+		assertThat(store.getData().getVersion()).isEqualTo(newerVersionOfFallback);
+		assertThat(readFile(cache).contains(newerVersionOfFallback)).isTrue();
 	}
 
 }

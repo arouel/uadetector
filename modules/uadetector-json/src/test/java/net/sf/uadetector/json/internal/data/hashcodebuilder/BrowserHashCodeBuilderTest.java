@@ -27,7 +27,7 @@ import net.sf.uadetector.internal.data.domain.BrowserType;
 import net.sf.uadetector.internal.data.domain.OperatingSystem;
 import net.sf.uadetector.internal.data.domain.OperatingSystemPattern;
 
-import org.junit.Assert;
+import static org.fest.assertions.Assertions.assertThat;
 import org.junit.Test;
 
 public class BrowserHashCodeBuilderTest {
@@ -61,8 +61,8 @@ public class BrowserHashCodeBuilderTest {
 	public void test() {
 		final String hash1 = BrowserHashCodeBuilder.build(create());
 		final String hash2 = BrowserHashCodeBuilder.build(create());
-		Assert.assertEquals(hash1, hash2);
-		Assert.assertEquals("57a53822a3db2877cfd851ee98f1b4991dfbf4ea6b39e55433b0597242ad859e", hash1);
+		assertThat(hash2).isEqualTo(hash1);
+		assertThat(hash1).isEqualTo("57a53822a3db2877cfd851ee98f1b4991dfbf4ea6b39e55433b0597242ad859e");
 	}
 
 }

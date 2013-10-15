@@ -26,7 +26,7 @@ import net.sf.uadetector.datastore.DataStore;
 import net.sf.uadetector.datastore.TestXmlDataStore;
 import net.sf.uadetector.internal.data.domain.Robot;
 
-import org.junit.Assert;
+import static org.fest.assertions.Assertions.assertThat;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -44,106 +44,106 @@ public class UserAgentStringParserTest {
 
 	@Test
 	public void getCurrentVersion() {
-		Assert.assertEquals("20130321-01", PARSER.getDataStore().getData().getVersion());
-		Assert.assertEquals("20130321-01", PARSER.getDataVersion());
+		assertThat(PARSER.getDataStore().getData().getVersion()).isEqualTo("20130321-01");
+		assertThat(PARSER.getDataVersion()).isEqualTo("20130321-01");
 	}
 
 	@Test
 	public void getDataStore() {
-		Assert.assertNotNull(PARSER.getDataStore());
-		Assert.assertNotNull(PARSER.getDataStore().getData());
+		assertThat(PARSER.getDataStore()).isNotNull();
+		assertThat(PARSER.getDataStore().getData()).isNotNull();
 	}
 
 	@Test
 	public void parse_browser_CHROME_withoutVersionInfo() throws Exception {
 		final String userAgent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_6_8) AppleWebKit/535.1 (KHTML, like Gecko) Chrome/$ Safari/535.1";
 		final UserAgent agent = PARSER.parse(userAgent);
-		Assert.assertNotNull(agent);
-		Assert.assertFalse(UserAgent.EMPTY.equals(agent));
-		Assert.assertFalse(OperatingSystem.EMPTY.equals(agent.getOperatingSystem()));
+		assertThat(agent).isNotNull();
+		assertThat(UserAgent.EMPTY.equals(agent)).isFalse();
+		assertThat(OperatingSystem.EMPTY.equals(agent.getOperatingSystem())).isFalse();
 
 		// check user agent informations
-		Assert.assertEquals(UserAgentFamily.SAFARI, agent.getFamily());
-		Assert.assertEquals("safari.png", agent.getIcon());
-		Assert.assertEquals("Safari", agent.getName());
-		Assert.assertEquals("Apple Inc.", agent.getProducer());
-		Assert.assertEquals("http://www.apple.com/", agent.getProducerUrl());
-		Assert.assertEquals(UserAgentType.BROWSER, agent.getType());
-		Assert.assertEquals("Browser", agent.getTypeName());
-		Assert.assertEquals("http://en.wikipedia.org/wiki/Safari_%28web_browser%29", agent.getUrl());
+		assertThat(agent.getFamily()).isEqualTo(UserAgentFamily.SAFARI);
+		assertThat(agent.getIcon()).isEqualTo("safari.png");
+		assertThat(agent.getName()).isEqualTo("Safari");
+		assertThat(agent.getProducer()).isEqualTo("Apple Inc.");
+		assertThat(agent.getProducerUrl()).isEqualTo("http://www.apple.com/");
+		assertThat(agent.getType()).isEqualTo(UserAgentType.BROWSER);
+		assertThat(agent.getTypeName()).isEqualTo("Browser");
+		assertThat(agent.getUrl()).isEqualTo("http://en.wikipedia.org/wiki/Safari_%28web_browser%29");
 
 		// check operating system informations
 		final OperatingSystem os = agent.getOperatingSystem();
-		Assert.assertEquals(OperatingSystemFamily.OS_X, os.getFamily());
-		Assert.assertEquals("OS X", os.getFamilyName());
-		Assert.assertEquals("macosx.png", os.getIcon());
-		Assert.assertEquals("OS X 10.6 Snow Leopard", os.getName());
-		Assert.assertEquals("Apple Computer, Inc.", os.getProducer());
-		Assert.assertEquals("http://www.apple.com/", os.getProducerUrl());
-		Assert.assertEquals("http://www.apple.com/osx/", os.getUrl());
-		Assert.assertEquals("10.6.8", os.getVersionNumber().toVersionString());
+		assertThat(os.getFamily()).isEqualTo(OperatingSystemFamily.OS_X);
+		assertThat(os.getFamilyName()).isEqualTo("OS X");
+		assertThat(os.getIcon()).isEqualTo("macosx.png");
+		assertThat(os.getName()).isEqualTo("OS X 10.6 Snow Leopard");
+		assertThat(os.getProducer()).isEqualTo("Apple Computer, Inc.");
+		assertThat(os.getProducerUrl()).isEqualTo("http://www.apple.com/");
+		assertThat(os.getUrl()).isEqualTo("http://www.apple.com/osx/");
+		assertThat(os.getVersionNumber().toVersionString()).isEqualTo("10.6.8");
 	}
 
 	@Test
 	public void parse_browser_CHROME13() throws Exception {
 		final String userAgent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_6_8) AppleWebKit/535.1 (KHTML, like Gecko) Chrome/13.0.782.112 Safari/535.1";
 		final UserAgent agent = PARSER.parse(userAgent);
-		Assert.assertNotNull(agent);
-		Assert.assertFalse(UserAgent.EMPTY.equals(agent));
-		Assert.assertFalse(OperatingSystem.EMPTY.equals(agent.getOperatingSystem()));
+		assertThat(agent).isNotNull();
+		assertThat(UserAgent.EMPTY.equals(agent)).isFalse();
+		assertThat(OperatingSystem.EMPTY.equals(agent.getOperatingSystem())).isFalse();
 
 		// check user agent informations
-		Assert.assertEquals(UserAgentFamily.CHROME, agent.getFamily());
-		Assert.assertEquals("chrome.png", agent.getIcon());
-		Assert.assertEquals("Chrome", agent.getName());
-		Assert.assertEquals("Google Inc.", agent.getProducer());
-		Assert.assertEquals("http://www.google.com/", agent.getProducerUrl());
-		Assert.assertEquals(UserAgentType.BROWSER, agent.getType());
-		Assert.assertEquals("Browser", agent.getTypeName());
-		Assert.assertEquals("http://www.google.com/chrome", agent.getUrl());
-		Assert.assertEquals("13.0.782.112", agent.getVersionNumber().toVersionString());
+		assertThat(agent.getFamily()).isEqualTo(UserAgentFamily.CHROME);
+		assertThat(agent.getIcon()).isEqualTo("chrome.png");
+		assertThat(agent.getName()).isEqualTo("Chrome");
+		assertThat(agent.getProducer()).isEqualTo("Google Inc.");
+		assertThat(agent.getProducerUrl()).isEqualTo("http://www.google.com/");
+		assertThat(agent.getType()).isEqualTo(UserAgentType.BROWSER);
+		assertThat(agent.getTypeName()).isEqualTo("Browser");
+		assertThat(agent.getUrl()).isEqualTo("http://www.google.com/chrome");
+		assertThat(agent.getVersionNumber().toVersionString()).isEqualTo("13.0.782.112");
 
 		// check operating system informations
 		final OperatingSystem os = agent.getOperatingSystem();
-		Assert.assertEquals(OperatingSystemFamily.OS_X, os.getFamily());
-		Assert.assertEquals("OS X", os.getFamilyName());
-		Assert.assertEquals("macosx.png", os.getIcon());
-		Assert.assertEquals("OS X 10.6 Snow Leopard", os.getName());
-		Assert.assertEquals("Apple Computer, Inc.", os.getProducer());
-		Assert.assertEquals("http://www.apple.com/", os.getProducerUrl());
-		Assert.assertEquals("http://www.apple.com/osx/", os.getUrl());
-		Assert.assertEquals("10.6.8", os.getVersionNumber().toVersionString());
+		assertThat(os.getFamily()).isEqualTo(OperatingSystemFamily.OS_X);
+		assertThat(os.getFamilyName()).isEqualTo("OS X");
+		assertThat(os.getIcon()).isEqualTo("macosx.png");
+		assertThat(os.getName()).isEqualTo("OS X 10.6 Snow Leopard");
+		assertThat(os.getProducer()).isEqualTo("Apple Computer, Inc.");
+		assertThat(os.getProducerUrl()).isEqualTo("http://www.apple.com/");
+		assertThat(os.getUrl()).isEqualTo("http://www.apple.com/osx/");
+		assertThat(os.getVersionNumber().toVersionString()).isEqualTo("10.6.8");
 	}
 
 	@Test
 	public void parse_browser_CHROME19() throws Exception {
 		final String userAgent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_7_4) AppleWebKit/536.5 (KHTML, like Gecko) Chrome/19.0.1084.46 Safari/536.5";
 		final UserAgent agent = PARSER.parse(userAgent);
-		Assert.assertNotNull(agent);
-		Assert.assertFalse(UserAgent.EMPTY.equals(agent));
-		Assert.assertFalse(OperatingSystem.EMPTY.equals(agent.getOperatingSystem()));
+		assertThat(agent).isNotNull();
+		assertThat(UserAgent.EMPTY.equals(agent)).isFalse();
+		assertThat(OperatingSystem.EMPTY.equals(agent.getOperatingSystem())).isFalse();
 
 		// check user agent informations
-		Assert.assertEquals(UserAgentFamily.CHROME, agent.getFamily());
-		Assert.assertEquals("chrome.png", agent.getIcon());
-		Assert.assertEquals("Chrome", agent.getName());
-		Assert.assertEquals("Google Inc.", agent.getProducer());
-		Assert.assertEquals("http://www.google.com/", agent.getProducerUrl());
-		Assert.assertEquals(UserAgentType.BROWSER, agent.getType());
-		Assert.assertEquals("Browser", agent.getTypeName());
-		Assert.assertEquals("http://www.google.com/chrome", agent.getUrl());
-		Assert.assertEquals("19.0.1084.46", agent.getVersionNumber().toVersionString());
+		assertThat(agent.getFamily()).isEqualTo(UserAgentFamily.CHROME);
+		assertThat(agent.getIcon()).isEqualTo("chrome.png");
+		assertThat(agent.getName()).isEqualTo("Chrome");
+		assertThat(agent.getProducer()).isEqualTo("Google Inc.");
+		assertThat(agent.getProducerUrl()).isEqualTo("http://www.google.com/");
+		assertThat(agent.getType()).isEqualTo(UserAgentType.BROWSER);
+		assertThat(agent.getTypeName()).isEqualTo("Browser");
+		assertThat(agent.getUrl()).isEqualTo("http://www.google.com/chrome");
+		assertThat(agent.getVersionNumber().toVersionString()).isEqualTo("19.0.1084.46");
 
 		// check operating system informations
 		final OperatingSystem os = agent.getOperatingSystem();
-		Assert.assertEquals(OperatingSystemFamily.OS_X, os.getFamily());
-		Assert.assertEquals("OS X", os.getFamilyName());
-		Assert.assertEquals("macosx.png", os.getIcon());
-		Assert.assertEquals("OS X 10.7 Lion", os.getName());
-		Assert.assertEquals("Apple Computer, Inc.", os.getProducer());
-		Assert.assertEquals("http://www.apple.com/", os.getProducerUrl());
-		Assert.assertEquals("http://www.apple.com/osx/", os.getUrl());
-		Assert.assertEquals("10.7.4", os.getVersionNumber().toVersionString());
+		assertThat(os.getFamily()).isEqualTo(OperatingSystemFamily.OS_X);
+		assertThat(os.getFamilyName()).isEqualTo("OS X");
+		assertThat(os.getIcon()).isEqualTo("macosx.png");
+		assertThat(os.getName()).isEqualTo("OS X 10.7 Lion");
+		assertThat(os.getProducer()).isEqualTo("Apple Computer, Inc.");
+		assertThat(os.getProducerUrl()).isEqualTo("http://www.apple.com/");
+		assertThat(os.getUrl()).isEqualTo("http://www.apple.com/osx/");
+		assertThat(os.getVersionNumber().toVersionString()).isEqualTo("10.7.4");
 	}
 
 	@Test
@@ -151,20 +151,20 @@ public class UserAgentStringParserTest {
 		final String userAgent = "Eudora";
 		final UserAgent agent = PARSER.parse(userAgent);
 		System.out.println(agent);
-		Assert.assertNotNull(agent);
-		Assert.assertFalse(UserAgent.EMPTY.equals(agent));
-		Assert.assertTrue(OperatingSystem.EMPTY.equals(agent.getOperatingSystem()));
+		assertThat(agent).isNotNull();
+		assertThat(UserAgent.EMPTY.equals(agent)).isFalse();
+		assertThat(OperatingSystem.EMPTY.equals(agent.getOperatingSystem())).isTrue();
 
 		// check user agent informations
-		Assert.assertEquals(UserAgentFamily.EUDORA, agent.getFamily());
-		Assert.assertEquals("eudora.png", agent.getIcon());
-		Assert.assertEquals("Eudora", agent.getName());
-		Assert.assertEquals("Qualcomm Incorporated.", agent.getProducer());
-		Assert.assertEquals("http://www.qualcomm.com/", agent.getProducerUrl());
-		Assert.assertEquals(UserAgentType.EMAIL_CLIENT, agent.getType());
-		Assert.assertEquals("Email client", agent.getTypeName());
-		Assert.assertEquals("http://www.eudora.com/archive.html", agent.getUrl());
-		Assert.assertEquals("", agent.getVersionNumber().toVersionString());
+		assertThat(agent.getFamily()).isEqualTo(UserAgentFamily.EUDORA);
+		assertThat(agent.getIcon()).isEqualTo("eudora.png");
+		assertThat(agent.getName()).isEqualTo("Eudora");
+		assertThat(agent.getProducer()).isEqualTo("Qualcomm Incorporated.");
+		assertThat(agent.getProducerUrl()).isEqualTo("http://www.qualcomm.com/");
+		assertThat(agent.getType()).isEqualTo(UserAgentType.EMAIL_CLIENT);
+		assertThat(agent.getTypeName()).isEqualTo("Email client");
+		assertThat(agent.getUrl()).isEqualTo("http://www.eudora.com/archive.html");
+		assertThat(agent.getVersionNumber().toVersionString()).isEqualTo("");
 	}
 
 	@Test
@@ -172,221 +172,221 @@ public class UserAgentStringParserTest {
 		final String userAgent = "Eudora/6.2.4b8 (MacOS)";
 		final UserAgent agent = PARSER.parse(userAgent);
 		System.out.println(agent);
-		Assert.assertNotNull(agent);
-		Assert.assertFalse(UserAgent.EMPTY.equals(agent));
-		Assert.assertFalse(OperatingSystem.EMPTY.equals(agent.getOperatingSystem()));
+		assertThat(agent).isNotNull();
+		assertThat(UserAgent.EMPTY.equals(agent)).isFalse();
+		assertThat(OperatingSystem.EMPTY.equals(agent.getOperatingSystem())).isFalse();
 
 		// check user agent informations
-		Assert.assertEquals(UserAgentFamily.EUDORA, agent.getFamily());
-		Assert.assertEquals("eudora.png", agent.getIcon());
-		Assert.assertEquals("Eudora", agent.getName());
-		Assert.assertEquals("Qualcomm Incorporated.", agent.getProducer());
-		Assert.assertEquals("http://www.qualcomm.com/", agent.getProducerUrl());
-		Assert.assertEquals(UserAgentType.EMAIL_CLIENT, agent.getType());
-		Assert.assertEquals("Email client", agent.getTypeName());
-		Assert.assertEquals("http://www.eudora.com/archive.html", agent.getUrl());
-		Assert.assertEquals("6.2.4b8", agent.getVersionNumber().toVersionString());
+		assertThat(agent.getFamily()).isEqualTo(UserAgentFamily.EUDORA);
+		assertThat(agent.getIcon()).isEqualTo("eudora.png");
+		assertThat(agent.getName()).isEqualTo("Eudora");
+		assertThat(agent.getProducer()).isEqualTo("Qualcomm Incorporated.");
+		assertThat(agent.getProducerUrl()).isEqualTo("http://www.qualcomm.com/");
+		assertThat(agent.getType()).isEqualTo(UserAgentType.EMAIL_CLIENT);
+		assertThat(agent.getTypeName()).isEqualTo("Email client");
+		assertThat(agent.getUrl()).isEqualTo("http://www.eudora.com/archive.html");
+		assertThat(agent.getVersionNumber().toVersionString()).isEqualTo("6.2.4b8");
 
 		// check operating system informations
 		final OperatingSystem os = agent.getOperatingSystem();
-		Assert.assertEquals(OperatingSystemFamily.MAC_OS, os.getFamily());
-		Assert.assertEquals("Mac OS", os.getFamilyName());
-		Assert.assertEquals("macos.png", os.getIcon());
-		Assert.assertEquals("Mac OS", os.getName());
-		Assert.assertEquals("Apple Computer, Inc.", os.getProducer());
-		Assert.assertEquals("http://www.apple.com/", os.getProducerUrl());
-		Assert.assertEquals("http://en.wikipedia.org/wiki/Mac_OS", os.getUrl());
-		Assert.assertEquals("", os.getVersionNumber().toVersionString());
+		assertThat(os.getFamily()).isEqualTo(OperatingSystemFamily.MAC_OS);
+		assertThat(os.getFamilyName()).isEqualTo("Mac OS");
+		assertThat(os.getIcon()).isEqualTo("macos.png");
+		assertThat(os.getName()).isEqualTo("Mac OS");
+		assertThat(os.getProducer()).isEqualTo("Apple Computer, Inc.");
+		assertThat(os.getProducerUrl()).isEqualTo("http://www.apple.com/");
+		assertThat(os.getUrl()).isEqualTo("http://en.wikipedia.org/wiki/Mac_OS");
+		assertThat(os.getVersionNumber().toVersionString()).isEqualTo("");
 	}
 
 	@Test
 	public void parse_browser_FIREFOX6() throws Exception {
 		final String userAgent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7; rv:6.0) Gecko/20100101 Firefox/6.0";
 		final UserAgent agent = PARSER.parse(userAgent);
-		Assert.assertNotNull(agent);
-		Assert.assertFalse(UserAgent.EMPTY.equals(agent));
-		Assert.assertFalse(OperatingSystem.EMPTY.equals(agent.getOperatingSystem()));
+		assertThat(agent).isNotNull();
+		assertThat(UserAgent.EMPTY.equals(agent)).isFalse();
+		assertThat(OperatingSystem.EMPTY.equals(agent.getOperatingSystem())).isFalse();
 
 		// check user agent informations
-		Assert.assertEquals(UserAgentFamily.FIREFOX, agent.getFamily());
-		Assert.assertEquals("firefox.png", agent.getIcon());
-		Assert.assertEquals("Firefox", agent.getName());
-		Assert.assertEquals("Mozilla Foundation", agent.getProducer());
-		Assert.assertEquals("http://www.mozilla.org/", agent.getProducerUrl());
-		Assert.assertEquals(UserAgentType.BROWSER, agent.getType());
-		Assert.assertEquals("Browser", agent.getTypeName());
-		Assert.assertEquals("http://www.firefox.com/", agent.getUrl());
-		Assert.assertEquals("6.0", agent.getVersionNumber().toVersionString());
+		assertThat(agent.getFamily()).isEqualTo(UserAgentFamily.FIREFOX);
+		assertThat(agent.getIcon()).isEqualTo("firefox.png");
+		assertThat(agent.getName()).isEqualTo("Firefox");
+		assertThat(agent.getProducer()).isEqualTo("Mozilla Foundation");
+		assertThat(agent.getProducerUrl()).isEqualTo("http://www.mozilla.org/");
+		assertThat(agent.getType()).isEqualTo(UserAgentType.BROWSER);
+		assertThat(agent.getTypeName()).isEqualTo("Browser");
+		assertThat(agent.getUrl()).isEqualTo("http://www.firefox.com/");
+		assertThat(agent.getVersionNumber().toVersionString()).isEqualTo("6.0");
 
 		// check operating system informations
 		final OperatingSystem os = agent.getOperatingSystem();
-		Assert.assertEquals(OperatingSystemFamily.OS_X, os.getFamily());
-		Assert.assertEquals("OS X", os.getFamilyName());
-		Assert.assertEquals("macosx.png", os.getIcon());
-		Assert.assertEquals("OS X 10.7 Lion", os.getName());
-		Assert.assertEquals("Apple Computer, Inc.", os.getProducer());
-		Assert.assertEquals("http://www.apple.com/", os.getProducerUrl());
-		Assert.assertEquals("http://www.apple.com/osx/", os.getUrl());
-		Assert.assertEquals("10.7", os.getVersionNumber().toVersionString());
+		assertThat(os.getFamily()).isEqualTo(OperatingSystemFamily.OS_X);
+		assertThat(os.getFamilyName()).isEqualTo("OS X");
+		assertThat(os.getIcon()).isEqualTo("macosx.png");
+		assertThat(os.getName()).isEqualTo("OS X 10.7 Lion");
+		assertThat(os.getProducer()).isEqualTo("Apple Computer, Inc.");
+		assertThat(os.getProducerUrl()).isEqualTo("http://www.apple.com/");
+		assertThat(os.getUrl()).isEqualTo("http://www.apple.com/osx/");
+		assertThat(os.getVersionNumber().toVersionString()).isEqualTo("10.7");
 	}
 
 	@Test
 	public void parse_browser_ICEWEASEL() throws Exception {
 		final String userAgent = "Mozilla/5.0 (X11; U; Linux i686; de; rv:1.9.1.5) Gecko/20091112 Iceweasel/3.5.5 (like Firefox/3.5.5; Debian-3.5.5-1)";
 		final UserAgent agent = PARSER.parse(userAgent);
-		Assert.assertNotNull(agent);
-		Assert.assertFalse(UserAgent.EMPTY.equals(agent));
-		Assert.assertFalse(OperatingSystem.EMPTY.equals(agent.getOperatingSystem()));
+		assertThat(agent).isNotNull();
+		assertThat(UserAgent.EMPTY.equals(agent)).isFalse();
+		assertThat(OperatingSystem.EMPTY.equals(agent.getOperatingSystem())).isFalse();
 
 		// check user agent informations
-		Assert.assertEquals(UserAgentFamily.ICEWEASEL, agent.getFamily());
-		Assert.assertEquals("iceweasel.png", agent.getIcon());
-		Assert.assertEquals("IceWeasel", agent.getName());
-		Assert.assertEquals("Software in the Public Interest, Inc.", agent.getProducer());
-		Assert.assertEquals("http://www.spi-inc.org/", agent.getProducerUrl());
-		Assert.assertEquals(UserAgentType.BROWSER, agent.getType());
-		Assert.assertEquals("Browser", agent.getTypeName());
-		Assert.assertEquals("http://www.gnu.org/software/gnuzilla/", agent.getUrl());
-		Assert.assertEquals("3.5.5", agent.getVersionNumber().toVersionString());
+		assertThat(agent.getFamily()).isEqualTo(UserAgentFamily.ICEWEASEL);
+		assertThat(agent.getIcon()).isEqualTo("iceweasel.png");
+		assertThat(agent.getName()).isEqualTo("IceWeasel");
+		assertThat(agent.getProducer()).isEqualTo("Software in the Public Interest, Inc.");
+		assertThat(agent.getProducerUrl()).isEqualTo("http://www.spi-inc.org/");
+		assertThat(agent.getType()).isEqualTo(UserAgentType.BROWSER);
+		assertThat(agent.getTypeName()).isEqualTo("Browser");
+		assertThat(agent.getUrl()).isEqualTo("http://www.gnu.org/software/gnuzilla/");
+		assertThat(agent.getVersionNumber().toVersionString()).isEqualTo("3.5.5");
 
 		// check operating system informations
 		final OperatingSystem os = agent.getOperatingSystem();
-		Assert.assertEquals(OperatingSystemFamily.LINUX, os.getFamily());
-		Assert.assertEquals("Linux", os.getFamilyName());
-		Assert.assertEquals("linux_debian.png", os.getIcon());
-		Assert.assertEquals("Linux (Debian)", os.getName());
-		Assert.assertEquals("Software in the Public Interest, Inc.", os.getProducer());
-		Assert.assertEquals("http://www.spi-inc.org/", os.getProducerUrl());
-		Assert.assertEquals("http://www.debian.org/", os.getUrl());
-		Assert.assertEquals(VersionNumber.UNKNOWN, os.getVersionNumber());
+		assertThat(os.getFamily()).isEqualTo(OperatingSystemFamily.LINUX);
+		assertThat(os.getFamilyName()).isEqualTo("Linux");
+		assertThat(os.getIcon()).isEqualTo("linux_debian.png");
+		assertThat(os.getName()).isEqualTo("Linux (Debian)");
+		assertThat(os.getProducer()).isEqualTo("Software in the Public Interest, Inc.");
+		assertThat(os.getProducerUrl()).isEqualTo("http://www.spi-inc.org/");
+		assertThat(os.getUrl()).isEqualTo("http://www.debian.org/");
+		assertThat(os.getVersionNumber()).isEqualTo(VersionNumber.UNKNOWN);
 	}
 
 	@Test
 	public void parse_browser_IE7() throws Exception {
 		final String userAgent = "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 6.1; WOW64; Trident/4.0; GTB6.4; SLCC2; .NET CLR 2.0.50727; .NET CLR 3.5.30729; .NET CLR 3.0.30729; Media Center PC 6.0; OfficeLiveConnector.1.3; OfficeLivePatch.0.0; .NET CLR 1.1.4322)";
 		final UserAgent agent = PARSER.parse(userAgent);
-		Assert.assertNotNull(agent);
-		Assert.assertFalse(UserAgent.EMPTY.equals(agent));
-		Assert.assertFalse(OperatingSystem.EMPTY.equals(agent.getOperatingSystem()));
+		assertThat(agent).isNotNull();
+		assertThat(UserAgent.EMPTY.equals(agent)).isFalse();
+		assertThat(OperatingSystem.EMPTY.equals(agent.getOperatingSystem())).isFalse();
 
 		// check user agent informations
-		Assert.assertEquals(UserAgentFamily.IE, agent.getFamily());
-		Assert.assertEquals("msie.png", agent.getIcon());
-		Assert.assertEquals("IE", agent.getName());
-		Assert.assertEquals("Microsoft Corporation.", agent.getProducer());
-		Assert.assertEquals("http://www.microsoft.com/", agent.getProducerUrl());
-		Assert.assertEquals(UserAgentType.BROWSER, agent.getType());
-		Assert.assertEquals("Browser", agent.getTypeName());
-		Assert.assertEquals("http://en.wikipedia.org/wiki/Internet_Explorer", agent.getUrl());
-		Assert.assertEquals("7.0", agent.getVersionNumber().toVersionString());
+		assertThat(agent.getFamily()).isEqualTo(UserAgentFamily.IE);
+		assertThat(agent.getIcon()).isEqualTo("msie.png");
+		assertThat(agent.getName()).isEqualTo("IE");
+		assertThat(agent.getProducer()).isEqualTo("Microsoft Corporation.");
+		assertThat(agent.getProducerUrl()).isEqualTo("http://www.microsoft.com/");
+		assertThat(agent.getType()).isEqualTo(UserAgentType.BROWSER);
+		assertThat(agent.getTypeName()).isEqualTo("Browser");
+		assertThat(agent.getUrl()).isEqualTo("http://en.wikipedia.org/wiki/Internet_Explorer");
+		assertThat(agent.getVersionNumber().toVersionString()).isEqualTo("7.0");
 
 		// check operating system informations
 		final OperatingSystem os = agent.getOperatingSystem();
-		Assert.assertEquals(OperatingSystemFamily.WINDOWS, os.getFamily());
-		Assert.assertEquals("Windows", os.getFamilyName());
-		Assert.assertEquals("windows-7.png", os.getIcon());
-		Assert.assertEquals("Windows 7", os.getName());
-		Assert.assertEquals("Microsoft Corporation.", os.getProducer());
-		Assert.assertEquals("http://www.microsoft.com/", os.getProducerUrl());
-		Assert.assertEquals("http://en.wikipedia.org/wiki/Windows_7", os.getUrl());
-		Assert.assertEquals("6.1", os.getVersionNumber().toVersionString());
+		assertThat(os.getFamily()).isEqualTo(OperatingSystemFamily.WINDOWS);
+		assertThat(os.getFamilyName()).isEqualTo("Windows");
+		assertThat(os.getIcon()).isEqualTo("windows-7.png");
+		assertThat(os.getName()).isEqualTo("Windows 7");
+		assertThat(os.getProducer()).isEqualTo("Microsoft Corporation.");
+		assertThat(os.getProducerUrl()).isEqualTo("http://www.microsoft.com/");
+		assertThat(os.getUrl()).isEqualTo("http://en.wikipedia.org/wiki/Windows_7");
+		assertThat(os.getVersionNumber().toVersionString()).isEqualTo("6.1");
 	}
 
 	@Test
 	public void parse_browser_JVM() throws Exception {
 		final String userAgent = "Java/1.6.0_31";
 		final UserAgent agent = PARSER.parse(userAgent);
-		Assert.assertNotNull(agent);
-		Assert.assertFalse(UserAgent.EMPTY.equals(agent));
-		Assert.assertFalse(OperatingSystem.EMPTY.equals(agent.getOperatingSystem()));
+		assertThat(agent).isNotNull();
+		assertThat(UserAgent.EMPTY.equals(agent)).isFalse();
+		assertThat(OperatingSystem.EMPTY.equals(agent.getOperatingSystem())).isFalse();
 
 		// check user agent informations
-		Assert.assertEquals(UserAgentFamily.JAVA, agent.getFamily());
-		Assert.assertEquals("java.png", agent.getIcon());
-		Assert.assertEquals("Java", agent.getName());
-		Assert.assertEquals("Sun Microsystems, Inc.", agent.getProducer());
-		Assert.assertEquals("http://www.sun.com/", agent.getProducerUrl());
-		Assert.assertEquals(UserAgentType.LIBRARY, agent.getType());
-		Assert.assertEquals("Library", agent.getTypeName());
-		Assert.assertEquals("http://www.sun.com/java/", agent.getUrl());
-		Assert.assertEquals("1.6.0_31", agent.getVersionNumber().toVersionString());
+		assertThat(agent.getFamily()).isEqualTo(UserAgentFamily.JAVA);
+		assertThat(agent.getIcon()).isEqualTo("java.png");
+		assertThat(agent.getName()).isEqualTo("Java");
+		assertThat(agent.getProducer()).isEqualTo("Sun Microsystems, Inc.");
+		assertThat(agent.getProducerUrl()).isEqualTo("http://www.sun.com/");
+		assertThat(agent.getType()).isEqualTo(UserAgentType.LIBRARY);
+		assertThat(agent.getTypeName()).isEqualTo("Library");
+		assertThat(agent.getUrl()).isEqualTo("http://www.sun.com/java/");
+		assertThat(agent.getVersionNumber().toVersionString()).isEqualTo("1.6.0_31");
 
 		// check operating system informations
 		final OperatingSystem os = agent.getOperatingSystem();
-		Assert.assertEquals(OperatingSystemFamily.JVM, os.getFamily());
-		Assert.assertEquals("JVM", os.getFamilyName());
-		Assert.assertEquals("java.png", os.getIcon());
-		Assert.assertEquals("JVM (Java)", os.getName());
-		Assert.assertEquals("Sun Microsystems, Inc.", os.getProducer());
-		Assert.assertEquals("http://en.wikipedia.org/wiki/Sun_Microsystems", os.getProducerUrl());
-		Assert.assertEquals("http://en.wikipedia.org/wiki/Jvm", os.getUrl());
-		Assert.assertEquals("1.6.0_31", os.getVersionNumber().toVersionString());
+		assertThat(os.getFamily()).isEqualTo(OperatingSystemFamily.JVM);
+		assertThat(os.getFamilyName()).isEqualTo("JVM");
+		assertThat(os.getIcon()).isEqualTo("java.png");
+		assertThat(os.getName()).isEqualTo("JVM (Java)");
+		assertThat(os.getProducer()).isEqualTo("Sun Microsystems, Inc.");
+		assertThat(os.getProducerUrl()).isEqualTo("http://en.wikipedia.org/wiki/Sun_Microsystems");
+		assertThat(os.getUrl()).isEqualTo("http://en.wikipedia.org/wiki/Jvm");
+		assertThat(os.getVersionNumber().toVersionString()).isEqualTo("1.6.0_31");
 	}
 
 	@Test
 	public void parse_browser_mobile_CHROME() throws Exception {
 		final String userAgent = "Mozilla/5.0 (Linux; U; Android-4.0.3; en-us; Galaxy Nexus Build/IML74K) AppleWebKit/535.7 (KHTML, like Gecko) CrMo/16.0.912.75 Mobile Safari/535.7";
 		final UserAgent agent = PARSER.parse(userAgent);
-		Assert.assertNotNull(agent);
-		Assert.assertFalse(UserAgent.EMPTY.equals(agent));
+		assertThat(agent).isNotNull();
+		assertThat(UserAgent.EMPTY.equals(agent)).isFalse();
 
 		// check user agent informations
-		Assert.assertEquals(UserAgentFamily.CHROME_MOBILE, agent.getFamily());
-		Assert.assertEquals("chrome.png", agent.getIcon());
-		Assert.assertEquals("Chrome Mobile", agent.getName());
-		Assert.assertEquals("Google Inc.", agent.getProducer());
-		Assert.assertEquals("http://www.google.com/", agent.getProducerUrl());
-		Assert.assertEquals(UserAgentType.MOBILE_BROWSER, agent.getType());
-		Assert.assertEquals("Mobile Browser", agent.getTypeName());
-		Assert.assertEquals("http://www.google.com/intl/en/chrome/browser/mobile/", agent.getUrl());
-		Assert.assertEquals("16.0.912.75", agent.getVersionNumber().toVersionString());
+		assertThat(agent.getFamily()).isEqualTo(UserAgentFamily.CHROME_MOBILE);
+		assertThat(agent.getIcon()).isEqualTo("chrome.png");
+		assertThat(agent.getName()).isEqualTo("Chrome Mobile");
+		assertThat(agent.getProducer()).isEqualTo("Google Inc.");
+		assertThat(agent.getProducerUrl()).isEqualTo("http://www.google.com/");
+		assertThat(agent.getType()).isEqualTo(UserAgentType.MOBILE_BROWSER);
+		assertThat(agent.getTypeName()).isEqualTo("Mobile Browser");
+		assertThat(agent.getUrl()).isEqualTo("http://www.google.com/intl/en/chrome/browser/mobile/");
+		assertThat(agent.getVersionNumber().toVersionString()).isEqualTo("16.0.912.75");
 
 		// check operating system informations
 		final OperatingSystem os = agent.getOperatingSystem();
-		Assert.assertEquals(OperatingSystemFamily.ANDROID, os.getFamily());
-		Assert.assertEquals("Android", os.getFamilyName());
-		Assert.assertEquals("android.png", os.getIcon());
-		Assert.assertEquals("Android 4.0.x Ice Cream Sandwich", os.getName());
-		Assert.assertEquals("Google, Inc.", os.getProducer());
-		Assert.assertEquals("http://www.google.com/", os.getProducerUrl());
-		Assert.assertEquals("http://en.wikipedia.org/wiki/Android_%28operating_system%29", os.getUrl());
-		Assert.assertEquals("4.0.3", os.getVersionNumber().toVersionString());
+		assertThat(os.getFamily()).isEqualTo(OperatingSystemFamily.ANDROID);
+		assertThat(os.getFamilyName()).isEqualTo("Android");
+		assertThat(os.getIcon()).isEqualTo("android.png");
+		assertThat(os.getName()).isEqualTo("Android 4.0.x Ice Cream Sandwich");
+		assertThat(os.getProducer()).isEqualTo("Google, Inc.");
+		assertThat(os.getProducerUrl()).isEqualTo("http://www.google.com/");
+		assertThat(os.getUrl()).isEqualTo("http://en.wikipedia.org/wiki/Android_%28operating_system%29");
+		assertThat(os.getVersionNumber().toVersionString()).isEqualTo("4.0.3");
 	}
 
 	@Test
 	public void parse_browser_mobile_SAFARI_IPAD() throws Exception {
 		final String userAgent = "Mozilla/5.0 (iPad; U; CPU OS 4_2_1 like Mac OS X; ja-jp) AppleWebKit/533.17.9 (KHTML, like Gecko) Version/5.0.2 Mobile/8C148 Safari/6533.18.5";
 		final UserAgent agent = PARSER.parse(userAgent);
-		Assert.assertNotNull(agent);
-		Assert.assertFalse(UserAgent.EMPTY.equals(agent));
-		Assert.assertFalse(OperatingSystem.EMPTY.equals(agent.getOperatingSystem()));
+		assertThat(agent).isNotNull();
+		assertThat(UserAgent.EMPTY.equals(agent)).isFalse();
+		assertThat(OperatingSystem.EMPTY.equals(agent.getOperatingSystem())).isFalse();
 
 		// check user agent informations
-		Assert.assertEquals(UserAgentFamily.MOBILE_SAFARI, agent.getFamily());
-		Assert.assertEquals("safari.png", agent.getIcon());
-		Assert.assertEquals("Mobile Safari", agent.getName());
-		Assert.assertEquals("Apple Inc.", agent.getProducer());
-		Assert.assertEquals("http://www.apple.com/", agent.getProducerUrl());
-		Assert.assertEquals(UserAgentType.MOBILE_BROWSER, agent.getType());
-		Assert.assertEquals("Mobile Browser", agent.getTypeName());
-		Assert.assertEquals("http://en.wikipedia.org/wiki/Safari_%28web_browser%29", agent.getUrl());
-		Assert.assertEquals("5.0.2", agent.getVersionNumber().toVersionString());
+		assertThat(agent.getFamily()).isEqualTo(UserAgentFamily.MOBILE_SAFARI);
+		assertThat(agent.getIcon()).isEqualTo("safari.png");
+		assertThat(agent.getName()).isEqualTo("Mobile Safari");
+		assertThat(agent.getProducer()).isEqualTo("Apple Inc.");
+		assertThat(agent.getProducerUrl()).isEqualTo("http://www.apple.com/");
+		assertThat(agent.getType()).isEqualTo(UserAgentType.MOBILE_BROWSER);
+		assertThat(agent.getTypeName()).isEqualTo("Mobile Browser");
+		assertThat(agent.getUrl()).isEqualTo("http://en.wikipedia.org/wiki/Safari_%28web_browser%29");
+		assertThat(agent.getVersionNumber().toVersionString()).isEqualTo("5.0.2");
 
 		// check operating system informations
 		final OperatingSystem os = agent.getOperatingSystem();
-		Assert.assertEquals(OperatingSystemFamily.IOS, os.getFamily());
-		Assert.assertEquals("iOS", os.getFamilyName());
-		Assert.assertEquals("iphone.png", os.getIcon());
-		Assert.assertEquals("iOS", os.getName());
-		Assert.assertEquals("Apple Inc.", os.getProducer());
-		Assert.assertEquals("http://www.apple.com/", os.getProducerUrl());
-		Assert.assertEquals("http://en.wikipedia.org/wiki/IOS", os.getUrl());
-		Assert.assertEquals("4.2.1", os.getVersionNumber().toVersionString());
+		assertThat(os.getFamily()).isEqualTo(OperatingSystemFamily.IOS);
+		assertThat(os.getFamilyName()).isEqualTo("iOS");
+		assertThat(os.getIcon()).isEqualTo("iphone.png");
+		assertThat(os.getName()).isEqualTo("iOS");
+		assertThat(os.getProducer()).isEqualTo("Apple Inc.");
+		assertThat(os.getProducerUrl()).isEqualTo("http://www.apple.com/");
+		assertThat(os.getUrl()).isEqualTo("http://en.wikipedia.org/wiki/IOS");
+		assertThat(os.getVersionNumber().toVersionString()).isEqualTo("4.2.1");
 
 		// distinguish as iPad
 		if (OperatingSystemFamily.IOS == agent.getOperatingSystem().getFamily() && userAgent.contains("iPad")) {
 			LOG.debug("I'm an iPad.");
-			Assert.assertTrue(true);
+			assertThat(true).isTrue();
 		}
 	}
 
@@ -394,36 +394,36 @@ public class UserAgentStringParserTest {
 	public void parse_browser_mobile_SAFARI_IPAD_IOS5() throws Exception {
 		final String userAgent = "Mozilla/5.0 (iPad; CPU OS 5_0 like Mac OS X) AppleWebKit/534.46 (KHTML, like Gecko) Version/5.1 Mobile/9A334 Safari/7534.48.3";
 		final UserAgent agent = PARSER.parse(userAgent);
-		Assert.assertNotNull(agent);
-		Assert.assertFalse(UserAgent.EMPTY.equals(agent));
-		Assert.assertFalse(OperatingSystem.EMPTY.equals(agent.getOperatingSystem()));
+		assertThat(agent).isNotNull();
+		assertThat(UserAgent.EMPTY.equals(agent)).isFalse();
+		assertThat(OperatingSystem.EMPTY.equals(agent.getOperatingSystem())).isFalse();
 
 		// check user agent informations
-		Assert.assertEquals(UserAgentFamily.MOBILE_SAFARI, agent.getFamily());
-		Assert.assertEquals("safari.png", agent.getIcon());
-		Assert.assertEquals("Mobile Safari", agent.getName());
-		Assert.assertEquals("Apple Inc.", agent.getProducer());
-		Assert.assertEquals("http://www.apple.com/", agent.getProducerUrl());
-		Assert.assertEquals(UserAgentType.MOBILE_BROWSER, agent.getType());
-		Assert.assertEquals("Mobile Browser", agent.getTypeName());
-		Assert.assertEquals("http://en.wikipedia.org/wiki/Safari_%28web_browser%29", agent.getUrl());
-		Assert.assertEquals("5.1", agent.getVersionNumber().toVersionString());
+		assertThat(agent.getFamily()).isEqualTo(UserAgentFamily.MOBILE_SAFARI);
+		assertThat(agent.getIcon()).isEqualTo("safari.png");
+		assertThat(agent.getName()).isEqualTo("Mobile Safari");
+		assertThat(agent.getProducer()).isEqualTo("Apple Inc.");
+		assertThat(agent.getProducerUrl()).isEqualTo("http://www.apple.com/");
+		assertThat(agent.getType()).isEqualTo(UserAgentType.MOBILE_BROWSER);
+		assertThat(agent.getTypeName()).isEqualTo("Mobile Browser");
+		assertThat(agent.getUrl()).isEqualTo("http://en.wikipedia.org/wiki/Safari_%28web_browser%29");
+		assertThat(agent.getVersionNumber().toVersionString()).isEqualTo("5.1");
 
 		// check operating system informations
 		final OperatingSystem os = agent.getOperatingSystem();
-		Assert.assertEquals(OperatingSystemFamily.IOS, os.getFamily());
-		Assert.assertEquals("iOS", os.getFamilyName());
-		Assert.assertEquals("iphone.png", os.getIcon());
-		Assert.assertEquals("iOS 5", os.getName());
-		Assert.assertEquals("Apple Inc.", os.getProducer());
-		Assert.assertEquals("http://www.apple.com/", os.getProducerUrl());
-		Assert.assertEquals("http://en.wikipedia.org/wiki/IOS", os.getUrl());
-		Assert.assertEquals("5.0", os.getVersionNumber().toVersionString());
+		assertThat(os.getFamily()).isEqualTo(OperatingSystemFamily.IOS);
+		assertThat(os.getFamilyName()).isEqualTo("iOS");
+		assertThat(os.getIcon()).isEqualTo("iphone.png");
+		assertThat(os.getName()).isEqualTo("iOS 5");
+		assertThat(os.getProducer()).isEqualTo("Apple Inc.");
+		assertThat(os.getProducerUrl()).isEqualTo("http://www.apple.com/");
+		assertThat(os.getUrl()).isEqualTo("http://en.wikipedia.org/wiki/IOS");
+		assertThat(os.getVersionNumber().toVersionString()).isEqualTo("5.0");
 
 		// distinguish as iPad
 		if (OperatingSystemFamily.IOS == agent.getOperatingSystem().getFamily() && userAgent.contains("iPad")) {
 			LOG.debug("I'm an iPad.");
-			Assert.assertTrue(true);
+			assertThat(true).isTrue();
 		}
 	}
 
@@ -431,36 +431,36 @@ public class UserAgentStringParserTest {
 	public void parse_browser_mobile_SAFARI_IPHONE() throws Exception {
 		final String userAgent = "Mozilla/5.0 (iPhone; CPU iPhone OS 5_1_1 like Mac OS X) AppleWebKit/534.46 (KHTML, like Gecko) Version/5.1 Mobile/9B206 Safari/7534.48.3";
 		final UserAgent agent = PARSER.parse(userAgent);
-		Assert.assertNotNull(agent);
-		Assert.assertFalse(UserAgent.EMPTY.equals(agent));
-		Assert.assertFalse(OperatingSystem.EMPTY.equals(agent.getOperatingSystem()));
+		assertThat(agent).isNotNull();
+		assertThat(UserAgent.EMPTY.equals(agent)).isFalse();
+		assertThat(OperatingSystem.EMPTY.equals(agent.getOperatingSystem())).isFalse();
 
 		// check user agent informations
-		Assert.assertEquals(UserAgentFamily.MOBILE_SAFARI, agent.getFamily());
-		Assert.assertEquals("safari.png", agent.getIcon());
-		Assert.assertEquals("Mobile Safari", agent.getName());
-		Assert.assertEquals("Apple Inc.", agent.getProducer());
-		Assert.assertEquals("http://www.apple.com/", agent.getProducerUrl());
-		Assert.assertEquals(UserAgentType.MOBILE_BROWSER, agent.getType());
-		Assert.assertEquals("Mobile Browser", agent.getTypeName());
-		Assert.assertEquals("http://en.wikipedia.org/wiki/Safari_%28web_browser%29", agent.getUrl());
-		Assert.assertEquals("5.1", agent.getVersionNumber().toVersionString());
+		assertThat(agent.getFamily()).isEqualTo(UserAgentFamily.MOBILE_SAFARI);
+		assertThat(agent.getIcon()).isEqualTo("safari.png");
+		assertThat(agent.getName()).isEqualTo("Mobile Safari");
+		assertThat(agent.getProducer()).isEqualTo("Apple Inc.");
+		assertThat(agent.getProducerUrl()).isEqualTo("http://www.apple.com/");
+		assertThat(agent.getType()).isEqualTo(UserAgentType.MOBILE_BROWSER);
+		assertThat(agent.getTypeName()).isEqualTo("Mobile Browser");
+		assertThat(agent.getUrl()).isEqualTo("http://en.wikipedia.org/wiki/Safari_%28web_browser%29");
+		assertThat(agent.getVersionNumber().toVersionString()).isEqualTo("5.1");
 
 		// check operating system informations
 		final OperatingSystem os = agent.getOperatingSystem();
-		Assert.assertEquals(OperatingSystemFamily.IOS, os.getFamily());
-		Assert.assertEquals("iOS", os.getFamilyName());
-		Assert.assertEquals("iphone.png", os.getIcon());
-		Assert.assertEquals("iOS 5", os.getName());
-		Assert.assertEquals("Apple Inc.", os.getProducer());
-		Assert.assertEquals("http://www.apple.com/", os.getProducerUrl());
-		Assert.assertEquals("http://en.wikipedia.org/wiki/IOS", os.getUrl());
-		Assert.assertEquals("5.1.1", os.getVersionNumber().toVersionString());
+		assertThat(os.getFamily()).isEqualTo(OperatingSystemFamily.IOS);
+		assertThat(os.getFamilyName()).isEqualTo("iOS");
+		assertThat(os.getIcon()).isEqualTo("iphone.png");
+		assertThat(os.getName()).isEqualTo("iOS 5");
+		assertThat(os.getProducer()).isEqualTo("Apple Inc.");
+		assertThat(os.getProducerUrl()).isEqualTo("http://www.apple.com/");
+		assertThat(os.getUrl()).isEqualTo("http://en.wikipedia.org/wiki/IOS");
+		assertThat(os.getVersionNumber().toVersionString()).isEqualTo("5.1.1");
 
 		// distinguish as iPhone
 		if (OperatingSystemFamily.IOS == agent.getOperatingSystem().getFamily() && userAgent.contains("iPhone")) {
 			LOG.debug("I'm an iPhone.");
-			Assert.assertTrue(true);
+			assertThat(true).isTrue();
 		}
 	}
 
@@ -468,144 +468,144 @@ public class UserAgentStringParserTest {
 	public void parse_browser_OPERA() throws Exception {
 		final String userAgent = "Opera/9.80 (Windows NT 5.1; U; cs) Presto/2.2.15 Version/10.00";
 		final UserAgent agent = PARSER.parse(userAgent);
-		Assert.assertNotNull(agent);
-		Assert.assertFalse(UserAgent.EMPTY.equals(agent));
-		Assert.assertFalse(OperatingSystem.EMPTY.equals(agent.getOperatingSystem()));
+		assertThat(agent).isNotNull();
+		assertThat(UserAgent.EMPTY.equals(agent)).isFalse();
+		assertThat(OperatingSystem.EMPTY.equals(agent.getOperatingSystem())).isFalse();
 
 		// check user agent informations
-		Assert.assertEquals(UserAgentFamily.OPERA, agent.getFamily());
-		Assert.assertEquals("opera.png", agent.getIcon());
-		Assert.assertEquals("Opera", agent.getName());
-		Assert.assertEquals("Opera Software ASA.", agent.getProducer());
-		Assert.assertEquals("http://www.opera.com/", agent.getProducerUrl());
-		Assert.assertEquals(UserAgentType.BROWSER, agent.getType());
-		Assert.assertEquals("Browser", agent.getTypeName());
-		Assert.assertEquals("http://www.opera.com/", agent.getUrl());
-		Assert.assertEquals("10.00", agent.getVersionNumber().toVersionString());
+		assertThat(agent.getFamily()).isEqualTo(UserAgentFamily.OPERA);
+		assertThat(agent.getIcon()).isEqualTo("opera.png");
+		assertThat(agent.getName()).isEqualTo("Opera");
+		assertThat(agent.getProducer()).isEqualTo("Opera Software ASA.");
+		assertThat(agent.getProducerUrl()).isEqualTo("http://www.opera.com/");
+		assertThat(agent.getType()).isEqualTo(UserAgentType.BROWSER);
+		assertThat(agent.getTypeName()).isEqualTo("Browser");
+		assertThat(agent.getUrl()).isEqualTo("http://www.opera.com/");
+		assertThat(agent.getVersionNumber().toVersionString()).isEqualTo("10.00");
 
 		// check operating system informations
 		final OperatingSystem os = agent.getOperatingSystem();
-		Assert.assertEquals(OperatingSystemFamily.WINDOWS, os.getFamily());
-		Assert.assertEquals("Windows", os.getFamilyName());
-		Assert.assertEquals("windowsxp.png", os.getIcon());
-		Assert.assertEquals("Windows XP", os.getName());
-		Assert.assertEquals("Microsoft Corporation.", os.getProducer());
-		Assert.assertEquals("http://www.microsoft.com/", os.getProducerUrl());
-		Assert.assertEquals("http://en.wikipedia.org/wiki/Windows_XP", os.getUrl());
-		Assert.assertEquals("5.1", os.getVersionNumber().toVersionString());
+		assertThat(os.getFamily()).isEqualTo(OperatingSystemFamily.WINDOWS);
+		assertThat(os.getFamilyName()).isEqualTo("Windows");
+		assertThat(os.getIcon()).isEqualTo("windowsxp.png");
+		assertThat(os.getName()).isEqualTo("Windows XP");
+		assertThat(os.getProducer()).isEqualTo("Microsoft Corporation.");
+		assertThat(os.getProducerUrl()).isEqualTo("http://www.microsoft.com/");
+		assertThat(os.getUrl()).isEqualTo("http://en.wikipedia.org/wiki/Windows_XP");
+		assertThat(os.getVersionNumber().toVersionString()).isEqualTo("5.1");
 	}
 
 	@Test
 	public void parse_browser_SAFARI() throws Exception {
 		final String userAgent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_7_3) AppleWebKit/534.55.3 (KHTML, like Gecko) Version/5.1.5 Safari/534.55.3";
 		final UserAgent agent = PARSER.parse(userAgent);
-		Assert.assertNotNull(agent);
-		Assert.assertFalse(UserAgent.EMPTY.equals(agent));
-		Assert.assertFalse(OperatingSystem.EMPTY.equals(agent.getOperatingSystem()));
+		assertThat(agent).isNotNull();
+		assertThat(UserAgent.EMPTY.equals(agent)).isFalse();
+		assertThat(OperatingSystem.EMPTY.equals(agent.getOperatingSystem())).isFalse();
 
 		// check user agent informations
-		Assert.assertEquals(UserAgentFamily.SAFARI, agent.getFamily());
-		Assert.assertEquals("safari.png", agent.getIcon());
-		Assert.assertEquals("Safari", agent.getName());
-		Assert.assertEquals("Apple Inc.", agent.getProducer());
-		Assert.assertEquals("http://www.apple.com/", agent.getProducerUrl());
-		Assert.assertEquals(UserAgentType.BROWSER, agent.getType());
-		Assert.assertEquals("Browser", agent.getTypeName());
-		Assert.assertEquals("http://en.wikipedia.org/wiki/Safari_%28web_browser%29", agent.getUrl());
-		Assert.assertEquals("5.1.5", agent.getVersionNumber().toVersionString());
+		assertThat(agent.getFamily()).isEqualTo(UserAgentFamily.SAFARI);
+		assertThat(agent.getIcon()).isEqualTo("safari.png");
+		assertThat(agent.getName()).isEqualTo("Safari");
+		assertThat(agent.getProducer()).isEqualTo("Apple Inc.");
+		assertThat(agent.getProducerUrl()).isEqualTo("http://www.apple.com/");
+		assertThat(agent.getType()).isEqualTo(UserAgentType.BROWSER);
+		assertThat(agent.getTypeName()).isEqualTo("Browser");
+		assertThat(agent.getUrl()).isEqualTo("http://en.wikipedia.org/wiki/Safari_%28web_browser%29");
+		assertThat(agent.getVersionNumber().toVersionString()).isEqualTo("5.1.5");
 
 		// check operating system informations
 		final OperatingSystem os = agent.getOperatingSystem();
-		Assert.assertEquals(OperatingSystemFamily.OS_X, os.getFamily());
-		Assert.assertEquals("OS X", os.getFamilyName());
-		Assert.assertEquals("macosx.png", os.getIcon());
-		Assert.assertEquals("OS X 10.7 Lion", os.getName());
-		Assert.assertEquals("Apple Computer, Inc.", os.getProducer());
-		Assert.assertEquals("http://www.apple.com/", os.getProducerUrl());
-		Assert.assertEquals("http://www.apple.com/osx/", os.getUrl());
-		Assert.assertEquals("10.7.3", os.getVersionNumber().toVersionString());
+		assertThat(os.getFamily()).isEqualTo(OperatingSystemFamily.OS_X);
+		assertThat(os.getFamilyName()).isEqualTo("OS X");
+		assertThat(os.getIcon()).isEqualTo("macosx.png");
+		assertThat(os.getName()).isEqualTo("OS X 10.7 Lion");
+		assertThat(os.getProducer()).isEqualTo("Apple Computer, Inc.");
+		assertThat(os.getProducerUrl()).isEqualTo("http://www.apple.com/");
+		assertThat(os.getUrl()).isEqualTo("http://www.apple.com/osx/");
+		assertThat(os.getVersionNumber().toVersionString()).isEqualTo("10.7.3");
 	}
 
 	@Test
 	public void parse_browser_SITESUCKER() throws Exception {
 		final String userAgent = "SiteSucker/1.6.9";
 		final UserAgent agent = PARSER.parse(userAgent);
-		Assert.assertNotNull(agent);
-		Assert.assertFalse(UserAgent.EMPTY.equals(agent));
-		Assert.assertFalse(OperatingSystem.EMPTY.equals(agent.getOperatingSystem()));
+		assertThat(agent).isNotNull();
+		assertThat(UserAgent.EMPTY.equals(agent)).isFalse();
+		assertThat(OperatingSystem.EMPTY.equals(agent.getOperatingSystem())).isFalse();
 
 		// check user agent informations
-		Assert.assertEquals(UserAgentFamily.SITESUCKER, agent.getFamily());
-		Assert.assertEquals("sitesucker.png", agent.getIcon());
-		Assert.assertEquals("SiteSucker", agent.getName());
-		Assert.assertEquals("Rick Cranisky", agent.getProducer());
-		Assert.assertEquals("", agent.getProducerUrl());
-		Assert.assertEquals(UserAgentType.OFFLINE_BROWSER, agent.getType());
-		Assert.assertEquals("Offline Browser", agent.getTypeName());
-		Assert.assertEquals("http://www.sitesucker.us/", agent.getUrl());
-		Assert.assertEquals("1.6.9", agent.getVersionNumber().toVersionString());
+		assertThat(agent.getFamily()).isEqualTo(UserAgentFamily.SITESUCKER);
+		assertThat(agent.getIcon()).isEqualTo("sitesucker.png");
+		assertThat(agent.getName()).isEqualTo("SiteSucker");
+		assertThat(agent.getProducer()).isEqualTo("Rick Cranisky");
+		assertThat(agent.getProducerUrl()).isEqualTo("");
+		assertThat(agent.getType()).isEqualTo(UserAgentType.OFFLINE_BROWSER);
+		assertThat(agent.getTypeName()).isEqualTo("Offline Browser");
+		assertThat(agent.getUrl()).isEqualTo("http://www.sitesucker.us/");
+		assertThat(agent.getVersionNumber().toVersionString()).isEqualTo("1.6.9");
 
 		// check operating system informations
 		final OperatingSystem os = agent.getOperatingSystem();
-		Assert.assertEquals(OperatingSystemFamily.MAC_OS, os.getFamily());
-		Assert.assertEquals("Mac OS", os.getFamilyName());
-		Assert.assertEquals("macos.png", os.getIcon());
-		Assert.assertEquals("Mac OS", os.getName());
-		Assert.assertEquals("Apple Computer, Inc.", os.getProducer());
-		Assert.assertEquals("http://www.apple.com/", os.getProducerUrl());
-		Assert.assertEquals("http://en.wikipedia.org/wiki/Mac_OS", os.getUrl());
-		Assert.assertEquals(VersionNumber.UNKNOWN, os.getVersionNumber());
+		assertThat(os.getFamily()).isEqualTo(OperatingSystemFamily.MAC_OS);
+		assertThat(os.getFamilyName()).isEqualTo("Mac OS");
+		assertThat(os.getIcon()).isEqualTo("macos.png");
+		assertThat(os.getName()).isEqualTo("Mac OS");
+		assertThat(os.getProducer()).isEqualTo("Apple Computer, Inc.");
+		assertThat(os.getProducerUrl()).isEqualTo("http://www.apple.com/");
+		assertThat(os.getUrl()).isEqualTo("http://en.wikipedia.org/wiki/Mac_OS");
+		assertThat(os.getVersionNumber()).isEqualTo(VersionNumber.UNKNOWN);
 	}
 
 	@Test
 	public void parse_browser_SKYFIRE() throws Exception {
 		final String userAgent = "Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_5_7; en-us) AppleWebKit/530.17 (KHTML, like Gecko) Version/4.0 Safari/530.17 Skyfire/2.0";
 		final UserAgent agent = PARSER.parse(userAgent);
-		Assert.assertNotNull(agent);
-		Assert.assertFalse(UserAgent.EMPTY.equals(agent));
-		Assert.assertFalse(OperatingSystem.EMPTY.equals(agent.getOperatingSystem()));
+		assertThat(agent).isNotNull();
+		assertThat(UserAgent.EMPTY.equals(agent)).isFalse();
+		assertThat(OperatingSystem.EMPTY.equals(agent.getOperatingSystem())).isFalse();
 
 		// check user agent informations
-		Assert.assertEquals(UserAgentFamily.SKYFIRE, agent.getFamily());
-		Assert.assertEquals("skyfire.png", agent.getIcon());
-		Assert.assertEquals("Skyfire", agent.getName());
-		Assert.assertEquals("Skyfire Labs, Inc.", agent.getProducer());
-		Assert.assertEquals("http://www.skyfire.com/about", agent.getProducerUrl());
-		Assert.assertEquals(UserAgentType.MOBILE_BROWSER, agent.getType());
-		Assert.assertEquals("Mobile Browser", agent.getTypeName());
-		Assert.assertEquals("http://www.skyfire.com/", agent.getUrl());
-		Assert.assertEquals("2.0", agent.getVersionNumber().toVersionString());
+		assertThat(agent.getFamily()).isEqualTo(UserAgentFamily.SKYFIRE);
+		assertThat(agent.getIcon()).isEqualTo("skyfire.png");
+		assertThat(agent.getName()).isEqualTo("Skyfire");
+		assertThat(agent.getProducer()).isEqualTo("Skyfire Labs, Inc.");
+		assertThat(agent.getProducerUrl()).isEqualTo("http://www.skyfire.com/about");
+		assertThat(agent.getType()).isEqualTo(UserAgentType.MOBILE_BROWSER);
+		assertThat(agent.getTypeName()).isEqualTo("Mobile Browser");
+		assertThat(agent.getUrl()).isEqualTo("http://www.skyfire.com/");
+		assertThat(agent.getVersionNumber().toVersionString()).isEqualTo("2.0");
 
 		// check operating system informations
 		final OperatingSystem os = agent.getOperatingSystem();
-		// Assert.assertEquals(OperatingSystemFamily.OS_X, os.getFamily());
-		// Assert.assertEquals("OS X", os.getFamilyName());
-		Assert.assertEquals("macosx.png", os.getIcon());
-		Assert.assertEquals("OS X 10.5 Leopard", os.getName());
-		Assert.assertEquals("Apple Computer, Inc.", os.getProducer());
-		Assert.assertEquals("http://www.apple.com/", os.getProducerUrl());
-		Assert.assertEquals("http://www.apple.com/osx/", os.getUrl());
-		Assert.assertEquals("10.5.7", os.getVersionNumber().toVersionString());
+		// assertThat( os.getFamily()).isEqualTo(OperatingSystemFamily.OS_X);
+		// assertThat( os.getFamilyName()).isEqualTo("OS X");
+		assertThat(os.getIcon()).isEqualTo("macosx.png");
+		assertThat(os.getName()).isEqualTo("OS X 10.5 Leopard");
+		assertThat(os.getProducer()).isEqualTo("Apple Computer, Inc.");
+		assertThat(os.getProducerUrl()).isEqualTo("http://www.apple.com/");
+		assertThat(os.getUrl()).isEqualTo("http://www.apple.com/osx/");
+		assertThat(os.getVersionNumber().toVersionString()).isEqualTo("10.5.7");
 	}
 
 	@Test
 	public void parse_browser_SKYFIRE_withoutOperatingSystemInfo() throws Exception {
 		final String userAgent = "Mozilla/5.0 AppleWebKit/530.17 (KHTML, like Gecko) Version/4.0 Safari/530.17 Skyfire/2.0";
 		final UserAgent agent = PARSER.parse(userAgent);
-		Assert.assertNotNull(agent);
-		Assert.assertFalse(UserAgent.EMPTY.equals(agent));
-		Assert.assertTrue(OperatingSystem.EMPTY.equals(agent.getOperatingSystem()));
+		assertThat(agent).isNotNull();
+		assertThat(UserAgent.EMPTY.equals(agent)).isFalse();
+		assertThat(OperatingSystem.EMPTY.equals(agent.getOperatingSystem())).isTrue();
 
 		// check user agent informations
-		Assert.assertEquals(UserAgentFamily.SKYFIRE, agent.getFamily());
-		Assert.assertEquals("skyfire.png", agent.getIcon());
-		Assert.assertEquals("Skyfire", agent.getName());
-		Assert.assertEquals("Skyfire Labs, Inc.", agent.getProducer());
-		Assert.assertEquals("http://www.skyfire.com/about", agent.getProducerUrl());
-		Assert.assertEquals(UserAgentType.MOBILE_BROWSER, agent.getType());
-		Assert.assertEquals("Mobile Browser", agent.getTypeName());
-		Assert.assertEquals("http://www.skyfire.com/", agent.getUrl());
-		Assert.assertEquals("2.0", agent.getVersionNumber().toVersionString());
+		assertThat(agent.getFamily()).isEqualTo(UserAgentFamily.SKYFIRE);
+		assertThat(agent.getIcon()).isEqualTo("skyfire.png");
+		assertThat(agent.getName()).isEqualTo("Skyfire");
+		assertThat(agent.getProducer()).isEqualTo("Skyfire Labs, Inc.");
+		assertThat(agent.getProducerUrl()).isEqualTo("http://www.skyfire.com/about");
+		assertThat(agent.getType()).isEqualTo(UserAgentType.MOBILE_BROWSER);
+		assertThat(agent.getTypeName()).isEqualTo("Mobile Browser");
+		assertThat(agent.getUrl()).isEqualTo("http://www.skyfire.com/");
+		assertThat(agent.getVersionNumber().toVersionString()).isEqualTo("2.0");
 	}
 
 	@Test
@@ -614,56 +614,56 @@ public class UserAgentStringParserTest {
 
 		// check user agent informations
 		final UserAgent e = UserAgent.EMPTY;
-		Assert.assertEquals(e.getFamily(), agent.getFamily());
-		Assert.assertEquals(e.getIcon(), agent.getIcon());
-		Assert.assertEquals(e.getName(), agent.getName());
-		Assert.assertEquals(e.getProducer(), agent.getProducer());
-		Assert.assertEquals(e.getProducerUrl(), agent.getProducerUrl());
-		Assert.assertEquals(e.getTypeName(), agent.getTypeName());
-		Assert.assertEquals(e.getUrl(), agent.getUrl());
-		Assert.assertEquals(VersionNumber.UNKNOWN, agent.getVersionNumber());
+		assertThat(agent.getFamily()).isEqualTo(e.getFamily());
+		assertThat(agent.getIcon()).isEqualTo(e.getIcon());
+		assertThat(agent.getName()).isEqualTo(e.getName());
+		assertThat(agent.getProducer()).isEqualTo(e.getProducer());
+		assertThat(agent.getProducerUrl()).isEqualTo(e.getProducerUrl());
+		assertThat(agent.getTypeName()).isEqualTo(e.getTypeName());
+		assertThat(agent.getUrl()).isEqualTo(e.getUrl());
+		assertThat(agent.getVersionNumber()).isEqualTo(VersionNumber.UNKNOWN);
 
-		Assert.assertEquals(OperatingSystem.EMPTY, agent.getOperatingSystem());
+		assertThat(agent.getOperatingSystem()).isEqualTo(OperatingSystem.EMPTY);
 	}
 
 	@Test
 	public void parse_robot_GOOGLEBOT() throws Exception {
 		final String userAgent = "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)";
 		final UserAgent agent = PARSER.parse(userAgent);
-		Assert.assertNotNull(agent);
-		Assert.assertFalse(UserAgent.EMPTY.equals(agent));
-		Assert.assertTrue(OperatingSystem.EMPTY.equals(agent.getOperatingSystem()));
+		assertThat(agent).isNotNull();
+		assertThat(UserAgent.EMPTY.equals(agent)).isFalse();
+		assertThat(OperatingSystem.EMPTY.equals(agent.getOperatingSystem())).isTrue();
 
 		// check user agent informations
-		Assert.assertEquals(UserAgentFamily.GOOGLEBOT, agent.getFamily());
-		Assert.assertEquals("bot_googlebot.png", agent.getIcon());
-		Assert.assertEquals("Googlebot/2.1", agent.getName());
-		Assert.assertEquals("Google Inc.", agent.getProducer());
-		Assert.assertEquals("http://www.google.com/", agent.getProducerUrl());
-		Assert.assertEquals(UserAgentType.ROBOT, agent.getType());
-		Assert.assertEquals(Robot.TYPENAME, agent.getTypeName());
-		Assert.assertEquals("/list-of-ua/bot-detail?bot=Googlebot", agent.getUrl());
-		Assert.assertEquals("2.1", agent.getVersionNumber().toVersionString());
+		assertThat(agent.getFamily()).isEqualTo(UserAgentFamily.GOOGLEBOT);
+		assertThat(agent.getIcon()).isEqualTo("bot_googlebot.png");
+		assertThat(agent.getName()).isEqualTo("Googlebot/2.1");
+		assertThat(agent.getProducer()).isEqualTo("Google Inc.");
+		assertThat(agent.getProducerUrl()).isEqualTo("http://www.google.com/");
+		assertThat(agent.getType()).isEqualTo(UserAgentType.ROBOT);
+		assertThat(agent.getTypeName()).isEqualTo(Robot.TYPENAME);
+		assertThat(agent.getUrl()).isEqualTo("/list-of-ua/bot-detail?bot=Googlebot");
+		assertThat(agent.getVersionNumber().toVersionString()).isEqualTo("2.1");
 	}
 
 	@Test
 	public void parse_robot_SETOOZ() throws Exception {
 		final String userAgent = "OOZBOT/0.20 ( Setooz výrazný ako say-th-uuz, znamená mosty.  ; http://www.setooz.com/oozbot.html ; agentname at setooz dot_com )";
 		final UserAgent agent = PARSER.parse(userAgent);
-		Assert.assertNotNull(agent);
-		Assert.assertFalse(UserAgent.EMPTY.equals(agent));
-		Assert.assertTrue(OperatingSystem.EMPTY.equals(agent.getOperatingSystem()));
+		assertThat(agent).isNotNull();
+		assertThat(UserAgent.EMPTY.equals(agent)).isFalse();
+		assertThat(OperatingSystem.EMPTY.equals(agent.getOperatingSystem())).isTrue();
 
 		// check user agent informations
-		Assert.assertEquals(UserAgentFamily.SETOOZBOT, agent.getFamily());
-		Assert.assertEquals("bot.png", agent.getIcon());
-		Assert.assertEquals("OOZBOT/0.20 b", agent.getName());
-		Assert.assertEquals("SETU Software Systems P. Ltd.", agent.getProducer());
-		Assert.assertEquals("http://www.setusoftware.com/", agent.getProducerUrl());
-		Assert.assertEquals(UserAgentType.ROBOT, agent.getType());
-		Assert.assertEquals(Robot.TYPENAME, agent.getTypeName());
-		Assert.assertEquals("/list-of-ua/bot-detail?bot=Setoozbot", agent.getUrl());
-		Assert.assertEquals("0.20 b", agent.getVersionNumber().toVersionString());
+		assertThat(agent.getFamily()).isEqualTo(UserAgentFamily.SETOOZBOT);
+		assertThat(agent.getIcon()).isEqualTo("bot.png");
+		assertThat(agent.getName()).isEqualTo("OOZBOT/0.20 b");
+		assertThat(agent.getProducer()).isEqualTo("SETU Software Systems P. Ltd.");
+		assertThat(agent.getProducerUrl()).isEqualTo("http://www.setusoftware.com/");
+		assertThat(agent.getType()).isEqualTo(UserAgentType.ROBOT);
+		assertThat(agent.getTypeName()).isEqualTo(Robot.TYPENAME);
+		assertThat(agent.getUrl()).isEqualTo("/list-of-ua/bot-detail?bot=Setoozbot");
+		assertThat(agent.getVersionNumber().toVersionString()).isEqualTo("0.20 b");
 	}
 
 	@Test
@@ -672,17 +672,17 @@ public class UserAgentStringParserTest {
 
 		// check user agent informations
 		final UserAgent e = UserAgent.EMPTY;
-		Assert.assertEquals(e.getFamily(), agent.getFamily());
-		Assert.assertEquals(e.getIcon(), agent.getIcon());
-		Assert.assertEquals(e.getName(), agent.getName());
-		Assert.assertEquals(e.getProducer(), agent.getProducer());
-		Assert.assertEquals(e.getProducerUrl(), agent.getProducerUrl());
-		Assert.assertEquals(UserAgentType.UNKNOWN, agent.getType());
-		Assert.assertEquals(e.getTypeName(), agent.getTypeName());
-		Assert.assertEquals(e.getUrl(), agent.getUrl());
-		Assert.assertEquals(VersionNumber.UNKNOWN, agent.getVersionNumber());
+		assertThat(agent.getFamily()).isEqualTo(e.getFamily());
+		assertThat(agent.getIcon()).isEqualTo(e.getIcon());
+		assertThat(agent.getName()).isEqualTo(e.getName());
+		assertThat(agent.getProducer()).isEqualTo(e.getProducer());
+		assertThat(agent.getProducerUrl()).isEqualTo(e.getProducerUrl());
+		assertThat(agent.getType()).isEqualTo(UserAgentType.UNKNOWN);
+		assertThat(agent.getTypeName()).isEqualTo(e.getTypeName());
+		assertThat(agent.getUrl()).isEqualTo(e.getUrl());
+		assertThat(agent.getVersionNumber()).isEqualTo(VersionNumber.UNKNOWN);
 
-		Assert.assertEquals(OperatingSystem.EMPTY, agent.getOperatingSystem());
+		assertThat(agent.getOperatingSystem()).isEqualTo(OperatingSystem.EMPTY);
 	}
 
 	@Test

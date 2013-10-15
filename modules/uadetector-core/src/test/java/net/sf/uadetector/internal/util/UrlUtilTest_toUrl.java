@@ -20,7 +20,7 @@ import java.net.MalformedURLException;
 import java.net.URI;
 
 import org.easymock.EasyMock;
-import org.junit.Assert;
+import static org.fest.assertions.Assertions.assertThat;
 import org.junit.Assume;
 import org.junit.Before;
 import org.junit.Test;
@@ -61,7 +61,7 @@ public class UrlUtilTest_toUrl {
 				PowerMock.replayAll();
 				UrlUtil.toUrl(file);
 				PowerMock.verifyAll();
-				Assert.assertTrue("Mocking seems not to work.", false);
+				assertThat(false).as("Mocking seems not to work.").isTrue();
 			} catch (IllegalStateException e) {
 				// all things okay
 			}

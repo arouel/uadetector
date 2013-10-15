@@ -20,7 +20,7 @@ import java.util.regex.Pattern;
 
 import net.sf.qualitycheck.exception.IllegalNullArgumentException;
 
-import org.junit.Assert;
+import static org.fest.assertions.Assertions.assertThat;
 import org.junit.Test;
 
 public class RegularExpressionConverterTest {
@@ -29,7 +29,7 @@ public class RegularExpressionConverterTest {
 	public void convertPerlRegexToPattern_andBack() {
 		final String perlStyleRegex = "/^test[a-z0-9]\\w+$/si";
 		final Pattern pattern = RegularExpressionConverter.convertPerlRegexToPattern(perlStyleRegex);
-		Assert.assertEquals(perlStyleRegex, RegularExpressionConverter.convertPatternToPerlRegex(pattern));
+		assertThat(RegularExpressionConverter.convertPatternToPerlRegex(pattern)).isEqualTo(perlStyleRegex);
 	}
 
 	@Test
@@ -37,7 +37,7 @@ public class RegularExpressionConverterTest {
 		final String perlStyleRegex = "/Nintendo DS/Si";
 		final Pattern pattern = RegularExpressionConverter.convertPerlRegexToPattern(perlStyleRegex, true);
 		final Pattern expected = Pattern.compile("Nintendo DS", Pattern.CASE_INSENSITIVE);
-		Assert.assertEquals(expected.flags(), pattern.flags());
+		assertThat(pattern.flags()).isEqualTo(expected.flags());
 	}
 
 	@Test(expected = IllegalArgumentException.class)
@@ -56,8 +56,8 @@ public class RegularExpressionConverterTest {
 		final String perlStyleRegex = "/test/([0-9a-zA-Z.\\-+]+)/s";
 		final Pattern pattern = RegularExpressionConverter.convertPerlRegexToPattern(perlStyleRegex);
 		final Pattern expected = Pattern.compile("test/([0-9a-zA-Z.\\-+]+)", Pattern.DOTALL);
-		Assert.assertEquals(expected.flags(), pattern.flags());
-		Assert.assertEquals(expected.pattern(), pattern.pattern());
+		assertThat(pattern.flags()).isEqualTo(expected.flags());
+		assertThat(pattern.pattern()).isEqualTo(expected.pattern());
 	}
 
 	@Test
@@ -65,8 +65,8 @@ public class RegularExpressionConverterTest {
 		final String perlStyleRegex = "/\\s*[a-zA-Z0-9]*/im";
 		final Pattern pattern = RegularExpressionConverter.convertPerlRegexToPattern(perlStyleRegex);
 		final Pattern expected = Pattern.compile("\\s*[a-zA-Z0-9]*", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
-		Assert.assertEquals(expected.flags(), pattern.flags());
-		Assert.assertEquals(expected.pattern(), pattern.pattern());
+		assertThat(pattern.flags()).isEqualTo(expected.flags());
+		assertThat(pattern.pattern()).isEqualTo(expected.pattern());
 	}
 
 	@Test
@@ -74,8 +74,8 @@ public class RegularExpressionConverterTest {
 		final String perlStyleRegex = "/\\s*/ [a-zA-Z0-9]* /im ";
 		final Pattern pattern = RegularExpressionConverter.convertPerlRegexToPattern(perlStyleRegex);
 		final Pattern expected = Pattern.compile("\\s*/ [a-zA-Z0-9]* ", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
-		Assert.assertEquals(expected.flags(), pattern.flags());
-		Assert.assertEquals(expected.pattern(), pattern.pattern());
+		assertThat(pattern.flags()).isEqualTo(expected.flags());
+		assertThat(pattern.pattern()).isEqualTo(expected.pattern());
 	}
 
 	@Test
@@ -83,7 +83,7 @@ public class RegularExpressionConverterTest {
 		final String perlStyleRegex = "/\\s*[a-zA-Z0-9]*/";
 		final Pattern pattern = RegularExpressionConverter.convertPerlRegexToPattern(perlStyleRegex);
 		final Pattern expected = Pattern.compile("\\s*[a-zA-Z0-9]*");
-		Assert.assertEquals(expected.flags(), pattern.flags());
+		assertThat(pattern.flags()).isEqualTo(expected.flags());
 	}
 
 	@Test
@@ -93,7 +93,7 @@ public class RegularExpressionConverterTest {
 		final Pattern pattern = RegularExpressionConverter.convertPerlRegexToPattern(perlStyleRegex, true);
 		final Pattern expected = Pattern.compile("mozilla.*rv:[0-9\\.]+.*gecko\\/[0-9]+.*firefox\\/([0-9a-z\\+\\-\\.]+).*swiftfox",
 				Pattern.CASE_INSENSITIVE | Pattern.DOTALL);
-		Assert.assertEquals(expected.flags(), pattern.flags());
+		assertThat(pattern.flags()).isEqualTo(expected.flags());
 	}
 
 	@Test

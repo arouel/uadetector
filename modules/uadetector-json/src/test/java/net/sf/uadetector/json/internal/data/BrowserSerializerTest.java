@@ -28,7 +28,7 @@ import net.sf.uadetector.internal.data.domain.OperatingSystem;
 import net.sf.uadetector.internal.data.domain.OperatingSystemPattern;
 import net.sf.uadetector.json.internal.data.serializer.BrowserSerializer;
 
-import org.junit.Assert;
+import static org.fest.assertions.Assertions.assertThat;
 import org.junit.Test;
 
 import com.google.gson.Gson;
@@ -73,7 +73,7 @@ public class BrowserSerializerTest {
 		};
 		final JsonElement e1 = new BrowserSerializer().serialize(browser, typeOfSrc, context);
 		final JsonElement e2 = new BrowserSerializer().serialize(browser, typeOfSrc, context);
-		Assert.assertEquals(e1.toString(), e2.toString());
+		assertThat(e2.toString()).isEqualTo(e1.toString());
 	}
 
 }

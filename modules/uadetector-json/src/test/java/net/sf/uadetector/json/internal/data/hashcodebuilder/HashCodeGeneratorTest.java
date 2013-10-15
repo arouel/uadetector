@@ -19,7 +19,7 @@ import java.lang.reflect.Constructor;
 
 import net.sf.uadetector.UserAgentFamily;
 
-import org.junit.Assert;
+import static org.fest.assertions.Assertions.assertThat;
 import org.junit.Test;
 
 public class HashCodeGeneratorTest {
@@ -27,43 +27,43 @@ public class HashCodeGeneratorTest {
 	@Test
 	public void generate_forBrowser() {
 		final String hash = HashCodeGenerator.generate(BrowserHashCodeBuilderTest.create());
-		Assert.assertFalse(hash.isEmpty());
+		assertThat(hash.isEmpty()).isFalse();
 	}
 
 	@Test
 	public void generate_forBrowserPattern() {
 		final String hash = HashCodeGenerator.generate(OrderedPatternHashCodeBuilderTest.createBrowserPattern());
-		Assert.assertFalse(hash.isEmpty());
+		assertThat(hash.isEmpty()).isFalse();
 	}
 
 	@Test
 	public void generate_forBrowserType() {
 		final String hash = HashCodeGenerator.generate(BrowserTypeHashCodeBuilderTest.create());
-		Assert.assertFalse(hash.isEmpty());
+		assertThat(hash.isEmpty()).isFalse();
 	}
 
 	@Test
 	public void generate_forOperatingSystem() {
 		final String hash = HashCodeGenerator.generate(OperatingSystemHashCodeBuilderTest.create());
-		Assert.assertFalse(hash.isEmpty());
+		assertThat(hash.isEmpty()).isFalse();
 	}
 
 	@Test
 	public void generate_forOperatingSystemPattern() {
 		final String hash = HashCodeGenerator.generate(OrderedPatternHashCodeBuilderTest.createOperatingSystemPattern());
-		Assert.assertFalse(hash.isEmpty());
+		assertThat(hash.isEmpty()).isFalse();
 	}
 
 	@Test
 	public void generate_forUserAgentFamily() {
 		final String hash = HashCodeGenerator.generate(UserAgentFamily.FIREFOX);
-		Assert.assertFalse(hash.isEmpty());
+		assertThat(hash.isEmpty()).isFalse();
 	}
 
 	@Test
 	public void generate_UNKNOWN() {
 		final String hash = HashCodeGenerator.generate("unknown type");
-		Assert.assertTrue(hash.isEmpty());
+		assertThat(hash.isEmpty()).isTrue();
 	}
 
 	@Test

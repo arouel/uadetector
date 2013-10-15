@@ -19,7 +19,7 @@ import java.util.regex.Pattern;
 
 import net.sf.uadetector.internal.data.domain.BrowserPattern;
 
-import org.junit.Assert;
+import static org.fest.assertions.Assertions.assertThat;
 import org.junit.Test;
 
 public class OrderedPatternPositionComparatorTest {
@@ -30,33 +30,33 @@ public class OrderedPatternPositionComparatorTest {
 
 	@Test
 	public void compare_bothNull() {
-		Assert.assertEquals(0, new OrderedPatternPositionComparator<BrowserPattern>().compare(null, null));
+		assertThat(new OrderedPatternPositionComparator<BrowserPattern>().compare(null, null)).isEqualTo(0);
 	}
 
 	@Test
 	public void compare_equalsBoth() {
-		Assert.assertEquals(0, new OrderedPatternPositionComparator<BrowserPattern>().compare(PATTERN_1, PATTERN_1));
-		Assert.assertEquals(0, new OrderedPatternPositionComparator<BrowserPattern>().compare(PATTERN_2, PATTERN_2));
+		assertThat(new OrderedPatternPositionComparator<BrowserPattern>().compare(PATTERN_1, PATTERN_1)).isEqualTo(0);
+		assertThat(new OrderedPatternPositionComparator<BrowserPattern>().compare(PATTERN_2, PATTERN_2)).isEqualTo(0);
 	}
 
 	@Test
 	public void compare_leftHigher() {
-		Assert.assertEquals(-1, new OrderedPatternPositionComparator<BrowserPattern>().compare(PATTERN_1, PATTERN_2));
+		assertThat(new OrderedPatternPositionComparator<BrowserPattern>().compare(PATTERN_1, PATTERN_2)).isEqualTo(-1);
 	}
 
 	@Test
 	public void compare_leftNull() {
-		Assert.assertEquals(-1, new OrderedPatternPositionComparator<BrowserPattern>().compare(null, PATTERN_1));
+		assertThat(new OrderedPatternPositionComparator<BrowserPattern>().compare(null, PATTERN_1)).isEqualTo(-1);
 	}
 
 	@Test
 	public void compare_rightHigher() {
-		Assert.assertEquals(1, new OrderedPatternPositionComparator<BrowserPattern>().compare(PATTERN_2, PATTERN_1));
+		assertThat(new OrderedPatternPositionComparator<BrowserPattern>().compare(PATTERN_2, PATTERN_1)).isEqualTo(1);
 	}
 
 	@Test
 	public void compare_rightNull() {
-		Assert.assertEquals(1, new OrderedPatternPositionComparator<BrowserPattern>().compare(PATTERN_1, null));
+		assertThat(new OrderedPatternPositionComparator<BrowserPattern>().compare(PATTERN_1, null)).isEqualTo(1);
 	}
 
 }

@@ -28,7 +28,7 @@ import net.sf.uadetector.internal.data.domain.OperatingSystemPattern;
 import net.sf.uadetector.internal.data.domain.Robot;
 import net.sf.uadetector.internal.util.RegularExpressionConverter;
 
-import org.junit.Assert;
+import static org.fest.assertions.Assertions.assertThat;
 import org.junit.Test;
 
 import com.google.common.collect.Maps;
@@ -97,12 +97,12 @@ public class AbstractUserAgentStringParserTest {
 		});
 
 		final ReadableUserAgent ua1 = parser.parse("Eudora");
-		Assert.assertEquals(UserAgentFamily.EUDORA, ua1.getFamily());
-		Assert.assertEquals("", ua1.getVersionNumber().toVersionString());
+		assertThat(ua1.getFamily()).isEqualTo(UserAgentFamily.EUDORA);
+		assertThat(ua1.getVersionNumber().toVersionString()).isEqualTo("");
 
 		final ReadableUserAgent ua2 = parser.parse("Eudora/1.0");
-		Assert.assertEquals(UserAgentFamily.EUDORA, ua2.getFamily());
-		Assert.assertEquals("", ua2.getVersionNumber().toVersionString());
+		assertThat(ua2.getFamily()).isEqualTo(UserAgentFamily.EUDORA);
+		assertThat(ua2.getVersionNumber().toVersionString()).isEqualTo("");
 	}
 
 }

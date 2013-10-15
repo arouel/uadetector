@@ -15,38 +15,38 @@
  ******************************************************************************/
 package net.sf.uadetector;
 
+import static org.fest.assertions.Assertions.assertThat;
 import net.sf.qualitycheck.exception.IllegalNullArgumentException;
 
-import org.junit.Assert;
 import org.junit.Test;
 
 public class UserAgentFamilyTest {
 
 	@Test
 	public void evaluate_emptyString() {
-		Assert.assertEquals(UserAgentFamily.UNKNOWN, UserAgentFamily.evaluate(""));
+		assertThat(UserAgentFamily.evaluate("")).isEqualTo(UserAgentFamily.UNKNOWN);
 	}
 
 	@Test
 	public void evaluate_GIANT() {
-		Assert.assertEquals(UserAgentFamily.GIANT, UserAgentFamily.evaluate("Giant/2.0"));
-		Assert.assertEquals(UserAgentFamily.GIANT, UserAgentFamily.evaluate("Giant/4.9"));
+		assertThat(UserAgentFamily.evaluate("Giant/2.0")).isEqualTo(UserAgentFamily.GIANT);
+		assertThat(UserAgentFamily.evaluate("Giant/4.9")).isEqualTo(UserAgentFamily.GIANT);
 	}
 
 	@Test
 	public void evaluate_knownString_CHROME() {
-		Assert.assertEquals(UserAgentFamily.CHROME, UserAgentFamily.evaluate("Chrome"));
+		assertThat(UserAgentFamily.evaluate("Chrome")).isEqualTo(UserAgentFamily.CHROME);
 	}
 
 	@Test
 	public void evaluate_knownString_FIREFOX() {
-		Assert.assertEquals(UserAgentFamily.FIREFOX, UserAgentFamily.evaluate("Firefox"));
+		assertThat(UserAgentFamily.evaluate("Firefox")).isEqualTo(UserAgentFamily.FIREFOX);
 	}
 
 	@Test
 	public void evaluate_MAILRU() {
-		Assert.assertEquals(UserAgentFamily.MAIL_RU, UserAgentFamily.evaluate("Mail.Ru/1.0"));
-		Assert.assertEquals(UserAgentFamily.MAIL_RU, UserAgentFamily.evaluate("Mail.RU_Bot/2.0"));
+		assertThat(UserAgentFamily.evaluate("Mail.Ru/1.0")).isEqualTo(UserAgentFamily.MAIL_RU);
+		assertThat(UserAgentFamily.evaluate("Mail.RU_Bot/2.0")).isEqualTo(UserAgentFamily.MAIL_RU);
 	}
 
 	@Test(expected = IllegalNullArgumentException.class)
@@ -56,17 +56,17 @@ public class UserAgentFamilyTest {
 
 	@Test
 	public void evaluate_unknownString() {
-		Assert.assertEquals(UserAgentFamily.UNKNOWN, UserAgentFamily.evaluate("abcdefghijklmnopqrstuvw"));
+		assertThat(UserAgentFamily.evaluate("abcdefghijklmnopqrstuvw")).isEqualTo(UserAgentFamily.UNKNOWN);
 	}
 
 	@Test
 	public void evaluateByName_emptyString() {
-		Assert.assertEquals(UserAgentFamily.UNKNOWN, UserAgentFamily.evaluateByName(""));
+		assertThat(UserAgentFamily.evaluateByName("")).isEqualTo(UserAgentFamily.UNKNOWN);
 	}
 
 	@Test
 	public void evaluateByName_knownString_YAHOO() {
-		Assert.assertEquals(UserAgentFamily.YAHOO, UserAgentFamily.evaluateByName("Yahoo!"));
+		assertThat(UserAgentFamily.evaluateByName("Yahoo!")).isEqualTo(UserAgentFamily.YAHOO);
 	}
 
 	@Test(expected = IllegalNullArgumentException.class)
@@ -76,17 +76,17 @@ public class UserAgentFamilyTest {
 
 	@Test
 	public void evaluateByName_unknownString() {
-		Assert.assertEquals(UserAgentFamily.UNKNOWN, UserAgentFamily.evaluateByName("abcdefghijklmnopqrstuvw"));
+		assertThat(UserAgentFamily.evaluateByName("abcdefghijklmnopqrstuvw")).isEqualTo(UserAgentFamily.UNKNOWN);
 	}
 
 	@Test
 	public void evaluateByPattern_emptyString() {
-		Assert.assertEquals(UserAgentFamily.UNKNOWN, UserAgentFamily.evaluateByPattern(""));
+		assertThat(UserAgentFamily.evaluateByPattern("")).isEqualTo(UserAgentFamily.UNKNOWN);
 	}
 
 	@Test
 	public void evaluateByPattern_knownString_ZOOMSPIDER() {
-		Assert.assertEquals(UserAgentFamily.ZOOMSPIDER, UserAgentFamily.evaluateByPattern("ZoomSpider (ZSEBOT)"));
+		assertThat(UserAgentFamily.evaluateByPattern("ZoomSpider (ZSEBOT)")).isEqualTo(UserAgentFamily.ZOOMSPIDER);
 	}
 
 	@Test(expected = IllegalNullArgumentException.class)
@@ -96,7 +96,7 @@ public class UserAgentFamilyTest {
 
 	@Test
 	public void evaluateByPattern_unknownString() {
-		Assert.assertEquals(UserAgentFamily.UNKNOWN, UserAgentFamily.evaluateByPattern("abcdefghijklmnopqrstuvw"));
+		assertThat(UserAgentFamily.evaluateByPattern("abcdefghijklmnopqrstuvw")).isEqualTo(UserAgentFamily.UNKNOWN);
 	}
 
 }

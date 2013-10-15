@@ -31,7 +31,7 @@ import net.sf.qualitycheck.exception.IllegalNullArgumentException;
 import net.sf.uadetector.OperatingSystemFamily;
 import net.sf.uadetector.UserAgent;
 
-import org.junit.Assert;
+import static org.fest.assertions.Assertions.assertThat;
 import org.junit.Test;
 
 public class OperatingSystemTest {
@@ -136,12 +136,12 @@ public class OperatingSystemTest {
 		final OperatingSystem os = new OperatingSystem(1, "n1", "Linux", "iu1", osPatternSet, "p1", "pu1", "u1", "i1");
 		final UserAgent.Builder builder = new UserAgent.Builder();
 		os.copyTo(builder);
-		Assert.assertEquals(OperatingSystemFamily.LINUX, builder.getOperatingSystem().getFamily());
-		Assert.assertEquals(os.getFamily(), builder.getOperatingSystem().getFamilyName());
-		Assert.assertEquals(os.getName(), builder.getOperatingSystem().getName());
-		Assert.assertEquals(os.getProducer(), builder.getOperatingSystem().getProducer());
-		Assert.assertEquals(os.getProducerUrl(), builder.getOperatingSystem().getProducerUrl());
-		Assert.assertEquals(os.getUrl(), builder.getOperatingSystem().getUrl());
+		assertThat(builder.getOperatingSystem().getFamily()).isEqualTo(OperatingSystemFamily.LINUX);
+		assertThat(builder.getOperatingSystem().getFamilyName()).isEqualTo(os.getFamily());
+		assertThat(builder.getOperatingSystem().getName()).isEqualTo(os.getName());
+		assertThat(builder.getOperatingSystem().getProducer()).isEqualTo(os.getProducer());
+		assertThat(builder.getOperatingSystem().getProducerUrl()).isEqualTo(os.getProducerUrl());
+		assertThat(builder.getOperatingSystem().getUrl()).isEqualTo(os.getUrl());
 	}
 
 	@Test
@@ -309,15 +309,15 @@ public class OperatingSystemTest {
 		final SortedSet<OperatingSystemPattern> patterns = new TreeSet<OperatingSystemPattern>();
 		patterns.add(new OperatingSystemPattern(1, Pattern.compile("1"), 1));
 		final OperatingSystem b = new OperatingSystem(id, name, family, infoUrl, patterns, producer, producerUrl, url, icon);
-		Assert.assertEquals("Learn Code The Hard Way", b.getFamily());
-		Assert.assertEquals("bunt.png", b.getIcon());
-		Assert.assertEquals(12354, b.getId());
-		Assert.assertEquals("http://programming-motherfucker.com/", b.getInfoUrl());
-		Assert.assertEquals("Programming, Motherfucker", b.getName());
-		Assert.assertEquals(patterns, b.getPatterns());
-		Assert.assertEquals("Our Values", b.getProducer());
-		Assert.assertEquals("https://github.com/before", b.getProducerUrl());
-		Assert.assertEquals("http://user-agent-string.info/", b.getUrl());
+		assertThat(b.getFamily()).isEqualTo("Learn Code The Hard Way");
+		assertThat(b.getIcon()).isEqualTo("bunt.png");
+		assertThat(b.getId()).isEqualTo(12354);
+		assertThat(b.getInfoUrl()).isEqualTo("http://programming-motherfucker.com/");
+		assertThat(b.getName()).isEqualTo("Programming, Motherfucker");
+		assertThat(b.getPatterns()).isEqualTo(patterns);
+		assertThat(b.getProducer()).isEqualTo("Our Values");
+		assertThat(b.getProducerUrl()).isEqualTo("https://github.com/before");
+		assertThat(b.getUrl()).isEqualTo("http://user-agent-string.info/");
 	}
 
 	@Test
@@ -326,9 +326,9 @@ public class OperatingSystemTest {
 		final SortedSet<OperatingSystemPattern> patterns = new TreeSet<OperatingSystemPattern>();
 		patterns.add(new OperatingSystemPattern(1, Pattern.compile("1"), 1));
 		final OperatingSystem os = new OperatingSystem(1, "n1", "f1", "iu1", patterns, "p1", "pu1", "u1", "i1");
-		Assert.assertEquals(
-				"OperatingSystem [id=1, name=n1, family=f1, infoUrl=iu1, patterns=[OperatingSystemPattern [id=1, pattern=1, position=1]], producer=p1, producerUrl=pu1, url=u1, icon=i1]",
-				os.toString());
+		assertThat(os.toString())
+				.isEqualTo(
+						"OperatingSystem [id=1, name=n1, family=f1, infoUrl=iu1, patterns=[OperatingSystemPattern [id=1, pattern=1, position=1]], producer=p1, producerUrl=pu1, url=u1, icon=i1]");
 	}
 
 }

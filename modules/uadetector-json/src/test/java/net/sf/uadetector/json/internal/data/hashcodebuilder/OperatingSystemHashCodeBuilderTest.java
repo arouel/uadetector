@@ -23,7 +23,7 @@ import java.util.regex.Pattern;
 import net.sf.uadetector.internal.data.domain.OperatingSystem;
 import net.sf.uadetector.internal.data.domain.OperatingSystemPattern;
 
-import org.junit.Assert;
+import static org.fest.assertions.Assertions.assertThat;
 import org.junit.Test;
 
 public class OperatingSystemHashCodeBuilderTest {
@@ -55,8 +55,8 @@ public class OperatingSystemHashCodeBuilderTest {
 	public void test() {
 		final String hash1 = OperatingSystemHashCodeBuilder.build(create());
 		final String hash2 = OperatingSystemHashCodeBuilder.build(create());
-		Assert.assertEquals(hash1, hash2);
-		Assert.assertEquals("cff51b9b31579a45cc4982ed536ef7ca162fce780024582d1f14782ba900b0e9", hash2);
+		assertThat(hash2).isEqualTo(hash1);
+		assertThat(hash2).isEqualTo("cff51b9b31579a45cc4982ed536ef7ca162fce780024582d1f14782ba900b0e9");
 	}
 
 }

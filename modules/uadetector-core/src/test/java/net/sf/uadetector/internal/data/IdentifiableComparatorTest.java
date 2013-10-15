@@ -19,7 +19,7 @@ import java.util.regex.Pattern;
 
 import net.sf.uadetector.internal.data.domain.BrowserPattern;
 
-import org.junit.Assert;
+import static org.fest.assertions.Assertions.assertThat;
 import org.junit.Test;
 
 public class IdentifiableComparatorTest {
@@ -28,15 +28,15 @@ public class IdentifiableComparatorTest {
 	public void compare_differentIds() {
 		final BrowserPattern pattern1 = new BrowserPattern(1, Pattern.compile("[0-9]+", Pattern.MULTILINE), 1);
 		final BrowserPattern pattern2 = new BrowserPattern(2, Pattern.compile("[0-9]+", Pattern.CASE_INSENSITIVE), 1);
-		Assert.assertEquals(-1, IdentifiableComparator.INSTANCE.compare(pattern1, pattern2));
-		Assert.assertEquals(1, IdentifiableComparator.INSTANCE.compare(pattern2, pattern1));
+		assertThat(IdentifiableComparator.INSTANCE.compare(pattern1, pattern2)).isEqualTo(-1);
+		assertThat(IdentifiableComparator.INSTANCE.compare(pattern2, pattern1)).isEqualTo(1);
 	}
 
 	@Test
 	public void compare_identical() {
 		final BrowserPattern pattern1 = new BrowserPattern(1, Pattern.compile("[0-9]+"), 1);
 		final BrowserPattern pattern2 = new BrowserPattern(1, Pattern.compile("[0-9]+"), 1);
-		Assert.assertEquals(0, IdentifiableComparator.INSTANCE.compare(pattern1, pattern2));
+		assertThat(IdentifiableComparator.INSTANCE.compare(pattern1, pattern2)).isEqualTo(0);
 	}
 
 	@Test
@@ -59,7 +59,7 @@ public class IdentifiableComparatorTest {
 	@Test
 	public void compare_same() {
 		final BrowserPattern pattern = new BrowserPattern(1, Pattern.compile("[0-9]+"), 1);
-		Assert.assertEquals(0, IdentifiableComparator.INSTANCE.compare(pattern, pattern));
+		assertThat(IdentifiableComparator.INSTANCE.compare(pattern, pattern)).isEqualTo(0);
 	}
 
 }

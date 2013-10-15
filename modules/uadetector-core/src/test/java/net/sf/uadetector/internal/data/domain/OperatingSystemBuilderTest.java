@@ -25,7 +25,7 @@ import net.sf.qualitycheck.exception.IllegalEmptyArgumentException;
 import net.sf.qualitycheck.exception.IllegalNegativeArgumentException;
 import net.sf.qualitycheck.exception.IllegalNullArgumentException;
 
-import org.junit.Assert;
+import static org.fest.assertions.Assertions.assertThat;
 import org.junit.Test;
 
 public class OperatingSystemBuilderTest {
@@ -63,40 +63,40 @@ public class OperatingSystemBuilderTest {
 		original.setUrl("u1");
 
 		final OperatingSystem.Builder copy1 = new OperatingSystem.Builder(original);
-		Assert.assertEquals("f1", copy1.getFamily());
-		Assert.assertEquals("i1", copy1.getIcon());
-		Assert.assertEquals(1, copy1.getId());
-		Assert.assertEquals("iu1", copy1.getInfoUrl());
-		Assert.assertEquals("n1", copy1.getName());
-		Assert.assertEquals(2, copy1.getPatterns().size());
-		Assert.assertEquals(patterns, copy1.getPatterns());
-		Assert.assertEquals("p1", copy1.getProducer());
-		Assert.assertEquals("pu1", copy1.getProducerUrl());
-		Assert.assertEquals("u1", copy1.getUrl());
+		assertThat(copy1.getFamily()).isEqualTo("f1");
+		assertThat(copy1.getIcon()).isEqualTo("i1");
+		assertThat(copy1.getId()).isEqualTo(1);
+		assertThat(copy1.getInfoUrl()).isEqualTo("iu1");
+		assertThat(copy1.getName()).isEqualTo("n1");
+		assertThat(copy1.getPatterns()).hasSize(2);
+		assertThat(copy1.getPatterns()).isEqualTo(patterns);
+		assertThat(copy1.getProducer()).isEqualTo("p1");
+		assertThat(copy1.getProducerUrl()).isEqualTo("pu1");
+		assertThat(copy1.getUrl()).isEqualTo("u1");
 
 		final OperatingSystem.Builder copy2 = original.copy();
-		Assert.assertEquals("f1", copy2.getFamily());
-		Assert.assertEquals("i1", copy2.getIcon());
-		Assert.assertEquals(1, copy2.getId());
-		Assert.assertEquals("iu1", copy2.getInfoUrl());
-		Assert.assertEquals("n1", copy2.getName());
-		Assert.assertEquals(2, copy2.getPatterns().size());
-		Assert.assertEquals(patterns, copy2.getPatterns());
-		Assert.assertEquals("p1", copy2.getProducer());
-		Assert.assertEquals("pu1", copy2.getProducerUrl());
-		Assert.assertEquals("u1", copy2.getUrl());
+		assertThat(copy2.getFamily()).isEqualTo("f1");
+		assertThat(copy2.getIcon()).isEqualTo("i1");
+		assertThat(copy2.getId()).isEqualTo(1);
+		assertThat(copy2.getInfoUrl()).isEqualTo("iu1");
+		assertThat(copy2.getName()).isEqualTo("n1");
+		assertThat(copy2.getPatterns()).hasSize(2);
+		assertThat(copy2.getPatterns()).isEqualTo(patterns);
+		assertThat(copy2.getProducer()).isEqualTo("p1");
+		assertThat(copy2.getProducerUrl()).isEqualTo("pu1");
+		assertThat(copy2.getUrl()).isEqualTo("u1");
 
 		final OperatingSystem.Builder copy3 = new OperatingSystem.Builder(original.build());
-		Assert.assertEquals("f1", copy3.getFamily());
-		Assert.assertEquals("i1", copy3.getIcon());
-		Assert.assertEquals(1, copy3.getId());
-		Assert.assertEquals("iu1", copy3.getInfoUrl());
-		Assert.assertEquals("n1", copy3.getName());
-		Assert.assertEquals(2, copy3.getPatterns().size());
-		Assert.assertEquals(patterns, copy3.getPatterns());
-		Assert.assertEquals("p1", copy3.getProducer());
-		Assert.assertEquals("pu1", copy3.getProducerUrl());
-		Assert.assertEquals("u1", copy3.getUrl());
+		assertThat(copy3.getFamily()).isEqualTo("f1");
+		assertThat(copy3.getIcon()).isEqualTo("i1");
+		assertThat(copy3.getId()).isEqualTo(1);
+		assertThat(copy3.getInfoUrl()).isEqualTo("iu1");
+		assertThat(copy3.getName()).isEqualTo("n1");
+		assertThat(copy3.getPatterns()).hasSize(2);
+		assertThat(copy3.getPatterns()).isEqualTo(patterns);
+		assertThat(copy3.getProducer()).isEqualTo("p1");
+		assertThat(copy3.getProducerUrl()).isEqualTo("pu1");
+		assertThat(copy3.getUrl()).isEqualTo("u1");
 	}
 
 	@Test(expected = IllegalNullArgumentException.class)
@@ -130,7 +130,7 @@ public class OperatingSystemBuilderTest {
 				.setProducer("p1").setProducerUrl("pu1").setUrl("u1").build();
 		final OperatingSystem b2 = new OperatingSystem.Builder().setId(1).setFamily("f1").setIcon("i1").setInfoUrl("iu1").setProducer("p1")
 				.setProducerUrl("pu1").setUrl("u1").build();
-		Assert.assertTrue(b1.equals(b2));
+		assertThat(b1.equals(b2)).isTrue();
 	}
 
 	@Test(expected = IllegalNegativeArgumentException.class)
@@ -159,8 +159,8 @@ public class OperatingSystemBuilderTest {
 		patterns.add(new OperatingSystemPattern(1, Pattern.compile("d"), 2));
 		patterns.add(new OperatingSystemPattern(4, Pattern.compile("g"), 8));
 		final OperatingSystem.Builder builder = new OperatingSystem.Builder().setPatterns(patterns);
-		Assert.assertNotSame(patterns, builder.getPatterns());
-		Assert.assertEquals(patterns, builder.getPatterns());
+		assertThat(builder.getPatterns()).isNotSameAs(patterns);
+		assertThat(builder.getPatterns()).isEqualTo(patterns);
 	}
 
 	@Test(expected = IllegalNullArgumentException.class)
@@ -185,35 +185,35 @@ public class OperatingSystemBuilderTest {
 		patterns.add(new OperatingSystemPattern(1, Pattern.compile("[0-9]"), 1));
 
 		final OperatingSystem.Builder builder = new OperatingSystem.Builder();
-		Assert.assertSame(builder, builder.setFamily("f1"));
-		Assert.assertSame(builder, builder.setIcon("i1"));
-		Assert.assertSame(builder, builder.setId(1));
-		Assert.assertSame(builder, builder.setInfoUrl("iu1"));
-		Assert.assertSame(builder, builder.setName("n1"));
-		Assert.assertSame(builder, builder.addPatterns(patterns));
-		Assert.assertSame(builder, builder.setProducer("p1"));
-		Assert.assertSame(builder, builder.setProducerUrl("pu1"));
-		Assert.assertSame(builder, builder.setUrl("u1"));
+		assertThat(builder.setFamily("f1")).isSameAs(builder);
+		assertThat(builder.setIcon("i1")).isSameAs(builder);
+		assertThat(builder.setId(1)).isSameAs(builder);
+		assertThat(builder.setInfoUrl("iu1")).isSameAs(builder);
+		assertThat(builder.setName("n1")).isSameAs(builder);
+		assertThat(builder.addPatterns(patterns)).isSameAs(builder);
+		assertThat(builder.setProducer("p1")).isSameAs(builder);
+		assertThat(builder.setProducerUrl("pu1")).isSameAs(builder);
+		assertThat(builder.setUrl("u1")).isSameAs(builder);
 
-		Assert.assertEquals("f1", builder.getFamily());
-		Assert.assertEquals("i1", builder.getIcon());
-		Assert.assertEquals(1, builder.getId());
-		Assert.assertEquals("iu1", builder.getInfoUrl());
-		Assert.assertEquals("n1", builder.getName());
-		Assert.assertEquals(patterns, builder.getPatterns());
-		Assert.assertEquals("p1", builder.getProducer());
-		Assert.assertEquals("pu1", builder.getProducerUrl());
-		Assert.assertEquals("u1", builder.getUrl());
+		assertThat(builder.getFamily()).isEqualTo("f1");
+		assertThat(builder.getIcon()).isEqualTo("i1");
+		assertThat(builder.getId()).isEqualTo(1);
+		assertThat(builder.getInfoUrl()).isEqualTo("iu1");
+		assertThat(builder.getName()).isEqualTo("n1");
+		assertThat(builder.getPatterns()).isEqualTo(patterns);
+		assertThat(builder.getProducer()).isEqualTo("p1");
+		assertThat(builder.getProducerUrl()).isEqualTo("pu1");
+		assertThat(builder.getUrl()).isEqualTo("u1");
 
 		final OperatingSystem os = builder.build();
-		Assert.assertEquals("f1", os.getFamily());
-		Assert.assertEquals("i1", os.getIcon());
-		Assert.assertEquals(1, os.getId());
-		Assert.assertEquals("iu1", os.getInfoUrl());
-		Assert.assertEquals("n1", os.getName());
-		Assert.assertEquals("p1", os.getProducer());
-		Assert.assertEquals("pu1", os.getProducerUrl());
-		Assert.assertEquals("u1", os.getUrl());
+		assertThat(os.getFamily()).isEqualTo("f1");
+		assertThat(os.getIcon()).isEqualTo("i1");
+		assertThat(os.getId()).isEqualTo(1);
+		assertThat(os.getInfoUrl()).isEqualTo("iu1");
+		assertThat(os.getName()).isEqualTo("n1");
+		assertThat(os.getProducer()).isEqualTo("p1");
+		assertThat(os.getProducerUrl()).isEqualTo("pu1");
+		assertThat(os.getUrl()).isEqualTo("u1");
 	}
 
 }

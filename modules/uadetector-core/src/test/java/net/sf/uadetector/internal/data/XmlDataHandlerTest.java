@@ -19,7 +19,7 @@ import java.io.IOException;
 
 import net.sf.qualitycheck.exception.IllegalNullArgumentException;
 
-import org.junit.Assert;
+import static org.fest.assertions.Assertions.assertThat;
 import org.junit.Test;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
@@ -51,7 +51,7 @@ public class XmlDataHandlerTest {
 	public void resolveEntity_knownUrl() throws IOException, SAXException {
 		final XmlDataHandler handler = new XmlDataHandler(new DataBuilder());
 		final InputSource input = handler.resolveEntity("publicId is irrelevant", XmlDataHandler.UASDATA_DEF_URL);
-		Assert.assertNotNull(input);
+		assertThat(input).isNotNull();
 	}
 
 	@Test(expected = SAXException.class)

@@ -22,7 +22,7 @@ import net.sf.qualitycheck.exception.IllegalNullArgumentException;
 import net.sf.qualitycheck.exception.IllegalStateOfArgumentException;
 
 import org.easymock.EasyMock;
-import org.junit.Assert;
+import static org.fest.assertions.Assertions.assertThat;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
@@ -43,17 +43,17 @@ public class UpdateOperationWithCacheFileTaskTest_deleteFile {
 	@Test
 	public void deleteFile_fileDoesNotExist() {
 		final File file = new File("does_not_exist");
-		Assert.assertFalse(file.exists());
+		assertThat(file.exists()).isFalse();
 		UpdateOperationWithCacheFileTask.deleteFile(file);
-		Assert.assertFalse(file.exists());
+		assertThat(file.exists()).isFalse();
 	}
 
 	@Test
 	public void deleteFile_fileExists() throws IOException {
 		final File file = folder.newFile("test_file");
-		Assert.assertTrue(file.exists());
+		assertThat(file.exists()).isTrue();
 		UpdateOperationWithCacheFileTask.deleteFile(file);
-		Assert.assertFalse(file.exists());
+		assertThat(file.exists()).isFalse();
 	}
 
 	@Test(expected = IllegalNullArgumentException.class)
@@ -72,7 +72,7 @@ public class UpdateOperationWithCacheFileTaskTest_deleteFile {
 		try {
 			UpdateOperationWithCacheFileTask.deleteFile(file);
 		} catch (final IllegalStateOfArgumentException e) {
-			Assert.assertEquals("Cannot delete file '/path'.", e.getLocalizedMessage());
+			assertThat(e.getLocalizedMessage()).isEqualTo("Cannot delete file '/path'.");
 		}
 
 		PowerMock.verify(file);

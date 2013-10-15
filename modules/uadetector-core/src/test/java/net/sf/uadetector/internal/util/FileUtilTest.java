@@ -26,7 +26,7 @@ import java.nio.charset.Charset;
 import net.sf.uadetector.datastore.DataStore;
 
 import org.easymock.EasyMock;
-import org.junit.Assert;
+import static org.fest.assertions.Assertions.assertThat;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.powermock.api.easymock.PowerMock;
@@ -53,7 +53,7 @@ public class FileUtilTest {
 		tempEmptyFile.deleteOnExit();
 		final boolean isEmpty = FileUtil.isEmpty(tempEmptyFile, CHARSET);
 		PowerMock.verifyAll();
-		Assert.assertTrue(isEmpty);
+		assertThat(isEmpty).isTrue();
 		tempEmptyFile.delete();
 	}
 
@@ -66,7 +66,7 @@ public class FileUtilTest {
 		writer.close();
 		final boolean isEmpty = FileUtil.isEmpty(tempEmptyFile, CHARSET);
 		PowerMock.verifyAll();
-		Assert.assertFalse(isEmpty);
+		assertThat(isEmpty).isFalse();
 		tempEmptyFile.delete();
 	}
 

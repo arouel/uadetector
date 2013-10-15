@@ -15,26 +15,26 @@
  ******************************************************************************/
 package net.sf.uadetector;
 
+import static org.fest.assertions.Assertions.assertThat;
 import net.sf.qualitycheck.exception.IllegalNullArgumentException;
 
-import org.junit.Assert;
 import org.junit.Test;
 
 public class OperatingSystemFamilyTest {
 
 	@Test
 	public void evaluate_emptyString() {
-		Assert.assertEquals(OperatingSystemFamily.UNKNOWN, OperatingSystemFamily.evaluate(""));
+		assertThat(OperatingSystemFamily.evaluate("")).isEqualTo(OperatingSystemFamily.UNKNOWN);
 	}
 
 	@Test
 	public void evaluate_knownString_LINUX() {
-		Assert.assertEquals(OperatingSystemFamily.LINUX, OperatingSystemFamily.evaluate("Linux"));
+		assertThat(OperatingSystemFamily.evaluate("Linux")).isEqualTo(OperatingSystemFamily.LINUX);
 	}
 
 	@Test
 	public void evaluate_knownString_XMB() {
-		Assert.assertEquals(OperatingSystemFamily.XROSSMEDIABAR, OperatingSystemFamily.evaluate("XrossMediaBar (XMB)"));
+		assertThat(OperatingSystemFamily.evaluate("XrossMediaBar (XMB)")).isEqualTo(OperatingSystemFamily.XROSSMEDIABAR);
 	}
 
 	@Test(expected = IllegalNullArgumentException.class)
@@ -44,18 +44,18 @@ public class OperatingSystemFamilyTest {
 
 	@Test
 	public void evaluate_unknownString() {
-		Assert.assertEquals(OperatingSystemFamily.UNKNOWN, OperatingSystemFamily.evaluate("abcdefghijklmnopqrstuvw"));
+		assertThat(OperatingSystemFamily.evaluate("abcdefghijklmnopqrstuvw")).isEqualTo(OperatingSystemFamily.UNKNOWN);
 	}
 
 	@Test
 	public void evaluateByName_emptyString() {
-		Assert.assertEquals(OperatingSystemFamily.UNKNOWN, OperatingSystemFamily.evaluateByName(""));
+		assertThat(OperatingSystemFamily.evaluateByName("")).isEqualTo(OperatingSystemFamily.UNKNOWN);
 	}
 
 	@Test
 	public void evaluateByName_knownString_IOS() {
-		Assert.assertEquals(OperatingSystemFamily.IOS, OperatingSystemFamily.evaluateByName("iOS"));
-		Assert.assertFalse(OperatingSystemFamily.IOS == OperatingSystemFamily.evaluateByName("iPhone OS"));
+		assertThat(OperatingSystemFamily.evaluateByName("iOS")).isEqualTo(OperatingSystemFamily.IOS);
+		assertThat(OperatingSystemFamily.evaluateByName("iPhone OS")).isNotEqualTo(OperatingSystemFamily.IOS);
 	}
 
 	@Test(expected = IllegalNullArgumentException.class)
@@ -65,18 +65,18 @@ public class OperatingSystemFamilyTest {
 
 	@Test
 	public void evaluateByName_unknownString() {
-		Assert.assertEquals(OperatingSystemFamily.UNKNOWN, OperatingSystemFamily.evaluateByName("abcdefghijklmnopqrstuvw"));
+		assertThat(OperatingSystemFamily.evaluateByName("abcdefghijklmnopqrstuvw")).isEqualTo(OperatingSystemFamily.UNKNOWN);
 	}
 
 	@Test
 	public void evaluateByPattern_emptyString() {
-		Assert.assertEquals(OperatingSystemFamily.UNKNOWN, OperatingSystemFamily.evaluateByPattern(""));
+		assertThat(OperatingSystemFamily.evaluateByPattern("")).isEqualTo(OperatingSystemFamily.UNKNOWN);
 	}
 
 	@Test
 	public void evaluateByPattern_knownString_IOS() {
-		Assert.assertEquals(OperatingSystemFamily.IOS, OperatingSystemFamily.evaluateByPattern("iOS"));
-		Assert.assertEquals(OperatingSystemFamily.IOS, OperatingSystemFamily.evaluateByPattern("iPhone OS"));
+		assertThat(OperatingSystemFamily.evaluateByPattern("iOS")).isEqualTo(OperatingSystemFamily.IOS);
+		assertThat(OperatingSystemFamily.evaluateByPattern("iPhone OS")).isEqualTo(OperatingSystemFamily.IOS);
 	}
 
 	@Test(expected = IllegalNullArgumentException.class)
@@ -86,7 +86,7 @@ public class OperatingSystemFamilyTest {
 
 	@Test
 	public void evaluateByPattern_unknownString() {
-		Assert.assertEquals(OperatingSystemFamily.UNKNOWN, OperatingSystemFamily.evaluateByPattern("abcdefghijklmnopqrstuvw"));
+		assertThat(OperatingSystemFamily.evaluateByPattern("abcdefghijklmnopqrstuvw")).isEqualTo(OperatingSystemFamily.UNKNOWN);
 	}
 
 }

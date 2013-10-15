@@ -19,7 +19,7 @@ import java.util.List;
 
 import net.sf.uadetector.service.UADetectorServiceFactory;
 
-import org.junit.Assert;
+import static org.fest.assertions.Assertions.assertThat;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -47,7 +47,7 @@ public class OperatingSystemSampleTest {
 			if (!sample.getName().equals(agent.getOperatingSystem().getName())) {
 				LOG.info("Naming different: " + sample.getName() + " != " + agent.getOperatingSystem().getName() + " ("
 						+ sample.getUserAgentString() + ")");
-				Assert.assertEquals(sample.getName(), agent.getOperatingSystem().getName());
+				assertThat(agent.getOperatingSystem().getName()).isEqualTo(sample.getName());
 			}
 
 			// check for unknown family
@@ -59,11 +59,11 @@ public class OperatingSystemSampleTest {
 			if (!sample.getVersion().equals(agent.getOperatingSystem().getVersionNumber())) {
 				LOG.info("Versioning different: " + sample.getVersion() + " != " + agent.getOperatingSystem().getVersionNumber() + " ("
 						+ sample.getUserAgentString() + ")");
-				Assert.assertEquals(sample.getVersion(), agent.getOperatingSystem().getVersionNumber());
+				assertThat(agent.getOperatingSystem().getVersionNumber()).isEqualTo(sample.getVersion());
 			}
 
 			// abort if unknown family
-			Assert.assertFalse(OperatingSystemFamily.UNKNOWN == agent.getOperatingSystem().getFamily());
+			assertThat(OperatingSystemFamily.UNKNOWN == agent.getOperatingSystem().getFamily()).isFalse();
 
 			// save read OS for printing out
 			i++;

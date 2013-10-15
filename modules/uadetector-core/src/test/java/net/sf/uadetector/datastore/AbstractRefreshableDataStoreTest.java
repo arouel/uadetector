@@ -20,7 +20,7 @@ import net.sf.qualitycheck.exception.IllegalStateOfArgumentException;
 import net.sf.uadetector.internal.data.Data;
 import net.sf.uadetector.internal.data.DataBlueprint;
 
-import org.junit.Assert;
+import static org.fest.assertions.Assertions.assertThat;
 import org.junit.Test;
 
 public class AbstractRefreshableDataStoreTest {
@@ -36,7 +36,7 @@ public class AbstractRefreshableDataStoreTest {
 		final TestXmlDataStore store = new TestXmlDataStore();
 		final Data data2 = new DataBlueprint().version("test-version").build();
 		store.setData(data2);
-		Assert.assertSame(data2, store.getData());
+		assertThat(store.getData()).isSameAs(data2);
 	}
 
 	@Test(expected = IllegalStateOfArgumentException.class)

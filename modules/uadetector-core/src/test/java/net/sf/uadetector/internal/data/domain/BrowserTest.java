@@ -32,7 +32,7 @@ import net.sf.uadetector.UserAgent;
 import net.sf.uadetector.UserAgent.Builder;
 import net.sf.uadetector.UserAgentFamily;
 
-import org.junit.Assert;
+import static org.fest.assertions.Assertions.assertThat;
 import org.junit.Test;
 
 import com.google.common.collect.Sets;
@@ -140,12 +140,12 @@ public class BrowserTest {
 		final Browser b = new Blueprint().operatingSystem(os).build();
 		final Builder builder = new UserAgent.Builder();
 		b.copyTo(builder);
-		Assert.assertEquals(b.getFamily(), builder.getFamily());
-		Assert.assertEquals(b.getProducer(), builder.getProducer());
-		Assert.assertEquals(b.getProducerUrl(), builder.getProducerUrl());
-		Assert.assertEquals(b.getType().getName(), builder.getTypeName());
-		Assert.assertEquals(b.getUrl(), builder.getUrl());
-		Assert.assertNotNull(builder.getOperatingSystem());
+		assertThat(builder.getFamily()).isEqualTo(b.getFamily());
+		assertThat(builder.getProducer()).isEqualTo(b.getProducer());
+		assertThat(builder.getProducerUrl()).isEqualTo(b.getProducerUrl());
+		assertThat(builder.getTypeName()).isEqualTo(b.getType().getName());
+		assertThat(builder.getUrl()).isEqualTo(b.getUrl());
+		assertThat(builder.getOperatingSystem()).isNotNull();
 	}
 
 	@Test
@@ -153,12 +153,12 @@ public class BrowserTest {
 		final Browser b = new Blueprint().operatingSystem(null).build();
 		final Builder builder = new UserAgent.Builder();
 		b.copyTo(builder);
-		Assert.assertEquals(b.getFamily(), builder.getFamily());
-		Assert.assertEquals(b.getProducer(), builder.getProducer());
-		Assert.assertEquals(b.getProducerUrl(), builder.getProducerUrl());
-		Assert.assertEquals(b.getType().getName(), builder.getTypeName());
-		Assert.assertEquals(b.getUrl(), builder.getUrl());
-		Assert.assertSame(net.sf.uadetector.OperatingSystem.EMPTY, builder.getOperatingSystem());
+		assertThat(builder.getFamily()).isEqualTo(b.getFamily());
+		assertThat(builder.getProducer()).isEqualTo(b.getProducer());
+		assertThat(builder.getProducerUrl()).isEqualTo(b.getProducerUrl());
+		assertThat(builder.getTypeName()).isEqualTo(b.getType().getName());
+		assertThat(builder.getUrl()).isEqualTo(b.getUrl());
+		assertThat(builder.getOperatingSystem()).isSameAs(net.sf.uadetector.OperatingSystem.EMPTY);
 	}
 
 	@Test
@@ -372,16 +372,16 @@ public class BrowserTest {
 		final SortedSet<BrowserPattern> patterns = new TreeSet<BrowserPattern>();
 		final Browser b = new Browser(id, family, family.getName(), patterns, type, operatingSystem, icon, infoUrl, producer, producerUrl,
 				url);
-		Assert.assertEquals(family, b.getFamily());
-		Assert.assertEquals("bunt.png", b.getIcon());
-		Assert.assertEquals(12354, b.getId());
-		Assert.assertEquals("http://programming-motherfucker.com/", b.getInfoUrl());
-		Assert.assertEquals(operatingSystem, b.getOperatingSystem());
-		Assert.assertEquals(patterns, b.getPatterns());
-		Assert.assertEquals("Our Values", b.getProducer());
-		Assert.assertEquals("https://github.com/before", b.getProducerUrl());
-		Assert.assertEquals(type, b.getType());
-		Assert.assertEquals("http://user-agent-string.info/", b.getUrl());
+		assertThat(b.getFamily()).isEqualTo(family);
+		assertThat(b.getIcon()).isEqualTo("bunt.png");
+		assertThat(b.getId()).isEqualTo(12354);
+		assertThat(b.getInfoUrl()).isEqualTo("http://programming-motherfucker.com/");
+		assertThat(b.getOperatingSystem()).isEqualTo(operatingSystem);
+		assertThat(b.getPatterns()).isEqualTo(patterns);
+		assertThat(b.getProducer()).isEqualTo("Our Values");
+		assertThat(b.getProducerUrl()).isEqualTo("https://github.com/before");
+		assertThat(b.getType()).isEqualTo(type);
+		assertThat(b.getUrl()).isEqualTo("http://user-agent-string.info/");
 	}
 
 	@Test
@@ -400,9 +400,9 @@ public class BrowserTest {
 		final SortedSet<BrowserPattern> patterns = new TreeSet<BrowserPattern>();
 		final Browser b = new Browser(id, family, family.getName(), patterns, type, os, icon, infoUrl, producer, producerUrl, url);
 
-		Assert.assertEquals(
-				"Browser [id=12354, family=FIREFOX, familyName=Firefox, patterns=[], type=BrowserType [id=1, name=Browser], operatingSystem=OperatingSystem [id=1, name=n1, family=f1, infoUrl=iu1, patterns=[], producer=p1, producerUrl=pu1, url=u1, icon=i1], icon=bunt.png, infoUrl=http://programming-motherfucker.com/, producer=Our Values, producerUrl=https://github.com/before, url=http://user-agent-string.info/]",
-				b.toString());
+		assertThat(b.toString())
+				.isEqualTo(
+						"Browser [id=12354, family=FIREFOX, familyName=Firefox, patterns=[], type=BrowserType [id=1, name=Browser], operatingSystem=OperatingSystem [id=1, name=n1, family=f1, infoUrl=iu1, patterns=[], producer=p1, producerUrl=pu1, url=u1, icon=i1], icon=bunt.png, infoUrl=http://programming-motherfucker.com/, producer=Our Values, producerUrl=https://github.com/before, url=http://user-agent-string.info/]");
 	}
 
 }

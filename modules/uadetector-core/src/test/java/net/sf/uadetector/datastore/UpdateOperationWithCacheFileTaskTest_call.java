@@ -24,7 +24,7 @@ import javax.annotation.Nonnull;
 import net.sf.uadetector.datareader.DataReader;
 import net.sf.uadetector.datareader.XmlDataReader;
 
-import org.junit.Assert;
+import static org.fest.assertions.Assertions.assertThat;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
@@ -58,18 +58,18 @@ public class UpdateOperationWithCacheFileTaskTest_call {
 				DataStore.DEFAULT_CHARSET, fallback);
 
 		final UpdateOperationWithCacheFileTask task = new UpdateOperationWithCacheFileTask(store, folder.newFile("cache_file.tmp"));
-		Assert.assertSame(fallback.getData(), store.getData());
-		Assert.assertFalse(UpdateOperationWithCacheFileTask.isNewerData(fallback.getData(), store.getData()));
+		assertThat(store.getData()).isSameAs(fallback.getData());
+		assertThat(UpdateOperationWithCacheFileTask.isNewerData(fallback.getData(), store.getData())).isFalse();
 
 		// try to update
 		task.call();
-		Assert.assertNotSame(fallback.getData(), store.getData());
-		Assert.assertTrue(UpdateOperationWithCacheFileTask.isNewerData(fallback.getData(), store.getData()));
+		assertThat(store.getData()).isNotSameAs(fallback.getData());
+		assertThat(UpdateOperationWithCacheFileTask.isNewerData(fallback.getData(), store.getData())).isTrue();
 
 		// retry to update
 		task.call();
-		Assert.assertNotSame(fallback.getData(), store.getData());
-		Assert.assertTrue(UpdateOperationWithCacheFileTask.isNewerData(fallback.getData(), store.getData()));
+		assertThat(store.getData()).isNotSameAs(fallback.getData());
+		assertThat(UpdateOperationWithCacheFileTask.isNewerData(fallback.getData(), store.getData())).isTrue();
 	}
 
 	@Test
@@ -81,18 +81,18 @@ public class UpdateOperationWithCacheFileTaskTest_call {
 				DataStore.DEFAULT_CHARSET, fallback);
 
 		final UpdateOperationWithCacheFileTask task = new UpdateOperationWithCacheFileTask(store, folder.newFile("cache_file.tmp"));
-		Assert.assertSame(fallback.getData(), store.getData());
-		Assert.assertFalse(UpdateOperationWithCacheFileTask.isNewerData(fallback.getData(), store.getData()));
+		assertThat(store.getData()).isSameAs(fallback.getData());
+		assertThat(UpdateOperationWithCacheFileTask.isNewerData(fallback.getData(), store.getData())).isFalse();
 
 		// try to update
 		task.call();
-		Assert.assertSame(fallback.getData(), store.getData());
-		Assert.assertFalse(UpdateOperationWithCacheFileTask.isNewerData(fallback.getData(), store.getData()));
+		assertThat(store.getData()).isSameAs(fallback.getData());
+		assertThat(UpdateOperationWithCacheFileTask.isNewerData(fallback.getData(), store.getData())).isFalse();
 
 		// retry to update
 		task.call();
-		Assert.assertSame(fallback.getData(), store.getData());
-		Assert.assertFalse(UpdateOperationWithCacheFileTask.isNewerData(fallback.getData(), store.getData()));
+		assertThat(store.getData()).isSameAs(fallback.getData());
+		assertThat(UpdateOperationWithCacheFileTask.isNewerData(fallback.getData(), store.getData())).isFalse();
 	}
 
 }

@@ -20,7 +20,7 @@ import java.lang.reflect.Constructor;
 import net.sf.uadetector.UserAgentFamily;
 import net.sf.uadetector.internal.data.domain.Robot;
 
-import org.junit.Assert;
+import static org.fest.assertions.Assertions.assertThat;
 import org.junit.Test;
 
 public class RobotHashCodeBuilderTest {
@@ -50,8 +50,8 @@ public class RobotHashCodeBuilderTest {
 	public void test() {
 		final String hash1 = RobotHashCodeBuilder.build(create());
 		final String hash2 = RobotHashCodeBuilder.build(create());
-		Assert.assertEquals(hash1, hash2);
-		Assert.assertEquals("4287c4d5a3ddd9d7ce99c47f89557d65bb2ba66fee889ac16ecd83fc023bd521", hash1);
+		assertThat(hash2).isEqualTo(hash1);
+		assertThat(hash1).isEqualTo("4287c4d5a3ddd9d7ce99c47f89557d65bb2ba66fee889ac16ecd83fc023bd521");
 	}
 
 }

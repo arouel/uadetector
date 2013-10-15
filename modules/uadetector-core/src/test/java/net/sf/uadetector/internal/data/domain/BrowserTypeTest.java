@@ -18,7 +18,7 @@ package net.sf.uadetector.internal.data.domain;
 import net.sf.qualitycheck.exception.IllegalNegativeArgumentException;
 import net.sf.qualitycheck.exception.IllegalNullArgumentException;
 
-import org.junit.Assert;
+import static org.fest.assertions.Assertions.assertThat;
 import org.junit.Test;
 
 public class BrowserTypeTest {
@@ -38,42 +38,42 @@ public class BrowserTypeTest {
 		// different id
 		final BrowserType type1 = new BrowserType(1, "Email client");
 		final BrowserType type2 = new BrowserType(2, "Email client");
-		Assert.assertFalse(type1.equals(type2));
+		assertThat(type1.equals(type2)).isFalse();
 
 		// different name
 		final BrowserType type3 = new BrowserType(1, "Browser");
 		final BrowserType type4 = new BrowserType(1, "Email client");
-		Assert.assertFalse(type3.equals(type4));
+		assertThat(type3.equals(type4)).isFalse();
 
 		// different class
 		final BrowserType type5 = new BrowserType(1, "Browser");
 		final String type6 = "";
-		Assert.assertFalse(type5.equals(type6));
+		assertThat(type5.equals(type6)).isFalse();
 
 		// different to null
 		final BrowserType type7 = new BrowserType(1, "Browser");
 		final BrowserType type8 = null;
-		Assert.assertFalse(type7.equals(type8));
+		assertThat(type7.equals(type8)).isFalse();
 	}
 
 	@Test
 	public void equals_identical() {
 		final BrowserType type1 = new BrowserType(1, "Email client");
 		final BrowserType type2 = new BrowserType(1, "Email client");
-		Assert.assertTrue(type1.equals(type2));
+		assertThat(type1.equals(type2)).isTrue();
 	}
 
 	@Test
 	public void equals_same() {
 		final BrowserType type = new BrowserType(1, "Email client");
-		Assert.assertTrue(type.equals(type));
+		assertThat(type.equals(type)).isTrue();
 	}
 
 	@Test
 	public void testToString() {
 		// reduces only some noise in coverage report
 		final BrowserType type = new BrowserType(1, "Email client");
-		Assert.assertEquals("BrowserType [id=1, name=Email client]", type.toString());
+		assertThat(type.toString()).isEqualTo("BrowserType [id=1, name=Email client]");
 	}
 
 }

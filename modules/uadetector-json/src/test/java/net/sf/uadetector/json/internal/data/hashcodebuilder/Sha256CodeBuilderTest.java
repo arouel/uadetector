@@ -19,7 +19,7 @@ import java.lang.reflect.Constructor;
 
 import net.sf.qualitycheck.exception.IllegalNullArgumentException;
 
-import org.junit.Assert;
+import static org.fest.assertions.Assertions.assertThat;
 import org.junit.Test;
 
 public class Sha256CodeBuilderTest {
@@ -44,7 +44,7 @@ public class Sha256CodeBuilderTest {
 
 	@Test
 	public void toHexString_withTestString() {
-		Assert.assertEquals("9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08", Sha256CodeBuilder.asHexString("test"));
+		assertThat(Sha256CodeBuilder.asHexString("test")).isEqualTo("9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08");
 	}
 
 }

@@ -30,7 +30,7 @@ import net.sf.uadetector.internal.data.DataBlueprint;
 import net.sf.uadetector.internal.util.UrlUtil;
 import net.sf.uadetector.parser.UpdatingUserAgentStringParserImpl;
 
-import org.junit.Assert;
+import static org.fest.assertions.Assertions.assertThat;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -130,7 +130,7 @@ public class CachingXmlDataStoreTest {
 	public void createCachingXmlDataStore_provokeFallback() throws IOException, InterruptedException {
 		// create temp file
 		final File cache = folder.newFile("uas_temp.xml");
-		Assert.assertEquals("", readFile(cache));
+		assertThat(readFile(cache)).isEqualTo("");
 
 		// create fallback data store
 		final String version = "fallback-data-version";
@@ -164,21 +164,21 @@ public class CachingXmlDataStoreTest {
 
 		// create caching data store
 		final DataStore store = CachingXmlDataStore.createCachingXmlDataStore(cache, UNREACHABLE_URL, UNREACHABLE_URL, CHARSET, fallback);
-		Assert.assertEquals(version, store.getData().getVersion());
+		assertThat(store.getData().getVersion()).isEqualTo(version);
 	}
 
 	@Test
 	public void createCachingXmlDataStore_successful() throws IOException, InterruptedException {
 		// create temp file
 		final File cache = folder.newFile("uas_temp.xml");
-		Assert.assertEquals("", readFile(cache));
+		assertThat(readFile(cache)).isEqualTo("");
 
 		// create caching data store
 		final CachingXmlDataStore store = CachingXmlDataStore.createCachingXmlDataStore(cache, DATA_URL, VERSION_URL, CHARSET, fallback);
 		final UpdatingUserAgentStringParserImpl parser = new UpdatingUserAgentStringParserImpl(store);
 
 		Thread.sleep(1000l);
-		Assert.assertTrue(readFile(cache).length() >= 721915);
+		assertThat(readFile(cache).length() >= 721915).isTrue();
 
 		final long firstLastUpdateCheck = store.getUpdateOperation().getLastUpdateCheck();
 		LOG.debug("LastUpdateCheck at: " + firstLastUpdateCheck);
@@ -193,7 +193,7 @@ public class CachingXmlDataStoreTest {
 		Thread.sleep(3000l);
 		final long currentLastUpdateCheck = store.getUpdateOperation().getLastUpdateCheck();
 		LOG.debug("LastUpdateCheck at: " + currentLastUpdateCheck);
-		Assert.assertTrue(firstLastUpdateCheck < currentLastUpdateCheck);
+		assertThat(firstLastUpdateCheck < currentLastUpdateCheck).isTrue();
 
 		parser.setUpdateInterval(originalInterval);
 	}
@@ -207,13 +207,13 @@ public class CachingXmlDataStoreTest {
 	public void findOrCreateCacheFile() {
 		CachingXmlDataStore.findOrCreateCacheFile().delete(); // delete if exists
 		File temp = CachingXmlDataStore.findOrCreateCacheFile(); // cache file does not exist
-		Assert.assertTrue(temp.exists());
+		assertThat(temp.exists()).isTrue();
 		temp = CachingXmlDataStore.findOrCreateCacheFile(); // cache file exists
-		Assert.assertTrue(temp.exists());
+		assertThat(temp.exists()).isTrue();
 		temp = CachingXmlDataStore.findOrCreateCacheFile(); // cache file exists
-		Assert.assertTrue(temp.exists());
+		assertThat(temp.exists()).isTrue();
 		temp.delete();
-		Assert.assertFalse(temp.exists());
+		assertThat(temp.exists()).isFalse();
 	}
 
 }

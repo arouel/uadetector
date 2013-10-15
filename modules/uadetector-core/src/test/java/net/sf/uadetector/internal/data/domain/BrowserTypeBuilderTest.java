@@ -19,7 +19,7 @@ import net.sf.qualitycheck.exception.IllegalNegativeArgumentException;
 import net.sf.qualitycheck.exception.IllegalNullArgumentException;
 import net.sf.uadetector.internal.data.domain.BrowserType.Builder;
 
-import org.junit.Assert;
+import static org.fest.assertions.Assertions.assertThat;
 import org.junit.Test;
 
 public class BrowserTypeBuilderTest {
@@ -66,8 +66,8 @@ public class BrowserTypeBuilderTest {
 		b.setId(1);
 		b.setName("Test");
 		BrowserType i = b.build();
-		Assert.assertEquals(1, i.getId());
-		Assert.assertEquals("Test", i.getName());
+		assertThat(i.getId()).isEqualTo(1);
+		assertThat(i.getName()).isEqualTo("Test");
 	}
 
 }

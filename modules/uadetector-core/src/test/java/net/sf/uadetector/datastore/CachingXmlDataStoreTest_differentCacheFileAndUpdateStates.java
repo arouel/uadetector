@@ -26,7 +26,7 @@ import java.nio.charset.Charset;
 import net.sf.uadetector.datareader.XmlDataReaderTest;
 import net.sf.uadetector.parser.UpdatingUserAgentStringParserImpl;
 
-import org.junit.Assert;
+import static org.fest.assertions.Assertions.assertThat;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
@@ -103,8 +103,8 @@ public class CachingXmlDataStoreTest_differentCacheFileAndUpdateStates {
 
 		Thread.sleep(1000l);
 		final String readIn1 = readFile(cache);
-		Assert.assertTrue(readIn1.contains(DATA_VERSION_OLDER));
-		Assert.assertTrue(readIn1.length() >= 721915);
+		assertThat(readIn1.contains(DATA_VERSION_OLDER)).isTrue();
+		assertThat(readIn1.length() >= 721915).isTrue();
 
 		// create caching data store with filled cache and available update
 		final CachingXmlDataStore store2 = CachingXmlDataStore.createCachingXmlDataStore(cache, DATA_URL_NEWER, VERSION_URL_NEWER, CHARSET,
@@ -114,8 +114,8 @@ public class CachingXmlDataStoreTest_differentCacheFileAndUpdateStates {
 
 		Thread.sleep(1000l);
 		final String readIn2 = readFile(cache);
-		Assert.assertTrue(readIn2.contains(DATA_VERSION_NEWER));
-		Assert.assertTrue(readIn2.length() >= 721915);
+		assertThat(readIn2.contains(DATA_VERSION_NEWER)).isTrue();
+		assertThat(readIn2.length() >= 721915).isTrue();
 
 		// create caching data store with filled cache and without an available update
 		final CachingXmlDataStore store = CachingXmlDataStore.createCachingXmlDataStore(cache, DATA_URL_NEWER, VERSION_URL_NEWER, CHARSET,
@@ -125,8 +125,8 @@ public class CachingXmlDataStoreTest_differentCacheFileAndUpdateStates {
 
 		Thread.sleep(1000l);
 		final String readIn = readFile(cache);
-		Assert.assertTrue(readIn.contains(DATA_VERSION_NEWER));
-		Assert.assertTrue(readIn.length() >= 721915);
+		assertThat(readIn.contains(DATA_VERSION_NEWER)).isTrue();
+		assertThat(readIn.length() >= 721915).isTrue();
 	}
 
 }

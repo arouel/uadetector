@@ -30,7 +30,7 @@ import javax.xml.transform.stream.StreamResult;
 import net.sf.uadetector.datastore.TestXmlDataStore;
 import net.sf.uadetector.internal.util.UrlUtil;
 
-import org.junit.Assert;
+import static org.fest.assertions.Assertions.assertThat;
 import org.junit.Test;
 import org.w3c.dom.Document;
 import org.xml.sax.InputSource;
@@ -65,7 +65,7 @@ public final class XmlDataWriterTest {
 		XmlDataWriter.write(new TestXmlDataStore().getData(), outputStream);
 		final String actual = new String(outputStream.toByteArray(), "UTF-8");
 
-		Assert.assertEquals(expected, formatSimilar(actual));
+		assertThat(formatSimilar(actual)).isEqualTo(expected);
 	}
 
 }

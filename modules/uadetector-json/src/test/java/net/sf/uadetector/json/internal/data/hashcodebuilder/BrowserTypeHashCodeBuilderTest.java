@@ -19,7 +19,7 @@ import java.lang.reflect.Constructor;
 
 import net.sf.uadetector.internal.data.domain.BrowserType;
 
-import org.junit.Assert;
+import static org.fest.assertions.Assertions.assertThat;
 import org.junit.Test;
 
 public class BrowserTypeHashCodeBuilderTest {
@@ -40,8 +40,8 @@ public class BrowserTypeHashCodeBuilderTest {
 	public void test() {
 		final String hash1 = BrowserTypeHashCodeBuilder.build(create());
 		final String hash2 = BrowserTypeHashCodeBuilder.build(create());
-		Assert.assertEquals(hash1, hash2);
-		Assert.assertEquals("d31de1a5c5c8ba2a210a167cf0d0dc2425c57ea7525f4b73a4b7ab934af79dfc", hash2);
+		assertThat(hash2).isEqualTo(hash1);
+		assertThat(hash2).isEqualTo("d31de1a5c5c8ba2a210a167cf0d0dc2425c57ea7525f4b73a4b7ab934af79dfc");
 	}
 
 }

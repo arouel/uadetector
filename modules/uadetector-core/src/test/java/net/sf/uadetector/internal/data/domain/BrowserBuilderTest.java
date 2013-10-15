@@ -24,7 +24,7 @@ import net.sf.qualitycheck.exception.IllegalNullArgumentException;
 import net.sf.uadetector.UserAgentFamily;
 import net.sf.uadetector.internal.data.domain.Browser.Builder;
 
-import org.junit.Assert;
+import static org.fest.assertions.Assertions.assertThat;
 import org.junit.Test;
 
 public class BrowserBuilderTest {
@@ -55,30 +55,30 @@ public class BrowserBuilderTest {
 		original.setUrl("u1");
 
 		final Builder copy1 = new Browser.Builder(original);
-		Assert.assertEquals(UserAgentFamily.CHROME, copy1.getFamily());
-		Assert.assertEquals("i1", copy1.getIcon());
-		Assert.assertEquals("iu1", copy1.getInfoUrl());
-		Assert.assertSame(operatingSystem, copy1.getOperatingSystem());
-		Assert.assertEquals(patternSet, copy1.getPatterns());
-		Assert.assertEquals("p1", copy1.getProducer());
-		Assert.assertEquals("pu1", copy1.getProducerUrl());
-		Assert.assertEquals("browser type test", copy1.getType().getName());
-		Assert.assertEquals(1, copy1.getType().getId());
-		Assert.assertEquals(1, copy1.getTypeId());
-		Assert.assertEquals("u1", copy1.getUrl());
+		assertThat(copy1.getFamily()).isEqualTo(UserAgentFamily.CHROME);
+		assertThat(copy1.getIcon()).isEqualTo("i1");
+		assertThat(copy1.getInfoUrl()).isEqualTo("iu1");
+		assertThat(copy1.getOperatingSystem()).isSameAs(operatingSystem);
+		assertThat(copy1.getPatterns()).isEqualTo(patternSet);
+		assertThat(copy1.getProducer()).isEqualTo("p1");
+		assertThat(copy1.getProducerUrl()).isEqualTo("pu1");
+		assertThat(copy1.getType().getName()).isEqualTo("browser type test");
+		assertThat(copy1.getType().getId()).isEqualTo(1);
+		assertThat(copy1.getTypeId()).isEqualTo(1);
+		assertThat(copy1.getUrl()).isEqualTo("u1");
 
 		final Builder copy2 = original.copy();
-		Assert.assertEquals(UserAgentFamily.CHROME, copy2.getFamily());
-		Assert.assertEquals("i1", copy2.getIcon());
-		Assert.assertEquals("iu1", copy2.getInfoUrl());
-		Assert.assertSame(operatingSystem, copy2.getOperatingSystem());
-		Assert.assertEquals(patternSet, copy2.getPatterns());
-		Assert.assertEquals("p1", copy2.getProducer());
-		Assert.assertEquals("pu1", copy2.getProducerUrl());
-		Assert.assertEquals("browser type test", copy2.getType().getName());
-		Assert.assertEquals(1, copy2.getType().getId());
-		Assert.assertEquals(1, copy2.getTypeId());
-		Assert.assertEquals("u1", copy2.getUrl());
+		assertThat(copy2.getFamily()).isEqualTo(UserAgentFamily.CHROME);
+		assertThat(copy2.getIcon()).isEqualTo("i1");
+		assertThat(copy2.getInfoUrl()).isEqualTo("iu1");
+		assertThat(copy2.getOperatingSystem()).isSameAs(operatingSystem);
+		assertThat(copy2.getPatterns()).isEqualTo(patternSet);
+		assertThat(copy2.getProducer()).isEqualTo("p1");
+		assertThat(copy2.getProducerUrl()).isEqualTo("pu1");
+		assertThat(copy2.getType().getName()).isEqualTo("browser type test");
+		assertThat(copy2.getType().getId()).isEqualTo(1);
+		assertThat(copy2.getTypeId()).isEqualTo(1);
+		assertThat(copy2.getUrl()).isEqualTo("u1");
 	}
 
 	@Test(expected = IllegalNullArgumentException.class)
@@ -132,7 +132,7 @@ public class BrowserBuilderTest {
 		builder2.setType(type).setUrl("u1");
 		final Browser b2 = builder2.build();
 
-		Assert.assertTrue(b1.equals(b2));
+		assertThat(b1.equals(b2)).isTrue();
 	}
 
 	@Test(expected = IllegalNegativeArgumentException.class)
@@ -198,52 +198,52 @@ public class BrowserBuilderTest {
 		final SortedSet<BrowserPattern> patterns = new TreeSet<BrowserPattern>();
 
 		final Browser.Builder builder = new Browser.Builder();
-		Assert.assertSame(builder, builder.setFamilyName(UserAgentFamily.SEAMONKEY.getName()));
-		Assert.assertSame(builder, builder.setIcon("i1"));
-		Assert.assertSame(builder, builder.setId(1));
-		Assert.assertSame(builder, builder.setInfoUrl("iu1"));
-		Assert.assertSame(builder, builder.setOperatingSystem(operatingSystem));
-		Assert.assertSame(builder, builder.setPatterns(patterns));
-		Assert.assertSame(builder, builder.setProducer("p1"));
-		Assert.assertSame(builder, builder.setProducerUrl("pu1"));
-		Assert.assertSame(builder, builder.setType(browserType));
-		Assert.assertSame(builder, builder.setTypeId(1));
-		Assert.assertSame(builder, builder.setUrl("u1"));
+		assertThat(builder.setFamilyName(UserAgentFamily.SEAMONKEY.getName())).isSameAs(builder);
+		assertThat(builder.setIcon("i1")).isSameAs(builder);
+		assertThat(builder.setId(1)).isSameAs(builder);
+		assertThat(builder.setInfoUrl("iu1")).isSameAs(builder);
+		assertThat(builder.setOperatingSystem(operatingSystem)).isSameAs(builder);
+		assertThat(builder.setPatterns(patterns)).isSameAs(builder);
+		assertThat(builder.setProducer("p1")).isSameAs(builder);
+		assertThat(builder.setProducerUrl("pu1")).isSameAs(builder);
+		assertThat(builder.setType(browserType)).isSameAs(builder);
+		assertThat(builder.setTypeId(1)).isSameAs(builder);
+		assertThat(builder.setUrl("u1")).isSameAs(builder);
 
-		Assert.assertEquals(UserAgentFamily.SEAMONKEY, builder.getFamily());
-		Assert.assertEquals(UserAgentFamily.SEAMONKEY.getName(), builder.getFamilyName());
-		Assert.assertEquals("i1", builder.getIcon());
-		Assert.assertEquals("iu1", builder.getInfoUrl());
-		Assert.assertSame(operatingSystem, builder.getOperatingSystem());
-		Assert.assertEquals(patterns, builder.getPatterns());
-		Assert.assertEquals("p1", builder.getProducer());
-		Assert.assertEquals("pu1", builder.getProducerUrl());
-		Assert.assertEquals("browser type test", builder.getType().getName());
-		Assert.assertEquals(1, builder.getType().getId());
-		Assert.assertEquals(1, builder.getTypeId());
-		Assert.assertEquals("u1", builder.getUrl());
+		assertThat(builder.getFamily()).isEqualTo(UserAgentFamily.SEAMONKEY);
+		assertThat(builder.getFamilyName()).isEqualTo(UserAgentFamily.SEAMONKEY.getName());
+		assertThat(builder.getIcon()).isEqualTo("i1");
+		assertThat(builder.getInfoUrl()).isEqualTo("iu1");
+		assertThat(builder.getOperatingSystem()).isSameAs(operatingSystem);
+		assertThat(builder.getPatterns()).isEqualTo(patterns);
+		assertThat(builder.getProducer()).isEqualTo("p1");
+		assertThat(builder.getProducerUrl()).isEqualTo("pu1");
+		assertThat(builder.getType().getName()).isEqualTo("browser type test");
+		assertThat(builder.getType().getId()).isEqualTo(1);
+		assertThat(builder.getTypeId()).isEqualTo(1);
+		assertThat(builder.getUrl()).isEqualTo("u1");
 
 		final Browser browser = builder.build();
-		Assert.assertEquals(UserAgentFamily.SEAMONKEY, browser.getFamily());
-		Assert.assertEquals(UserAgentFamily.SEAMONKEY.getName(), browser.getFamilyName());
-		Assert.assertEquals("i1", browser.getIcon());
-		Assert.assertEquals("iu1", browser.getInfoUrl());
-		Assert.assertEquals("p1", browser.getProducer());
-		Assert.assertEquals("pu1", browser.getProducerUrl());
-		Assert.assertEquals("browser type test", browser.getType().getName());
-		Assert.assertEquals(1, browser.getType().getId());
-		Assert.assertEquals("u1", browser.getUrl());
+		assertThat(browser.getFamily()).isEqualTo(UserAgentFamily.SEAMONKEY);
+		assertThat(browser.getFamilyName()).isEqualTo(UserAgentFamily.SEAMONKEY.getName());
+		assertThat(browser.getIcon()).isEqualTo("i1");
+		assertThat(browser.getInfoUrl()).isEqualTo("iu1");
+		assertThat(browser.getProducer()).isEqualTo("p1");
+		assertThat(browser.getProducerUrl()).isEqualTo("pu1");
+		assertThat(browser.getType().getName()).isEqualTo("browser type test");
+		assertThat(browser.getType().getId()).isEqualTo(1);
+		assertThat(browser.getUrl()).isEqualTo("u1");
 
 		final Browser browserRebuild = new Builder(builder.build()).build();
-		Assert.assertEquals(UserAgentFamily.SEAMONKEY, browserRebuild.getFamily());
-		Assert.assertEquals(UserAgentFamily.SEAMONKEY.getName(), browserRebuild.getFamilyName());
-		Assert.assertEquals("i1", browserRebuild.getIcon());
-		Assert.assertEquals("iu1", browserRebuild.getInfoUrl());
-		Assert.assertEquals("p1", browserRebuild.getProducer());
-		Assert.assertEquals("pu1", browserRebuild.getProducerUrl());
-		Assert.assertEquals("browser type test", browserRebuild.getType().getName());
-		Assert.assertEquals(1, browserRebuild.getType().getId());
-		Assert.assertEquals("u1", browserRebuild.getUrl());
+		assertThat(browserRebuild.getFamily()).isEqualTo(UserAgentFamily.SEAMONKEY);
+		assertThat(browserRebuild.getFamilyName()).isEqualTo(UserAgentFamily.SEAMONKEY.getName());
+		assertThat(browserRebuild.getIcon()).isEqualTo("i1");
+		assertThat(browserRebuild.getInfoUrl()).isEqualTo("iu1");
+		assertThat(browserRebuild.getProducer()).isEqualTo("p1");
+		assertThat(browserRebuild.getProducerUrl()).isEqualTo("pu1");
+		assertThat(browserRebuild.getType().getName()).isEqualTo("browser type test");
+		assertThat(browserRebuild.getType().getId()).isEqualTo(1);
+		assertThat(browserRebuild.getUrl()).isEqualTo("u1");
 	}
 
 }

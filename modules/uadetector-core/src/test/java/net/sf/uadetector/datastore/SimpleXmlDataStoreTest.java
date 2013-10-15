@@ -19,7 +19,7 @@ import java.net.URL;
 
 import net.sf.uadetector.internal.util.UrlUtil;
 
-import org.junit.Assert;
+import static org.fest.assertions.Assertions.assertThat;
 import org.junit.Test;
 
 public class SimpleXmlDataStoreTest {
@@ -42,10 +42,10 @@ public class SimpleXmlDataStoreTest {
 	@Test
 	public void construct_successful() {
 		final SimpleXmlDataStore store = new SimpleXmlDataStore(DATA_URL, VERSION_URL);
-		Assert.assertTrue(!store.getData().getVersion().isEmpty());
-		Assert.assertNotNull(store.getDataReader());
-		Assert.assertNotNull(store.getDataUrl());
-		Assert.assertNotNull(store.getVersionUrl());
+		assertThat(!store.getData().getVersion().isEmpty()).isTrue();
+		assertThat(store.getDataReader()).isNotNull();
+		assertThat(store.getDataUrl()).isNotNull();
+		assertThat(store.getVersionUrl()).isNotNull();
 	}
 
 	@Test(expected = IllegalStateException.class)

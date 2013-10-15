@@ -21,7 +21,7 @@ import net.sf.qualitycheck.exception.IllegalEmptyArgumentException;
 import net.sf.qualitycheck.exception.IllegalNegativeArgumentException;
 import net.sf.qualitycheck.exception.IllegalNullArgumentException;
 
-import org.junit.Assert;
+import static org.fest.assertions.Assertions.assertThat;
 import org.junit.Test;
 
 public class BrowserPatternBuilderTest {
@@ -45,7 +45,7 @@ public class BrowserPatternBuilderTest {
 	public void equality() {
 		final BrowserPattern pattern1 = new BrowserPattern.Builder().setId(1).setPosition(1).setPattern(Pattern.compile("[0-9]+")).build();
 		final BrowserPattern pattern2 = new BrowserPattern.Builder().setId(1).setPosition(1).setPattern(Pattern.compile("[0-9]+")).build();
-		Assert.assertTrue(pattern1.equals(pattern2));
+		assertThat(pattern1.equals(pattern2)).isTrue();
 	}
 
 	@Test(expected = NumberFormatException.class)
@@ -68,7 +68,7 @@ public class BrowserPatternBuilderTest {
 		final BrowserPattern pattern1 = new BrowserPattern.Builder().setId("1").setPosition(1).setPattern(Pattern.compile("[0-9]+"))
 				.build();
 		final BrowserPattern pattern2 = new BrowserPattern.Builder().setId(1).setPosition(1).setPattern(Pattern.compile("[0-9]+")).build();
-		Assert.assertTrue(pattern1.equals(pattern2));
+		assertThat(pattern1.equals(pattern2)).isTrue();
 	}
 
 	@Test(expected = IllegalNegativeArgumentException.class)

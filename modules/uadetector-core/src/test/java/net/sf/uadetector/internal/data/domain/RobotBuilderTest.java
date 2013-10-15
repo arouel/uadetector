@@ -21,7 +21,7 @@ import net.sf.qualitycheck.exception.IllegalNullArgumentException;
 import net.sf.uadetector.UserAgentFamily;
 import net.sf.uadetector.internal.data.domain.Robot.Builder;
 
-import org.junit.Assert;
+import static org.fest.assertions.Assertions.assertThat;
 import org.junit.Test;
 
 public class RobotBuilderTest {
@@ -40,8 +40,8 @@ public class RobotBuilderTest {
 
 		final Robot r1 = builder.build();
 		final Robot r2 = new Robot.Builder(r1).build();
-		Assert.assertTrue(r1.equals(r2));
-		Assert.assertTrue(r1.hashCode() == r2.hashCode());
+		assertThat(r1.equals(r2)).isTrue();
+		assertThat(r1.hashCode() == r2.hashCode()).isTrue();
 	}
 
 	@Test(expected = IllegalNullArgumentException.class)
@@ -75,8 +75,8 @@ public class RobotBuilderTest {
 				.setName("n1").setProducer("p1").setProducerUrl("pu1").setUserAgentString("uas1").build();
 		final Robot b2 = new Robot.Builder().setId(1).setFamilyName(UserAgentFamily.GOOGLEBOT.getName()).setIcon("i1").setInfoUrl("iu1")
 				.setName("n1").setProducer("p1").setProducerUrl("pu1").setUserAgentString("uas1").build();
-		Assert.assertTrue(b1.equals(b2));
-		Assert.assertTrue(b1.hashCode() == b2.hashCode());
+		assertThat(b1.equals(b2)).isTrue();
+		assertThat(b1.hashCode() == b2.hashCode()).isTrue();
 	}
 
 	@Test(expected = IllegalNegativeArgumentException.class)

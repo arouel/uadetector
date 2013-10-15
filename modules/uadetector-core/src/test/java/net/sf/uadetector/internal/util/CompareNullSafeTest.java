@@ -15,7 +15,7 @@
  ******************************************************************************/
 package net.sf.uadetector.internal.util;
 
-import org.junit.Assert;
+import static org.fest.assertions.Assertions.assertThat;
 import org.junit.Test;
 
 public class CompareNullSafeTest {
@@ -31,22 +31,22 @@ public class CompareNullSafeTest {
 
 	@Test
 	public void compare_bothNotNull() {
-		Assert.assertEquals(0, new TestComparator().compare("b1", "b2"));
+		assertThat(new TestComparator().compare("b1", "b2")).isEqualTo(0);
 	}
 
 	@Test
 	public void compare_bothNull() {
-		Assert.assertEquals(0, new TestComparator().compare(null, null));
+		assertThat(new TestComparator().compare(null, null)).isEqualTo(0);
 	}
 
 	@Test
 	public void compare_leftNull() {
-		Assert.assertEquals(-1, new TestComparator().compare(null, ""));
+		assertThat(new TestComparator().compare(null, "")).isEqualTo(-1);
 	}
 
 	@Test
 	public void compare_rightNull() {
-		Assert.assertEquals(1, new TestComparator().compare("", null));
+		assertThat(new TestComparator().compare("", null)).isEqualTo(1);
 	}
 
 }

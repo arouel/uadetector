@@ -31,7 +31,7 @@ import net.sf.uadetector.internal.data.domain.OperatingSystem;
 import net.sf.uadetector.internal.data.domain.OperatingSystemPattern;
 import net.sf.uadetector.internal.data.domain.Robot;
 
-import org.junit.Assert;
+import static org.fest.assertions.Assertions.assertThat;
 import org.junit.Test;
 
 public class DataBuilderTest {
@@ -44,8 +44,8 @@ public class DataBuilderTest {
 		final BrowserType browserType = new BrowserType(1, "Browser");
 		final Browser browser = new Browser(4256, UserAgentFamily.FIREBIRD, UserAgentFamily.FIREBIRD.getName(),
 				new TreeSet<BrowserPattern>(), browserType, os, "icn", "iu1", "p1", "pu1", "u1");
-		Assert.assertSame(b, b.appendBrowser(browser));
-		Assert.assertSame(b, b.appendBrowser(browser)); // testing to add same, one more time
+		assertThat(b.appendBrowser(browser)).isSameAs(b);
+		assertThat(b.appendBrowser(browser)).isSameAs(b); // testing to add same, one more time
 	}
 
 	@Test(expected = IllegalNullArgumentException.class)
@@ -61,8 +61,8 @@ public class DataBuilderTest {
 		builder.setId(1);
 		builder.setFamilyName(UserAgentFamily.FIREFOX.getName());
 		builder.setType(new BrowserType(1, "Browser"));
-		Assert.assertSame(b, b.appendBrowserBuilder(builder));
-		Assert.assertSame(b, b.appendBrowserBuilder(builder)); // testing to add same one more time
+		assertThat(b.appendBrowserBuilder(builder)).isSameAs(b);
+		assertThat(b.appendBrowserBuilder(builder)).isSameAs(b); // testing to add same one more time
 	}
 
 	@Test(expected = IllegalNegativeArgumentException.class)
@@ -84,13 +84,13 @@ public class DataBuilderTest {
 		builder.setId(1);
 		builder.setFamilyName(UserAgentFamily.FIREFOX.getName());
 		builder.setType(new BrowserType(1, "Browser"));
-		Assert.assertSame(d, d.appendBrowserBuilder(builder));
+		assertThat(d.appendBrowserBuilder(builder)).isSameAs(d);
 		builder.setId(2);
 		builder.setFamilyName(UserAgentFamily.CHROME.getName());
 		builder.setType(new BrowserType(1, "Browser"));
-		Assert.assertSame(d, d.appendBrowserBuilder(builder));
+		assertThat(d.appendBrowserBuilder(builder)).isSameAs(d);
 		final Data data = d.build();
-		Assert.assertEquals(2, data.getBrowsers().size());
+		assertThat(data.getBrowsers()).hasSize(2);
 	}
 
 	@Test
@@ -100,14 +100,14 @@ public class DataBuilderTest {
 		b1.setId(1);
 		b1.setFamilyName(UserAgentFamily.FIREFOX.getName());
 		b1.setType(new BrowserType(1, "Browser"));
-		Assert.assertSame(d, d.appendBrowserBuilder(b1));
+		assertThat(d.appendBrowserBuilder(b1)).isSameAs(d);
 		final Browser.Builder b2 = new Browser.Builder();
 		b2.setId(2);
 		b2.setFamilyName(UserAgentFamily.CHROME.getName());
 		b2.setType(new BrowserType(1, "Browser"));
-		Assert.assertSame(d, d.appendBrowserBuilder(b2));
+		assertThat(d.appendBrowserBuilder(b2)).isSameAs(d);
 		final Data data = d.build();
-		Assert.assertEquals(2, data.getBrowsers().size());
+		assertThat(data.getBrowsers()).hasSize(2);
 	}
 
 	@Test(expected = IllegalStateOfArgumentException.class)
@@ -128,10 +128,10 @@ public class DataBuilderTest {
 		builder.setId(1);
 		builder.setFamilyName(UserAgentFamily.FIREFOX.getName());
 		builder.setTypeId(2);
-		Assert.assertSame(d, d.appendBrowserBuilder(builder));
+		assertThat(d.appendBrowserBuilder(builder)).isSameAs(d);
 		final Data data = d.build();
-		Assert.assertEquals(1, data.getBrowsers().size());
-		Assert.assertEquals(type, data.getBrowsers().iterator().next().getType());
+		assertThat(data.getBrowsers()).hasSize(1);
+		assertThat(data.getBrowsers().iterator().next().getType()).isEqualTo(type);
 	}
 
 	@Test
@@ -141,9 +141,9 @@ public class DataBuilderTest {
 		builder.setId(1);
 		builder.setFamilyName(UserAgentFamily.FIREFOX.getName());
 		builder.setTypeId(1); // type does not exist, a log message occur
-		Assert.assertSame(d, d.appendBrowserBuilder(builder));
+		assertThat(d.appendBrowserBuilder(builder)).isSameAs(d);
 		final Data data = d.build();
-		Assert.assertEquals(0, data.getBrowsers().size());
+		assertThat(data.getBrowsers()).isEmpty();
 	}
 
 	@Test(expected = IllegalNullArgumentException.class)
@@ -175,7 +175,7 @@ public class DataBuilderTest {
 		final SortedSet<OperatingSystemPattern> patterns = new TreeSet<OperatingSystemPattern>();
 		final OperatingSystem os = new OperatingSystem(1, "n1", "f1", "iu1", patterns, "p1", "pu1", "u1", "i1");
 		final DataBuilder b = new DataBuilder();
-		Assert.assertSame(b, b.appendOperatingSystem(os));
+		assertThat(b.appendOperatingSystem(os)).isSameAs(b);
 		b.appendOperatingSystem(os); // testing to add same one more time
 	}
 
@@ -184,7 +184,7 @@ public class DataBuilderTest {
 		final OperatingSystem.Builder builder = new OperatingSystem.Builder().setId("1").setFamily("f1").setIcon("i1").setInfoUrl("iu1")
 				.setProducer("p1").setProducerUrl("pu1").setUrl("u1");
 		final DataBuilder b = new DataBuilder();
-		Assert.assertSame(b, b.appendOperatingSystemBuilder(builder));
+		assertThat(b.appendOperatingSystemBuilder(builder)).isSameAs(b);
 		b.appendOperatingSystemBuilder(builder); // testing to add same one more time fails
 	}
 
@@ -210,9 +210,9 @@ public class DataBuilderTest {
 		d.appendOperatingSystemBuilder(builder);
 
 		final Data data = d.build();
-		Assert.assertEquals(1, data.getOperatingSystems().size());
+		assertThat(data.getOperatingSystems()).hasSize(1);
 		final OperatingSystem os = data.getOperatingSystems().iterator().next();
-		Assert.assertEquals("", os.getName());
+		assertThat(os.getName()).isEqualTo("");
 	}
 
 	@Test
@@ -234,7 +234,7 @@ public class DataBuilderTest {
 		d.appendOperatingSystemBuilder(builder);
 
 		final Data data = d.build();
-		Assert.assertEquals(1, data.getOperatingSystems().size());
+		assertThat(data.getOperatingSystems()).hasSize(1);
 	}
 
 	@Test
@@ -262,7 +262,7 @@ public class DataBuilderTest {
 		final Robot robot = new Robot(12, "Majestic-12", UserAgentFamily.MJ12BOT, "Majestic-12 bot", "http://majestic12.co.uk/bot.php",
 				"Majestic-12", "http://www.majestic12.co.uk/", "MJ12bot/v1.4.3", "mj12.png");
 		final DataBuilder b = new DataBuilder();
-		Assert.assertSame(b, b.appendRobot(robot));
+		assertThat(b.appendRobot(robot)).isSameAs(b);
 
 		// test to add same robot one more time
 		b.appendRobot(robot);
@@ -311,10 +311,10 @@ public class DataBuilderTest {
 		d.appendBrowserOperatingSystemMapping(new BrowserOperatingSystemMapping(2, 909));
 
 		final Data data = d.build();
-		Assert.assertEquals(2, data.getBrowsers().size());
-		Assert.assertEquals(1, data.getOperatingSystems().size());
+		assertThat(data.getBrowsers()).hasSize(2);
+		assertThat(data.getOperatingSystems()).hasSize(1);
 		final OperatingSystem os = data.getOperatingSystems().iterator().next();
-		Assert.assertEquals("MyOS", os.getName());
+		assertThat(os.getName()).isEqualTo("MyOS");
 	}
 
 	@Test
@@ -325,8 +325,8 @@ public class DataBuilderTest {
 		d.appendBrowserOperatingSystemMapping(new BrowserOperatingSystemMapping(909, 303));
 
 		final Data data = d.build();
-		Assert.assertNotNull(data);
-		Assert.assertEquals(0, data.getOperatingSystems().size());
+		assertThat(data).isNotNull();
+		assertThat(data.getOperatingSystems()).isEmpty();
 	}
 
 }

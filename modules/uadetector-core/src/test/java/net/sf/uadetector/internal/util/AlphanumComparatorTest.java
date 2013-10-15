@@ -20,7 +20,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import org.junit.Assert;
+import static org.fest.assertions.Assertions.assertThat;
 import org.junit.Test;
 
 public class AlphanumComparatorTest {
@@ -29,61 +29,61 @@ public class AlphanumComparatorTest {
 	public void compare_0_0() {
 		final String charA = "0";
 		final String charB = "0";
-		Assert.assertEquals(0, new AlphanumComparator().compare(charA, charB));
+		assertThat(new AlphanumComparator().compare(charA, charB)).isEqualTo(0);
 	}
 
 	@Test
 	public void compare_0_0000() {
 		final String charA = "0";
 		final String charB = "0000";
-		Assert.assertEquals(-3, new AlphanumComparator().compare(charA, charB));
-		Assert.assertEquals(3, new AlphanumComparator().compare(charB, charA));
+		assertThat(new AlphanumComparator().compare(charA, charB)).isEqualTo(-3);
+		assertThat(new AlphanumComparator().compare(charB, charA)).isEqualTo(3);
 	}
 
 	@Test
 	public void compare_00001_00001() {
 		final String charA = "00001";
 		final String charB = "00001";
-		Assert.assertEquals(0, new AlphanumComparator().compare(charA, charB));
+		assertThat(new AlphanumComparator().compare(charA, charB)).isEqualTo(0);
 	}
 
 	@Test
 	public void compare_02_2() {
 		final String charA = "02";
 		final String charB = "2";
-		Assert.assertEquals(1, new AlphanumComparator().compare(charA, charB));
-		Assert.assertEquals(-1, new AlphanumComparator().compare(charB, charA));
+		assertThat(new AlphanumComparator().compare(charA, charB)).isEqualTo(1);
+		assertThat(new AlphanumComparator().compare(charB, charA)).isEqualTo(-1);
 	}
 
 	@Test
 	public void compare_02_20() {
 		final String charA = "02";
 		final String charB = "20";
-		Assert.assertEquals(-2, new AlphanumComparator().compare(charA, charB));
-		Assert.assertEquals(2, new AlphanumComparator().compare(charB, charA));
+		assertThat(new AlphanumComparator().compare(charA, charB)).isEqualTo(-2);
+		assertThat(new AlphanumComparator().compare(charB, charA)).isEqualTo(2);
 	}
 
 	@Test
 	public void compare_0A_0000A() {
 		final String charA = "0A";
 		final String charB = "0000A";
-		Assert.assertEquals(-3, new AlphanumComparator().compare(charA, charB));
-		Assert.assertEquals(3, new AlphanumComparator().compare(charB, charA));
+		assertThat(new AlphanumComparator().compare(charA, charB)).isEqualTo(-3);
+		assertThat(new AlphanumComparator().compare(charB, charA)).isEqualTo(3);
 	}
 
 	@Test
 	public void compare_differentFlags() {
 		final String version1 = "0";
 		final String version2 = "00";
-		Assert.assertEquals(-1, new AlphanumComparator().compare(version1, version2));
-		Assert.assertEquals(1, new AlphanumComparator().compare(version2, version1));
+		assertThat(new AlphanumComparator().compare(version1, version2)).isEqualTo(-1);
+		assertThat(new AlphanumComparator().compare(version2, version1)).isEqualTo(1);
 	}
 
 	@Test
 	public void compare_identical() {
 		final String version1 = "000-12";
 		final String version2 = "000-12";
-		Assert.assertEquals(0, new AlphanumComparator().compare(version1, version2));
+		assertThat(new AlphanumComparator().compare(version1, version2)).isEqualTo(0);
 	}
 
 	@Test
@@ -114,7 +114,7 @@ public class AlphanumComparatorTest {
 		Collections.shuffle(scrambled);
 		Collections.sort(scrambled, new AlphanumComparator());
 
-		Assert.assertEquals(src, scrambled);
+		assertThat(scrambled).isEqualTo(src);
 	}
 
 	@Test
@@ -137,31 +137,31 @@ public class AlphanumComparatorTest {
 	@Test
 	public void compare_same() {
 		final String version = "4";
-		Assert.assertEquals(0, new AlphanumComparator().compare(version, version));
+		assertThat(new AlphanumComparator().compare(version, version)).isEqualTo(0);
 	}
 
 	@Test
 	public void compareDigits_001_xyz() {
 		final String charA = "001";
 		final String charB = "xyz";
-		Assert.assertEquals(-72, AlphanumComparator.compareDigits(charA, charB));
-		Assert.assertEquals(72, AlphanumComparator.compareDigits(charB, charA));
+		assertThat(AlphanumComparator.compareDigits(charA, charB)).isEqualTo(-72);
+		assertThat(AlphanumComparator.compareDigits(charB, charA)).isEqualTo(72);
 	}
 
 	@Test
 	public void compareDigits_1_00() {
 		final String charA = "1";
 		final String charB = "00";
-		Assert.assertEquals(-1, AlphanumComparator.compareDigits(charA, charB));
-		Assert.assertEquals(1, AlphanumComparator.compareDigits(charB, charA));
+		assertThat(AlphanumComparator.compareDigits(charA, charB)).isEqualTo(-1);
+		assertThat(AlphanumComparator.compareDigits(charB, charA)).isEqualTo(1);
 	}
 
 	@Test
 	public void compareDigits_abc_xyz() {
 		final String charA = "abc";
 		final String charB = "xyz";
-		Assert.assertEquals(-23, AlphanumComparator.compareDigits(charA, charB));
-		Assert.assertEquals(23, AlphanumComparator.compareDigits(charB, charA));
+		assertThat(AlphanumComparator.compareDigits(charA, charB)).isEqualTo(-23);
+		assertThat(AlphanumComparator.compareDigits(charB, charA)).isEqualTo(23);
 	}
 
 }

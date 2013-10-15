@@ -22,7 +22,7 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 import java.net.URL;
 
-import org.junit.Assert;
+import static org.fest.assertions.Assertions.assertThat;
 import org.junit.Test;
 
 public class ActualityOfDtdTest {
@@ -44,7 +44,7 @@ public class ActualityOfDtdTest {
 		final String localDtd = read(localReader);
 		localReader.close();
 
-		Assert.assertEquals(onlineDtd, localDtd);
+		assertThat(localDtd).isEqualTo(onlineDtd);
 	}
 
 	private String read(final Reader reader) throws IOException {

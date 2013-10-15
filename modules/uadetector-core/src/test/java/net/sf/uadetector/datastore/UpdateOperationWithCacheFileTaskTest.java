@@ -32,7 +32,7 @@ import net.sf.uadetector.internal.util.UrlUtil;
 
 import org.easymock.EasyMock;
 import org.easymock.IMockBuilder;
-import org.junit.Assert;
+import static org.fest.assertions.Assertions.assertThat;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
@@ -53,16 +53,16 @@ public class UpdateOperationWithCacheFileTaskTest {
 	public void call_cacheContainsUnexpectedData_willBeOverriddenIfUpdateAvailable() throws MalformedURLException, IOException {
 		final File cache = folder.newFile("test.cache");
 		Files.write("unexpected data".getBytes(Charsets.UTF_8), cache);
-		Assert.assertTrue(cache.exists());
+		assertThat(cache.exists()).isTrue();
 
 		// file will be created
 		final UpdateOperationWithCacheFileTask task = new UpdateOperationWithCacheFileTask(new TestXmlDataStore(), cache);
 		task.call();
-		Assert.assertTrue(cache.length() >= 722015);
+		assertThat(cache.length() >= 722015).isTrue();
 
 		// file will be overwritten (delete and rename)
 		task.call();
-		Assert.assertTrue(cache.length() >= 722015);
+		assertThat(cache.length() >= 722015).isTrue();
 	}
 
 	@Test
@@ -70,16 +70,16 @@ public class UpdateOperationWithCacheFileTaskTest {
 		final File cache = folder.newFile("test.cache");
 		final String unexpectedContent = "unexpected data";
 		Files.write(unexpectedContent.getBytes(Charsets.UTF_8), cache);
-		Assert.assertTrue(cache.exists());
+		assertThat(cache.exists()).isTrue();
 
 		// file will be created
 		final UpdateOperationWithCacheFileTask task = new UpdateOperationWithCacheFileTask(new NotUpdateableXmlDataStore(), cache);
 		task.call();
-		Assert.assertEquals(unexpectedContent.getBytes(Charsets.UTF_8).length, cache.length());
+		assertThat(cache.length()).isEqualTo(unexpectedContent.getBytes(Charsets.UTF_8).length);
 
 		// file will be overwritten (delete and rename)
 		task.call();
-		Assert.assertEquals(unexpectedContent.getBytes(Charsets.UTF_8).length, cache.length());
+		assertThat(cache.length()).isEqualTo(unexpectedContent.getBytes(Charsets.UTF_8).length);
 	}
 
 	@Test(expected = IllegalNullArgumentException.class)
@@ -101,45 +101,45 @@ public class UpdateOperationWithCacheFileTaskTest {
 	public void readAndSave_cacheFileDoesExist() throws MalformedURLException, IOException {
 		final File cache = new File(folder.getRoot(), "test.cache"); // cache file does not exist
 		cache.createNewFile();
-		Assert.assertTrue(cache.exists());
+		assertThat(cache.exists()).isTrue();
 
 		// file will be created
 		UpdateOperationWithCacheFileTask.readAndSave(cache, new TestXmlDataStore());
-		Assert.assertTrue(cache.length() >= 722015);
+		assertThat(cache.length() >= 722015).isTrue();
 
 		// file will be overwritten (delete and rename)
 		UpdateOperationWithCacheFileTask.readAndSave(cache, new TestXmlDataStore());
-		Assert.assertTrue(cache.length() >= 722015);
+		assertThat(cache.length() >= 722015).isTrue();
 	}
 
 	@Test
 	public void readAndSave_cacheFileDoesNotExist() throws MalformedURLException, IOException {
 		final File cache = new File(folder.getRoot(), "test.cache"); // cache file does not exist
-		Assert.assertFalse(cache.exists());
+		assertThat(cache.exists()).isFalse();
 
 		// file will be created
 		UpdateOperationWithCacheFileTask.readAndSave(cache, new TestXmlDataStore());
-		Assert.assertTrue(cache.length() >= 722015);
+		assertThat(cache.length() >= 722015).isTrue();
 
 		// file will be overwritten (delete and rename)
 		UpdateOperationWithCacheFileTask.readAndSave(cache, new TestXmlDataStore());
-		Assert.assertTrue(cache.length() >= 722015);
+		assertThat(cache.length() >= 722015).isTrue();
 	}
 
 	@Test
 	public void readAndSave_deleteAndRenameTempFileTest() throws MalformedURLException, IOException {
 		final File cache = folder.newFile(); // cache file does not exist
 
-		// Assert.assertTrue(temp.length() == 0); // does not work on any system
-		Assert.assertTrue(FileUtil.isEmpty(cache, DataStore.DEFAULT_CHARSET));
+		// assertThat(temp.length() == 0).isTrue(); // does not work on any system
+		assertThat(FileUtil.isEmpty(cache, DataStore.DEFAULT_CHARSET)).isTrue();
 
 		// file will be created
 		UpdateOperationWithCacheFileTask.readAndSave(cache, new TestXmlDataStore());
-		Assert.assertTrue(cache.length() >= 722015);
+		assertThat(cache.length() >= 722015).isTrue();
 
 		// file will be overwritten (delete and rename)
 		UpdateOperationWithCacheFileTask.readAndSave(cache, new TestXmlDataStore());
-		Assert.assertTrue(cache.length() >= 722015);
+		assertThat(cache.length() >= 722015).isTrue();
 	}
 
 	@Test(expected = IllegalNullArgumentException.class)
@@ -157,16 +157,16 @@ public class UpdateOperationWithCacheFileTaskTest {
 		EasyMock.expect(fileMock.renameTo(EasyMock.anyObject(File.class))).andReturn(false).anyTimes();
 		EasyMock.replay(fileMock);
 
-		// Assert.assertTrue(temp.length() == 0); // does not work on any system
-		Assert.assertTrue(FileUtil.isEmpty(fileMock, DataStore.DEFAULT_CHARSET));
+		// assertThat(temp.length() == 0).isTrue(); // does not work on any system
+		assertThat(FileUtil.isEmpty(fileMock, DataStore.DEFAULT_CHARSET)).isTrue();
 
 		// file will be created
 		UpdateOperationWithCacheFileTask.readAndSave(fileMock, new TestXmlDataStore());
-		Assert.assertTrue(fileMock.length() >= 722015);
+		assertThat(fileMock.length() >= 722015).isTrue();
 
 		// file will be overwritten (delete and rename)
 		UpdateOperationWithCacheFileTask.readAndSave(fileMock, new TestXmlDataStore());
-		Assert.assertTrue(fileMock.length() >= 722015);
+		assertThat(fileMock.length() >= 722015).isTrue();
 	}
 
 	@Test(expected = IllegalNullArgumentException.class)

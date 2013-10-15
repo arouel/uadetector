@@ -26,7 +26,7 @@ import net.sf.qualitycheck.exception.IllegalNegativeArgumentException;
 import net.sf.qualitycheck.exception.IllegalNullArgumentException;
 import net.sf.uadetector.UserAgentFamily;
 
-import org.junit.Assert;
+import static org.fest.assertions.Assertions.assertThat;
 import org.junit.Test;
 
 public class RobotTest {
@@ -261,15 +261,15 @@ public class RobotTest {
 		final String userAgentString = "I'm a robot";
 		final Robot r = new Robot(id, name, family, familyName, infoUrl, producer, producerUrl, userAgentString, icon);
 
-		Assert.assertEquals(family, r.getFamily());
-		Assert.assertEquals(familyName, r.getFamilyName());
-		Assert.assertEquals("bunt.png", r.getIcon());
-		Assert.assertEquals(12354, r.getId());
-		Assert.assertEquals("http://programming-motherfucker.com/", r.getInfoUrl());
-		Assert.assertEquals("Programming, Motherfucker", r.getName());
-		Assert.assertEquals("Our Values", r.getProducer());
-		Assert.assertEquals("https://github.com/before", r.getProducerUrl());
-		Assert.assertEquals("I'm a robot", r.getUserAgentString());
+		assertThat(r.getFamily()).isEqualTo(family);
+		assertThat(r.getFamilyName()).isEqualTo(familyName);
+		assertThat(r.getIcon()).isEqualTo("bunt.png");
+		assertThat(r.getId()).isEqualTo(12354);
+		assertThat(r.getInfoUrl()).isEqualTo("http://programming-motherfucker.com/");
+		assertThat(r.getName()).isEqualTo("Programming, Motherfucker");
+		assertThat(r.getProducer()).isEqualTo("Our Values");
+		assertThat(r.getProducerUrl()).isEqualTo("https://github.com/before");
+		assertThat(r.getUserAgentString()).isEqualTo("I'm a robot");
 	}
 
 	@Test
@@ -285,9 +285,9 @@ public class RobotTest {
 		final String producer = "Our Values";
 		final String userAgentString = "I'm a robot";
 		final Robot r = new Robot(id, name, family, familyName, infoUrl, producer, producerUrl, userAgentString, icon);
-		Assert.assertEquals(
-				"ReadableRobot [id=12354, name=Programming, Motherfucker, family=MJ12BOT, familyName=Majestic-12, infoUrl=http://programming-motherfucker.com/, producer=Our Values, producerUrl=https://github.com/before, userAgentString=I'm a robot, icon=bunt.png]",
-				r.toString());
+		assertThat(r.toString())
+				.isEqualTo(
+						"ReadableRobot [id=12354, name=Programming, Motherfucker, family=MJ12BOT, familyName=Majestic-12, infoUrl=http://programming-motherfucker.com/, producer=Our Values, producerUrl=https://github.com/before, userAgentString=I'm a robot, icon=bunt.png]");
 	}
 
 }

@@ -42,7 +42,7 @@ import net.sf.uadetector.internal.data.domain.OperatingSystem;
 import net.sf.uadetector.internal.data.domain.OperatingSystemPattern;
 import net.sf.uadetector.internal.data.domain.Robot;
 
-import org.junit.Assert;
+import static org.fest.assertions.Assertions.assertThat;
 import org.junit.Test;
 
 import com.google.common.collect.Lists;
@@ -215,7 +215,7 @@ public class DataTest {
 
 	@Test
 	public void equals_EMPTY() {
-		Assert.assertSame(Data.EMPTY, Data.EMPTY);
+		assertThat(Data.EMPTY).isSameAs(Data.EMPTY);
 
 		// create new empty instance
 		final Data empty = new Data(new HashSet<Browser>(0), new HashMap<Integer, SortedSet<BrowserPattern>>(0),
@@ -223,8 +223,8 @@ public class DataTest {
 				new HashSet<BrowserOperatingSystemMapping>(0), new HashSet<OperatingSystem>(0),
 				new HashMap<Integer, SortedSet<OperatingSystemPattern>>(0), new TreeMap<OperatingSystemPattern, OperatingSystem>(),
 				new ArrayList<Robot>(0), "");
-		Assert.assertEquals(Data.EMPTY, empty);
-		Assert.assertTrue(Data.EMPTY.hashCode() == empty.hashCode());
+		assertThat(empty).isEqualTo(Data.EMPTY);
+		assertThat(Data.EMPTY.hashCode() == empty.hashCode()).isTrue();
 	}
 
 	@Test
@@ -356,16 +356,16 @@ public class DataTest {
 		final Data data = dataBlueprint.build();
 
 		// check
-		Assert.assertEquals(browsers, data.getBrowsers());
-		Assert.assertEquals(browserPatterns, data.getBrowserPatterns());
-		Assert.assertEquals(browserTypes, data.getBrowserTypes());
-		Assert.assertEquals(patternToBrowserMap, data.getPatternToBrowserMap());
-		Assert.assertEquals(browserToOperatingSystemMappings, data.getBrowserToOperatingSystemMappings());
-		Assert.assertEquals(operatingSystems, data.getOperatingSystems());
-		Assert.assertEquals(operatingSystemPatterns, data.getOperatingSystemPatterns());
-		Assert.assertEquals(patternToOperatingSystemMap, data.getPatternToOperatingSystemMap());
-		Assert.assertEquals(robots, data.getRobots());
-		Assert.assertSame(version, data.getVersion());
+		assertThat(data.getBrowsers()).isEqualTo(browsers);
+		assertThat(data.getBrowserPatterns()).isEqualTo(browserPatterns);
+		assertThat(data.getBrowserTypes()).isEqualTo(browserTypes);
+		assertThat(data.getPatternToBrowserMap()).isEqualTo(patternToBrowserMap);
+		assertThat(data.getBrowserToOperatingSystemMappings()).isEqualTo(browserToOperatingSystemMappings);
+		assertThat(data.getOperatingSystems()).isEqualTo(operatingSystems);
+		assertThat(data.getOperatingSystemPatterns()).isEqualTo(operatingSystemPatterns);
+		assertThat(data.getPatternToOperatingSystemMap()).isEqualTo(patternToOperatingSystemMap);
+		assertThat(data.getRobots()).isEqualTo(robots);
+		assertThat(data.getVersion()).isSameAs(version);
 	}
 
 	@Test
@@ -396,8 +396,8 @@ public class DataTest {
 		dataBlueprint.version(version);
 		final Data data = dataBlueprint.build();
 
-		Assert.assertEquals(
-				"Data [browsers=[], browserPatterns={}, browserTypes={}, patternToBrowserMap={}, browserToOperatingSystemMap=[], operatingSystems=[], operatingSystemPatterns={}, patternToOperatingSystemMap={}, robots=[], version=test]",
-				data.toString());
+		assertThat(data.toString())
+				.isEqualTo(
+						"Data [browsers=[], browserPatterns={}, browserTypes={}, patternToBrowserMap={}, browserToOperatingSystemMap=[], operatingSystems=[], operatingSystemPatterns={}, patternToOperatingSystemMap={}, robots=[], version=test]");
 	}
 }

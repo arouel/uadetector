@@ -22,7 +22,7 @@ import net.sf.qualitycheck.exception.IllegalNullArgumentException;
 import net.sf.uadetector.datareader.DataReader;
 import net.sf.uadetector.datareader.XmlDataReader;
 
-import org.junit.Assert;
+import static org.fest.assertions.Assertions.assertThat;
 import org.junit.Test;
 
 public class AbstractDataStoreTest3 {
@@ -70,10 +70,10 @@ public class AbstractDataStoreTest3 {
 		final DataReader reader = new XmlDataReader();
 		final DataStore store = new TestDataStore(reader, DATA_URL, VERSION_URL, CHARSET);
 
-		Assert.assertTrue(!store.getData().getVersion().isEmpty());
-		Assert.assertEquals(reader, store.getDataReader());
-		Assert.assertEquals(DATA_URL, store.getDataUrl().toExternalForm());
-		Assert.assertEquals(VERSION_URL, store.getVersionUrl().toExternalForm());
+		assertThat(!store.getData().getVersion().isEmpty()).isTrue();
+		assertThat(store.getDataReader()).isEqualTo(reader);
+		assertThat(store.getDataUrl().toExternalForm()).isEqualTo(DATA_URL);
+		assertThat(store.getVersionUrl().toExternalForm()).isEqualTo(VERSION_URL);
 	}
 
 	@Test(expected = IllegalStateException.class)

@@ -2,7 +2,7 @@ package net.sf.uadetector.internal.data;
 
 import net.sf.uadetector.internal.data.domain.BrowserOperatingSystemMapping;
 
-import org.junit.Assert;
+import static org.fest.assertions.Assertions.assertThat;
 import org.junit.Test;
 
 public class BrowserOperatingSystemMappingComparatorTest {
@@ -13,33 +13,33 @@ public class BrowserOperatingSystemMappingComparatorTest {
 
 	@Test
 	public void compare_bothNull() {
-		Assert.assertEquals(0, BrowserOperatingSystemMappingComparator.INSTANCE.compare(null, null));
+		assertThat(BrowserOperatingSystemMappingComparator.INSTANCE.compare(null, null)).isEqualTo(0);
 	}
 
 	@Test
 	public void compare_equalsBoth() {
-		Assert.assertEquals(0, BrowserOperatingSystemMappingComparator.INSTANCE.compare(MAPPING_1, MAPPING_1));
-		Assert.assertEquals(0, BrowserOperatingSystemMappingComparator.INSTANCE.compare(MAPPING_2, MAPPING_2));
+		assertThat(BrowserOperatingSystemMappingComparator.INSTANCE.compare(MAPPING_1, MAPPING_1)).isEqualTo(0);
+		assertThat(BrowserOperatingSystemMappingComparator.INSTANCE.compare(MAPPING_2, MAPPING_2)).isEqualTo(0);
 	}
 
 	@Test
 	public void compare_leftHigher() {
-		Assert.assertEquals(-1, BrowserOperatingSystemMappingComparator.INSTANCE.compare(MAPPING_1, MAPPING_2));
+		assertThat(BrowserOperatingSystemMappingComparator.INSTANCE.compare(MAPPING_1, MAPPING_2)).isEqualTo(-1);
 	}
 
 	@Test
 	public void compare_leftNull() {
-		Assert.assertEquals(-1, BrowserOperatingSystemMappingComparator.INSTANCE.compare(null, MAPPING_1));
+		assertThat(BrowserOperatingSystemMappingComparator.INSTANCE.compare(null, MAPPING_1)).isEqualTo(-1);
 	}
 
 	@Test
 	public void compare_rightHigher() {
-		Assert.assertEquals(1, BrowserOperatingSystemMappingComparator.INSTANCE.compare(MAPPING_2, MAPPING_1));
+		assertThat(BrowserOperatingSystemMappingComparator.INSTANCE.compare(MAPPING_2, MAPPING_1)).isEqualTo(1);
 	}
 
 	@Test
 	public void compare_rightNull() {
-		Assert.assertEquals(1, BrowserOperatingSystemMappingComparator.INSTANCE.compare(MAPPING_1, null));
+		assertThat(BrowserOperatingSystemMappingComparator.INSTANCE.compare(MAPPING_1, null)).isEqualTo(1);
 	}
 
 }

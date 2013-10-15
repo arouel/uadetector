@@ -21,7 +21,7 @@ import java.util.List;
 import net.sf.uadetector.internal.data.domain.Robot;
 import net.sf.uadetector.service.UADetectorServiceFactory;
 
-import org.junit.Assert;
+import static org.fest.assertions.Assertions.assertThat;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -81,7 +81,7 @@ public class UserAgentStringParserIntegrationTest {
 			final ReadableUserAgent agent = PARSER.parse(example.getUserAgentString());
 
 			// comparing the name
-			Assert.assertEquals(example.getName(), agent.getOperatingSystem().getName());
+			assertThat(agent.getOperatingSystem().getName()).isEqualTo(example.getName());
 
 			// check for unknown family
 			if (OperatingSystemFamily.UNKNOWN == agent.getOperatingSystem().getFamily()) {
@@ -90,7 +90,7 @@ public class UserAgentStringParserIntegrationTest {
 			}
 
 			// abort if family is unknown
-			Assert.assertFalse(OperatingSystemFamily.UNKNOWN == agent.getOperatingSystem().getFamily());
+			assertThat(OperatingSystemFamily.UNKNOWN == agent.getOperatingSystem().getFamily()).isFalse();
 
 			// save read OS for printing out
 			out.print(agent.getOperatingSystem().getName(), agent.getOperatingSystem().getVersionNumber(), example.getUserAgentString());
@@ -114,7 +114,7 @@ public class UserAgentStringParserIntegrationTest {
 				LOG.info("Unexpected user agent family found. Please check the user agent string '" + example.getUserAgentString() + "'.");
 			}
 			final String msgForFamilyDiff = "'" + family + "' != '" + agent.getFamily() + "' : " + example.getUserAgentString();
-			Assert.assertEquals(msgForFamilyDiff, family, agent.getFamily());
+			assertThat(agent.getFamily()).as(msgForFamilyDiff).isEqualTo(family);
 
 			final String type = "robot".equals(example.getType()) ? Robot.TYPENAME : example.getType();
 			if (Robot.TYPENAME.equals(type)) {
@@ -124,7 +124,7 @@ public class UserAgentStringParserIntegrationTest {
 
 			// abort if the type is not the expected one
 			final String msgForTypeDiff = "'" + type + "' != '" + agent.getTypeName() + "' : " + example.getUserAgentString();
-			Assert.assertEquals(msgForTypeDiff, type, agent.getTypeName());
+			assertThat(agent.getTypeName()).as(msgForTypeDiff).isEqualTo(type);
 
 			i++;
 		}

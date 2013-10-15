@@ -32,7 +32,7 @@ import net.sf.uadetector.internal.data.domain.OperatingSystem;
 import net.sf.uadetector.internal.data.domain.OperatingSystemPattern;
 import net.sf.uadetector.internal.data.domain.Robot;
 
-import org.junit.Assert;
+import static org.fest.assertions.Assertions.assertThat;
 import org.junit.Test;
 
 public class DataEqualsTest {
@@ -77,23 +77,23 @@ public class DataEqualsTest {
 		final Data data3 = new DataBlueprint().patternToBrowserMap(patterns3).build();
 		final Data data4 = new DataBlueprint().patternToBrowserMap(patterns4).build();
 
-		Assert.assertFalse(data1.equals(data2));
-		Assert.assertFalse(data1.hashCode() == data2.hashCode());
-		Assert.assertFalse(data2.equals(data1));
+		assertThat(data1.equals(data2)).isFalse();
+		assertThat(data1.hashCode() == data2.hashCode()).isFalse();
+		assertThat(data2.equals(data1)).isFalse();
 
-		Assert.assertFalse(data1.equals(data3));
-		Assert.assertFalse(data1.hashCode() == data3.hashCode());
-		Assert.assertFalse(data3.equals(data1));
+		assertThat(data1.equals(data3)).isFalse();
+		assertThat(data1.hashCode() == data3.hashCode()).isFalse();
+		assertThat(data3.equals(data1)).isFalse();
 
-		Assert.assertTrue(data3.equals(data4));
-		Assert.assertTrue(data3.hashCode() == data4.hashCode());
-		Assert.assertTrue(data4.equals(data3));
+		assertThat(data3.equals(data4)).isTrue();
+		assertThat(data3.hashCode() == data4.hashCode()).isTrue();
+		assertThat(data4.equals(data3)).isTrue();
 
-		Assert.assertFalse(data2.equals(data3));
-		Assert.assertFalse(data2.hashCode() == data3.hashCode());
+		assertThat(data2.equals(data3)).isFalse();
+		assertThat(data2.hashCode() == data3.hashCode()).isFalse();
 
-		Assert.assertFalse(data1.equals(data4));
-		Assert.assertFalse(data1.hashCode() == data4.hashCode());
+		assertThat(data1.equals(data4)).isFalse();
+		assertThat(data1.hashCode() == data4.hashCode()).isFalse();
 	}
 
 	@Test
@@ -110,7 +110,7 @@ public class DataEqualsTest {
 		browsers2.add(browser1);
 		final Data data1 = new DataBlueprint().browsers(browsers1).build();
 		final Data data2 = new DataBlueprint().browsers(browsers2).build();
-		Assert.assertFalse(data1.equals(data2));
+		assertThat(data1.equals(data2)).isFalse();
 	}
 
 	@Test
@@ -135,23 +135,23 @@ public class DataEqualsTest {
 		final Data data3 = new DataBlueprint().patternToOperatingSystemMap(patterns3).build();
 		final Data data4 = new DataBlueprint().patternToOperatingSystemMap(patterns4).build();
 
-		Assert.assertFalse(data1.equals(data2));
-		Assert.assertFalse(data1.hashCode() == data2.hashCode());
-		Assert.assertFalse(data2.equals(data1));
+		assertThat(data1.equals(data2)).isFalse();
+		assertThat(data1.hashCode() == data2.hashCode()).isFalse();
+		assertThat(data2.equals(data1)).isFalse();
 
-		Assert.assertFalse(data1.equals(data3));
-		Assert.assertFalse(data1.hashCode() == data3.hashCode());
-		Assert.assertFalse(data3.equals(data1));
+		assertThat(data1.equals(data3)).isFalse();
+		assertThat(data1.hashCode() == data3.hashCode()).isFalse();
+		assertThat(data3.equals(data1)).isFalse();
 
-		Assert.assertTrue(data3.equals(data4));
-		Assert.assertTrue(data3.hashCode() == data4.hashCode());
-		Assert.assertTrue(data4.equals(data3));
+		assertThat(data3.equals(data4)).isTrue();
+		assertThat(data3.hashCode() == data4.hashCode()).isTrue();
+		assertThat(data4.equals(data3)).isTrue();
 
-		Assert.assertFalse(data2.equals(data3));
-		Assert.assertFalse(data2.hashCode() == data3.hashCode());
+		assertThat(data2.equals(data3)).isFalse();
+		assertThat(data2.hashCode() == data3.hashCode()).isFalse();
 
-		Assert.assertFalse(data1.equals(data4));
-		Assert.assertFalse(data1.hashCode() == data4.hashCode());
+		assertThat(data1.equals(data4)).isFalse();
+		assertThat(data1.hashCode() == data4.hashCode()).isFalse();
 	}
 
 	@Test
@@ -167,8 +167,8 @@ public class DataEqualsTest {
 		operatingSystems2.add(os3);
 		final Data data1 = new DataBlueprint().operatingSystems(operatingSystems1).build();
 		final Data data2 = new DataBlueprint().operatingSystems(operatingSystems2).build();
-		Assert.assertFalse(data1.equals(data2));
-		Assert.assertFalse(data1.hashCode() == data2.hashCode());
+		assertThat(data1.equals(data2)).isFalse();
+		assertThat(data1.hashCode() == data2.hashCode()).isFalse();
 	}
 
 	@Test
@@ -182,44 +182,44 @@ public class DataEqualsTest {
 		robots2.add(robot1);
 		final Data data1 = new DataBlueprint().robots(robots1).build();
 		final Data data2 = new DataBlueprint().robots(robots2).build();
-		Assert.assertFalse(data1.equals(data2));
-		Assert.assertFalse(data1.hashCode() == data2.hashCode());
+		assertThat(data1.equals(data2)).isFalse();
+		assertThat(data1.hashCode() == data2.hashCode()).isFalse();
 	}
 
 	@Test
 	public void equals_different_version() {
 		final Data data1 = new DataBlueprint().version("v1").build();
 		final Data data2 = new DataBlueprint().version("v2").build();
-		Assert.assertFalse(data1.equals(data2));
-		Assert.assertFalse(data1.hashCode() == data2.hashCode());
+		assertThat(data1.equals(data2)).isFalse();
+		assertThat(data1.hashCode() == data2.hashCode()).isFalse();
 	}
 
 	@Test
 	public void equals_identical() {
 		final Data data1 = new DataBlueprint().version("identical").build();
 		final Data data2 = new DataBlueprint().version("identical").build();
-		Assert.assertTrue(data1.equals(data2));
-		Assert.assertTrue(data1.hashCode() == data2.hashCode());
+		assertThat(data1.equals(data2)).isTrue();
+		assertThat(data1.hashCode() == data2.hashCode()).isTrue();
 	}
 
 	@Test
 	public void equals_null() {
 		final Data data = new DataBlueprint().build();
-		Assert.assertFalse(data.equals(null));
+		assertThat(data.equals(null)).isFalse();
 	}
 
 	@Test
 	public void equals_otherClass() {
 		final Data data = new DataBlueprint().build();
 		final String otherClass = "";
-		Assert.assertFalse(data.equals(otherClass));
+		assertThat(data.equals(otherClass)).isFalse();
 	}
 
 	@Test
 	public void equals_same() {
 		final Data data = new DataBlueprint().version("same").build();
-		Assert.assertTrue(data.equals(data));
-		Assert.assertTrue(data.hashCode() == data.hashCode());
+		assertThat(data.equals(data)).isTrue();
+		assertThat(data.hashCode() == data.hashCode()).isTrue();
 	}
 
 }

@@ -25,7 +25,7 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 
-import org.junit.Assert;
+import static org.fest.assertions.Assertions.assertThat;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -76,7 +76,7 @@ public class ExecutorServicesTest {
 		f3.get();
 		f2.get();
 		f1.get();
-		Assert.assertEquals(Lists.newArrayList(1, 2, 3, 4, 5), pool);
+		assertThat(pool).isEqualTo(Lists.newArrayList(1, 2, 3, 4, 5));
 	}
 
 	@Test
@@ -93,7 +93,7 @@ public class ExecutorServicesTest {
 		f3.get();
 		f2.get();
 		f1.get();
-		Assert.assertEquals(Lists.newArrayList(1, 5, 4, 3, 2), pool);
+		assertThat(pool).isEqualTo(Lists.newArrayList(1, 5, 4, 3, 2));
 	}
 
 	@Test
@@ -133,7 +133,7 @@ public class ExecutorServicesTest {
 
 		// we cannot test the elements, because execution speed and order is not predictable, especially on build
 		// servers not under our control
-		Assert.assertFalse(pool.isEmpty());
+		assertThat(pool.isEmpty()).isFalse();
 	}
 
 	@Test
@@ -155,7 +155,7 @@ public class ExecutorServicesTest {
 
 		// we cannot test the elements, because execution speed and order is not predictable, especially on build
 		// servers not under our control
-		Assert.assertFalse(pool.isEmpty());
+		assertThat(pool.isEmpty()).isFalse();
 	}
 
 	@Test

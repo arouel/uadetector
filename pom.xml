@@ -100,6 +100,7 @@
 		<!-- Dependencies -->
 		<commons-logging.version>1.1.1</commons-logging.version>
 		<easymock.version>3.1</easymock.version>
+		<fest-assert.version>1.4</fest-assert.version>
 		<findbugs.version>2.0.1</findbugs.version>
 		<guava.version>14.0.1</guava.version>
 		<junit.version>4.11</junit.version>
@@ -145,6 +146,12 @@
 				<groupId>commons-logging</groupId>
 				<artifactId>commons-logging</artifactId>
 				<version>${commons-logging.version}</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.easytesting</groupId>
+				<artifactId>fest-assert</artifactId>
+				<version>${fest-assert.version}</version>
 				<scope>test</scope>
 			</dependency>
 			<dependency>

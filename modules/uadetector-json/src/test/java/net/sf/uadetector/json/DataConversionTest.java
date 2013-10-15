@@ -24,7 +24,7 @@ import net.sf.uadetector.internal.util.UrlUtil;
 import net.sf.uadetector.json.internal.data.JsonConverter;
 import net.sf.uadetector.json.internal.data.serializer.Serialization;
 
-import org.junit.Assert;
+import static org.fest.assertions.Assertions.assertThat;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -48,20 +48,20 @@ public class DataConversionTest {
 		final SerDeOption options = SerDeOption.PRETTY_PRINTING;
 		final DataStore store = TestDataStoreFactory.produce();
 		Serialization serialization = JsonConverter.serialize(store.getData(), options);
-		Assert.assertEquals(0, serialization.getWarnings().size());
+		assertThat(serialization.getWarnings()).isEmpty();
 		final String json = serialization.getJson();
 		final Data parsedData = JsonConverter.deserialize(json).getData();
 
 		// can not be equals, because the IDs are different
-		Assert.assertFalse(store.getData().equals(parsedData));
+		assertThat(store.getData().equals(parsedData)).isFalse();
 
 		// must be equals, because the IDs are identical after conversion
 		Serialization serialization2 = JsonConverter.serialize(store.getData(), options);
-		Assert.assertEquals(0, serialization2.getWarnings().size());
+		assertThat(serialization2.getWarnings()).isEmpty();
 		final String expectedJson = serialization2.getJson();
 		final Data expectedData = JsonConverter.deserialize(expectedJson).getData();
-		Assert.assertEquals(expectedJson, json);
-		Assert.assertEquals(expectedData, parsedData);
+		assertThat(json).isEqualTo(expectedJson);
+		assertThat(parsedData).isEqualTo(expectedData);
 
 		// print some JSON
 		LOG.info(json);

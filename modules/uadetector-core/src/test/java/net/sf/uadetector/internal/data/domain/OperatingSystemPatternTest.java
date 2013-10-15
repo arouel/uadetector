@@ -20,7 +20,7 @@ import java.util.regex.Pattern;
 import net.sf.qualitycheck.exception.IllegalNegativeArgumentException;
 import net.sf.qualitycheck.exception.IllegalNullArgumentException;
 
-import org.junit.Assert;
+import static org.fest.assertions.Assertions.assertThat;
 import org.junit.Test;
 
 public class OperatingSystemPatternTest {
@@ -29,10 +29,10 @@ public class OperatingSystemPatternTest {
 	public void compare_differentPatternFlags() {
 		final OperatingSystemPattern pattern1 = new OperatingSystemPattern(1, Pattern.compile("[0-9]+", Pattern.MULTILINE), 1);
 		final OperatingSystemPattern pattern2 = new OperatingSystemPattern(1, Pattern.compile("[0-9]+", Pattern.CASE_INSENSITIVE), 1);
-		Assert.assertFalse(pattern1.equals(pattern2));
-		Assert.assertFalse(pattern2.equals(pattern1));
-		Assert.assertEquals(1, pattern1.compareTo(pattern2));
-		Assert.assertEquals(-1, pattern2.compareTo(pattern1));
+		assertThat(pattern1.equals(pattern2)).isFalse();
+		assertThat(pattern2.equals(pattern1)).isFalse();
+		assertThat(pattern1.compareTo(pattern2)).isEqualTo(1);
+		assertThat(pattern2.compareTo(pattern1)).isEqualTo(-1);
 	}
 
 	@Test
@@ -41,35 +41,35 @@ public class OperatingSystemPatternTest {
 				| Pattern.CASE_INSENSITIVE), 1);
 		final OperatingSystemPattern pattern2 = new OperatingSystemPattern(1, Pattern.compile("[0-9]+", Pattern.CASE_INSENSITIVE
 				| Pattern.MULTILINE), 1);
-		Assert.assertTrue(pattern1.equals(pattern2));
-		Assert.assertEquals(0, pattern1.compareTo(pattern2));
+		assertThat(pattern1.equals(pattern2)).isTrue();
+		assertThat(pattern1.compareTo(pattern2)).isEqualTo(0);
 	}
 
 	@Test
 	public void compareTo_differentPosition() {
 		final OperatingSystemPattern pattern1 = new OperatingSystemPattern(1, Pattern.compile("[0-9]+"), 1);
 		final OperatingSystemPattern pattern2 = new OperatingSystemPattern(1, Pattern.compile("[0-9]+"), 2);
-		Assert.assertEquals(-1, pattern1.compareTo(pattern2));
-		Assert.assertEquals(1, pattern2.compareTo(pattern1));
+		assertThat(pattern1.compareTo(pattern2)).isEqualTo(-1);
+		assertThat(pattern2.compareTo(pattern1)).isEqualTo(1);
 	}
 
 	@Test
 	public void compareTo_identical() {
 		final OperatingSystemPattern pattern1 = new OperatingSystemPattern(1, Pattern.compile("[0-9]+"), 1);
 		final OperatingSystemPattern pattern2 = new OperatingSystemPattern(1, Pattern.compile("[0-9]+"), 1);
-		Assert.assertEquals(0, pattern1.compareTo(pattern2));
+		assertThat(pattern1.compareTo(pattern2)).isEqualTo(0);
 	}
 
 	@Test
 	public void compareTo_null() {
 		final OperatingSystemPattern pattern = new OperatingSystemPattern(1, Pattern.compile("[0-9]+"), 1);
-		Assert.assertEquals(-1, pattern.compareTo(null));
+		assertThat(pattern.compareTo(null)).isEqualTo(-1);
 	}
 
 	@Test
 	public void compareTo_same() {
 		final OperatingSystemPattern pattern = new OperatingSystemPattern(1, Pattern.compile("[0-9]+"), 1);
-		Assert.assertEquals(0, pattern.compareTo(pattern));
+		assertThat(pattern.compareTo(pattern)).isEqualTo(0);
 	}
 
 	@Test(expected = IllegalNegativeArgumentException.class)
@@ -91,80 +91,80 @@ public class OperatingSystemPatternTest {
 	public void equals_different_flags() {
 		final OperatingSystemPattern pattern1 = new OperatingSystemPattern(1, Pattern.compile("[0-9]+", Pattern.CASE_INSENSITIVE), 1);
 		final OperatingSystemPattern pattern2 = new OperatingSystemPattern(1, Pattern.compile("[0-9]+", Pattern.MULTILINE), 1);
-		Assert.assertFalse(pattern1.equals(pattern2));
-		Assert.assertFalse(pattern1.hashCode() == pattern2.hashCode());
+		assertThat(pattern1.equals(pattern2)).isFalse();
+		assertThat(pattern1.hashCode() == pattern2.hashCode()).isFalse();
 	}
 
 	@Test
 	public void equals_different_id() {
 		final OperatingSystemPattern pattern1 = new OperatingSystemPattern(1, Pattern.compile("[0-9]+"), 1);
 		final OperatingSystemPattern pattern2 = new OperatingSystemPattern(2, Pattern.compile("[0-9]+"), 1);
-		Assert.assertFalse(pattern1.equals(pattern2));
-		Assert.assertFalse(pattern1.hashCode() == pattern2.hashCode());
-		Assert.assertEquals(-1, pattern1.compareTo(pattern2));
+		assertThat(pattern1.equals(pattern2)).isFalse();
+		assertThat(pattern1.hashCode() == pattern2.hashCode()).isFalse();
+		assertThat(pattern1.compareTo(pattern2)).isEqualTo(-1);
 	}
 
 	@Test
 	public void equals_different_pattern() {
 		final OperatingSystemPattern pattern1 = new OperatingSystemPattern(1, Pattern.compile("[0-9]+"), 1);
 		final OperatingSystemPattern pattern2 = new OperatingSystemPattern(1, Pattern.compile("[a-z]+"), 1);
-		Assert.assertFalse(pattern1.equals(pattern2));
-		Assert.assertFalse(pattern1.hashCode() == pattern2.hashCode());
-		Assert.assertFalse(pattern1.compareTo(pattern2) >= 0);
+		assertThat(pattern1.equals(pattern2)).isFalse();
+		assertThat(pattern1.hashCode() == pattern2.hashCode()).isFalse();
+		assertThat(pattern1.compareTo(pattern2) >= 0).isFalse();
 	}
 
 	@Test
 	public void equals_different_position() {
 		final OperatingSystemPattern pattern1 = new OperatingSystemPattern(1, Pattern.compile("[0-9]+"), 1);
 		final OperatingSystemPattern pattern2 = new OperatingSystemPattern(1, Pattern.compile("[0-9]+"), 2);
-		Assert.assertFalse(pattern1.equals(pattern2));
-		Assert.assertFalse(pattern1.hashCode() == pattern2.hashCode());
-		Assert.assertEquals(-1, pattern1.compareTo(pattern2));
+		assertThat(pattern1.equals(pattern2)).isFalse();
+		assertThat(pattern1.hashCode() == pattern2.hashCode()).isFalse();
+		assertThat(pattern1.compareTo(pattern2)).isEqualTo(-1);
 	}
 
 	@Test
 	public void equals_identical() {
 		final OperatingSystemPattern pattern1 = new OperatingSystemPattern(1, Pattern.compile("[0-9]+"), 1);
 		final OperatingSystemPattern pattern2 = new OperatingSystemPattern(1, Pattern.compile("[0-9]+"), 1);
-		Assert.assertTrue(pattern1.equals(pattern2));
-		Assert.assertTrue(pattern1.hashCode() == pattern2.hashCode());
-		Assert.assertEquals(0, pattern1.compareTo(pattern2));
+		assertThat(pattern1.equals(pattern2)).isTrue();
+		assertThat(pattern1.hashCode() == pattern2.hashCode()).isTrue();
+		assertThat(pattern1.compareTo(pattern2)).isEqualTo(0);
 	}
 
 	@Test
 	public void equals_null() {
 		final OperatingSystemPattern pattern = new OperatingSystemPattern(1, Pattern.compile("[0-9]+"), 1);
-		Assert.assertFalse(pattern.equals(null));
+		assertThat(pattern.equals(null)).isFalse();
 	}
 
 	@Test
 	public void equals_otherClass() {
 		final OperatingSystemPattern pattern = new OperatingSystemPattern(1, Pattern.compile("[0-9]+"), 1);
 		final BrowserPattern otherClass = new BrowserPattern(1, Pattern.compile("[0-9]+"), 2);
-		Assert.assertFalse(pattern.equals(otherClass));
+		assertThat(pattern.equals(otherClass)).isFalse();
 	}
 
 	@Test
 	public void equals_same() {
 		final OperatingSystemPattern pattern = new OperatingSystemPattern(1, Pattern.compile("[0-9]+"), 1);
-		Assert.assertTrue(pattern.equals(pattern));
-		Assert.assertEquals(0, pattern.compareTo(pattern));
+		assertThat(pattern.equals(pattern)).isTrue();
+		assertThat(pattern.compareTo(pattern)).isEqualTo(0);
 	}
 
 	@Test
 	public void testGetters() {
 		final Pattern p = Pattern.compile("[0-9]+");
 		final OperatingSystemPattern pattern = new OperatingSystemPattern(12345, p, 98765);
-		Assert.assertEquals(12345, pattern.getId());
-		Assert.assertSame(p, pattern.getPattern());
-		Assert.assertEquals(98765, pattern.getPosition());
+		assertThat(pattern.getId()).isEqualTo(12345);
+		assertThat(pattern.getPattern()).isSameAs(p);
+		assertThat(pattern.getPosition()).isEqualTo(98765);
 	}
 
 	@Test
 	public void testToString() {
 		// reduces only some noise in coverage report
 		final OperatingSystemPattern pattern = new OperatingSystemPattern(1, Pattern.compile("[0-9]+"), 1);
-		Assert.assertEquals("OperatingSystemPattern [id=1, pattern=[0-9]+, position=1]", pattern.toString());
+		assertThat(pattern.toString()).isEqualTo("OperatingSystemPattern [id=1, pattern=[0-9]+, position=1]");
 	}
 
 }

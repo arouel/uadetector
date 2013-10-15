@@ -17,7 +17,7 @@ package net.sf.uadetector.exception;
 
 import java.io.IOException;
 
-import org.junit.Assert;
+import static org.fest.assertions.Assertions.assertThat;
 import org.junit.Test;
 
 public class CannotCloseExceptionTest {
@@ -32,8 +32,8 @@ public class CannotCloseExceptionTest {
 		final IOException tunneled = new IOException();
 		final CannotCloseException e = new CannotCloseException(tunneled);
 		final String expected = CannotCloseException.DEFAULT_MESSAGE;
-		Assert.assertEquals(expected, e.getMessage());
-		Assert.assertSame(tunneled, e.getCause());
+		assertThat(e.getMessage()).isEqualTo(expected);
+		assertThat(e.getCause()).isSameAs(tunneled);
 	}
 
 	@Test
@@ -52,8 +52,8 @@ public class CannotCloseExceptionTest {
 		final IOException tunneled = new IOException();
 		final CannotCloseException e = new CannotCloseException(info, tunneled);
 		final String expected = String.format(CannotCloseException.MESSAGE_WITH_INFO, info);
-		Assert.assertEquals(expected, e.getMessage());
-		Assert.assertSame(tunneled, e.getCause());
+		assertThat(e.getMessage()).isEqualTo(expected);
+		assertThat(e.getCause()).isSameAs(tunneled);
 	}
 
 	@Test
@@ -66,7 +66,7 @@ public class CannotCloseExceptionTest {
 		final String info = "a message which describes the cause";
 		final CannotCloseException e = new CannotCloseException(info);
 		final String expected = String.format(CannotCloseException.MESSAGE_WITH_INFO, info);
-		Assert.assertEquals(expected, e.getMessage());
+		assertThat(e.getMessage()).isEqualTo(expected);
 	}
 
 }

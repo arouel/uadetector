@@ -19,7 +19,7 @@ import java.net.URL;
 
 import net.sf.qualitycheck.exception.IllegalNullArgumentException;
 
-import org.junit.Assert;
+import static org.fest.assertions.Assertions.assertThat;
 import org.junit.Test;
 
 public class SimpleJsonDataStoreTest {
@@ -35,7 +35,7 @@ public class SimpleJsonDataStoreTest {
 
 	@Test
 	public void construct1_successful() {
-		Assert.assertNotNull(new SimpleJsonDataStore(DATA_URL, VERSION_URL));
+		assertThat(new SimpleJsonDataStore(DATA_URL, VERSION_URL)).isNotNull();
 	}
 
 	@Test(expected = IllegalNullArgumentException.class)

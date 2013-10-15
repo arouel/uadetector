@@ -17,7 +17,7 @@ package net.sf.uadetector;
 
 import net.sf.qualitycheck.exception.IllegalNullArgumentException;
 
-import org.junit.Assert;
+import static org.fest.assertions.Assertions.assertThat;
 import org.junit.Test;
 
 public class OperatingSystemTest {
@@ -72,13 +72,13 @@ public class OperatingSystemTest {
 	@Test
 	public void empty() {
 		final OperatingSystem os = OperatingSystem.EMPTY;
-		Assert.assertEquals(OperatingSystemFamily.UNKNOWN, os.getFamily());
-		Assert.assertEquals("unknown", os.getFamilyName());
-		Assert.assertEquals("unknown.png", os.getIcon());
-		Assert.assertEquals("unknown", os.getName());
-		Assert.assertEquals("", os.getProducer());
-		Assert.assertEquals("", os.getProducerUrl());
-		Assert.assertEquals("", os.getUrl());
+		assertThat(os.getFamily()).isEqualTo(OperatingSystemFamily.UNKNOWN);
+		assertThat(os.getFamilyName()).isEqualTo("unknown");
+		assertThat(os.getIcon()).isEqualTo("unknown.png");
+		assertThat(os.getName()).isEqualTo("unknown");
+		assertThat(os.getProducer()).isEqualTo("");
+		assertThat(os.getProducerUrl()).isEqualTo("");
+		assertThat(os.getUrl()).isEqualTo("");
 	}
 
 	@Test
@@ -89,8 +89,8 @@ public class OperatingSystemTest {
 				new VersionNumber("1"));
 		final OperatingSystem os2 = new OperatingSystem(aix, "family", "icon", "name", "producer", "producer url", "url",
 				new VersionNumber("1"));
-		Assert.assertFalse(os1.equals(os2));
-		Assert.assertFalse(os1.hashCode() == os2.hashCode());
+		assertThat(os1.equals(os2)).isFalse();
+		assertThat(os1.hashCode() == os2.hashCode()).isFalse();
 	}
 
 	@Test
@@ -98,8 +98,8 @@ public class OperatingSystemTest {
 		final OperatingSystemFamily linux = OperatingSystemFamily.LINUX;
 		final OperatingSystem os1 = new OperatingSystem(linux, "family1", "icon", "name", "prod", "prodUrl", "url", new VersionNumber("1"));
 		final OperatingSystem os2 = new OperatingSystem(linux, "family2", "icon", "name", "prod", "prodUrl", "url", new VersionNumber("1"));
-		Assert.assertFalse(os1.equals(os2));
-		Assert.assertFalse(os1.hashCode() == os2.hashCode());
+		assertThat(os1.equals(os2)).isFalse();
+		assertThat(os1.hashCode() == os2.hashCode()).isFalse();
 	}
 
 	@Test
@@ -109,8 +109,8 @@ public class OperatingSystemTest {
 				new VersionNumber("1"));
 		final OperatingSystem os2 = new OperatingSystem(linux, "family", "icon2", "name", "producer", "producer url", "url",
 				new VersionNumber("1"));
-		Assert.assertFalse(os1.equals(os2));
-		Assert.assertFalse(os1.hashCode() == os2.hashCode());
+		assertThat(os1.equals(os2)).isFalse();
+		assertThat(os1.hashCode() == os2.hashCode()).isFalse();
 	}
 
 	@Test
@@ -120,8 +120,8 @@ public class OperatingSystemTest {
 				new VersionNumber("1"));
 		final OperatingSystem os2 = new OperatingSystem(linux, "family", "icon", "name2", "producer", "producer url", "url",
 				new VersionNumber("1"));
-		Assert.assertFalse(os1.equals(os2));
-		Assert.assertFalse(os1.hashCode() == os2.hashCode());
+		assertThat(os1.equals(os2)).isFalse();
+		assertThat(os1.hashCode() == os2.hashCode()).isFalse();
 	}
 
 	@Test
@@ -131,8 +131,8 @@ public class OperatingSystemTest {
 				new VersionNumber("1"));
 		final OperatingSystem os2 = new OperatingSystem(linux, "family", "icon", "name", "producer2", "producer url", "url",
 				new VersionNumber("1"));
-		Assert.assertFalse(os1.equals(os2));
-		Assert.assertFalse(os1.hashCode() == os2.hashCode());
+		assertThat(os1.equals(os2)).isFalse();
+		assertThat(os1.hashCode() == os2.hashCode()).isFalse();
 	}
 
 	@Test
@@ -142,8 +142,8 @@ public class OperatingSystemTest {
 				new VersionNumber("1"));
 		final OperatingSystem os2 = new OperatingSystem(linux, "family", "icon", "name", "producer", "producer url 2", "url",
 				new VersionNumber("1"));
-		Assert.assertFalse(os1.equals(os2));
-		Assert.assertFalse(os1.hashCode() == os2.hashCode());
+		assertThat(os1.equals(os2)).isFalse();
+		assertThat(os1.hashCode() == os2.hashCode()).isFalse();
 	}
 
 	@Test
@@ -153,8 +153,8 @@ public class OperatingSystemTest {
 				new VersionNumber("1"));
 		final OperatingSystem os2 = new OperatingSystem(linux, "family", "icon", "name", "producer", "producer url", "url2",
 				new VersionNumber("1"));
-		Assert.assertFalse(os1.equals(os2));
-		Assert.assertFalse(os1.hashCode() == os2.hashCode());
+		assertThat(os1.equals(os2)).isFalse();
+		assertThat(os1.hashCode() == os2.hashCode()).isFalse();
 	}
 
 	@Test
@@ -164,14 +164,14 @@ public class OperatingSystemTest {
 				new VersionNumber("1", "0"));
 		final OperatingSystem os2 = new OperatingSystem(linux, "family", "icon", "name", "producer", "producer url", "url",
 				new VersionNumber("1", "1"));
-		Assert.assertFalse(os1.equals(os2));
-		Assert.assertFalse(os1.hashCode() == os2.hashCode());
+		assertThat(os1.equals(os2)).isFalse();
+		assertThat(os1.hashCode() == os2.hashCode()).isFalse();
 	}
 
 	@Test
 	public void equals_EMPTY() {
-		Assert.assertEquals(OperatingSystem.EMPTY, OperatingSystem.EMPTY);
-		Assert.assertSame(OperatingSystem.EMPTY, OperatingSystem.EMPTY);
+		assertThat(OperatingSystem.EMPTY).isEqualTo(OperatingSystem.EMPTY);
+		assertThat(OperatingSystem.EMPTY).isSameAs(OperatingSystem.EMPTY);
 	}
 
 	@Test
@@ -181,12 +181,12 @@ public class OperatingSystemTest {
 				new VersionNumber("1"));
 		final OperatingSystem os2 = new OperatingSystem(linux, "family", "icon", "name", "producer", "producer url", "url",
 				new VersionNumber("1"));
-		Assert.assertEquals(os1, os2);
+		assertThat(os2).isEqualTo(os1);
 	}
 
 	@Test
 	public void equals_null() {
-		Assert.assertFalse(OperatingSystem.EMPTY.equals(null));
+		assertThat(OperatingSystem.EMPTY.equals(null)).isFalse();
 	}
 
 	@Test
@@ -194,7 +194,7 @@ public class OperatingSystemTest {
 		final OperatingSystemFamily linux = OperatingSystemFamily.LINUX;
 		final OperatingSystem os = new OperatingSystem(linux, "family", "icon", "name", "producer", "producer url", "url",
 				new VersionNumber("1"));
-		Assert.assertFalse(os.equals(123456));
+		assertThat(os.equals(123456)).isFalse();
 	}
 
 	@Test
@@ -202,13 +202,13 @@ public class OperatingSystemTest {
 		final OperatingSystemFamily linux = OperatingSystemFamily.LINUX;
 		final OperatingSystem os = new OperatingSystem(linux, "family", "icon", "name", "producer", "producer url", "url",
 				new VersionNumber("1"));
-		Assert.assertEquals(linux, os.getFamily());
-		Assert.assertEquals("family", os.getFamilyName());
-		Assert.assertEquals("icon", os.getIcon());
-		Assert.assertEquals("name", os.getName());
-		Assert.assertEquals("producer", os.getProducer());
-		Assert.assertEquals("producer url", os.getProducerUrl());
-		Assert.assertEquals("url", os.getUrl());
+		assertThat(os.getFamily()).isEqualTo(linux);
+		assertThat(os.getFamilyName()).isEqualTo("family");
+		assertThat(os.getIcon()).isEqualTo("icon");
+		assertThat(os.getName()).isEqualTo("name");
+		assertThat(os.getProducer()).isEqualTo("producer");
+		assertThat(os.getProducerUrl()).isEqualTo("producer url");
+		assertThat(os.getUrl()).isEqualTo("url");
 	}
 
 	@Test
@@ -218,12 +218,12 @@ public class OperatingSystemTest {
 				new VersionNumber("1"));
 		final OperatingSystem os2 = new OperatingSystem(linux, "family", "icon", "name", "producer", "producer url", "url",
 				new VersionNumber("1"));
-		Assert.assertEquals(os1.hashCode(), os2.hashCode());
+		assertThat(os2.hashCode()).isEqualTo(os1.hashCode());
 	}
 
 	@Test
 	public void testHashCode_EMPTY() {
-		Assert.assertEquals(OperatingSystem.EMPTY.hashCode(), OperatingSystem.EMPTY.hashCode());
+		assertThat(OperatingSystem.EMPTY.hashCode()).isEqualTo(OperatingSystem.EMPTY.hashCode());
 	}
 
 	@Test
@@ -232,9 +232,9 @@ public class OperatingSystemTest {
 		final OperatingSystemFamily linux = OperatingSystemFamily.LINUX;
 		final OperatingSystem ua = new OperatingSystem(linux, "f1", "i1", "n1", "p1", "pu1", "u1", new VersionNumber("1", "0", "0",
 				"-stable"));
-		Assert.assertEquals(
-				"OperatingSystem [family=LINUX, familyName=f1, icon=i1, name=n1, producer=p1, producerUrl=pu1, url=u1, versionNumber=VersionNumber [groups=[1, 0, 0], extension=-stable]]",
-				ua.toString());
+		assertThat(ua.toString())
+				.isEqualTo(
+						"OperatingSystem [family=LINUX, familyName=f1, icon=i1, name=n1, producer=p1, producerUrl=pu1, url=u1, versionNumber=VersionNumber [groups=[1, 0, 0], extension=-stable]]");
 	}
 
 }

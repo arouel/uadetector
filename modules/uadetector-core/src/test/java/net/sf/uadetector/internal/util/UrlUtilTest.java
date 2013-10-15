@@ -27,7 +27,7 @@ import net.sf.qualitycheck.exception.IllegalStateOfArgumentException;
 import net.sf.uadetector.datastore.DataStore;
 import net.sf.uadetector.exception.CanNotOpenStreamException;
 
-import org.junit.Assert;
+import static org.fest.assertions.Assertions.assertThat;
 import org.junit.Test;
 
 public class UrlUtilTest {
@@ -85,7 +85,7 @@ public class UrlUtilTest {
 	@Test
 	public void toUrl_empty() {
 		final URL url = UrlUtil.toUrl(new File("doesn't exist"));
-		Assert.assertNotNull(url);
+		assertThat(url).isNotNull();
 	}
 
 	@Test(expected = IllegalNullArgumentException.class)

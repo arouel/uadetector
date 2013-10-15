@@ -28,7 +28,7 @@ import net.sf.uadetector.datareader.XmlDataReader.XmlParser;
 import net.sf.uadetector.datastore.DataStore;
 import net.sf.uadetector.internal.data.Data;
 
-import org.junit.Assert;
+import static org.fest.assertions.Assertions.assertThat;
 import org.junit.Test;
 
 import com.google.common.io.CharStreams;
@@ -81,7 +81,7 @@ public class XmlDataReaderTest {
 	@Test
 	public void read_url_unreachable() throws MalformedURLException {
 		final Data data = new XmlDataReader().read(new URL("http://unreachable.local/"), CHARSET);
-		Assert.assertSame(Data.EMPTY, data);
+		assertThat(data).isSameAs(Data.EMPTY);
 	}
 
 	@Test
@@ -89,7 +89,7 @@ public class XmlDataReaderTest {
 		final XmlDataReader reader = new XmlDataReader();
 		final String dataAsString = CharStreams.toString(new InputStreamReader(CORRUPTED_DATA_URL.openStream()));
 		final Data data = reader.read(dataAsString);
-		Assert.assertSame(Data.EMPTY, data);
+		assertThat(data).isSameAs(Data.EMPTY);
 	}
 
 	@Test
@@ -97,7 +97,7 @@ public class XmlDataReaderTest {
 		final XmlDataReader reader = new XmlDataReader();
 		final String dataAsString = CharStreams.toString(new InputStreamReader(DIRTY_DATA_URL.openStream()));
 		final Data data = reader.read(dataAsString);
-		Assert.assertSame(Data.EMPTY, data);
+		assertThat(data).isSameAs(Data.EMPTY);
 	}
 
 	@Test
@@ -105,28 +105,28 @@ public class XmlDataReaderTest {
 		final XmlDataReader reader = new XmlDataReader();
 		final String dataAsString = CharStreams.toString(new InputStreamReader(DATA_URL.openStream()));
 		final Data data = reader.read(dataAsString);
-		Assert.assertEquals("20130321-01", data.getVersion());
+		assertThat(data.getVersion()).isEqualTo("20130321-01");
 	}
 
 	@Test
 	public void readByUrl_parsingOfCorruptedData() throws IOException {
 		final XmlDataReader reader = new XmlDataReader();
 		final Data data = reader.read(CORRUPTED_DATA_URL, CHARSET);
-		Assert.assertSame(Data.EMPTY, data);
+		assertThat(data).isSameAs(Data.EMPTY);
 	}
 
 	@Test
 	public void readByUrl_parsingOfDirtyData() throws IOException {
 		final XmlDataReader reader = new XmlDataReader();
 		final Data data = reader.read(DIRTY_DATA_URL, CHARSET);
-		Assert.assertSame(Data.EMPTY, data);
+		assertThat(data).isSameAs(Data.EMPTY);
 	}
 
 	@Test
 	public void readByUrl_versionParsing() throws IOException {
 		final DataReader reader = new XmlDataReader();
 		final Data data = reader.read(DATA_URL, CHARSET);
-		Assert.assertEquals("20130321-01", data.getVersion());
+		assertThat(data.getVersion()).isEqualTo("20130321-01");
 	}
 
 	@Test(expected = IllegalNullArgumentException.class)

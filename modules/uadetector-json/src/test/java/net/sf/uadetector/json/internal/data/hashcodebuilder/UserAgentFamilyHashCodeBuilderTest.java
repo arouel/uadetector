@@ -19,7 +19,7 @@ import java.lang.reflect.Constructor;
 
 import net.sf.uadetector.UserAgentFamily;
 
-import org.junit.Assert;
+import static org.fest.assertions.Assertions.assertThat;
 import org.junit.Test;
 
 public class UserAgentFamilyHashCodeBuilderTest {
@@ -36,8 +36,8 @@ public class UserAgentFamilyHashCodeBuilderTest {
 	public void test() {
 		final String hash1 = UserAgentFamilyHashCodeBuilder.build(UserAgentFamily.CAMINO);
 		final String hash2 = UserAgentFamilyHashCodeBuilder.build(UserAgentFamily.CAMINO);
-		Assert.assertEquals(hash1, hash2);
-		Assert.assertEquals("565bfb6dc1b336d2f42c7d27e12e3f8a75fc8441580002b3fa5e5431e90b1a52", hash2);
+		assertThat(hash2).isEqualTo(hash1);
+		assertThat(hash2).isEqualTo("565bfb6dc1b336d2f42c7d27e12e3f8a75fc8441580002b3fa5e5431e90b1a52");
 	}
 
 }

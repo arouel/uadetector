@@ -23,6 +23,7 @@ public class AbstractUpdateOperationTest {
 		assertThat(AbstractUpdateOperation.hasUpdate("", "")).isFalse();
 		assertThat(AbstractUpdateOperation.hasUpdate("", " ")).isFalse();
 		assertThat(AbstractUpdateOperation.hasUpdate(" ", "")).isFalse();
+		assertThat(AbstractUpdateOperation.hasUpdate("20131011-02", "unknown-pattern")).isFalse();
 	}
 
 }

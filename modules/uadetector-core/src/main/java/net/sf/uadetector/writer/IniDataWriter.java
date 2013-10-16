@@ -25,8 +25,6 @@ import java.util.SortedSet;
 
 import javax.annotation.Nonnull;
 import javax.annotation.concurrent.ThreadSafe;
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.transform.TransformerException;
 
 import net.sf.qualitycheck.Check;
 import net.sf.uadetector.internal.data.BrowserOperatingSystemMappingComparator;
@@ -293,10 +291,8 @@ public final class IniDataWriter {
 	 *            {@code Data} to transform into XML
 	 * @param outputStream
 	 *            output stream to write
-	 * @throws ParserConfigurationException
-	 *             If a DocumentBuilder cannot be created which satisfies the configuration requested.
-	 * @throws TransformerException
-	 *             If an unrecoverable error occurs during the course of the transformation.
+	 * @throws IOException
+	 *             if the given output stream can not be written
 	 */
 	public static void write(@Nonnull final Data data, @Nonnull final OutputStream outputStream) throws IOException {
 		Check.notNull(data, "data");

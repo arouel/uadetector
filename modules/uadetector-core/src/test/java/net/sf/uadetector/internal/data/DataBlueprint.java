@@ -26,6 +26,7 @@ import java.util.regex.Pattern;
 import javax.annotation.Nonnull;
 import javax.annotation.concurrent.NotThreadSafe;
 
+import net.sf.uadetector.ReadableDeviceCategory.Category;
 import net.sf.uadetector.UserAgentFamily;
 import net.sf.uadetector.internal.data.domain.Browser;
 import net.sf.uadetector.internal.data.domain.BrowserOperatingSystemMapping;
@@ -104,7 +105,7 @@ public final class DataBlueprint {
 		devicePatternSet.add(devicePattern);
 		devicePatterns.put(1, devicePatternSet);
 
-		final Device device = new Device("device.png", 1, "device-info", "device-category-name", devicePatternSet);
+		final Device device = new Device("device.png", 1, "device-info", "device-category-name", devicePatternSet, Category.OTHER);
 		devices.add(device);
 
 		patternToDeviceMap.put(devicePattern, device);

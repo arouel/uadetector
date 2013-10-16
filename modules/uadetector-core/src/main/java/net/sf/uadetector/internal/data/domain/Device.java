@@ -81,7 +81,7 @@ public final class Device implements Identifiable, Serializable {
 
 		@Nonnull
 		public Device build() {
-			return new Device(icon, id, infoUrl, name, patterns);
+			return new Device(icon, id, infoUrl, name, patterns, Category.evaluate(name));
 		}
 
 		/**
@@ -154,10 +154,11 @@ public final class Device implements Identifiable, Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	private static int buildHashCode(@Nonnull final String icon, @Nonnegative final int id, @Nonnull final String infoUrl,
-			@Nonnull final String name, @Nonnull final SortedSet<DevicePattern> patterns) {
+	private static int buildHashCode(@Nonnull final Category category, @Nonnull final String icon, @Nonnegative final int id,
+			@Nonnull final String infoUrl, @Nonnull final String name, @Nonnull final SortedSet<DevicePattern> patterns) {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + category.hashCode();
 		result = prime * result + icon.hashCode();
 		result = prime * result + id;
 		result = prime * result + infoUrl.hashCode();
@@ -187,14 +188,14 @@ public final class Device implements Identifiable, Serializable {
 	private final SortedSet<DevicePattern> patterns;
 
 	public Device(@Nonnull final String icon, @Nonnegative final int id, @Nonnull final String infoUrl, @Nonnull final String name,
-			@Nonnull final SortedSet<DevicePattern> patterns) {
+			@Nonnull final SortedSet<DevicePattern> patterns, @Nonnull final Category category) {
+		this.category = category;
 		this.icon = Check.notNull(icon, "icon");
 		this.id = Check.notNegative(id, "id");
 		this.infoUrl = Check.notNull(infoUrl, "infoUrl");
 		this.name = Check.notNull(name, "name");
 		this.patterns = Collections.unmodifiableSortedSet(new TreeSet<DevicePattern>(Check.notNull(patterns, "patterns")));
-		hash = buildHashCode(icon, id, infoUrl, name, patterns);
-		category = Category.evaluate(name);
+		hash = buildHashCode(category, icon, id, infoUrl, name, patterns);
 	}
 
 	@Override
@@ -209,6 +210,9 @@ public final class Device implements Identifiable, Serializable {
 			return false;
 		}
 		final Device other = (Device) obj;
+		if (category != other.category) {
+			return false;
+		}
 		if (!icon.equals(other.icon)) {
 			return false;
 		}

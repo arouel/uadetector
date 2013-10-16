@@ -13,6 +13,7 @@ import javax.annotation.Nonnull;
 
 import net.sf.qualitycheck.exception.IllegalNegativeArgumentException;
 import net.sf.qualitycheck.exception.IllegalNullArgumentException;
+import net.sf.uadetector.ReadableDeviceCategory.Category;
 
 import org.junit.Test;
 
@@ -28,6 +29,8 @@ public final class DeviceTest {
 
 		private String name = "device-name";
 
+		private Category category = Category.UNKNOWN;
+
 		private SortedSet<DevicePattern> patterns = new TreeSet<DevicePattern>();
 
 		public Blueprint() {
@@ -36,7 +39,12 @@ public final class DeviceTest {
 
 		@Nonnull
 		public Device build() {
-			return new Device(icon, id, infoUrl, name, patterns);
+			return new Device(icon, id, infoUrl, name, patterns, category);
+		}
+
+		public Blueprint category(final Category category) {
+			this.category = category;
+			return this;
 		}
 
 		public Blueprint icon(final String icon) {
@@ -80,6 +88,14 @@ public final class DeviceTest {
 
 		final Device blueprint = new Blueprint().build();
 		assertEquals(blueprint, obj);
+	}
+
+	@Test
+	public void equals_different_CATEGORY() {
+		final Device a = new Blueprint().category(Category.SMARTPHONE).build();
+		final Device b = new Blueprint().category(Category.TABLET).build();
+		assertFalse(a.equals(b));
+		assertFalse(a.hashCode() == b.hashCode());
 	}
 
 	@Test
@@ -203,6 +219,7 @@ public final class DeviceTest {
 		assertEquals(2, device.getId());
 		assertEquals("info", device.getInfoUrl());
 		assertEquals(patterns, device.getPatterns());
+		assertEquals(Category.UNKNOWN, device.getCategory());
 
 		final Device.Builder c = new Device.Builder(device);
 		assertEquals("test", c.getName());

@@ -111,12 +111,10 @@ public class DataBuilder {
 		int typeId;
 		for (final Map.Entry<Integer, Browser.Builder> entry : builders.entrySet()) {
 			typeId = entry.getValue().getTypeId();
-			if (typeId >= 0) {
-				if (types.containsKey(typeId)) {
-					entry.getValue().setType(types.get(typeId));
-				} else {
-					LOG.warn("No type available for '" + entry.getValue().getProducer() + " " + entry.getValue().getFamily() + "'.");
-				}
+			if (types.containsKey(typeId)) {
+				entry.getValue().setType(types.get(typeId));
+			} else {
+				LOG.warn("No type available for '" + entry.getValue().getProducer() + " " + entry.getValue().getFamily() + "'.");
 			}
 		}
 	}

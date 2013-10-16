@@ -172,7 +172,7 @@ public final class Device implements Identifiable, Serializable {
 	private final String icon;
 
 	@Nonnull
-	private final transient Category category;
+	private final Category category;
 
 	@Nonnegative
 	private final int id;

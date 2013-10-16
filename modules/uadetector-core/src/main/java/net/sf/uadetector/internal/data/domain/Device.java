@@ -81,7 +81,7 @@ public final class Device implements Identifiable, Serializable {
 
 		@Nonnull
 		public Device build() {
-			return new Device(icon, id, infoUrl, name, patterns, Category.evaluate(name));
+			return new Device(name, id, Category.evaluate(name), icon, infoUrl, patterns);
 		}
 
 		/**
@@ -187,8 +187,8 @@ public final class Device implements Identifiable, Serializable {
 	@Nonnull
 	private final SortedSet<DevicePattern> patterns;
 
-	public Device(@Nonnull final String icon, @Nonnegative final int id, @Nonnull final String infoUrl, @Nonnull final String name,
-			@Nonnull final SortedSet<DevicePattern> patterns, @Nonnull final Category category) {
+	public Device(@Nonnull final String name, @Nonnegative final int id, @Nonnull final Category category, @Nonnull final String icon,
+			@Nonnull final String infoUrl, @Nonnull final SortedSet<DevicePattern> patterns) {
 		this.category = category;
 		this.icon = Check.notNull(icon, "icon");
 		this.id = Check.notNegative(id, "id");

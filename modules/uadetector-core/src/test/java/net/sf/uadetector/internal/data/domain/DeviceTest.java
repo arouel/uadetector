@@ -39,7 +39,7 @@ public final class DeviceTest {
 
 		@Nonnull
 		public Device build() {
-			return new Device(icon, id, infoUrl, name, patterns, category);
+			return new Device(name, id, category, icon, infoUrl, patterns);
 		}
 
 		public Blueprint category(final Category category) {

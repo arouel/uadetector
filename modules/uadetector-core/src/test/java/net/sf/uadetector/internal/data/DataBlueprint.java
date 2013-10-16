@@ -105,7 +105,7 @@ public final class DataBlueprint {
 		devicePatternSet.add(devicePattern);
 		devicePatterns.put(1, devicePatternSet);
 
-		final Device device = new Device("device.png", 1, "device-info", "device-category-name", devicePatternSet, Category.OTHER);
+		final Device device = new Device("device-category-name", 1, Category.OTHER, "device.png", "device-info", devicePatternSet);
 		devices.add(device);
 
 		patternToDeviceMap.put(devicePattern, device);

@@ -139,10 +139,10 @@ public class DataTest {
 
 	@Test
 	public void equals_different_DEVICES() {
-		final Device device1 = new Device("icon", 123, "infoUrl", "dev1", new TreeSet<DevicePattern>(), Category.OTHER);
+		final Device device1 = new Device("dev1", 123, Category.OTHER, "icon", "infoUrl", new TreeSet<DevicePattern>());
 		final Data a = new DataBlueprint().devices(Sets.newHashSet(device1)).build();
 
-		final Device device2 = new Device("icon", 234, "infoUrl", "dev2", new TreeSet<DevicePattern>(), Category.OTHER);
+		final Device device2 = new Device("dev2", 234, Category.OTHER, "icon", "infoUrl", new TreeSet<DevicePattern>());
 		final Data b = new DataBlueprint().devices(Sets.newHashSet(device2)).build();
 
 		assertFalse(a.equals(b));
@@ -208,13 +208,13 @@ public class DataTest {
 	@Test
 	public void equals_different_PATTERNTODEVICEMAP() {
 		final DevicePattern pattern1 = new DevicePattern(1, Pattern.compile("1"), 1);
-		final Device device1 = new Device("icon", 234, "infoUrl", "dev1", new TreeSet<DevicePattern>(), Category.OTHER);
+		final Device device1 = new Device("dev1", 234, Category.OTHER, "icon", "infoUrl", new TreeSet<DevicePattern>());
 		final SortedMap<DevicePattern, Device> map1 = Maps.newTreeMap();
 		map1.put(pattern1, device1);
 		final Data a = new DataBlueprint().patternToDeviceMap(map1).build();
 
 		final DevicePattern pattern2 = new DevicePattern(1, Pattern.compile("2"), 1);
-		final Device device2 = new Device("icon", 235, "infoUrl", "dev2", new TreeSet<DevicePattern>(), Category.OTHER);
+		final Device device2 = new Device("dev2", 235, Category.OTHER, "icon", "infoUrl", new TreeSet<DevicePattern>());
 		final SortedMap<DevicePattern, Device> map2 = Maps.newTreeMap();
 		map2.put(pattern2, device2);
 		final Data b = new DataBlueprint().patternToDeviceMap(map2).build();

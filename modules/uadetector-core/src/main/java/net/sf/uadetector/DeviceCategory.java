@@ -29,16 +29,12 @@ public final class DeviceCategory implements ReadableDeviceCategory, Serializabl
 	@NotThreadSafe
 	public static final class Builder {
 
-		@Nonnull
 		private Category category;
 
-		@Nonnull
 		private String icon;
 
-		@Nonnull
 		private String infoUrl;
 
-		@Nonnull
 		private String name;
 
 		public Builder() {

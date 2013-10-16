@@ -1,5 +1,7 @@
 package net.sf.uadetector.parser;
 
+import static org.fest.assertions.Assertions.assertThat;
+
 import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
@@ -14,6 +16,7 @@ import java.util.TreeMap;
 import java.util.TreeSet;
 import java.util.regex.Pattern;
 
+import net.sf.uadetector.DeviceCategory;
 import net.sf.uadetector.ReadableUserAgent;
 import net.sf.uadetector.UserAgentFamily;
 import net.sf.uadetector.UserAgentStringParser;
@@ -31,7 +34,6 @@ import net.sf.uadetector.internal.data.domain.OperatingSystemPattern;
 import net.sf.uadetector.internal.data.domain.Robot;
 import net.sf.uadetector.internal.util.RegularExpressionConverter;
 
-import static org.fest.assertions.Assertions.assertThat;
 import org.junit.Test;
 
 import com.google.common.collect.Maps;
@@ -106,10 +108,12 @@ public class AbstractUserAgentStringParserTest {
 		final ReadableUserAgent ua1 = parser.parse("Eudora");
 		assertThat(ua1.getFamily()).isEqualTo(UserAgentFamily.EUDORA);
 		assertThat(ua1.getVersionNumber().toVersionString()).isEqualTo("");
+		assertThat(ua1.getDeviceCategory()).isEqualTo(DeviceCategory.EMPTY);
 
 		final ReadableUserAgent ua2 = parser.parse("Eudora/1.0");
 		assertThat(ua2.getFamily()).isEqualTo(UserAgentFamily.EUDORA);
 		assertThat(ua2.getVersionNumber().toVersionString()).isEqualTo("");
+		assertThat(ua2.getDeviceCategory()).isEqualTo(DeviceCategory.EMPTY);
 	}
 
 }

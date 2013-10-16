@@ -24,7 +24,8 @@ import java.util.regex.Pattern;
 import net.sf.qualitycheck.exception.IllegalNegativeArgumentException;
 import net.sf.qualitycheck.exception.IllegalNullArgumentException;
 import net.sf.qualitycheck.exception.IllegalStateOfArgumentException;
-import net.sf.uadetector.DeviceCategory;
+import net.sf.uadetector.ReadableDeviceCategory;
+import net.sf.uadetector.ReadableDeviceCategory.Category;
 import net.sf.uadetector.UserAgentFamily;
 import net.sf.uadetector.internal.data.domain.Browser;
 import net.sf.uadetector.internal.data.domain.BrowserOperatingSystemMapping;
@@ -172,7 +173,7 @@ public class DataBuilderTest {
 		final DataBuilder b = new DataBuilder();
 		final Device.Builder builder = new Device.Builder();
 		builder.setId(1);
-		builder.setName(DeviceCategory.TABLET.getName());
+		builder.setName(ReadableDeviceCategory.Category.TABLET.getName());
 		assertThat(b.appendDeviceBuilder(builder)).isSameAs(b);
 		assertThat(b.appendDeviceBuilder(builder)).isSameAs(b); // testing to add same one more time
 	}
@@ -194,10 +195,10 @@ public class DataBuilderTest {
 		final DataBuilder d = new DataBuilder().setVersion("test version");
 		final Device.Builder builder = new Device.Builder();
 		builder.setId(1);
-		builder.setName(DeviceCategory.TABLET.getName());
+		builder.setName(Category.TABLET.getName());
 		assertThat(d.appendDeviceBuilder(builder)).isSameAs(d);
 		builder.setId(2);
-		builder.setName(DeviceCategory.SMARTPHONE.getName());
+		builder.setName(ReadableDeviceCategory.Category.SMARTPHONE.getName());
 		assertThat(d.appendDeviceBuilder(builder)).isSameAs(d);
 		final Data data = d.build();
 		assertThat(data.getDevices()).hasSize(2);
@@ -208,11 +209,11 @@ public class DataBuilderTest {
 		final DataBuilder d = new DataBuilder().setVersion("test version");
 		final Device.Builder b1 = new Device.Builder();
 		b1.setId(1);
-		b1.setName(DeviceCategory.TABLET.getName());
+		b1.setName(ReadableDeviceCategory.Category.TABLET.getName());
 		assertThat(d.appendDeviceBuilder(b1)).isSameAs(d);
 		final Device.Builder b2 = new Device.Builder();
 		b2.setId(2);
-		b2.setName(DeviceCategory.SMARTPHONE.getName());
+		b2.setName(ReadableDeviceCategory.Category.SMARTPHONE.getName());
 		assertThat(d.appendDeviceBuilder(b2)).isSameAs(d);
 		final Data data = d.build();
 		assertThat(data.getDevices()).hasSize(2);

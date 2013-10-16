@@ -37,7 +37,7 @@ public interface ReadableUserAgent {
 	 * @return detected device category
 	 */
 	@Nonnull
-	DeviceCategory getDeviceCategory();
+	ReadableDeviceCategory getDeviceCategory();
 
 	/**
 	 * Gets the family of an user agent.

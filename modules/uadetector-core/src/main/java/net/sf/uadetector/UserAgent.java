@@ -225,7 +225,7 @@ public final class UserAgent implements ReadableUserAgent, Serializable {
 
 	}
 
-	public static final UserAgent EMPTY = new UserAgent(DeviceCategory.UNKNOWN, UserAgentFamily.UNKNOWN, "", "unknown",
+	public static final UserAgent EMPTY = new UserAgent(DeviceCategory.EMPTY, UserAgentFamily.UNKNOWN, "", "unknown",
 			OperatingSystem.EMPTY, "", "", UserAgentType.UNKNOWN, "", "", VersionNumber.UNKNOWN);
 
 	/**
@@ -421,7 +421,7 @@ public final class UserAgent implements ReadableUserAgent, Serializable {
 	@Override
 	public String toString() {
 		final StringBuilder builder = new StringBuilder();
-		builder.append("UserAgent [deviceType=");
+		builder.append("UserAgent [deviceCategory=");
 		builder.append(deviceCategory);
 		builder.append(", family=");
 		builder.append(family);

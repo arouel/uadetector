@@ -26,6 +26,7 @@ import javax.annotation.concurrent.Immutable;
 import javax.annotation.concurrent.NotThreadSafe;
 
 import net.sf.qualitycheck.Check;
+import net.sf.uadetector.ReadableDeviceCategory.Category;
 
 @Immutable
 public final class Device implements Identifiable, Serializable {
@@ -170,6 +171,9 @@ public final class Device implements Identifiable, Serializable {
 	@Nonnull
 	private final String icon;
 
+	@Nonnull
+	private final transient Category category;
+
 	@Nonnegative
 	private final int id;
 
@@ -190,6 +194,7 @@ public final class Device implements Identifiable, Serializable {
 		this.name = Check.notNull(name, "name");
 		this.patterns = Collections.unmodifiableSortedSet(new TreeSet<DevicePattern>(Check.notNull(patterns, "patterns")));
 		hash = buildHashCode(icon, id, infoUrl, name, patterns);
+		category = Category.evaluate(name);
 	}
 
 	@Override
@@ -220,6 +225,11 @@ public final class Device implements Identifiable, Serializable {
 			return false;
 		}
 		return true;
+	}
+
+	@Nonnull
+	public Category getCategory() {
+		return category;
 	}
 
 	@Nonnull

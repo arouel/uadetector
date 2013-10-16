@@ -15,12 +15,16 @@
  ******************************************************************************/
 package net.sf.uadetector.parser;
 
+import static org.fest.assertions.Assertions.assertThat;
+
 import java.net.MalformedURLException;
 
 import net.sf.qualitycheck.exception.IllegalNegativeArgumentException;
 import net.sf.qualitycheck.exception.IllegalNullArgumentException;
+import net.sf.uadetector.DeviceCategory;
 import net.sf.uadetector.OperatingSystem;
 import net.sf.uadetector.OperatingSystemFamily;
+import net.sf.uadetector.ReadableDeviceCategory.Category;
 import net.sf.uadetector.UserAgent;
 import net.sf.uadetector.UserAgentFamily;
 import net.sf.uadetector.UserAgentType;
@@ -29,7 +33,6 @@ import net.sf.uadetector.datastore.NotUpdateableXmlDataStore;
 import net.sf.uadetector.datastore.TestXmlDataStore;
 import net.sf.uadetector.internal.data.domain.Robot;
 
-import static org.fest.assertions.Assertions.assertThat;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -62,7 +65,6 @@ public class UpdatingUserAgentStringParserImplTest {
 		final String userAgent = "http://Anonymouse.org/ (Unix)";
 		final UserAgent agent = PARSER.parse(userAgent);
 		assertThat(agent).isNotNull();
-		assertThat(UserAgent.EMPTY.equals(agent)).isFalse();
 
 		// check user agent informations
 		assertThat(agent.getFamily()).isEqualTo(UserAgentFamily.ANONYMOUSE_ORG);
@@ -82,6 +84,13 @@ public class UpdatingUserAgentStringParserImplTest {
 		assertThat(os.getProducer()).isEmpty();
 		assertThat(os.getProducerUrl()).isEmpty();
 		assertThat(os.getUrl()).isEqualTo("http://en.wikipedia.org/wiki/Linux");
+
+		// check device category informations
+		final DeviceCategory category = agent.getDeviceCategory();
+		assertThat(category.getCategory()).isEqualTo(Category.OTHER);
+		assertThat(category.getName()).isEqualTo(Category.OTHER.getName());
+		assertThat(category.getIcon()).isEqualTo("other.png");
+		assertThat(category.getInfoUrl()).isEqualTo("/list-of-ua/device-detail?device=Other");
 	}
 
 	@Test
@@ -89,8 +98,6 @@ public class UpdatingUserAgentStringParserImplTest {
 		final String userAgent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_6_8) AppleWebKit/535.1 (KHTML, like Gecko) Chrome/13.0.782.112 Safari/535.1";
 		final UserAgent agent = PARSER.parse(userAgent);
 		assertThat(agent).isNotNull();
-		assertThat(UserAgent.EMPTY.equals(agent)).isFalse();
-		assertThat(OperatingSystem.EMPTY.equals(agent.getOperatingSystem())).isFalse();
 
 		// check user agent informations
 		assertThat(agent.getFamily()).isEqualTo(UserAgentFamily.CHROME);
@@ -109,6 +116,13 @@ public class UpdatingUserAgentStringParserImplTest {
 		assertThat(os.getProducer()).isEqualTo("Apple Computer, Inc.");
 		assertThat(os.getProducerUrl()).isEqualTo("http://www.apple.com/");
 		assertThat(os.getUrl()).isEqualTo("http://www.apple.com/osx/");
+
+		// check device category informations
+		final DeviceCategory category = agent.getDeviceCategory();
+		assertThat(category.getCategory()).isEqualTo(Category.PERSONAL_COMPUTER);
+		assertThat(category.getName()).isEqualTo(Category.PERSONAL_COMPUTER.getName());
+		assertThat(category.getIcon()).isEqualTo("desktop.png");
+		assertThat(category.getInfoUrl()).isEqualTo("/list-of-ua/device-detail?device=Personal computer");
 	}
 
 	@Test
@@ -116,8 +130,6 @@ public class UpdatingUserAgentStringParserImplTest {
 		final String userAgent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_6_8) AppleWebKit/535.1 (KHTML, like Gecko) Chrome/$ Safari/535.1";
 		final UserAgent agent = PARSER.parse(userAgent);
 		assertThat(agent).isNotNull();
-		assertThat(UserAgent.EMPTY.equals(agent)).isFalse();
-		assertThat(OperatingSystem.EMPTY.equals(agent.getOperatingSystem())).isFalse();
 
 		// check user agent informations
 		assertThat(agent.getFamily()).isEqualTo(UserAgentFamily.SAFARI);
@@ -135,6 +147,13 @@ public class UpdatingUserAgentStringParserImplTest {
 		assertThat(os.getProducer()).isEqualTo("Apple Computer, Inc.");
 		assertThat(os.getProducerUrl()).isEqualTo("http://www.apple.com/");
 		assertThat(os.getUrl()).isEqualTo("http://www.apple.com/osx/");
+
+		// check device category informations
+		final DeviceCategory category = agent.getDeviceCategory();
+		assertThat(category.getCategory()).isEqualTo(Category.PERSONAL_COMPUTER);
+		assertThat(category.getName()).isEqualTo(Category.PERSONAL_COMPUTER.getName());
+		assertThat(category.getIcon()).isEqualTo("desktop.png");
+		assertThat(category.getInfoUrl()).isEqualTo("/list-of-ua/device-detail?device=Personal computer");
 	}
 
 	@Test
@@ -142,8 +161,6 @@ public class UpdatingUserAgentStringParserImplTest {
 		final String userAgent = "SiteSucker/1.6.9";
 		final UserAgent agent = PARSER.parse(userAgent);
 		assertThat(agent).isNotNull();
-		assertThat(UserAgent.EMPTY.equals(agent)).isFalse();
-		assertThat(OperatingSystem.EMPTY.equals(agent.getOperatingSystem())).isFalse();
 
 		// check user agent informations
 		assertThat(agent.getFamily()).isEqualTo(UserAgentFamily.SITESUCKER);
@@ -162,6 +179,13 @@ public class UpdatingUserAgentStringParserImplTest {
 		assertThat(os.getProducer()).isEqualTo("Apple Computer, Inc.");
 		assertThat(os.getProducerUrl()).isEqualTo("http://www.apple.com/");
 		assertThat(os.getUrl()).isEqualTo("http://en.wikipedia.org/wiki/Mac_OS");
+
+		// check device category informations
+		final DeviceCategory category = agent.getDeviceCategory();
+		assertThat(category.getCategory()).isEqualTo(Category.PERSONAL_COMPUTER);
+		assertThat(category.getName()).isEqualTo(Category.PERSONAL_COMPUTER.getName());
+		assertThat(category.getIcon()).isEqualTo("desktop.png");
+		assertThat(category.getInfoUrl()).isEqualTo("/list-of-ua/device-detail?device=Personal computer");
 	}
 
 	@Test
@@ -169,8 +193,6 @@ public class UpdatingUserAgentStringParserImplTest {
 		final String userAgent = "Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_5_7; en-us) AppleWebKit/530.17 (KHTML, like Gecko) Version/4.0 Safari/530.17 Skyfire/2.0";
 		final UserAgent agent = PARSER.parse(userAgent);
 		assertThat(agent).isNotNull();
-		assertThat(UserAgent.EMPTY.equals(agent)).isFalse();
-		assertThat(OperatingSystem.EMPTY.equals(agent.getOperatingSystem())).isFalse();
 
 		// check user agent informations
 		assertThat(agent.getFamily()).isEqualTo(UserAgentFamily.SKYFIRE);
@@ -189,6 +211,13 @@ public class UpdatingUserAgentStringParserImplTest {
 		assertThat(os.getProducer()).isEqualTo("Apple Computer, Inc.");
 		assertThat(os.getProducerUrl()).isEqualTo("http://www.apple.com/");
 		assertThat(os.getUrl()).isEqualTo("http://www.apple.com/osx/");
+
+		// check device category informations
+		final DeviceCategory category = agent.getDeviceCategory();
+		assertThat(category.getCategory()).isEqualTo(Category.SMARTPHONE);
+		assertThat(category.getName()).isEqualTo(Category.SMARTPHONE.getName());
+		assertThat(category.getIcon()).isEqualTo("phone.png");
+		assertThat(category.getInfoUrl()).isEqualTo("/list-of-ua/device-detail?device=Smartphone");
 	}
 
 	@Test
@@ -196,8 +225,6 @@ public class UpdatingUserAgentStringParserImplTest {
 		final String userAgent = "Mozilla/5.0 AppleWebKit/530.17 (KHTML, like Gecko) Version/4.0 Safari/530.17 Skyfire/2.0";
 		final UserAgent agent = PARSER.parse(userAgent);
 		assertThat(agent).isNotNull();
-		assertThat(UserAgent.EMPTY.equals(agent)).isFalse();
-		assertThat(OperatingSystem.EMPTY.equals(agent.getOperatingSystem())).isTrue();
 
 		// check user agent informations
 		assertThat(agent.getFamily()).isEqualTo(UserAgentFamily.SKYFIRE);
@@ -207,6 +234,16 @@ public class UpdatingUserAgentStringParserImplTest {
 		assertThat(agent.getTypeName()).isEqualTo("Mobile Browser");
 		assertThat(agent.getUrl()).isEqualTo("http://www.skyfire.com/");
 		assertThat(agent.getVersionNumber().toVersionString()).isEqualTo("2.0");
+
+		// check operating system informations
+		assertThat(agent.getOperatingSystem()).isEqualTo(OperatingSystem.EMPTY);
+
+		// check device category informations
+		final DeviceCategory category = agent.getDeviceCategory();
+		assertThat(category.getCategory()).isEqualTo(Category.SMARTPHONE);
+		assertThat(category.getName()).isEqualTo(Category.SMARTPHONE.getName());
+		assertThat(category.getIcon()).isEqualTo("phone.png");
+		assertThat(category.getInfoUrl()).isEqualTo("/list-of-ua/device-detail?device=Smartphone");
 	}
 
 	@Test
@@ -222,7 +259,11 @@ public class UpdatingUserAgentStringParserImplTest {
 		assertThat(agent.getTypeName()).isEqualTo(e.getTypeName());
 		assertThat(agent.getUrl()).isEqualTo(e.getUrl());
 
+		// check operating system informations
 		assertThat(agent.getOperatingSystem()).isEqualTo(OperatingSystem.EMPTY);
+
+		// check device category informations
+		assertThat(agent.getDeviceCategory()).isEqualTo(DeviceCategory.EMPTY);
 	}
 
 	@Test
@@ -241,6 +282,13 @@ public class UpdatingUserAgentStringParserImplTest {
 		assertThat(agent.getTypeName()).isEqualTo(Robot.TYPENAME);
 		assertThat(agent.getUrl()).isEqualTo("/list-of-ua/bot-detail?bot=Googlebot");
 		assertThat(agent.getVersionNumber().toVersionString()).isEqualTo("2.1");
+
+		// check device category informations
+		final DeviceCategory category = agent.getDeviceCategory();
+		assertThat(category.getCategory()).isEqualTo(Category.OTHER);
+		assertThat(category.getName()).isEqualTo(Category.OTHER.getName());
+		assertThat(category.getIcon()).isEqualTo("other.png");
+		assertThat(category.getInfoUrl()).isEqualTo("/list-of-ua/device-detail?device=Other");
 	}
 
 	@Test
@@ -257,7 +305,11 @@ public class UpdatingUserAgentStringParserImplTest {
 		assertThat(agent.getUrl()).isEqualTo(e.getUrl());
 		assertThat(agent.getVersionNumber()).isEqualTo(VersionNumber.UNKNOWN);
 
+		// check operating system informations
 		assertThat(agent.getOperatingSystem()).isEqualTo(OperatingSystem.EMPTY);
+
+		// check device category informations
+		assertThat(agent.getDeviceCategory()).isEqualTo(DeviceCategory.EMPTY);
 	}
 
 	@Test

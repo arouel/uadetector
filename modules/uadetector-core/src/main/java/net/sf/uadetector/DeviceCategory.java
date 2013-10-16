@@ -15,101 +15,189 @@
  ******************************************************************************/
 package net.sf.uadetector;
 
+import java.io.Serializable;
+
 import javax.annotation.Nonnull;
+import javax.annotation.concurrent.Immutable;
+import javax.annotation.concurrent.NotThreadSafe;
 
 import net.sf.qualitycheck.Check;
 
-/**
- * This enum represents the type of an device. The assignment to a type is performed within the UAS data.
- * 
- * @author André Rouél
- */
-public enum DeviceCategory {
+@Immutable
+public final class DeviceCategory implements ReadableDeviceCategory, Serializable {
 
-	/**
-	 * A game console is an interactive computer that produces a video display signal which can be used with a display
-	 * device (a television, monitor, etc.) to display a video game. The term "game console" is used to distinguish a
-	 * machine designed for people to buy and use primarily for playing video games on a TV in contrast to arcade
-	 * machines, handheld game consoles, or home computers.
-	 */
-	GAME_CONSOLE("Game console"),
+	@NotThreadSafe
+	public static final class Builder {
 
-	/**
-	 * A device that doesn't match the other types
-	 */
-	OTHER("Other"),
+		@Nonnull
+		private Category category;
 
-	/**
-	 * A personal computer (PC) is a general-purpose computer, whose size, capabilities, and original sale price makes
-	 * it useful for individuals, and which is intended to be operated directly by an end-user with no intervening
-	 * computer operator.
-	 */
-	PERSONAL_COMPUTER("Personal computer"),
+		@Nonnull
+		private String icon;
 
-	/**
-	 * A smart TV, sometimes referred to as connected TV or hybrid TV
-	 */
-	SMART_TV("Smart TV"),
+		@Nonnull
+		private String infoUrl;
 
-	/**
-	 * A smartphone is a mobile phone built on a mobile operating system, with more advanced computing capability and
-	 * connectivity than a feature phone
-	 */
-	SMARTPHONE("Smartphone"),
+		@Nonnull
+		private String name;
 
-	/**
-	 * A tablet computer, or simply tablet, is a mobile computer with display, circuitry and battery in a single unit.
-	 * Tablets are often equipped with sensors, including cameras, microphone, accelerometer and touchscreen, with
-	 * finger or stylus gestures replacing computer mouse and keyboard.
-	 */
-	TABLET("Tablet"),
-
-	/**
-	 * An unknown device type
-	 */
-	UNKNOWN("");
-
-	/**
-	 * Tries to find by the given type name a matching enum value. The type name must match against an device entry in
-	 * the <i>UAS data</i>.
-	 * 
-	 * @param typeName
-	 *            name of an device type
-	 * @return the matching enum value or {@code DeviceType#UNKNOWN}
-	 * @throws net.sf.qualitycheck.exception.IllegalNullArgumentException
-	 *             if the given argument is {@code null}
-	 */
-	public static DeviceCategory evaluate(@Nonnull final String typeName) {
-		Check.notNull(typeName, "typeName");
-
-		DeviceCategory result = UNKNOWN;
-		for (final DeviceCategory value : values()) {
-			if (value.getName().equals(typeName)) {
-				result = value;
-				break;
-			}
+		public Builder() {
+			// default constructor
 		}
+
+		public Builder(@Nonnull final DeviceCategory deviceCategory) {
+			Check.notNull(deviceCategory, "deviceCategory");
+			category = Check.notNull(deviceCategory.getCategory(), "deviceCategory.getCategory()");
+			icon = Check.notNull(deviceCategory.getIcon(), "deviceCategory.getIcon()");
+			infoUrl = Check.notNull(deviceCategory.getInfoUrl(), "deviceCategory.getInfoUrl()");
+			name = Check.notNull(deviceCategory.getName(), "deviceCategory.getName()");
+		}
+
+		@Nonnull
+		public DeviceCategory build() {
+			return new DeviceCategory(category, icon, infoUrl, name);
+		}
+
+		@Nonnull
+		public Builder setCategory(@Nonnull final Category category) {
+			this.category = Check.notNull(category, "category");
+			return this;
+		}
+
+		@Nonnull
+		public Builder setIcon(@Nonnull final String icon) {
+			this.icon = Check.notNull(icon, "icon");
+			return this;
+		}
+
+		@Nonnull
+		public Builder setInfoUrl(@Nonnull final String infoUrl) {
+			this.infoUrl = Check.notNull(infoUrl, "infoUrl");
+			return this;
+		}
+
+		@Nonnull
+		public Builder setName(@Nonnull final String name) {
+			this.name = Check.notNull(name, "name");
+			return this;
+		}
+
+	}
+
+	private static final long serialVersionUID = 1L;
+
+	/**
+	 * Represents a not set device category.
+	 */
+	public static final DeviceCategory EMPTY = new DeviceCategory();
+
+	private static int buildHashCode(@Nonnull final Category category, @Nonnull final String icon, @Nonnull final String infoUrl,
+			@Nonnull final String name) {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + category.hashCode();
+		result = prime * result + icon.hashCode();
+		result = prime * result + infoUrl.hashCode();
+		result = prime * result + name.hashCode();
 		return result;
 	}
 
-	/**
-	 * Name of the device type
-	 */
+	@Nonnull
+	private final Category category;
+
+	@Nonnull
+	private final String icon;
+
+	@Nonnull
+	private final String infoUrl;
+
 	@Nonnull
 	private final String name;
 
-	private DeviceCategory(@Nonnull final String name) {
-		this.name = name;
-	}
+	private final int hash;
 
 	/**
-	 * Returns the name of the device type.
-	 * 
-	 * @return name of the type
+	 * Builds an instance that represents an empty device category.
+	 * <p>
+	 * <b>Attention</b>: This is only intended to build one instance at runtime to represent value behind the constant
+	 * {@link #EMPTY}.
 	 */
+	private DeviceCategory() {
+		category = Category.UNKNOWN;
+		icon = "";
+		infoUrl = "";
+		name = "";
+		hash = buildHashCode(category, icon, infoUrl, name);
+	}
+
+	public DeviceCategory(@Nonnull final Category category, @Nonnull final String icon, @Nonnull final String infoUrl,
+			@Nonnull final String name) {
+		this.category = Check.notNull(category, "category");
+		this.icon = Check.notNull(icon, "icon");
+		this.infoUrl = Check.notNull(infoUrl, "infoUrl");
+		this.name = Check.notEmpty(name, "name");
+		hash = buildHashCode(category, icon, infoUrl, name);
+	}
+
+	@Override
+	public boolean equals(final Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null) {
+			return false;
+		}
+		if (getClass() != obj.getClass()) {
+			return false;
+		}
+		final DeviceCategory other = (DeviceCategory) obj;
+		if (!category.equals(other.category)) {
+			return false;
+		}
+		if (!icon.equals(other.icon)) {
+			return false;
+		}
+		if (!infoUrl.equals(other.infoUrl)) {
+			return false;
+		}
+		if (!name.equals(other.name)) {
+			return false;
+		}
+		return true;
+	}
+
+	@Override
+	@Nonnull
+	public Category getCategory() {
+		return category;
+	}
+
+	@Override
+	@Nonnull
+	public String getIcon() {
+		return icon;
+	}
+
+	@Override
+	@Nonnull
+	public String getInfoUrl() {
+		return infoUrl;
+	}
+
+	@Override
 	@Nonnull
 	public String getName() {
 		return name;
+	}
+
+	@Override
+	public int hashCode() {
+		return hash;
+	}
+
+	@Override
+	public String toString() {
+		return "DeviceCategory [category=" + category + ", icon=" + icon + ", infoUrl=" + infoUrl + ", name=" + name + "]";
 	}
 
 }

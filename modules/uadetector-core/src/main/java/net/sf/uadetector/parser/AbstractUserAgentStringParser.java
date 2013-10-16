@@ -18,7 +18,10 @@ package net.sf.uadetector.parser;
 import java.util.Map.Entry;
 import java.util.regex.Matcher;
 
+import javax.annotation.Nonnull;
+
 import net.sf.uadetector.DeviceCategory;
+import net.sf.uadetector.ReadableDeviceCategory.Category;
 import net.sf.uadetector.UserAgent;
 import net.sf.uadetector.UserAgentStringParser;
 import net.sf.uadetector.UserAgentType;
@@ -69,26 +72,35 @@ public abstract class AbstractUserAgentStringParser implements UserAgentStringPa
 	}
 
 	/**
-	 * Examines the user agent string whether it is a device.
+	 * Examines the user agent string whether has a specific device category.
 	 * 
 	 * @param userAgent
 	 *            String of an user agent
 	 * @param builder
 	 *            Builder for an user agent information
 	 */
-	private static void examineAsDevice(final UserAgent.Builder builder, final Data data) {
+	private static void examineAsDeviceCategory(final UserAgent.Builder builder, final Data data) {
+
+		// an unknown user agent type should lead to an unknown device
+		if (UserAgentType.UNKNOWN == builder.getType()) {
+			builder.setDeviceCategory(DeviceCategory.EMPTY);
+			return;
+		}
 
 		// a robot will be classified as 'Other'
 		if (UserAgentType.ROBOT == builder.getType()) {
-			builder.setDeviceCategory(DeviceCategory.OTHER);
+			final DeviceCategory category = findDeviceCategoryByValue(Category.OTHER, data);
+			builder.setDeviceCategory(category);
 			return;
 		}
 
 		// classification depends on matching order
 		for (final Entry<DevicePattern, Device> entry : data.getPatternToDeviceMap().entrySet()) {
-			Matcher matcher = entry.getKey().getPattern().matcher(builder.getUserAgentString());
+			final Matcher matcher = entry.getKey().getPattern().matcher(builder.getUserAgentString());
 			if (matcher.find()) {
-				builder.setDeviceCategory(DeviceCategory.evaluate(entry.getValue().getName()));
+				final Category category = Category.evaluate(entry.getValue().getName());
+				final DeviceCategory deviceCategory = findDeviceCategoryByValue(category, data);
+				builder.setDeviceCategory(deviceCategory);
 				return;
 			}
 		}
@@ -97,17 +109,20 @@ public abstract class AbstractUserAgentStringParser implements UserAgentStringPa
 		// than classify it as 'Other'
 		if (UserAgentType.OTHER == builder.getType() || UserAgentType.LIBRARY == builder.getType()
 				|| UserAgentType.VALIDATOR == builder.getType() || UserAgentType.USERAGENT_ANONYMIZER == builder.getType()) {
-			builder.setDeviceCategory(DeviceCategory.OTHER);
+			final DeviceCategory category = findDeviceCategoryByValue(Category.OTHER, data);
+			builder.setDeviceCategory(category);
 			return;
 		}
 
 		// if no pattern is available but the type is a mobile or WAP browser than classify it as 'Smartphone'
 		if (UserAgentType.MOBILE_BROWSER == builder.getType() || UserAgentType.WAP_BROWSER == builder.getType()) {
-			builder.setDeviceCategory(DeviceCategory.SMARTPHONE);
+			final DeviceCategory category = findDeviceCategoryByValue(Category.SMARTPHONE, data);
+			builder.setDeviceCategory(category);
 			return;
 		}
 
-		builder.setDeviceCategory(DeviceCategory.PERSONAL_COMPUTER);
+		final DeviceCategory category = findDeviceCategoryByValue(Category.PERSONAL_COMPUTER, data);
+		builder.setDeviceCategory(category);
 	}
 
 	/**
@@ -157,6 +172,15 @@ public abstract class AbstractUserAgentStringParser implements UserAgentStringPa
 		}
 	}
 
+	private static DeviceCategory findDeviceCategoryByValue(@Nonnull final Category category, @Nonnull final Data data) {
+		for (final Device device : data.getDevices()) {
+			if (category == device.getCategory()) {
+				return new DeviceCategory(category, device.getIcon(), device.getInfoUrl(), device.getName());
+			}
+		}
+		return DeviceCategory.EMPTY;
+	}
+
 	/**
 	 * Gets the data store of this parser.
 	 * 
@@ -180,7 +204,7 @@ public abstract class AbstractUserAgentStringParser implements UserAgentStringPa
 			examineAsBrowser(builder, data);
 			examineOperatingSystem(builder, data);
 		}
-		examineAsDevice(builder, data);
+		examineAsDeviceCategory(builder, data);
 		return builder.build();
 	}
 

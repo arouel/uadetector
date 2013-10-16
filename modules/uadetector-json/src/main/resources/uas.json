@@ -1,6 +1,6 @@
 {
   "format": "1.0",
-  "version": "20131011-02",
+  "version": "20131016-01",
   "operating-system-patterns": [
     {
       "regex": {
@@ -15919,10 +15919,10 @@
       "icon": "bot_Speedy.png",
       "info-url": "/list-of-ua/bot-detail?bot\u003dSpeedy",
       "name": "Speedy Spider",
-      "producer": "Entireweb.com",
+      "producer": "Entireweb Sweden AB",
       "producer-url": "http://www.entireweb.com/",
       "user-agent-string": "Speedy Spider (http://www.entireweb.com/about/search_tech/speedy_spider/)",
-      "hash": "49a8d9ff7ae28653a9402e15c6861ccfe91a70c6861f4bd9e2327ff06244238a"
+      "hash": "97c68096f53932c4eba2f4888312646f2e579489523cf7a4ebf1f1301e7c5222"
     },
     {
       "family-name": "FAST Enterprise Crawler",
@@ -17599,10 +17599,10 @@
       "icon": "bot_Speedy.png",
       "info-url": "/list-of-ua/bot-detail?bot\u003dSpeedy",
       "name": "Speedy Spider Beta/1.2",
-      "producer": "Entireweb.com",
+      "producer": "Entireweb Sweden AB",
       "producer-url": "http://www.entireweb.com/",
       "user-agent-string": "Speedy Spider (Entireweb; Beta/1.2; http://www.entireweb.com/about/search_tech/speedyspider/)",
-      "hash": "8896558933bfd51adab699b21a6125892386463b7b8ff29f68d7f857a55e0935"
+      "hash": "5afe679f882aec15783b2aaa511111a6d8bba758858bf0c0640733df930d3310"
     },
     {
       "family-name": "heritrix",
@@ -18659,10 +18659,10 @@
       "icon": "bot_Speedy.png",
       "info-url": "/list-of-ua/bot-detail?bot\u003dSpeedy",
       "name": "Speedy Spider",
-      "producer": "Entireweb.com",
+      "producer": "Entireweb Sweden AB",
       "producer-url": "http://www.entireweb.com/",
       "user-agent-string": "Mozilla/5.0 (compatible; Speedy Spider; http://www.entireweb.com/about/search_tech/speedy_spider/)",
-      "hash": "8da71b34e72a7fa05f34135369ac06044e88eedf15a20e7122cd731fe1c7cf19"
+      "hash": "f0dd0396928e8744fb1bc7c7e9d1a5f062fe8de61400d5c3f6bce522d334ee33"
     },
     {
       "family-name": "L.webis",
@@ -18689,10 +18689,10 @@
       "icon": "bot_Speedy.png",
       "info-url": "/list-of-ua/bot-detail?bot\u003dSpeedy",
       "name": "Speedy Spider",
-      "producer": "Entireweb.com",
+      "producer": "Entireweb Sweden AB",
       "producer-url": "http://www.entireweb.com/",
       "user-agent-string": "Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US) Speedy Spider (http://www.entireweb.com/about/search_tech/speedy_spider/)",
-      "hash": "1db3416c525a6733bee78a39c947a201c31b97c661fa7f1f80786d32c8117cd3"
+      "hash": "cdd5553d92b2e3534edf0dc957a3243a7aa94bf5962c4783a19c11375c1782e3"
     },
     {
       "family-name": "spbot",
@@ -20289,10 +20289,10 @@
       "icon": "bot_Speedy.png",
       "info-url": "/list-of-ua/bot-detail?bot\u003dSpeedy",
       "name": "Speedy Spider",
-      "producer": "Entireweb.com",
+      "producer": "Entireweb Sweden AB",
       "producer-url": "http://www.entireweb.com/",
       "user-agent-string": "Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US) Speedy Spider for SpeedyAds (http://www.entireweb.com/about/search_tech/speedy_spider/)",
-      "hash": "4e37ac1efb383012da4f3b834c48868007741a76eded761601210c046cb6cb78"
+      "hash": "7db6b5cceec0f0521f9c656d7fe2622226fa57288e46016d6f96848a0767b2eb"
     },
     {
       "family-name": "findlinks",
@@ -22475,6 +22475,16 @@
       "hash": "415ef6151067a6e8368412bef21bd04e945dafe70dbffd8c2082a3a75fb32b1e"
     },
     {
+      "family-name": "bingbot",
+      "icon": "bot_msnbot.png",
+      "info-url": "/list-of-ua/bot-detail?bot\u003dbingbot",
+      "name": "bingbot/2.0",
+      "producer": "Microsoft Corporation",
+      "producer-url": "http://www.microsoft.com/",
+      "user-agent-string": "Mozilla/5.0 (compatible; bingbot/2.0; +http://www.bing.com/bingbot.htm",
+      "hash": "e88113fe55d3234b8f26760654e644ce88bc56f86c47ec7f91cff7551360c65b"
+    },
+    {
       "family-name": "search.KumKie.com",
       "icon": "bot.png",
       "info-url": "/list-of-ua/bot-detail?bot\u003dsearch.KumKie.com",
@@ -23003,6 +23013,16 @@
       "producer-url": "http://hwacha.dk/",
       "user-agent-string": "Zookabot/2.5;++http://zookabot.com",
       "hash": "98cfccf1710ff37a186c8aa9481421df52dcc7df16d50f1ceefcd87b8b5e4a17"
+    },
+    {
+      "family-name": "bingbot",
+      "icon": "bot_msnbot.png",
+      "info-url": "/list-of-ua/bot-detail?bot\u003dbingbot",
+      "name": "bingbot SitemapProbe",
+      "producer": "Microsoft Corporation",
+      "producer-url": "http://www.microsoft.com/",
+      "user-agent-string": "Mozilla/5.0 (compatible; bingbot/2.0; +http://www.bing.com/bingbot.htm) SitemapProbe",
+      "hash": "c1a5051557785ee2128efba66fb17d75a4379e2027d417423733de1e0800e7d5"
     },
     {
       "family-name": "ZumBot",
@@ -23585,6 +23605,16 @@
       "hash": "c8f1888bc06019dd3b1b2c3e48467878dc86d9203aaf7e76a1527675732961b9"
     },
     {
+      "family-name": "BingPreview",
+      "icon": "bot_msnbot.png",
+      "info-url": "/list-of-ua/bot-detail?bot\u003dBingPreview",
+      "name": "BingPreview/1.0b",
+      "producer": "Microsoft Corporation",
+      "producer-url": "http://www.microsoft.com/",
+      "user-agent-string": "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/534+ (KHTML, like Gecko) BingPreview/1.0b",
+      "hash": "f639ec7412c37e65db93ac25a2b9532a138a7c9c1560413469aa47f2c160af37"
+    },
+    {
       "family-name": "SeznamBot",
       "icon": "seznam.png",
       "info-url": "/list-of-ua/bot-detail?bot\u003dSeznamBot",
@@ -23705,6 +23735,16 @@
       "hash": "7d809f25c8cb918cc09eca2af9a8b8e61a0d9666e9d0b56a9496f2157add4136"
     },
     {
+      "family-name": "bixocrawler",
+      "icon": "bot.png",
+      "info-url": "/list-of-ua/bot-detail?bot\u003dbixocrawler",
+      "name": "bixocrawler",
+      "producer": "Bixo Labs",
+      "producer-url": "http://openbixo.org/",
+      "user-agent-string": "Mozilla/5.0 (compatible; Mozilla/5.0; +http://wiki.github.com/bixo/bixo/bixocrawler; bixo-dev@yahoogroups.com)",
+      "hash": "7af5b7d73555a9e32ddf350e799bf77dbf22e14cb746c0182b0b9489739ac848"
+    },
+    {
       "family-name": "Semantifire",
       "icon": "bot.png",
       "info-url": "/list-of-ua/bot-detail?bot\u003dSemantifire",
@@ -23713,6 +23753,16 @@
       "producer-url": "http://www.setusoftware.com/",
       "user-agent-string": "Semantifire1/0.20 ( http://www.setooz.com/oozbot.html ; agentname at setooz dot_com )",
       "hash": "f60eea15e03abfb74758e9d573dc4f5c03fcae77dad30c65ceedaf5e0670eeed"
+    },
+    {
+      "family-name": "bixocrawler",
+      "icon": "bot.png",
+      "info-url": "/list-of-ua/bot-detail?bot\u003dbixocrawler",
+      "name": "bixocrawler",
+      "producer": "Bixo Labs",
+      "producer-url": "http://openbixo.org/",
+      "user-agent-string": "Mozilla/5.0 (compatible; BIXOCRAWLER; +http://wiki.github.com/bixo/bixo/bixocrawler; bixo-dev@yahoogroups.com)",
+      "hash": "34a990387a72bcded984ece1a5846e9bc29dfba77ff5461c91bf79f26c099319"
     },
     {
       "family-name": "socialbm_bot",
@@ -23825,14 +23875,14 @@
       "hash": "9ebc3cb06fc4543fda5428e2aab94b90851bfc6e393158547cf9461c09fdafc9"
     },
     {
-      "family-name": "Cliqz Bot",
-      "icon": "bot.png",
-      "info-url": "/list-of-ua/bot-detail?bot\u003dCliqz Bot",
+      "family-name": "CliqzBot",
+      "icon": "bot_cliqzbot.png",
+      "info-url": "/list-of-ua/bot-detail?bot\u003dCliqzBot",
       "name": "Cliqz Bot",
       "producer": "10betterpages GmbH",
       "producer-url": "http://www.10betterpages.com/",
       "user-agent-string": "Cliqz Bot (+http://www.cliqz.com)",
-      "hash": "fa765347fed788d5c1fb30d2e7c9cda0c62c919a4d12c661389c31c9075d211a"
+      "hash": "2b26d6a11d9163ffe32d1ffe968f50916c65142613dfd4c7dd6f2989b03ed666"
     },
     {
       "family-name": "KrOWLer",
@@ -23843,6 +23893,16 @@
       "producer-url": "http://nico.matentzoglu.net/",
       "user-agent-string": "KrOWLer/0.0.1, matentzn at cs dot man dot ac dot uk",
       "hash": "a9dbc2372b7d34eaba62f0ffd197e04140ce2f6235cbccbcb57f841d4414f72c"
+    },
+    {
+      "family-name": "Cliqzbot",
+      "icon": "bot_cliqzbot.png",
+      "info-url": "/list-of-ua/bot-detail?bot\u003dCliqzbot",
+      "name": "Cliqzbot/0.1",
+      "producer": "10betterpages GmbH",
+      "producer-url": "http://www.10betterpages.com/",
+      "user-agent-string": "Cliqzbot/0.1 (+http://cliqz.com +cliqzbot@cliqz.com)",
+      "hash": "c3e543c216c2a1ee8c3313ea222cc2731166afbb5896a9d5a787b23600b4fa7a"
     },
     {
       "family-name": "HostTracker",
@@ -23893,6 +23953,16 @@
       "producer-url": "http://www.axandra.com/",
       "user-agent-string": "Mozilla/5.0 (compatible; spbot/4.0b; +http://www.seoprofiler.com/bot )",
       "hash": "cfec9816fd013f9f889518c1683c0ebf6b05d5f59d79ae834ed4106b1d3d0d2b"
+    },
+    {
+      "family-name": "Speedy",
+      "icon": "bot_Speedy.png",
+      "info-url": "/list-of-ua/bot-detail?bot\u003dSpeedy",
+      "name": "Speedy Spider",
+      "producer": "Entireweb Sweden AB",
+      "producer-url": "http://www.entireweb.com/",
+      "user-agent-string": "Speedy Spider (Submit your site at http://www.entireweb.com/free_submission/)",
+      "hash": "06a46376baccdf494582e7aababb2d0237ac4c5bf6c9e56d1b5a6d32c950e429"
     }
   ]
 }

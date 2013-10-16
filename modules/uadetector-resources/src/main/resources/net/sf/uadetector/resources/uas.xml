@@ -3,7 +3,7 @@
 <uasdata>
 	<description>
 		<label>Data (format xml) for UASparser - http://user-agent-string.info/download/UASparser</label>
-		<version>20131011-02</version>
+		<version>20131016-01</version>
 		<checksum type="MD5">http://user-agent-string.info/rpc/get_data.php?format=xml&amp;md5=y</checksum>
 		<checksum type="SHA1">http://user-agent-string.info/rpc/get_data.php?format=xml&amp;sha1=y</checksum>
 	</description>
@@ -1050,6 +1050,36 @@
 				<bot_info_url>/list-of-ua/bot-detail?bot=bingbot</bot_info_url>
 			</robot>
 			<robot>
+				<id>7754</id>
+				<useragent><![CDATA[Mozilla/5.0 (compatible; bingbot/2.0; +http://www.bing.com/bingbot.htm]]></useragent>
+				<family>bingbot</family>
+				<name>bingbot/2.0</name>
+				<company><![CDATA[Microsoft Corporation]]></company>
+				<url_company><![CDATA[http://www.microsoft.com/]]></url_company>
+				<icon>bot_msnbot.png</icon>
+				<bot_info_url>/list-of-ua/bot-detail?bot=bingbot</bot_info_url>
+			</robot>
+			<robot>
+				<id>8866</id>
+				<useragent><![CDATA[Mozilla/5.0 (compatible; bingbot/2.0; +http://www.bing.com/bingbot.htm) SitemapProbe]]></useragent>
+				<family>bingbot</family>
+				<name>bingbot SitemapProbe</name>
+				<company><![CDATA[Microsoft Corporation]]></company>
+				<url_company><![CDATA[http://www.microsoft.com/]]></url_company>
+				<icon>bot_msnbot.png</icon>
+				<bot_info_url>/list-of-ua/bot-detail?bot=bingbot</bot_info_url>
+			</robot>
+			<robot>
+				<id>10241</id>
+				<useragent><![CDATA[Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/534+ (KHTML, like Gecko) BingPreview/1.0b]]></useragent>
+				<family>BingPreview</family>
+				<name>BingPreview/1.0b</name>
+				<company><![CDATA[Microsoft Corporation]]></company>
+				<url_company><![CDATA[http://www.microsoft.com/]]></url_company>
+				<icon>bot_msnbot.png</icon>
+				<bot_info_url>/list-of-ua/bot-detail?bot=BingPreview</bot_info_url>
+			</robot>
+			<robot>
 				<id>2022</id>
 				<useragent><![CDATA[bitlybot]]></useragent>
 				<family>bitlybot</family>
@@ -1112,6 +1142,26 @@
 			<robot>
 				<id>9832</id>
 				<useragent><![CDATA[Mozilla/5.0 (compatible; Mozilla; +http://wiki.github.com/bixo/bixo/bixocrawler; bixo-dev@yahoogroups.com)]]></useragent>
+				<family>bixocrawler</family>
+				<name>bixocrawler</name>
+				<company><![CDATA[Bixo Labs]]></company>
+				<url_company><![CDATA[http://openbixo.org/]]></url_company>
+				<icon>bot.png</icon>
+				<bot_info_url>/list-of-ua/bot-detail?bot=bixocrawler</bot_info_url>
+			</robot>
+			<robot>
+				<id>10562</id>
+				<useragent><![CDATA[Mozilla/5.0 (compatible; BIXOCRAWLER; +http://wiki.github.com/bixo/bixo/bixocrawler; bixo-dev@yahoogroups.com)]]></useragent>
+				<family>bixocrawler</family>
+				<name>bixocrawler</name>
+				<company><![CDATA[Bixo Labs]]></company>
+				<url_company><![CDATA[http://openbixo.org/]]></url_company>
+				<icon>bot.png</icon>
+				<bot_info_url>/list-of-ua/bot-detail?bot=bixocrawler</bot_info_url>
+			</robot>
+			<robot>
+				<id>10537</id>
+				<useragent><![CDATA[Mozilla/5.0 (compatible; Mozilla/5.0; +http://wiki.github.com/bixo/bixo/bixocrawler; bixo-dev@yahoogroups.com)]]></useragent>
 				<family>bixocrawler</family>
 				<name>bixocrawler</name>
 				<company><![CDATA[Bixo Labs]]></company>
@@ -1732,12 +1782,22 @@
 			<robot>
 				<id>10923</id>
 				<useragent><![CDATA[Cliqz Bot (+http://www.cliqz.com)]]></useragent>
-				<family>Cliqz Bot</family>
+				<family>CliqzBot</family>
 				<name>Cliqz Bot</name>
 				<company><![CDATA[10betterpages GmbH]]></company>
 				<url_company><![CDATA[http://www.10betterpages.com/]]></url_company>
-				<icon>bot.png</icon>
-				<bot_info_url>/list-of-ua/bot-detail?bot=Cliqz Bot</bot_info_url>
+				<icon>bot_cliqzbot.png</icon>
+				<bot_info_url>/list-of-ua/bot-detail?bot=CliqzBot</bot_info_url>
+			</robot>
+			<robot>
+				<id>11025</id>
+				<useragent><![CDATA[Cliqzbot/0.1 (+http://cliqz.com +cliqzbot@cliqz.com)]]></useragent>
+				<family>Cliqzbot</family>
+				<name>Cliqzbot/0.1</name>
+				<company><![CDATA[10betterpages GmbH]]></company>
+				<url_company><![CDATA[http://www.10betterpages.com/]]></url_company>
+				<icon>bot_cliqzbot.png</icon>
+				<bot_info_url>/list-of-ua/bot-detail?bot=Cliqzbot</bot_info_url>
 			</robot>
 			<robot>
 				<id>10035</id>
@@ -8314,7 +8374,7 @@
 				<useragent><![CDATA[Speedy Spider (http://www.entireweb.com/about/search_tech/speedy_spider/)]]></useragent>
 				<family>Speedy</family>
 				<name>Speedy Spider</name>
-				<company><![CDATA[Entireweb.com]]></company>
+				<company><![CDATA[Entireweb Sweden AB]]></company>
 				<url_company><![CDATA[http://www.entireweb.com/]]></url_company>
 				<icon>bot_Speedy.png</icon>
 				<bot_info_url>/list-of-ua/bot-detail?bot=Speedy</bot_info_url>
@@ -8324,7 +8384,7 @@
 				<useragent><![CDATA[Speedy Spider (Entireweb; Beta/1.2; http://www.entireweb.com/about/search_tech/speedyspider/)]]></useragent>
 				<family>Speedy</family>
 				<name>Speedy Spider Beta/1.2</name>
-				<company><![CDATA[Entireweb.com]]></company>
+				<company><![CDATA[Entireweb Sweden AB]]></company>
 				<url_company><![CDATA[http://www.entireweb.com/]]></url_company>
 				<icon>bot_Speedy.png</icon>
 				<bot_info_url>/list-of-ua/bot-detail?bot=Speedy</bot_info_url>
@@ -8334,7 +8394,7 @@
 				<useragent><![CDATA[Mozilla/5.0 (compatible; Speedy Spider; http://www.entireweb.com/about/search_tech/speedy_spider/)]]></useragent>
 				<family>Speedy</family>
 				<name>Speedy Spider</name>
-				<company><![CDATA[Entireweb.com]]></company>
+				<company><![CDATA[Entireweb Sweden AB]]></company>
 				<url_company><![CDATA[http://www.entireweb.com/]]></url_company>
 				<icon>bot_Speedy.png</icon>
 				<bot_info_url>/list-of-ua/bot-detail?bot=Speedy</bot_info_url>
@@ -8344,7 +8404,7 @@
 				<useragent><![CDATA[Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US) Speedy Spider (http://www.entireweb.com/about/search_tech/speedy_spider/)]]></useragent>
 				<family>Speedy</family>
 				<name>Speedy Spider</name>
-				<company><![CDATA[Entireweb.com]]></company>
+				<company><![CDATA[Entireweb Sweden AB]]></company>
 				<url_company><![CDATA[http://www.entireweb.com/]]></url_company>
 				<icon>bot_Speedy.png</icon>
 				<bot_info_url>/list-of-ua/bot-detail?bot=Speedy</bot_info_url>
@@ -8354,7 +8414,17 @@
 				<useragent><![CDATA[Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US) Speedy Spider for SpeedyAds (http://www.entireweb.com/about/search_tech/speedy_spider/)]]></useragent>
 				<family>Speedy</family>
 				<name>Speedy Spider</name>
-				<company><![CDATA[Entireweb.com]]></company>
+				<company><![CDATA[Entireweb Sweden AB]]></company>
+				<url_company><![CDATA[http://www.entireweb.com/]]></url_company>
+				<icon>bot_Speedy.png</icon>
+				<bot_info_url>/list-of-ua/bot-detail?bot=Speedy</bot_info_url>
+			</robot>
+			<robot>
+				<id>11139</id>
+				<useragent><![CDATA[Speedy Spider (Submit your site at http://www.entireweb.com/free_submission/)]]></useragent>
+				<family>Speedy</family>
+				<name>Speedy Spider</name>
+				<company><![CDATA[Entireweb Sweden AB]]></company>
 				<url_company><![CDATA[http://www.entireweb.com/]]></url_company>
 				<icon>bot_Speedy.png</icon>
 				<bot_info_url>/list-of-ua/bot-detail?bot=Speedy</bot_info_url>

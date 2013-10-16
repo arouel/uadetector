@@ -15,10 +15,7 @@
  ******************************************************************************/
 package net.sf.uadetector.internal.data.domain;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertSame;
-import static org.junit.Assert.assertTrue;
+import static org.fest.assertions.Assertions.assertThat;
 
 import java.util.SortedSet;
 import java.util.TreeSet;
@@ -31,7 +28,6 @@ import net.sf.qualitycheck.exception.IllegalNullArgumentException;
 import net.sf.uadetector.OperatingSystemFamily;
 import net.sf.uadetector.UserAgent;
 
-import static org.fest.assertions.Assertions.assertThat;
 import org.junit.Test;
 
 public class OperatingSystemTest {
@@ -148,40 +144,40 @@ public class OperatingSystemTest {
 	public void equals_different_FAMILY() {
 		final OperatingSystem a = new Blueprint().family("family-1").build();
 		final OperatingSystem b = new Blueprint().family("family-2").build();
-		assertFalse(a.equals(b));
-		assertFalse(a.hashCode() == b.hashCode());
+		assertThat(a.equals(b)).isFalse();
+		assertThat(a.hashCode() == b.hashCode()).isFalse();
 	}
 
 	@Test
 	public void equals_different_ICON() {
 		final OperatingSystem a = new Blueprint().icon("icon-1").build();
 		final OperatingSystem b = new Blueprint().icon("icon-2").build();
-		assertFalse(a.equals(b));
-		assertFalse(a.hashCode() == b.hashCode());
+		assertThat(a.equals(b)).isFalse();
+		assertThat(a.hashCode() == b.hashCode()).isFalse();
 	}
 
 	@Test
 	public void equals_different_ID() {
 		final OperatingSystem a = new Blueprint().id(1234).build();
 		final OperatingSystem b = new Blueprint().id(9876).build();
-		assertFalse(a.equals(b));
-		assertFalse(a.hashCode() == b.hashCode());
+		assertThat(a.equals(b)).isFalse();
+		assertThat(a.hashCode() == b.hashCode()).isFalse();
 	}
 
 	@Test
 	public void equals_different_INFOURL() {
 		final OperatingSystem a = new Blueprint().infoUrl("info-url-1").build();
 		final OperatingSystem b = new Blueprint().infoUrl("info-url-2").build();
-		assertFalse(a.equals(b));
-		assertFalse(a.hashCode() == b.hashCode());
+		assertThat(a.equals(b)).isFalse();
+		assertThat(a.hashCode() == b.hashCode()).isFalse();
 	}
 
 	@Test
 	public void equals_different_NAME() {
 		final OperatingSystem a = new Blueprint().name("name-1").build();
 		final OperatingSystem b = new Blueprint().name("name-2").build();
-		assertFalse(a.equals(b));
-		assertFalse(a.hashCode() == b.hashCode());
+		assertThat(a.equals(b)).isFalse();
+		assertThat(a.hashCode() == b.hashCode()).isFalse();
 	}
 
 	@Test
@@ -195,60 +191,60 @@ public class OperatingSystemTest {
 		patterns2.add(new OperatingSystemPattern(1, Pattern.compile("[0-9]+"), 1));
 		final OperatingSystem b = new Blueprint().patterns(patterns2).build();
 
-		assertFalse(a.equals(b));
-		assertFalse(a.hashCode() == b.hashCode());
+		assertThat(a.equals(b)).isFalse();
+		assertThat(a.hashCode() == b.hashCode()).isFalse();
 	}
 
 	@Test
 	public void equals_different_PRODUCER() {
 		final OperatingSystem a = new Blueprint().producer("prod-1").build();
 		final OperatingSystem b = new Blueprint().producer("prod-2").build();
-		assertFalse(a.equals(b));
-		assertFalse(a.hashCode() == b.hashCode());
+		assertThat(a.equals(b)).isFalse();
+		assertThat(a.hashCode() == b.hashCode()).isFalse();
 	}
 
 	@Test
 	public void equals_different_PRODUCERURL() {
 		final OperatingSystem a = new Blueprint().producerUrl("prod-url-1").build();
 		final OperatingSystem b = new Blueprint().producerUrl("prod-url-2").build();
-		assertFalse(a.equals(b));
-		assertFalse(a.hashCode() == b.hashCode());
+		assertThat(a.equals(b)).isFalse();
+		assertThat(a.hashCode() == b.hashCode()).isFalse();
 	}
 
 	@Test
 	public void equals_different_URL() {
 		final OperatingSystem a = new Blueprint().url("url-1").build();
 		final OperatingSystem b = new Blueprint().url("url-2").build();
-		assertFalse(a.equals(b));
-		assertFalse(a.hashCode() == b.hashCode());
+		assertThat(a.equals(b)).isFalse();
+		assertThat(a.hashCode() == b.hashCode()).isFalse();
 	}
 
 	@Test
 	public void equals_identical() {
 		final OperatingSystem a = new Blueprint().build();
 		final OperatingSystem b = new Blueprint().build();
-		assertEquals(a, b);
-		assertTrue(a.hashCode() == b.hashCode());
+		assertThat(b).isEqualTo(a);
+		assertThat(a.hashCode() == b.hashCode()).isTrue();
 	}
 
 	@Test
 	public void equals_null() {
 		final OperatingSystem a = new Blueprint().build();
-		assertFalse(a.equals(null));
+		assertThat(a.equals(null)).isFalse();
 	}
 
 	@Test
 	public void equals_otherClass() {
 		final OperatingSystem a = new Blueprint().build();
-		assertFalse(a.equals(""));
+		assertThat(a.equals("")).isFalse();
 	}
 
 	@Test
 	public void equals_same() {
 		final OperatingSystem a = new Blueprint().build();
-		assertEquals(a, a);
-		assertSame(a, a);
-		assertTrue(a.hashCode() == a.hashCode());
+		assertThat(a).isEqualTo(a);
+		assertThat(a).isSameAs(a);
+		assertThat(a.hashCode() == a.hashCode()).isTrue();
 	}
 
 	@Test(expected = IllegalNullArgumentException.class)

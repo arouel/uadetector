@@ -15,10 +15,7 @@
  ******************************************************************************/
 package net.sf.uadetector.internal.data.domain;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertSame;
-import static org.junit.Assert.assertTrue;
+import static org.fest.assertions.Assertions.assertThat;
 
 import javax.annotation.Nonnull;
 
@@ -26,7 +23,6 @@ import net.sf.qualitycheck.exception.IllegalNegativeArgumentException;
 import net.sf.qualitycheck.exception.IllegalNullArgumentException;
 import net.sf.uadetector.UserAgentFamily;
 
-import static org.fest.assertions.Assertions.assertThat;
 import org.junit.Test;
 
 public class RobotTest {
@@ -107,100 +103,100 @@ public class RobotTest {
 	public void equals_different_FAMILY() {
 		final Robot a = new Blueprint().family(UserAgentFamily.GOOGLEBOT).build();
 		final Robot b = new Blueprint().family(UserAgentFamily.YAHOO).build();
-		assertFalse(a.equals(b));
-		assertFalse(a.hashCode() == b.hashCode());
+		assertThat(a.equals(b)).isFalse();
+		assertThat(a.hashCode() == b.hashCode()).isFalse();
 	}
 
 	@Test
 	public void equals_different_FAMILYNAME() {
 		final Robot a = new Blueprint().familyName("f1").build();
 		final Robot b = new Blueprint().familyName("f2").build();
-		assertFalse(a.equals(b));
-		assertFalse(a.hashCode() == b.hashCode());
+		assertThat(a.equals(b)).isFalse();
+		assertThat(a.hashCode() == b.hashCode()).isFalse();
 	}
 
 	@Test
 	public void equals_different_ICON() {
 		final Robot a = new Blueprint().icon("icon-name-1").build();
 		final Robot b = new Blueprint().icon("icon-name-2").build();
-		assertFalse(a.equals(b));
-		assertFalse(a.hashCode() == b.hashCode());
+		assertThat(a.equals(b)).isFalse();
+		assertThat(a.hashCode() == b.hashCode()).isFalse();
 	}
 
 	@Test
 	public void equals_different_ID() {
 		final Robot a = new Blueprint().id(123).build();
 		final Robot b = new Blueprint().id(987).build();
-		assertFalse(a.equals(b));
-		assertFalse(a.hashCode() == b.hashCode());
+		assertThat(a.equals(b)).isFalse();
+		assertThat(a.hashCode() == b.hashCode()).isFalse();
 	}
 
 	@Test
 	public void equals_different_INFOURL() {
 		final Robot a = new Blueprint().infoUrl("info-url-1").build();
 		final Robot b = new Blueprint().infoUrl("info-url-2").build();
-		assertFalse(a.equals(b));
-		assertFalse(a.hashCode() == b.hashCode());
+		assertThat(a.equals(b)).isFalse();
+		assertThat(a.hashCode() == b.hashCode()).isFalse();
 	}
 
 	@Test
 	public void equals_different_NAME() {
 		final Robot a = new Blueprint().name("name-1").build();
 		final Robot b = new Blueprint().name("name-2").build();
-		assertFalse(a.equals(b));
-		assertFalse(a.hashCode() == b.hashCode());
+		assertThat(a.equals(b)).isFalse();
+		assertThat(a.hashCode() == b.hashCode()).isFalse();
 	}
 
 	@Test
 	public void equals_different_PRODUCER() {
 		final Robot a = new Blueprint().producer("p1").build();
 		final Robot b = new Blueprint().producer("p2").build();
-		assertFalse(a.equals(b));
-		assertFalse(a.hashCode() == b.hashCode());
+		assertThat(a.equals(b)).isFalse();
+		assertThat(a.hashCode() == b.hashCode()).isFalse();
 	}
 
 	@Test
 	public void equals_different_PRODUCERURL() {
 		final Robot a = new Blueprint().producerUrl("pu1").build();
 		final Robot b = new Blueprint().producerUrl("pu2").build();
-		assertFalse(a.equals(b));
-		assertFalse(a.hashCode() == b.hashCode());
+		assertThat(a.equals(b)).isFalse();
+		assertThat(a.hashCode() == b.hashCode()).isFalse();
 	}
 
 	@Test
 	public void equals_different_USERAGENTSTRING() {
 		final Robot a = new Blueprint().userAgentString("uas.1").build();
 		final Robot b = new Blueprint().userAgentString("uas.2").build();
-		assertFalse(a.equals(b));
-		assertFalse(a.hashCode() == b.hashCode());
+		assertThat(a.equals(b)).isFalse();
+		assertThat(a.hashCode() == b.hashCode()).isFalse();
 	}
 
 	@Test
 	public void equals_identical() {
 		final Robot a = new Blueprint().build();
 		final Robot b = new Blueprint().build();
-		assertEquals(a, b);
-		assertTrue(a.hashCode() == b.hashCode());
+		assertThat(b).isEqualTo(a);
+		assertThat(a.hashCode() == b.hashCode()).isTrue();
 	}
 
 	@Test
 	public void equals_null() {
 		final Robot a = new Blueprint().build();
-		assertFalse(a.equals(null));
+		assertThat(a.equals(null)).isFalse();
 	}
 
 	@Test
 	public void equals_otherClass() {
 		final Robot a = new Blueprint().build();
-		assertFalse(a.equals(""));
+		assertThat(a.equals("")).isFalse();
 	}
 
 	@Test
 	public void equals_same() {
 		final Robot a = new Blueprint().build();
-		assertEquals(a, a);
-		assertSame(a, a);
-		assertTrue(a.hashCode() == a.hashCode());
+		assertThat(a).isEqualTo(a);
+		assertThat(a).isSameAs(a);
+		assertThat(a.hashCode() == a.hashCode()).isTrue();
 	}
 
 	@Test(expected = IllegalNullArgumentException.class)

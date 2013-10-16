@@ -15,11 +15,11 @@
  ******************************************************************************/
 package net.sf.uadetector.internal.data.domain;
 
+import static org.fest.assertions.Assertions.assertThat;
 import net.sf.qualitycheck.exception.IllegalNegativeArgumentException;
 import net.sf.qualitycheck.exception.IllegalNullArgumentException;
 import net.sf.uadetector.internal.data.domain.BrowserOperatingSystemMapping.Builder;
 
-import static org.fest.assertions.Assertions.assertThat;
 import org.junit.Test;
 
 public class BrowserOperatingSystemMappingBuilderTest {

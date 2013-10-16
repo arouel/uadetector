@@ -15,9 +15,7 @@
  ******************************************************************************/
 package net.sf.uadetector.datastore;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.fest.assertions.Assertions.assertThat;
 
 import java.io.File;
 import java.io.IOException;
@@ -73,18 +71,18 @@ public class CachingXmlDataStoreTest_loadingWrongContent {
 		final CachingXmlDataStore store = CachingXmlDataStore.createCachingXmlDataStore(cache, DATA_CONNECTION_ERROR_URL,
 				VERSION_CONNECTION_ERROR_URL, CHARSET, fallback);
 
-		assertEquals(TestXmlDataStore.VERSION_OLDER, store.getData().getVersion());
+		assertThat(store.getData().getVersion()).isEqualTo(TestXmlDataStore.VERSION_OLDER);
 
 		// check that cache was removed
-		assertFalse(cache.exists());
+		assertThat(cache.exists()).isFalse();
 
 		// try to update the content
 		store.refresh();
 		Thread.sleep(1000L);
 
 		// test that no fallback data will be written to cache file
-		assertEquals(TestXmlDataStore.VERSION_OLDER, store.getData().getVersion());
-		assertFalse(cache.exists());
+		assertThat(store.getData().getVersion()).isEqualTo(TestXmlDataStore.VERSION_OLDER);
+		assertThat(cache.exists()).isFalse();
 	}
 
 	@Test
@@ -103,18 +101,18 @@ public class CachingXmlDataStoreTest_loadingWrongContent {
 		final CachingXmlDataStore store = CachingXmlDataStore.createCachingXmlDataStore(cache, TestXmlDataStore.DATA_URL_NEWER,
 				TestXmlDataStore.VERSION_URL_NEWER, CHARSET, fallback);
 
-		assertEquals(TestXmlDataStore.VERSION_OLDER, store.getData().getVersion());
+		assertThat(store.getData().getVersion()).isEqualTo(TestXmlDataStore.VERSION_OLDER);
 
 		// check that cache was removed
-		assertFalse(cache.exists());
+		assertThat(cache.exists()).isFalse();
 
 		// try to update the content
 		store.refresh();
 		Thread.sleep(1000L);
 
 		// test that no corrupt data will be saved into cache file
-		assertEquals(TestXmlDataStore.VERSION_NEWER, store.getData().getVersion());
-		assertEquals(Files.toString(new File(TestXmlDataStore.DATA_URL_NEWER.toURI()), CHARSET), Files.toString(cache, CHARSET));
+		assertThat(store.getData().getVersion()).isEqualTo(TestXmlDataStore.VERSION_NEWER);
+		assertThat(Files.toString(cache, CHARSET)).isEqualTo(Files.toString(new File(TestXmlDataStore.DATA_URL_NEWER.toURI()), CHARSET));
 	}
 
 	@Test
@@ -129,18 +127,18 @@ public class CachingXmlDataStoreTest_loadingWrongContent {
 		final CachingXmlDataStore store = CachingXmlDataStore.createCachingXmlDataStore(cache, DATA_CONNECTION_ERROR_URL,
 				VERSION_CONNECTION_ERROR_URL, CHARSET, fallback);
 
-		assertEquals(TestXmlDataStore.VERSION_OLDER, store.getData().getVersion());
+		assertThat(store.getData().getVersion()).isEqualTo(TestXmlDataStore.VERSION_OLDER);
 
 		// check that cache file is empty, because fallback data store will be taken
-		assertTrue(Files.toString(cache, CHARSET).isEmpty());
+		assertThat(Files.toString(cache, CHARSET).isEmpty()).isTrue();
 
 		// try to update the content
 		store.refresh();
 		Thread.sleep(1000L);
 
 		// test that no corrupt data will be saved into cache file
-		assertEquals(TestXmlDataStore.VERSION_NEWER, store.getData().getVersion());
-		assertEquals(Files.toString(new File(TestXmlDataStore.DATA_URL_NEWER.toURI()), CHARSET), Files.toString(cache, CHARSET));
+		assertThat(store.getData().getVersion()).isEqualTo(TestXmlDataStore.VERSION_NEWER);
+		assertThat(Files.toString(cache, CHARSET)).isEqualTo(Files.toString(new File(TestXmlDataStore.DATA_URL_NEWER.toURI()), CHARSET));
 	}
 
 	@Test
@@ -157,18 +155,17 @@ public class CachingXmlDataStoreTest_loadingWrongContent {
 		final CachingXmlDataStore store = CachingXmlDataStore.createCachingXmlDataStore(cache, DATA_CONNECTION_ERROR_URL,
 				VERSION_CONNECTION_ERROR_URL, CHARSET, fallback);
 
-		assertEquals(TestXmlDataStore.VERSION_NEWER, store.getData().getVersion());
+		assertThat(store.getData().getVersion()).isEqualTo(TestXmlDataStore.VERSION_NEWER);
 
 		// check that cache file's content is still correctly filled
-		assertEquals(Files.toString(new File(TestXmlDataStore.DATA_URL_NEWER.toURI()), CHARSET), Files.toString(cache, CHARSET));
+		assertThat(Files.toString(cache, CHARSET)).isEqualTo(Files.toString(new File(TestXmlDataStore.DATA_URL_NEWER.toURI()), CHARSET));
 
 		// try to update the content
 		store.refresh();
 		Thread.sleep(1000L);
 
 		// test that no corrupt data will be saved into cache file
-		assertEquals(TestXmlDataStore.VERSION_NEWER, store.getData().getVersion());
-		assertEquals(Files.toString(new File(TestXmlDataStore.DATA_URL_NEWER.toURI()), CHARSET), Files.toString(cache, CHARSET));
+		assertThat(store.getData().getVersion()).isEqualTo(TestXmlDataStore.VERSION_NEWER);
+		assertThat(Files.toString(cache, CHARSET)).isEqualTo(Files.toString(new File(TestXmlDataStore.DATA_URL_NEWER.toURI()), CHARSET));
 	}
-
 }

@@ -15,10 +15,7 @@
  ******************************************************************************/
 package net.sf.uadetector.internal.data.domain;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertSame;
-import static org.junit.Assert.assertTrue;
+import static org.fest.assertions.Assertions.assertThat;
 
 import java.util.SortedSet;
 import java.util.TreeSet;
@@ -32,7 +29,6 @@ import net.sf.uadetector.UserAgent;
 import net.sf.uadetector.UserAgent.Builder;
 import net.sf.uadetector.UserAgentFamily;
 
-import static org.fest.assertions.Assertions.assertThat;
 import org.junit.Test;
 
 import com.google.common.collect.Sets;
@@ -165,40 +161,40 @@ public class BrowserTest {
 	public void equals_different_FAMILY() {
 		final Browser a = new Blueprint().family(UserAgentFamily.FIREBIRD).build();
 		final Browser b = new Blueprint().family(UserAgentFamily.FIREFOX).build();
-		assertFalse(a.equals(b));
-		assertFalse(a.hashCode() == b.hashCode());
+		assertThat(a.equals(b)).isFalse();
+		assertThat(a.hashCode() == b.hashCode()).isFalse();
 	}
 
 	@Test
 	public void equals_different_FAMILYNAME() {
 		final Browser a = new Blueprint().familyName("name1").build();
 		final Browser b = new Blueprint().familyName("name2").build();
-		assertFalse(a.equals(b));
-		assertFalse(a.hashCode() == b.hashCode());
+		assertThat(a.equals(b)).isFalse();
+		assertThat(a.hashCode() == b.hashCode()).isFalse();
 	}
 
 	@Test
 	public void equals_different_ICON() {
 		final Browser a = new Blueprint().icon("icon.png").build();
 		final Browser b = new Blueprint().icon("icon.gif").build();
-		assertFalse(a.equals(b));
-		assertFalse(a.hashCode() == b.hashCode());
+		assertThat(a.equals(b)).isFalse();
+		assertThat(a.hashCode() == b.hashCode()).isFalse();
 	}
 
 	@Test
 	public void equals_different_ID() {
 		final Browser a = new Blueprint().id(725).build();
 		final Browser b = new Blueprint().id(289).build();
-		assertFalse(a.equals(b));
-		assertFalse(a.hashCode() == b.hashCode());
+		assertThat(a.equals(b)).isFalse();
+		assertThat(a.hashCode() == b.hashCode()).isFalse();
 	}
 
 	@Test
 	public void equals_different_INFOURL() {
 		final Browser a = new Blueprint().infoUrl("info-1").build();
 		final Browser b = new Blueprint().infoUrl("info-2").build();
-		assertFalse(a.equals(b));
-		assertFalse(a.hashCode() == b.hashCode());
+		assertThat(a.equals(b)).isFalse();
+		assertThat(a.hashCode() == b.hashCode()).isFalse();
 	}
 
 	@Test
@@ -211,8 +207,8 @@ public class BrowserTest {
 				"SUSE Linux GmbH", "https://www.suse.com", "https://www.suse.com", "tux.png");
 		final Browser b = new Blueprint().operatingSystem(os2).build();
 
-		assertFalse(a.equals(b));
-		assertFalse(a.hashCode() == b.hashCode());
+		assertThat(a.equals(b)).isFalse();
+		assertThat(a.hashCode() == b.hashCode()).isFalse();
 	}
 
 	@Test
@@ -223,9 +219,9 @@ public class BrowserTest {
 				"SUSE Linux GmbH", "https://www.suse.com", "https://www.suse.com", "tux.png");
 		final Browser b = new Blueprint().operatingSystem(os2).build();
 
-		assertFalse(a.equals(b));
-		assertFalse(b.equals(a));
-		assertFalse(a.hashCode() == b.hashCode());
+		assertThat(a.equals(b)).isFalse();
+		assertThat(b.equals(a)).isFalse();
+		assertThat(a.hashCode() == b.hashCode()).isFalse();
 	}
 
 	@Test
@@ -238,68 +234,68 @@ public class BrowserTest {
 		patterns2.add(new BrowserPattern(1932, Pattern.compile("f*[1-4]+"), 733));
 		final Browser b = new Blueprint().patterns(patterns2).build();
 
-		assertFalse(a.equals(b));
-		assertFalse(a.hashCode() == b.hashCode());
+		assertThat(a.equals(b)).isFalse();
+		assertThat(a.hashCode() == b.hashCode()).isFalse();
 	}
 
 	@Test
 	public void equals_different_PRODUCER() {
 		final Browser a = new Blueprint().producer("prod-1").build();
 		final Browser b = new Blueprint().producer("prod-2").build();
-		assertFalse(a.equals(b));
-		assertFalse(a.hashCode() == b.hashCode());
+		assertThat(a.equals(b)).isFalse();
+		assertThat(a.hashCode() == b.hashCode()).isFalse();
 	}
 
 	@Test
 	public void equals_different_PRODUCERURL() {
 		final Browser a = new Blueprint().producerUrl("prod-url-1").build();
 		final Browser b = new Blueprint().producerUrl("prod-url-2").build();
-		assertFalse(a.equals(b));
-		assertFalse(a.hashCode() == b.hashCode());
+		assertThat(a.equals(b)).isFalse();
+		assertThat(a.hashCode() == b.hashCode()).isFalse();
 	}
 
 	@Test
 	public void equals_different_TYPE() {
 		final Browser a = new Blueprint().type(new BrowserType(1, "Type 1")).build();
 		final Browser b = new Blueprint().type(new BrowserType(2, "Type 2")).build();
-		assertFalse(a.equals(b));
-		assertFalse(a.hashCode() == b.hashCode());
+		assertThat(a.equals(b)).isFalse();
+		assertThat(a.hashCode() == b.hashCode()).isFalse();
 	}
 
 	@Test
 	public void equals_different_URL() {
 		final Browser a = new Blueprint().url("url.net").build();
 		final Browser b = new Blueprint().url("url.org").build();
-		assertFalse(a.equals(b));
-		assertFalse(a.hashCode() == b.hashCode());
+		assertThat(a.equals(b)).isFalse();
+		assertThat(a.hashCode() == b.hashCode()).isFalse();
 	}
 
 	@Test
 	public void equals_identical() {
 		final Browser a = new Blueprint().build();
 		final Browser b = new Blueprint().build();
-		assertEquals(a, b);
-		assertTrue(a.hashCode() == b.hashCode());
+		assertThat(b).isEqualTo(a);
+		assertThat(a.hashCode() == b.hashCode()).isTrue();
 	}
 
 	@Test
 	public void equals_null() {
 		final Browser a = new Blueprint().build();
-		assertFalse(a.equals(null));
+		assertThat(a.equals(null)).isFalse();
 	}
 
 	@Test
 	public void equals_otherClass() {
 		final Browser a = new Blueprint().build();
-		assertFalse(a.equals(""));
+		assertThat(a.equals("")).isFalse();
 	}
 
 	@Test
 	public void equals_same() {
 		final Browser a = new Blueprint().build();
-		assertEquals(a, a);
-		assertSame(a, a);
-		assertTrue(a.hashCode() == a.hashCode());
+		assertThat(a).isEqualTo(a);
+		assertThat(a).isSameAs(a);
+		assertThat(a.hashCode() == a.hashCode()).isTrue();
 	}
 
 	@Test(expected = IllegalNullArgumentException.class)

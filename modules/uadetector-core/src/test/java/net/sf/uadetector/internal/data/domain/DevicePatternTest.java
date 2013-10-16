@@ -1,9 +1,6 @@
 package net.sf.uadetector.internal.data.domain;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertSame;
-import static org.junit.Assert.assertTrue;
+import static org.fest.assertions.Assertions.assertThat;
 
 import java.util.regex.Pattern;
 
@@ -58,7 +55,7 @@ public final class DevicePatternTest {
 		builder.setPattern(Pattern.compile("[a-z]+", Pattern.CASE_INSENSITIVE));
 		builder.setPosition(987654321);
 		final DevicePattern obj = builder.build();
-		assertEquals(blueprint, obj);
+		assertThat(obj).isEqualTo(blueprint);
 
 	}
 
@@ -66,111 +63,111 @@ public final class DevicePatternTest {
 	public void compareTo_different_ID() {
 		final DevicePattern a = new Blueprint().id(987).build();
 		final DevicePattern b = new Blueprint().id(123).build();
-		assertTrue(a.compareTo(b) > 0);
-		assertTrue(b.compareTo(a) < 0);
+		assertThat(a.compareTo(b) > 0).isTrue();
+		assertThat(b.compareTo(a) < 0).isTrue();
 	}
 
 	@Test
 	public void compareTo_different_PATTERN() {
 		final DevicePattern a = new Blueprint().pattern(Pattern.compile("")).build();
 		final DevicePattern b = new Blueprint().pattern(Pattern.compile("^1")).build();
-		assertTrue(a.compareTo(b) < 0);
-		assertTrue(b.compareTo(a) > 0);
+		assertThat(a.compareTo(b) < 0).isTrue();
+		assertThat(b.compareTo(a) > 0).isTrue();
 	}
 
 	@Test
 	public void compareTo_different_PATTERN_FLAGS() {
 		final DevicePattern a = new Blueprint().pattern(Pattern.compile("[a-z]+")).build();
 		final DevicePattern b = new Blueprint().pattern(Pattern.compile("[a-z]+", Pattern.CASE_INSENSITIVE)).build();
-		assertTrue(a.compareTo(b) < 0);
-		assertTrue(b.compareTo(a) > 0);
+		assertThat(a.compareTo(b) < 0).isTrue();
+		assertThat(b.compareTo(a) > 0).isTrue();
 	}
 
 	@Test
 	public void compareTo_different_POSITION() {
 		final DevicePattern a = new Blueprint().position(127).build();
 		final DevicePattern b = new Blueprint().position(255).build();
-		assertTrue(a.compareTo(b) < 0);
-		assertTrue(b.compareTo(a) > 0);
+		assertThat(a.compareTo(b) < 0).isTrue();
+		assertThat(b.compareTo(a) > 0).isTrue();
 	}
 
 	@Test
 	public void compareTo_identical() {
 		final DevicePattern a = new Blueprint().build();
 		final DevicePattern b = new Blueprint().build();
-		assertTrue(a.compareTo(b) == 0);
+		assertThat(a.compareTo(b) == 0).isTrue();
 	}
 
 	@Test
 	public void compareTo_null() {
 		final DevicePattern a = new Blueprint().build();
-		assertTrue(a.compareTo(null) < 0);
+		assertThat(a.compareTo(null) < 0).isTrue();
 	}
 
 	@Test
 	public void compareTo_same() {
 		final DevicePattern a = new Blueprint().build();
-		assertTrue(a.compareTo(a) == 0);
+		assertThat(a.compareTo(a) == 0).isTrue();
 	}
 
 	@Test
 	public void equals_different_ID() {
 		final DevicePattern a = new Blueprint().id(987).build();
 		final DevicePattern b = new Blueprint().id(123).build();
-		assertFalse(a.equals(b));
-		assertFalse(a.hashCode() == b.hashCode());
+		assertThat(a.equals(b)).isFalse();
+		assertThat(a.hashCode() == b.hashCode()).isFalse();
 	}
 
 	@Test
 	public void equals_different_PATTERN() {
 		final DevicePattern a = new Blueprint().pattern(Pattern.compile("")).build();
 		final DevicePattern b = new Blueprint().pattern(Pattern.compile("^1")).build();
-		assertFalse(a.equals(b));
-		assertFalse(a.hashCode() == b.hashCode());
+		assertThat(a.equals(b)).isFalse();
+		assertThat(a.hashCode() == b.hashCode()).isFalse();
 	}
 
 	@Test
 	public void equals_different_PATTERN_FLAGS() {
 		final DevicePattern a = new Blueprint().pattern(Pattern.compile("[a-z]+")).build();
 		final DevicePattern b = new Blueprint().pattern(Pattern.compile("[a-z]+", Pattern.CASE_INSENSITIVE)).build();
-		assertFalse(a.equals(b));
-		assertFalse(a.hashCode() == b.hashCode());
+		assertThat(a.equals(b)).isFalse();
+		assertThat(a.hashCode() == b.hashCode()).isFalse();
 	}
 
 	@Test
 	public void equals_different_POSITION() {
 		final DevicePattern a = new Blueprint().position(127).build();
 		final DevicePattern b = new Blueprint().position(255).build();
-		assertFalse(a.equals(b));
-		assertFalse(a.hashCode() == b.hashCode());
+		assertThat(a.equals(b)).isFalse();
+		assertThat(a.hashCode() == b.hashCode()).isFalse();
 	}
 
 	@Test
 	public void equals_identical() {
 		final DevicePattern a = new Blueprint().build();
 		final DevicePattern b = new Blueprint().build();
-		assertEquals(a, b);
-		assertTrue(a.hashCode() == b.hashCode());
+		assertThat(b).isEqualTo(a);
+		assertThat(a.hashCode() == b.hashCode()).isTrue();
 	}
 
 	@Test
 	public void equals_null() {
 		final DevicePattern a = new Blueprint().build();
-		assertFalse(a.equals(null));
+		assertThat(a.equals(null)).isFalse();
 	}
 
 	@Test
 	public void equals_otherClass() {
 		final DevicePattern a = new Blueprint().build();
-		assertFalse(a.equals(""));
+		assertThat(a.equals("")).isFalse();
 	}
 
 	@Test
 	public void equals_same() {
 		final DevicePattern a = new Blueprint().build();
-		assertEquals(a, a);
-		assertSame(a, a);
-		assertTrue(a.hashCode() == a.hashCode());
+		assertThat(a).isEqualTo(a);
+		assertThat(a).isSameAs(a);
+		assertThat(a.hashCode() == a.hashCode()).isTrue();
 	}
 
 	@Test(expected = IllegalNegativeArgumentException.class)
@@ -191,7 +188,7 @@ public final class DevicePatternTest {
 	@Test
 	public void testToString() {
 		// reduces only some noise in coverage report
-		assertEquals("DevicePattern [id=123456789, pattern=[a-z]+, position=987654321]", new Blueprint().build().toString());
+		assertThat(new Blueprint().build().toString()).isEqualTo("DevicePattern [id=123456789, pattern=[a-z]+, position=987654321]");
 	}
 
 }

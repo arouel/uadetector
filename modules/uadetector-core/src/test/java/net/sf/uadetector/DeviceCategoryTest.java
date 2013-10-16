@@ -1,9 +1,6 @@
 package net.sf.uadetector;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertSame;
-import static org.junit.Assert.assertTrue;
+import static org.fest.assertions.Assertions.assertThat;
 
 import javax.annotation.Nonnull;
 
@@ -67,67 +64,67 @@ public final class DeviceCategoryTest {
 		builder.setName("a name");
 
 		final DeviceCategory obj = builder.build();
-		assertEquals(blueprint, obj);
+		assertThat(obj).isEqualTo(blueprint);
 	}
 
 	@Test
 	public void equals_different_CATEGORY() {
 		final DeviceCategory a = new Blueprint().category(Category.OTHER).build();
 		final DeviceCategory b = new Blueprint().category(Category.PERSONAL_COMPUTER).build();
-		assertFalse(a.equals(b));
-		assertFalse(a.hashCode() == b.hashCode());
+		assertThat(a.equals(b)).isFalse();
+		assertThat(a.hashCode() == b.hashCode()).isFalse();
 	}
 
 	@Test
 	public void equals_different_ICON() {
 		final DeviceCategory a = new Blueprint().icon("icn1").build();
 		final DeviceCategory b = new Blueprint().icon("icn2").build();
-		assertFalse(a.equals(b));
-		assertFalse(a.hashCode() == b.hashCode());
+		assertThat(a.equals(b)).isFalse();
+		assertThat(a.hashCode() == b.hashCode()).isFalse();
 	}
 
 	@Test
 	public void equals_different_INFOURL() {
 		final DeviceCategory a = new Blueprint().infoUrl("info1").build();
 		final DeviceCategory b = new Blueprint().infoUrl("info2").build();
-		assertFalse(a.equals(b));
-		assertFalse(a.hashCode() == b.hashCode());
+		assertThat(a.equals(b)).isFalse();
+		assertThat(a.hashCode() == b.hashCode()).isFalse();
 	}
 
 	@Test
 	public void equals_different_NAME() {
 		final DeviceCategory a = new Blueprint().name("name1").build();
 		final DeviceCategory b = new Blueprint().name("name2").build();
-		assertFalse(a.equals(b));
-		assertFalse(a.hashCode() == b.hashCode());
+		assertThat(a.equals(b)).isFalse();
+		assertThat(a.hashCode() == b.hashCode()).isFalse();
 	}
 
 	@Test
 	public void equals_identical() {
 		final DeviceCategory a = new Blueprint().build();
 		final DeviceCategory b = new Blueprint().build();
-		assertEquals(a, b);
-		assertTrue(a.hashCode() == b.hashCode());
+		assertThat(b).isEqualTo(a);
+		assertThat(a.hashCode() == b.hashCode()).isTrue();
 	}
 
 	@Test
 	public void equals_null() {
 		final DeviceCategory a = new Blueprint().build();
-		assertFalse(a.equals(null));
+		assertThat(a.equals(null)).isFalse();
 	}
 
 	@Test
 	public void equals_otherClass() {
 		final DeviceCategory a = new Blueprint().build();
-		assertFalse(a.equals(""));
+		assertThat(a.equals("")).isFalse();
 	}
 
 	@Test
 	public void equals_same() {
 		final DeviceCategory a = new Blueprint().build();
-		assertEquals(a, a);
-		assertSame(a, a);
-		assertTrue(a.hashCode() == a.hashCode());
+		assertThat(a).isEqualTo(a);
+		assertThat(a).isSameAs(a);
+		assertThat(a.hashCode() == a.hashCode()).isTrue();
 	}
 
 	@Test(expected = IllegalNullArgumentException.class)

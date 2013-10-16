@@ -1,9 +1,6 @@
 package net.sf.uadetector.internal.data.domain;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertSame;
-import static org.junit.Assert.assertTrue;
+import static org.fest.assertions.Assertions.assertThat;
 
 import java.util.SortedSet;
 import java.util.TreeSet;
@@ -87,47 +84,47 @@ public final class DeviceTest {
 		final Device obj = builder.build();
 
 		final Device blueprint = new Blueprint().build();
-		assertEquals(blueprint, obj);
+		assertThat(obj).isEqualTo(blueprint);
 	}
 
 	@Test
 	public void equals_different_CATEGORY() {
 		final Device a = new Blueprint().category(Category.SMARTPHONE).build();
 		final Device b = new Blueprint().category(Category.TABLET).build();
-		assertFalse(a.equals(b));
-		assertFalse(a.hashCode() == b.hashCode());
+		assertThat(a.equals(b)).isFalse();
+		assertThat(a.hashCode() == b.hashCode()).isFalse();
 	}
 
 	@Test
 	public void equals_different_ICON() {
 		final Device a = new Blueprint().icon("icn").build();
 		final Device b = new Blueprint().icon("ic").build();
-		assertFalse(a.equals(b));
-		assertFalse(a.hashCode() == b.hashCode());
+		assertThat(a.equals(b)).isFalse();
+		assertThat(a.hashCode() == b.hashCode()).isFalse();
 	}
 
 	@Test
 	public void equals_different_ID() {
 		final Device a = new Blueprint().id(749).build();
 		final Device b = new Blueprint().id(372).build();
-		assertFalse(a.equals(b));
-		assertFalse(a.hashCode() == b.hashCode());
+		assertThat(a.equals(b)).isFalse();
+		assertThat(a.hashCode() == b.hashCode()).isFalse();
 	}
 
 	@Test
 	public void equals_different_INFOURL() {
 		final Device a = new Blueprint().infoUrl("info1").build();
 		final Device b = new Blueprint().infoUrl("info2").build();
-		assertFalse(a.equals(b));
-		assertFalse(a.hashCode() == b.hashCode());
+		assertThat(a.equals(b)).isFalse();
+		assertThat(a.hashCode() == b.hashCode()).isFalse();
 	}
 
 	@Test
 	public void equals_different_NAME() {
 		final Device a = new Blueprint().name("test1").build();
 		final Device b = new Blueprint().name("test2").build();
-		assertFalse(a.equals(b));
-		assertFalse(a.hashCode() == b.hashCode());
+		assertThat(a.equals(b)).isFalse();
+		assertThat(a.hashCode() == b.hashCode()).isFalse();
 	}
 
 	@Test
@@ -139,36 +136,36 @@ public final class DeviceTest {
 		patterns2.add(new DevicePattern(1, Pattern.compile("Enterprise"), 1701));
 		patterns2.add(new DevicePattern(2, Pattern.compile("Voyager"), 74656));
 		final Device b = new Blueprint().patterns(patterns2).build();
-		assertFalse(a.equals(b));
-		assertFalse(a.hashCode() == b.hashCode());
+		assertThat(a.equals(b)).isFalse();
+		assertThat(a.hashCode() == b.hashCode()).isFalse();
 	}
 
 	@Test
 	public void equals_identical() {
 		final Device a = new Blueprint().build();
 		final Device b = new Blueprint().build();
-		assertEquals(a, b);
-		assertTrue(a.hashCode() == b.hashCode());
+		assertThat(b).isEqualTo(a);
+		assertThat(a.hashCode() == b.hashCode()).isTrue();
 	}
 
 	@Test
 	public void equals_null() {
 		final Device a = new Blueprint().build();
-		assertFalse(a.equals(null));
+		assertThat(a.equals(null)).isFalse();
 	}
 
 	@Test
 	public void equals_otherClass() {
 		final Device a = new Blueprint().build();
-		assertFalse(a.equals(""));
+		assertThat(a.equals("")).isFalse();
 	}
 
 	@Test
 	public void equals_same() {
 		final Device a = new Blueprint().build();
-		assertEquals(a, a);
-		assertSame(a, a);
-		assertTrue(a.hashCode() == a.hashCode());
+		assertThat(a).isEqualTo(a);
+		assertThat(a).isSameAs(a);
+		assertThat(a.hashCode() == a.hashCode()).isTrue();
 	}
 
 	@Test(expected = IllegalNullArgumentException.class)
@@ -207,34 +204,34 @@ public final class DeviceTest {
 		patterns.add(new DevicePattern(21, Pattern.compile(""), 42));
 		b.setPatterns(patterns);
 
-		assertEquals("test", b.getName());
-		assertEquals("icon", b.getIcon());
-		assertEquals(2, b.getId());
-		assertEquals("info", b.getInfoUrl());
-		assertEquals(patterns, b.getPatterns());
+		assertThat(b.getName()).isEqualTo("test");
+		assertThat(b.getIcon()).isEqualTo("icon");
+		assertThat(b.getId()).isEqualTo(2);
+		assertThat(b.getInfoUrl()).isEqualTo("info");
+		assertThat(b.getPatterns()).isEqualTo(patterns);
 
 		final Device device = b.build();
-		assertEquals("test", device.getName());
-		assertEquals("icon", device.getIcon());
-		assertEquals(2, device.getId());
-		assertEquals("info", device.getInfoUrl());
-		assertEquals(patterns, device.getPatterns());
-		assertEquals(Category.UNKNOWN, device.getCategory());
+		assertThat(device.getName()).isEqualTo("test");
+		assertThat(device.getIcon()).isEqualTo("icon");
+		assertThat(device.getId()).isEqualTo(2);
+		assertThat(device.getInfoUrl()).isEqualTo("info");
+		assertThat(device.getPatterns()).isEqualTo(patterns);
+		assertThat(device.getCategory()).isEqualTo(Category.UNKNOWN);
 
 		final Device.Builder c = new Device.Builder(device);
-		assertEquals("test", c.getName());
-		assertEquals("icon", c.getIcon());
-		assertEquals(2, c.getId());
-		assertEquals("info", c.getInfoUrl());
-		assertEquals(patterns, c.getPatterns());
+		assertThat(c.getName()).isEqualTo("test");
+		assertThat(c.getIcon()).isEqualTo("icon");
+		assertThat(c.getId()).isEqualTo(2);
+		assertThat(c.getInfoUrl()).isEqualTo("info");
+		assertThat(c.getPatterns()).isEqualTo(patterns);
 	}
 
 	@Test
 	public void testToString() {
 		// reduces only some noise in coverage report
-		assertEquals(
-				"Device [icon=logo.png, id=987, infoUrl=info-url, name=device-name, patterns=[DevicePattern [id=1, pattern=Enterprise, position=1701]]]",
-				new Blueprint().build().toString());
+		assertThat(new Blueprint().build().toString())
+				.isEqualTo(
+						"Device [icon=logo.png, id=987, infoUrl=info-url, name=device-name, patterns=[DevicePattern [id=1, pattern=Enterprise, position=1701]]]");
 	}
 
 }

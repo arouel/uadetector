@@ -15,12 +15,13 @@
  ******************************************************************************/
 package net.sf.uadetector.internal.data.domain;
 
+import static org.fest.assertions.Assertions.assertThat;
+
 import java.util.regex.Pattern;
 
 import net.sf.qualitycheck.exception.IllegalNegativeArgumentException;
 import net.sf.qualitycheck.exception.IllegalNullArgumentException;
 
-import static org.fest.assertions.Assertions.assertThat;
 import org.junit.Test;
 
 public class OperatingSystemPatternTest {

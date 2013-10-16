@@ -15,8 +15,7 @@
  ******************************************************************************/
 package net.sf.uadetector.datastore;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.fest.assertions.Assertions.assertThat;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -83,18 +82,18 @@ public class CachingXmlDataStoreTest_deleteCacheFile {
 				VERSION_CONNECTION_ERROR_URL, CHARSET, fallback);
 		new FileInputStream(cache).read();
 
-		assertEquals(TestXmlDataStore.VERSION_OLDER, store.getData().getVersion());
+		assertThat(store.getData().getVersion()).isEqualTo(TestXmlDataStore.VERSION_OLDER);
 
 		// check that cache was removed
-		assertTrue(cache.exists());
+		assertThat(cache.exists()).isTrue();
 
 		// try to update the content
 		store.refresh();
 		Thread.sleep(1000L);
 
 		// test that no fallback data will be written to cache file
-		assertEquals(TestXmlDataStore.VERSION_OLDER, store.getData().getVersion());
-		assertTrue(cache.exists());
+		assertThat(store.getData().getVersion()).isEqualTo(TestXmlDataStore.VERSION_OLDER);
+		assertThat(cache.exists()).isTrue();
 	}
 
 }

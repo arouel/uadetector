@@ -15,10 +15,7 @@
  ******************************************************************************/
 package net.sf.uadetector.internal.data;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertSame;
-import static org.junit.Assert.assertTrue;
+import static org.fest.assertions.Assertions.assertThat;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -45,7 +42,6 @@ import net.sf.uadetector.internal.data.domain.OperatingSystem;
 import net.sf.uadetector.internal.data.domain.OperatingSystemPattern;
 import net.sf.uadetector.internal.data.domain.Robot;
 
-import static org.fest.assertions.Assertions.assertThat;
 import org.junit.Test;
 
 import com.google.common.collect.Lists;
@@ -68,8 +64,8 @@ public class DataTest {
 		patterns2.put(1, pattern2);
 		final Data b = new DataBlueprint().browserPatterns(patterns2).build();
 
-		assertFalse(a.equals(b));
-		assertFalse(a.hashCode() == b.hashCode());
+		assertThat(a.equals(b)).isFalse();
+		assertThat(a.hashCode() == b.hashCode()).isFalse();
 	}
 
 	@Test
@@ -86,8 +82,8 @@ public class DataTest {
 		patterns2.put(1, pattern2);
 		final Data b = new DataBlueprint().devicePatterns(patterns2).build();
 
-		assertFalse(a.equals(b));
-		assertFalse(a.hashCode() == b.hashCode());
+		assertThat(a.equals(b)).isFalse();
+		assertThat(a.hashCode() == b.hashCode()).isFalse();
 	}
 
 	@Test
@@ -105,8 +101,8 @@ public class DataTest {
 				browserType, os, "icn", "iu", "p", "pu", "u");
 		final Data b = new DataBlueprint().browsers(Sets.newHashSet(browser2)).build();
 
-		assertFalse(a.equals(b));
-		assertFalse(a.hashCode() == b.hashCode());
+		assertThat(a.equals(b)).isFalse();
+		assertThat(a.hashCode() == b.hashCode()).isFalse();
 	}
 
 	@Test
@@ -119,8 +115,8 @@ public class DataTest {
 		map2.add(new BrowserOperatingSystemMapping(1, 2));
 		final Data b = new DataBlueprint().browserToOperatingSystemMappings(map2).build();
 
-		assertFalse(a.equals(b));
-		assertFalse(a.hashCode() == b.hashCode());
+		assertThat(a.equals(b)).isFalse();
+		assertThat(a.hashCode() == b.hashCode()).isFalse();
 	}
 
 	@Test
@@ -133,8 +129,8 @@ public class DataTest {
 		types2.put(1, new BrowserType(2, "Feedreader"));
 		final Data b = new DataBlueprint().browserTypes(types2).build();
 
-		assertFalse(a.equals(b));
-		assertFalse(a.hashCode() == b.hashCode());
+		assertThat(a.equals(b)).isFalse();
+		assertThat(a.hashCode() == b.hashCode()).isFalse();
 	}
 
 	@Test
@@ -145,8 +141,8 @@ public class DataTest {
 		final Device device2 = new Device("dev2", 234, Category.OTHER, "icon", "infoUrl", new TreeSet<DevicePattern>());
 		final Data b = new DataBlueprint().devices(Sets.newHashSet(device2)).build();
 
-		assertFalse(a.equals(b));
-		assertFalse(a.hashCode() == b.hashCode());
+		assertThat(a.equals(b)).isFalse();
+		assertThat(a.hashCode() == b.hashCode()).isFalse();
 	}
 
 	@Test
@@ -163,8 +159,8 @@ public class DataTest {
 		operatingSystemPatterns1.put(1, patterns2);
 		final Data b = new DataBlueprint().operatingSystemPatterns(operatingSystemPatterns2).build();
 
-		assertFalse(a.equals(b));
-		assertFalse(a.hashCode() == b.hashCode());
+		assertThat(a.equals(b)).isFalse();
+		assertThat(a.hashCode() == b.hashCode()).isFalse();
 	}
 
 	@Test
@@ -177,8 +173,8 @@ public class DataTest {
 				"i1");
 		final Data b = new DataBlueprint().operatingSystems(Sets.newHashSet(os2)).build();
 
-		assertFalse(a.equals(b));
-		assertFalse(a.hashCode() == b.hashCode());
+		assertThat(a.equals(b)).isFalse();
+		assertThat(a.hashCode() == b.hashCode()).isFalse();
 	}
 
 	@Test
@@ -201,8 +197,8 @@ public class DataTest {
 		map2.put(pattern2, browser2);
 		final Data b = new DataBlueprint().patternToBrowserMap(map2).build();
 
-		assertFalse(a.equals(b));
-		assertFalse(a.hashCode() == b.hashCode());
+		assertThat(a.equals(b)).isFalse();
+		assertThat(a.hashCode() == b.hashCode()).isFalse();
 	}
 
 	@Test
@@ -219,8 +215,8 @@ public class DataTest {
 		map2.put(pattern2, device2);
 		final Data b = new DataBlueprint().patternToDeviceMap(map2).build();
 
-		assertFalse(a.equals(b));
-		assertFalse(a.hashCode() == b.hashCode());
+		assertThat(a.equals(b)).isFalse();
+		assertThat(a.hashCode() == b.hashCode()).isFalse();
 	}
 
 	@Test
@@ -240,8 +236,8 @@ public class DataTest {
 		final OperatingSystem os2 = new OperatingSystem(2, "n1", "f1", "iu1", osPatternSet2, "p1", "pu1", "u1", "i1");
 		map2.put(pattern2, os2);
 		final Data b = new DataBlueprint().patternToOperatingSystemMap(map2).build();
-		assertFalse(a.equals(b));
-		assertFalse(a.hashCode() == b.hashCode());
+		assertThat(a.equals(b)).isFalse();
+		assertThat(a.hashCode() == b.hashCode()).isFalse();
 	}
 
 	@Test
@@ -252,16 +248,16 @@ public class DataTest {
 		final Robot robot2 = new Robot(2, "n2", UserAgentFamily.YAHOOFEEDSEEKER, "fn2", "iu2", "p2", "pu2", "uas2", "icn2");
 		final Data b = new DataBlueprint().robots(Lists.newArrayList(robot2)).build();
 
-		assertFalse(a.equals(b));
-		assertFalse(a.hashCode() == b.hashCode());
+		assertThat(a.equals(b)).isFalse();
+		assertThat(a.hashCode() == b.hashCode()).isFalse();
 	}
 
 	@Test
 	public void equals_different_VERSION() {
 		final Data a = new DataBlueprint().version("v1.0").build();
 		final Data b = new DataBlueprint().version("v2.0").build();
-		assertFalse(a.equals(b));
-		assertFalse(a.hashCode() == b.hashCode());
+		assertThat(a.equals(b)).isFalse();
+		assertThat(a.hashCode() == b.hashCode()).isFalse();
 	}
 
 	@Test
@@ -283,28 +279,28 @@ public class DataTest {
 	public void equals_identical() {
 		final Data a = new DataBlueprint().build();
 		final Data b = new DataBlueprint().build();
-		assertEquals(a, b);
-		assertTrue(a.hashCode() == b.hashCode());
+		assertThat(b).isEqualTo(a);
+		assertThat(a.hashCode() == b.hashCode()).isTrue();
 	}
 
 	@Test
 	public void equals_null() {
 		final Data a = new DataBlueprint().build();
-		assertFalse(a.equals(null));
+		assertThat(a.equals(null)).isFalse();
 	}
 
 	@Test
 	public void equals_otherClass() {
 		final Data a = new DataBlueprint().build();
-		assertFalse(a.equals(""));
+		assertThat(a.equals("")).isFalse();
 	}
 
 	@Test
 	public void equals_same() {
 		final Data a = new DataBlueprint().build();
-		assertEquals(a, a);
-		assertSame(a, a);
-		assertTrue(a.hashCode() == a.hashCode());
+		assertThat(a).isEqualTo(a);
+		assertThat(a).isSameAs(a);
+		assertThat(a.hashCode() == a.hashCode()).isTrue();
 	}
 
 	@Test(expected = IllegalNullArgumentException.class)

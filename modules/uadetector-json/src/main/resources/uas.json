@@ -1,6 +1,6 @@
 {
   "format": "1.0",
-  "version": "20131016-01",
+  "version": "20131018-01",
   "operating-system-patterns": [
     {
       "regex": {
@@ -999,6 +999,13 @@
     {
       "regex": {
         "flags": "si",
+        "pattern": "^Mozilla.*BB10.*Touch.*AppleWebKit.*Mobile"
+      },
+      "hash": "58e6f455680b98e3844c1f7182c501d78ef3fcca42f7fa823aeef7905d46b14b"
+    },
+    {
+      "regex": {
+        "flags": "si",
         "pattern": "Mac OS X"
       },
       "hash": "79ba200a62cf50b377cd2b1538b7719b758304e074a2b06b31230c7cd05b9775"
@@ -1932,17 +1939,18 @@
       "hash": "e8ecf1c82d777251f20ca31d2deb8fdb0994d6831d65dcb233ed500c8b8725a5"
     },
     {
-      "family": "RIM OS",
+      "family": "BlackBerry OS",
       "icon": "rim_os.png",
-      "info-url": "/list-of-ua/os-detail?os\u003dRIM OS",
-      "name": "RIM OS",
+      "info-url": "/list-of-ua/os-detail?os\u003dBlackBerry OS",
+      "name": "BlackBerry OS",
       "operating-system-pattern-hashs": [
-        "ab025711a07146e3160d3ab6ab567b24236a762c8065ca41fc425a7260c7dce4"
+        "ab025711a07146e3160d3ab6ab567b24236a762c8065ca41fc425a7260c7dce4",
+        "58e6f455680b98e3844c1f7182c501d78ef3fcca42f7fa823aeef7905d46b14b"
       ],
-      "producer": "Research In Motion Limited",
-      "producer-url": "http://www.rim.com/",
-      "url": "http://www.blackberry.com/",
-      "hash": "03598845ffabdedee67c769f26688dea2db7c0e8fe58d221884d45bc39e98d08"
+      "producer": "BlackBerry Ltd",
+      "producer-url": "http://www.blackberry.com/",
+      "url": "http://en.wikipedia.org/wiki/BlackBerry_OS",
+      "hash": "d89ca2dce88b53c2c6e79ac11e6c0ab50445fd4cb37e3faafd051cb7c978c7f5"
     },
     {
       "family": "QNX",
@@ -2339,15 +2347,15 @@
     {
       "family": "Linux",
       "icon": "ChromiumOS.png",
-      "info-url": "/list-of-ua/os-detail?os\u003dChromium OS",
-      "name": "Chromium OS",
+      "info-url": "/list-of-ua/os-detail?os\u003dChrome OS",
+      "name": "Chrome OS",
       "operating-system-pattern-hashs": [
         "3e566c75796368eff4bd7d79a97576124598050de25a55e63c577187e91453b5"
       ],
       "producer": "Google Inc.",
       "producer-url": "http://www.google.com/",
-      "url": "http://sites.google.com/a/chromium.org/dev/chromium-os",
-      "hash": "dcaf3017d20524636792ccbc4f856830795fe7406480149bcc36415ee9eb19ad"
+      "url": "http://en.wikipedia.org/wiki/Chrome_OS",
+      "hash": "325f83c4738b954877b287becae69d0154e834b2584e05d1ea41c6b09881212d"
     },
     {
       "family": "Nintendo",
@@ -2902,9 +2910,9 @@
     {
       "regex": {
         "flags": "si",
-        "pattern": "^Mozilla.*Android.*Silk\\/([0-9\\.\\-]+).*Mobile"
+        "pattern": "^Mozilla.*Silk\\/([0-9\\.\\-]+).*safari"
       },
-      "hash": "a5679dd40b7f0a650c676f71892ac517381cdf1bf6ec2bc0044732237c6c5d37"
+      "hash": "824212998857b6756d6985eea043d8ff8fe3f2bb5041d8bf7d3bab2cfbd667b7"
     },
     {
       "regex": {
@@ -3052,6 +3060,13 @@
         "pattern": "Mozilla.*AppleWebKit.*Chrome.*Safari.*Puffin\\/([0-9\\.]+)"
       },
       "hash": "3dcb34b73c0b4b6ef1361b82730fcb724b4c24bd10cd145df8c4c67b3572aea0"
+    },
+    {
+      "regex": {
+        "flags": "si",
+        "pattern": "^Mozilla.*BB10.*Touch.*AppleWebKit.*Mobile"
+      },
+      "hash": "58e6f455680b98e3844c1f7182c501d78ef3fcca42f7fa823aeef7905d46b14b"
     },
     {
       "regex": {
@@ -3917,9 +3932,9 @@
     {
       "regex": {
         "flags": "si",
-        "pattern": "mozilla.*rv:[0-9\\.]+.*gecko\\/[0-9]+.*Tablet browser ([0-9a-z\\+\\-\\.]+).*"
+        "pattern": "mozilla.*Linux armv7l.*rv:[0-9\\.]+.*gecko\\/[0-9]+.*Tablet browser ([0-9a-z\\+\\-\\.]+).*"
       },
-      "hash": "daaec2800327a2a038744a60cd2b69d1f4b44b31720b36b708473f872059f027"
+      "hash": "10f5c1a2c8b903da4eb9fd0595ccc3a39978c5c95f3716e11ccb47dbd3151d46"
     },
     {
       "regex": {
@@ -3948,6 +3963,13 @@
         "pattern": "series60.*applewebkit.*"
       },
       "hash": "6bf201e8fae49ce6f4b7223737aa0acc27f6d568fd98413a07b2bb96943a55bf"
+    },
+    {
+      "regex": {
+        "flags": "si",
+        "pattern": "mozilla.*Linux armv7l.*rv:[0-9\\.]+.*gecko\\/[0-9]+.*maemo browser ([0-9a-z\\+\\-\\.]+).*"
+      },
+      "hash": "67fcd504227eed3107212eab056127b2b86fdef340df87600a9460236711b0ff"
     },
     {
       "regex": {
@@ -6055,6 +6077,13 @@
         "pattern": "^Mozilla.*Nintendo 3DS"
       },
       "hash": "783bd33d8354d03525c9c90a4cfb0972308193d6d1138bd27823a7637e01a18c"
+    },
+    {
+      "regex": {
+        "flags": "si",
+        "pattern": "^Mozilla.*Polaris ([0-9\\.])"
+      },
+      "hash": "5033d7e702d2c340d932f92f7de4b302f8fcf6286b8a21ea9b1b31a4de352597"
     },
     {
       "regex": {
@@ -8281,6 +8310,7 @@
       "icon": "blackberry.png",
       "info-url": "/list-of-ua/browser-detail?browser\u003dBlackBerry Browser",
       "browser-pattern-hashs": [
+        "58e6f455680b98e3844c1f7182c501d78ef3fcca42f7fa823aeef7905d46b14b",
         "ab025711a07146e3160d3ab6ab567b24236a762c8065ca41fc425a7260c7dce4",
         "0ed661e061571499641412d7a673efa902b940f35f80f35bd0c5db831dee5f19"
       ],
@@ -8288,7 +8318,7 @@
       "producer-url": "http://www.rim.com/",
       "browser-type-hash": "d4f1118eb3ace8c9d67d4b72ff39234cd4f3ab260ef6f422ce24b7a1b10d14ee",
       "url": "http://www.blackberry.com/",
-      "hash": "1c4b5f596e43c0136775a3692dfeed49082d41b7a3c5cc9bb6555bbd3e27bfc5"
+      "hash": "2055d1ad3bb52ff063960661e5fde7b734cad87602ff7db7a2a507b4c7772383"
     },
     {
       "family": "Polaris",
@@ -8296,13 +8326,14 @@
       "info-url": "/list-of-ua/browser-detail?browser\u003dPolaris",
       "operating-system-hash": "d4346e3ae27bfe0b97ddee6e0eb24886c852eb0c65e61d9116d32262a4ae3820",
       "browser-pattern-hashs": [
+        "5033d7e702d2c340d932f92f7de4b302f8fcf6286b8a21ea9b1b31a4de352597",
         "1d54bc8651728dfd08d03a0a3dc67e9c931029faf8acf2bb0151ff4d4683a83f"
       ],
       "producer": "Infraware",
       "producer-url": "http://www.infraware.co.kr/",
       "browser-type-hash": "d4f1118eb3ace8c9d67d4b72ff39234cd4f3ab260ef6f422ce24b7a1b10d14ee",
       "url": "http://www.infraware.co.kr/eng/01_product/product02.asp",
-      "hash": "6ea4a18566d34390edbd14c995ea5067b84c94d6671adb95d6598a1c2bbe710c"
+      "hash": "83938a0522865f2aee100849e35867af8298a702f09098bddfe54fa022e5db1f"
     },
     {
       "family": "Hv3",
@@ -9575,13 +9606,14 @@
       "info-url": "/list-of-ua/browser-detail?browser\u003dMicroB",
       "operating-system-hash": "e4795e6079394879eb803f734f08af586214d1b0efc3c0b892e1ddd59c9e79a6",
       "browser-pattern-hashs": [
-        "daaec2800327a2a038744a60cd2b69d1f4b44b31720b36b708473f872059f027"
+        "10f5c1a2c8b903da4eb9fd0595ccc3a39978c5c95f3716e11ccb47dbd3151d46",
+        "67fcd504227eed3107212eab056127b2b86fdef340df87600a9460236711b0ff"
       ],
-      "producer": "Nokia",
-      "producer-url": "http://www.nokia.com/",
+      "producer": "maemo project",
+      "producer-url": "http://maemo.org/",
       "browser-type-hash": "d4f1118eb3ace8c9d67d4b72ff39234cd4f3ab260ef6f422ce24b7a1b10d14ee",
-      "url": "http://browser.garage.maemo.org/",
-      "hash": "866b0deadeb1263b5abdf293ad1b9440e2a1e34a2c6e72ec46a8ade932761087"
+      "url": "http://en.wikipedia.org/wiki/MicroB",
+      "hash": "93cfd614328ac154e57ab012d02c73ab3eb4943d5b97b3ed6d139853a34b44c6"
     },
     {
       "family": "Tear",
@@ -12139,17 +12171,17 @@
       "hash": "736c8d1e13818628f26ca69d33e7055f65094bfb321341c1db45e275b6465f45"
     },
     {
-      "family": "Mobile Silk",
+      "family": "Silk",
       "icon": "amazon_silk.png",
-      "info-url": "/list-of-ua/browser-detail?browser\u003dMobile Silk",
+      "info-url": "/list-of-ua/browser-detail?browser\u003dSilk",
       "browser-pattern-hashs": [
-        "a5679dd40b7f0a650c676f71892ac517381cdf1bf6ec2bc0044732237c6c5d37"
+        "824212998857b6756d6985eea043d8ff8fe3f2bb5041d8bf7d3bab2cfbd667b7"
       ],
       "producer": "Amazon.com, Inc.",
       "producer-url": "http://www.amazon.com/",
       "browser-type-hash": "d4f1118eb3ace8c9d67d4b72ff39234cd4f3ab260ef6f422ce24b7a1b10d14ee",
       "url": "http://amazonsilk.wordpress.com/",
-      "hash": "f47605d75ebd8816b255f0957efe4528309209568f5745cf9c6fab929d21b8d5"
+      "hash": "4e8765f7aea3c172c4153668b025457666be227262d59d818a54aca5d36900c3"
     },
     {
       "family": "Apache-HttpClient",

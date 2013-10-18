@@ -7,6 +7,69 @@
 	</properties>
 	<body>
 		<section name="Known Issues">
+			<subsection name="Element type &quot;devices&quot; must be declared" class="knownIssues">
+				<table class="table knownIssues">
+					<tr>
+						<th>Issue Description</th>
+						<td>
+							The log contains a message that reading of
+							<i>UAS data</i>
+							failed, because
+							<i>Element type "devices" must be declared.</i>
+							<pre class="log"><![CDATA[22:35:02 [update-operation] WARN  n.s.u.internal.data.XmlDataHandler - Error while reading UAS data: Element type "devices" must be declared. (line: 20917)
+22:35:02 [update-operation] WARN  n.s.u.datareader.XmlDataReader - Element type "devices" must be declared.
+Exception in thread "update-operation" net.sf.qualitycheck.exception.IllegalStateOfArgumentException: The passed arguments have caused an invalid state: Argument 'data' must not be empty.
+    at net.sf.uadetector.datastore.AbstractRefreshableDataStore.checkData(AbstractRefreshableDataStore.java:61)
+    at net.sf.uadetector.datastore.AbstractRefreshableDataStore.setData(AbstractRefreshableDataStore.java:229)
+    at net.sf.uadetector.datastore.UpdateOperationTask.call(UpdateOperationTask.java:36)
+    at net.sf.uadetector.datastore.AbstractUpdateOperation$1.run(AbstractUpdateOperation.java:197)
+    at java.util.concurrent.ThreadPoolExecutor$Worker.runTask(ThreadPoolExecutor.java:895)
+    at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:918)
+    at java.lang.Thread.run(Thread.java:695)
+]]></pre>
+						</td>
+					</tr>
+					<tr>
+						<th>Explanation</th>
+						<td>
+							Since device categorization is available within the
+							<i>UAS data</i>
+							beginning October 2013 all previously published versions print the described log message.
+							It means that
+							UADetector
+							cannot work with the most recent version of the database from
+							<a href="http://user-agent-string.info/">http://user-agent-string.info</a>
+							, because the XML schema changed. In this case the library falls back to the
+							previously cached file or the
+							delivered database within
+							<i>uadetector-resources</i>
+							.
+							<br />
+							Stay cool, the library continues to work normally but without updates.
+							End of October 2013 an update of UADetector
+							support device categorization, but you can create an snapshot from the
+							sources today if you need it earlier.
+						</td>
+					</tr>
+					<tr>
+						<th>Corresponding Issue</th>
+						<td>
+							<a href="https://github.com/before/uadetector/issues/44">https://github.com/before/uadetector/issues/44</a>
+						</td>
+					</tr>
+					<tr>
+						<th>Affected Versions</th>
+						<td>
+							&lt;=
+							<code>uadetector-core-0.9.9</code>
+							,
+							<br />
+							&lt;=
+							<code>uadetector-resources-2013.09</code>
+						</td>
+					</tr>
+				</table>
+			</subsection>
 			<subsection name="Error while reading UAS data" class="knownIssues">
 				<table class="table knownIssues">
 					<tr>
@@ -52,11 +115,11 @@ java.lang.IllegalStateException: The read in content can not be transformed to a
 						<th>Affected Versions</th>
 						<td>
 							&lt;=
-							<code>uadetector-core-0.9.7</code>
+							<code>uadetector-core-0.9.9</code>
 							,
 							<br />
 							&lt;=
-							<code>uadetector-resources-2013.07</code>
+							<code>uadetector-resources-2013.09</code>
 						</td>
 					</tr>
 				</table>

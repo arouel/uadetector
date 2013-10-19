@@ -90,7 +90,8 @@ public class UserAgentStringParserIntegrationTest {
 			}
 
 			// abort if family is unknown
-			assertThat(OperatingSystemFamily.UNKNOWN == agent.getOperatingSystem().getFamily()).isFalse();
+			String msg = "Unknown operating system for: " + example.getUserAgentString();
+			assertThat(agent.getOperatingSystem().getFamily()).as(msg).isNotEqualTo(OperatingSystemFamily.UNKNOWN);
 
 			// save read OS for printing out
 			out.print(agent.getOperatingSystem().getName(), agent.getOperatingSystem().getVersionNumber(), example.getUserAgentString());

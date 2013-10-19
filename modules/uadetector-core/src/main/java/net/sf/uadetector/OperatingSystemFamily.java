@@ -172,11 +172,11 @@ public enum OperatingSystemFamily {
 	QNX("QNX", Pattern.compile("QNX")),
 
 	/**
-	 * The BlackBerry OS (up to the fifth edition known as the <i>BlackBerry Device Software</i>, also known as
-	 * <i>Research In Motion OS</i>) is a proprietary, free usable (freeware) multi-tasking operating system for
-	 * smartphones.
+	 * BlackBerry OS (up to the fifth edition known as the <i>BlackBerry Device Software</i>, also known as <i>Research
+	 * In Motion OS</i>) is a proprietary mobile operating system developed by BlackBerry Ltd for its BlackBerry line of
+	 * smartphone handheld devices.
 	 */
-	BLACKBERRY_OS("RIM OS", Pattern.compile("RIM OS")),
+	BLACKBERRY_OS("BlackBerry OS", Pattern.compile("(RIM OS|BlackBerry OS)")),
 
 	/**
 	 * Solaris is the name of an operating system distribution based on SunOS and is a Unix operating system. Since the

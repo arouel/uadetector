@@ -783,6 +783,39 @@ public class UserAgentStringParserTest {
 	}
 
 	@Test
+	public void parse_browser_SILK() throws Exception {
+		final String userAgent = "Mozilla/5.0 (Linux; U; Android 2.3.4; en-us; Silk/1.1.0-80) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1 Silk-Accelerated=true";
+		final UserAgent agent = PARSER.parse(userAgent);
+		assertThat(agent).isNotNull();
+		assertThat(agent).isNotEqualTo(UserAgent.EMPTY);
+
+		// check user agent informations
+		assertThat(agent.getFamily()).isEqualTo(UserAgentFamily.SILK);
+		assertThat(agent.getName()).isEqualTo("Silk");
+		assertThat(agent.getProducer()).isEqualTo("Amazon.com, Inc.");
+		assertThat(agent.getProducerUrl()).isEqualTo("http://www.amazon.com/");
+		assertThat(agent.getTypeName()).isEqualTo("Mobile Browser");
+		assertThat(agent.getUrl()).isEqualTo("http://amazonsilk.wordpress.com/");
+		assertThat(agent.getVersionNumber().toVersionString()).isEqualTo("1.1.0-80");
+
+		// check operating system informations
+		final OperatingSystem os = agent.getOperatingSystem();
+		assertThat(os.getFamily()).isEqualTo(OperatingSystemFamily.ANDROID);
+		assertThat(os.getFamilyName()).isEqualTo("Android");
+		assertThat(os.getName()).isEqualTo("Android 2.3.x Gingerbread");
+		assertThat(os.getProducer()).isEqualTo("Google, Inc.");
+		assertThat(os.getProducerUrl()).isEqualTo("http://www.google.com/");
+		assertThat(os.getUrl()).isEqualTo("http://en.wikipedia.org/wiki/Android_%28operating_system%29");
+
+		// check device category informations
+		final DeviceCategory category = agent.getDeviceCategory();
+		assertThat(category.getCategory()).isEqualTo(Category.TABLET);
+		assertThat(category.getName()).isEqualTo(Category.TABLET.getName());
+		assertThat(category.getIcon()).isEqualTo("tablet.png");
+		assertThat(category.getInfoUrl()).isEqualTo("/list-of-ua/device-detail?device=Tablet");
+	}
+
+	@Test
 	public void parse_browser_SITESUCKER() throws Exception {
 		final String userAgent = "SiteSucker/1.6.9";
 		final UserAgent agent = PARSER.parse(userAgent);

@@ -3298,7 +3298,7 @@ public enum UserAgentFamily {
 	/**
 	 * silk
 	 */
-	SILK("silk", Pattern.compile("silk")),
+	SILK("Silk", Pattern.compile("silk", Pattern.CASE_INSENSITIVE)),
 
 	/**
 	 * SimplePie

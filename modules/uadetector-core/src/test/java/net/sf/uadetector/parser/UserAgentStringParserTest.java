@@ -26,6 +26,7 @@ import net.sf.uadetector.UserAgentFamily;
 import net.sf.uadetector.UserAgentType;
 import net.sf.uadetector.VersionNumber;
 import net.sf.uadetector.datastore.DataStore;
+import net.sf.uadetector.datastore.RefreshableDataStore;
 import net.sf.uadetector.datastore.TestXmlDataStore;
 import net.sf.uadetector.internal.data.domain.Robot;
 
@@ -33,7 +34,14 @@ import org.junit.Test;
 
 public class UserAgentStringParserTest {
 
-	private static final UserAgentStringParserImpl<DataStore> PARSER = new UserAgentStringParserImpl<DataStore>(new TestXmlDataStore());
+	private static final RefreshableDataStore DATA_STORE = new TestXmlDataStore();
+
+	private static final UserAgentStringParserImpl<DataStore> PARSER = new UserAgentStringParserImpl<DataStore>(DATA_STORE);
+
+	// refresh data store
+	static {
+		DATA_STORE.refresh();
+	}
 
 	@Test(expected = IllegalNullArgumentException.class)
 	public void construct_stream_null() throws Exception {
@@ -42,8 +50,8 @@ public class UserAgentStringParserTest {
 
 	@Test
 	public void getCurrentVersion() {
-		assertThat(PARSER.getDataStore().getData().getVersion()).isEqualTo(TestXmlDataStore.VERSION_OLDER);
-		assertThat(PARSER.getDataVersion()).isEqualTo(TestXmlDataStore.VERSION_OLDER);
+		assertThat(PARSER.getDataStore().getData().getVersion()).isEqualTo(TestXmlDataStore.VERSION_NEWER);
+		assertThat(PARSER.getDataVersion()).isEqualTo(TestXmlDataStore.VERSION_NEWER);
 	}
 
 	@Test
@@ -492,10 +500,10 @@ public class UserAgentStringParserTest {
 
 		// check device category informations
 		final DeviceCategory category = agent.getDeviceCategory();
-		assertThat(category.getCategory()).isEqualTo(Category.SMARTPHONE);
-		assertThat(category.getName()).isEqualTo(Category.SMARTPHONE.getName());
-		assertThat(category.getIcon()).isEqualTo("phone.png");
-		assertThat(category.getInfoUrl()).isEqualTo("/list-of-ua/device-detail?device=Smartphone");
+		assertThat(category.getCategory()).isEqualTo(Category.TABLET);
+		assertThat(category.getName()).isEqualTo(Category.TABLET.getName());
+		assertThat(category.getIcon()).isEqualTo("tablet.png");
+		assertThat(category.getInfoUrl()).isEqualTo("/list-of-ua/device-detail?device=Tablet");
 	}
 
 	@Test

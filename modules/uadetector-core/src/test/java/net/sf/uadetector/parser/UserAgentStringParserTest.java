@@ -94,6 +94,102 @@ public class UserAgentStringParserTest {
 	}
 
 	@Test
+	public void parse_browser_BB10() throws Exception {
+		final String userAgent = "Mozilla/5.0 (BB10; Touch) AppleWebKit/537.10+ (KHTML, like Gecko) Version/10.1.0.4633 Mobile Safari/537.10+";
+		final UserAgent agent = PARSER.parse(userAgent);
+		assertThat(agent).isNotNull();
+
+		// check user agent informations
+		assertThat(agent.getFamily()).isEqualTo(UserAgentFamily.BLACKBERRY_BROWSER);
+		assertThat(agent.getName()).isEqualTo("BlackBerry Browser");
+		assertThat(agent.getProducer()).isEqualTo("Research In Motion Limited");
+		assertThat(agent.getProducerUrl()).isEqualTo("http://www.rim.com/");
+		assertThat(agent.getTypeName()).isEqualTo("Mobile Browser");
+		assertThat(agent.getUrl()).isEqualTo("http://www.blackberry.com/");
+		assertThat(agent.getVersionNumber().toVersionString()).isEqualTo("");
+
+		// check operating system informations
+		final OperatingSystem os = agent.getOperatingSystem();
+		assertThat(os.getFamily()).isEqualTo(OperatingSystemFamily.BLACKBERRY_OS);
+		assertThat(os.getFamilyName()).isEqualTo("BlackBerry OS");
+		assertThat(os.getName()).isEqualTo("BlackBerry OS");
+		assertThat(os.getProducer()).isEqualTo("BlackBerry Ltd");
+		assertThat(os.getProducerUrl()).isEqualTo("http://www.blackberry.com/");
+		assertThat(os.getUrl()).isEqualTo("http://en.wikipedia.org/wiki/BlackBerry_OS");
+
+		// check device category informations
+		final DeviceCategory category = agent.getDeviceCategory();
+		assertThat(category.getCategory()).isEqualTo(Category.SMARTPHONE);
+		assertThat(category.getName()).isEqualTo(Category.SMARTPHONE.getName());
+		assertThat(category.getIcon()).isEqualTo("phone.png");
+		assertThat(category.getInfoUrl()).isEqualTo("/list-of-ua/device-detail?device=Smartphone");
+	}
+
+	@Test
+	public void parse_browser_BLACKBERRY_9000() throws Exception {
+		final String userAgent = "BlackBerry 9000: BlackBerry9000/4.6.0.65 Profile/MIDP-2.0 Configuration/CLDC-1.1 VendorID/102";
+		final UserAgent agent = PARSER.parse(userAgent);
+		assertThat(agent).isNotNull();
+
+		// check user agent informations
+		assertThat(agent.getFamily()).isEqualTo(UserAgentFamily.BLACKBERRY_BROWSER);
+		assertThat(agent.getName()).isEqualTo("BlackBerry Browser");
+		assertThat(agent.getProducer()).isEqualTo("Research In Motion Limited");
+		assertThat(agent.getProducerUrl()).isEqualTo("http://www.rim.com/");
+		assertThat(agent.getTypeName()).isEqualTo("Mobile Browser");
+		assertThat(agent.getUrl()).isEqualTo("http://www.blackberry.com/");
+		assertThat(agent.getVersionNumber().toVersionString()).isEqualTo("");
+
+		// check operating system informations
+		final OperatingSystem os = agent.getOperatingSystem();
+		assertThat(os.getFamily()).isEqualTo(OperatingSystemFamily.BLACKBERRY_OS);
+		assertThat(os.getFamilyName()).isEqualTo("BlackBerry OS");
+		assertThat(os.getName()).isEqualTo("BlackBerry OS");
+		assertThat(os.getProducer()).isEqualTo("BlackBerry Ltd");
+		assertThat(os.getProducerUrl()).isEqualTo("http://www.blackberry.com/");
+		assertThat(os.getUrl()).isEqualTo("http://en.wikipedia.org/wiki/BlackBerry_OS");
+
+		// check device category informations
+		final DeviceCategory category = agent.getDeviceCategory();
+		assertThat(category.getCategory()).isEqualTo(Category.SMARTPHONE);
+		assertThat(category.getName()).isEqualTo(Category.SMARTPHONE.getName());
+		assertThat(category.getIcon()).isEqualTo("phone.png");
+		assertThat(category.getInfoUrl()).isEqualTo("/list-of-ua/device-detail?device=Smartphone");
+	}
+
+	@Test
+	public void parse_browser_BLACKBERRY_9900() throws Exception {
+		final String userAgent = "Mozilla/5.0 (BlackBerry; U; BlackBerry 9900; en) AppleWebKit/534.11+ (KHTML, like Gecko) Version/7.1.0.346 Mobile Safari/534.11+";
+		final UserAgent agent = PARSER.parse(userAgent);
+		assertThat(agent).isNotNull();
+
+		// check user agent informations
+		assertThat(agent.getFamily()).isEqualTo(UserAgentFamily.BLACKBERRY_BROWSER);
+		assertThat(agent.getName()).isEqualTo("BlackBerry Browser");
+		assertThat(agent.getProducer()).isEqualTo("Research In Motion Limited");
+		assertThat(agent.getProducerUrl()).isEqualTo("http://www.rim.com/");
+		assertThat(agent.getTypeName()).isEqualTo("Mobile Browser");
+		assertThat(agent.getUrl()).isEqualTo("http://www.blackberry.com/");
+		assertThat(agent.getVersionNumber().toVersionString()).isEqualTo("");
+
+		// check operating system informations
+		final OperatingSystem os = agent.getOperatingSystem();
+		assertThat(os.getFamily()).isEqualTo(OperatingSystemFamily.BLACKBERRY_OS);
+		assertThat(os.getFamilyName()).isEqualTo("BlackBerry OS");
+		assertThat(os.getName()).isEqualTo("BlackBerry OS");
+		assertThat(os.getProducer()).isEqualTo("BlackBerry Ltd");
+		assertThat(os.getProducerUrl()).isEqualTo("http://www.blackberry.com/");
+		assertThat(os.getUrl()).isEqualTo("http://en.wikipedia.org/wiki/BlackBerry_OS");
+
+		// check device category informations
+		final DeviceCategory category = agent.getDeviceCategory();
+		assertThat(category.getCategory()).isEqualTo(Category.SMARTPHONE);
+		assertThat(category.getName()).isEqualTo(Category.SMARTPHONE.getName());
+		assertThat(category.getIcon()).isEqualTo("phone.png");
+		assertThat(category.getInfoUrl()).isEqualTo("/list-of-ua/device-detail?device=Smartphone");
+	}
+
+	@Test
 	public void parse_browser_CHROME() throws Exception {
 		final String userAgent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_6_8) AppleWebKit/535.1 (KHTML, like Gecko) Chrome/13.0.782.112 Safari/535.1";
 		final UserAgent agent = PARSER.parse(userAgent);

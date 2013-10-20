@@ -357,7 +357,7 @@ public final class Browser implements Identifiable, Serializable {
 	public void copyTo(@Nonnull final UserAgent.Builder builder) {
 		builder.setFamily(family);
 		builder.setIcon(icon);
-		builder.setName(family.getName());
+		builder.setName(familyName);
 		builder.setProducer(producer);
 		builder.setProducerUrl(producerUrl);
 		builder.setTypeName(type.getName());

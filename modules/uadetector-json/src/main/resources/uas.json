@@ -1,6 +1,6 @@
 {
   "format": "1.0",
-  "version": "20131018-01",
+  "version": "20131025-01",
   "operating-system-patterns": [
     {
       "regex": {
@@ -1791,8 +1791,8 @@
       ],
       "producer": "Microsoft Corporation.",
       "producer-url": "http://www.microsoft.com/",
-      "url": "http://www.msntv.com/",
-      "hash": "c6a4bd761a8fea33db06fa3b11c1681c7623635fbf1e754db1e9711ff739a70d"
+      "url": "http://en.wikipedia.org/wiki/MSN_TV",
+      "hash": "b2a74ce5861401cd368e8c37eecaab3ed5d54619631a503fd3dcec03a28d5efb"
     },
     {
       "family": "OS/2",
@@ -2924,6 +2924,13 @@
     {
       "regex": {
         "flags": "si",
+        "pattern": "mozilla.*rv:[0-9\\.]+.*gecko\\/[0-9]+.*camino\\/([0-9a-z\\+\\-\\.]+).*"
+      },
+      "hash": "fa1ed0c1521edab4f3fa014bc704610ac38851637f81dda881992b16611eef66"
+    },
+    {
+      "regex": {
+        "flags": "si",
         "pattern": "mozilla.*gecko.*kazehakase\\/([0-9a-z\\+\\-\\.]+).*"
       },
       "hash": "7f71b2f8060629a5bb61f4379ae11eadac440d6adcfbb49eb0d7a3082959c40f"
@@ -3977,13 +3984,6 @@
         "pattern": "mozilla.*rv:[0-9\\.]+.*gecko\\/[0-9]+.*seamonkey\\/([0-9a-z\\+\\-\\.]+).*"
       },
       "hash": "fe521b028e075632309526332137b587cd5189cf14e1d5438247f736549723a4"
-    },
-    {
-      "regex": {
-        "flags": "si",
-        "pattern": "mozilla.*rv:[0-9\\.]+.*gecko\\/[0-9]+.*camino\\/([0-9a-z\\+\\-\\.]+).*"
-      },
-      "hash": "fa1ed0c1521edab4f3fa014bc704610ac38851637f81dda881992b16611eef66"
     },
     {
       "regex": {
@@ -6084,6 +6084,34 @@
         "pattern": "^Mozilla.*Polaris ([0-9\\.])"
       },
       "hash": "5033d7e702d2c340d932f92f7de4b302f8fcf6286b8a21ea9b1b31a4de352597"
+    },
+    {
+      "regex": {
+        "flags": "si",
+        "pattern": "^BrowserEmulator\\/0\\.9 see http:\\/\\/dejavu\\.org"
+      },
+      "hash": "ed736927bbf5b076cd21006def7a13244eab513b25c823f758f9135af8d6903d"
+    },
+    {
+      "regex": {
+        "flags": "si",
+        "pattern": "^Mozilla\\/5\\.0.*SymbianOS\\/[0-9\\.]+.*AppleWebKit.*KHTML.*Safari\\/[0-9\\.]+"
+      },
+      "hash": "9b707a11c9d283b9f93dbb3025ef86541b8bfbd75b4ec183361b0278f092d61d"
+    },
+    {
+      "regex": {
+        "flags": "si",
+        "pattern": "^Mozilla.*PalmOS.*WebPro\\/([0-9\\.]+).*Palm"
+      },
+      "hash": "b44f84a2ea7d18665b6b10d6cfa96fbe1b84a3ce78240b5c2c7c87dacdc490f3"
+    },
+    {
+      "regex": {
+        "flags": "si",
+        "pattern": "^Mozilla.*AppleWebKit.*PhantomJS\\/([0-9\\.]+) Safari"
+      },
+      "hash": "766a5ef9e7eb67934a87fe2822367a54fc93df2b5c0e92f793f66d35d6bd64a3"
     },
     {
       "regex": {
@@ -9156,13 +9184,14 @@
         "6bf201e8fae49ce6f4b7223737aa0acc27f6d568fd98413a07b2bb96943a55bf",
         "d7b138d2302db7d0dfd1af9ea2f6b600cdbede0f48d4726e6fc8e1d9f52948f7",
         "af81c38578e3283381ce5b2de97ee48c645da380f17d2d142b2f3a387af01569",
-        "440d3ef384989e5daf8d43bbf33dc0dd969713a4f91e42f9d6026edd0e483688"
+        "440d3ef384989e5daf8d43bbf33dc0dd969713a4f91e42f9d6026edd0e483688",
+        "9b707a11c9d283b9f93dbb3025ef86541b8bfbd75b4ec183361b0278f092d61d"
       ],
       "producer": "Nokia",
       "producer-url": "http://www.nokia.com/",
       "browser-type-hash": "d4f1118eb3ace8c9d67d4b72ff39234cd4f3ab260ef6f422ce24b7a1b10d14ee",
       "url": "http://nokia.com/browser",
-      "hash": "b172dbb44bafbef62eedbf9a2988e70998ad4dbcf56114dceebd283add6dadd9"
+      "hash": "ef1dcfca7dda660bcbb849ade6a9942765d1265c886edfdce6ce5191d5940465"
     },
     {
       "family": "LFTP",
@@ -12443,6 +12472,45 @@
       "browser-type-hash": "d31de1a5c5c8ba2a210a167cf0d0dc2425c57ea7525f4b73a4b7ab934af79dfc",
       "url": "http://en.wikipedia.org/wiki/Internet_Browser_(Nintendo_3DS)",
       "hash": "dd33c32310b69fde5b6ccf427b9f01d3cc5e6fe810e3d4f2a3a7996648762145"
+    },
+    {
+      "family": "BrowserEmulator",
+      "icon": "browseremulator.png",
+      "info-url": "/list-of-ua/browser-detail?browser\u003dBrowserEmulator",
+      "browser-pattern-hashs": [
+        "ed736927bbf5b076cd21006def7a13244eab513b25c823f758f9135af8d6903d"
+      ],
+      "producer": "Metamatrix AB",
+      "producer-url": "http://www.metamatrix.se/",
+      "browser-type-hash": "f97e9da0e3b879f0a9df979ae260a5f7e1371edb127c1862d4f861981166cdc1",
+      "url": "http://www.dejavu.org/emulator.htm",
+      "hash": "82958294c11ef0bc6ec1e42ff2361ede3705e3fa2b1436a1c24ef0c5e5b26f67"
+    },
+    {
+      "family": "Palm WebPro",
+      "icon": "palmWebPro.png",
+      "info-url": "/list-of-ua/browser-detail?browser\u003dPalm WebPro",
+      "browser-pattern-hashs": [
+        "b44f84a2ea7d18665b6b10d6cfa96fbe1b84a3ce78240b5c2c7c87dacdc490f3"
+      ],
+      "producer": "Palm Inc.",
+      "producer-url": "http://www.palm.com/",
+      "browser-type-hash": "d4f1118eb3ace8c9d67d4b72ff39234cd4f3ab260ef6f422ce24b7a1b10d14ee",
+      "url": "http://www.hpwebos.com/us/support/handbooks/tungstent/webbrowser_hb.pdf",
+      "hash": "60b0077a9963fc5d00d9218c3020b430e20aa0c1245403a254ed7d5b9f4242b3"
+    },
+    {
+      "family": "PhantomJS",
+      "icon": "PhantomJS.png",
+      "info-url": "/list-of-ua/browser-detail?browser\u003dPhantomJS",
+      "browser-pattern-hashs": [
+        "766a5ef9e7eb67934a87fe2822367a54fc93df2b5c0e92f793f66d35d6bd64a3"
+      ],
+      "producer": "Ariya Hidayat",
+      "producer-url": "http://ariya.ofilabs.com/about",
+      "browser-type-hash": "f97e9da0e3b879f0a9df979ae260a5f7e1371edb127c1862d4f861981166cdc1",
+      "url": "http://phantomjs.org/",
+      "hash": "0fd78a762d0691117b0d9bd258598a8cef25f1fa4d96b43b6819c2dd4158e3e0"
     }
   ],
   "robots": [
@@ -16501,10 +16569,10 @@
       "icon": "bot_baiduspider.png",
       "info-url": "/list-of-ua/bot-detail?bot\u003dBaiduspider",
       "name": "Baiduspider japan",
-      "producer": "Baidu Japan Inc",
-      "producer-url": "http://www.baidu.jp/",
+      "producer": "Baidu",
+      "producer-url": "http://www.baidu.com/",
       "user-agent-string": "Baiduspider+(+http://www.baidu.jp/spider/)",
-      "hash": "925b13823bbc1332b5ed2415c8139f51f902918ea6531fab77f3fdd1295c287a"
+      "hash": "3904eea43dec37882367f1bbfb035b96c96a3a386b8b070fb4bbd0804a896399"
     },
     {
       "family-name": "linkdexbot",
@@ -19408,13 +19476,13 @@
     },
     {
       "family-name": "archive.org_bot",
-      "icon": "bot.png",
+      "icon": "bot_heritrix.png",
       "info-url": "/list-of-ua/bot-detail?bot\u003darchive.org_bot",
       "name": "archive.org_bot",
       "producer": "Internet Archive",
       "producer-url": "http://www.archive.org/",
       "user-agent-string": "Mozilla/5.0 (compatible; archive.org_bot +http://www.archive.org/details/archive.org_bot)",
-      "hash": "f37db3dd21539cb1eb805eccd3b482737efaa0f66f126f77ce5393d5dcd60362"
+      "hash": "fdb1c448a03fe7c9ab4762dac5dfdd1150d919bfccbd53a809e4a608f2b32339"
     },
     {
       "family-name": "Vagabondo",
@@ -20067,6 +20135,16 @@
       "hash": "bb54f3eda02dcdfac4714fbdeff4417ed78e94ece0fadb292d967400d0a0d0cc"
     },
     {
+      "family-name": "SeznamBot",
+      "icon": "seznam.png",
+      "info-url": "/list-of-ua/bot-detail?bot\u003dSeznamBot",
+      "name": "SeznamBot/3.0-beta",
+      "producer": "Seznam.cz, a.s.",
+      "producer-url": "http://www.seznam.cz/",
+      "user-agent-string": "SeznamBot/3.0-beta (+http://fulltext.sblog.cz/), I",
+      "hash": "720fdb7a8183c7872e5f8d3f0fa00fbc2883435bf4c356082998cc1be8f6ad7d"
+    },
+    {
       "family-name": "SEODat",
       "icon": "bot.png",
       "info-url": "/list-of-ua/bot-detail?bot\u003dSEODat",
@@ -20167,6 +20245,16 @@
       "hash": "fd80caa847e8c6a9c0fc46b1bdeb2e586001687a8b7cbc7658f63ccdbb68866a"
     },
     {
+      "family-name": "SeznamBot",
+      "icon": "seznam.png",
+      "info-url": "/list-of-ua/bot-detail?bot\u003dSeznamBot",
+      "name": "SeznamBot/3.0-test",
+      "producer": "Seznam.cz, a.s.",
+      "producer-url": "http://www.seznam.cz/",
+      "user-agent-string": "SeznamBot/3.0-test (+http://fulltext.sblog.cz/)",
+      "hash": "626046021ee2813ea3ff20392a053325ebc013fbefd5876ccb5fd91f63e587f0"
+    },
+    {
       "family-name": "FlightDeckReportsBot",
       "icon": "bot.png",
       "info-url": "/list-of-ua/bot-detail?bot\u003dFlightDeckReportsBot",
@@ -20175,6 +20263,16 @@
       "producer-url": "http://www.flightdeckreports.com/",
       "user-agent-string": "FlightDeckReportsBot/2.0 (http://www.flightdeckreports.com/pages/bot)",
       "hash": "e9f118f27f68bc24ab5f23338a0dd1532bbe3d5220066df3c6c0b8db81b6f113"
+    },
+    {
+      "family-name": "SeznamBot",
+      "icon": "seznam.png",
+      "info-url": "/list-of-ua/bot-detail?bot\u003dSeznamBot",
+      "name": "SeznamBot/3.0-test",
+      "producer": "Seznam.cz, a.s.",
+      "producer-url": "http://www.seznam.cz/",
+      "user-agent-string": "SeznamBot/3.0-test (+http://fulltext.sblog.cz/), I",
+      "hash": "1e44abf262fa4b32175a3b6cba60ff254afd78e0bc021af15205bebd252acd75"
     },
     {
       "family-name": "NetcraftSurveyAgent",
@@ -20445,6 +20543,16 @@
       "producer-url": "http://muni.cz/fi/335300?lang\u003den",
       "user-agent-string": "Mozilla/5.0 (compatible; socketcrawler; http://nlp.fi.muni.cz/projects/biwec/)",
       "hash": "06f4b47709a3af12dd62235bfbff85b1d9b04730f8103853dd1d1bb647f1230c"
+    },
+    {
+      "family-name": "Wotbox",
+      "icon": "bot.png",
+      "info-url": "/list-of-ua/bot-detail?bot\u003dWotbox",
+      "name": "Wotbox/2.0",
+      "producer": "Wotbox Team",
+      "producer-url": "http://www.wotbox.com/",
+      "user-agent-string": "Wotbox/2.0 (bot@wotbox.com; http://www.wotbox.com)",
+      "hash": "6a310b6fa89d703ab1c72277e55e4e4c6cadd1854b416c07616a7ad55ed87dfe"
     },
     {
       "family-name": "Thumbshots.ru",
@@ -21197,6 +21305,16 @@
       "hash": "bef1e9ed7bc4d8b1b69833553b6f3751347d6d233e3d59891c45a67c1108b83d"
     },
     {
+      "family-name": "SeznamBot",
+      "icon": "seznam.png",
+      "info-url": "/list-of-ua/bot-detail?bot\u003dSeznamBot",
+      "name": "SeznamBot/3.0",
+      "producer": "Seznam.cz, a.s.",
+      "producer-url": "http://www.seznam.cz/",
+      "user-agent-string": "SeznamBot/3.0 (HaF+http://fulltext.sblog.cz/)",
+      "hash": "9749e78d10604c0d98da319ea7d60361c08534d784ca72893e32749786aef095"
+    },
+    {
       "family-name": "OpenindexSpider",
       "icon": "bot.png",
       "info-url": "/list-of-ua/bot-detail?bot\u003dOpenindexSpider",
@@ -21385,6 +21503,16 @@
       "producer-url": "http://www.inboxq.com/",
       "user-agent-string": "RADaR-Bot/Nutch-1.3 (http://radar-bot.com/)",
       "hash": "bf540f5692f634f10c9c008c64c074d94b5f07e4e87fe363c88f048593bd439f"
+    },
+    {
+      "family-name": "heritrix",
+      "icon": "bot_heritrix.png",
+      "info-url": "/list-of-ua/bot-detail?bot\u003dheritrix",
+      "name": "heritrix/3.1.1",
+      "producer": "Internet Archive",
+      "producer-url": "",
+      "user-agent-string": "Mozilla/5.0 (compatible; heritrix/3.1.1-SNAPSHOT-20120116.200628 +http://www.archive.org/details/archive.org_bot)",
+      "hash": "aa1058a37f0a6ec2bf9cc7c316aceb805b5ec2105fb81011b9ae8f60c7bf25db"
     },
     {
       "family-name": "AddThis.com",
@@ -23027,6 +23155,16 @@
       "hash": "f342dd336a4220b4d65153c56733fab92b56e42d34b0d9d415921251821e5508"
     },
     {
+      "family-name": "archive.org_bot",
+      "icon": "bot_heritrix.png",
+      "info-url": "/list-of-ua/bot-detail?bot\u003darchive.org_bot",
+      "name": "special_archiver/3.1.1",
+      "producer": "Internet Archive",
+      "producer-url": "http://www.archive.org/",
+      "user-agent-string": "Mozilla/5.0 (compatible; special_archiver/3.1.1 +http://www.archive.org/details/archive.org_bot)",
+      "hash": "53172fa2b730554de174653242fa7120fa45543a3653f77a6e2144df9da6f669"
+    },
+    {
       "family-name": "NLNZ_IAHarvester2013",
       "icon": "bot.png",
       "info-url": "/list-of-ua/bot-detail?bot\u003dNLNZ_IAHarvester2013",
@@ -23377,14 +23515,14 @@
       "hash": "76e00ad818c85ec273c292e4e2acea069ee66b5452b002f25d05df9585d5dafd"
     },
     {
-      "family-name": "uMBot-FC",
+      "family-name": "uMBot",
       "icon": "bot.png",
-      "info-url": "/list-of-ua/bot-detail?bot\u003duMBot-FC",
+      "info-url": "/list-of-ua/bot-detail?bot\u003duMBot",
       "name": "uMBot-FC/1.0",
       "producer": "uberMetrics Technologies GmbH",
       "producer-url": "http://www.ubermetrics-technologies.com/",
       "user-agent-string": "Mozilla/5.0 (compatible; uMBot-FC/1.0; mailto: crawling@ubermetrics-technologies.com)",
-      "hash": "bc1a2c846ec3013c26f08e49729a12824185f931f4004c0456547122a5599cf9"
+      "hash": "8fa9056ab22c900eeef46a225f36cbe14dd578e1649f9e52149d0c2948237c01"
     },
     {
       "family-name": "coccoc",
@@ -23435,6 +23573,16 @@
       "producer-url": "http://www.cireu.com/",
       "user-agent-string": "CirrusExplorer/1.1 (http://www.cireu.com/explorer.php)",
       "hash": "14723844bc717030bec1033bd50c35e17de645873854c12594f95e804471b1f1"
+    },
+    {
+      "family-name": "uMBot",
+      "icon": "bot.png",
+      "info-url": "/list-of-ua/bot-detail?bot\u003duMBot",
+      "name": "uMBot-LN/1.0",
+      "producer": "uberMetrics Technologies GmbH",
+      "producer-url": "http://www.ubermetrics-technologies.com/",
+      "user-agent-string": "Mozilla/5.0 (compatible; uMBot-LN/1.0; mailto: crawling@ubermetrics-technologies.com)",
+      "hash": "a8487a1d6413071295329248838450add5e1af00213e0775f6d1d629518f1063"
     },
     {
       "family-name": "Crowsnest",
@@ -23647,14 +23795,24 @@
       "hash": "f639ec7412c37e65db93ac25a2b9532a138a7c9c1560413469aa47f2c160af37"
     },
     {
+      "family-name": "AhrefsBot",
+      "icon": "bot.png",
+      "info-url": "/list-of-ua/bot-detail?bot\u003dAhrefsBot",
+      "name": "AhrefsBot/5.0",
+      "producer": "Ahrefs.com",
+      "producer-url": "http://ahrefs.com/",
+      "user-agent-string": "Mozilla/5.0 (compatible; AhrefsBot/5.0; +http://ahrefs.com/robot/)",
+      "hash": "40c7be3e1075ad6f448868ba08b9856b843ba5062cf5e76fd2bb1f0f64f12132"
+    },
+    {
       "family-name": "SeznamBot",
       "icon": "seznam.png",
       "info-url": "/list-of-ua/bot-detail?bot\u003dSeznamBot",
       "name": "SeznamBot/3.1-test",
-      "producer": "",
-      "producer-url": "",
+      "producer": "Seznam.cz, a.s.",
+      "producer-url": "http://www.seznam.cz/",
       "user-agent-string": "Mozilla/5.0 (compatible; SeznamBot/3.1-test1; +http://fulltext.sblog.cz/)",
-      "hash": "0d77d947384e96d8d5d1d885fc80d848487025474826ee24f4a2f2672a63cc6b"
+      "hash": "8128f1d90add19b57da9b64f82754ccfb1cc04dd4108098f86fc9cf89f7eb8f4"
     },
     {
       "family-name": "yacybot",
@@ -23995,6 +24153,116 @@
       "producer-url": "http://www.entireweb.com/",
       "user-agent-string": "Speedy Spider (Submit your site at http://www.entireweb.com/free_submission/)",
       "hash": "06a46376baccdf494582e7aababb2d0237ac4c5bf6c9e56d1b5a6d32c950e429"
+    },
+    {
+      "family-name": "alexa site audit",
+      "icon": "bot.png",
+      "info-url": "/list-of-ua/bot-detail?bot\u003dalexa site audit",
+      "name": "alexa site audit/1.0",
+      "producer": "Alexa Internet, Inc.",
+      "producer-url": "http://www.alexa.com/",
+      "user-agent-string": "Mozilla/5.0 (compatible; alexa site audit/1.0; +http://www.alexa.com/help/webmasters; siteaudit@alexa.com)",
+      "hash": "128adb29c7ef86be74ab86665d0f6e88f5c0cd7f2fd23f82ba5c6e060290b976"
+    },
+    {
+      "family-name": "A6-Indexer",
+      "icon": "bot.png",
+      "info-url": "/list-of-ua/bot-detail?bot\u003dA6-Indexer",
+      "name": "A6-Indexer/1.0",
+      "producer": "A6 Corporation",
+      "producer-url": "http://www.a6corp.com/",
+      "user-agent-string": "A6-Indexer/1.0 (http://www.a6corp.com/a6-web-scraping-policy/)",
+      "hash": "e7d8cbe1cbe230c34b39754d3b9652adcf39be0749b4476587b8b90fbe6e013d"
+    },
+    {
+      "family-name": "yacybot",
+      "icon": "bot_yacybot.png",
+      "info-url": "/list-of-ua/bot-detail?bot\u003dyacybot",
+      "name": "yacybot",
+      "producer": "Michael Christen",
+      "producer-url": "",
+      "user-agent-string": "yacybot (freeworld/global; amd64 Linux 3.10.15-1-MANJARO; java 1.7.0_40; Asia/en) http://yacy.net/bot.html",
+      "hash": "a267e62f6621ead9dafef748a25fc70f202e102580ec142442ab0df7ac16bbd0"
+    },
+    {
+      "family-name": "Vedma",
+      "icon": "bot.png",
+      "info-url": "/list-of-ua/bot-detail?bot\u003dVedma",
+      "name": "Vedma/0.91Beta",
+      "producer": "vedma.ru",
+      "producer-url": "http://www.vedma.ru/",
+      "user-agent-string": "Mozilla/5.0 (Compatible; Vedma/0.91Beta; +http://www.vedma.ru/bot.htm)",
+      "hash": "80b64a636de4eafa5b7991d932331193424219e967cb4473fcfb2aa46a0528d5"
+    },
+    {
+      "family-name": "WebThumbnail",
+      "icon": "bot.png",
+      "info-url": "/list-of-ua/bot-detail?bot\u003dWebThumbnail",
+      "name": "WebThumbnail/3.x",
+      "producer": "hellworx - Lukasz Cepowski",
+      "producer-url": "http://www.hellworx.com/",
+      "user-agent-string": "Mozilla/5.0 (compatible; WebThumbnail/3.x; Website Thumbnail Generator; +http://webthumbnail.org)",
+      "hash": "6c02cb7c0ba5d49480739797b0b7afa15486a8096d1f31967d0b837e16ba3d0c"
+    },
+    {
+      "family-name": "archive.org_bot",
+      "icon": "bot_heritrix.png",
+      "info-url": "/list-of-ua/bot-detail?bot\u003darchive.org_bot",
+      "name": "archive.org_bot",
+      "producer": "Internet Archive",
+      "producer-url": "http://www.archive.org/",
+      "user-agent-string": "Mozilla/5.0 (compatible; archive.org_bot; Wayback Machine Live Record; +http://archive.org/details/archive.org_bot)",
+      "hash": "7676dbb5886599b8bf9d57c1ea536e08eb8363c0b1b4c6a6d34c48e69a766864"
+    },
+    {
+      "family-name": "SeoCheckBot",
+      "icon": "bot.png",
+      "info-url": "/list-of-ua/bot-detail?bot\u003dSeoCheckBot",
+      "name": "SeoCheckBot",
+      "producer": "Kristian Fischer",
+      "producer-url": "http://www.kfsw.de/",
+      "user-agent-string": "SeoCheckBot (Seo-Check, http://www.kfsw.de/bot.html)",
+      "hash": "1342b5d4f8945a7364b61d99fbd4028be7b4ce981b06229c35fa1a88cd7355fb"
+    },
+    {
+      "family-name": "MiaDev",
+      "icon": "bot.png",
+      "info-url": "/list-of-ua/bot-detail?bot\u003dMiaDev",
+      "name": "MiaDev/0.0.1",
+      "producer": "Technische Universität Berlin",
+      "producer-url": "http://www.dima.tu-berlin.de/",
+      "user-agent-string": "MiaDev/0.0.1 (MIA Bot for research project MIA (www.MIA-marktplatz.de); http://www.mia-marktplatz.de/spider; spider@mia-marktplatz.de)",
+      "hash": "73792f3996a191a6df36c6106a2e3f4433483fb73d96eb4e5d7fb12a243d5815"
+    },
+    {
+      "family-name": "aiHitBot",
+      "icon": "bot.png",
+      "info-url": "/list-of-ua/bot-detail?bot\u003daiHitBot",
+      "name": "aiHitBot/2.8",
+      "producer": "aiHit Ltd",
+      "producer-url": "http://aihit.com/",
+      "user-agent-string": "Mozilla/5.0 (compatible; aiHitBot/2.8; +http://endb-consolidated.aihit.com/)",
+      "hash": "8769805e603b4183a5830aeed8625a4f7d228951be70d96dbce472a9bba78056"
+    },
+    {
+      "family-name": "Baiduspider",
+      "icon": "bot_baiduspider.png",
+      "info-url": "/list-of-ua/bot-detail?bot\u003dBaiduspider",
+      "name": "Baiduspider-image",
+      "producer": "Baidu",
+      "producer-url": "",
+      "user-agent-string": "Baiduspider-image+(+http://www.baidu.com/search/spider.htm)",
+      "hash": "916d20bb6f660e38688d813b5a6dc8756855c3b89f4464809ca2b0ce3a9d3428"
+    },
+    {
+      "family-name": "Fetch-Guess",
+      "icon": "bot.png",
+      "info-url": "/list-of-ua/bot-detail?bot\u003dFetch-Guess",
+      "name": "Fetch/2.0a",
+      "producer": "Ivo van der Wijk",
+      "producer-url": "http://www.m3r.nl/",
+      "user-agent-string": "Fetch/2.0a (CMS Detection/Web/SEO analysis tool, see http://guess.scritch.org)",
+      "hash": "dcaa24294f10fbcf09840b466f7dbeb614bc084c23f23ca4f6970e54fe99d740"
     }
   ]
 }

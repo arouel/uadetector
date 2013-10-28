@@ -49,6 +49,12 @@
 			<artifactId>jsr305</artifactId>
 		</dependency>
 
+		<!-- JSR-250 annotations -->
+		<dependency>
+			<groupId>javax.annotation</groupId>
+			<artifactId>jsr250-api</artifactId>
+		</dependency>
+
 		<!-- Logging -->
 		<dependency>
 			<groupId>org.slf4j</groupId>

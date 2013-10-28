@@ -129,15 +129,15 @@ java.lang.IllegalStateException: The read in content can not be transformed to a
 					<tr>
 						<th>Issue Description</th>
 						<td>
-							When an application using an implementation of
+							If an application uses an implementation of
 							<code>UserAgentStringParser</code>
 							with updating functionality like
 							<code>UADetectorServiceFactory.getCachingAndUpdatingParser()</code>
 							or
 							<code>UADetectorServiceFactory.getOnlineUpdatingParser()</code>
-							results in the following warnings in
+							its possible to get the following warnings in
 							<i>Apache Tomcat</i>
-							on shutdown:
+							during shutdown:
 							<pre class="log"><![CDATA[Jun 18, 2013 10:18:57 AM org.apache.catalina.loader.WebappClassLoader clearReferencesThreads
 SEVERE: The web application [/gwx-tocs-rest] appears to have started a thread named [Thread-6] but has failed to stop it. This is very likely to create a memory leak.
 Jun 18, 2013 10:18:57 AM org.apache.catalina.loader.WebappClassLoader clearReferencesThreads
@@ -165,12 +165,24 @@ Jun 18, 2013 10:18:57 AM org.apache.catalina.loader.WebappClassLoader clearRefer
 							and
 							<a href="./modules/uadetector-core/apidocs/net/sf/uadetector/internal/util/ExecutorServices.html#shutdownAll()">ExecutorServices#shutdownAll()</a>
 							to stop running executors and schedulers if necessary.
+							<br />
+							A number of Dependency Injection containers support the annotation
+							<a href="http://docs.oracle.com/javase/7/docs/api/index.html?javax/annotation/PreDestroy.html">@PreDestroy</a>
+							which is useful to indicate methods that should be called when the container is shutting down. We annotated the
+							method
+							<a href="./modules/uadetector-core/apidocs/net/sf/uadetector/parser/UpdatingUserAgentStringParserImpl.html#shutdown()">UpdatingUserAgentStringParserImpl#shutdown()</a>
+							since
+							<code>uadetector-core-0.9.10</code>
+							with it. If your container support these annotation and you registered an UserAgentStringParser with updating
+							functionality as bean everything is done by convention.
 						</td>
 					</tr>
 					<tr>
-						<th>Corresponding Issue</th>
+						<th>Corresponding Issues</th>
 						<td>
 							<a href="https://github.com/before/uadetector/issues/4">https://github.com/before/uadetector/issues/4</a>
+							<br />
+							<a href="https://github.com/before/uadetector/issues/46">https://github.com/before/uadetector/issues/46</a>
 						</td>
 					</tr>
 					<tr>

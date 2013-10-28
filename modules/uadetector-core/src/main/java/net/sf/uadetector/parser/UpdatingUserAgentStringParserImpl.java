@@ -21,6 +21,7 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
 
 import javax.annotation.Nonnegative;
+import javax.annotation.PreDestroy;
 
 import net.sf.qualitycheck.Check;
 import net.sf.uadetector.datastore.RefreshableDataStore;
@@ -106,6 +107,7 @@ public final class UpdatingUserAgentStringParserImpl extends UserAgentStringPars
 	}
 
 	@Override
+	@PreDestroy
 	public void shutdown() {
 		currentUpdateTask.cancel(false);
 		ExecutorServices.shutdown(scheduler);

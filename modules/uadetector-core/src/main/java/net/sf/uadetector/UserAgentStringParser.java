@@ -15,6 +15,8 @@
  ******************************************************************************/
 package net.sf.uadetector;
 
+import javax.annotation.PreDestroy;
+
 /**
  * Basic interface for user agent string parsers.
  * 
@@ -50,18 +52,27 @@ public interface UserAgentStringParser {
 
 	/**
 	 * In environments where the JVM will never shut down while reinstalling UADetector, it is necessary to manually
-	 * shutdown running threads of <code>UserAgentStringParser</code>s with updating functionality like
+	 * shutdown running threads of <code>UserAgentStringParser</code>s with <b>updating functionality</b> like
 	 * <code>UADetectorServiceFactory.getCachingAndUpdatingParser()</code> or
 	 * <code>UADetectorServiceFactory.getOnlineUpdatingParser()</code>.
 	 * <p>
-	 * For example, when an Web Application with UADetector will be re-deployed within an <i>Apache Tomcat</i> you must
+	 * For example, if a web application with UADetector will be re-deployed within an <i>Apache Tomcat</i> you must
 	 * shutdown your self-created or via <code>UADetectorServiceFactory</code> retrieved updating
-	 * <code>UserAgentStringParser</code>.
+	 * <code>UserAgentStringParser</code> otherwise more and more threads will be registered.
 	 * <p>
-	 * An implementation of <code>UserAgentStringParser</code> has updating functionality if it works with a
+	 * An implementation of <code>UserAgentStringParser</code> has <b>updating functionality</b> if it works with a
 	 * {@link net.sf.uadetector.datastore.RefreshableDataStore}.
 	 * <p>
 	 * If you call shutdown on a non-updating <code>UserAgentStringParser</code> implementation nothing will happen.
+	 * <p>
+	 * A number of Dependency Injection containers support the annotation {@link PreDestroy} which is be useful for
+	 * indicating methods that should be called when the container is shutting down. This annotation is available by
+	 * default in Java SE 7 and can be made available through the external library <i>jsr250-api-1.0.jar</i> for earlier
+	 * versions of Java.
+	 * <p>
+	 * We recommend to annotate an implementation of {@link #shutdown()} with {@link PreDestroy} to inform a container
+	 * (for example <i>Spring Framework</i>) to trigger the shutdown method automatically by convention during the
+	 * shutdown lifecycle. This saves developers to call explicitly the shutdown method.
 	 * <p>
 	 * To shutdown all managed {@code ExecutorService} by UADetector at once, you can call also
 	 * {@link net.sf.uadetector.internal.util.ExecutorServices#shutdownAll()}.

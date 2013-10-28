@@ -103,6 +103,7 @@
 		<fest-assert.version>1.4</fest-assert.version>
 		<findbugs.version>2.0.1</findbugs.version>
 		<guava.version>14.0.1</guava.version>
+		<jsr250-api.version>1.0</jsr250-api.version>
 		<junit.version>4.11</junit.version>
 		<logback.version>1.0.13</logback.version>
 		<powermock.version>1.5.1</powermock.version>
@@ -126,6 +127,13 @@
 				<groupId>com.google.code.findbugs</groupId>
 				<artifactId>jsr305</artifactId>
 				<version>${findbugs.version}</version>
+			</dependency>
+
+			<!-- JSR-250 annotations -->
+			<dependency>
+				<groupId>javax.annotation</groupId>
+				<artifactId>jsr250-api</artifactId>
+				<version>${jsr250-api.version}</version>
 			</dependency>
 
 			<!-- Logging -->

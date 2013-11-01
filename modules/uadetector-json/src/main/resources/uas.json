@@ -1,6 +1,6 @@
 {
   "format": "1.0",
-  "version": "20131025-01",
+  "version": "20131101-02",
   "operating-system-patterns": [
     {
       "regex": {
@@ -148,6 +148,13 @@
         "pattern": "Android 4\\.3"
       },
       "hash": "fb4f5343b9a8e39e6c41630028d91e87a7824db22e769b67fd6cdb5083ef6f2f"
+    },
+    {
+      "regex": {
+        "flags": "si",
+        "pattern": "Android 4\\.4"
+      },
+      "hash": "e19d21603cd53a7cf67c2c352f220922367da7e54705a2687fa13ba82fbf7524"
     },
     {
       "regex": {
@@ -2830,6 +2837,19 @@
       "producer-url": "https://www.tizen.org/",
       "url": "https://www.tizen.org/",
       "hash": "e778e95c35bd1c1cd6e6ef029e5a3923be1010f4a36deab163ed07a2becd2519"
+    },
+    {
+      "family": "Android",
+      "icon": "android.png",
+      "info-url": "/list-of-ua/os-detail?os\u003dAndroid 4.4 KitKat",
+      "name": "Android 4.4 KitKat",
+      "operating-system-pattern-hashs": [
+        "e19d21603cd53a7cf67c2c352f220922367da7e54705a2687fa13ba82fbf7524"
+      ],
+      "producer": "Google, Inc.",
+      "producer-url": "http://www.google.com/",
+      "url": "http://en.wikipedia.org/wiki/Android_%28operating_system%29",
+      "hash": "cd90fddd6e43b2dab69cf17811ca91a435e4e7d672bb7ff49ec0495f19aea919"
     }
   ],
   "browser-types": [
@@ -6413,6 +6433,13 @@
         "pattern": "^Plex\\/([0-9\\.]+).*Android"
       },
       "hash": "ef603ffdc91693cfac6509eb21415865ef3375ba931cd20405b0ac96690e11b0"
+    },
+    {
+      "regex": {
+        "flags": "si",
+        "pattern": "^CFNetwork\\/([0-9\\.]+)"
+      },
+      "hash": "21f69c36f4aa8ce6129d1a91342d084c1d01981d654ae9c0badd3e1a19108126"
     },
     {
       "regex": {
@@ -10871,9 +10898,9 @@
       "hash": "dd47e78e93941950539fbef271baa681c0e821678fe53b2d8c8cc291f4839239"
     },
     {
-      "family": "Android Webkit",
+      "family": "Android browser",
       "icon": "androidWebkit.png",
-      "info-url": "/list-of-ua/browser-detail?browser\u003dAndroid Webkit",
+      "info-url": "/list-of-ua/browser-detail?browser\u003dAndroid browser",
       "browser-pattern-hashs": [
         "e82ac732daa427482b8474dcebc37ec2c19649e22e7223c62b4264f9d6c3cc0b"
       ],
@@ -10881,7 +10908,7 @@
       "producer-url": "http://www.google.com/",
       "browser-type-hash": "d4f1118eb3ace8c9d67d4b72ff39234cd4f3ab260ef6f422ce24b7a1b10d14ee",
       "url": "http://developer.android.com/reference/android/webkit/package-summary.html",
-      "hash": "e0b8d0aec96b64fbeb5c10d2ef7bc0b74f3b31d88a7c0571bea31b71e4e1fdef"
+      "hash": "29301077adf8740ac2fcbd3358ebbe3e1b17604e9c9e419fb17e33f4d10694a0"
     },
     {
       "family": "Weltweitimnetz Browser",
@@ -12511,6 +12538,20 @@
       "browser-type-hash": "f97e9da0e3b879f0a9df979ae260a5f7e1371edb127c1862d4f861981166cdc1",
       "url": "http://phantomjs.org/",
       "hash": "0fd78a762d0691117b0d9bd258598a8cef25f1fa4d96b43b6819c2dd4158e3e0"
+    },
+    {
+      "family": "CFNetwork",
+      "icon": "DLLicon.png",
+      "info-url": "/list-of-ua/browser-detail?browser\u003dCFNetwork",
+      "operating-system-hash": "ae2f6e85ba795f5839c34de511a28a6256445d1e8eee9bc175fc3ed6deb27be3",
+      "browser-pattern-hashs": [
+        "21f69c36f4aa8ce6129d1a91342d084c1d01981d654ae9c0badd3e1a19108126"
+      ],
+      "producer": "Apple Inc.",
+      "producer-url": "http://www.apple.com/",
+      "browser-type-hash": "dc20b3d5d2cddf82fad332821ca5e9a4efdcede4a273aa193d2b495bdcc92825",
+      "url": "https://developer.apple.com/library/mac/documentation/Networking/Conceptual/CFNetwork/Introduction/Introduction.html",
+      "hash": "e45b19909b3966d860ab4a0706ac331abcf677ab408e49c89685a076bb433093"
     }
   ],
   "robots": [
@@ -19055,6 +19096,16 @@
       "hash": "f5ac67137dce3cfb77a1f1ab10e99318b715c85260e2116273d4ff435c40a453"
     },
     {
+      "family-name": "Googlebot",
+      "icon": "bot_googlebot.png",
+      "info-url": "/list-of-ua/bot-detail?bot\u003dGooglebot",
+      "name": "AdsBot-Google-Mobile",
+      "producer": "Google Inc.",
+      "producer-url": "http://www.google.com/",
+      "user-agent-string": "AdsBot-Google-Mobile (+http://www.google.com/mobile/adsbot.html) Mozilla (iPhone; U; CPU iPhone OS 3 0 like Mac OS X) AppleWebKit (KHTML, like Gecko) Mobile Safari",
+      "hash": "6b0ed8e0b48e09f31e62e9c56acbc0b1b7cc9bdeaafabc883c191456c994de3c"
+    },
+    {
       "family-name": "Yaanb",
       "icon": "bot_Yaanb.png",
       "info-url": "/list-of-ua/bot-detail?bot\u003dYaanb",
@@ -24263,6 +24314,76 @@
       "producer-url": "http://www.m3r.nl/",
       "user-agent-string": "Fetch/2.0a (CMS Detection/Web/SEO analysis tool, see http://guess.scritch.org)",
       "hash": "dcaa24294f10fbcf09840b466f7dbeb614bc084c23f23ca4f6970e54fe99d740"
+    },
+    {
+      "family-name": "spbot",
+      "icon": "bot_spbot.png",
+      "info-url": "/list-of-ua/bot-detail?bot\u003dspbot",
+      "name": "spbot/4.0",
+      "producer": "Axandra GmbH",
+      "producer-url": "http://www.axandra.com/",
+      "user-agent-string": "Mozilla/5.0 (compatible; spbot/4.0; +http://www.seoprofiler.com/bot )",
+      "hash": "807372d907a7127692703fbf3a5bfeec8824b89094bd391d142a9d41cc5c2602"
+    },
+    {
+      "family-name": "Mail.Ru bot",
+      "icon": "bot.png",
+      "info-url": "/list-of-ua/bot-detail?bot\u003dMail.Ru bot",
+      "name": "Mail.RU_Bot/Img/2.0",
+      "producer": "Mail.Ru Group",
+      "producer-url": "http://corp.mail.ru/",
+      "user-agent-string": "Mozilla/5.0 (compatible; Linux x86_64; Mail.RU_Bot/Img/2.0; +http://go.mail.ru/help/robots)",
+      "hash": "258f6104c00d8955ced7078937dc85ddd27f511cd0f92593449b0ddc30a4cc23"
+    },
+    {
+      "family-name": "Googlebot",
+      "icon": "bot_googlebot.png",
+      "info-url": "/list-of-ua/bot-detail?bot\u003dGooglebot",
+      "name": "Googlebot-Mobile",
+      "producer": "Google Inc.",
+      "producer-url": "http://www.google.com/",
+      "user-agent-string": "Mozilla/5.0 (iPhone; CPU iPhone OS 6_0 like Mac OS X) AppleWebKit/536.26 (KHTML, like Gecko) Version/6.0 Mobile/10A5376e Safari/8536.25 (compatible; Googlebot-Mobile/2.1; +http://www.google.com/bot.html)",
+      "hash": "ef8f3c36e4c5a79a252b92ab524edf61a28bddbcf64d1cc3502050b206c195a0"
+    },
+    {
+      "family-name": "Googlebot",
+      "icon": "bot_googlebot.png",
+      "info-url": "/list-of-ua/bot-detail?bot\u003dGooglebot",
+      "name": "Googlebot-Mobile",
+      "producer": "Google Inc.",
+      "producer-url": "http://www.google.com/",
+      "user-agent-string": "SAMSUNG-SGH-E250/1.0 Profile/MIDP-2.0 Configuration/CLDC-1.1 UP.Browser/6.2.3.3.c.1.101 (GUI) MMP/2.0 (compatible; Googlebot-Mobile/2.1; +http://www.google.com/bot.html)",
+      "hash": "2b4e8103f80a82b991f072803af5f546564052525d0de8225829a6a2828bbdcf"
+    },
+    {
+      "family-name": "Googlebot",
+      "icon": "bot_googlebot.png",
+      "info-url": "/list-of-ua/bot-detail?bot\u003dGooglebot",
+      "name": "Googlebot-Mobile",
+      "producer": "Google Inc.",
+      "producer-url": "http://www.google.com/",
+      "user-agent-string": "DoCoMo/2.0 N905i(c100;TB;W24H16) (compatible; Googlebot-Mobile/2.1; +http://www.google.com/bot.html)",
+      "hash": "fc1e4fa614bb1e4237ee5c06fb41dedb2b95cee6ca37975c9a4e747949e29f67"
+    },
+    {
+      "family-name": "Curious George",
+      "icon": "bot.png",
+      "info-url": "/list-of-ua/bot-detail?bot\u003dCurious George",
+      "name": "Curious George",
+      "producer": "Analytics SEO Limited",
+      "producer-url": "http://www.analyticsseo.com/",
+      "user-agent-string": "Curious George - www.analyticsseo.com/crawler",
+      "hash": "178a597cf6d6e1697e79eb5e320c36ddb4c905fd422de0b69876771c477b749d"
+    },
+    {
+      "family-name": "socialbm_bot",
+      "icon": "bot.png",
+      "info-url": "/list-of-ua/bot-detail?bot\u003dsocialbm_bot",
+      "name": "socialbm_bot",
+      "producer": "Martin Junker - social-bookmarking.net",
+      "producer-url": "http://www.social-bookmarking.net/",
+      "user-agent-string": "socialbm_bot http://spider.socialbm.net",
+      "hash": "73007ef042db301a75f9e2239ccc6a63805c5a84a29761862c27abe591828718"
     }
   ]
 }

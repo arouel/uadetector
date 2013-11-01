@@ -81,12 +81,6 @@ public abstract class AbstractUserAgentStringParser implements UserAgentStringPa
 	 */
 	private static void examineAsDeviceCategory(final UserAgent.Builder builder, final Data data) {
 
-		// an unknown user agent type should lead to an unknown device
-		if (UserAgentType.UNKNOWN == builder.getType()) {
-			builder.setDeviceCategory(DeviceCategory.EMPTY);
-			return;
-		}
-
 		// a robot will be classified as 'Other'
 		if (UserAgentType.ROBOT == builder.getType()) {
 			final DeviceCategory category = findDeviceCategoryByValue(Category.OTHER, data);
@@ -103,6 +97,12 @@ public abstract class AbstractUserAgentStringParser implements UserAgentStringPa
 				builder.setDeviceCategory(deviceCategory);
 				return;
 			}
+		}
+
+		// an unknown user agent type should lead to an unknown device
+		if (UserAgentType.UNKNOWN == builder.getType()) {
+			builder.setDeviceCategory(DeviceCategory.EMPTY);
+			return;
 		}
 
 		// if no pattern is available but the type is Other, Library, Validator or UA Anonymizer

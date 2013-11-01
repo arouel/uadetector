@@ -73,6 +73,13 @@ public interface ReadableDeviceCategory {
 		OTHER("Other"),
 
 		/**
+		 * A personal digital assistant (PDA), also known as a palmtop computer, or personal data assistant, is a mobile
+		 * device that functions as a personal information manager. PDAs are largely considered obsolete with the
+		 * widespread adoption of smartphones.
+		 */
+		PDA("PDA"),
+
+		/**
 		 * A personal computer (PC) is a general-purpose computer, whose size, capabilities, and original sale price
 		 * makes it useful for individuals, and which is intended to be operated directly by an end-user with no
 		 * intervening computer operator.

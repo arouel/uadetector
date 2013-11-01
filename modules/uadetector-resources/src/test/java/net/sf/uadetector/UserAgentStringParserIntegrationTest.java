@@ -15,13 +15,15 @@
  ******************************************************************************/
 package net.sf.uadetector;
 
+import static org.fest.assertions.Assertions.assertThat;
+
 import java.util.Formatter;
 import java.util.List;
 
+import net.sf.uadetector.ReadableDeviceCategory.Category;
 import net.sf.uadetector.internal.data.domain.Robot;
 import net.sf.uadetector.service.UADetectorServiceFactory;
 
-import static org.fest.assertions.Assertions.assertThat;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -67,11 +69,32 @@ public class UserAgentStringParserIntegrationTest {
 	 */
 	private static final Logger LOG = LoggerFactory.getLogger(UserAgentStringParserIntegrationTest.class);
 
+	private static final List<DeviceCategoryExample> DC_EXAMPLES = DeviceCategoryExamplesReader.read();
+
 	private static final List<OperatingSystemExample> OS_EXAMPLES = OperatingSystemExamplesReader.read();
 
 	private static final List<UserAgentExample> UA_EXAMPLES = UserAgentExamplesReader.read();
 
 	private static final UserAgentStringParser PARSER = UADetectorServiceFactory.getResourceModuleParser();
+
+	@Test
+	public void testDeviceCategoryExamples() throws Exception {
+		int i = 0;
+		for (final DeviceCategoryExample example : DC_EXAMPLES) {
+			final ReadableUserAgent agent = PARSER.parse(example.getUserAgentString());
+
+			// abort if category is unknown
+			final String msg1 = "Unknown device category for: " + example.getUserAgentString();
+			assertThat(agent.getDeviceCategory().getCategory()).as(msg1).isNotEqualTo(Category.UNKNOWN);
+
+			// abort if category is unknown
+			final String msg2 = "Different device category for: " + example.getUserAgentString();
+			assertThat(agent.getDeviceCategory().getName()).as(msg2).isEqualTo(example.getCategory());
+
+			i++;
+		}
+		LOG.info(i + " device category examples validated");
+	}
 
 	@Test
 	public void testOperatingSystemExamples() throws Exception {
@@ -90,7 +113,7 @@ public class UserAgentStringParserIntegrationTest {
 			}
 
 			// abort if family is unknown
-			String msg = "Unknown operating system for: " + example.getUserAgentString();
+			final String msg = "Unknown operating system for: " + example.getUserAgentString();
 			assertThat(agent.getOperatingSystem().getFamily()).as(msg).isNotEqualTo(OperatingSystemFamily.UNKNOWN);
 
 			// save read OS for printing out
@@ -110,7 +133,7 @@ public class UserAgentStringParserIntegrationTest {
 			final ReadableUserAgent agent = PARSER.parse(example.getUserAgentString());
 
 			// comparing the name
-			UserAgentFamily family = UserAgentFamily.evaluate(example.getName());
+			final UserAgentFamily family = UserAgentFamily.evaluate(example.getName());
 			if (family != agent.getFamily()) {
 				LOG.info("Unexpected user agent family found. Please check the user agent string '" + example.getUserAgentString() + "'.");
 			}

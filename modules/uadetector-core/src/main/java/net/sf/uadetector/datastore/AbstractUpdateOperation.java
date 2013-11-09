@@ -33,7 +33,12 @@ import net.sf.uadetector.internal.util.ExecutorServices;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-abstract class AbstractUpdateOperation implements UpdateOperation {
+/**
+ * Provides a basic implementation to update UAS data in the background when calling {@link #run()}.
+ * 
+ * @author André Rouél
+ */
+public abstract class AbstractUpdateOperation implements UpdateOperation {
 
 	/**
 	 * Defines an empty version string

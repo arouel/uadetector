@@ -107,7 +107,13 @@ public interface ReadableDeviceCategory {
 		/**
 		 * An unknown device category
 		 */
-		UNKNOWN("");
+		UNKNOWN(""),
+
+		/**
+		 * Wearable computers, also known as body-borne computers are miniature electronic devices that are worn by the
+		 * bearer under, with or on top of clothing.
+		 */
+		WEARABLE_COMPUTER("Wearable computer");
 
 		/**
 		 * Tries to find by the given category name a matching enum value. The category name must match against an

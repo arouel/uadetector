@@ -1,6 +1,6 @@
 {
   "format": "1.0",
-  "version": "20131101-02",
+  "version": "20131108-03",
   "operating-system-patterns": [
     {
       "regex": {
@@ -127,6 +127,13 @@
         "pattern": "^Mozilla.*MSIE.*Windows NT 6.1.* Xbox"
       },
       "hash": "0500a790cc3d93330ba2bc77fe78b27cffedb2e52b7c392baaca8a1344fa545e"
+    },
+    {
+      "regex": {
+        "flags": "si",
+        "pattern": "^Mozilla\\/.*Ubuntu.*[Tablet|Mobile].*WebKit"
+      },
+      "hash": "7719551c5bee2148ee0716123148ede23d259524bec0e0a788000f4023611e2a"
     },
     {
       "regex": {
@@ -1118,6 +1125,13 @@
     {
       "regex": {
         "flags": "si",
+        "pattern": "NokiaN70"
+      },
+      "hash": "433c0e73b61c0d147d79cde7670f4fe7b060fbd535fcdb3d2671044b24bff2c3"
+    },
+    {
+      "regex": {
+        "flags": "si",
         "pattern": "NT4\\.0"
       },
       "hash": "dec5fb8abba71846f031959689f4491c58e826b35d6dc1a6795fb0b085172c2b"
@@ -1764,6 +1778,7 @@
         "ae7d1d501ba6238418076bc711386eaed13c407a72603952e8ed2eec8ab71726",
         "9b214741f9cb7d1faae51a3c1645717c7394cbc15ce95d822d5e2eaee6d41535",
         "542895742195ba688aefdbe7359e6c1090034bafebfa97a91b4ea93efbbf76cf",
+        "433c0e73b61c0d147d79cde7670f4fe7b060fbd535fcdb3d2671044b24bff2c3",
         "fae04d15894a22b1f9fdbd979936e1daa6ce1ed609edd6c9c483f68acfae1e4c",
         "d9fca01d22480886ee75f5118338d841a1cf02388c83cf322aa04b23f403cef7",
         "727c084292e8dea50c1a3c1359b2ecca07b972d4c542327c26330b2f9fb4eb31",
@@ -1773,7 +1788,7 @@
       "producer": "Symbian Foundation",
       "producer-url": "http://licensing.symbian.org/",
       "url": "http://en.wikipedia.org/wiki/Symbian_OS",
-      "hash": "8e8dd115f09b60643fcc09f83fdf06054e574b865def9a48d07bc54876b19e85"
+      "hash": "4eba33b78e664f8f1fe6bc1b625546a5d2293eaf1ee1477a7011e2d144ca58d9"
     },
     {
       "family": "Palm OS",
@@ -2850,6 +2865,19 @@
       "producer-url": "http://www.google.com/",
       "url": "http://en.wikipedia.org/wiki/Android_%28operating_system%29",
       "hash": "cd90fddd6e43b2dab69cf17811ca91a435e4e7d672bb7ff49ec0495f19aea919"
+    },
+    {
+      "family": "Linux",
+      "icon": "ubuntu_touch.png",
+      "info-url": "/list-of-ua/os-detail?os\u003dUbuntu Touch",
+      "name": "Ubuntu Touch",
+      "operating-system-pattern-hashs": [
+        "7719551c5bee2148ee0716123148ede23d259524bec0e0a788000f4023611e2a"
+      ],
+      "producer": "Canonical Ltd.",
+      "producer-url": "http://www.canonical.com/",
+      "url": "http://en.wikipedia.org/wiki/Ubuntu_Touch",
+      "hash": "76e481ac85be9ccebc3e16afbcdb18cf921fd073558200e64e18df7751746d97"
     }
   ],
   "browser-types": [
@@ -3416,6 +3444,13 @@
         "pattern": "^Mozilla.*Tizen 2.*Version\\/([0-9\\.]+).*Mobile Safari"
       },
       "hash": "110e7114a488b4760f03e190841d0bff876f3fef8aa56105d1b9f06eec08b45d"
+    },
+    {
+      "regex": {
+        "flags": "si",
+        "pattern": "^Mozilla.*iPad.*AppleWebKit.*Coast\\/([0-9\\.]+)"
+      },
+      "hash": "463aa59a168dc50c77f18f78c9ba3792ad09914e8e644c1a3a361b41f3bfc85b"
     },
     {
       "regex": {
@@ -6136,6 +6171,62 @@
     {
       "regex": {
         "flags": "si",
+        "pattern": "^Mozilla.*AppleWebKit.*LG Browser\\/([0-9\\.]+).*NetCast"
+      },
+      "hash": "c4d9cb28531ab3f54f353d56ae816125ba5b75af591e750b4c80d37ed82f77da"
+    },
+    {
+      "regex": {
+        "flags": "si",
+        "pattern": "^BlueCrab\\/([0-9]+).*OS X"
+      },
+      "hash": "33a1cda15b49cfb024c60d04efe0a78a1ed96a006f8af2636174150883e35122"
+    },
+    {
+      "regex": {
+        "flags": "si",
+        "pattern": "^Mozilla.*DTV.*AppleWebKit.*Espial\\/([0-9\\.]+)"
+      },
+      "hash": "12dbc5268e21dfb6fae533b9e91b3e30f8c5d7dad886ecee5e45551547ce1feb"
+    },
+    {
+      "regex": {
+        "flags": "si",
+        "pattern": "^OneBrowser\\/([0-9\\.]+).*Android.*AppleWebKit"
+      },
+      "hash": "20c5b4b6b3db64b7a23aa147a997b943b7dde361166153b2d84144067a2df0c9"
+    },
+    {
+      "regex": {
+        "flags": "si",
+        "pattern": "^Mozilla\\/.*Ubuntu.*[Tablet|Mobile].*WebKit"
+      },
+      "hash": "7719551c5bee2148ee0716123148ede23d259524bec0e0a788000f4023611e2a"
+    },
+    {
+      "regex": {
+        "flags": "si",
+        "pattern": "^Screaming Frog SEO Spider\\/([0-9\\.]+)"
+      },
+      "hash": "d74fb473adaadf466e501a1b9bf1dfbdbe902ee53bc54a4a040ca9a5b5b0c167"
+    },
+    {
+      "regex": {
+        "flags": "si",
+        "pattern": "^Mozilla.*MSIE.*Windows CE"
+      },
+      "hash": "9c5c1bc9362b0b8ee5481847f860a4e7ded21a86f82bf4f82ce2982eb39203f7"
+    },
+    {
+      "regex": {
+        "flags": "si",
+        "pattern": "Y!.*yahoo.*YahooFeedSeekerBetaJp\\/([0-9\\.]+)"
+      },
+      "hash": "803be2c631abb59f18069fe69244327a969d7f09d10c815642d7e6b5454c1dec"
+    },
+    {
+      "regex": {
+        "flags": "si",
         "pattern": "mozilla.*opera ([0-9][0-9a-z\\+\\-\\.]+).*"
       },
       "hash": "fad87aad28843a1997ca2c3f22f12ac9f54d61e1aaa8ce1b2e7f833a3bd4755a"
@@ -6776,6 +6867,13 @@
         "pattern": "^Typhoeus.*https:\\/\\/github.com\\/typhoeus\\/typhoeus"
       },
       "hash": "eb4bdefc6f7cace660c26358fcdecf8d3fcf3585923f0eaaf59feb96c394c0fc"
+    },
+    {
+      "regex": {
+        "flags": "si",
+        "pattern": "^OneBrowser\\/([0-9\\.]+)"
+      },
+      "hash": "dddb69727f5be75a04a4cc467bdffd6b636fef71c403fd056ae48207df4534bb"
     },
     {
       "regex": {
@@ -8351,6 +8449,7 @@
       "browser-pattern-hashs": [
         "ad0e32f673556ebdcf5f2016edd36b886ac5c03148ba9ebf44b15ef1a39bcf2f",
         "6d28649b341e7d884a78da73ec8e6d46f64af2f000ffde807db9f67067dd46cc",
+        "9c5c1bc9362b0b8ee5481847f860a4e7ded21a86f82bf4f82ce2982eb39203f7",
         "cd845362bc980bde8eda3782ab815d35fb52f7cb64dea8257b06e50b158b558f",
         "c62a5beee457d82bf99b2796f47cb202a024dc6672085383fd7754e0e2b1a881"
       ],
@@ -8358,7 +8457,7 @@
       "producer-url": "http://www.microsoft.com/",
       "browser-type-hash": "d4f1118eb3ace8c9d67d4b72ff39234cd4f3ab260ef6f422ce24b7a1b10d14ee",
       "url": "http://www.microsoft.com/windowsmobile/en-us/downloads/microsoft/internet-explorer-mobile.mspx",
-      "hash": "cce4c39b814d81a6cd6d6248f95c21319f0e89213d28750ea6905fc3d58adae3"
+      "hash": "9cc3043fcf9cca48c6372bcbe5b7ca6a567bb092aa0fb281cfb23f2255e89367"
     },
     {
       "family": "BlackBerry Browser",
@@ -8924,13 +9023,14 @@
       "icon": "YahooFeedSeeker.png",
       "info-url": "/list-of-ua/browser-detail?browser\u003dYahooFeedSeeker",
       "browser-pattern-hashs": [
-        "15ad3aaddaa8b38cdb4e760069c57bed4d42bf94b0390e248f7440f299f4441a"
+        "15ad3aaddaa8b38cdb4e760069c57bed4d42bf94b0390e248f7440f299f4441a",
+        "803be2c631abb59f18069fe69244327a969d7f09d10c815642d7e6b5454c1dec"
       ],
       "producer": "Yahoo! Inc",
       "producer-url": "http://www.yahoo.com/",
       "browser-type-hash": "5fa04e9ebd5155094546faa58f26a23c83ab2b1f413e76eba83b588d793609d9",
       "url": "http://publisher.yahoo.com/rssguide",
-      "hash": "bae413b47abe58040afad8e5a239872f3ce42ed63b0883ddafbca15e549ee8b1"
+      "hash": "af88c27075fdc4eb4ddc11a66b8bdda7ec307ee7ab9a74c8955d0ddbf07956ec"
     },
     {
       "family": "TheWorld Browser",
@@ -10863,13 +10963,14 @@
       "icon": "EspialTVBrowser.png",
       "info-url": "/list-of-ua/browser-detail?browser\u003dEspial TV Browser",
       "browser-pattern-hashs": [
-        "634955f7a1cd2f449a6c20965b1b0ed519c1abc89bd1088fcafca35f45b98c32"
+        "634955f7a1cd2f449a6c20965b1b0ed519c1abc89bd1088fcafca35f45b98c32",
+        "12dbc5268e21dfb6fae533b9e91b3e30f8c5d7dad886ecee5e45551547ce1feb"
       ],
       "producer": "Espial Group",
       "producer-url": "http://www.espial.com/",
       "browser-type-hash": "d31de1a5c5c8ba2a210a167cf0d0dc2425c57ea7525f4b73a4b7ab934af79dfc",
       "url": "http://www.espial.com/products/evo_browser/",
-      "hash": "b7529fab1764a2f08feb8af35922f05c9bb92882df20dda9fb47d64ded0f12e3"
+      "hash": "ac7c6cce8099f0d1b22a2dc80f166deec5dcdfcf5ec575e8dbe7f85f09b85cf4"
     },
     {
       "family": "UltraBrowser ",
@@ -11215,8 +11316,8 @@
       "producer": "Rockmelt, Inc.",
       "producer-url": "http://www.rockmelt.com/",
       "browser-type-hash": "d31de1a5c5c8ba2a210a167cf0d0dc2425c57ea7525f4b73a4b7ab934af79dfc",
-      "url": "http://www.rockmelt.com/",
-      "hash": "2b79cd51cf7e2f342653487016b96d91c87ba891ff612796448ea652d442727f"
+      "url": "http://en.wikipedia.org/wiki/Rockmelt",
+      "hash": "eb646f4473e8bbd2f6233e06f7ec2403df03892980b45b046ed25b4af70e0333"
     },
     {
       "family": "Epic",
@@ -11881,7 +11982,7 @@
       "family": "Nokia SyncML Client",
       "icon": "nokiaSyncML.png",
       "info-url": "/list-of-ua/browser-detail?browser\u003dNokia SyncML Client",
-      "operating-system-hash": "8e8dd115f09b60643fcc09f83fdf06054e574b865def9a48d07bc54876b19e85",
+      "operating-system-hash": "4eba33b78e664f8f1fe6bc1b625546a5d2293eaf1ee1477a7011e2d144ca58d9",
       "browser-pattern-hashs": [
         "f344fd27767c7236109c5896edf85b4c3ee55d5fd834645d8e30105d98fc7c12"
       ],
@@ -11889,7 +11990,7 @@
       "producer-url": "http://www.nokia.com/",
       "browser-type-hash": "f97e9da0e3b879f0a9df979ae260a5f7e1371edb127c1862d4f861981166cdc1",
       "url": "http://www.developer.nokia.com/Community/Wiki/SyncML_Client_API",
-      "hash": "6f5c60837070d3808ffce9618793357b0f85429f8028d6ff8b97b602d704b7e8"
+      "hash": "c7a7cf6bfc23e85d550162575f5df50dda0383d532b55e65139939d1399f11e9"
     },
     {
       "family": "Charon",
@@ -12552,6 +12653,85 @@
       "browser-type-hash": "dc20b3d5d2cddf82fad332821ca5e9a4efdcede4a273aa193d2b495bdcc92825",
       "url": "https://developer.apple.com/library/mac/documentation/Networking/Conceptual/CFNetwork/Introduction/Introduction.html",
       "hash": "e45b19909b3966d860ab4a0706ac331abcf677ab408e49c89685a076bb433093"
+    },
+    {
+      "family": "LG Web Browser",
+      "icon": "lgbrowser.png",
+      "info-url": "/list-of-ua/browser-detail?browser\u003dLG Web Browser",
+      "browser-pattern-hashs": [
+        "c4d9cb28531ab3f54f353d56ae816125ba5b75af591e750b4c80d37ed82f77da"
+      ],
+      "producer": "LG Electronics",
+      "producer-url": "http://www.lg.com/",
+      "browser-type-hash": "d31de1a5c5c8ba2a210a167cf0d0dc2425c57ea7525f4b73a4b7ab934af79dfc",
+      "url": "http://developer.lgappstv.com/TV_HELP/index.jsp?topic\u003d%2Flge.tvsdk.developing.book%2Fhtml%2FDeveloping+Web+App%2FDeveloping+Web+App%2FWeb+Engine.htm",
+      "hash": "6f41ca9f7dfb07bae1e21542a54b80ea90e1a6161b6624d3d5b6844226349f02"
+    },
+    {
+      "family": "BlueCrab",
+      "icon": "Blue_Crab.png",
+      "info-url": "/list-of-ua/browser-detail?browser\u003dBlueCrab",
+      "browser-pattern-hashs": [
+        "33a1cda15b49cfb024c60d04efe0a78a1ed96a006f8af2636174150883e35122"
+      ],
+      "producer": "Limit Point LLC.",
+      "producer-url": "http://www.limit-point.com/",
+      "browser-type-hash": "3e4f388cbbe80735dba9dc7aa81ee9281e84f171c26f2a765120eb356d701e3f",
+      "url": "http://www.limit-point.com/products/bluecrab/index.html",
+      "hash": "a9e9c2e90f8d37ad6420caf31e26cdf6fa04739a6eaaf27f6f22fe7cde238d80"
+    },
+    {
+      "family": "ONE Browser",
+      "icon": "one_browser.png",
+      "info-url": "/list-of-ua/browser-detail?browser\u003dONE Browser",
+      "browser-pattern-hashs": [
+        "20c5b4b6b3db64b7a23aa147a997b943b7dde361166153b2d84144067a2df0c9",
+        "dddb69727f5be75a04a4cc467bdffd6b636fef71c403fd056ae48207df4534bb"
+      ],
+      "producer": "Tencent Mobile International Ltd.",
+      "producer-url": "http://www.tencent.com/",
+      "browser-type-hash": "d4f1118eb3ace8c9d67d4b72ff39234cd4f3ab260ef6f422ce24b7a1b10d14ee",
+      "url": "http://one-browser.com/",
+      "hash": "0daef2c143bf2312f5e4cd3aac41e162194f76446a1b07f4615e136125730661"
+    },
+    {
+      "family": "Ubuntu web browser",
+      "icon": "ubuntu_webbrowser.png",
+      "info-url": "/list-of-ua/browser-detail?browser\u003dUbuntu web browser",
+      "browser-pattern-hashs": [
+        "7719551c5bee2148ee0716123148ede23d259524bec0e0a788000f4023611e2a"
+      ],
+      "producer": "Canonical Ltd.",
+      "producer-url": "http://www.canonical.com/",
+      "browser-type-hash": "d4f1118eb3ace8c9d67d4b72ff39234cd4f3ab260ef6f422ce24b7a1b10d14ee",
+      "url": "https://launchpad.net/webbrowser-app",
+      "hash": "8353eb128d739ad27f97611d8f0a2c3a1bb6e23f950eb728421ab94be347fbda"
+    },
+    {
+      "family": "Screaming Frog SEO Spider",
+      "icon": "screaming-frog.png",
+      "info-url": "/list-of-ua/browser-detail?browser\u003dScreaming Frog SEO Spider",
+      "browser-pattern-hashs": [
+        "d74fb473adaadf466e501a1b9bf1dfbdbe902ee53bc54a4a040ca9a5b5b0c167"
+      ],
+      "producer": "Screaming Frog Ltd",
+      "producer-url": "http://www.screamingfrog.co.uk/",
+      "browser-type-hash": "0b0a0967f8b942e1a413fc26de435a08df2fb272885de25eddad17fa4fc1b6b5",
+      "url": "http://www.screamingfrog.co.uk/seo-spider/",
+      "hash": "1af98f3a40a30cbbec690ef6c4b03c68842f925cb9a83d8589da52a48a11e320"
+    },
+    {
+      "family": "Coast",
+      "icon": "coast.png",
+      "info-url": "/list-of-ua/browser-detail?browser\u003dCoast",
+      "browser-pattern-hashs": [
+        "463aa59a168dc50c77f18f78c9ba3792ad09914e8e644c1a3a361b41f3bfc85b"
+      ],
+      "producer": "Opera Software ASA.",
+      "producer-url": "http://www.opera.com/",
+      "browser-type-hash": "d31de1a5c5c8ba2a210a167cf0d0dc2425c57ea7525f4b73a4b7ab934af79dfc",
+      "url": "http://coastbyopera.com/",
+      "hash": "355e963e062f205cffad66d905777d5ce3497f65a87b574f0bebbcffa85e25a1"
     }
   ],
   "robots": [
@@ -16946,14 +17126,14 @@
       "hash": "0cc0c474a74f45bd1ea09a87ae58c2de7c953f3980ca54d1c51c0cf6963d1362"
     },
     {
-      "family-name": "Yahoo! JAPAN",
+      "family-name": "Yahoo!",
       "icon": "bot_yahoo!slurp.png",
-      "info-url": "/list-of-ua/bot-detail?bot\u003dYahoo! JAPAN",
+      "info-url": "/list-of-ua/bot-detail?bot\u003dYahoo!",
       "name": "Y!J-BRI/0.0.1",
       "producer": "Yahoo! Inc",
       "producer-url": "http://www.yahoo.com/",
       "user-agent-string": "Y!J-BRI/0.0.1 crawler ( http://help.yahoo.co.jp/help/jp/search/indexing/indexing-15.html )",
-      "hash": "2b52c00f93ed773a34d0402cc338bfc01e1c1e75ded91de935e6ec47bec91bcf"
+      "hash": "fa1cf780854f594450630c95b7d273231ed309392b7589200ae156b963b9e7b5"
     },
     {
       "family-name": "akula",
@@ -16976,14 +17156,14 @@
       "hash": "a94a2dc2115b181cdced755577570b247ffaad8a4ea876b2857b42ff016ba569"
     },
     {
-      "family-name": "Yahoo! JAPAN",
+      "family-name": "Yahoo!",
       "icon": "bot_yahoo!slurp.png",
-      "info-url": "/list-of-ua/bot-detail?bot\u003dYahoo! JAPAN",
+      "info-url": "/list-of-ua/bot-detail?bot\u003dYahoo!",
       "name": "Y!J-BSC/1.0",
       "producer": "Yahoo! Inc",
       "producer-url": "http://www.yahoo.com/",
       "user-agent-string": "Y!J-BSC/1.0 (http://help.yahoo.co.jp/help/jp/blog-search/)",
-      "hash": "cfc0d1e82ca0adf9cf54c8d698b38aab5d63bd1b15a59820216584c084dcf254"
+      "hash": "aa7495551424b369c95195d5caa2146319fce780bd0dbfbd9b4494d6b2fd706f"
     },
     {
       "family-name": "Shelob",
@@ -17296,14 +17476,14 @@
       "hash": "106b689fcfa4f2742aed487e72fd26fd0983884ac564e5ef1449a0748e278140"
     },
     {
-      "family-name": "adidxbot",
-      "icon": "bot.png",
-      "info-url": "/list-of-ua/bot-detail?bot\u003dadidxbot",
+      "family-name": "MSNBot",
+      "icon": "bot_msnbot.png",
+      "info-url": "/list-of-ua/bot-detail?bot\u003dMSNBot",
       "name": "adidxbot/1.1",
-      "producer": "\tMicrosoft Corporation",
+      "producer": "Microsoft Corporation",
       "producer-url": "http://www.microsoft.com/",
       "user-agent-string": "adidxbot/1.1 (+http://search.msn.com/msnbot.htm)",
-      "hash": "68ff428a423db1d00cf0dc832d68c8ac983fb79b242cdccf21aa8b6154d5233b"
+      "hash": "80edf5c43dd04e16785f20232bb564dc25aa49b0ab9f6b9204fcaf235c890483"
     },
     {
       "family-name": "Robozilla",
@@ -18444,6 +18624,16 @@
       "producer-url": "",
       "user-agent-string": "yacybot (amd64 Linux 2.6.32-gentoo; java 1.6.0_17; Europe/en) http://yacy.net/bot.html",
       "hash": "10df000f7beed0a3b8a3f0eaab656f04d3b1594f89a71b6ef6f086099801b776"
+    },
+    {
+      "family-name": "Yahoo!",
+      "icon": "bot_yahoo!slurp.png",
+      "info-url": "/list-of-ua/bot-detail?bot\u003dYahoo!",
+      "name": "Yahoo! Site Explorer Feed Validator",
+      "producer": "Yahoo! Inc",
+      "producer-url": "http://www.yahoo.com/",
+      "user-agent-string": "Yahoo! Site Explorer Feed Validator http://help.yahoo.com/l/us/yahoo/search/siteexplorer/manage/",
+      "hash": "4eabd1cc9415c07e3568c5dc37cf139aff62b66cce16bcce6735596daa065115"
     },
     {
       "family-name": "yacybot",
@@ -20116,14 +20306,14 @@
       "hash": "8963739bdd9e32ec2d006e3e87dd33bcd554bd66da0e3f32159636fe1791725f"
     },
     {
-      "family-name": "Yahoo! JAPAN",
+      "family-name": "Yahoo!",
       "icon": "bot_yahoo!slurp.png",
-      "info-url": "/list-of-ua/bot-detail?bot\u003dYahoo! JAPAN",
+      "info-url": "/list-of-ua/bot-detail?bot\u003dYahoo!",
       "name": "Y!J-BRO/YFSJ",
       "producer": "Yahoo! Inc",
       "producer-url": "http://www.yahoo.com/",
       "user-agent-string": "Y!J-BRO/YFSJ crawler (compatible; Mozilla 4.0; MSIE 5.5; http://help.yahoo.co.jp/help/jp/search/indexing/indexing-15.html; YahooFeedSeekerJp/2.0)",
-      "hash": "48b5cf7f565729ca7bc700850e006318c18eb63979d140bd758161034a2ab3bb"
+      "hash": "548d4b808af972a8802c7e9871dbd2238813d822cc22ec4b9c5cb292b91c0280"
     },
     {
       "family-name": "oBot",
@@ -20314,6 +20504,16 @@
       "producer-url": "http://www.flightdeckreports.com/",
       "user-agent-string": "FlightDeckReportsBot/2.0 (http://www.flightdeckreports.com/pages/bot)",
       "hash": "e9f118f27f68bc24ab5f23338a0dd1532bbe3d5220066df3c6c0b8db81b6f113"
+    },
+    {
+      "family-name": "MSNBot",
+      "icon": "bot_msnbot.png",
+      "info-url": "/list-of-ua/bot-detail?bot\u003dMSNBot",
+      "name": "msnbot-UDiscovery/2.0b",
+      "producer": "Microsoft Corporation",
+      "producer-url": "http://www.microsoft.com/",
+      "user-agent-string": "msnbot-UDiscovery/2.0b (+http://search.msn.com/msnbot.htm)",
+      "hash": "dc5b5126f14f638eb5b14fc6f14e380442665b70f45550fd22508bca773f7ac6"
     },
     {
       "family-name": "SeznamBot",
@@ -20646,14 +20846,14 @@
       "hash": "ab71677275fc5966852a16d7278d854c6473182772230eb06f937cc0598c6a83"
     },
     {
-      "family-name": "Yahoo! JAPAN",
+      "family-name": "Yahoo!",
       "icon": "bot_yahoo!slurp.png",
-      "info-url": "/list-of-ua/bot-detail?bot\u003dYahoo! JAPAN",
+      "info-url": "/list-of-ua/bot-detail?bot\u003dYahoo!",
       "name": "Y!J-BRW/1.0",
       "producer": "Yahoo! Inc",
       "producer-url": "http://www.yahoo.com/",
       "user-agent-string": "Y!J-BRW/1.0 crawler (http://help.yahoo.co.jp/help/jp/search/indexing/indexing-15.html)",
-      "hash": "4721439774945d7c1a1cbbac43900ad6b72d1563700123e21dc3625aa50a6759"
+      "hash": "f334e91c0a9c31b3f2a56200a0ec1fd23849b627f71ef16803423019720cab45"
     },
     {
       "family-name": "LemurWebCrawler",
@@ -22016,14 +22216,14 @@
       "hash": "ba2adbc536e0c3710cd5d5f58691856b5df08051111329e27c3114384ba1630a"
     },
     {
-      "family-name": "Yahoo! JAPAN",
+      "family-name": "Yahoo!",
       "icon": "bot_yahoo!slurp.png",
-      "info-url": "/list-of-ua/bot-detail?bot\u003dYahoo! JAPAN",
+      "info-url": "/list-of-ua/bot-detail?bot\u003dYahoo!",
       "name": "Y!J-BRJ/YATS",
       "producer": "Yahoo! Inc",
       "producer-url": "http://www.yahoo.com/",
       "user-agent-string": "Y!J-BRJ/YATS crawler (http://listing.yahoo.co.jp/support/faq/int/other/other_001.html)",
-      "hash": "3835a486ecf0fcada18c80b6b57a9d812ea60f23a19632843c685ba062ce943f"
+      "hash": "a09724e2b39ff6893b32b2330b4d8cac6cae408596edbe46543129ddbfc0ec9c"
     },
     {
       "family-name": "UnisterBot",
@@ -22526,14 +22726,14 @@
       "hash": "c66c357b0dee8b2fe8423f6f4c5941fb71e1e953b7d7cb298da4b3e883f9ad4a"
     },
     {
-      "family-name": "Yahoo! JAPAN",
-      "icon": "bot.png",
-      "info-url": "/list-of-ua/bot-detail?bot\u003dYahoo! JAPAN",
+      "family-name": "Yahoo!",
+      "icon": "bot_yahoo!slurp.png",
+      "info-url": "/list-of-ua/bot-detail?bot\u003dYahoo!",
       "name": "Y!J-BSC/1.0",
-      "producer": "Yahoo Japan Corporation",
-      "producer-url": "http://www.yahoo.co.jp/",
+      "producer": "Yahoo! Inc",
+      "producer-url": "http://www.yahoo.com/",
       "user-agent-string": "Y!J-BSC/1.0 crawler (http://help.yahoo.co.jp/help/jp/blog-search/)",
-      "hash": "6032b1775057b4bc08414c46b2ca3600e537d37c2eacd1a3d4bf39e3b7328765"
+      "hash": "7bb1f211ec07aa09b5c737fb46431e0d33930ff5c3920d2f25087672fbce215f"
     },
     {
       "family-name": "proximic",
@@ -22594,6 +22794,16 @@
       "producer-url": "http://www.tencent.com/",
       "user-agent-string": "Mozilla/5.0(compatible; Sosospider/2.0; +http://help.soso.com/webspider.htm)",
       "hash": "fab060867182244b0aed3795e6ecb99e7d0411077ac318b74ac4db30463795a1"
+    },
+    {
+      "family-name": "360Spider",
+      "icon": "bot.png",
+      "info-url": "/list-of-ua/bot-detail?bot\u003d360Spider",
+      "name": "360Spider",
+      "producer": "360.CN",
+      "producer-url": "http://360.cn/",
+      "user-agent-string": "Mozilla/5.0 (Windows; U; Windows NT 5.1; zh-CN; rv:1.8.0.11) Gecko/20070312 Firefox/1.5.0.11; 360Spider",
+      "hash": "245fb562e20276ef8962a8c517f7e4077bbb6bdcfdd6c21fe67e933c064259b8"
     },
     {
       "family-name": "GrapeshotCrawler",
@@ -23126,14 +23336,14 @@
       "hash": "286f2c8c64e6079e4c9f5a046e6e617b312de2052d64c59951a73b81d9b25635"
     },
     {
-      "family-name": "Yahoo! JAPAN",
-      "icon": "bot.png",
-      "info-url": "/list-of-ua/bot-detail?bot\u003dYahoo! JAPAN",
+      "family-name": "Yahoo!",
+      "icon": "bot_yahoo!slurp.png",
+      "info-url": "/list-of-ua/bot-detail?bot\u003dYahoo!",
       "name": "Y!J-BRJ/YATS",
-      "producer": "Yahoo Japan Corporation",
-      "producer-url": "http://www.yahoo.co.jp/",
+      "producer": "Yahoo! Inc",
+      "producer-url": "http://www.yahoo.com/",
       "user-agent-string": "Y!J-BRJ/YATS crawler (http://help.yahoo.co.jp/help/jp/search/indexing/indexing-15.html)",
-      "hash": "da9d8aa50f395d7384abd1c58ae453d67bd897ffc91442ba9f320e13817697f1"
+      "hash": "ce352d580cc6da6699648c350fcee82a5c718ceeda8578b50258a5dd637bc362"
     },
     {
       "family-name": "yacybot",
@@ -23384,6 +23594,16 @@
       "producer-url": "http://automattic.com/",
       "user-agent-string": "Automattic Analytics Crawler/0.1; http://wordpress.com/crawler/",
       "hash": "db13c58c14966a79c4e8ca9ef6965966fe1ba7dfb7f3d442da131bf134feb21e"
+    },
+    {
+      "family-name": "360Spider",
+      "icon": "bot.png",
+      "info-url": "/list-of-ua/bot-detail?bot\u003d360Spider",
+      "name": "360Spider",
+      "producer": "360.CN",
+      "producer-url": "http://360.cn/",
+      "user-agent-string": "Mozilla/5.0 (Windows; U; Windows NT 5.1; zh-CN; rv:1.8.0.11)  Firefox/1.5.0.11; 360Spider",
+      "hash": "99ba98f8326447cd28874730a07e785b5d10e1c83183468f315f2418a9e910de"
     },
     {
       "family-name": "AraBot",
@@ -24246,6 +24466,16 @@
       "hash": "80b64a636de4eafa5b7991d932331193424219e967cb4473fcfb2aa46a0528d5"
     },
     {
+      "family-name": "Yahoo!",
+      "icon": "bot_yahoo!slurp.png",
+      "info-url": "/list-of-ua/bot-detail?bot\u003dYahoo!",
+      "name": "YahooCacheSystem",
+      "producer": "Yahoo! Inc",
+      "producer-url": "http://www.yahoo.com/",
+      "user-agent-string": "YahooCacheSystem",
+      "hash": "264af0dbcca37c8158993ac1e4601608081e089d3c6520c2f2538f745e0927a7"
+    },
+    {
       "family-name": "WebThumbnail",
       "icon": "bot.png",
       "info-url": "/list-of-ua/bot-detail?bot\u003dWebThumbnail",
@@ -24384,6 +24614,56 @@
       "producer-url": "http://www.social-bookmarking.net/",
       "user-agent-string": "socialbm_bot http://spider.socialbm.net",
       "hash": "73007ef042db301a75f9e2239ccc6a63805c5a84a29761862c27abe591828718"
+    },
+    {
+      "family-name": "LuminateBot",
+      "icon": "bot.png",
+      "info-url": "/list-of-ua/bot-detail?bot\u003dLuminateBot",
+      "name": "LuminateBot/1.0",
+      "producer": "Luminate, Inc.",
+      "producer-url": "http://www.luminate.com/",
+      "user-agent-string": "Mozilla/5.0 (compatible; LuminateBot/1.0; +http://www.luminate.com/bot/)",
+      "hash": "e9f9c28b480a3b82287352ff9cb0d64a79894c5901f9f570432738cfb706ce81"
+    },
+    {
+      "family-name": "MSNBot",
+      "icon": "bot_msnbot.png",
+      "info-url": "/list-of-ua/bot-detail?bot\u003dMSNBot",
+      "name": "msnbot-media/2.0b",
+      "producer": "Microsoft Corporation",
+      "producer-url": "http://www.microsoft.com/",
+      "user-agent-string": "msnbot-media/2.0b (+http://search.msn.com/msnbot.htm)",
+      "hash": "df6ff9e916a4955f8824e81fd14150deb42f3047833f6c770672670d4103272c"
+    },
+    {
+      "family-name": "yacybot",
+      "icon": "bot_yacybot.png",
+      "info-url": "/list-of-ua/bot-detail?bot\u003dyacybot",
+      "name": "yacybot",
+      "producer": "Michael Christen",
+      "producer-url": "",
+      "user-agent-string": "yacybot (freeworld-global; amd64 Windows 7 6.1; java 1.7.0_02-ea; America/en) http://yacy.net/bot.html",
+      "hash": "6aaf635c85d769d514fcabc019a9821ebb0c52f4eb97624f444395e29602cf30"
+    },
+    {
+      "family-name": "BegunAdvertising",
+      "icon": "bot.png",
+      "info-url": "/list-of-ua/bot-detail?bot\u003dBegunAdvertising",
+      "name": "BegunAdvertising/3.0",
+      "producer": "Begun",
+      "producer-url": "http://begun.ru/",
+      "user-agent-string": "Mozilla/5.0 (compatible; BegunAdvertising/3.0; +http://begun.ru/begun/technology/indexer/)",
+      "hash": "86535dfc57095e00c08012e1216ceae25bbaf39cd1b9aa555db0e552f22adfcd"
+    },
+    {
+      "family-name": "360Spider",
+      "icon": "bot.png",
+      "info-url": "/list-of-ua/bot-detail?bot\u003d360Spider",
+      "name": "360Spider",
+      "producer": "360.CN",
+      "producer-url": "http://360.cn/",
+      "user-agent-string": "Mozilla/5.0 (Windows; U; Windows NT 5.1; zh-CN; )  Firefox/1.5.0.11; 360Spider",
+      "hash": "9c74f8dc2c4d1e647bccc2e30b0ba0c0506152d5a565b55074ee7398ab5aaae4"
     }
   ]
 }

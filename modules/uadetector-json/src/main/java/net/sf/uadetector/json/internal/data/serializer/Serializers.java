@@ -23,6 +23,8 @@ import net.sf.uadetector.internal.data.Data;
 import net.sf.uadetector.internal.data.domain.Browser;
 import net.sf.uadetector.internal.data.domain.BrowserPattern;
 import net.sf.uadetector.internal.data.domain.BrowserType;
+import net.sf.uadetector.internal.data.domain.Device;
+import net.sf.uadetector.internal.data.domain.DevicePattern;
 import net.sf.uadetector.internal.data.domain.OperatingSystem;
 import net.sf.uadetector.internal.data.domain.OperatingSystemPattern;
 import net.sf.uadetector.internal.data.domain.Robot;
@@ -54,6 +56,8 @@ public final class Serializers extends AbstractMessageCollector<Data> {
 		gsonBuilder.registerTypeAdapter(OperatingSystemPattern.class, new OrderedPatternSerializer<OperatingSystemPattern>());
 		gsonBuilder.registerTypeAdapter(Robot.class, new RobotSerializer());
 		gsonBuilder.registerTypeAdapter(Pattern.class, new PatternSerializer());
+		gsonBuilder.registerTypeAdapter(Device.class, new DeviceSerializer());
+		gsonBuilder.registerTypeAdapter(DevicePattern.class, new OrderedPatternSerializer<DevicePattern>());
 
 		// some settings
 		if (options.contains(SerDeOption.PRETTY_PRINTING)) {

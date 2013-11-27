@@ -19,6 +19,8 @@ import net.sf.uadetector.UserAgentFamily;
 import net.sf.uadetector.internal.data.domain.Browser;
 import net.sf.uadetector.internal.data.domain.BrowserPattern;
 import net.sf.uadetector.internal.data.domain.BrowserType;
+import net.sf.uadetector.internal.data.domain.Device;
+import net.sf.uadetector.internal.data.domain.DevicePattern;
 import net.sf.uadetector.internal.data.domain.OperatingSystem;
 import net.sf.uadetector.internal.data.domain.OperatingSystemPattern;
 import net.sf.uadetector.internal.data.domain.Robot;
@@ -42,6 +44,10 @@ public final class HashCodeGenerator {
 			builder.append(OrderedPatternHashCodeBuilder.build((BrowserPattern) element));
 		} else if (element instanceof BrowserType) {
 			builder.append(BrowserTypeHashCodeBuilder.build((BrowserType) element));
+		} else if (element instanceof Device) {
+			builder.append(DeviceHashCodeBuilder.build((Device) element));
+		} else if (element instanceof DevicePattern) {
+			builder.append(OrderedPatternHashCodeBuilder.build((DevicePattern) element));
 		} else if (element instanceof OperatingSystem) {
 			builder.append(OperatingSystemHashCodeBuilder.build((OperatingSystem) element));
 		} else if (element instanceof OperatingSystemPattern) {

@@ -28,6 +28,8 @@ import net.sf.uadetector.internal.data.Data;
 import net.sf.uadetector.internal.data.domain.Browser;
 import net.sf.uadetector.internal.data.domain.BrowserPattern;
 import net.sf.uadetector.internal.data.domain.BrowserType;
+import net.sf.uadetector.internal.data.domain.Device;
+import net.sf.uadetector.internal.data.domain.DevicePattern;
 import net.sf.uadetector.internal.data.domain.OperatingSystem;
 import net.sf.uadetector.internal.data.domain.OperatingSystemPattern;
 import net.sf.uadetector.internal.data.domain.Robot;
@@ -56,6 +58,10 @@ public final class Deserializers extends AbstractDeserializer<Data> {
 
 	private final DataDeserializer dataDeserializer;
 
+	private final DeviceDeserializer deviceDeserializer;
+
+	private final DevicePatternDeserializer devicePatternDeserializer;
+
 	private final Gson gson;
 
 	private final OperatingSystemDeserializer operatingSystemDeserializer;
@@ -77,10 +83,14 @@ public final class Deserializers extends AbstractDeserializer<Data> {
 				operatingSystemDeserializer);
 		robotDeserializer = new RobotDeserializer(options);
 		patternDeserializer = new PatternDeserializer(options);
+		devicePatternDeserializer = new DevicePatternDeserializer(options);
+		deviceDeserializer = new DeviceDeserializer(options, devicePatternDeserializer);
 
 		// setup deserializers
 		final GsonBuilder gsonBuilder = new GsonBuilder();
 		gsonBuilder.registerTypeAdapter(Data.class, dataDeserializer);
+		gsonBuilder.registerTypeAdapter(Device.class, deviceDeserializer);
+		gsonBuilder.registerTypeAdapter(DevicePattern.class, devicePatternDeserializer);
 		gsonBuilder.registerTypeAdapter(Browser.class, browserDeserializer);
 		gsonBuilder.registerTypeAdapter(BrowserPattern.class, browserPatternDeserializer);
 		gsonBuilder.registerTypeAdapter(BrowserType.class, browserTypeDeserializer);

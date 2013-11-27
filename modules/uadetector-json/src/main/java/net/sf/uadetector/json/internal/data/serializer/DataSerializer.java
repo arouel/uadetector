@@ -18,6 +18,8 @@ package net.sf.uadetector.json.internal.data.serializer;
 import static net.sf.uadetector.json.internal.data.field.SerializableDataField.BROWSERPATTERNS;
 import static net.sf.uadetector.json.internal.data.field.SerializableDataField.BROWSERS;
 import static net.sf.uadetector.json.internal.data.field.SerializableDataField.BROWSERTYPES;
+import static net.sf.uadetector.json.internal.data.field.SerializableDataField.DEVICEPATTERNS;
+import static net.sf.uadetector.json.internal.data.field.SerializableDataField.DEVICES;
 import static net.sf.uadetector.json.internal.data.field.SerializableDataField.OPERATINGSYSTEMPATTERNS;
 import static net.sf.uadetector.json.internal.data.field.SerializableDataField.OPERATINGSYSTEMS;
 import static net.sf.uadetector.json.internal.data.field.SerializableDataField.ROBOTS;
@@ -35,6 +37,8 @@ import net.sf.uadetector.internal.data.IdentifiableComparator;
 import net.sf.uadetector.internal.data.domain.Browser;
 import net.sf.uadetector.internal.data.domain.BrowserPattern;
 import net.sf.uadetector.internal.data.domain.BrowserType;
+import net.sf.uadetector.internal.data.domain.Device;
+import net.sf.uadetector.internal.data.domain.DevicePattern;
 import net.sf.uadetector.internal.data.domain.OperatingSystem;
 import net.sf.uadetector.internal.data.domain.OperatingSystemPattern;
 import net.sf.uadetector.internal.data.domain.Robot;
@@ -61,7 +65,8 @@ public final class DataSerializer implements JsonSerializer<Data> {
 		jsonObj.add(DataJsonFormat.VERSION_1_0.getKey(), context.serialize(DataJsonFormat.VERSION_1_0.getVersion()));
 		jsonObj.add(VERSION.getName(), context.serialize(data.getVersion()));
 
-		final List<OperatingSystemPattern> osPatterns = new ArrayList<OperatingSystemPattern>(data.getPatternToOperatingSystemMap().keySet());
+		final List<OperatingSystemPattern> osPatterns = new ArrayList<OperatingSystemPattern>(data.getPatternToOperatingSystemMap()
+				.keySet());
 		Collections.sort(osPatterns, new OrderedPatternPositionComparator<OperatingSystemPattern>());
 		jsonObj.add(OPERATINGSYSTEMPATTERNS.getName(), context.serialize(osPatterns));
 
@@ -84,6 +89,15 @@ public final class DataSerializer implements JsonSerializer<Data> {
 		final List<Robot> robots = new ArrayList<Robot>(data.getRobots());
 		Collections.sort(robots, IdentifiableComparator.INSTANCE);
 		jsonObj.add(ROBOTS.getName(), context.serialize(robots));
+
+		final List<DevicePattern> devicePatterns = new ArrayList<DevicePattern>(data.getPatternToDeviceMap().keySet());
+		Collections.sort(devicePatterns, new OrderedPatternPositionComparator<DevicePattern>());
+		jsonObj.add(DEVICEPATTERNS.getName(), context.serialize(devicePatterns));
+
+		final List<Device> devices = new ArrayList<Device>(data.getDevices());
+		Collections.sort(devices, IdentifiableComparator.INSTANCE);
+		jsonObj.add(DEVICES.getName(), context.serialize(devices));
+
 		return jsonObj;
 	}
 

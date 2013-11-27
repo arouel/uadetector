@@ -28,6 +28,8 @@ import net.sf.uadetector.internal.data.DataBuilder;
 import net.sf.uadetector.internal.data.domain.Browser;
 import net.sf.uadetector.internal.data.domain.BrowserPattern;
 import net.sf.uadetector.internal.data.domain.BrowserType;
+import net.sf.uadetector.internal.data.domain.Device;
+import net.sf.uadetector.internal.data.domain.DevicePattern;
 import net.sf.uadetector.internal.data.domain.OperatingSystem;
 import net.sf.uadetector.internal.data.domain.OperatingSystemPattern;
 import net.sf.uadetector.internal.data.domain.Robot;
@@ -98,6 +100,15 @@ public final class DataDeserializer extends AbstractDeserializer<Data> implement
 			final List<Robot> robots = deserializeType(context, entry, SerializableDataField.ROBOTS, Robot.class);
 			for (final Robot robot : robots) {
 				builder.appendRobot(robot);
+			}
+			final List<DevicePattern> devicePatterns = deserializeType(context, entry, SerializableDataField.DEVICEPATTERNS,
+					DevicePattern.class);
+			for (final DevicePattern devicePattern : devicePatterns) {
+				builder.appendDevicePattern(devicePattern);
+			}
+			final List<Device> devices = deserializeType(context, entry, SerializableDataField.DEVICES, Device.class);
+			for (final Device device : devices) {
+				builder.appendDevice(device);
 			}
 			if (SerializableDataField.VERSION.getName().equals(entry.getKey())) {
 				builder.setVersion(entry.getValue().getAsString());

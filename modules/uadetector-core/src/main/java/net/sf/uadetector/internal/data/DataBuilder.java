@@ -218,6 +218,9 @@ public class DataBuilder {
 	private final Set<Browser> browsers = new HashSet<Browser>();
 
 	@Nonnull
+	private final Set<Device> devices = new HashSet<Device>();
+
+	@Nonnull
 	private final Map<Integer, Device.Builder> deviceBuilders = new HashMap<Integer, Device.Builder>();
 
 	@Nonnull
@@ -313,6 +316,13 @@ public class DataBuilder {
 		Check.notNull(type, "type");
 
 		browserTypes.put(type.getId(), type);
+		return this;
+	}
+
+	public DataBuilder appendDevice(@Nonnull final Device device) {
+		Check.notNull(device, "device");
+
+		devices.add(device);
 		return this;
 	}
 
@@ -440,14 +450,15 @@ public class DataBuilder {
 		final Set<Browser> browserSet = buildBrowsers(browserBuilders);
 		browserSet.addAll(browsers);
 
-		final Set<Device> devices = buildDevices(deviceBuilders);
+		final Set<Device> deviceSet = buildDevices(deviceBuilders);
+		deviceSet.addAll(devices);
 
 		final SortedMap<BrowserPattern, Browser> patternToBrowserMap = buildPatternToBrowserMap(browserSet);
 		final SortedMap<OperatingSystemPattern, OperatingSystem> patternToOperatingSystemMap = buildPatternToOperatingSystemMap(osSet);
-		final SortedMap<DevicePattern, Device> patternToDeviceMap = buildPatternToDeviceMap(devices);
+		final SortedMap<DevicePattern, Device> patternToDeviceMap = buildPatternToDeviceMap(deviceSet);
 
 		return new Data(browserSet, browserPatterns, browserTypes, patternToBrowserMap, browserToOperatingSystemMap, osSet,
-				operatingSystemPatterns, patternToOperatingSystemMap, robots, devices, devicePatterns, patternToDeviceMap, version);
+				operatingSystemPatterns, patternToOperatingSystemMap, robots, deviceSet, devicePatterns, patternToDeviceMap, version);
 	}
 
 	@Nonnull

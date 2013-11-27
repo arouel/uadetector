@@ -15,11 +15,12 @@
  ******************************************************************************/
 package net.sf.uadetector.json.internal.data.hashcodebuilder;
 
+import static org.fest.assertions.Assertions.assertThat;
+
 import java.lang.reflect.Constructor;
 
 import net.sf.uadetector.UserAgentFamily;
 
-import static org.fest.assertions.Assertions.assertThat;
 import org.junit.Test;
 
 public class HashCodeGeneratorTest {
@@ -39,6 +40,12 @@ public class HashCodeGeneratorTest {
 	@Test
 	public void generate_forBrowserType() {
 		final String hash = HashCodeGenerator.generate(BrowserTypeHashCodeBuilderTest.create());
+		assertThat(hash.isEmpty()).isFalse();
+	}
+
+	@Test
+	public void generate_forDevice() {
+		final String hash = HashCodeGenerator.generate(DeviceHashCodeBuilderTest.create());
 		assertThat(hash.isEmpty()).isFalse();
 	}
 

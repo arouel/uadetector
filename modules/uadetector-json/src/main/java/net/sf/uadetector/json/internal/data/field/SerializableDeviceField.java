@@ -15,29 +15,21 @@
  ******************************************************************************/
 package net.sf.uadetector.json.internal.data.field;
 
-public enum SerializableDataField {
+public enum SerializableDeviceField {
 
-	BROWSERPATTERNS("browser-patterns"),
+	HASH("hash"),
 
-	BROWSERS("browsers"),
+	ICON("icon"),
 
-	BROWSERTYPES("browser-types"),
+	INFO_URL("info-url"),
 
-	DEVICEPATTERNS("device-patterns"),
+	NAME("name"),
 
-	DEVICES("devices"),
-
-	OPERATINGSYSTEMPATTERNS("operating-system-patterns"),
-
-	OPERATINGSYSTEMS("operating-systems"),
-
-	ROBOTS("robots"),
-
-	VERSION("version");
+	PATTERNS("device-pattern-hashs");
 
 	private final String name;
 
-	private SerializableDataField(final String name) {
+	private SerializableDeviceField(final String name) {
 		this.name = name;
 	}
 

@@ -3,7 +3,7 @@
 <uasdata>
 	<description>
 		<label>Data (format xml) for UASparser - http://user-agent-string.info/download/UASparser</label>
-		<version>20131127-01</version>
+		<version>20131202-01</version>
 		<checksum type="MD5">http://user-agent-string.info/rpc/get_data.php?format=xml&amp;md5=y</checksum>
 		<checksum type="SHA1">http://user-agent-string.info/rpc/get_data.php?format=xml&amp;sha1=y</checksum>
 	</description>
@@ -2618,6 +2618,16 @@
 				<url_company><![CDATA[http://www.yama.info.waseda.ac.jp/]]></url_company>
 				<icon>bot.png</icon>
 				<bot_info_url>/list-of-ua/bot-detail?bot=e-SocietyRobot</bot_info_url>
+			</robot>
+			<robot>
+				<id>11239</id>
+				<useragent><![CDATA[Mozilla/5.0 (compatible; EasouSpider; +http://www.easou.com/search/spider.html)]]></useragent>
+				<family>EasouSpider</family>
+				<name>EasouSpider</name>
+				<company><![CDATA[easou.com]]></company>
+				<url_company><![CDATA[http://www.easou.com/]]></url_company>
+				<icon>bot.png</icon>
+				<bot_info_url>/list-of-ua/bot-detail?bot=EasouSpider</bot_info_url>
 			</robot>
 			<robot>
 				<id>7624</id>
@@ -7600,6 +7610,16 @@
 				<bot_info_url>/list-of-ua/bot-detail?bot=RyzeCrawler</bot_info_url>
 			</robot>
 			<robot>
+				<id>11878</id>
+				<useragent><![CDATA[RyzeCrawler/1.1.1 (+http://www.domain2day.nl/crawler/)]]></useragent>
+				<family>RyzeCrawler</family>
+				<name>RyzeCrawler/1.1.1</name>
+				<company><![CDATA[Domain2day]]></company>
+				<url_company><![CDATA[http://www.domain2day.nl/]]></url_company>
+				<icon>bot.png</icon>
+				<bot_info_url>/list-of-ua/bot-detail?bot=RyzeCrawler</bot_info_url>
+			</robot>
+			<robot>
 				<id>1816</id>
 				<useragent><![CDATA[http://domino.research.ibm.com/comm/research_projects.nsf/pages/sai-crawler.callingcard.html]]></useragent>
 				<family>SAI Crawler</family>
@@ -8724,6 +8744,16 @@
 				<useragent><![CDATA[Mozilla/5.0 (compatible; spbot/4.0; +http://www.seoprofiler.com/bot )]]></useragent>
 				<family>spbot</family>
 				<name>spbot/4.0</name>
+				<company><![CDATA[Axandra GmbH]]></company>
+				<url_company><![CDATA[http://www.axandra.com/]]></url_company>
+				<icon>bot_spbot.png</icon>
+				<bot_info_url>/list-of-ua/bot-detail?bot=spbot</bot_info_url>
+			</robot>
+			<robot>
+				<id>11832</id>
+				<useragent><![CDATA[Mozilla/5.0 (compatible; spbot/4.0.3; +http://www.seoprofiler.com/bot )]]></useragent>
+				<family>spbot</family>
+				<name>spbot/4.0.3</name>
 				<company><![CDATA[Axandra GmbH]]></company>
 				<url_company><![CDATA[http://www.axandra.com/]]></url_company>
 				<icon>bot_spbot.png</icon>

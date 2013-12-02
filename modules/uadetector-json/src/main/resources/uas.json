@@ -1,6 +1,6 @@
 {
   "format": "1.0",
-  "version": "20131127-01",
+  "version": "20131202-01",
   "operating-system-patterns": [
     {
       "regex": {
@@ -24580,6 +24580,16 @@
       "hash": "06a46376baccdf494582e7aababb2d0237ac4c5bf6c9e56d1b5a6d32c950e429"
     },
     {
+      "family-name": "EasouSpider",
+      "icon": "bot.png",
+      "info-url": "/list-of-ua/bot-detail?bot\u003dEasouSpider",
+      "name": "EasouSpider",
+      "producer": "easou.com",
+      "producer-url": "http://www.easou.com/",
+      "user-agent-string": "Mozilla/5.0 (compatible; EasouSpider; +http://www.easou.com/search/spider.html)",
+      "hash": "870dcee73139be7eba00f90799cefd760d1086679044ea26df747739d6cfc5b0"
+    },
+    {
       "family-name": "alexa site audit",
       "icon": "bot.png",
       "info-url": "/list-of-ua/bot-detail?bot\u003dalexa site audit",
@@ -24908,6 +24918,26 @@
       "producer-url": "http://www.unipi.it/",
       "user-agent-string": "Mozilla/5.0 (compatible; IXEbot; +http://medialab.di.unipi.it/IXEbot.html)",
       "hash": "7980984ef0ddc42b2ca86f148be6716769b8c8c84de311916def37e4f83e56e8"
+    },
+    {
+      "family-name": "spbot",
+      "icon": "bot_spbot.png",
+      "info-url": "/list-of-ua/bot-detail?bot\u003dspbot",
+      "name": "spbot/4.0.3",
+      "producer": "Axandra GmbH",
+      "producer-url": "http://www.axandra.com/",
+      "user-agent-string": "Mozilla/5.0 (compatible; spbot/4.0.3; +http://www.seoprofiler.com/bot )",
+      "hash": "b4d1af4ce68ad0132bba97159ee5105fcc1029342f8f97270b1f410ef78795ee"
+    },
+    {
+      "family-name": "RyzeCrawler",
+      "icon": "bot.png",
+      "info-url": "/list-of-ua/bot-detail?bot\u003dRyzeCrawler",
+      "name": "RyzeCrawler/1.1.1",
+      "producer": "Domain2day",
+      "producer-url": "http://www.domain2day.nl/",
+      "user-agent-string": "RyzeCrawler/1.1.1 (+http://www.domain2day.nl/crawler/)",
+      "hash": "e3c8272590400139b713d0b93bda68dbff07005cdef95124c788be3720ef612a"
     }
   ],
   "device-patterns": [

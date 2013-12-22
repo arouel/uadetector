@@ -14,4 +14,4 @@
  * limitations under the License.
  ******************************************************************************/
 @javax.annotation.ParametersAreNonnullByDefault
-package net.sf.uadetector.internal.data;
+package net.sf.uadetector.service;

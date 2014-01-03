@@ -10,18 +10,28 @@ browsers and 130 other User-Agents like feed readers, email clients and
 multimedia players. In addition, even more than 400 robots like BingBot,
 Googlebot or Yahoo Bot can be identified.
 
-The UADetector library is a free, portable Java library to analyze User-Agent
-strings. The goal of this library is to detect the type and the associated
-operating system of a client like `Mobile Firefox 9.0` on `Android` or `Mobile
+This library is a free, portable Java library to analyze User-Agent strings.
+The goal of this library is to detect the type and the associated operating
+system of a client like `Mobile Firefox 9.0` on `Android` or `Mobile
 Safari 5.1` on `iOS`.
 
-The UADetector library is divided into two modules. The core module includes
+UADetector is divided into two modules. The core module includes
 the API and implementation to read the detection information and the functions
 to identify User-Agents. The resources module contains the database with the
 necessary identification information and a service factory class to get simply
 preconfigured UserAgentStringParser singletons. This library will be published
 monthly, is integration-tested against the core module and is guaranteed to run
 against the defined core.
+
+
+Device categorization
+-----
+
+Since version `0.9.10` we support device categorization which means that for
+instance an *iPhone* or *Nexus 4* will be classified as "Smartphone" and an
+*iPad*, *Kindle* or *Surface RT* as "Tablet". Please take a look into our
+[API documentation](http://uadetector.sourceforge.net/modules/uadetector-core/apidocs/net/sf/uadetector/ReadableUserAgent.html)
+to get an idea what you can get when parsing an user agent string.
 
 
 Features
@@ -34,7 +44,7 @@ other User-Agents like feed readers, multimedia players and email clients.
 
 ### Identifies over 400 robots
 
-On the Internet many robots are on their way to examine sites. A large number
+In the Internet many robots are on their way to examine sites. A large number
 of robots can be detected with this library.
 
 ### Monthly updated
@@ -44,8 +54,8 @@ always detect the latest User-Agents.
 
 ### Extremely tested
 
-All classes in this library have been especially tested. The unit tests have a
-100% branch coverage and 98% line coverage . In addition, many integration
+All classes in this library have been especially tested. The unit tests have
+over 90% branch coverage and 98% line coverage. In addition, many integration
 tests performed regularly.
 
 

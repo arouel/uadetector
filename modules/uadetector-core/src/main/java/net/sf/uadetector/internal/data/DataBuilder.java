@@ -90,7 +90,7 @@ public class DataBuilder {
 			if (patterns.containsKey(entry.getKey())) {
 				entry.getValue().setPatterns(patterns.get(entry.getKey()));
 			} else {
-				LOG.info("No pattern available for '" + entry.getValue().getName() + "'.");
+				LOG.debug("No pattern available for '" + entry.getValue().getName() + "'.");
 			}
 		}
 	}

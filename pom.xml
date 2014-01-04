@@ -60,7 +60,7 @@
 	</modules>
 
 	<distributionManagement>
-		<downloadUrl>http://sourceforge.net/projects/uadetector/files/</downloadUrl>
+		<downloadUrl>http://uadetector.sourceforge.net/download.html</downloadUrl>
 		<site>
 			<id>shell.sourceforge.net</id>
 			<url>scp://shell.sourceforge.net/home/project-web/uadetector/htdocs</url>

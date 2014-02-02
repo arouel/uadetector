@@ -25,7 +25,7 @@
 		<dependency>
 			<groupId>net.sf.uadetector</groupId>
 			<artifactId>uadetector-resources</artifactId>
-			<version>2013.12</version>
+			<version>2014.01</version>
 		</dependency>
 		...
 	</dependencies>

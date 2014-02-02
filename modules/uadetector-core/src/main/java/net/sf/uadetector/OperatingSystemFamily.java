@@ -130,6 +130,12 @@ public enum OperatingSystemFamily {
 	MINIX("MINIX", Pattern.compile("MINIX")),
 
 	/**
+	 * OpenVMS (Open Virtual Memory System), previously known as VAX-11/VMS, VAX/VMS or (informally) VMS, is a computer
+	 * server operating system that runs on VAX, Alpha and Itanium-based families of computers.
+	 */
+	OPENVMS("OpenVMS", Pattern.compile("OpenVMS")),
+
+	/**
 	 * OS X, formerly Mac OS X, is a Unix-based operating systems developed by Apple. It is a proprietary distribution
 	 * of the free Darwin operating system from Apple.
 	 */
@@ -177,6 +183,12 @@ public enum OperatingSystemFamily {
 	 * smartphone handheld devices.
 	 */
 	BLACKBERRY_OS("BlackBerry OS", Pattern.compile("(RIM OS|BlackBerry OS)")),
+
+	/**
+	 * Sailfish is a Linux-based mobile operating system developed by Jolla in cooperation with the Mer project and
+	 * supported by the Sailfish Alliance.
+	 */
+	SAILFISH_OS("Sailfish", Pattern.compile("Sailfish")),
 
 	/**
 	 * Solaris is the name of an operating system distribution based on SunOS and is a Unix operating system. Since the

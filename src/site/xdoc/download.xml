@@ -18,6 +18,79 @@
 		</section>
 
 		<section name="Releases">
+			<subsection name="Release 2014.02">
+				<table>
+					<tr>
+						<th>Module</th>
+						<th>File</th>
+						<th>Checksum</th>
+						<th>Signature</th>
+					</tr>
+					<tr>
+						<td>Core Module</td>
+						<td>
+							<a
+								href="http://search.maven.org/remotecontent?filepath=net/sf/uadetector/uadetector-core/0.9.14/uadetector-core-0.9.14.jar">
+								uadetector-core-0.9.14.jar
+							</a>
+						</td>
+						<td>
+							<a
+								href="http://search.maven.org/remotecontent?filepath=net/sf/uadetector/uadetector-core/0.9.14/uadetector-core-0.9.14.jar.md5">
+								md5
+							</a>
+						</td>
+						<td>
+							<a
+								href="http://search.maven.org/remotecontent?filepath=net/sf/uadetector/uadetector-core/0.9.14/uadetector-core-0.9.14.jar.asc">
+								pgp
+							</a>
+						</td>
+					</tr>
+					<tr>
+						<td>JSON Module</td>
+						<td>
+							<a
+								href="http://search.maven.org/remotecontent?filepath=net/sf/uadetector/uadetector-json/0.1.14/uadetector-json-0.1.14.jar">
+								uadetector-json-0.1.14.jar
+							</a>
+						</td>
+						<td>
+							<a
+								href="http://search.maven.org/remotecontent?filepath=net/sf/uadetector/uadetector-json/0.1.14/uadetector-json-0.1.14.jar.md5">
+								md5
+							</a>
+						</td>
+						<td>
+							<a
+								href="http://search.maven.org/remotecontent?filepath=net/sf/uadetector/uadetector-json/0.1.14/uadetector-json-0.1.14.jar.asc">
+								pgp
+							</a>
+						</td>
+					</tr>
+					<tr>
+						<td>Resources Module</td>
+						<td>
+							<a
+								href="http://search.maven.org/remotecontent?filepath=net/sf/uadetector/uadetector-resources/2014.02/uadetector-resources-2014.02.jar">
+								uadetector-resources-2014.02.jar
+							</a>
+						</td>
+						<td>
+							<a
+								href="http://search.maven.org/remotecontent?filepath=net/sf/uadetector/uadetector-resources/2014.02/uadetector-resources-2014.02.jar.md5">
+								md5
+							</a>
+						</td>
+						<td>
+							<a
+								href="http://search.maven.org/remotecontent?filepath=net/sf/uadetector/uadetector-resources/2014.02/uadetector-resources-2014.02.jar.asc">
+								pgp
+							</a>
+						</td>
+					</tr>
+				</table>
+			</subsection>
 			<subsection name="Release 2014.01">
 				<table>
 					<tr>

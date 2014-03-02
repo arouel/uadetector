@@ -15,21 +15,21 @@
  ******************************************************************************/
 package net.sf.uadetector.datastore;
 
+import static org.fest.assertions.Assertions.assertThat;
+
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URL;
-import java.nio.MappedByteBuffer;
-import java.nio.channels.FileChannel;
 import java.nio.charset.Charset;
 
 import net.sf.uadetector.datareader.XmlDataReaderTest;
 import net.sf.uadetector.parser.UpdatingUserAgentStringParserImpl;
 
-import static org.fest.assertions.Assertions.assertThat;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
+
+import com.google.common.io.Files;
 
 public class CachingXmlDataStoreTest_differentCacheFileAndUpdateStates {
 
@@ -69,15 +69,8 @@ public class CachingXmlDataStoreTest_differentCacheFileAndUpdateStates {
 	private static final Charset CHARSET = DataStore.DEFAULT_CHARSET;
 
 	private static String readFile(final File file) throws IOException {
-		final FileInputStream stream = new FileInputStream(file);
-		try {
-			final FileChannel fc = stream.getChannel();
-			final MappedByteBuffer bb = fc.map(FileChannel.MapMode.READ_ONLY, 0, fc.size());
-			/* Instead of using default, pass in a decoder. */
-			return Charset.defaultCharset().decode(bb).toString();
-		} finally {
-			stream.close();
-		}
+		byte[] bytes = Files.toByteArray(file);
+		return new String(bytes, Charset.defaultCharset());
 	}
 
 	/**

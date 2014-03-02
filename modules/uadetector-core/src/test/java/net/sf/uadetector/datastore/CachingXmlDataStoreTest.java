@@ -15,12 +15,11 @@
  ******************************************************************************/
 package net.sf.uadetector.datastore;
 
+import static org.fest.assertions.Assertions.assertThat;
+
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URL;
-import java.nio.MappedByteBuffer;
-import java.nio.channels.FileChannel;
 import java.nio.charset.Charset;
 
 import net.sf.qualitycheck.exception.IllegalNullArgumentException;
@@ -30,13 +29,14 @@ import net.sf.uadetector.internal.data.DataBlueprint;
 import net.sf.uadetector.internal.util.UrlUtil;
 import net.sf.uadetector.parser.UpdatingUserAgentStringParserImpl;
 
-import static org.fest.assertions.Assertions.assertThat;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import com.google.common.io.Files;
 
 public class CachingXmlDataStoreTest {
 
@@ -66,15 +66,8 @@ public class CachingXmlDataStoreTest {
 	private static final URL VERSION_URL = CachingXmlDataStoreTest.class.getClassLoader().getResource("uas_older.version");
 
 	private static String readFile(final File file) throws IOException {
-		final FileInputStream stream = new FileInputStream(file);
-		try {
-			final FileChannel fc = stream.getChannel();
-			final MappedByteBuffer bb = fc.map(FileChannel.MapMode.READ_ONLY, 0, fc.size());
-			/* Instead of using default, pass in a decoder. */
-			return Charset.defaultCharset().decode(bb).toString();
-		} finally {
-			stream.close();
-		}
+		byte[] bytes = Files.toByteArray(file);
+		return new String(bytes, Charset.defaultCharset());
 	}
 
 	private DataStore fallback;

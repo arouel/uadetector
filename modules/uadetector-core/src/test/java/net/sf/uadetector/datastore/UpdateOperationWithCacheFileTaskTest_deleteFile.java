@@ -15,26 +15,22 @@
  ******************************************************************************/
 package net.sf.uadetector.datastore;
 
+import static org.easymock.EasyMock.createMock;
+import static org.easymock.EasyMock.expect;
+import static org.easymock.EasyMock.replay;
+import static org.easymock.EasyMock.verify;
+import static org.fest.assertions.Assertions.assertThat;
+
 import java.io.File;
 import java.io.IOException;
 
 import net.sf.qualitycheck.exception.IllegalNullArgumentException;
 import net.sf.qualitycheck.exception.IllegalStateOfArgumentException;
 
-import org.easymock.EasyMock;
-import static org.fest.assertions.Assertions.assertThat;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
-import org.junit.runner.RunWith;
-import org.powermock.api.easymock.PowerMock;
-import org.powermock.core.classloader.annotations.PowerMockIgnore;
-import org.powermock.core.classloader.annotations.PrepareForTest;
-import org.powermock.modules.junit4.PowerMockRunner;
 
-@RunWith(PowerMockRunner.class)
-@PrepareForTest({ File.class })
-@PowerMockIgnore({ "com.*", "org.*" })
 public class UpdateOperationWithCacheFileTaskTest_deleteFile {
 
 	@Rule
@@ -63,11 +59,11 @@ public class UpdateOperationWithCacheFileTaskTest_deleteFile {
 
 	@Test
 	public void deleteFile_fileNotRemovable() throws IOException {
-		final File file = PowerMock.createMock(File.class);
-		EasyMock.expect(file.delete()).andReturn(false).anyTimes();
-		EasyMock.expect(file.exists()).andReturn(true).anyTimes();
-		EasyMock.expect(file.getPath()).andReturn("/path").anyTimes();
-		PowerMock.replay(file);
+		final File file = createMock(File.class);
+		expect(file.delete()).andReturn(false).anyTimes();
+		expect(file.exists()).andReturn(true).anyTimes();
+		expect(file.getPath()).andReturn("/path").anyTimes();
+		replay(file);
 
 		try {
 			UpdateOperationWithCacheFileTask.deleteFile(file);
@@ -75,7 +71,7 @@ public class UpdateOperationWithCacheFileTaskTest_deleteFile {
 			assertThat(e.getLocalizedMessage()).isEqualTo("Cannot delete file '/path'.");
 		}
 
-		PowerMock.verify(file);
+		verify(file);
 	}
 
 }

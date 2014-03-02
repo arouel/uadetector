@@ -15,6 +15,10 @@
  ******************************************************************************/
 package net.sf.uadetector.datastore;
 
+import static org.easymock.EasyMock.createMock;
+import static org.easymock.EasyMock.expect;
+import static org.easymock.EasyMock.replay;
+import static org.easymock.EasyMock.verify;
 import static org.fest.assertions.Assertions.assertThat;
 
 import java.io.File;
@@ -24,20 +28,13 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.charset.Charset;
 
-import org.easymock.EasyMock;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
-import org.junit.runner.RunWith;
-import org.powermock.api.easymock.PowerMock;
-import org.powermock.core.classloader.annotations.PrepareForTest;
-import org.powermock.modules.junit4.PowerMockRunner;
 
 import com.google.common.io.ByteStreams;
 import com.google.common.io.Files;
 
-@RunWith(PowerMockRunner.class)
-@PrepareForTest({ File.class })
 public class CachingXmlDataStoreTest_deleteCacheFile {
 
 	/**
@@ -62,13 +59,16 @@ public class CachingXmlDataStoreTest_deleteCacheFile {
 	@Test
 	public void loadCorruptedCacheFile_useFallback_doNotOverrideCacheFileWithFallbackData_cacheFileIsNotDeletable() throws IOException,
 			InterruptedException, URISyntaxException {
-
-		final File cache = PowerMock.createMock(File.class);
-		EasyMock.expect(cache.delete()).andReturn(false).anyTimes();
-		EasyMock.expect(cache.exists()).andReturn(true).anyTimes();
-		EasyMock.expect(cache.getPath()).andReturn(folder.newFile().getPath()).anyTimes();
-		EasyMock.expect(cache.toURI()).andReturn(folder.newFile().toURI()).anyTimes();
-		PowerMock.replay(cache);
+		final File cache = createMock(File.class);
+		expect(cache.canRead()).andReturn(true).anyTimes();
+		expect(cache.isFile()).andReturn(true).anyTimes();
+		// expect(cache.isInvalid()).andReturn(false).anyTimes(); // maybe necessary when using JDK7
+		expect(cache.delete()).andReturn(false).anyTimes();
+		expect(cache.exists()).andReturn(true).anyTimes();
+		final File tmpFile = folder.newFile();
+		expect(cache.getPath()).andReturn(tmpFile.getPath()).anyTimes();
+		expect(cache.toURI()).andReturn(tmpFile.toURI()).anyTimes();
+		replay(cache);
 
 		// fill cache file with false content
 		final byte[] wrongContent = ByteStreams.toByteArray(DATA_CONNECTION_ERROR_URL.openStream());
@@ -94,6 +94,8 @@ public class CachingXmlDataStoreTest_deleteCacheFile {
 		// test that no fallback data will be written to cache file
 		assertThat(store.getData().getVersion()).isEqualTo(TestXmlDataStore.VERSION_OLDER);
 		assertThat(cache.exists()).isTrue();
+
+		verify(cache);
 	}
 
 }

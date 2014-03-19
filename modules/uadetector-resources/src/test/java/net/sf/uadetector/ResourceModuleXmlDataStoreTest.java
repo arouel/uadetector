@@ -15,6 +15,7 @@
  ******************************************************************************/
 package net.sf.uadetector;
 
+import net.sf.uadetector.filter.Filter;
 import net.sf.uadetector.service.UADetectorServiceFactory;
 
 import org.junit.Test;
@@ -24,6 +25,7 @@ public class ResourceModuleXmlDataStoreTest {
 	@Test
 	public void construct_successful() {
 		new UADetectorServiceFactory.ResourceModuleXmlDataStore();
+		new UADetectorServiceFactory.ResourceModuleXmlDataStore(Filter.ALL);
 	}
 
 }

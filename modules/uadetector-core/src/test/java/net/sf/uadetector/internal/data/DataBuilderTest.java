@@ -15,8 +15,11 @@
  ******************************************************************************/
 package net.sf.uadetector.internal.data;
 
+import net.sf.uadetector.filter.Filter;
 import static org.fest.assertions.Assertions.assertThat;
 
+import java.util.HashSet;
+import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
 import java.util.regex.Pattern;
@@ -148,6 +151,50 @@ public class DataBuilderTest {
 		assertThat(d.appendBrowserBuilder(builder)).isSameAs(d);
 		final Data data = d.build();
 		assertThat(data.getBrowsers()).isEmpty();
+	}
+
+	@Test
+	public void appendBrowserBuilder_whitelistFilter() {
+		Set<String> whitelist = new HashSet<String>();
+		whitelist.add(UserAgentFamily.FIREFOX.getName());
+		Filter filter = new Filter.Builder().setBrowsers(whitelist).setColorBrowsers(Filter.Color.WHITE).build();
+		final DataBuilder d = new DataBuilder().setVersion("test version").setFilter(filter);
+		BrowserType type = new BrowserType(1, "Browser");
+		final Browser.Builder builder1 = new Browser.Builder();
+		builder1.setId(1);
+		builder1.setFamilyName(UserAgentFamily.FIREFOX.getName());
+		builder1.setType(type);
+		final Browser.Builder builder2 = new Browser.Builder();
+		builder2.setId(2);
+		builder2.setFamilyName(UserAgentFamily.CHROME.getName());
+		builder2.setType(type);
+		d.appendBrowserBuilder(builder1);
+		d.appendBrowserBuilder(builder2);
+		Data data = d.build();
+		assertThat(data.getBrowsers().size()).isEqualTo(1);
+		assertThat(data.getBrowsers().iterator().next().getFamilyName()).isEqualTo(UserAgentFamily.FIREFOX.getName());
+	}
+
+	@Test
+	public void appendBrowserBuilder_blacklistFilter() {
+		Set<String> blacklist = new HashSet<String>();
+		blacklist.add(UserAgentFamily.FIREFOX.getName());
+		Filter filter = new Filter.Builder().setBrowsers(blacklist).setColorBrowsers(Filter.Color.BLACK).build();
+		final DataBuilder d = new DataBuilder().setVersion("test version").setFilter(filter);
+		BrowserType type = new BrowserType(1, "Browser");
+		final Browser.Builder builder1 = new Browser.Builder();
+		builder1.setId(1);
+		builder1.setFamilyName(UserAgentFamily.FIREFOX.getName());
+		builder1.setType(type);
+		final Browser.Builder builder2 = new Browser.Builder();
+		builder2.setId(2);
+		builder2.setFamilyName(UserAgentFamily.CHROME.getName());
+		builder2.setType(type);
+		d.appendBrowserBuilder(builder1);
+		d.appendBrowserBuilder(builder2);
+		Data data = d.build();
+		assertThat(data.getBrowsers().size()).isEqualTo(1);
+		assertThat(data.getBrowsers().iterator().next().getFamilyName()).isEqualTo(UserAgentFamily.CHROME.getName());
 	}
 
 	@Test(expected = IllegalNullArgumentException.class)

@@ -17,6 +17,8 @@ package net.sf.uadetector.datastore;
 
 import javax.annotation.Nonnegative;
 
+import java.util.concurrent.TimeUnit;
+
 /**
  * Defines an update operation which will be executed within a executor service in background.
  * 
@@ -49,4 +51,11 @@ public interface UpdateOperation extends Runnable {
 	 */
 	void shutdown();
 
+	/**
+	 * Waits for the most recently submitted task to complete.
+	 * @param timeout time amount to wait
+	 * @param unit time unit to wait
+	 * @return true if task completes within the timeout
+	 */
+	boolean wait(long timeout, TimeUnit unit);
 }

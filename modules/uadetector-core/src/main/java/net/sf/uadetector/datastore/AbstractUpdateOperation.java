@@ -21,7 +21,11 @@ import java.io.InputStreamReader;
 import java.io.LineNumberReader;
 import java.net.URL;
 import java.nio.charset.Charset;
+
 import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicReference;
 import java.util.regex.Pattern;
 
 import javax.annotation.Nonnull;
@@ -90,6 +94,8 @@ public abstract class AbstractUpdateOperation implements UpdateOperation {
 	 * Pattern of a typical version of <i>UAS data</i>
 	 */
 	private static final Pattern VERSION_PATTERN = Pattern.compile("\\d{8}\\-\\d{2}");
+
+	private final AtomicReference<Future> future = new AtomicReference<Future>();
 
 	/**
 	 * Checks a given newer version against an older one.
@@ -196,12 +202,31 @@ public abstract class AbstractUpdateOperation implements UpdateOperation {
 	 */
 	@Override
 	public void run() {
-		executorService.execute(new Runnable() {
+		future.set(executorService.submit(new Runnable() {
 			@Override
 			public void run() {
 				call();
 			}
-		});
+		}));
+	}
+
+	/**
+	 * Waits for the most recently submitted task to complete.
+	 * @param timeout time amount to wait
+	 * @param unit time unit to wait
+	 * @return true if task completes within the timeout
+	 */
+	@Override
+	public boolean wait(long timeout, TimeUnit unit) {
+		Future fut = future.get();
+		if (fut != null) {
+			try {
+				fut.get(timeout, unit);
+				return true;
+			} catch (Exception e) {
+			}
+		}
+		return false;
 	}
 
 	/**

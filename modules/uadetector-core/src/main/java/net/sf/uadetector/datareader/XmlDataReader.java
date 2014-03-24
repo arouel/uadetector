@@ -63,7 +63,7 @@ public final class XmlDataReader implements DataReader {
 		}
 
 		protected static void validate(@Nonnull final XmlDataHandler handler) {
-			if (handler.hasError() || handler.hasWarning()) {
+			if (handler.hasError()) {
 				throw new IllegalStateException(MSG_NOT_PARSED_AS_EXPECTED);
 			}
 		}

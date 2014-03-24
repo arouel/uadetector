@@ -53,7 +53,7 @@ public class XmlParserTest {
 		PowerMock.verify(mock);
 	}
 
-	@Test(expected = IllegalStateException.class)
+	@Test
 	public void validate_hasWarning() {
 		final XmlDataHandler mock = PowerMock.createMock(XmlDataHandler.class);
 		EasyMock.expect(mock.hasError()).andReturn(false).anyTimes();

@@ -178,6 +178,13 @@ public enum OperatingSystemFamily {
 	QNX("QNX", Pattern.compile("QNX")),
 
 	/**
+	 * RISC OS is a computer operating system originally designed by Acorn Computers Ltd. It was specifically designed
+	 * to run on the ARM chipset, which Acorn had designed concurrently for use in its new line of Archimedes personal
+	 * computers.
+	 */
+	RISC_OS("RISC OS", Pattern.compile("RISC OS|RISK OS")),
+
+	/**
 	 * BlackBerry OS (up to the fifth edition known as the <i>BlackBerry Device Software</i>, also known as <i>Research
 	 * In Motion OS</i>) is a proprietary mobile operating system developed by BlackBerry Ltd for its BlackBerry line of
 	 * smartphone handheld devices.
@@ -212,6 +219,11 @@ public enum OperatingSystemFamily {
 	 * LiMo Foundation.
 	 */
 	TIZEN("Tizen", Pattern.compile("Tizen")),
+
+	/**
+	 * The Wii Operating System is based on Nintendo’s proprietary software and runs on the Wii video game console.
+	 */
+	WII_OS("Wii OS", Pattern.compile("Nintendo Wii|Wii OS")),
 
 	/**
 	 * Microsoft Windows is a trademark for operating systems of the Microsoft Corporation. Microsoft Windows was

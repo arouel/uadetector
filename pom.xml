@@ -77,7 +77,7 @@
 
 		<!-- Maven Plugins -->
 		<build-helper-maven-plugin.version>1.7</build-helper-maven-plugin.version>
-		<clirr-maven-plugin.version>2.5</clirr-maven-plugin.version>
+		<clirr-maven-plugin.version>2.6.1</clirr-maven-plugin.version>
 		<findbugs-maven-plugin.version>2.5.3</findbugs-maven-plugin.version>
 		<jacoco.version>0.6.2.201302030002</jacoco.version>
 		<maven-antrun-plugin.version>1.7</maven-antrun-plugin.version>

@@ -22,7 +22,6 @@ import static org.easymock.EasyMock.verify;
 import static org.fest.assertions.Assertions.assertThat;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
@@ -72,7 +71,7 @@ public class CachingXmlDataStoreTest_deleteCacheFile {
 
 		// fill cache file with false content
 		final byte[] wrongContent = ByteStreams.toByteArray(DATA_CONNECTION_ERROR_URL.openStream());
-		Files.write(wrongContent, cache);
+		Files.write(wrongContent, tmpFile);
 
 		// create working fallback data store
 		final TestXmlDataStore fallback = new TestXmlDataStore();
@@ -80,7 +79,6 @@ public class CachingXmlDataStoreTest_deleteCacheFile {
 		// create caching data store without a cache file
 		final CachingXmlDataStore store = CachingXmlDataStore.createCachingXmlDataStore(cache, DATA_CONNECTION_ERROR_URL,
 				VERSION_CONNECTION_ERROR_URL, CHARSET, fallback);
-		new FileInputStream(cache).read();
 
 		assertThat(store.getData().getVersion()).isEqualTo(TestXmlDataStore.VERSION_OLDER);
 

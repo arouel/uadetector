@@ -18,19 +18,19 @@
 			<p>This will compile all the Java files, run any tests, and package the deliverable code and resources into</p>
 			<ul>
 				<li>
-					modules/uadetector-core/target/uadetector-core-0.9.13-SNAPSHOT.jar
+					modules/uadetector-core/target/uadetector-core-0.9.16-SNAPSHOT.jar
 				</li>
 				<li>
-					modules/uadetector-core/target/uadetector-resources-2014.01-SNAPSHOT.jar
+					modules/uadetector-core/target/uadetector-resources-2014.04-SNAPSHOT.jar
 				</li>
 				<li>
-					distribution/target/uadetector-2014.01-SNAPSHOT-bin.tar.gz
+					distribution/target/uadetector-2014.04-SNAPSHOT-bin.tar.gz
 				</li>
 				<li>
-					distribution/target/uadetector-2014.01-SNAPSHOT-bin.zip
+					distribution/target/uadetector-2014.04-SNAPSHOT-bin.zip
 				</li>
 			</ul>
-			<p>(assuming the recent version is 2014.01-SNAPSHOT and 0.9.13-SNAPSHOT.)</p>
+			<p>(assuming the recent version is 2014.04-SNAPSHOT and 0.9.16-SNAPSHOT.)</p>
 		</section>
 	</body>
 </document>

@@ -105,7 +105,7 @@
 		<guava.version>17.0</guava.version>
 		<jsr250-api.version>1.0</jsr250-api.version>
 		<junit.version>4.11</junit.version>
-		<logback.version>1.1.1</logback.version>
+		<logback.version>1.1.2</logback.version>
 		<powermock.version>1.5.1</powermock.version>
 		<quality-check.version>1.3</quality-check.version>
 		<slf4j.version>1.7.6</slf4j.version>

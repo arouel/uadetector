@@ -72,6 +72,33 @@ public abstract class AbstractUserAgentStringParser implements UserAgentStringPa
 	}
 
 	/**
+	 * Examines the user agent string whether it is a robot.
+	 * 
+	 * @param userAgent
+	 *            String of an user agent
+	 * @param builder
+	 *            Builder for an user agent information
+	 * @return {@code true} if it is a robot, otherwise {@code false}
+	 */
+	private static boolean examineAsRobot(final UserAgent.Builder builder, final Data data) {
+		boolean isRobot = false;
+		VersionNumber version;
+		for (final Robot robot : data.getRobots()) {
+			if (robot.getUserAgentString().equals(builder.getUserAgentString())) {
+				isRobot = true;
+				robot.copyTo(builder);
+
+				// try to get the version from the last found group
+				version = VersionNumber.parseLastVersionNumber(robot.getName());
+				builder.setVersionNumber(version);
+
+				break;
+			}
+		}
+		return isRobot;
+	}
+
+	/**
 	 * Examines the user agent string whether has a specific device category.
 	 * 
 	 * @param userAgent
@@ -123,33 +150,6 @@ public abstract class AbstractUserAgentStringParser implements UserAgentStringPa
 
 		final DeviceCategory category = findDeviceCategoryByValue(Category.PERSONAL_COMPUTER, data);
 		builder.setDeviceCategory(category);
-	}
-
-	/**
-	 * Examines the user agent string whether it is a robot.
-	 * 
-	 * @param userAgent
-	 *            String of an user agent
-	 * @param builder
-	 *            Builder for an user agent information
-	 * @return {@code true} if it is a robot, otherwise {@code false}
-	 */
-	private static boolean examineAsRobot(final UserAgent.Builder builder, final Data data) {
-		boolean isRobot = false;
-		VersionNumber version;
-		for (final Robot robot : data.getRobots()) {
-			if (robot.getUserAgentString().equals(builder.getUserAgentString())) {
-				isRobot = true;
-				robot.copyTo(builder);
-
-				// try to get the version from the last found group
-				version = VersionNumber.parseLastVersionNumber(robot.getName());
-				builder.setVersionNumber(version);
-
-				break;
-			}
-		}
-		return isRobot;
 	}
 
 	/**

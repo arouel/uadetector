@@ -79,7 +79,7 @@ public abstract class AbstractUserAgentStringParser implements UserAgentStringPa
 	 * @param builder
 	 *            Builder for an user agent information
 	 */
-	private static void examineAsDeviceCategory(final UserAgent.Builder builder, final Data data) {
+	private static void examineDeviceCategory(final UserAgent.Builder builder, final Data data) {
 
 		// a robot will be classified as 'Other'
 		if (UserAgentType.ROBOT == builder.getType()) {
@@ -204,7 +204,7 @@ public abstract class AbstractUserAgentStringParser implements UserAgentStringPa
 			examineAsBrowser(builder, data);
 			examineOperatingSystem(builder, data);
 		}
-		examineAsDeviceCategory(builder, data);
+		examineDeviceCategory(builder, data);
 		return builder.build();
 	}
 

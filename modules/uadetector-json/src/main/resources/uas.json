@@ -1,6 +1,6 @@
 {
   "format": "1.0",
-  "version": "20140529-02",
+  "version": "20140603-01",
   "operating-system-patterns": [
     {
       "regex": {
@@ -82,6 +82,20 @@
     {
       "regex": {
         "flags": "si",
+        "pattern": "iPad.*OS 8_[0-9_]+"
+      },
+      "hash": "70c15dff39f1d2c1d9873c60c9e570994390d68125500d7ce0ae9eb250f3a25f"
+    },
+    {
+      "regex": {
+        "flags": "si",
+        "pattern": "iPhone OS 8_[0-9_]+"
+      },
+      "hash": "bc63c19670b0de1b2cea7d572972da3f364d1daca9080473e64fef1597bd5f8c"
+    },
+    {
+      "regex": {
+        "flags": "si",
         "pattern": "iPhone OS ([0-9_]+) like Mac OS X"
       },
       "hash": "73bb39e95ee101f9df25e832be6bb90dcf4ca6699f5ed571c7a0204e84238cbc"
@@ -131,9 +145,23 @@
     {
       "regex": {
         "flags": "si",
+        "pattern": "^Mozilla.*Windows Phone 8.0"
+      },
+      "hash": "02f2e73e0bcd2529760212013d7a8365b0959bf8858d42574b5090b5045f4b6a"
+    },
+    {
+      "regex": {
+        "flags": "si",
         "pattern": "^Mozilla\\/.*Ubuntu.*[Tablet|Mobile].*WebKit"
       },
       "hash": "7719551c5bee2148ee0716123148ede23d259524bec0e0a788000f4023611e2a"
+    },
+    {
+      "regex": {
+        "flags": "si",
+        "pattern": "^Mozilla.*Windows Phone 8.1"
+      },
+      "hash": "ed700d4606263c740380831afe8cf4ec1768b06fab639ca1d2c584411f20c644"
     },
     {
       "regex": {
@@ -288,6 +316,13 @@
         "pattern": "^Mozilla.*Tizen 2"
       },
       "hash": "caeebcec68e601d314e275a0947ff52f9f80daa904913cd295cb97d83b6f4595"
+    },
+    {
+      "regex": {
+        "flags": "si",
+        "pattern": "(Windows Mobile)|(Windows Phone)"
+      },
+      "hash": "58edd209edd54fe72bf46200c70f914731a0b93fd7cb017db715ba526d573e18"
     },
     {
       "regex": {
@@ -950,13 +985,6 @@
     {
       "regex": {
         "flags": "si",
-        "pattern": "^Mozilla.*Windows Phone 8.0"
-      },
-      "hash": "02f2e73e0bcd2529760212013d7a8365b0959bf8858d42574b5090b5045f4b6a"
-    },
-    {
-      "regex": {
-        "flags": "si",
         "pattern": "Linux.*Mageia"
       },
       "hash": "a843a4de794c8dbe6eec7173a9f0a919f55dfee4ff7cbb3c2025a2e613f1f366"
@@ -1062,16 +1090,16 @@
     {
       "regex": {
         "flags": "si",
-        "pattern": "^Mozilla.*Windows Phone 8.1"
+        "pattern": "^Mozilla.*Kbd.*Touch.*AppleWebKit.*Mobile"
       },
-      "hash": "ed700d4606263c740380831afe8cf4ec1768b06fab639ca1d2c584411f20c644"
+      "hash": "9506f02c4ae71626f65008e89a9114c2e7738908f1f9de41ce85fdf60da67ac0"
     },
     {
       "regex": {
         "flags": "si",
-        "pattern": "^Mozilla.*Kbd.*Touch.*AppleWebKit.*Mobile"
+        "pattern": "Mac OS X (10_10|10\\.10)"
       },
-      "hash": "9506f02c4ae71626f65008e89a9114c2e7738908f1f9de41ce85fdf60da67ac0"
+      "hash": "76bc09695deb337f36ed9d34a61730c3a14bd9f49a635bcb5c7f84f9506dca09"
     },
     {
       "regex": {
@@ -1135,13 +1163,6 @@
         "pattern": "Windows 2000"
       },
       "hash": "1876aa5be9fa1ed73f0990d071ab57e03c29c25efdb96dacfd51f90ff1e655c9"
-    },
-    {
-      "regex": {
-        "flags": "si",
-        "pattern": "(Windows Mobile)|(Windows Phone)"
-      },
-      "hash": "58edd209edd54fe72bf46200c70f914731a0b93fd7cb017db715ba526d573e18"
     },
     {
       "regex": {
@@ -2269,8 +2290,8 @@
       ],
       "producer": "Apple Computer, Inc.",
       "producer-url": "http://www.apple.com/",
-      "url": "http://www.apple.com/osx/",
-      "hash": "878df3ce7a35f8e84cf4e39e57dcbdbaa4ebdf067fe7d513e56ac3f5bf1e7d44"
+      "url": "http://en.wikipedia.org/wiki/Mac_OS_X_Tiger",
+      "hash": "7ab43663a7befac81d8cd8a82edc15a2da21a67c21d3eb5faaedb5407b8cddc1"
     },
     {
       "family": "OS X",
@@ -2282,8 +2303,8 @@
       ],
       "producer": "Apple Computer, Inc.",
       "producer-url": "http://www.apple.com/",
-      "url": "http://www.apple.com/osx/",
-      "hash": "7e76cec25f9d1ab19b32fe98073c6502530f3d475a847e1eb20a265bc824a586"
+      "url": "http://en.wikipedia.org/wiki/Mac_OS_X_Leopard",
+      "hash": "3bbd0ad4d342daf5b7bc56fefefe1dca6a18fb1883565593b44f6776eae090d0"
     },
     {
       "family": "OS X",
@@ -2295,8 +2316,8 @@
       ],
       "producer": "Apple Computer, Inc.",
       "producer-url": "http://www.apple.com/",
-      "url": "http://www.apple.com/osx/",
-      "hash": "3dca0446a08186e04cfd1a7c043e16ffc09eb42cb5ef79df6bf03331c4337541"
+      "url": "http://en.wikipedia.org/wiki/Mac_OS_X_Snow_Leopard",
+      "hash": "d7b972a66363ebe84c966281f86eeb54d944b966470e2e0e8c251c4f937f7d42"
     },
     {
       "family": "OS X",
@@ -2309,8 +2330,8 @@
       ],
       "producer": "Apple Computer, Inc.",
       "producer-url": "http://www.apple.com/",
-      "url": "http://www.apple.com/osx/",
-      "hash": "ae2f6e85ba795f5839c34de511a28a6256445d1e8eee9bc175fc3ed6deb27be3"
+      "url": "http://en.wikipedia.org/wiki/Mac_OS_X",
+      "hash": "37ad9646fdf7e191640c3f74406be910ee57baaffe16447d193694582238debd"
     },
     {
       "family": "OS/2",
@@ -2348,8 +2369,8 @@
       ],
       "producer": "Apple Computer, Inc.",
       "producer-url": "http://www.apple.com/",
-      "url": "http://www.apple.com/osx/",
-      "hash": "a1dcb0ab60c51b62100a709e556731b0f911824f21c8f8dcfcbf2cdeeb015cbc"
+      "url": "http://en.wikipedia.org/wiki/Mac_OS_X_Panther",
+      "hash": "e6afe02c3bc5bee3adc6bcf56bf8b849c2ccef29c6ce9ac208360ef9f7fbfec8"
     },
     {
       "family": "MINIX",
@@ -2629,8 +2650,8 @@
       ],
       "producer": "Apple Computer, Inc.",
       "producer-url": "http://www.apple.com/",
-      "url": "http://www.apple.com/osx/",
-      "hash": "f1b7a2ddadce790a65e781a708071ffe9d02d94576d2b0be4ae2b8e3305e4281"
+      "url": "http://en.wikipedia.org/wiki/Mac_OS_X_Lion",
+      "hash": "4cab2a16cfe6c40638adf045d7eded18afffef955a196d5fbfec4d3c8cf1c863"
     },
     {
       "family": "Tizen",
@@ -2679,8 +2700,8 @@
       ],
       "producer": "Apple Computer, Inc.",
       "producer-url": "http://www.apple.com/",
-      "url": "http://www.apple.com/osx/",
-      "hash": "3f9216106c0ad02ef1edcf655f78169aa8c67d9f6944f0563f41366320024285"
+      "url": "http://en.wikipedia.org/wiki/OS_X_Mountain_Lion",
+      "hash": "816248369a75bc74f1c1339b77019c2206a729c4f112b48960d27c08374bde15"
     },
     {
       "family": "iOS",
@@ -2892,8 +2913,8 @@
       ],
       "producer": "Apple Computer, Inc.",
       "producer-url": "http://www.apple.com/",
-      "url": "http://www.apple.com/osx/",
-      "hash": "17def05b8c99bc0c4d0677eca91997fddc6b417b7f9025fd5dcb7e4a42317d05"
+      "url": "http://en.wikipedia.org/wiki/OS_X_Mavericks",
+      "hash": "0f8eaf9f479e8b5fad134251a97748e788a53c558582d339d032bb0e0f9ad6a9"
     },
     {
       "family": "Nintendo",
@@ -2998,6 +3019,33 @@
       "producer-url": "",
       "url": "http://en.wikipedia.org/wiki/Windows_Phone_8.1",
       "hash": "1892e56fc7cea3b3ef03380d79b059a41012afce7b8efbbe41c5d4089a7bd2c1"
+    },
+    {
+      "family": "OS X",
+      "icon": "macosx.png",
+      "info-url": "/list-of-ua/os-detail?os\u003dOS X 10.10 Yosemite",
+      "name": "OS X 10.10 Yosemite",
+      "operating-system-pattern-hashs": [
+        "76bc09695deb337f36ed9d34a61730c3a14bd9f49a635bcb5c7f84f9506dca09"
+      ],
+      "producer": "Apple Computer, Inc.",
+      "producer-url": "http://www.apple.com/",
+      "url": "http://en.wikipedia.org/wiki/OS_X_Yosemite",
+      "hash": "64644d7ffd0e45ba48a0fd9930f378658c60fc9d18505e8157d5b4ad23ebd192"
+    },
+    {
+      "family": "iOS",
+      "icon": "iphone.png",
+      "info-url": "/list-of-ua/os-detail?os\u003diOS 8",
+      "name": "iOS 8",
+      "operating-system-pattern-hashs": [
+        "70c15dff39f1d2c1d9873c60c9e570994390d68125500d7ce0ae9eb250f3a25f",
+        "bc63c19670b0de1b2cea7d572972da3f364d1daca9080473e64fef1597bd5f8c"
+      ],
+      "producer": "Apple Inc.",
+      "producer-url": "http://www.apple.com/",
+      "url": "http://en.wikipedia.org/wiki/IOS_8",
+      "hash": "3602ec8e73fe88ca03ff2c823a4571704a99ff3ed65ea898682152c524e98aaa"
     }
   ],
   "browser-types": [
@@ -11875,7 +11923,7 @@
       "family": "iGooMap",
       "icon": "igoomap.png",
       "info-url": "/list-of-ua/browser-detail?browser\u003diGooMap",
-      "operating-system-hash": "ae2f6e85ba795f5839c34de511a28a6256445d1e8eee9bc175fc3ed6deb27be3",
+      "operating-system-hash": "37ad9646fdf7e191640c3f74406be910ee57baaffe16447d193694582238debd",
       "browser-pattern-hashs": [
         "3e1ece2c43ed65d0127f65ec29a42443bfedca2f98c5c0360a71de5480fa4d31"
       ],
@@ -11883,7 +11931,7 @@
       "producer-url": "http://www.pointworks.de/",
       "browser-type-hash": "f97e9da0e3b879f0a9df979ae260a5f7e1371edb127c1862d4f861981166cdc1",
       "url": "http://www.pointworks.de/software/igoomap/index.php",
-      "hash": "cb7343325b32e0b9134f5a66f0f9c0e99f205cc49a2565beaea6590362b7acc5"
+      "hash": "ae60dcfdffe8f646ea5c070f4b8199ffeb25fbfc74a794082d22e15e948ae48f"
     },
     {
       "family": "iTunes",
@@ -13065,7 +13113,7 @@
       "family": "CFNetwork",
       "icon": "DLLicon.png",
       "info-url": "/list-of-ua/browser-detail?browser\u003dCFNetwork",
-      "operating-system-hash": "ae2f6e85ba795f5839c34de511a28a6256445d1e8eee9bc175fc3ed6deb27be3",
+      "operating-system-hash": "37ad9646fdf7e191640c3f74406be910ee57baaffe16447d193694582238debd",
       "browser-pattern-hashs": [
         "21f69c36f4aa8ce6129d1a91342d084c1d01981d654ae9c0badd3e1a19108126"
       ],
@@ -13073,7 +13121,7 @@
       "producer-url": "http://www.apple.com/",
       "browser-type-hash": "dc20b3d5d2cddf82fad332821ca5e9a4efdcede4a273aa193d2b495bdcc92825",
       "url": "https://developer.apple.com/library/mac/documentation/Networking/Conceptual/CFNetwork/Introduction/Introduction.html",
-      "hash": "e45b19909b3966d860ab4a0706ac331abcf677ab408e49c89685a076bb433093"
+      "hash": "edd030aacce3588414963159f04bdf2841a6f32621ced75996b8a6d3d0316a26"
     },
     {
       "family": "LG Web Browser",

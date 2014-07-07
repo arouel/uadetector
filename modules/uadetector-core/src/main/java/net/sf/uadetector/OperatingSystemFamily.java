@@ -124,6 +124,12 @@ public enum OperatingSystemFamily {
 	MAC_OS("Mac OS", Pattern.compile("Mac OS")),
 
 	/**
+	 * MeeGo was a Linux kernel-based free mobile operating system project resulting from the fusion of Intel's Moblin
+	 * and Nokia's Maemo operating systems.
+	 */
+	MEEGO("MeeGo", Pattern.compile("MeeGo")),
+
+	/**
 	 * Minix is a free unixoides operating system that was developed by Andrew S. Tanenbaum at the Free University of
 	 * Amsterdam as a teaching tool.
 	 */
@@ -183,6 +189,12 @@ public enum OperatingSystemFamily {
 	 * computers.
 	 */
 	RISC_OS("RISC OS", Pattern.compile("RISC OS|RISK OS")),
+
+	/**
+	 * Binary Runtime Environment for Wireless (Brew MP, Brew, or BREW) is an application development platform created
+	 * by Qualcomm.
+	 */
+	BREW("Brew", Pattern.compile("Brew")),
 
 	/**
 	 * BlackBerry OS (up to the fifth edition known as the <i>BlackBerry Device Software</i>, also known as <i>Research

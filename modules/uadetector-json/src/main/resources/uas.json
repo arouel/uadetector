@@ -1,6 +1,6 @@
 {
   "format": "1.0",
-  "version": "20140707-01",
+  "version": "20140805-01",
   "operating-system-patterns": [
     {
       "regex": {
@@ -3769,6 +3769,13 @@
     {
       "regex": {
         "flags": "si",
+        "pattern": "^Mozilla.*AppleWebKit.*Chrome\\/[0-9\\.]+.*Kinza\\/([0-9\\.]+)"
+      },
+      "hash": "5477ba831c4f5dfaea33bdeeb589669243bf0ebeac2b9dc5259e6c6858afbe2c"
+    },
+    {
+      "regex": {
+        "flags": "si",
         "pattern": "mozilla.*rv:[0-9\\.]+.*gecko\\/[0-9]+.*fennec\\/([0-9a-z\\+\\-\\.]+).*"
       },
       "hash": "c5698c32a8fa8c2e881227d6f5491a541b5289947430ae88a45450c4926eb39a"
@@ -5281,9 +5288,9 @@
     {
       "regex": {
         "flags": "si",
-        "pattern": "^Jigsaw\\/[0-9\\.]+ W3C_CSS_Validator_JFouffa\\/([0-9\\.]+)$"
+        "pattern": "^Jigsaw\\/[0-9\\.]+ W3C_CSS_Validator_JFouffa\\/([0-9\\.]+)"
       },
-      "hash": "7021f24465573bfa5c65f54c3816d47d90e9cc432477699c41f2fdcd4ed3293b"
+      "hash": "f779807a8acb654351f5fc78a06fc1358a6b21406911792ef3bceb3daded609f"
     },
     {
       "regex": {
@@ -6884,9 +6891,9 @@
     {
       "regex": {
         "flags": "si",
-        "pattern": "^CSE HTML Validator Lite Online"
+        "pattern": "^CSE HTML Validator.* Online"
       },
-      "hash": "edc81076db535b0b593fd4fd3f722dcfbd96b4475db8da3513565bd504efe87f"
+      "hash": "6a8ac8b530dd9d5f9faa888824e9dc36d9ed7fa7938a4ed52544f79d342a4abf"
     },
     {
       "regex": {
@@ -9362,13 +9369,13 @@
       "icon": "w3.png",
       "info-url": "/list-of-ua/browser-detail?browser\u003dW3C CSS Validator",
       "browser-pattern-hashs": [
-        "7021f24465573bfa5c65f54c3816d47d90e9cc432477699c41f2fdcd4ed3293b"
+        "f779807a8acb654351f5fc78a06fc1358a6b21406911792ef3bceb3daded609f"
       ],
       "producer": "World Wide Web Consortium",
       "producer-url": "http://www.w3.org/",
       "browser-type-hash": "0b0a0967f8b942e1a413fc26de435a08df2fb272885de25eddad17fa4fc1b6b5",
       "url": "http://jigsaw.w3.org/css-validator/",
-      "hash": "172460822817765b1999d0b8a7d202de6dbdb3fdd28c8e6b465110dda0370ad0"
+      "hash": "48cd9a32c38d8d05ffb997ae10df578c15be2f6c7dd386baabb62acec3364086"
     },
     {
       "family": "PHP link checker",
@@ -9573,13 +9580,13 @@
       "icon": "csehtmlvalidator.png",
       "info-url": "/list-of-ua/browser-detail?browser\u003dCSE HTML Validator",
       "browser-pattern-hashs": [
-        "edc81076db535b0b593fd4fd3f722dcfbd96b4475db8da3513565bd504efe87f"
+        "6a8ac8b530dd9d5f9faa888824e9dc36d9ed7fa7938a4ed52544f79d342a4abf"
       ],
       "producer": "AI Internet Solutions",
       "producer-url": "http://www.htmlvalidator.com/",
       "browser-type-hash": "0b0a0967f8b942e1a413fc26de435a08df2fb272885de25eddad17fa4fc1b6b5",
       "url": "http://online.htmlvalidator.com/php/onlinevallite.php",
-      "hash": "964849a5149ebdc390e2deded23d5bb01e02a1e53858123b05dcc19394c2f1bd"
+      "hash": "469b5736ee7c959739eb05ddaa56e8d8be4954babd9f0880547459e6310dd581"
     },
     {
       "family": "Omea Reader",
@@ -13742,6 +13749,19 @@
       "browser-type-hash": "d4f1118eb3ace8c9d67d4b72ff39234cd4f3ab260ef6f422ce24b7a1b10d14ee",
       "url": "http://imobile.baidu.com/browser/",
       "hash": "5fc86fd4f692f511004bcf046d1e32e3badc14324120109513d6bd5060901184"
+    },
+    {
+      "family": "Kinza",
+      "icon": "kinza.png",
+      "info-url": "/list-of-ua/browser-detail?browser\u003dKinza",
+      "browser-pattern-hashs": [
+        "5477ba831c4f5dfaea33bdeeb589669243bf0ebeac2b9dc5259e6c6858afbe2c"
+      ],
+      "producer": "Dayz Inc.",
+      "producer-url": "http://www.dayz.jp/",
+      "browser-type-hash": "d31de1a5c5c8ba2a210a167cf0d0dc2425c57ea7525f4b73a4b7ab934af79dfc",
+      "url": "http://www.kinza.jp/",
+      "hash": "0057186d6e00b8defae2e8a0ac17d1af947e08b11a7fb11d7b2d0c35b43b3a24"
     }
   ],
   "robots": [
@@ -27404,6 +27424,136 @@
       "producer-url": "http://www.daumcorp.com/",
       "user-agent-string": "Mozilla/5.0 (compatible; MSIE or Firefox mutant; not on Windows server;) Daumoa/4.0",
       "hash": "a4d9eb4994e8b7a96864f57870629fda17ea5d0a5fa064790ce04e558d0cb692"
+    },
+    {
+      "family-name": "SurcentroBot",
+      "icon": "bot.png",
+      "info-url": "/list-of-ua/bot-detail?bot\u003dSurcentroBot",
+      "name": "SurcentroBot",
+      "producer": "SurCentro",
+      "producer-url": "http://www.surcentro.com/",
+      "user-agent-string": "SurcentroBot",
+      "hash": "9a030b39ca5b5b824c3d309b24abe405c2fc7fc0b18262314ebab07745ca76b8"
+    },
+    {
+      "family-name": "HypeStat",
+      "icon": "bot.png",
+      "info-url": "/list-of-ua/bot-detail?bot\u003dHypeStat",
+      "name": "HypeStat/1.0",
+      "producer": "hypestat.com",
+      "producer-url": "http://www.hypestat.com/",
+      "user-agent-string": "Mozilla/5.0 (compatible; hypestat/1.0; +http://www.hypestat.com/bot)",
+      "hash": "a740f8a64f03139fc702e1049f0ba180a9cfef6920f1edb28c5e2033900bab90"
+    },
+    {
+      "family-name": "MixBot",
+      "icon": "bot.png",
+      "info-url": "/list-of-ua/bot-detail?bot\u003dMixBot",
+      "name": "MixBot",
+      "producer": "MIXDATA",
+      "producer-url": "http://www.mixdata.com/",
+      "user-agent-string": "MixBot (+http://t.co/GSRLLKex24)",
+      "hash": "dfe6d2ec872fd9ed77f35eda8362202a2f19d82769c5875a38dfb7d2c2907f4b"
+    },
+    {
+      "family-name": "ImplisenseBot",
+      "icon": "bot.png",
+      "info-url": "/list-of-ua/bot-detail?bot\u003dImplisenseBot",
+      "name": "ImplisenseBot 1.0",
+      "producer": "Implisense GmbH",
+      "producer-url": "http://www.implisense.com/",
+      "user-agent-string": "ImplisenseBot 1.0",
+      "hash": "296e594c81900ee17dac1080101e9eb3cd9d189985d60cd4b31a048450209730"
+    },
+    {
+      "family-name": "stq_bot",
+      "icon": "bot.png",
+      "info-url": "/list-of-ua/bot-detail?bot\u003dstq_bot",
+      "name": "stq_bot",
+      "producer": "SEARCHTEQ GmbH",
+      "producer-url": "http://www.searchteq.de/",
+      "user-agent-string": "stq_bot (+http://www.searchteq.de)",
+      "hash": "9d514205438d58be9246747040c32ea33de6cdb81a87cb6c54857590afb5ac92"
+    },
+    {
+      "family-name": "voltron",
+      "icon": "bot_80legs.png",
+      "info-url": "/list-of-ua/bot-detail?bot\u003dvoltron",
+      "name": "voltron",
+      "producer": "Datafiniti, LLC.",
+      "producer-url": "http://datafiniti.net/",
+      "user-agent-string": "voltron",
+      "hash": "eafbac848c42e8be5c9843d5e4bbc57414fef56a4c99ad2b7bd077fdb9c2462f"
+    },
+    {
+      "family-name": "datagnionbot",
+      "icon": "bot.png",
+      "info-url": "/list-of-ua/bot-detail?bot\u003ddatagnionbot",
+      "name": "datagnionbot",
+      "producer": "Datagnion GmbH.",
+      "producer-url": "http://www.datagnion.com/",
+      "user-agent-string": "datagnionbot (+http://www.datagnion.com/bot.html)",
+      "hash": "9932eb52a55c946cc79c769142a48f5bdde6ed71eb1ecf63878192465ad87f6a"
+    },
+    {
+      "family-name": " Scrubby",
+      "icon": "bot.png",
+      "info-url": "/list-of-ua/bot-detail?bot\u003d Scrubby",
+      "name": " Scrubby/3.1",
+      "producer": "Scrub The Web",
+      "producer-url": "http://www.scrubtheweb.com/",
+      "user-agent-string": "Mozilla/5.0 (compatible; Scrubby/3.1; +http://www.scrubtheweb.com/help/technology.html)",
+      "hash": "d359c36609cb23adbf2f8be6069bdaafe75100cc92c3cd02027a0d944c718a88"
+    },
+    {
+      "family-name": " Scrubby",
+      "icon": "bot.png",
+      "info-url": "/list-of-ua/bot-detail?bot\u003d Scrubby",
+      "name": " Scrubby/3.2",
+      "producer": "Scrub The Web",
+      "producer-url": "http://www.scrubtheweb.com/",
+      "user-agent-string": "Mozilla/5.0 (compatible; Scrubby/3.2; +http://seotools.scrubtheweb.com/webpage-analyzer.html)",
+      "hash": "469bd5a653059add2d399316c333c83e4fc0b75fb7eb744c07c6d1b265755c3f"
+    },
+    {
+      "family-name": "Infohelfer",
+      "icon": "bot.png",
+      "info-url": "/list-of-ua/bot-detail?bot\u003dInfohelfer",
+      "name": "Infohelfer/1.4.3",
+      "producer": "ITam GmbH",
+      "producer-url": "http://www.itam-gmbh.com/",
+      "user-agent-string": "Mozilla/5.0 (compatible; Infohelfer/1.4.3; +http://www.infohelfer.de/crawler.php)",
+      "hash": "fd39d07c81d4313c66e4a63e5e09fe9688644b0c663e07bfefb4ecfe4b3379ee"
+    },
+    {
+      "family-name": "dlvr.it",
+      "icon": "bot.png",
+      "info-url": "/list-of-ua/bot-detail?bot\u003ddlvr.it",
+      "name": "dlvr.it/1.0",
+      "producer": "dlvr.it, inc.",
+      "producer-url": "http://dlvr.it/",
+      "user-agent-string": "dlvr.it/1.0 (+http://dlvr.it/) Mozilla/5.0",
+      "hash": "01c5902f8f1d5363ccc5915230afadd7ba87bd2e99eb1b0da5e690a1edb28e58"
+    },
+    {
+      "family-name": "SemrushBot",
+      "icon": "bot.png",
+      "info-url": "/list-of-ua/bot-detail?bot\u003dSemrushBot",
+      "name": "SemrushBot-SA/0.97",
+      "producer": "SEOQuake Team",
+      "producer-url": "http://www.seoquaketeam.com/",
+      "user-agent-string": "Mozilla/5.0 (compatible; SemrushBot-SA/0.97; +http://www.semrush.com/bot.html)",
+      "hash": "b0aae1ae4aedca031a045df5ebd14eb0138bea0ea33cb671e33dd1d2934e7909"
+    },
+    {
+      "family-name": "FreeWebMonitoring SiteChecker",
+      "icon": "bot.png",
+      "info-url": "/list-of-ua/bot-detail?bot\u003dFreeWebMonitoring SiteChecker",
+      "name": "FreeWebMonitoring SiteChecker/0.2",
+      "producer": "GreenWave Online Inc.",
+      "producer-url": "http://www.greenwaveonline.com/",
+      "user-agent-string": "FreeWebMonitoring SiteChecker/0.2 (+http://www.freewebmonitoring.com/bot.html)",
+      "hash": "32ca103416404d9b7a553f46705fd97e77b4ac9f07adac52646c2435f74998c4"
     }
   ],
   "device-patterns": [

@@ -10628,9 +10628,9 @@
       "hash": "dd47e78e93941950539fbef271baa681c0e821678fe53b2d8c8cc291f4839239"
     },
     {
-      "family": "Android Webkit",
+      "family": "Android Browser",
       "icon": "androidWebkit.png",
-      "info-url": "/list-of-ua/browser-detail?browser\u003dAndroid Webkit",
+      "info-url": "/list-of-ua/browser-detail?browser\u003dAndroid browser",
       "browser-pattern-hashs": [
         "e82ac732daa427482b8474dcebc37ec2c19649e22e7223c62b4264f9d6c3cc0b"
       ],
@@ -10638,7 +10638,7 @@
       "producer-url": "http://www.google.com/",
       "browser-type-hash": "d4f1118eb3ace8c9d67d4b72ff39234cd4f3ab260ef6f422ce24b7a1b10d14ee",
       "url": "http://developer.android.com/reference/android/webkit/package-summary.html",
-      "hash": "e0b8d0aec96b64fbeb5c10d2ef7bc0b74f3b31d88a7c0571bea31b71e4e1fdef"
+      "hash": "770dd42cbd9eb18d7c1976d2a7d5602ba3caa35c5054f0bd97fbad6ae61b73d1"
     },
     {
       "family": "Weltweitimnetz Browser",
@@ -13234,7 +13234,7 @@
       "producer": "Sproose, Inc.",
       "producer-url": "http://www.sproose.com/",
       "user-agent-string": "sproose/0.1-alpha (sproose crawler; http://www.sproose.com/bot.html; crawler@sproose.com)",
-      "hash": "e2fdfbbd8213b2cd883546cf136001c46ec33314c2d1ef55d26accfa27621cb9"
+      "hash": "14705e914f9ca8d3b9aa679da6b62f0e23765ac3bf7e6ddcc6de2b03b4a20b73"
     },
     {
       "family-name": "Search Engine World Robots.txt Validator",
@@ -13664,7 +13664,7 @@
       "producer": "Snap",
       "producer-url": "http://www.snap.com/",
       "user-agent-string": "Snapbot/1.0",
-      "hash": "9f39a24aa3b840973449be4ee55e1bda4cc447e876f780c33e76c969c65f93e0"
+      "hash": "0af3350a1c08e022fac86b38da0e9d096e048f12cabd7e90eb601a142b8633cd"
     },
     {
       "family-name": "SrevBot",
@@ -13754,7 +13754,7 @@
       "producer": "Sproose, Inc.",
       "producer-url": "http://www.sproose.com/",
       "user-agent-string": "sproose/0.1 (sproose bot; http://www.sproose.com/bot.html; crawler@sproose.com)",
-      "hash": "509bee5c908d8a312b7861cc9e9a8e68f99231e5d79d24170850044409be9cd0"
+      "hash": "a42118884c09618ad73bc4fcfc9c2806954bbbb62815fd8837ef199f61147cde"
     },
     {
       "family-name": "updated",
@@ -14854,7 +14854,7 @@
       "producer": "Snap",
       "producer-url": "http://www.snap.com/",
       "user-agent-string": "Snapbot/1.0 (+http://www.snap.com)",
-      "hash": "ccfc70eeb29dd5ff6c25e1041fb6ff2136393648b42d1bc6c75ad41d27b71c1a"
+      "hash": "f982d6bb5059c7a6a872d23d5fbaeaf310e3014e769c8774b3a21e5429aaceed"
     },
     {
       "family-name": "DataFountains",
@@ -15184,7 +15184,7 @@
       "producer": "Snap",
       "producer-url": "http://www.snap.com/",
       "user-agent-string": "Snapbot/1.0 (Snap Shots, +http://www.snap.com)",
-      "hash": "a30cada757cb678c4328286a51ffeb5934af606dd5e5299a48e6faffb8b195fd"
+      "hash": "aea088ff4079f7ef13c25c5e9fb08d1d5c3374bf603ed53a5d57bf01f837f5dd"
     },
     {
       "family-name": "Acorn",
@@ -15474,7 +15474,7 @@
       "producer": "Snap",
       "producer-url": "http://www.snap.com/",
       "user-agent-string": "Snapbot/1.0 (Site Search Crawler, +http://www.snap.com)",
-      "hash": "e7d5df7b24a080bd3ad863547036662f345c70eb320e7eedbde95f5725fd2e57"
+      "hash": "c087f9ad530e48300ea9ee2804df0be5ffaf867a831cc8db1d885166f4f6831f"
     },
     {
       "family-name": "WebAlta Crawler",

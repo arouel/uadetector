@@ -61,6 +61,39 @@ public class UpdatingUserAgentStringParserImplTest {
 	}
 
 	@Test
+	public void parse_anonymizer_ANDROID() throws Exception {
+		final String userAgent = "Mozilla/5.0 (Linux; Android 4.4.2; sv-se; SAMSUNG GT-I9505 Build/KOT49H) AppleWebKit/537.36 (KHTML, like Gecko) Version/1.5 Chrome/28.0.1500.94 Mobile Safari/537.36";
+		final UserAgent agent = PARSER.parse(userAgent);
+		assertThat(agent).isNotNull();
+
+		// check user agent informations
+		assertThat(agent.getFamily()).isEqualTo(UserAgentFamily.ANDROID_BROWSER);
+		assertThat(agent.getName()).isEqualTo("Android Webkit");
+		assertThat(agent.getProducer()).isEqualTo("Google Inc.");
+		assertThat(agent.getProducerUrl()).isEqualTo("http://www.google.com/");
+		assertThat(agent.getType()).isEqualTo(UserAgentType.MOBILE_BROWSER);
+		assertThat(agent.getTypeName()).isEqualTo("Mobile Browser");
+		assertThat(agent.getUrl()).isEqualTo("http://developer.android.com/reference/android/webkit/package-summary.html");
+		assertThat(agent.getVersionNumber().toVersionString()).isEqualTo("1.5");
+
+		// check operating system informations
+		final OperatingSystem os = agent.getOperatingSystem();
+		assertThat(os.getFamily()).isEqualTo(OperatingSystemFamily.ANDROID);
+		assertThat(os.getFamilyName()).isEqualTo("Android");
+		assertThat(os.getName()).isEqualTo("Android 4.0.x Ice Cream Sandwich");
+		assertThat(os.getProducer()).isEqualTo("Google, Inc.");
+		assertThat(os.getProducerUrl()).isEqualTo("http://www.google.com/");
+		assertThat(os.getUrl()).isEqualTo("http://en.wikipedia.org/wiki/Android_%28operating_system%29");
+
+		// check device category informations
+		final DeviceCategory category = agent.getDeviceCategory();
+		assertThat(category.getCategory()).isEqualTo(Category.TABLET);
+		assertThat(category.getName()).isEqualTo(Category.TABLET.getName());
+		assertThat(category.getIcon()).isEqualTo("tablet.png");
+		assertThat(category.getInfoUrl()).isEqualTo("/list-of-ua/device-detail?device=Tablet");
+	}
+
+	@Test
 	public void parse_anonymizer_ANONYMOUSE() throws Exception {
 		final String userAgent = "http://Anonymouse.org/ (Unix)";
 		final UserAgent agent = PARSER.parse(userAgent);

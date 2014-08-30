@@ -224,9 +224,9 @@ public enum UserAgentFamily {
 	AMIGA_VOYAGER("Amiga Voyager", Pattern.compile("Amiga Voyager")),
 
 	/**
-	 * Android Webkit
+	 * Android Browser
 	 */
-	ANDROID_WEBKIT("Android Webkit", Pattern.compile("Android Webkit")),
+	ANDROID_BROWSER("Android Browser", Pattern.compile("(Android Browser|Android Webkit)", Pattern.CASE_INSENSITIVE)),
 
 	/**
 	 * Anemone
@@ -4413,7 +4413,7 @@ public enum UserAgentFamily {
 
 		UserAgentFamily result = UNKNOWN;
 		for (final UserAgentFamily value : values()) {
-			if (value.getName().equals(family)) {
+			if (value.getName().equalsIgnoreCase(family)) {
 				result = value;
 				break;
 			}

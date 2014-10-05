@@ -9,7 +9,7 @@
 
 	<groupId>net.sf.uadetector</groupId>
 	<artifactId>uadetector-parent</artifactId>
-	<version>2014.09</version>
+	<version>2014.10-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<name>UADetector</name>
@@ -49,7 +49,7 @@
 		<connection>scm:git:git://github.com/before/uadetector.git</connection>
 		<developerConnection>scm:git:git@github.com:before/uadetector.git</developerConnection>
 		<url>https://github.com/before/uadetector</url>
-		<tag>2014.09</tag>
+		<tag>HEAD</tag>
 	</scm>
 
 	<modules>

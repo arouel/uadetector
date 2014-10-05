@@ -1,4 +1,5 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
@@ -48,7 +49,7 @@
 	<scm>
 		<connection>scm:git:git://github.com/before/uadetector.git</connection>
 		<developerConnection>scm:git:git@github.com:before/uadetector.git</developerConnection>
-		<url>https://github.com/before/uadetector.git</url>
+		<url>https://github.com/before/uadetector</url>
 		<tag>HEAD</tag>
 	</scm>
 
@@ -95,6 +96,7 @@
 		<maven-site-plugin.version>3.0</maven-site-plugin.version>
 		<maven-surefire-plugin.version>2.17</maven-surefire-plugin.version>
 		<maven-toolchains-plugin.version>1.0</maven-toolchains-plugin.version>
+		<site-maven-plugin.version>0.10</site-maven-plugin.version>
 		<wagon-ssh.version>2.6</wagon-ssh.version>
 
 		<!-- Dependencies -->
@@ -110,6 +112,8 @@
 		<quality-check.version>1.3</quality-check.version>
 		<slf4j.version>1.7.7</slf4j.version>
 
+		<!-- GitHub Site Plugin -->
+		<github.global.server>github</github.global.server>
 	</properties>
 
 	<dependencyManagement>
@@ -342,6 +346,11 @@
 					<version>1.0</version>
 				</plugin>
 				<plugin>
+					<groupId>com.github.github</groupId>
+					<artifactId>site-maven-plugin</artifactId>
+					<version>${site-maven-plugin.version}</version>
+				</plugin>
+				<plugin>
 					<groupId>org.eclipse.m2e</groupId>
 					<artifactId>lifecycle-mapping</artifactId>
 					<version>1.0.0</version>
@@ -430,6 +439,25 @@
 						<_include>-osgi.bnd</_include>
 					</instructions>
 				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>com.github.github</groupId>
+				<artifactId>site-maven-plugin</artifactId>
+				<configuration>
+					<merge>true</merge>
+					<message>Creating site for ${project.artifactId}-${project.version}</message>
+					<noJekyll>true</noJekyll>
+					<repositoryName>UADetector</repositoryName>
+					<repositoryOwner>before</repositoryOwner>
+				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>site</goal>
+						</goals>
+						<phase>site</phase>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 

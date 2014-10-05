@@ -77,27 +77,27 @@
 		<java.version>1.6</java.version>
 
 		<!-- Maven Plugins -->
-		<build-helper-maven-plugin.version>1.7</build-helper-maven-plugin.version>
+		<build-helper-maven-plugin.version>1.9.1</build-helper-maven-plugin.version>
 		<clirr-maven-plugin.version>2.6.1</clirr-maven-plugin.version>
-		<findbugs-maven-plugin.version>2.5.3</findbugs-maven-plugin.version>
+		<findbugs-maven-plugin.version>2.5.5</findbugs-maven-plugin.version>
 		<jacoco.version>0.6.2.201302030002</jacoco.version>
 		<maven-antrun-plugin.version>1.7</maven-antrun-plugin.version>
-		<maven-assembly-plugin.version>2.4</maven-assembly-plugin.version>
-		<maven-bundle-plugin.version>2.4.0</maven-bundle-plugin.version>
-		<maven-changelog-plugin.version>2.2</maven-changelog-plugin.version>
+		<maven-assembly-plugin.version>2.4.1</maven-assembly-plugin.version>
+		<maven-bundle-plugin.version>2.5.3</maven-bundle-plugin.version>
+		<maven-changelog-plugin.version>2.3</maven-changelog-plugin.version>
 		<maven-compiler-plugin.version>3.1</maven-compiler-plugin.version>
-		<maven-gpg-plugin.version>1.4</maven-gpg-plugin.version>
+		<maven-gpg-plugin.version>1.5</maven-gpg-plugin.version>
 		<maven-javadoc-plugin.version>2.9.1</maven-javadoc-plugin.version>
 		<maven-jxr-plugin.version>2.4</maven-jxr-plugin.version>
-		<maven-pmd-plugin.version>3.1</maven-pmd-plugin.version>
+		<maven-pmd-plugin.version>3.2</maven-pmd-plugin.version>
 		<maven-project-info-reports-plugin.version>2.7</maven-project-info-reports-plugin.version>
-		<maven-release-plugin.version>2.4.1</maven-release-plugin.version>
-		<maven-resources-plugin.version>2.6</maven-resources-plugin.version>
+		<maven-release-plugin.version>2.5.1</maven-release-plugin.version>
+		<maven-resources-plugin.version>2.7</maven-resources-plugin.version>
 		<maven-site-plugin.version>3.0</maven-site-plugin.version>
 		<maven-surefire-plugin.version>2.17</maven-surefire-plugin.version>
 		<maven-toolchains-plugin.version>1.0</maven-toolchains-plugin.version>
 		<site-maven-plugin.version>0.10</site-maven-plugin.version>
-		<wagon-ssh.version>2.6</wagon-ssh.version>
+		<wagon-ssh.version>2.7</wagon-ssh.version>
 
 		<!-- Dependencies -->
 		<commons-logging.version>1.1.1</commons-logging.version>

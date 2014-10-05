@@ -10,7 +10,7 @@
 
 	<groupId>net.sf.uadetector</groupId>
 	<artifactId>uadetector-parent</artifactId>
-	<version>0.2.28-SNAPSHOT</version>
+	<version>2014.09-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<name>UADetector</name>

@@ -6,7 +6,7 @@
 		<relativePath>../../</relativePath>
 		<groupId>net.sf.uadetector</groupId>
 		<artifactId>uadetector-parent</artifactId>
-		<version>0.2.28-SNAPSHOT</version>
+		<version>2014.09-SNAPSHOT</version>
 	</parent>
 
 	<artifactId>uadetector-json</artifactId>

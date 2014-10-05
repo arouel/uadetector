@@ -1,6 +1,6 @@
 {
   "format": "1.0",
-  "version": "20140825-01",
+  "version": "20141003-01",
   "operating-system-patterns": [
     {
       "regex": {
@@ -3910,6 +3910,13 @@
         "pattern": "^Mozilla.*AppleWebKit.*Chrome.*WebExplorer\\/([0-9\\.]+)"
       },
       "hash": "c7423455d07ef661e293504893419a7472149027c9b22a8bf51ab0a724ba8f5f"
+    },
+    {
+      "regex": {
+        "flags": "si",
+        "pattern": "^Mozilla.*AppleWebKit.*MxNitro\\/([0-9\\.]+).*Safari"
+      },
+      "hash": "0de574c973542285bc94541eda1faec78c82654e502b4ba8dff57eb9f9c1d4f3"
     },
     {
       "regex": {
@@ -13940,6 +13947,19 @@
       "browser-type-hash": "d31de1a5c5c8ba2a210a167cf0d0dc2425c57ea7525f4b73a4b7ab934af79dfc",
       "url": "http://webexplorerbrasil.com/",
       "hash": "ac917a167176e13aa7a6fbfc902d7c2e2557bac606ef3b95981f5c6ce17d5305"
+    },
+    {
+      "family": "MxNitro",
+      "icon": "mxnitro.png",
+      "info-url": "/list-of-ua/browser-detail?browser\u003dMxNitro",
+      "browser-pattern-hashs": [
+        "0de574c973542285bc94541eda1faec78c82654e502b4ba8dff57eb9f9c1d4f3"
+      ],
+      "producer": "Maxthon Ltd.",
+      "producer-url": "http://www.maxthon.com/",
+      "browser-type-hash": "d31de1a5c5c8ba2a210a167cf0d0dc2425c57ea7525f4b73a4b7ab934af79dfc",
+      "url": "http://usa.maxthon.com/mxnitro/",
+      "hash": "6adede2d14c788cd60e2211be2da2369da5a3d4f9524f1e4283ecc8cb1932388"
     }
   ],
   "robots": [
@@ -14355,13 +14375,13 @@
     },
     {
       "family-name": "LinkWalker",
-      "icon": "bot.png",
+      "icon": "bot_LinkWalker.png",
       "info-url": "/list-of-ua/bot-detail?bot\u003dLinkWalker",
       "name": "LinkWalker",
-      "producer": "SEVENtwentyfour Inc.",
-      "producer-url": "http://www.seventwentyfour.com/",
+      "producer": "BrandProtect Inc.",
+      "producer-url": "http://www.brandprotect.com/",
       "user-agent-string": "LinkWalker",
-      "hash": "082d7a9d25abb9188400888d02df419232ff5291f4b6204a9ea3b61154498a62"
+      "hash": "e49808378fd615e6494c5d33bbeb62133b3003ea5a3b9dd53b99a229bf04d835"
     },
     {
       "family-name": "Ask Jeeves/Teoma",
@@ -15011,7 +15031,7 @@
       "producer": "Sproose, Inc.",
       "producer-url": "http://www.sproose.com/",
       "user-agent-string": "sproose/0.1-alpha (sproose crawler; http://www.sproose.com/bot.html; crawler@sproose.com)",
-      "hash": "e2fdfbbd8213b2cd883546cf136001c46ec33314c2d1ef55d26accfa27621cb9"
+      "hash": "14705e914f9ca8d3b9aa679da6b62f0e23765ac3bf7e6ddcc6de2b03b4a20b73"
     },
     {
       "family-name": "Search Engine World Robots.txt Validator",
@@ -15441,7 +15461,7 @@
       "producer": "Snap",
       "producer-url": "http://www.snap.com/",
       "user-agent-string": "Snapbot/1.0",
-      "hash": "9f39a24aa3b840973449be4ee55e1bda4cc447e876f780c33e76c969c65f93e0"
+      "hash": "0af3350a1c08e022fac86b38da0e9d096e048f12cabd7e90eb601a142b8633cd"
     },
     {
       "family-name": "SrevBot",
@@ -15531,7 +15551,7 @@
       "producer": "Sproose, Inc.",
       "producer-url": "http://www.sproose.com/",
       "user-agent-string": "sproose/0.1 (sproose bot; http://www.sproose.com/bot.html; crawler@sproose.com)",
-      "hash": "509bee5c908d8a312b7861cc9e9a8e68f99231e5d79d24170850044409be9cd0"
+      "hash": "a42118884c09618ad73bc4fcfc9c2806954bbbb62815fd8837ef199f61147cde"
     },
     {
       "family-name": "updated",
@@ -16405,13 +16425,13 @@
     },
     {
       "family-name": "LinkWalker",
-      "icon": "bot.png",
+      "icon": "bot_LinkWalker.png",
       "info-url": "/list-of-ua/bot-detail?bot\u003dLinkWalker",
       "name": "LinkWalker/2.0",
-      "producer": "SEVENtwentyfour Inc.",
-      "producer-url": "http://www.seventwentyfour.com/",
+      "producer": "BrandProtect Inc.",
+      "producer-url": "http://www.brandprotect.com/",
       "user-agent-string": "LinkWalker/2.0",
-      "hash": "cd63bd4c997bb5db74b716dfbeb925d489a5d300b41c20f43bc82a6e631be543"
+      "hash": "5a01fc0bfcee9e331ec5249eb163047ba7d9f5ad0802bc1464ae3a3a635e79f8"
     },
     {
       "family-name": "Exabot",
@@ -16631,7 +16651,7 @@
       "producer": "Snap",
       "producer-url": "http://www.snap.com/",
       "user-agent-string": "Snapbot/1.0 (+http://www.snap.com)",
-      "hash": "ccfc70eeb29dd5ff6c25e1041fb6ff2136393648b42d1bc6c75ad41d27b71c1a"
+      "hash": "f982d6bb5059c7a6a872d23d5fbaeaf310e3014e769c8774b3a21e5429aaceed"
     },
     {
       "family-name": "DataFountains",
@@ -16961,7 +16981,7 @@
       "producer": "Snap",
       "producer-url": "http://www.snap.com/",
       "user-agent-string": "Snapbot/1.0 (Snap Shots, +http://www.snap.com)",
-      "hash": "a30cada757cb678c4328286a51ffeb5934af606dd5e5299a48e6faffb8b195fd"
+      "hash": "aea088ff4079f7ef13c25c5e9fb08d1d5c3374bf603ed53a5d57bf01f837f5dd"
     },
     {
       "family-name": "Acorn",
@@ -17251,7 +17271,7 @@
       "producer": "Snap",
       "producer-url": "http://www.snap.com/",
       "user-agent-string": "Snapbot/1.0 (Site Search Crawler, +http://www.snap.com)",
-      "hash": "e7d5df7b24a080bd3ad863547036662f345c70eb320e7eedbde95f5725fd2e57"
+      "hash": "c087f9ad530e48300ea9ee2804df0be5ffaf867a831cc8db1d885166f4f6831f"
     },
     {
       "family-name": "WebAlta Crawler",
@@ -19585,13 +19605,13 @@
     },
     {
       "family-name": "bixocrawler",
-      "icon": "bot_ptd-crawler.png",
+      "icon": "bot.png",
       "info-url": "/list-of-ua/bot-detail?bot\u003dbixocrawler",
       "name": "ptd-crawler",
       "producer": "Bixo Labs",
       "producer-url": "http://openbixo.org/",
       "user-agent-string": "Mozilla/5.0 (compatible; ptd-crawler; +http://bixolabs.com/crawler/ptd/; crawler@bixolabs.com)",
-      "hash": "667485468806fabe9c1d5c39d168b0f0ffefe402bbad1f6682eac19e5d373b95"
+      "hash": "3e4c71fe1a0181076212549419b2e502303c368f655a555c301d1d97a40ca948"
     },
     {
       "family-name": "SBIder",
@@ -27634,6 +27654,16 @@
       "hash": "266983c60acb20850a0adfd0d35c7e31eeef151cb48b2cc78e664f8f21dbcda1"
     },
     {
+      "family-name": "MojeekBot",
+      "icon": "bot_MojeekBot.png",
+      "info-url": "/list-of-ua/bot-detail?bot\u003dMojeekBot",
+      "name": "MojeekBot/0.6",
+      "producer": "Mojeek Ltd.",
+      "producer-url": "http://www.mojeek.com/",
+      "user-agent-string": "Mozilla/5.0 (compatible; MojeekBot/0.6; +https://www.mojeek.com/bot.html)",
+      "hash": "14e09bb0aac7dcec85fe0797c0ca646f17a2b0fcdcdaa204155b69c1315534cc"
+    },
+    {
       "family-name": "bingbot",
       "icon": "bot_msnbot.png",
       "info-url": "/list-of-ua/bot-detail?bot\u003dbingbot",
@@ -27835,13 +27865,13 @@
     },
     {
       "family-name": "bixocrawler",
-      "icon": "bot_ptd-crawler.png",
+      "icon": "bot.png",
       "info-url": "/list-of-ua/bot-detail?bot\u003dbixocrawler",
       "name": "bixocrawler TestCrawler",
       "producer": "Bixo Labs",
       "producer-url": "http://openbixo.org/",
       "user-agent-string": "Mozilla/5.0 (compatible; TestCrawler; +http://wiki.github.com/bixo/bixo/bixocrawler; bixo-dev@yahoogroups.com)",
-      "hash": "674105dfa71022c303cacfcddd9974182c418ae7481fcce7d5e89aabbc54fbfd"
+      "hash": "8904954a47bea109b5053ee0e25a8ebee4069d277334ffad783fdfbba5cdc55e"
     },
     {
       "family-name": "Online Domain Tools",
@@ -27992,22 +28022,222 @@
       "producer-url": "http://www.gigablast.com/",
       "user-agent-string": "GigablastOpenSource/1.0",
       "hash": "604f7aeacddb51830fde5e7ca07444850bdc9dac0d058d0c0901682f1c23fb31"
+    },
+    {
+      "family-name": "LinkWalker",
+      "icon": "bot_LinkWalker.png",
+      "info-url": "/list-of-ua/bot-detail?bot\u003dLinkWalker",
+      "name": "LinkWalker/3.0",
+      "producer": "BrandProtect Inc.",
+      "producer-url": "http://www.brandprotect.com/",
+      "user-agent-string": "LinkWalker/3.0 (http://www.brandprotect.com)",
+      "hash": "30432b6ee40c89162227fa1594eb8445641bd039bf1b2d99512dd2b182c0b57b"
+    },
+    {
+      "family-name": "bl.uk_lddc_bot",
+      "icon": "bot.png",
+      "info-url": "/list-of-ua/bot-detail?bot\u003dbl.uk_lddc_bot",
+      "name": "bl.uk_lddc_bot/3.3.0",
+      "producer": "British Library",
+      "producer-url": "http://www.bl.uk/",
+      "user-agent-string": "bl.uk_lddc_bot/3.3.0-SNAPSHOT-20140519-0844 (+http://www.bl.uk/aboutus/legaldeposit/websites/websites/faqswebmaster/index.html)",
+      "hash": "4cfab1e5ecd7c24816eb8ff2ce5dc80d84acfbb2da3c71e5e148b80eb8cc641b"
+    },
+    {
+      "family-name": "Experibot",
+      "icon": "bot.png",
+      "info-url": "/list-of-ua/bot-detail?bot\u003dExperibot",
+      "name": "Experibot_v1",
+      "producer": "Amir Krause",
+      "producer-url": "",
+      "user-agent-string": "Experibot_v1 (https://dl.dropboxusercontent.com/u/8024465/site/Info.html)",
+      "hash": "8ca3f597ea087a094cc6dd2f5ee3f26feeefe732ba2468dc1a93e837a790c32f"
+    },
+    {
+      "family-name": "WeViKaBot",
+      "icon": "bot.png",
+      "info-url": "/list-of-ua/bot-detail?bot\u003dWeViKaBot",
+      "name": "WeViKaBot/1.0",
+      "producer": "GS IT-Trainingsservice UG",
+      "producer-url": "http://www.wevika.de/",
+      "user-agent-string": "Mozilla/5.0 (compatible; WeViKaBot/1.0; +http://www.wevika.de/)",
+      "hash": "e201080c5d606d852b9bc131abc5e67044673aa6f51ee11660f97893f0eb6581"
+    },
+    {
+      "family-name": "contentDetection",
+      "icon": "bot.png",
+      "info-url": "/list-of-ua/bot-detail?bot\u003dcontentDetection",
+      "name": "contentDetection",
+      "producer": "Intelligence GmbH",
+      "producer-url": "http://www.mindup.de/",
+      "user-agent-string": "Crawler powered by contentDetection (www.mindup.de)",
+      "hash": "7a522d4711c48e0f224eba51e182d6ab3c90088dc1ffebc32392532e6c6dcb97"
+    },
+    {
+      "family-name": "DomainAppender",
+      "icon": "bot.png",
+      "info-url": "/list-of-ua/bot-detail?bot\u003dDomainAppender",
+      "name": "DomainAppender /1.0",
+      "producer": "Profound Networks, LLC",
+      "producer-url": "http://www.profound.net/",
+      "user-agent-string": "Mozilla/5.0 (compatible; DomainAppender /1.0; +http://www.profound.net/domainappender)",
+      "hash": "d90bb9155f47755956c589016e0ec3ddb5df2ebd8eb85b2aecf6116155bc941e"
+    },
+    {
+      "family-name": "Mail.Ru bot",
+      "icon": "bot.png",
+      "info-url": "/list-of-ua/bot-detail?bot\u003dMail.Ru bot",
+      "name": "Mail.RU_Bot/Robots",
+      "producer": "Mail.Ru Group",
+      "producer-url": "http://corp.mail.ru/",
+      "user-agent-string": "Mozilla/5.0 (compatible; Linux x86_64; Mail.RU_Bot/Robots; +http://go.mail.ru/help/robots)",
+      "hash": "f00be0d2940ca0eb4550862c74edbec88a88b867c2f37652b9c114475985418a"
+    },
+    {
+      "family-name": "LivelapBot/0.2",
+      "icon": "bot.png",
+      "info-url": "/list-of-ua/bot-detail?bot\u003dLivelapBot/0.2",
+      "name": "LivelapBot/0.2",
+      "producer": "LiveLap",
+      "producer-url": "http://ivelap.com/",
+      "user-agent-string": "LivelapBot/0.2 (http://site.livelap.com/crawler)",
+      "hash": "3995fd04cf7b50cece203afb2df5876ef5d491f83fccc97fdad3e70bda68a1d5"
+    },
+    {
+      "family-name": "ProductoDownloadUrlBot/",
+      "icon": "bot.png",
+      "info-url": "/list-of-ua/bot-detail?bot\u003dProductoDownloadUrlBot/",
+      "name": "ProductoDownloadUrlBot/1.0",
+      "producer": "Producto AG",
+      "producer-url": "http://www.producto.de/",
+      "user-agent-string": "Mozilla/5.0 (compatible; ProductoDownloadUrlBot/1.0; +http://www.producto.de/)",
+      "hash": "b9c5e655d6a7a7a25381dc71ac30a39d496289fe578cbd6a57498b918a385788"
+    },
+    {
+      "family-name": "spbot",
+      "icon": "bot_spbot.png",
+      "info-url": "/list-of-ua/bot-detail?bot\u003dspbot",
+      "name": "spbot/4.2.0",
+      "producer": "Axandra GmbH",
+      "producer-url": "http://www.axandra.com/",
+      "user-agent-string": "Mozilla/5.0 (compatible; spbot/4.2.0; +http://OpenLinkProfiler.org/bot )",
+      "hash": "1e0899285fe67fd3b87579a10cf60102bb8fe1a8247611366aab82401cb0ac46"
+    },
+    {
+      "family-name": "SeznamBot",
+      "icon": "seznam.png",
+      "info-url": "/list-of-ua/bot-detail?bot\u003dSeznamBot",
+      "name": "SeznamBot/3.2-test2",
+      "producer": "Seznam.cz, a.s.",
+      "producer-url": "http://www.seznam.cz/",
+      "user-agent-string": "Mozilla/5.0 (compatible; SeznamBot/3.2-test2; +http://fulltext.sblog.cz/)",
+      "hash": "25e754a7fd7161eeb07d7410519fbe7f58a723eddaaf6bcb5e6106c5798783f0"
+    },
+    {
+      "family-name": "Impressumscrawler",
+      "icon": "bot.png",
+      "info-url": "/list-of-ua/bot-detail?bot\u003dImpressumscrawler",
+      "name": "Impressumscrawler",
+      "producer": "netEstate GmbH",
+      "producer-url": "http://www.netestate.de/",
+      "user-agent-string": "netEstate Impressumscrawler (+http://www.netestate.de/De/Loesungen/Impressumscrawler)",
+      "hash": "4840f0ba4f106c852e2f6d73f8157bd5062f73847fdf63d5f1b0391485a2cfb3"
+    },
+    {
+      "family-name": "yacybot",
+      "icon": "bot_yacybot.png",
+      "info-url": "/list-of-ua/bot-detail?bot\u003dyacybot",
+      "name": "yacybot",
+      "producer": "Michael Christen",
+      "producer-url": "",
+      "user-agent-string": "yacybot (-global; amd64 FreeBSD 9.2-RELEASE-p10; java 1.7.0_65; Europe/en) http://yacy.net/bot.html",
+      "hash": "cbb763e5b8a40cf42c7845e0ebb917b35227634b258fbd3f51c6ecae48b08571"
+    },
+    {
+      "family-name": "yacybot",
+      "icon": "bot_yacybot.png",
+      "info-url": "/list-of-ua/bot-detail?bot\u003dyacybot",
+      "name": "yacybot",
+      "producer": "Michael Christen",
+      "producer-url": "",
+      "user-agent-string": "yacybot (freeworld/global; amd64 Linux 3.9.3-1-ARCH; java 1.7.0_21; America/en) http://yacy.net/bot.html",
+      "hash": "3d2345efd5e75c5c91edd965eada07b68f6136535ce186b1ae28d08a540a5109"
+    },
+    {
+      "family-name": "UptimeRobot",
+      "icon": "bot.png",
+      "info-url": "/list-of-ua/bot-detail?bot\u003dUptimeRobot",
+      "name": "UptimeRobot/2.0",
+      "producer": "Umut Muhaddisoglu, Daniel Rimille",
+      "producer-url": "http://www.webresourcesdepot.com/",
+      "user-agent-string": "Mozilla/5.0+(compatible; UptimeRobot/2.0; http://www.uptimerobot.com/)",
+      "hash": "030c86c501fb7206b959d0eb937b402d8039bfa8b72ccefa86c479eb3344fbd3"
+    },
+    {
+      "family-name": "EuripBot",
+      "icon": "bot.png",
+      "info-url": "/list-of-ua/bot-detail?bot\u003dEuripBot",
+      "name": "EuripBot/2.0",
+      "producer": "EURIP - European Internet Portal",
+      "producer-url": "http://www.eurip.com/",
+      "user-agent-string": "EuripBot/2.0 (+http://www.eurip.com) GetRobots",
+      "hash": "7ab8c319d80c003f8cf56159e7efc1b37023d165aed83d998ef76eb87b9425d6"
+    },
+    {
+      "family-name": "bixocrawler",
+      "icon": "bot.png",
+      "info-url": "/list-of-ua/bot-detail?bot\u003dbixocrawler",
+      "name": "pub-crawler",
+      "producer": "Bixo Labs",
+      "producer-url": "http://openbixo.org/",
+      "user-agent-string": "Mozilla/5.0 (compatible; pub-crawler; +http://wiki.github.com/bixo/bixo/bixocrawler; bixo-dev@yahoogroups.com)",
+      "hash": "da858a7478e7102f678a6d6f2d20505fddb3ea08cf991b6672b3ff592acf5ba9"
+    },
+    {
+      "family-name": "ZumBot",
+      "icon": "bot.png",
+      "info-url": "/list-of-ua/bot-detail?bot\u003dZumBot",
+      "name": "ZumBot/1.0",
+      "producer": "ZUMinternet Corp",
+      "producer-url": "http://www.zuminternet.com/",
+      "user-agent-string": "Mozilla/5.0 (compatible; Windows NT 6.1?; ZumBot/1.0; http://help.zum.com/inquiry)",
+      "hash": "e6a182f723e7cdce9c8584e6324e354de395db309196ee81501f88b131819d1d"
+    },
+    {
+      "family-name": "NaverBot",
+      "icon": "bot_NaverBot.png",
+      "info-url": "/list-of-ua/bot-detail?bot\u003dNaverBot",
+      "name": "Yeti/1.1",
+      "producer": "NHN Corporation",
+      "producer-url": "http://www.nhncorp.com/",
+      "user-agent-string": "Mozilla/5.0 (compatible; Yeti/1.1; +http://help.naver.com/robots/)",
+      "hash": "0f0c484aeaa50edb926ef93f55d421498af928d3ac164bc3b82c137b114281ce"
+    },
+    {
+      "family-name": "Slackbot",
+      "icon": "bot_Slackbot.png",
+      "info-url": "/list-of-ua/bot-detail?bot\u003dSlackbot",
+      "name": "Slackbot-LinkExpanding",
+      "producer": "Slack Technologies, Inc. ",
+      "producer-url": "https://slack.com/",
+      "user-agent-string": "Slackbot-LinkExpanding (+https://api.slack.com/robots)",
+      "hash": "595e3fdee47a2deb92db9159f58937693934c095f00bf23344b387113947c16e"
     }
   ],
   "device-patterns": [
     {
       "regex": {
         "flags": "si",
-        "pattern": "^Mozilla.*Android.*OUYA"
+        "pattern": "^HbbTV"
       },
-      "hash": "cff9846679869bd0793a1a26abf35b279ea85baff1b0c4f1d1a6a135e03d8b12"
+      "hash": "9d97c5068fa7400a8fd222a4928ffafda4beb10bb57ed19a752897984363e05b"
     },
     {
       "regex": {
         "flags": "si",
-        "pattern": "^HbbTV"
+        "pattern": "^Mozilla.*Android.*OUYA"
       },
-      "hash": "9d97c5068fa7400a8fd222a4928ffafda4beb10bb57ed19a752897984363e05b"
+      "hash": "cff9846679869bd0793a1a26abf35b279ea85baff1b0c4f1d1a6a135e03d8b12"
     },
     {
       "regex": {
@@ -28019,16 +28249,9 @@
     {
       "regex": {
         "flags": "si",
-        "pattern": "^Mozilla.*Windows Phone.*ARM.*NOKIA.*Lumia 920"
+        "pattern": "^Mozilla.*Android.*POV_TV-HDMI.* Safari"
       },
-      "hash": "322a4e5ddab7f6ad29c3344d575a06cbce43fac313f3b66ae48079e27f4b163a"
-    },
-    {
-      "regex": {
-        "flags": "si",
-        "pattern": "^Mozilla.*Windows Phone.*ARM.*NOKIA.*Lumia 820"
-      },
-      "hash": "91dbdaebcd26aa7328f364336da88d3dc0516601f5fe85c97b3d6715ad871e02"
+      "hash": "ce4632efa59288d612d22e3fa19e5f8fc190dcc731e86793e98ec057efd572f1"
     },
     {
       "regex": {
@@ -28040,23 +28263,16 @@
     {
       "regex": {
         "flags": "si",
-        "pattern": "^Mozilla.*Android.*POV_TV-HDMI.* Safari"
+        "pattern": "^Mozilla.*Windows Phone.*ARM.*NOKIA.*Lumia 820"
       },
-      "hash": "ce4632efa59288d612d22e3fa19e5f8fc190dcc731e86793e98ec057efd572f1"
+      "hash": "91dbdaebcd26aa7328f364336da88d3dc0516601f5fe85c97b3d6715ad871e02"
     },
     {
       "regex": {
         "flags": "si",
-        "pattern": "^Mozilla.*DTV.*AppleWebKit.*Espial"
+        "pattern": "^Mozilla.*Windows Phone.*ARM.*NOKIA.*Lumia 920"
       },
-      "hash": "b4a01ca07dd795e2658cfff21efa21c60c7764634347da5c73945a482ab471be"
-    },
-    {
-      "regex": {
-        "flags": "si",
-        "pattern": "^Opera.*Linux.*NETTV\\/[0-9\\.]+.*Presto"
-      },
-      "hash": "ffdd2ff10d2a68b2ea3603de03f18976fe1e189b9c92839b2cb8489659533a81"
+      "hash": "322a4e5ddab7f6ad29c3344d575a06cbce43fac313f3b66ae48079e27f4b163a"
     },
     {
       "regex": {
@@ -28068,6 +28284,20 @@
     {
       "regex": {
         "flags": "si",
+        "pattern": "^Opera.*Linux.*NETTV\\/[0-9\\.]+.*Presto"
+      },
+      "hash": "ffdd2ff10d2a68b2ea3603de03f18976fe1e189b9c92839b2cb8489659533a81"
+    },
+    {
+      "regex": {
+        "flags": "si",
+        "pattern": "^Mozilla.*hp-tablet.*hpwOS.*TouchPad"
+      },
+      "hash": "64c0ddff58d0d9a42e4e533cd3d904bff90e2443ff76a0620452c7cea567b1bb"
+    },
+    {
+      "regex": {
+        "flags": "si",
         "pattern": "^Mozilla\\/.*Ubuntu.*Mobile.*WebKit"
       },
       "hash": "4928aa1b1e4e5db74993e5589e562db64a486a515f7fa2f2f5ec96ea70496719"
@@ -28075,9 +28305,9 @@
     {
       "regex": {
         "flags": "si",
-        "pattern": "^Mozilla.*Android.*L-06C Build"
+        "pattern": "^Mozilla.*Android.*bq (Edison|Darwin|Voltaire)"
       },
-      "hash": "5cbc016e9ab3aed18c8f722c8d4516837584d530c61bf93c1da84ac240cffd96"
+      "hash": "f0d672f48d16f11d8aa4a1419719bd7d26e5a02023278c80e92634df9439e73a"
     },
     {
       "regex": {
@@ -28117,16 +28347,16 @@
     {
       "regex": {
         "flags": "si",
-        "pattern": "^Mozilla.*hp-tablet.*hpwOS.*TouchPad"
+        "pattern": "^Mozilla.*Linux.*HbbTV"
       },
-      "hash": "64c0ddff58d0d9a42e4e533cd3d904bff90e2443ff76a0620452c7cea567b1bb"
+      "hash": "4eccdc2376b19a80b3d5f75d8dbc4a3c0a0fbfcc6da8d4ebe8eca85710e9e29b"
     },
     {
       "regex": {
         "flags": "si",
-        "pattern": "^Mozilla.*Linux.*HbbTV"
+        "pattern": "^Mozilla.*DTV.*AppleWebKit.*Espial"
       },
-      "hash": "4eccdc2376b19a80b3d5f75d8dbc4a3c0a0fbfcc6da8d4ebe8eca85710e9e29b"
+      "hash": "b4a01ca07dd795e2658cfff21efa21c60c7764634347da5c73945a482ab471be"
     },
     {
       "regex": {
@@ -28194,16 +28424,9 @@
     {
       "regex": {
         "flags": "si",
-        "pattern": "^Mozilla.*Android.* (HP Slate 10 HD|HP Slate 7|HP SlateBook 10)"
+        "pattern": "^Mozilla.*Android.*Hudl HT7S3.*AppleWebKit.*Safari"
       },
-      "hash": "aa5a3da85e1b334ad347831f2cecb63dee6069051af0bd348e65a5c61fd82af1"
-    },
-    {
-      "regex": {
-        "flags": "si",
-        "pattern": "^Mozilla.*FreeBSD.*Viera.*AppleWebKit.*Viera.*Chrome"
-      },
-      "hash": "6ffe08f150cee727d2a530a2fc9bf66bb8800bd5acf403f257073eff26117ed4"
+      "hash": "01c45ee03abea7dfb5170cf3729b268ec4656017bf283e9d9edcdcfaa276e1a7"
     },
     {
       "regex": {
@@ -28271,23 +28494,30 @@
     {
       "regex": {
         "flags": "si",
+        "pattern": "^Mozilla.*AppleWebKit.*QtCarBrowser.*Safari"
+      },
+      "hash": "2cd7a1f3ba467a20029d7a0dc784bc4460fc9c9ed5a94a08bc2cd660ff044c98"
+    },
+    {
+      "regex": {
+        "flags": "si",
+        "pattern": "^Mozilla.*FreeBSD.*Viera.*AppleWebKit.*Viera.*Chrome"
+      },
+      "hash": "6ffe08f150cee727d2a530a2fc9bf66bb8800bd5acf403f257073eff26117ed4"
+    },
+    {
+      "regex": {
+        "flags": "si",
+        "pattern": "^Mozilla.*Android.* (HP Slate 10 HD|HP Slate 7|HP SlateBook 10)"
+      },
+      "hash": "aa5a3da85e1b334ad347831f2cecb63dee6069051af0bd348e65a5c61fd82af1"
+    },
+    {
+      "regex": {
+        "flags": "si",
         "pattern": "^Mozilla.*Android.*GTV100.*Safari"
       },
       "hash": "0556e39587a384af2a99399c986e738dd2aaca0e58c2c142a61fd8a2bc2e27a8"
-    },
-    {
-      "regex": {
-        "flags": "si",
-        "pattern": "^Mozilla.*Android.*Nook.*(Color|BNRV200|BNTV250|BNTV300|BNTV400|BNTV600)"
-      },
-      "hash": "a223a3aee050fc13404d90d35e0d40aac1f3272e9cc16ba8964a7445f6458b66"
-    },
-    {
-      "regex": {
-        "flags": "si",
-        "pattern": "^Mozilla.*Android.*Hudl HT7S3.*AppleWebKit.*Safari"
-      },
-      "hash": "01c45ee03abea7dfb5170cf3729b268ec4656017bf283e9d9edcdcfaa276e1a7"
     },
     {
       "regex": {
@@ -28327,13 +28557,6 @@
     {
       "regex": {
         "flags": "si",
-        "pattern": "^Mozilla.*Android.*bq (Edison|Darwin|Voltaire)"
-      },
-      "hash": "f0d672f48d16f11d8aa4a1419719bd7d26e5a02023278c80e92634df9439e73a"
-    },
-    {
-      "regex": {
-        "flags": "si",
         "pattern": "^Mozilla.*Android.*Maxwell (Lite|Plus)"
       },
       "hash": "7337f2c8ef71a21bd8ac711b43eeaecbab2a6a3bbfd2b842f41748c29d401698"
@@ -28362,16 +28585,44 @@
     {
       "regex": {
         "flags": "si",
-        "pattern": "^Mozilla.*AppleWebKit.*QtCarBrowser.*Safari"
+        "pattern": "^Mozilla.*Android.*Nook.*(Color|BNRV200|BNTV250|BNTV300|BNTV400|BNTV600)"
       },
-      "hash": "2cd7a1f3ba467a20029d7a0dc784bc4460fc9c9ed5a94a08bc2cd660ff044c98"
+      "hash": "a223a3aee050fc13404d90d35e0d40aac1f3272e9cc16ba8964a7445f6458b66"
     },
     {
       "regex": {
         "flags": "si",
-        "pattern": "^Mozilla.*SmartHub.*Linux"
+        "pattern": "^Opera.*Linux.*Opera TV"
       },
-      "hash": "27b15ce588a2c8ed59c5135118b9c3bb0a4bb88ed1b007771ee819acbfb596e0"
+      "hash": "00b940ccf194694c402ca9467981a0907bf1208db611ce73349ed6a95b015a3e"
+    },
+    {
+      "regex": {
+        "flags": "si",
+        "pattern": "^Mozilla.*Android.*L-06C Build"
+      },
+      "hash": "5cbc016e9ab3aed18c8f722c8d4516837584d530c61bf93c1da84ac240cffd96"
+    },
+    {
+      "regex": {
+        "flags": "si",
+        "pattern": "iPad.*OS.*like Mac OS X"
+      },
+      "hash": "f852b0865b48444c606e90e2b44500d71396c84b96b0a2a06763a1090bfa6ea7"
+    },
+    {
+      "regex": {
+        "flags": "si",
+        "pattern": "^Mozilla.*Gecko.*Firefox.*Kylo\\/([0-9\\.]+)$"
+      },
+      "hash": "4d0826d1b37d02662ff6f81cfdcc97762fbe2fdc46b9b0c67da18745fd3e5eea"
+    },
+    {
+      "regex": {
+        "flags": "si",
+        "pattern": "^Mozilla.*linux.*KFTT.*Silk"
+      },
+      "hash": "66b5dbe83b64fbfd570346e32ed8d62140716507afc781ea1eb0d2d74068cdb4"
     },
     {
       "regex": {
@@ -28383,9 +28634,9 @@
     {
       "regex": {
         "flags": "si",
-        "pattern": "^Mozilla.*Linux.*Kindle\\/[0-9\\.]+"
+        "pattern": "^Mozilla.*(Android|Linux).*KFJWI.*Silk"
       },
-      "hash": "2049acd708a51118213ad0046f66fd981356c243db605c7fbca2bc1a5f4beda6"
+      "hash": "b3199a7a7fc5f2c5db9015236b5b7b4213f04beb7d645562ce9769e507041217"
     },
     {
       "regex": {
@@ -28393,13 +28644,6 @@
         "pattern": "^Mozilla.*linux.*KFJWA.*Silk"
       },
       "hash": "7f1e1a58dd434e25ec217ba7ab6554920743f6f14240b89d45f3175dd2aec599"
-    },
-    {
-      "regex": {
-        "flags": "si",
-        "pattern": "^Mozilla.*Escape [0-9\\.]+"
-      },
-      "hash": "1d678a820f279012159a3686c356913440477ecac944e2d8f728418b767a1eb5"
     },
     {
       "regex": {
@@ -28418,9 +28662,44 @@
     {
       "regex": {
         "flags": "si",
-        "pattern": "^Mozilla.*(Android|Linux).*KFJWI.*Silk"
+        "pattern": "^Mozilla.*Android.*SGPT12"
       },
-      "hash": "b3199a7a7fc5f2c5db9015236b5b7b4213f04beb7d645562ce9769e507041217"
+      "hash": "21b233284dd1f4f4171e3ebe2d0db44437ef0f3db4161bffd8d5a3004d2dbd5c"
+    },
+    {
+      "regex": {
+        "flags": "si",
+        "pattern": "^Mozilla.*Android.*(SGP311|SGP321)"
+      },
+      "hash": "2d1df4654182567262d0a12827ce525ab70a12df1ed63cff210d69a69a55928b"
+    },
+    {
+      "regex": {
+        "flags": "si",
+        "pattern": "^Mozilla.*Android.*Sony Tablet P"
+      },
+      "hash": "fe4f65c6439c85db22148a1e25781d99545fd94288b951a1b366eed973b858ac"
+    },
+    {
+      "regex": {
+        "flags": "si",
+        "pattern": "^Mozilla.*Android.*A80KSC"
+      },
+      "hash": "787e4c1c51d6723421e8a47f4fb0c252f72924126aafb01aa7ee4f8f83a802e7"
+    },
+    {
+      "regex": {
+        "flags": "si",
+        "pattern": "^Mozilla.*Escape [0-9\\.]+"
+      },
+      "hash": "1d678a820f279012159a3686c356913440477ecac944e2d8f728418b767a1eb5"
+    },
+    {
+      "regex": {
+        "flags": "si",
+        "pattern": "^Mozilla.*Linux.*Kindle\\/[0-9\\.]+"
+      },
+      "hash": "2049acd708a51118213ad0046f66fd981356c243db605c7fbca2bc1a5f4beda6"
     },
     {
       "regex": {
@@ -28432,16 +28711,9 @@
     {
       "regex": {
         "flags": "si",
-        "pattern": "^Mozilla.*linux.*KFTT.*Silk"
+        "pattern": "^Mozilla.*SmartHub.*Linux"
       },
-      "hash": "66b5dbe83b64fbfd570346e32ed8d62140716507afc781ea1eb0d2d74068cdb4"
-    },
-    {
-      "regex": {
-        "flags": "si",
-        "pattern": "^Mozilla.*Gecko.*Firefox.*Kylo\\/([0-9\\.]+)$"
-      },
-      "hash": "4d0826d1b37d02662ff6f81cfdcc97762fbe2fdc46b9b0c67da18745fd3e5eea"
+      "hash": "27b15ce588a2c8ed59c5135118b9c3bb0a4bb88ed1b007771ee819acbfb596e0"
     },
     {
       "regex": {
@@ -28474,34 +28746,6 @@
     {
       "regex": {
         "flags": "si",
-        "pattern": "^Mozilla.*Android.*A80KSC"
-      },
-      "hash": "787e4c1c51d6723421e8a47f4fb0c252f72924126aafb01aa7ee4f8f83a802e7"
-    },
-    {
-      "regex": {
-        "flags": "si",
-        "pattern": "^Mozilla.*Android.*SGPT12"
-      },
-      "hash": "21b233284dd1f4f4171e3ebe2d0db44437ef0f3db4161bffd8d5a3004d2dbd5c"
-    },
-    {
-      "regex": {
-        "flags": "si",
-        "pattern": "^Mozilla.*Android.*Sony Tablet P"
-      },
-      "hash": "fe4f65c6439c85db22148a1e25781d99545fd94288b951a1b366eed973b858ac"
-    },
-    {
-      "regex": {
-        "flags": "si",
-        "pattern": "^Mozilla.*Android.*(SGP311|SGP321)"
-      },
-      "hash": "2d1df4654182567262d0a12827ce525ab70a12df1ed63cff210d69a69a55928b"
-    },
-    {
-      "regex": {
-        "flags": "si",
         "pattern": "^Mozilla.*Android.* Enjoy"
       },
       "hash": "8b4ca2c0c1b1645d2dbc20458717ef6e4ce3a04c070981b2d2a32f89393f0487"
@@ -28509,9 +28753,16 @@
     {
       "regex": {
         "flags": "si",
-        "pattern": "^Mozilla.*Android.*Nexus 10"
+        "pattern": "^Mozilla.*Android.*SmartTab"
       },
-      "hash": "ffd3e48cb703a0358c93472be4ab82591cb7af8d7d441891b2104200dcb5f56a"
+      "hash": "18479e4bbe3a98a6957c2ad7bc3a124e2f27fdbb9f98dc9d4001a5cbfdc7bd28"
+    },
+    {
+      "regex": {
+        "flags": "si",
+        "pattern": "^Mozilla.*Android.*SCH\\-(I925|I915)"
+      },
+      "hash": "a10397187744588a78269877e057cc0225b6daf9fe68fdabcf5afe150849bd63"
     },
     {
       "regex": {
@@ -28558,13 +28809,6 @@
     {
       "regex": {
         "flags": "si",
-        "pattern": "iPad.*OS.*like Mac OS X"
-      },
-      "hash": "f852b0865b48444c606e90e2b44500d71396c84b96b0a2a06763a1090bfa6ea7"
-    },
-    {
-      "regex": {
-        "flags": "si",
         "pattern": "^Mozilla.*Android.*(HUAWEI MediaPad|MediaPad 10)"
       },
       "hash": "38505dde3e6c4f27f0e9814e16279d589850923f115a052e1b1ed157b713279c"
@@ -28579,9 +28823,16 @@
     {
       "regex": {
         "flags": "si",
-        "pattern": "^Mozilla.*Android.*SCH\\-(I925|I915)"
+        "pattern": "^Mozilla.*Android.*Nexus 10"
       },
-      "hash": "a10397187744588a78269877e057cc0225b6daf9fe68fdabcf5afe150849bd63"
+      "hash": "ffd3e48cb703a0358c93472be4ab82591cb7af8d7d441891b2104200dcb5f56a"
+    },
+    {
+      "regex": {
+        "flags": "si",
+        "pattern": "^Mozilla.*Android.*SPH\\-P500"
+      },
+      "hash": "1cc1f6066331931db826b3544468a85917cbc47e5fc185ca9f73af38e1dc6069"
     },
     {
       "regex": {
@@ -28593,9 +28844,9 @@
     {
       "regex": {
         "flags": "si",
-        "pattern": "^Mozilla.*Android.*SmartTab"
+        "pattern": "^Mozilla.*Android.*SHV\\-(E230|E140)"
       },
-      "hash": "18479e4bbe3a98a6957c2ad7bc3a124e2f27fdbb9f98dc9d4001a5cbfdc7bd28"
+      "hash": "534417e501c9231808bdf563127ba132031efb7511c626f9336e4b092d375f1b"
     },
     {
       "regex": {
@@ -28621,23 +28872,9 @@
     {
       "regex": {
         "flags": "si",
-        "pattern": "^Mozilla.*Android.*SPH\\-P500"
-      },
-      "hash": "1cc1f6066331931db826b3544468a85917cbc47e5fc185ca9f73af38e1dc6069"
-    },
-    {
-      "regex": {
-        "flags": "si",
         "pattern": "^Mozilla.*Android.*SHW\\-(M380|M480K|M500|M305)"
       },
       "hash": "887d9f0c036cd11d758f5876ac826d4251726bb6ee75a61ee178596b9c4b4c56"
-    },
-    {
-      "regex": {
-        "flags": "si",
-        "pattern": "^Mozilla.*Android.*SHV\\-(E230|E140)"
-      },
-      "hash": "534417e501c9231808bdf563127ba132031efb7511c626f9336e4b092d375f1b"
     },
     {
       "regex": {
@@ -28649,30 +28886,9 @@
     {
       "regex": {
         "flags": "si",
-        "pattern": "Kindle Fire"
-      },
-      "hash": "9f3b78afc79f5f28a35c32bef1c7c91dde672019b6205643778eaef7e5bdfc44"
-    },
-    {
-      "regex": {
-        "flags": "si",
-        "pattern": "(PlayBook|RIM Tablet)"
-      },
-      "hash": "e7d6e8490f86ec0990557395d3e1ae1d110e368c4ca5c8bb900686efa167cefc"
-    },
-    {
-      "regex": {
-        "flags": "si",
         "pattern": "Playstation"
       },
       "hash": "6693227388aa5ab4f3ba17bd6a9c43c1c407b69c3f4780b2a156b64fdfbbb18f"
-    },
-    {
-      "regex": {
-        "flags": "si",
-        "pattern": "Bada\\/[0-9\\.]+"
-      },
-      "hash": "12a1bcd7f201e13a8220600ac0b0720650fd1c685d0d0e5f487d00799cb80054"
     },
     {
       "regex": {
@@ -28684,9 +28900,30 @@
     {
       "regex": {
         "flags": "si",
-        "pattern": "AppleTV"
+        "pattern": "Opera Tablet"
       },
-      "hash": "101bdae8012c39ba5c12a2521a3b2c87a8b336221e02990dc48adc44b8add60e"
+      "hash": "f59ca5df66a14851190bd15dd71f18a4a3a1fc608757b3ea636be2db823daf7d"
+    },
+    {
+      "regex": {
+        "flags": "si",
+        "pattern": "(PlayBook|RIM Tablet)"
+      },
+      "hash": "e7d6e8490f86ec0990557395d3e1ae1d110e368c4ca5c8bb900686efa167cefc"
+    },
+    {
+      "regex": {
+        "flags": "si",
+        "pattern": "Bada\\/[0-9\\.]+"
+      },
+      "hash": "12a1bcd7f201e13a8220600ac0b0720650fd1c685d0d0e5f487d00799cb80054"
+    },
+    {
+      "regex": {
+        "flags": "si",
+        "pattern": "Kindle Fire"
+      },
+      "hash": "9f3b78afc79f5f28a35c32bef1c7c91dde672019b6205643778eaef7e5bdfc44"
     },
     {
       "regex": {
@@ -28698,23 +28935,9 @@
     {
       "regex": {
         "flags": "si",
-        "pattern": "Opera Tablet"
-      },
-      "hash": "f59ca5df66a14851190bd15dd71f18a4a3a1fc608757b3ea636be2db823daf7d"
-    },
-    {
-      "regex": {
-        "flags": "si",
         "pattern": "Teleca.*MIDP"
       },
       "hash": "c07a5004d79ffbdcdc81cfca798f2fd75c8220926b57a701acf1123181ff28e5"
-    },
-    {
-      "regex": {
-        "flags": "si",
-        "pattern": "Obigo.*MIDP"
-      },
-      "hash": "bf610f63afc9d51647dd202a05c5bbae8099874ddc764c074eecfdd345361bc8"
     },
     {
       "regex": {
@@ -28726,9 +28949,30 @@
     {
       "regex": {
         "flags": "si",
-        "pattern": "j2me"
+        "pattern": "Obigo.*MIDP"
       },
-      "hash": "c01667be3d80900e6e9b17601716f1dd6ff0a74a30187ad41cc79b4a6bef98c0"
+      "hash": "bf610f63afc9d51647dd202a05c5bbae8099874ddc764c074eecfdd345361bc8"
+    },
+    {
+      "regex": {
+        "flags": "si",
+        "pattern": "AppleTV"
+      },
+      "hash": "101bdae8012c39ba5c12a2521a3b2c87a8b336221e02990dc48adc44b8add60e"
+    },
+    {
+      "regex": {
+        "flags": "si",
+        "pattern": "InettvBrowser"
+      },
+      "hash": "9f5ac5cb4f6929729c339831de0ad46b34d825c0e5c6a518bca4779aa2abe47a"
+    },
+    {
+      "regex": {
+        "flags": "si",
+        "pattern": ".*\\/.*CFNetwork\\/459 Darwin\\/"
+      },
+      "hash": "5772c763ee82b4dde06e93fa0cd479c2e25c674ceac3ec3ac32f1de66682a86c"
     },
     {
       "regex": {
@@ -28761,13 +29005,6 @@
     {
       "regex": {
         "flags": "si",
-        "pattern": "^Roku\\/"
-      },
-      "hash": "3e1659c0e41e47cf6014502004da8d1154a392bb583f72b1079110e23b21a166"
-    },
-    {
-      "regex": {
-        "flags": "si",
         "pattern": "xbox"
       },
       "hash": "724c6d3c23512944599377b8238e52ae808a5754d88d852b62bdeef9860f0ab7"
@@ -28775,9 +29012,16 @@
     {
       "regex": {
         "flags": "si",
-        "pattern": ".*\\/.*CFNetwork\\/459 Darwin\\/"
+        "pattern": "j2me"
       },
-      "hash": "5772c763ee82b4dde06e93fa0cd479c2e25c674ceac3ec3ac32f1de66682a86c"
+      "hash": "c01667be3d80900e6e9b17601716f1dd6ff0a74a30187ad41cc79b4a6bef98c0"
+    },
+    {
+      "regex": {
+        "flags": "si",
+        "pattern": "^Roku\\/"
+      },
+      "hash": "3e1659c0e41e47cf6014502004da8d1154a392bb583f72b1079110e23b21a166"
     },
     {
       "regex": {
@@ -28810,21 +29054,21 @@
       "name": "Smartphone",
       "device-pattern-hashs": [
         "5c4fce86b070bca714ea3c745a03d99c7c0a9ded89ebfd5e20ba70a229327319",
-        "322a4e5ddab7f6ad29c3344d575a06cbce43fac313f3b66ae48079e27f4b163a",
         "91dbdaebcd26aa7328f364336da88d3dc0516601f5fe85c97b3d6715ad871e02",
+        "322a4e5ddab7f6ad29c3344d575a06cbce43fac313f3b66ae48079e27f4b163a",
         "4928aa1b1e4e5db74993e5589e562db64a486a515f7fa2f2f5ec96ea70496719",
         "8c786310cf4eccf99c9614673143a7a0ed7de74b51d3e32a3078a48df79cc2dd",
         "12a1bcd7f201e13a8220600ac0b0720650fd1c685d0d0e5f487d00799cb80054",
         "c07a5004d79ffbdcdc81cfca798f2fd75c8220926b57a701acf1123181ff28e5",
         "bf610f63afc9d51647dd202a05c5bbae8099874ddc764c074eecfdd345361bc8",
-        "c01667be3d80900e6e9b17601716f1dd6ff0a74a30187ad41cc79b4a6bef98c0",
+        "5772c763ee82b4dde06e93fa0cd479c2e25c674ceac3ec3ac32f1de66682a86c",
         "4993e6f06d833bf729e6efe1e71b97b1f38fbe240406a88f115eb519d8a9f0d7",
         "c88f61a3f9dfec19063e6a7b56faedc2bbbdfff2ff5493428c040abb047067ae",
         "95af1e1ee246bc4b6a5a8e025327448442e727dc0948041f64d14e9d65ac1d60",
         "049d597a9c686a01a869d4725732426d18a0ddc631e6c17d7a4a25c6e8c08843",
-        "5772c763ee82b4dde06e93fa0cd479c2e25c674ceac3ec3ac32f1de66682a86c"
+        "c01667be3d80900e6e9b17601716f1dd6ff0a74a30187ad41cc79b4a6bef98c0"
       ],
-      "hash": "4c10bb13930b721947273f4326df2fd86f34037a09e03f05cdbb74ec9d665f37"
+      "hash": "2482e3ced85dc150f71a0458469b045872d57b86880079f2daa93ebb80d8458b"
     },
     {
       "icon": "tablet.png",
@@ -28832,8 +29076,8 @@
       "name": "Tablet",
       "device-pattern-hashs": [
         "0eeab1533e0c458b9e138a296c77c25787c86c15ffe5bc26f7c83eb07b1ef89e",
-        "5cbc016e9ab3aed18c8f722c8d4516837584d530c61bf93c1da84ac240cffd96",
         "64c0ddff58d0d9a42e4e533cd3d904bff90e2443ff76a0620452c7cea567b1bb",
+        "f0d672f48d16f11d8aa4a1419719bd7d26e5a02023278c80e92634df9439e73a",
         "7ba1aafe8d22c09d83f6ee57507ca5bcdfaebed3849480857cfa7be9eca7356c",
         "4ed9e7fda4451acaccd98437fd3d256ec31a4173e00e89fcf48986a2b9a6b043",
         "b8d58f21aff0efbed75dcb0a742af08392acb099dfa6d0cb36732d00665a92fb",
@@ -28841,7 +29085,7 @@
         "1ca571eec7513e0d95ce80b985608150887714a1a895144d15dfdbb8086e0b1b",
         "58f0e63224b79fd7440e87644b44c3862613606692aa71093cf19268d12c7baf",
         "d7575e0e101bfb89f16748814cccbe0e3496020902d2b96fda46b50cc11c3e86",
-        "aa5a3da85e1b334ad347831f2cecb63dee6069051af0bd348e65a5c61fd82af1",
+        "01c45ee03abea7dfb5170cf3729b268ec4656017bf283e9d9edcdcfaa276e1a7",
         "324f47014f1a7e9682a526cd9923cd104604a5e6ad2918787fa5f972c04d91c4",
         "5cf2426930f2706884265b6a59ad294c0fb6cbb1892b69e2c3f86646c6a1e321",
         "0b0e45c98acdcae547e141ffad87efa2d0f16034142511c81d1011eadf639727",
@@ -28850,57 +29094,57 @@
         "e3d5411130596a29afd2cbde7d827839d59b1712cd45bef8e3b8c592ba7ca3c4",
         "d30ca283d717030c309b622c0cc72ab21c612ca3a5a3adb0686ed06ce43573a7",
         "5d5d246afddba8a279c3f6e18f66432a373298c85e1bc6811af03c273b082d9d",
-        "a223a3aee050fc13404d90d35e0d40aac1f3272e9cc16ba8964a7445f6458b66",
-        "01c45ee03abea7dfb5170cf3729b268ec4656017bf283e9d9edcdcfaa276e1a7",
+        "aa5a3da85e1b334ad347831f2cecb63dee6069051af0bd348e65a5c61fd82af1",
         "9c4f66fb5b11b1f42ddfc6f315e04ad00e50472697cc9a690a749e302599abd7",
         "cf91e01d123ca2a199f764091e6ab1f9d73c5fd4499ee00eaa013f8450beba12",
         "3a24e7525ff117e89c6a2accd3efb7d0b9a25d2c7e36f4b31a8aef773e77c153",
         "a4fac408eef24ebf66ba98a3cd81e4cc830ea00e819e33bb6c26de807c62605b",
-        "f0d672f48d16f11d8aa4a1419719bd7d26e5a02023278c80e92634df9439e73a",
         "7337f2c8ef71a21bd8ac711b43eeaecbab2a6a3bbfd2b842f41748c29d401698",
         "d0d34218c19a85d77712e588a334b28953b9e666acdcae66592464025a1dd112",
         "cd06e519b7681055c48f881c21947ea15e1f85a7881479afbf2f3c96605bebc2",
         "76cb00a24e8ac0ee2869f4bd6e00288b54b9cd74eee13c4a6ebf55c45f40d760",
+        "a223a3aee050fc13404d90d35e0d40aac1f3272e9cc16ba8964a7445f6458b66",
+        "5cbc016e9ab3aed18c8f722c8d4516837584d530c61bf93c1da84ac240cffd96",
+        "f852b0865b48444c606e90e2b44500d71396c84b96b0a2a06763a1090bfa6ea7",
+        "66b5dbe83b64fbfd570346e32ed8d62140716507afc781ea1eb0d2d74068cdb4",
         "033b8c10815d1f608adf52094f28a2611c3148c3482992189286da56d712a157",
-        "2049acd708a51118213ad0046f66fd981356c243db605c7fbca2bc1a5f4beda6",
+        "b3199a7a7fc5f2c5db9015236b5b7b4213f04beb7d645562ce9769e507041217",
         "7f1e1a58dd434e25ec217ba7ab6554920743f6f14240b89d45f3175dd2aec599",
         "9a64b4f3bac0c9f95932fb7b3b8f69e47825c6e845440a7588353e17b78ce965",
         "eefb7ef890a0a0dc95bf79272a8e5f98681b058c3af63993b4eafdfd80505d27",
-        "b3199a7a7fc5f2c5db9015236b5b7b4213f04beb7d645562ce9769e507041217",
-        "863676db30eb4eafc155cd05addedcbac53f688000d716dfbf5020a610c96ce6",
-        "66b5dbe83b64fbfd570346e32ed8d62140716507afc781ea1eb0d2d74068cdb4",
-        "787e4c1c51d6723421e8a47f4fb0c252f72924126aafb01aa7ee4f8f83a802e7",
         "21b233284dd1f4f4171e3ebe2d0db44437ef0f3db4161bffd8d5a3004d2dbd5c",
-        "fe4f65c6439c85db22148a1e25781d99545fd94288b951a1b366eed973b858ac",
         "2d1df4654182567262d0a12827ce525ab70a12df1ed63cff210d69a69a55928b",
+        "fe4f65c6439c85db22148a1e25781d99545fd94288b951a1b366eed973b858ac",
+        "787e4c1c51d6723421e8a47f4fb0c252f72924126aafb01aa7ee4f8f83a802e7",
+        "2049acd708a51118213ad0046f66fd981356c243db605c7fbca2bc1a5f4beda6",
+        "863676db30eb4eafc155cd05addedcbac53f688000d716dfbf5020a610c96ce6",
         "8b4ca2c0c1b1645d2dbc20458717ef6e4ce3a04c070981b2d2a32f89393f0487",
-        "ffd3e48cb703a0358c93472be4ab82591cb7af8d7d441891b2104200dcb5f56a",
+        "18479e4bbe3a98a6957c2ad7bc3a124e2f27fdbb9f98dc9d4001a5cbfdc7bd28",
+        "a10397187744588a78269877e057cc0225b6daf9fe68fdabcf5afe150849bd63",
         "1f76d18eeb8ed7fe8b1a3a1ad76564a353d1c47e0eadc588f20f9e147a47e68c",
         "3d028327baa6b3af341d84ea1f4ef79f0eb6edc80cbe35743fd186bf1ba67b52",
         "33454d95e508460fa416bd88f6bd112fd2e5c3a10ef921573ca55d9815519171",
         "4b17972bff6b9d075392edbc76f7ec9371a599ae644d6bd04f143ac2b7a5afa5",
         "fcb2fc706272317fa7d4c72762c5ecf53cd674bcd1863543004e40ee4a9d3e2a",
         "d35cb27b4db85f0b6806703bae87ed674bd00807abd8493172879dbae5e2b496",
-        "f852b0865b48444c606e90e2b44500d71396c84b96b0a2a06763a1090bfa6ea7",
         "38505dde3e6c4f27f0e9814e16279d589850923f115a052e1b1ed157b713279c",
         "de099aa6bf848aa4f60a61ea4c1287064ec4536e8fa91254e96bc9ed3cd29d2a",
-        "a10397187744588a78269877e057cc0225b6daf9fe68fdabcf5afe150849bd63",
+        "ffd3e48cb703a0358c93472be4ab82591cb7af8d7d441891b2104200dcb5f56a",
+        "1cc1f6066331931db826b3544468a85917cbc47e5fc185ca9f73af38e1dc6069",
         "33861ffcaf90e3ea34afdf3bb46760885ad6f20237e558f4a65e5dd1ba6d6ce9",
-        "18479e4bbe3a98a6957c2ad7bc3a124e2f27fdbb9f98dc9d4001a5cbfdc7bd28",
+        "534417e501c9231808bdf563127ba132031efb7511c626f9336e4b092d375f1b",
         "e5c176ff706b128f4b800858783a509d25973f27083b3799bcb39c6d8b8e973b",
         "61db025097849ff30c89c0abfde29f8b0f4bb9051e0c229e44606add90e4de72",
         "af1dfb38eeaf19cdd9f1a1de8bb7d5ba3db31f6068ab9eb621aa809e187f1da9",
-        "1cc1f6066331931db826b3544468a85917cbc47e5fc185ca9f73af38e1dc6069",
         "887d9f0c036cd11d758f5876ac826d4251726bb6ee75a61ee178596b9c4b4c56",
-        "534417e501c9231808bdf563127ba132031efb7511c626f9336e4b092d375f1b",
-        "9f3b78afc79f5f28a35c32bef1c7c91dde672019b6205643778eaef7e5bdfc44",
-        "e7d6e8490f86ec0990557395d3e1ae1d110e368c4ca5c8bb900686efa167cefc",
-        "e8ce4a3b3ac5b4d17ba1e3b8880dff0736dc9449c24b9c3485114a6c3d70bee8",
         "f59ca5df66a14851190bd15dd71f18a4a3a1fc608757b3ea636be2db823daf7d",
+        "e7d6e8490f86ec0990557395d3e1ae1d110e368c4ca5c8bb900686efa167cefc",
+        "9f3b78afc79f5f28a35c32bef1c7c91dde672019b6205643778eaef7e5bdfc44",
+        "e8ce4a3b3ac5b4d17ba1e3b8880dff0736dc9449c24b9c3485114a6c3d70bee8",
         "d72fe4933e14136fcea6599e240b4fcc133bbc30fa0ccb3af90dedc282384e71",
         "e8b02915262bfb57544bc90397d463c780382b15af52f4153667ebe0dfe90b03"
       ],
-      "hash": "78c4433f7013e0dfd66c58a261d5320f1cfc3ff6b73fb6a2e7584a99667e1a59"
+      "hash": "163ca202d453a912e18c395a27fca3803699bfb48ccb6abc5d9484a738164060"
     },
     {
       "icon": "console.png",
@@ -28923,25 +29167,27 @@
       "device-pattern-hashs": [
         "9d97c5068fa7400a8fd222a4928ffafda4beb10bb57ed19a752897984363e05b",
         "ce4632efa59288d612d22e3fa19e5f8fc190dcc731e86793e98ec057efd572f1",
-        "b4a01ca07dd795e2658cfff21efa21c60c7764634347da5c73945a482ab471be",
         "ffdd2ff10d2a68b2ea3603de03f18976fe1e189b9c92839b2cb8489659533a81",
         "c8835c21a54dbc74fcd04b3fcfcb5ed6d1c2d97b5de02b36f9c502bd594a489c",
         "dac4026bdf5c11c31ef3d75864b802dea98bb27ad74d719aee9f9cc0eac8e183",
         "4eccdc2376b19a80b3d5f75d8dbc4a3c0a0fbfcc6da8d4ebe8eca85710e9e29b",
-        "6ffe08f150cee727d2a530a2fc9bf66bb8800bd5acf403f257073eff26117ed4",
+        "b4a01ca07dd795e2658cfff21efa21c60c7764634347da5c73945a482ab471be",
         "bbf1eda9e2a2e4557bbebfd489cb99e817d85ddd7d2d8ba4d759f0c2b6df91eb",
+        "6ffe08f150cee727d2a530a2fc9bf66bb8800bd5acf403f257073eff26117ed4",
         "0556e39587a384af2a99399c986e738dd2aaca0e58c2c142a61fd8a2bc2e27a8",
-        "27b15ce588a2c8ed59c5135118b9c3bb0a4bb88ed1b007771ee819acbfb596e0",
-        "1d678a820f279012159a3686c356913440477ecac944e2d8f728418b767a1eb5",
+        "00b940ccf194694c402ca9467981a0907bf1208db611ce73349ed6a95b015a3e",
         "4d0826d1b37d02662ff6f81cfdcc97762fbe2fdc46b9b0c67da18745fd3e5eea",
+        "1d678a820f279012159a3686c356913440477ecac944e2d8f728418b767a1eb5",
+        "27b15ce588a2c8ed59c5135118b9c3bb0a4bb88ed1b007771ee819acbfb596e0",
         "1ea85d8b75f7832388f5cb05fe4bfc13cdecb1e88e17f932d22d1e974af23a78",
         "1f3d528ee2c4e21d19f893adb070b70121da7447e857ce1712903e32b67a052b",
         "0b34e702c6977e01cc86d7b0b694a73f6de8ec4ef3bc3493274e179333a36380",
         "f52286a08f648d633e6e02df5e3a8adb75bedb2387b1eccc5d67f1cb82314ab0",
         "101bdae8012c39ba5c12a2521a3b2c87a8b336221e02990dc48adc44b8add60e",
+        "9f5ac5cb4f6929729c339831de0ad46b34d825c0e5c6a518bca4779aa2abe47a",
         "3e1659c0e41e47cf6014502004da8d1154a392bb583f72b1079110e23b21a166"
       ],
-      "hash": "b69ef880a1f774f941e59cf969fc28b30709925ed54c9aa94f3d3f1322f25c46"
+      "hash": "d5a79f707803c41b61d971a5f0ede59cc0236d7a0b17ede22c08f0c8db0fbbc1"
     },
     {
       "icon": "pda.png",

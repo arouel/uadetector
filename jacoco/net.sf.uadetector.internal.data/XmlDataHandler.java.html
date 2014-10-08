@@ -1,0 +1,710 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>XmlDataHandler.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="right"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">UADetector :: Core</a> &gt; <a href="index.html" class="el_package">net.sf.uadetector.internal.data</a> &gt; <span class="el_source">XmlDataHandler.java</span></div><h1>XmlDataHandler.java</h1><pre class="source lang-java linenums">/*******************************************************************************
+ * Copyright 2012 André Rouél
+ * 
+ * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ ******************************************************************************/
+package net.sf.uadetector.internal.data;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+
+import javax.annotation.Nonnull;
+
+import net.sf.qualitycheck.Check;
+import net.sf.uadetector.internal.data.domain.Browser;
+import net.sf.uadetector.internal.data.domain.BrowserOperatingSystemMapping;
+import net.sf.uadetector.internal.data.domain.BrowserPattern;
+import net.sf.uadetector.internal.data.domain.BrowserType;
+import net.sf.uadetector.internal.data.domain.Device;
+import net.sf.uadetector.internal.data.domain.DevicePattern;
+import net.sf.uadetector.internal.data.domain.OperatingSystem;
+import net.sf.uadetector.internal.data.domain.OperatingSystemPattern;
+import net.sf.uadetector.internal.data.domain.Robot;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.xml.sax.Attributes;
+import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
+import org.xml.sax.SAXParseException;
+import org.xml.sax.helpers.DefaultHandler;
+
+public final class XmlDataHandler extends DefaultHandler {
+
+<span class="pc" id="L45">	public enum Tag {</span>
+
+		/**
+		 * Tag name of a browser entry
+		 */
+<span class="fc" id="L50">		BROWSER(&quot;browser&quot;),</span>
+
+		/**
+		 * Tag name of the ID of an browser pattern
+		 */
+<span class="fc" id="L55">		BROWSER_ID(&quot;browser_id&quot;),</span>
+
+		/**
+		 * Tag name of the informational URL of a browser entry
+		 */
+<span class="fc" id="L60">		BROWSER_INFO_URL(&quot;browser_info_url&quot;),</span>
+
+		/**
+		 * Tag name of a mapping entry between a browser and an operating system
+		 */
+<span class="fc" id="L65">		BROWSER_OS_MAPPING(&quot;browser_os&quot;),</span>
+
+		/**
+		 * Tag name of a browser pattern
+		 */
+<span class="fc" id="L70">		BROWSER_PATTERN(&quot;browser_reg&quot;),</span>
+
+		/**
+		 * Tag name of a browser type entry
+		 */
+<span class="fc" id="L75">		BROWSER_TYPE(&quot;browser_type&quot;),</span>
+
+		/**
+		 * Tag name of the type ID of a browser
+		 */
+<span class="fc" id="L80">		BROWSER_TYPE_ID(&quot;type&quot;),</span>
+
+		/**
+		 * Tag name of a producer company of an user agent
+		 */
+<span class="fc" id="L85">		COMPANY(&quot;company&quot;),</span>
+
+		/**
+		 * Tag name of the URL of a producer company from an user agent
+		 */
+<span class="fc" id="L90">		COMPANY_URL(&quot;url_company&quot;),</span>
+
+		/**
+		 * Tag name of a device
+		 */
+<span class="fc" id="L95">		DEVICE(&quot;device&quot;),</span>
+
+		/**
+		 * Tag name of a device pattern
+		 */
+<span class="fc" id="L100">		DEVICE_ID(&quot;device_id&quot;),</span>
+
+		/**
+		 * Tag name of the informational URL of an device entry
+		 */
+<span class="fc" id="L105">		DEVICE_INFO_URL(&quot;device_info_url&quot;),</span>
+
+		/**
+		 * Tag name of a device pattern
+		 */
+<span class="fc" id="L110">		DEVICE_PATTERN(&quot;device_reg&quot;),</span>
+
+		/**
+		 * Tag name of all devices
+		 */
+<span class="fc" id="L115">		DEVICES(&quot;devices&quot;),</span>
+
+		/**
+		 * Tag name of all device patterns
+		 */
+<span class="fc" id="L120">		DEVICES_PATTERN(&quot;devices_reg&quot;),</span>
+
+		/**
+		 * Tag name of an family of an user agent
+		 */
+<span class="fc" id="L125">		FAMILY(&quot;family&quot;),</span>
+
+		/**
+		 * Tag name of the icon of an entry
+		 */
+<span class="fc" id="L130">		ICON(&quot;icon&quot;),</span>
+
+		/**
+		 * Tag name of an ID of an user agent
+		 */
+<span class="fc" id="L135">		ID(&quot;id&quot;),</span>
+
+		/**
+		 * Tag name of the product name of an user agent
+		 */
+<span class="fc" id="L140">		NAME(&quot;name&quot;),</span>
+
+		/**
+		 * Tag name of an operating system entry
+		 */
+<span class="fc" id="L145">		OPERATING_SYSTEM(&quot;os&quot;),</span>
+
+		/**
+		 * Tag name of the ID of an operating system pattern
+		 */
+<span class="fc" id="L150">		OPERATING_SYSTEM_ID(&quot;os_id&quot;),</span>
+
+		/**
+		 * Tag name of the informational URL of an operating system entry
+		 */
+<span class="fc" id="L155">		OPERATING_SYSTEM_INFO_URL(&quot;os_info_url&quot;),</span>
+
+		/**
+		 * Tag name of an operating system pattern
+		 */
+<span class="fc" id="L160">		OPERATING_SYSTEM_PATTERN(&quot;operating_system_reg&quot;),</span>
+
+		/**
+		 * Tag name of the order of an user agent pattern
+		 */
+<span class="fc" id="L165">		PATTERN_ORDER(&quot;order&quot;),</span>
+
+		/**
+		 * Tag name of the regular expression of an user agent pattern
+		 */
+<span class="fc" id="L170">		PATTERN_REGEX(&quot;regstring&quot;),</span>
+
+		/**
+		 * Tag name of a robot entry
+		 */
+<span class="fc" id="L175">		ROBOT(&quot;robot&quot;),</span>
+
+		/**
+		 * Tag name of the informational URL of a robot entry
+		 */
+<span class="fc" id="L180">		ROBOT_INFO_URL(&quot;bot_info_url&quot;),</span>
+
+		/**
+		 * Tag name of the product URL of an user agent
+		 */
+<span class="fc" id="L185">		URL(&quot;url&quot;),</span>
+
+		/**
+		 * Tag name of an user agent string of a robot entry
+		 */
+<span class="fc" id="L190">		USERAGENT(&quot;useragent&quot;),</span>
+
+		/**
+		 * Tag name of the data version
+		 */
+<span class="fc" id="L195">		VERSION(&quot;version&quot;);</span>
+
+		public static Tag evaluate(@Nonnull final String tagName) {
+<span class="fc" id="L198">			Check.notNull(tagName, &quot;tagName&quot;);</span>
+
+<span class="fc" id="L200">			Tag result = null;</span>
+<span class="fc bfc" id="L201" title="All 2 branches covered.">			for (final Tag tag : values()) {</span>
+<span class="fc bfc" id="L202" title="All 2 branches covered.">				if (tag.getTagName().equalsIgnoreCase(tagName)) {</span>
+<span class="fc" id="L203">					result = tag;</span>
+<span class="fc" id="L204">					break;</span>
+				}
+			}
+<span class="fc" id="L207">			return result;</span>
+		}
+
+		public static boolean isBrowserOsMappingTag(final String tagName) {
+<span class="fc" id="L211">			return BROWSER_OS_MAPPING.getTagName().equalsIgnoreCase(tagName);</span>
+		}
+
+		public static boolean isBrowserPatternTag(final String tagName) {
+<span class="fc" id="L215">			return BROWSER_PATTERN.getTagName().equalsIgnoreCase(tagName);</span>
+		}
+
+		public static boolean isBrowserTag(final String tagName) {
+<span class="fc" id="L219">			return BROWSER.getTagName().equalsIgnoreCase(tagName);</span>
+		}
+
+		public static boolean isBrowserTypeTag(final String tagName) {
+<span class="fc" id="L223">			return BROWSER_TYPE.getTagName().equalsIgnoreCase(tagName);</span>
+		}
+
+		public static boolean isDevicePatternTag(final String tagName) {
+<span class="fc" id="L227">			return DEVICE_PATTERN.getTagName().equalsIgnoreCase(tagName);</span>
+		}
+
+		public static boolean isDeviceTag(final String tagName) {
+<span class="fc" id="L231">			return DEVICE.getTagName().equalsIgnoreCase(tagName);</span>
+		}
+
+		public static boolean isIdTag(final String tagName) {
+<span class="fc" id="L235">			return ID.getTagName().equalsIgnoreCase(tagName);</span>
+		}
+
+		public static boolean isOperatingSystemPatternTag(final String tagName) {
+<span class="fc" id="L239">			return OPERATING_SYSTEM_PATTERN.getTagName().equalsIgnoreCase(tagName);</span>
+		}
+
+		public static boolean isOperatingSystemTag(final String tagName) {
+<span class="fc" id="L243">			return OPERATING_SYSTEM.getTagName().equalsIgnoreCase(tagName);</span>
+		}
+
+		public static boolean isRobotTag(final String tagName) {
+<span class="fc" id="L247">			return ROBOT.getTagName().equalsIgnoreCase(tagName);</span>
+		}
+
+		@Nonnull
+		private String tagName;
+
+<span class="fc" id="L253">		private Tag(@Nonnull final String tagName) {</span>
+<span class="fc" id="L254">			this.tagName = tagName;</span>
+<span class="fc" id="L255">		}</span>
+
+		@Nonnull
+		public String getTagName() {
+<span class="fc" id="L259">			return tagName;</span>
+		}
+
+	}
+
+	/**
+	 * Character set to read the internal Document Type Definition (DTD) of UAS data
+	 */
+	private static final String CHARSET = &quot;UTF-8&quot;;
+
+	/**
+	 * Corresponding logger for this class
+	 */
+<span class="fc" id="L272">	private static final Logger LOG = LoggerFactory.getLogger(XmlDataHandler.class);</span>
+
+	/**
+	 * Path to the internal Document Type Definition (DTD) of UAS data files to be able to work completely offline
+	 */
+	protected static final String UASDATA_DEF = &quot;uadetector/uasxmldata.dtd&quot;;
+
+	/**
+	 * URL to the Document Type Definition (DTD) of UAS data files
+	 */
+	protected static final String UASDATA_DEF_URL = &quot;http://user-agent-string.info/rpc/uasxmldata.dtd&quot;;
+
+	/**
+	 * Logs an issue while parsing XML.
+	 * 
+	 * @param prefix
+	 *            log level as string to add at the beginning of the message
+	 * @param e
+	 *            exception to log
+	 */
+	protected static void logParsingIssue(final String prefix, final SAXParseException e) {
+<span class="fc" id="L293">		final StringBuilder buffer = new StringBuilder();</span>
+<span class="fc" id="L294">		buffer.append(prefix);</span>
+<span class="fc" id="L295">		buffer.append(&quot; while reading UAS data: &quot;);</span>
+<span class="fc" id="L296">		buffer.append(e.getMessage());</span>
+<span class="fc" id="L297">		buffer.append(&quot; (line: &quot;);</span>
+<span class="fc" id="L298">		buffer.append(e.getLineNumber());</span>
+<span class="fc bfc" id="L299" title="All 2 branches covered.">		if (e.getSystemId() != null) {</span>
+<span class="fc" id="L300">			buffer.append(&quot; uri: &quot;);</span>
+<span class="fc" id="L301">			buffer.append(e.getSystemId());</span>
+		}
+<span class="fc" id="L303">		buffer.append(&quot;)&quot;);</span>
+<span class="fc" id="L304">		LOG.warn(buffer.toString());</span>
+<span class="fc" id="L305">	}</span>
+
+<span class="fc" id="L307">	private Browser.Builder browserBuilder = new Browser.Builder();</span>
+
+<span class="fc" id="L309">	private Device.Builder deviceBuilder = new Device.Builder();</span>
+
+<span class="fc" id="L311">	private BrowserOperatingSystemMapping.Builder browserOsMappingBuilder = new BrowserOperatingSystemMapping.Builder();</span>
+
+<span class="fc" id="L313">	private BrowserPattern.Builder browserPatternBuilder = new BrowserPattern.Builder();</span>
+
+<span class="fc" id="L315">	private DevicePattern.Builder devicePatternBuilder = new DevicePattern.Builder();</span>
+
+<span class="fc" id="L317">	private BrowserType.Builder browserTypeBuilder = new BrowserType.Builder();</span>
+
+<span class="fc" id="L319">	private StringBuilder buffer = new StringBuilder();</span>
+
+<span class="fc" id="L321">	private Tag currentTag = null;</span>
+
+	@Nonnull
+	private final DataBuilder dataBuilder;
+
+	/**
+	 * Flag to note that a fatal error occurred while parsing the document
+	 */
+<span class="fc" id="L329">	private boolean error = false;</span>
+
+<span class="fc" id="L331">	private boolean isBrowser = false;</span>
+
+<span class="fc" id="L333">	private boolean isBrowserOsMapping = false;</span>
+
+<span class="fc" id="L335">	private boolean isBrowserPattern = false;</span>
+
+<span class="fc" id="L337">	private boolean isBrowserType = false;</span>
+
+<span class="fc" id="L339">	private boolean isDevice = false;</span>
+
+<span class="fc" id="L341">	private boolean isDevicePattern = false;</span>
+
+<span class="fc" id="L343">	private boolean isOperatingSystem = false;</span>
+
+<span class="fc" id="L345">	private boolean isOperatingSystemPattern = false;</span>
+
+<span class="fc" id="L347">	private boolean isRobot = false;</span>
+
+<span class="fc" id="L349">	private OperatingSystem.Builder operatingSystemBuilder = new OperatingSystem.Builder();</span>
+
+<span class="fc" id="L351">	private OperatingSystemPattern.Builder operatingSystemPatternBuilder = new OperatingSystemPattern.Builder();</span>
+
+<span class="fc" id="L353">	private Robot.Builder robotBuilder = new Robot.Builder();</span>
+
+	/**
+	 * Flag to note that a warning occurred while parsing the document
+	 */
+<span class="fc" id="L358">	private boolean warning = false;</span>
+
+<span class="fc" id="L360">	public XmlDataHandler(@Nonnull final DataBuilder builder) {</span>
+<span class="fc" id="L361">		Check.notNull(builder, &quot;builder&quot;);</span>
+
+<span class="fc" id="L363">		dataBuilder = builder;</span>
+<span class="fc" id="L364">	}</span>
+
+	private void addToBrowserBuilder() {
+<span class="fc bfc" id="L367" title="All 2 branches covered.">		if (isBrowser) {</span>
+<span class="fc bfc" id="L368" title="All 2 branches covered.">			if (currentTag == Tag.ID) {</span>
+<span class="fc" id="L369">				browserBuilder.setId(buffer.toString());</span>
+<span class="fc bfc" id="L370" title="All 2 branches covered.">			} else if (currentTag == Tag.BROWSER_TYPE_ID) {</span>
+<span class="fc" id="L371">				browserBuilder.setTypeId(buffer.toString());</span>
+<span class="fc bfc" id="L372" title="All 2 branches covered.">			} else if (currentTag == Tag.NAME) {</span>
+<span class="fc" id="L373">				browserBuilder.setFamilyName(buffer.toString());</span>
+<span class="fc bfc" id="L374" title="All 2 branches covered.">			} else if (currentTag == Tag.URL) {</span>
+<span class="fc" id="L375">				browserBuilder.setUrl(buffer.toString());</span>
+<span class="fc bfc" id="L376" title="All 2 branches covered.">			} else if (currentTag == Tag.COMPANY) {</span>
+<span class="fc" id="L377">				browserBuilder.setProducer(buffer.toString());</span>
+<span class="fc bfc" id="L378" title="All 2 branches covered.">			} else if (currentTag == Tag.COMPANY_URL) {</span>
+<span class="fc" id="L379">				browserBuilder.setProducerUrl(buffer.toString());</span>
+<span class="fc bfc" id="L380" title="All 2 branches covered.">			} else if (currentTag == Tag.ICON) {</span>
+<span class="fc" id="L381">				browserBuilder.setIcon(buffer.toString());</span>
+<span class="fc bfc" id="L382" title="All 2 branches covered.">			} else if (currentTag == Tag.BROWSER_INFO_URL) {</span>
+<span class="fc" id="L383">				browserBuilder.setInfoUrl(buffer.toString());</span>
+			}
+		}
+<span class="fc" id="L386">	}</span>
+
+	private void addToBrowserOsMappingBuilder() {
+<span class="fc bfc" id="L389" title="All 4 branches covered.">		if (isBrowserOsMapping &amp;&amp; currentTag == Tag.BROWSER_ID) {</span>
+<span class="fc" id="L390">			browserOsMappingBuilder.setBrowserId(buffer.toString());</span>
+<span class="fc bfc" id="L391" title="All 4 branches covered.">		} else if (isBrowserOsMapping &amp;&amp; currentTag == Tag.OPERATING_SYSTEM_ID) {</span>
+<span class="fc" id="L392">			browserOsMappingBuilder.setOperatingSystemId(buffer.toString());</span>
+		}
+<span class="fc" id="L394">	}</span>
+
+	private void addToBrowserPatternBuilder() {
+<span class="fc bfc" id="L397" title="All 4 branches covered.">		if (isBrowserPattern &amp;&amp; currentTag == Tag.PATTERN_ORDER) {</span>
+<span class="fc" id="L398">			browserPatternBuilder.setPosition(buffer.toString());</span>
+<span class="fc bfc" id="L399" title="All 4 branches covered.">		} else if (isBrowserPattern &amp;&amp; currentTag == Tag.BROWSER_ID) {</span>
+<span class="fc" id="L400">			browserPatternBuilder.setId(buffer.toString());</span>
+<span class="fc bfc" id="L401" title="All 4 branches covered.">		} else if (isBrowserPattern &amp;&amp; currentTag == Tag.PATTERN_REGEX) {</span>
+<span class="fc" id="L402">			browserPatternBuilder.setPerlRegularExpression(buffer.toString());</span>
+		}
+<span class="fc" id="L404">	}</span>
+
+	private void addToBrowserTypeBuilder() {
+<span class="fc bfc" id="L407" title="All 4 branches covered.">		if (isBrowserType &amp;&amp; currentTag == Tag.ID) {</span>
+<span class="fc" id="L408">			browserTypeBuilder.setId(buffer.toString());</span>
+<span class="fc bfc" id="L409" title="All 4 branches covered.">		} else if (isBrowserType &amp;&amp; currentTag == Tag.BROWSER_TYPE_ID) {</span>
+<span class="fc" id="L410">			browserTypeBuilder.setName(buffer.toString());</span>
+		}
+<span class="fc" id="L412">	}</span>
+
+	private void addToDeviceBuilder() {
+<span class="fc bfc" id="L415" title="All 2 branches covered.">		if (isDevice) {</span>
+<span class="fc bfc" id="L416" title="All 2 branches covered.">			if (currentTag == Tag.ID) {</span>
+<span class="fc" id="L417">				deviceBuilder.setId(buffer.toString());</span>
+<span class="fc bfc" id="L418" title="All 2 branches covered.">			} else if (currentTag == Tag.NAME) {</span>
+<span class="fc" id="L419">				deviceBuilder.setName(buffer.toString());</span>
+<span class="fc bfc" id="L420" title="All 2 branches covered.">			} else if (currentTag == Tag.ICON) {</span>
+<span class="fc" id="L421">				deviceBuilder.setIcon(buffer.toString());</span>
+<span class="fc bfc" id="L422" title="All 2 branches covered.">			} else if (currentTag == Tag.DEVICE_INFO_URL) {</span>
+<span class="fc" id="L423">				deviceBuilder.setInfoUrl(buffer.toString());</span>
+			}
+		}
+<span class="fc" id="L426">	}</span>
+
+	private void addToDevicePatternBuilder() {
+<span class="fc bfc" id="L429" title="All 4 branches covered.">		if (isDevicePattern &amp;&amp; currentTag == Tag.PATTERN_ORDER) {</span>
+<span class="fc" id="L430">			devicePatternBuilder.setPosition(buffer.toString());</span>
+<span class="fc bfc" id="L431" title="All 4 branches covered.">		} else if (isDevicePattern &amp;&amp; currentTag == Tag.DEVICE_ID) {</span>
+<span class="fc" id="L432">			devicePatternBuilder.setId(buffer.toString());</span>
+<span class="fc bfc" id="L433" title="All 4 branches covered.">		} else if (isDevicePattern &amp;&amp; currentTag == Tag.PATTERN_REGEX) {</span>
+<span class="fc" id="L434">			devicePatternBuilder.setPerlRegularExpression(buffer.toString());</span>
+		}
+<span class="fc" id="L436">	}</span>
+
+	private void addToOperatingSystemBuilder() {
+<span class="fc bfc" id="L439" title="All 2 branches covered.">		if (isOperatingSystem) {</span>
+<span class="fc bfc" id="L440" title="All 2 branches covered.">			if (currentTag == Tag.ID) {</span>
+<span class="fc" id="L441">				operatingSystemBuilder.setId(buffer.toString());</span>
+<span class="fc bfc" id="L442" title="All 2 branches covered.">			} else if (currentTag == Tag.FAMILY) {</span>
+<span class="fc" id="L443">				operatingSystemBuilder.setFamily(buffer.toString());</span>
+<span class="fc bfc" id="L444" title="All 2 branches covered.">			} else if (currentTag == Tag.NAME) {</span>
+<span class="fc" id="L445">				operatingSystemBuilder.setName(buffer.toString());</span>
+<span class="fc bfc" id="L446" title="All 2 branches covered.">			} else if (currentTag == Tag.URL) {</span>
+<span class="fc" id="L447">				operatingSystemBuilder.setUrl(buffer.toString());</span>
+<span class="fc bfc" id="L448" title="All 2 branches covered.">			} else if (currentTag == Tag.COMPANY) {</span>
+<span class="fc" id="L449">				operatingSystemBuilder.setProducer(buffer.toString());</span>
+<span class="fc bfc" id="L450" title="All 2 branches covered.">			} else if (currentTag == Tag.COMPANY_URL) {</span>
+<span class="fc" id="L451">				operatingSystemBuilder.setProducerUrl(buffer.toString());</span>
+<span class="fc bfc" id="L452" title="All 2 branches covered.">			} else if (currentTag == Tag.ICON) {</span>
+<span class="fc" id="L453">				operatingSystemBuilder.setIcon(buffer.toString());</span>
+<span class="fc bfc" id="L454" title="All 2 branches covered.">			} else if (currentTag == Tag.OPERATING_SYSTEM_INFO_URL) {</span>
+<span class="fc" id="L455">				operatingSystemBuilder.setInfoUrl(buffer.toString());</span>
+			}
+		}
+<span class="fc" id="L458">	}</span>
+
+	private void addToOperatingSystemPatternBuilder() {
+<span class="fc bfc" id="L461" title="All 2 branches covered.">		if (isOperatingSystemPattern) {</span>
+<span class="fc bfc" id="L462" title="All 2 branches covered.">			if (currentTag == Tag.PATTERN_ORDER) {</span>
+<span class="fc" id="L463">				operatingSystemPatternBuilder.setPosition(buffer.toString());</span>
+<span class="fc bfc" id="L464" title="All 2 branches covered.">			} else if (currentTag == Tag.OPERATING_SYSTEM_ID) {</span>
+<span class="fc" id="L465">				operatingSystemPatternBuilder.setId(buffer.toString());</span>
+<span class="fc bfc" id="L466" title="All 2 branches covered.">			} else if (currentTag == Tag.PATTERN_REGEX) {</span>
+<span class="fc" id="L467">				operatingSystemPatternBuilder.setPerlRegularExpression(buffer.toString());</span>
+			}
+		}
+<span class="fc" id="L470">	}</span>
+
+	private void addToRobotBuilder() {
+<span class="fc bfc" id="L473" title="All 2 branches covered.">		if (isRobot) {</span>
+<span class="fc bfc" id="L474" title="All 2 branches covered.">			if (currentTag == Tag.ID) {</span>
+<span class="fc" id="L475">				robotBuilder.setId(buffer.toString());</span>
+<span class="fc bfc" id="L476" title="All 2 branches covered.">			} else if (currentTag == Tag.USERAGENT) {</span>
+<span class="fc" id="L477">				robotBuilder.setUserAgentString(buffer.toString());</span>
+<span class="fc bfc" id="L478" title="All 2 branches covered.">			} else if (currentTag == Tag.FAMILY) {</span>
+<span class="fc" id="L479">				robotBuilder.setFamilyName(buffer.toString());</span>
+<span class="fc bfc" id="L480" title="All 2 branches covered.">			} else if (currentTag == Tag.NAME) {</span>
+<span class="fc" id="L481">				robotBuilder.setName(buffer.toString());</span>
+<span class="fc bfc" id="L482" title="All 2 branches covered.">			} else if (currentTag == Tag.COMPANY) {</span>
+<span class="fc" id="L483">				robotBuilder.setProducer(buffer.toString());</span>
+<span class="fc bfc" id="L484" title="All 2 branches covered.">			} else if (currentTag == Tag.COMPANY_URL) {</span>
+<span class="fc" id="L485">				robotBuilder.setProducerUrl(buffer.toString());</span>
+<span class="fc bfc" id="L486" title="All 2 branches covered.">			} else if (currentTag == Tag.ICON) {</span>
+<span class="fc" id="L487">				robotBuilder.setIcon(buffer.toString());</span>
+<span class="fc bfc" id="L488" title="All 2 branches covered.">			} else if (currentTag == Tag.ROBOT_INFO_URL) {</span>
+<span class="fc" id="L489">				robotBuilder.setInfoUrl(buffer.toString());</span>
+			}
+		}
+<span class="fc" id="L492">	}</span>
+
+	@Override
+	public void characters(final char ch[], final int start, final int length) throws SAXException {
+<span class="fc" id="L496">		buffer.append(new String(ch, start, length));</span>
+<span class="fc" id="L497">	}</span>
+
+	@Override
+	public void endElement(final String uri, final String localName, final String tagName) throws SAXException {
+
+<span class="fc" id="L502">		transferToSpecificBuilderAndReset();</span>
+
+<span class="fc bfc" id="L504" title="All 2 branches covered.">		if (Tag.isRobotTag(tagName)) {</span>
+<span class="fc" id="L505">			saveAndResetRobotBuilder();</span>
+<span class="fc" id="L506">			isRobot = false;</span>
+<span class="fc bfc" id="L507" title="All 2 branches covered.">		} else if (Tag.isBrowserTag(tagName)) {</span>
+<span class="fc" id="L508">			saveAndResetBrowserBuilder();</span>
+<span class="fc" id="L509">			isBrowser = false;</span>
+<span class="fc bfc" id="L510" title="All 2 branches covered.">		} else if (Tag.isOperatingSystemTag(tagName)) {</span>
+<span class="fc" id="L511">			saveAndResetOperatingSystemBuilder();</span>
+<span class="fc" id="L512">			isOperatingSystem = false;</span>
+<span class="fc bfc" id="L513" title="All 2 branches covered.">		} else if (Tag.isBrowserTypeTag(tagName)) {</span>
+<span class="fc" id="L514">			saveAndResetBrowserTypeBuilder();</span>
+<span class="fc" id="L515">			isBrowserType = false;</span>
+<span class="fc bfc" id="L516" title="All 2 branches covered.">		} else if (Tag.isBrowserPatternTag(tagName)) {</span>
+<span class="fc" id="L517">			saveAndResetBrowserPatternBuilder();</span>
+<span class="fc" id="L518">			isBrowserPattern = false;</span>
+<span class="fc bfc" id="L519" title="All 2 branches covered.">		} else if (Tag.isBrowserOsMappingTag(tagName)) {</span>
+<span class="fc" id="L520">			saveAndResetBrowserOperatingSystemMapping();</span>
+<span class="fc" id="L521">			isBrowserOsMapping = false;</span>
+<span class="fc bfc" id="L522" title="All 2 branches covered.">		} else if (Tag.isOperatingSystemPatternTag(tagName)) {</span>
+<span class="fc" id="L523">			saveAndResetOperatingSystemPatternBuilder();</span>
+<span class="fc" id="L524">			isOperatingSystemPattern = false;</span>
+<span class="fc bfc" id="L525" title="All 2 branches covered.">		} else if (Tag.isDeviceTag(tagName)) {</span>
+<span class="fc" id="L526">			saveAndResetDeviceBuilder();</span>
+<span class="fc" id="L527">			isDevice = false;</span>
+<span class="fc bfc" id="L528" title="All 2 branches covered.">		} else if (Tag.isDevicePatternTag(tagName)) {</span>
+<span class="fc" id="L529">			saveAndResetDevicePatternBuilder();</span>
+<span class="fc" id="L530">			isDevicePattern = false;</span>
+		}
+
+<span class="fc" id="L533">		currentTag = null;</span>
+<span class="fc" id="L534">	}</span>
+
+	@Override
+	public void error(final SAXParseException e) throws SAXException {
+<span class="nc" id="L538">		error = true;</span>
+<span class="nc" id="L539">		logParsingIssue(&quot;Error&quot;, e);</span>
+<span class="nc" id="L540">		super.fatalError(e);</span>
+<span class="nc" id="L541">	}</span>
+
+	@Override
+	public void fatalError(final SAXParseException e) throws SAXException {
+<span class="nc" id="L545">		logParsingIssue(&quot;Fatal error&quot;, e);</span>
+
+		// this call throws a SAXException
+<span class="nc" id="L548">		super.fatalError(e);</span>
+<span class="nc" id="L549">	}</span>
+
+	/**
+	 * Gets the flag whether an error occurred while parsing the document.
+	 * 
+	 * @return {@code true} if an error occurred otherwise {@code false}
+	 */
+	public boolean hasError() {
+<span class="fc" id="L557">		return error;</span>
+	}
+
+	/**
+	 * Gets the flag whether an warning occurred while parsing the document.
+	 * 
+	 * @return {@code true} if an warning occurred otherwise {@code false}
+	 */
+	public boolean hasWarning() {
+<span class="nc" id="L566">		return warning;</span>
+	}
+
+	@Override
+	public InputSource resolveEntity(final String publicId, final String systemId) throws IOException, SAXException {
+<span class="fc bfc" id="L571" title="All 2 branches covered.">		if (UASDATA_DEF_URL.equals(systemId)) {</span>
+<span class="fc" id="L572">			final InputStream stream = this.getClass().getClassLoader().getResourceAsStream(UASDATA_DEF);</span>
+<span class="fc" id="L573">			return new InputSource(new InputStreamReader(stream, CHARSET));</span>
+		}
+<span class="fc" id="L575">		throw new SAXException(&quot;unable to resolve remote entity, systemId = &quot; + systemId);</span>
+	}
+
+	private void saveAndResetBrowserBuilder() {
+<span class="fc" id="L579">		dataBuilder.appendBrowserBuilder(browserBuilder);</span>
+<span class="fc" id="L580">		browserBuilder = new Browser.Builder();</span>
+<span class="fc" id="L581">	}</span>
+
+	private void saveAndResetBrowserOperatingSystemMapping() {
+<span class="fc" id="L584">		dataBuilder.appendBrowserOperatingSystemMapping(browserOsMappingBuilder.build());</span>
+<span class="fc" id="L585">		browserOsMappingBuilder = new BrowserOperatingSystemMapping.Builder();</span>
+<span class="fc" id="L586">	}</span>
+
+	private void saveAndResetBrowserPatternBuilder() {
+		try {
+<span class="fc" id="L590">			dataBuilder.appendBrowserPattern(browserPatternBuilder.build());</span>
+<span class="nc" id="L591">		} catch (final IllegalArgumentException e) {</span>
+<span class="nc" id="L592">			LOG.warn(&quot;Can not append browser pattern: &quot; + e.getLocalizedMessage());</span>
+<span class="fc" id="L593">		}</span>
+<span class="fc" id="L594">		browserPatternBuilder = new BrowserPattern.Builder();</span>
+<span class="fc" id="L595">	}</span>
+
+	private void saveAndResetBrowserTypeBuilder() {
+<span class="fc" id="L598">		dataBuilder.appendBrowserType(browserTypeBuilder.build());</span>
+<span class="fc" id="L599">		browserTypeBuilder = new BrowserType.Builder();</span>
+<span class="fc" id="L600">	}</span>
+
+	private void saveAndResetDeviceBuilder() {
+<span class="fc" id="L603">		dataBuilder.appendDeviceBuilder(deviceBuilder);</span>
+<span class="fc" id="L604">		deviceBuilder = new Device.Builder();</span>
+<span class="fc" id="L605">	}</span>
+
+	private void saveAndResetDevicePatternBuilder() {
+		try {
+<span class="fc" id="L609">			dataBuilder.appendDevicePattern(devicePatternBuilder.build());</span>
+<span class="nc" id="L610">		} catch (final IllegalArgumentException e) {</span>
+<span class="nc" id="L611">			LOG.warn(&quot;Can not append device pattern: &quot; + e.getLocalizedMessage());</span>
+<span class="fc" id="L612">		}</span>
+<span class="fc" id="L613">		devicePatternBuilder = new DevicePattern.Builder();</span>
+<span class="fc" id="L614">	}</span>
+
+	private void saveAndResetOperatingSystemBuilder() {
+<span class="fc" id="L617">		dataBuilder.appendOperatingSystemBuilder(operatingSystemBuilder);</span>
+<span class="fc" id="L618">		operatingSystemBuilder = new OperatingSystem.Builder();</span>
+<span class="fc" id="L619">	}</span>
+
+	private void saveAndResetOperatingSystemPatternBuilder() {
+		try {
+<span class="fc" id="L623">			dataBuilder.appendOperatingSystemPattern(operatingSystemPatternBuilder.build());</span>
+<span class="nc" id="L624">		} catch (final IllegalArgumentException e) {</span>
+<span class="nc" id="L625">			LOG.warn(&quot;Can not append OS pattern: &quot; + e.getLocalizedMessage());</span>
+<span class="fc" id="L626">		}</span>
+<span class="fc" id="L627">		operatingSystemPatternBuilder = new OperatingSystemPattern.Builder();</span>
+<span class="fc" id="L628">	}</span>
+
+	private void saveAndResetRobotBuilder() {
+<span class="fc" id="L631">		dataBuilder.appendRobot(robotBuilder.build());</span>
+<span class="fc" id="L632">		robotBuilder = new Robot.Builder();</span>
+<span class="fc" id="L633">	}</span>
+
+	@Override
+	public void startElement(final String uri, final String localName, final String tagName, final Attributes attributes)
+			throws SAXException {
+
+<span class="fc bfc" id="L639" title="All 2 branches covered.">		if (Tag.isRobotTag(tagName)) {</span>
+<span class="fc" id="L640">			isRobot = true;</span>
+<span class="fc bfc" id="L641" title="All 2 branches covered.">		} else if (Tag.isBrowserTag(tagName)) {</span>
+<span class="fc" id="L642">			isBrowser = true;</span>
+<span class="fc bfc" id="L643" title="All 2 branches covered.">		} else if (Tag.isOperatingSystemTag(tagName)) {</span>
+<span class="fc" id="L644">			isOperatingSystem = true;</span>
+<span class="fc bfc" id="L645" title="All 2 branches covered.">		} else if (Tag.isBrowserTypeTag(tagName)) {</span>
+<span class="fc" id="L646">			isBrowserType = true;</span>
+<span class="fc bfc" id="L647" title="All 2 branches covered.">		} else if (Tag.isBrowserPatternTag(tagName)) {</span>
+<span class="fc" id="L648">			isBrowserPattern = true;</span>
+<span class="fc bfc" id="L649" title="All 2 branches covered.">		} else if (Tag.isBrowserOsMappingTag(tagName)) {</span>
+<span class="fc" id="L650">			isBrowserOsMapping = true;</span>
+<span class="fc bfc" id="L651" title="All 2 branches covered.">		} else if (Tag.isOperatingSystemPatternTag(tagName)) {</span>
+<span class="fc" id="L652">			isOperatingSystemPattern = true;</span>
+<span class="fc bfc" id="L653" title="All 2 branches covered.">		} else if (Tag.isDeviceTag(tagName)) {</span>
+<span class="fc" id="L654">			isDevice = true;</span>
+<span class="fc bfc" id="L655" title="All 2 branches covered.">		} else if (Tag.isDevicePatternTag(tagName)) {</span>
+<span class="fc" id="L656">			isDevicePattern = true;</span>
+		}
+
+<span class="fc" id="L659">		currentTag = Tag.evaluate(tagName);</span>
+<span class="fc" id="L660">	}</span>
+
+	/**
+	 * Transfers all characters of a specific tag to the corresponding builder and resets the string buffer.
+	 */
+	private void transferToSpecificBuilderAndReset() {
+
+		// version
+<span class="fc bfc" id="L668" title="All 2 branches covered.">		if (currentTag == Tag.VERSION) {</span>
+<span class="fc" id="L669">			dataBuilder.setVersion(buffer.toString());</span>
+		}
+
+		// robot browser
+<span class="fc" id="L673">		addToRobotBuilder();</span>
+
+		// build browser
+<span class="fc" id="L676">		addToBrowserBuilder();</span>
+
+		// build operating system
+<span class="fc" id="L679">		addToOperatingSystemBuilder();</span>
+
+		// build browser pattern
+<span class="fc" id="L682">		addToBrowserPatternBuilder();</span>
+
+		// build browser type
+<span class="fc" id="L685">		addToBrowserTypeBuilder();</span>
+
+		// build browser to operating system mapping
+<span class="fc" id="L688">		addToBrowserOsMappingBuilder();</span>
+
+		// build operating system pattern
+<span class="fc" id="L691">		addToOperatingSystemPatternBuilder();</span>
+
+		// build browser
+<span class="fc" id="L694">		addToDeviceBuilder();</span>
+
+		// build browser pattern
+<span class="fc" id="L697">		addToDevicePatternBuilder();</span>
+
+<span class="fc" id="L699">		buffer = new StringBuilder();</span>
+<span class="fc" id="L700">	}</span>
+
+	@Override
+	public void warning(final SAXParseException e) throws SAXException {
+<span class="nc" id="L704">		warning = true;</span>
+<span class="nc" id="L705">		logParsingIssue(&quot;Warning&quot;, e);</span>
+<span class="nc" id="L706">		super.warning(e);</span>
+<span class="nc" id="L707">	}</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.6.2.201302030002</span></div></body></html>

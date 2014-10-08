@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>DeviceCategory.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="right"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">UADetector :: Core</a> &gt; <a href="index.html" class="el_package">net.sf.uadetector</a> &gt; <span class="el_source">DeviceCategory.java</span></div><h1>DeviceCategory.java</h1><pre class="source lang-java linenums">/*******************************************************************************
+ * Copyright 2012 André Rouél
+ * 
+ * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ ******************************************************************************/
+package net.sf.uadetector;
+
+import java.io.Serializable;
+
+import javax.annotation.Nonnull;
+import javax.annotation.concurrent.Immutable;
+import javax.annotation.concurrent.NotThreadSafe;
+
+import net.sf.qualitycheck.Check;
+
+@Immutable
+public final class DeviceCategory implements ReadableDeviceCategory, Serializable {
+
+	@NotThreadSafe
+	public static final class Builder {
+
+		private Category category;
+
+		private String icon;
+
+		private String infoUrl;
+
+		private String name;
+
+<span class="fc" id="L40">		public Builder() {</span>
+			// default constructor
+<span class="fc" id="L42">		}</span>
+
+<span class="nc" id="L44">		public Builder(@Nonnull final DeviceCategory deviceCategory) {</span>
+<span class="nc" id="L45">			Check.notNull(deviceCategory, &quot;deviceCategory&quot;);</span>
+<span class="nc" id="L46">			category = Check.notNull(deviceCategory.getCategory(), &quot;deviceCategory.getCategory()&quot;);</span>
+<span class="nc" id="L47">			icon = Check.notNull(deviceCategory.getIcon(), &quot;deviceCategory.getIcon()&quot;);</span>
+<span class="nc" id="L48">			infoUrl = Check.notNull(deviceCategory.getInfoUrl(), &quot;deviceCategory.getInfoUrl()&quot;);</span>
+<span class="nc" id="L49">			name = Check.notNull(deviceCategory.getName(), &quot;deviceCategory.getName()&quot;);</span>
+<span class="nc" id="L50">		}</span>
+
+		@Nonnull
+		public DeviceCategory build() {
+<span class="fc" id="L54">			return new DeviceCategory(category, icon, infoUrl, name);</span>
+		}
+
+		@Nonnull
+		public Builder setCategory(@Nonnull final Category category) {
+<span class="fc" id="L59">			this.category = Check.notNull(category, &quot;category&quot;);</span>
+<span class="fc" id="L60">			return this;</span>
+		}
+
+		@Nonnull
+		public Builder setIcon(@Nonnull final String icon) {
+<span class="fc" id="L65">			this.icon = Check.notNull(icon, &quot;icon&quot;);</span>
+<span class="fc" id="L66">			return this;</span>
+		}
+
+		@Nonnull
+		public Builder setInfoUrl(@Nonnull final String infoUrl) {
+<span class="fc" id="L71">			this.infoUrl = Check.notNull(infoUrl, &quot;infoUrl&quot;);</span>
+<span class="fc" id="L72">			return this;</span>
+		}
+
+		@Nonnull
+		public Builder setName(@Nonnull final String name) {
+<span class="fc" id="L77">			this.name = Check.notNull(name, &quot;name&quot;);</span>
+<span class="fc" id="L78">			return this;</span>
+		}
+
+	}
+
+	private static final long serialVersionUID = 1L;
+
+	/**
+	 * Represents a not set device category.
+	 */
+<span class="fc" id="L88">	public static final DeviceCategory EMPTY = new DeviceCategory();</span>
+
+	private static int buildHashCode(@Nonnull final Category category, @Nonnull final String icon, @Nonnull final String infoUrl,
+			@Nonnull final String name) {
+<span class="fc" id="L92">		final int prime = 31;</span>
+<span class="fc" id="L93">		int result = 1;</span>
+<span class="fc" id="L94">		result = prime * result + category.hashCode();</span>
+<span class="fc" id="L95">		result = prime * result + icon.hashCode();</span>
+<span class="fc" id="L96">		result = prime * result + infoUrl.hashCode();</span>
+<span class="fc" id="L97">		result = prime * result + name.hashCode();</span>
+<span class="fc" id="L98">		return result;</span>
+	}
+
+	@Nonnull
+	private final Category category;
+
+	@Nonnull
+	private final String icon;
+
+	@Nonnull
+	private final String infoUrl;
+
+	@Nonnull
+	private final String name;
+
+	private final int hash;
+
+	/**
+	 * Builds an instance that represents an empty device category.
+	 * &lt;p&gt;
+	 * &lt;b&gt;Attention&lt;/b&gt;: This is only intended to build one instance at runtime to represent value behind the constant
+	 * {@link #EMPTY}.
+	 */
+<span class="fc" id="L121">	private DeviceCategory() {</span>
+<span class="fc" id="L122">		category = Category.UNKNOWN;</span>
+<span class="fc" id="L123">		icon = &quot;&quot;;</span>
+<span class="fc" id="L124">		infoUrl = &quot;&quot;;</span>
+<span class="fc" id="L125">		name = &quot;&quot;;</span>
+<span class="fc" id="L126">		hash = buildHashCode(category, icon, infoUrl, name);</span>
+<span class="fc" id="L127">	}</span>
+
+	public DeviceCategory(@Nonnull final Category category, @Nonnull final String icon, @Nonnull final String infoUrl,
+<span class="fc" id="L130">			@Nonnull final String name) {</span>
+<span class="fc" id="L131">		this.category = Check.notNull(category, &quot;category&quot;);</span>
+<span class="fc" id="L132">		this.icon = Check.notNull(icon, &quot;icon&quot;);</span>
+<span class="fc" id="L133">		this.infoUrl = Check.notNull(infoUrl, &quot;infoUrl&quot;);</span>
+<span class="fc" id="L134">		this.name = Check.notEmpty(name, &quot;name&quot;);</span>
+<span class="fc" id="L135">		hash = buildHashCode(category, icon, infoUrl, name);</span>
+<span class="fc" id="L136">	}</span>
+
+	@Override
+	public boolean equals(final Object obj) {
+<span class="fc bfc" id="L140" title="All 2 branches covered.">		if (this == obj) {</span>
+<span class="fc" id="L141">			return true;</span>
+		}
+<span class="fc bfc" id="L143" title="All 2 branches covered.">		if (obj == null) {</span>
+<span class="fc" id="L144">			return false;</span>
+		}
+<span class="fc bfc" id="L146" title="All 2 branches covered.">		if (getClass() != obj.getClass()) {</span>
+<span class="fc" id="L147">			return false;</span>
+		}
+<span class="fc" id="L149">		final DeviceCategory other = (DeviceCategory) obj;</span>
+<span class="fc bfc" id="L150" title="All 2 branches covered.">		if (!category.equals(other.category)) {</span>
+<span class="fc" id="L151">			return false;</span>
+		}
+<span class="fc bfc" id="L153" title="All 2 branches covered.">		if (!icon.equals(other.icon)) {</span>
+<span class="fc" id="L154">			return false;</span>
+		}
+<span class="fc bfc" id="L156" title="All 2 branches covered.">		if (!infoUrl.equals(other.infoUrl)) {</span>
+<span class="fc" id="L157">			return false;</span>
+		}
+<span class="fc bfc" id="L159" title="All 2 branches covered.">		if (!name.equals(other.name)) {</span>
+<span class="fc" id="L160">			return false;</span>
+		}
+<span class="fc" id="L162">		return true;</span>
+	}
+
+	@Override
+	@Nonnull
+	public Category getCategory() {
+<span class="fc" id="L168">		return category;</span>
+	}
+
+	@Override
+	@Nonnull
+	public String getIcon() {
+<span class="fc" id="L174">		return icon;</span>
+	}
+
+	@Override
+	@Nonnull
+	public String getInfoUrl() {
+<span class="fc" id="L180">		return infoUrl;</span>
+	}
+
+	@Override
+	@Nonnull
+	public String getName() {
+<span class="fc" id="L186">		return name;</span>
+	}
+
+	@Override
+	public int hashCode() {
+<span class="fc" id="L191">		return hash;</span>
+	}
+
+	@Override
+	public String toString() {
+<span class="fc" id="L196">		return &quot;DeviceCategory [category=&quot; + category + &quot;, icon=&quot; + icon + &quot;, infoUrl=&quot; + infoUrl + &quot;, name=&quot; + name + &quot;]&quot;;</span>
+	}
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.6.2.201302030002</span></div></body></html>

@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>XmlDataReader.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="right"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">UADetector :: Core</a> &gt; <a href="index.html" class="el_package">net.sf.uadetector.datareader</a> &gt; <span class="el_source">XmlDataReader.java</span></div><h1>XmlDataReader.java</h1><pre class="source lang-java linenums">/*******************************************************************************
+ * Copyright 2012 André Rouél
+ * 
+ * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ ******************************************************************************/
+package net.sf.uadetector.datareader;
+
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
+import java.nio.charset.Charset;
+
+import javax.annotation.Nonnull;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.parsers.SAXParser;
+import javax.xml.parsers.SAXParserFactory;
+
+import net.sf.qualitycheck.Check;
+import net.sf.uadetector.exception.CanNotOpenStreamException;
+import net.sf.uadetector.internal.data.Data;
+import net.sf.uadetector.internal.data.DataBuilder;
+import net.sf.uadetector.internal.data.XmlDataHandler;
+import net.sf.uadetector.internal.util.Closeables;
+import net.sf.uadetector.internal.util.UrlUtil;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.xml.sax.SAXException;
+
+/**
+ * Reader for the XML data for UASparser from &lt;a
+ * href=&quot;http://user-agent-string.info/&quot;&gt;http://user-agent-string.info&lt;/a&gt;.&lt;br&gt;
+ * &lt;br&gt;
+ * This reader is safe when used concurrently by multiple threads.
+ * 
+ * @author André Rouél
+ */
+<span class="fc" id="L49">public final class XmlDataReader implements DataReader {</span>
+
+<span class="fc" id="L51">	protected static final class XmlParser {</span>
+
+		private static final String MSG_NOT_PARSED_AS_EXPECTED = &quot;The UAS data has not been parsed as expected.&quot;;
+
+		public static void parse(@Nonnull final InputStream stream, @Nonnull final DataBuilder builder)
+				throws ParserConfigurationException, SAXException, IOException {
+<span class="fc" id="L57">			final SAXParserFactory factory = SAXParserFactory.newInstance();</span>
+<span class="fc" id="L58">			factory.setValidating(true);</span>
+<span class="fc" id="L59">			final SAXParser parser = factory.newSAXParser();</span>
+<span class="fc" id="L60">			final XmlDataHandler handler = new XmlDataHandler(builder);</span>
+<span class="fc" id="L61">			parser.parse(stream, handler);</span>
+<span class="fc" id="L62">			validate(handler);</span>
+<span class="fc" id="L63">		}</span>
+
+		protected static void validate(@Nonnull final XmlDataHandler handler) {
+<span class="fc bfc" id="L66" title="All 2 branches covered.">			if (handler.hasError()) {</span>
+<span class="fc" id="L67">				throw new IllegalStateException(MSG_NOT_PARSED_AS_EXPECTED);</span>
+			}
+<span class="fc" id="L69">		}</span>
+
+<span class="fc" id="L71">		private XmlParser() {</span>
+			// This class is not intended to create objects from it.
+<span class="fc" id="L73">		}</span>
+
+	}
+
+	/**
+	 * Default character set to read UAS data
+	 */
+<span class="fc" id="L80">	private static final Charset DEFAULT_CHARSET = Charset.forName(&quot;UTF-8&quot;);</span>
+
+	/**
+	 * Corresponding default logger for this class
+	 */
+<span class="fc" id="L85">	private static final Logger LOG = LoggerFactory.getLogger(XmlDataReader.class);</span>
+
+	/**
+	 * Reads the &lt;em&gt;UAS data&lt;/em&gt; in XML format based on the given URL.&lt;br&gt;
+	 * &lt;br&gt;
+	 * When during the reading errors occur which lead to a termination of the read operation, the information will be
+	 * written to a log. The termination of the read operation will not lead to a program termination and in this case
+	 * this method returns {@link Data#EMPTY}.
+	 * 
+	 * @param inputStream
+	 *            an input stream for reading &lt;em&gt;UAS data&lt;/em&gt;
+	 * @param charset
+	 *            the character set in which the data should be read
+	 * @return read in &lt;em&gt;UAS data&lt;/em&gt; as {@code Data} instance
+	 * @throws net.sf.qualitycheck.exception.IllegalNullArgumentException
+	 *             if any of the given arguments is {@code null}
+	 * @throws net.sf.uadetector.exception.CanNotOpenStreamException
+	 *             if no stream to the given {@code URL} can be established
+	 */
+	protected static Data readXml(@Nonnull final InputStream inputStream, @Nonnull final Charset charset) {
+<span class="fc" id="L105">		Check.notNull(inputStream, &quot;inputStream&quot;);</span>
+<span class="fc" id="L106">		Check.notNull(charset, &quot;charset&quot;);</span>
+
+<span class="fc" id="L108">		final DataBuilder builder = new DataBuilder();</span>
+<span class="fc" id="L109">		boolean hasErrors = false;</span>
+		try {
+<span class="fc" id="L111">			XmlParser.parse(inputStream, builder);</span>
+<span class="nc" id="L112">		} catch (final ParserConfigurationException e) {</span>
+<span class="nc" id="L113">			hasErrors = true;</span>
+<span class="nc" id="L114">			LOG.warn(e.getLocalizedMessage());</span>
+<span class="fc" id="L115">		} catch (final SAXException e) {</span>
+<span class="fc" id="L116">			hasErrors = true;</span>
+<span class="fc" id="L117">			LOG.warn(e.getLocalizedMessage());</span>
+<span class="nc" id="L118">		} catch (final IOException e) {</span>
+<span class="nc" id="L119">			hasErrors = true;</span>
+<span class="nc" id="L120">			LOG.warn(e.getLocalizedMessage());</span>
+<span class="nc" id="L121">		} catch (final IllegalStateException e) {</span>
+<span class="nc" id="L122">			hasErrors = true;</span>
+<span class="nc" id="L123">			LOG.warn(e.getLocalizedMessage());</span>
+<span class="nc" id="L124">		} catch (final Exception e) {</span>
+<span class="nc" id="L125">			hasErrors = true;</span>
+<span class="nc" id="L126">			LOG.warn(e.getLocalizedMessage(), e);</span>
+		} finally {
+<span class="pc" id="L128">			Closeables.closeAndConvert(inputStream, true);</span>
+<span class="pc" id="L129">		}</span>
+
+<span class="fc bfc" id="L131" title="All 2 branches covered.">		return hasErrors ? Data.EMPTY : builder.build();</span>
+	}
+
+	/**
+	 * Reads the &lt;em&gt;UAS data&lt;/em&gt; in XML format from the given string.
+	 * 
+	 * @param data
+	 *            &lt;em&gt;UAS data&lt;/em&gt; as string
+	 * @return read in User-Agent data as {@code Data} instance otherwise {@link Data#EMPTY}
+	 * 
+	 * @throws net.sf.qualitycheck.exception.IllegalNullArgumentException
+	 *             if any of the given argument is {@code null}
+	 */
+	@Override
+	public Data read(@Nonnull final String data) {
+<span class="fc" id="L146">		Check.notNull(data, &quot;data&quot;);</span>
+
+<span class="fc" id="L148">		return readXml(new ByteArrayInputStream(data.getBytes(DEFAULT_CHARSET)), DEFAULT_CHARSET);</span>
+	}
+
+	/**
+	 * Reads the &lt;em&gt;UAS data&lt;/em&gt; in XML format based on the given URL.
+	 * 
+	 * @param url
+	 *            {@code URL} to User-Agent informations
+	 * @param charset
+	 *            the character set in which the data should be read
+	 * @return read in User-Agent data as {@code Data} instance otherwise {@link Data#EMPTY}
+	 * 
+	 * @throws net.sf.qualitycheck.exception.IllegalNullArgumentException
+	 *             if any of the given arguments is {@code null}
+	 */
+	@Override
+	public Data read(@Nonnull final URL url, @Nonnull final Charset charset) {
+<span class="fc" id="L165">		Check.notNull(url, &quot;url&quot;);</span>
+<span class="fc" id="L166">		Check.notNull(charset, &quot;charset&quot;);</span>
+
+<span class="fc" id="L168">		Data data = Data.EMPTY;</span>
+		try {
+<span class="fc" id="L170">			data = readXml(UrlUtil.open(url), charset);</span>
+<span class="fc" id="L171">		} catch (final CanNotOpenStreamException e) {</span>
+<span class="fc" id="L172">			LOG.warn(e.getLocalizedMessage());</span>
+<span class="fc" id="L173">		}</span>
+
+<span class="fc" id="L175">		return data;</span>
+	}
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.6.2.201302030002</span></div></body></html>

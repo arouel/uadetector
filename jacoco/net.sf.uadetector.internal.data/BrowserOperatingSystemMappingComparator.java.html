@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>BrowserOperatingSystemMappingComparator.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="right"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">UADetector :: Core</a> &gt; <a href="index.html" class="el_package">net.sf.uadetector.internal.data</a> &gt; <span class="el_source">BrowserOperatingSystemMappingComparator.java</span></div><h1>BrowserOperatingSystemMappingComparator.java</h1><pre class="source lang-java linenums">package net.sf.uadetector.internal.data;
+
+import javax.annotation.concurrent.ThreadSafe;
+
+import net.sf.uadetector.internal.data.domain.BrowserOperatingSystemMapping;
+import net.sf.uadetector.internal.util.CompareNullSafe;
+
+@ThreadSafe
+public final class BrowserOperatingSystemMappingComparator extends CompareNullSafe&lt;BrowserOperatingSystemMapping&gt; {
+
+	private static final long serialVersionUID = 3227329029706985170L;
+
+<span class="fc" id="L13">	public static final BrowserOperatingSystemMappingComparator INSTANCE = new BrowserOperatingSystemMappingComparator();</span>
+
+	/**
+	 * &lt;strong&gt;Attention:&lt;/strong&gt; This class is a stateless singleton and not intended to create more than one object
+	 * from it.
+	 */
+<span class="fc" id="L19">	private BrowserOperatingSystemMappingComparator() {</span>
+		// This class is not intended to create own objects from it.
+<span class="fc" id="L21">	}</span>
+
+	@Override
+	public int compareType(final BrowserOperatingSystemMapping o1, final BrowserOperatingSystemMapping o2) {
+<span class="fc bfc" id="L25" title="All 4 branches covered.">		return o1.getBrowserId() &lt; o2.getBrowserId() ? -1 : o1.getBrowserId() == o2.getBrowserId() ? 0 : 1;</span>
+	}
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.6.2.201302030002</span></div></body></html>

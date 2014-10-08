@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>UpdatingUserAgentStringParserImpl.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="right"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">UADetector :: Core</a> &gt; <a href="index.html" class="el_package">net.sf.uadetector.parser</a> &gt; <span class="el_source">UpdatingUserAgentStringParserImpl.java</span></div><h1>UpdatingUserAgentStringParserImpl.java</h1><pre class="source lang-java linenums">/*******************************************************************************
+ * Copyright 2012 André Rouél
+ * 
+ * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ ******************************************************************************/
+package net.sf.uadetector.parser;
+
+import static java.util.concurrent.TimeUnit.MILLISECONDS;
+
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ScheduledFuture;
+
+import javax.annotation.Nonnegative;
+import javax.annotation.PreDestroy;
+
+import net.sf.qualitycheck.Check;
+import net.sf.uadetector.datastore.RefreshableDataStore;
+import net.sf.uadetector.internal.util.ExecutorServices;
+
+/**
+ * This parser checks once per day if newer data are available. When newer data are available, they will be loaded, read
+ * and replaced by the current one.
+ * 
+ * @author André Rouél
+ */
+public final class UpdatingUserAgentStringParserImpl extends UserAgentStringParserImpl&lt;RefreshableDataStore&gt; {
+
+	/**
+	 * The default interval to check for updates is once per day
+	 */
+	public static final long DEFAULT_UPDATE_INTERVAL = 1000 * 60 * 60 * 24;
+
+	/**
+	 * Interval to check for updates in milliseconds
+	 */
+<span class="fc" id="L46">	private long updateInterval = DEFAULT_UPDATE_INTERVAL;</span>
+
+	/**
+	 * Current update task of {@link UpdatingUserAgentStringParserImpl#scheduler}
+	 */
+	private ScheduledFuture&lt;?&gt; currentUpdateTask;
+
+	/**
+	 * {@link ScheduledExecutorService} to schedule commands to update the UAS data in defined intervals
+	 */
+<span class="fc" id="L56">	private final ScheduledExecutorService scheduler = ExecutorServices.createScheduler();</span>
+
+	/**
+	 * Constructs an instance of {@code OnlineUserAgentStringParser}. During construction new UAS data will be queried
+	 * online by the given {@code URL}s.
+	 * 
+	 * @param store
+	 *            {@code DataStore} with reference UAS data used in fallback case
+	 * @throws net.sf.qualitycheck.exception.IllegalNullArgumentException
+	 *             if one of the given arguments is {@code null}
+	 */
+	public UpdatingUserAgentStringParserImpl(final RefreshableDataStore store) {
+<span class="fc" id="L68">		super(store);</span>
+
+		// set up update service
+<span class="fc" id="L71">		setUpUpdateService();</span>
+<span class="fc" id="L72">	}</span>
+
+	/**
+	 * Gets the current update interval in milliseconds.
+	 * 
+	 * @return current update interval in milliseconds
+	 */
+	public long getUpdateInterval() {
+<span class="fc" id="L80">		return updateInterval;</span>
+	}
+
+	/**
+	 * Sets a new update interval in milliseconds.&lt;br&gt;
+	 * &lt;br&gt;
+	 * When a new update interval is set, the old update service is removed and a new one will be set.
+	 * 
+	 * @param updateInterval
+	 *            update interval in milliseconds
+	 * @throws net.sf.qualitycheck.exception.IllegalNegativeArgumentException
+	 *             if the given update interval is less than 0
+	 */
+	public void setUpdateInterval(@Nonnegative final long updateInterval) {
+<span class="fc" id="L94">		Check.notNegative(updateInterval, &quot;updateInterval&quot;);</span>
+<span class="fc" id="L95">		this.updateInterval = updateInterval;</span>
+<span class="fc" id="L96">		setUpUpdateService();</span>
+<span class="fc" id="L97">	}</span>
+
+	/**
+	 * Set up a new update service to get newer UAS data
+	 */
+	private void setUpUpdateService() {
+<span class="fc bfc" id="L103" title="All 2 branches covered.">		if (currentUpdateTask != null) {</span>
+<span class="fc" id="L104">			currentUpdateTask.cancel(false);</span>
+		}
+<span class="fc" id="L106">		currentUpdateTask = scheduler.scheduleWithFixedDelay(getDataStore().getUpdateOperation(), 0, updateInterval, MILLISECONDS);</span>
+<span class="fc" id="L107">	}</span>
+
+	@Override
+	@PreDestroy
+	public void shutdown() {
+<span class="fc" id="L112">		currentUpdateTask.cancel(false);</span>
+<span class="fc" id="L113">		ExecutorServices.shutdown(scheduler);</span>
+<span class="fc" id="L114">		getDataStore().getUpdateOperation().shutdown();</span>
+<span class="fc" id="L115">	}</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.6.2.201302030002</span></div></body></html>

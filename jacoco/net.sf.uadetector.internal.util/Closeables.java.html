@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>Closeables.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="right"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">UADetector :: Core</a> &gt; <a href="index.html" class="el_package">net.sf.uadetector.internal.util</a> &gt; <span class="el_source">Closeables.java</span></div><h1>Closeables.java</h1><pre class="source lang-java linenums">/*******************************************************************************
+ * Copyright 2013 André Rouél
+ * 
+ * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ ******************************************************************************/
+package net.sf.uadetector.internal.util;
+
+import java.io.Closeable;
+import java.io.IOException;
+
+import javax.annotation.Nullable;
+
+import net.sf.uadetector.exception.CannotCloseException;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+/**
+ * This class is intended to provide utility methods to close {@link Closeable} instances.
+ * 
+ * @author André Rouél
+ */
+public final class Closeables {
+
+<span class="fc" id="L35">	private static final Logger LOG = LoggerFactory.getLogger(Closeables.class);</span>
+
+	/**
+	 * Closes a {@link Closeable} and swallows an occurring {@link IOException} if argument {@code swallowIOException}
+	 * is {@code true}, otherwise the {@code IOException} will be thrown.
+	 * &lt;p&gt;
+	 * This method does nothing if a null reference is passed as {@code closeable}.
+	 * 
+	 * @param closeable
+	 *            the {@code Closeable} object to be closed, or {@code null}
+	 * @param swallowIOException
+	 *            {@code true} if an occurring {@code IOException} should be swallowed and logged or {@code false} to
+	 *            throw it
+	 * 
+	 * @throws IOException
+	 *             if the given {@code closeable} cannot be closed
+	 */
+	public static void close(@Nullable final Closeable closeable, final boolean swallowIOException) throws IOException {
+<span class="fc bfc" id="L53" title="All 2 branches covered.">		if (closeable != null) {</span>
+			try {
+<span class="fc" id="L55">				closeable.close();</span>
+<span class="fc" id="L56">			} catch (final IOException e) {</span>
+<span class="fc bfc" id="L57" title="All 2 branches covered.">				if (!swallowIOException) {</span>
+<span class="fc" id="L58">					throw e;</span>
+				}
+<span class="fc" id="L60">				LOG.warn(e.getLocalizedMessage(), e);</span>
+<span class="fc" id="L61">			}</span>
+		}
+<span class="fc" id="L63">	}</span>
+
+	/**
+	 * Closes a {@link Closeable} and swallows an occurring {@link IOException} if argument {@code swallowIOException}
+	 * is {@code true}, otherwise the {@code IOException} will be converted into a runtime exception.
+	 * &lt;p&gt;
+	 * This method does nothing if a null reference is passed as {@code closeable}.
+	 * 
+	 * @param closeable
+	 *            the {@code Closeable} object to be closed, or {@code null}
+	 * @param swallowIOException
+	 *            {@code true} if an occurring {@code IOException} should be swallowed and logged or {@code false} to
+	 *            throw a {@code CannotCloseException}
+	 * 
+	 * @throws CannotCloseException
+	 *             if the given {@code closeable} cannot be closed
+	 */
+	public static void closeAndConvert(@Nullable final Closeable closeable, final boolean swallowIOException) {
+<span class="fc bfc" id="L81" title="All 2 branches covered.">		if (closeable != null) {</span>
+			try {
+<span class="fc" id="L83">				closeable.close();</span>
+<span class="fc" id="L84">			} catch (final IOException e) {</span>
+<span class="fc bfc" id="L85" title="All 2 branches covered.">				if (!swallowIOException) {</span>
+<span class="fc" id="L86">					throw new CannotCloseException(e.getLocalizedMessage(), e);</span>
+				}
+<span class="fc" id="L88">				LOG.warn(e.getLocalizedMessage(), e);</span>
+<span class="fc" id="L89">			}</span>
+		}
+<span class="fc" id="L91">	}</span>
+
+	/**
+	 * &lt;strong&gt;Attention:&lt;/strong&gt; This class is not intended to create objects from it.
+	 */
+<span class="nc" id="L96">	private Closeables() {</span>
+		// This class is not intended to create objects from it.
+<span class="nc" id="L98">	}</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.6.2.201302030002</span></div></body></html>

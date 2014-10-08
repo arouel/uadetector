@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>AbstractDataStore.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="right"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">UADetector :: Core</a> &gt; <a href="index.html" class="el_package">net.sf.uadetector.datastore</a> &gt; <span class="el_source">AbstractDataStore.java</span></div><h1>AbstractDataStore.java</h1><pre class="source lang-java linenums">/*******************************************************************************
+ * Copyright 2012 André Rouél
+ * 
+ * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ ******************************************************************************/
+package net.sf.uadetector.datastore;
+
+import java.net.URL;
+import java.nio.charset.Charset;
+
+import javax.annotation.Nonnull;
+
+import net.sf.qualitycheck.Check;
+import net.sf.uadetector.datareader.DataReader;
+import net.sf.uadetector.internal.data.Data;
+import net.sf.uadetector.internal.util.UrlUtil;
+
+/**
+ * The abstract implementation to store &lt;em&gt;UAS data&lt;/em&gt; only in the heap space.&lt;br&gt;
+ * &lt;br&gt;
+ * A store must always have an usable instance of {@link Data}. It is recommended to initialize it with the supplied UAS
+ * file in the &lt;em&gt;uadetector-resources&lt;/em&gt; module.
+ * 
+ * @author André Rouél
+ */
+public abstract class AbstractDataStore implements DataStore {
+
+	/**
+	 * Runtime check that the passed instance of {@link Data} is not empty (respectively {@link Data#EMPTY}).
+	 * 
+	 * @param data
+	 *            instance of {@code Data}
+	 * @throws IllegalStateException
+	 *             if the passed instance is empty
+	 */
+	private static Data checkData(final Data data) {
+<span class="fc bfc" id="L47" title="All 2 branches covered.">		if (Data.EMPTY.equals(data)) {</span>
+<span class="fc" id="L48">			throw new IllegalStateException(&quot;Argument 'data' must not be empty.&quot;);</span>
+		}
+<span class="fc" id="L50">		return data;</span>
+	}
+
+	/**
+	 * This method reads the given {@link URL} by using an {@link DataReader}. The new created instance of {@link Data}
+	 * will be returned.
+	 * 
+	 * @param reader
+	 *            data reader to read the given {@code dataUrl}
+	 * @param url
+	 *            URL to &lt;em&gt;UAS data&lt;/em&gt;
+	 * @param charset
+	 *            the character set in which the data should be read
+	 * @return an instance of {@code Data} or {@link Data#EMPTY} if an error occurred, but never {@code null}
+	 * @throws net.sf.qualitycheck.exception.IllegalNullArgumentException
+	 *             if the given argument is {@code null}
+	 */
+	protected static final Data readData(@Nonnull final DataReader reader, @Nonnull final URL url, @Nonnull final Charset charset) {
+<span class="fc" id="L68">		Check.notNull(reader, &quot;reader&quot;);</span>
+<span class="fc" id="L69">		Check.notNull(url, &quot;url&quot;);</span>
+<span class="fc" id="L70">		Check.notNull(charset, &quot;charset&quot;);</span>
+
+<span class="fc" id="L72">		return reader.read(url, charset);</span>
+	}
+
+	/**
+	 * Current the character set in which the &lt;em&gt;UAS data&lt;/em&gt; will be read
+	 */
+	private final Charset charset;
+
+	/**
+	 * Current &lt;em&gt;UAS data&lt;/em&gt;
+	 */
+	private final Data data;
+
+	/**
+	 * The {@code URL} to get &lt;em&gt;UAS data&lt;/em&gt;
+	 */
+	private final URL dataUrl;
+
+	/**
+	 * The data reader to read in &lt;em&gt;UAS data&lt;/em&gt;
+	 */
+	private final DataReader reader;
+
+	/**
+	 * The {@code URL} to get the latest version information of &lt;em&gt;UAS data&lt;/em&gt;
+	 */
+	private final URL versionUrl;
+
+	/**
+	 * Constructs an new instance of {@link AbstractDataStore}.
+	 * 
+	 * @param data
+	 *            first &lt;em&gt;UAS data&lt;/em&gt; which will be available in the store
+	 * @param reader
+	 *            data reader to read the given {@code dataUrl}
+	 * @param dataUrl
+	 *            URL to &lt;em&gt;UAS data&lt;/em&gt;
+	 * @param versionUrl
+	 *            URL to version information about the given &lt;em&gt;UAS data&lt;/em&gt;
+	 * @param charset
+	 *            the character set in which the data should be read
+	 * @throws net.sf.qualitycheck.exception.IllegalNullArgumentException
+	 *             if one of the given arguments is {@code null}
+	 */
+	protected AbstractDataStore(@Nonnull final Data data, @Nonnull final DataReader reader, @Nonnull final URL dataUrl,
+<span class="fc" id="L117">			@Nonnull final URL versionUrl, @Nonnull final Charset charset) {</span>
+<span class="fc" id="L118">		Check.notNull(data, &quot;data&quot;);</span>
+<span class="fc" id="L119">		Check.notNull(reader, &quot;reader&quot;);</span>
+<span class="fc" id="L120">		Check.notNull(charset, &quot;charset&quot;);</span>
+<span class="fc" id="L121">		Check.notNull(dataUrl, &quot;dataUrl&quot;);</span>
+<span class="fc" id="L122">		Check.notNull(versionUrl, &quot;versionUrl&quot;);</span>
+
+<span class="fc" id="L124">		this.data = checkData(data);</span>
+<span class="fc" id="L125">		this.reader = reader;</span>
+<span class="fc" id="L126">		this.dataUrl = dataUrl;</span>
+<span class="fc" id="L127">		this.versionUrl = versionUrl;</span>
+<span class="fc" id="L128">		this.charset = charset;</span>
+<span class="fc" id="L129">	}</span>
+
+	/**
+	 * Constructs an {@code AbstractDataStore} by reading the given {@code dataUrl} as &lt;em&gt;UAS data&lt;/em&gt;.
+	 * 
+	 * @param reader
+	 *            data reader to read the given {@code dataUrl}
+	 * @param dataUrl
+	 *            URL to &lt;em&gt;UAS data&lt;/em&gt;
+	 * @param versionUrl
+	 *            URL to version information about the given &lt;em&gt;UAS data&lt;/em&gt;
+	 * @param charset
+	 *            the character set in which the data should be read
+	 * @throws net.sf.qualitycheck.exception.IllegalNullArgumentException
+	 *             if one of the given arguments is {@code null}
+	 * @throws net.sf.qualitycheck.exception.IllegalNullArgumentException
+	 *             if the given strings are not valid URLs
+	 */
+	protected AbstractDataStore(final DataReader reader, final String dataUrl, final String versionUrl, final Charset charset) {
+<span class="fc" id="L148">		this(reader, UrlUtil.build(dataUrl), UrlUtil.build(versionUrl), charset);</span>
+<span class="fc" id="L149">	}</span>
+
+	/**
+	 * Constructs an {@code AbstractDataStore} by reading the given {@code dataUrl} as &lt;em&gt;UAS data&lt;/em&gt;.
+	 * 
+	 * @param reader
+	 *            data reader to read the given {@code dataUrl}
+	 * @param dataUrl
+	 *            URL to &lt;em&gt;UAS data&lt;/em&gt;
+	 * @param versionUrl
+	 *            URL to version information about the given &lt;em&gt;UAS data&lt;/em&gt;
+	 * @param charset
+	 *            the character set in which the data should be read
+	 * @throws net.sf.qualitycheck.exception.IllegalNullArgumentException
+	 *             if the given argument is {@code null}
+	 * @throws net.sf.qualitycheck.exception.IllegalStateOfArgumentException
+	 *             if the created instance of {@link Data} is empty
+	 */
+	protected AbstractDataStore(final DataReader reader, final URL dataUrl, final URL versionUrl, final Charset charset) {
+<span class="fc" id="L168">		this(checkData(readData(reader, dataUrl, charset)), reader, dataUrl, versionUrl, charset);</span>
+<span class="fc" id="L169">	}</span>
+
+	@Override
+	public Charset getCharset() {
+<span class="fc" id="L173">		return charset;</span>
+	}
+
+	@Override
+	public Data getData() {
+<span class="fc" id="L178">		return data;</span>
+	}
+
+	@Override
+	public DataReader getDataReader() {
+<span class="fc" id="L183">		return reader;</span>
+	}
+
+	@Override
+	public URL getDataUrl() {
+<span class="fc" id="L188">		return dataUrl;</span>
+	}
+
+	@Override
+	public URL getVersionUrl() {
+<span class="fc" id="L193">		return versionUrl;</span>
+	}
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.6.2.201302030002</span></div></body></html>

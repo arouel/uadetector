@@ -1,0 +1,42 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head><meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<title>AbstractUpdateOperationTest xref</title>
+<link type="text/css" rel="stylesheet" href="../../../../stylesheet.css" />
+</head>
+<body>
+<div id="overview"><a href="../../../../../testapidocs/net/sf/uadetector/datastore/AbstractUpdateOperationTest.html">View Javadoc</a></div><pre>
+<a class="jxr_linenumber" name="L1" href="#L1">1</a>   <strong class="jxr_keyword">package</strong> net.sf.uadetector.datastore;
+<a class="jxr_linenumber" name="L2" href="#L2">2</a>   
+<a class="jxr_linenumber" name="L3" href="#L3">3</a>   <strong class="jxr_keyword">import</strong> <strong class="jxr_keyword">static</strong> org.fest.assertions.Assertions.assertThat;
+<a class="jxr_linenumber" name="L4" href="#L4">4</a>   <strong class="jxr_keyword">import</strong> org.junit.Test;
+<a class="jxr_linenumber" name="L5" href="#L5">5</a>   
+<a class="jxr_linenumber" name="L6" href="#L6">6</a>   <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">class</strong> <a href="../../../../net/sf/uadetector/datastore/AbstractUpdateOperationTest.html">AbstractUpdateOperationTest</a> {
+<a class="jxr_linenumber" name="L7" href="#L7">7</a>   
+<a class="jxr_linenumber" name="L8" href="#L8">8</a>   	@Test
+<a class="jxr_linenumber" name="L9" href="#L9">9</a>   	<strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> hasUpdate_<strong class="jxr_keyword">true</strong>() {
+<a class="jxr_linenumber" name="L10" href="#L10">10</a>  		assertThat(AbstractUpdateOperation.hasUpdate(<span class="jxr_string">"20130310-02"</span>, <span class="jxr_string">"20130310-01"</span>)).isTrue();
+<a class="jxr_linenumber" name="L11" href="#L11">11</a>  		assertThat(AbstractUpdateOperation.hasUpdate(<span class="jxr_string">"20130310-01"</span>, <span class="jxr_string">"20130301-01"</span>)).isTrue();
+<a class="jxr_linenumber" name="L12" href="#L12">12</a>  		assertThat(AbstractUpdateOperation.hasUpdate(<span class="jxr_string">"20130310-02"</span>, <span class="jxr_string">"20120408-10"</span>)).isTrue();
+<a class="jxr_linenumber" name="L13" href="#L13">13</a>  	}
+<a class="jxr_linenumber" name="L14" href="#L14">14</a>  
+<a class="jxr_linenumber" name="L15" href="#L15">15</a>  	@Test
+<a class="jxr_linenumber" name="L16" href="#L16">16</a>  	<strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> hasUpdate_false() {
+<a class="jxr_linenumber" name="L17" href="#L17">17</a>  		assertThat(AbstractUpdateOperation.hasUpdate(<span class="jxr_string">"20130310-02"</span>, <span class="jxr_string">"20130310-03"</span>)).isFalse();
+<a class="jxr_linenumber" name="L18" href="#L18">18</a>  		assertThat(AbstractUpdateOperation.hasUpdate(<span class="jxr_string">"20130310-01"</span>, <span class="jxr_string">"20130311-01"</span>)).isFalse();
+<a class="jxr_linenumber" name="L19" href="#L19">19</a>  		assertThat(AbstractUpdateOperation.hasUpdate(<span class="jxr_string">"20110310-02"</span>, <span class="jxr_string">"20120408-10"</span>)).isFalse();
+<a class="jxr_linenumber" name="L20" href="#L20">20</a>  		assertThat(AbstractUpdateOperation.hasUpdate(<span class="jxr_string">""</span>, <span class="jxr_string">"20120408-10"</span>)).isFalse();
+<a class="jxr_linenumber" name="L21" href="#L21">21</a>  		assertThat(AbstractUpdateOperation.hasUpdate(<span class="jxr_string">"&lt;h1&gt;Error - Connect failed:&lt;br /&gt; &lt;u&gt;Too many connections&lt;/u&gt;&lt;/h1&gt;"</span>, <span class="jxr_string">"20120408-10"</span>))
+<a class="jxr_linenumber" name="L22" href="#L22">22</a>  				.isFalse();
+<a class="jxr_linenumber" name="L23" href="#L23">23</a>  		assertThat(AbstractUpdateOperation.hasUpdate(<span class="jxr_string">""</span>, <span class="jxr_string">""</span>)).isFalse();
+<a class="jxr_linenumber" name="L24" href="#L24">24</a>  		assertThat(AbstractUpdateOperation.hasUpdate(<span class="jxr_string">""</span>, <span class="jxr_string">" "</span>)).isFalse();
+<a class="jxr_linenumber" name="L25" href="#L25">25</a>  		assertThat(AbstractUpdateOperation.hasUpdate(<span class="jxr_string">" "</span>, <span class="jxr_string">""</span>)).isFalse();
+<a class="jxr_linenumber" name="L26" href="#L26">26</a>  		assertThat(AbstractUpdateOperation.hasUpdate(<span class="jxr_string">"20131011-02"</span>, <span class="jxr_string">"unknown-pattern"</span>)).isFalse();
+<a class="jxr_linenumber" name="L27" href="#L27">27</a>  	}
+<a class="jxr_linenumber" name="L28" href="#L28">28</a>  
+<a class="jxr_linenumber" name="L29" href="#L29">29</a>  }
+</pre>
+<hr/>
+<div id="footer">Copyright &#169; 2011&#x2013;2014. All rights reserved.</div>
+</body>
+</html>

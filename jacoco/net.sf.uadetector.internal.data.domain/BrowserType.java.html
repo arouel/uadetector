@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>BrowserType.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="right"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">UADetector :: Core</a> &gt; <a href="index.html" class="el_package">net.sf.uadetector.internal.data.domain</a> &gt; <span class="el_source">BrowserType.java</span></div><h1>BrowserType.java</h1><pre class="source lang-java linenums">/*******************************************************************************
+ * Copyright 2012 André Rouél
+ * 
+ * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ ******************************************************************************/
+package net.sf.uadetector.internal.data.domain;
+
+import java.io.Serializable;
+
+import javax.annotation.Nonnegative;
+import javax.annotation.Nonnull;
+import javax.annotation.concurrent.Immutable;
+import javax.annotation.concurrent.NotThreadSafe;
+
+import net.sf.qualitycheck.Check;
+
+/**
+ * The {@code BrowserType} class represents the type of a browser.&lt;br&gt;
+ * &lt;br&gt;
+ * A {@code BrowserType} object is immutable, their values cannot be changed after creation.
+ * 
+ * @author André Rouél
+ */
+@Immutable
+public final class BrowserType implements Identifiable, Serializable {
+
+	@NotThreadSafe
+<span class="fc" id="L38">	public static final class Builder {</span>
+
+		/**
+		 * Identification number (ID) of a browser type entry
+		 */
+<span class="fc" id="L43">		private int id = Integer.MIN_VALUE;</span>
+
+		/**
+		 * Name of a browser type entry
+		 */
+		private String name;
+
+		/**
+		 * Builds a new instance of {@code BrowserType} and returns it.
+		 * 
+		 * @return a new instance of {@code BrowserType}
+		 * @throws net.sf.qualitycheck.exception.IllegalNegativeArgumentException
+		 *             if one of the needed arguments to build an instance of {@code BrowserType} is invalid
+		 * @throws net.sf.qualitycheck.exception.IllegalNullArgumentException
+		 *             if one of the needed arguments to build an instance of {@code BrowserType} is invalid
+		 */
+		@Nonnull
+		public BrowserType build() {
+<span class="fc" id="L61">			return new BrowserType(id, name);</span>
+		}
+
+		/**
+		 * Sets the identification number (ID).
+		 * 
+		 * @param id
+		 *            ID of browser type
+		 */
+		@Nonnull
+		public Builder setId(@Nonnegative final int id) {
+<span class="fc" id="L72">			Check.notNegative(id, &quot;id&quot;);</span>
+
+<span class="fc" id="L74">			this.id = id;</span>
+<span class="fc" id="L75">			return this;</span>
+		}
+
+		/**
+		 * Sets the identification number via a string.&lt;br&gt;
+		 * &lt;br&gt;
+		 * An opening and closing Square brackets at the end of a string will be filtered. If the string can not be
+		 * parsed as a long, a {@code NumberFormatException} will be thrown.
+		 * 
+		 * @param id
+		 *            ID of browser type
+		 */
+		@Nonnull
+		public Builder setId(@Nonnull final String id) {
+<span class="fc" id="L89">			Check.notNull(id, &quot;id&quot;);</span>
+
+<span class="fc" id="L91">			this.setId(Integer.parseInt(id.trim()));</span>
+<span class="fc" id="L92">			return this;</span>
+		}
+
+		/**
+		 * Sets the name.
+		 * 
+		 * @param name
+		 *            name of the browser type
+		 */
+		@Nonnull
+		public Builder setName(@Nonnull final String name) {
+<span class="fc" id="L103">			Check.notNull(name, &quot;name&quot;);</span>
+
+<span class="fc" id="L105">			this.name = name;</span>
+<span class="fc" id="L106">			return this;</span>
+		}
+
+	}
+
+	private static final long serialVersionUID = 2643535063309729806L;
+
+	@Nonnegative
+	private final int id;
+
+	@Nonnull
+	private final String name;
+
+<span class="fc" id="L119">	public BrowserType(@Nonnegative final int id, @Nonnull final String name) {</span>
+<span class="fc" id="L120">		Check.notNegative(id, &quot;id&quot;);</span>
+<span class="fc" id="L121">		Check.notNull(name, &quot;name&quot;);</span>
+
+<span class="fc" id="L123">		this.id = id;</span>
+<span class="fc" id="L124">		this.name = name;</span>
+<span class="fc" id="L125">	}</span>
+
+	@Override
+	public boolean equals(final Object obj) {
+<span class="fc bfc" id="L129" title="All 2 branches covered.">		if (this == obj) {</span>
+<span class="fc" id="L130">			return true;</span>
+		}
+<span class="fc bfc" id="L132" title="All 2 branches covered.">		if (obj == null) {</span>
+<span class="fc" id="L133">			return false;</span>
+		}
+<span class="fc bfc" id="L135" title="All 2 branches covered.">		if (getClass() != obj.getClass()) {</span>
+<span class="fc" id="L136">			return false;</span>
+		}
+<span class="fc" id="L138">		final BrowserType other = (BrowserType) obj;</span>
+<span class="fc bfc" id="L139" title="All 2 branches covered.">		if (id != other.id) {</span>
+<span class="fc" id="L140">			return false;</span>
+		}
+<span class="fc bfc" id="L142" title="All 2 branches covered.">		if (!name.equals(other.name)) {</span>
+<span class="fc" id="L143">			return false;</span>
+		}
+<span class="fc" id="L145">		return true;</span>
+	}
+
+	/**
+	 * Gets the identification number (ID) of a browser type.
+	 * 
+	 * @return identification number (ID) of a browser type
+	 */
+	@Override
+	public int getId() {
+<span class="fc" id="L155">		return id;</span>
+	}
+
+	public String getName() {
+<span class="fc" id="L159">		return name;</span>
+	}
+
+	@Override
+	public int hashCode() {
+<span class="fc" id="L164">		final int prime = 31;</span>
+<span class="fc" id="L165">		int result = 1;</span>
+<span class="fc" id="L166">		result = prime * result + id;</span>
+<span class="fc" id="L167">		result = prime * result + name.hashCode();</span>
+<span class="fc" id="L168">		return result;</span>
+	}
+
+	@Override
+	public String toString() {
+<span class="fc" id="L173">		final StringBuilder builder = new StringBuilder();</span>
+<span class="fc" id="L174">		builder.append(&quot;BrowserType [id=&quot;);</span>
+<span class="fc" id="L175">		builder.append(id);</span>
+<span class="fc" id="L176">		builder.append(&quot;, name=&quot;);</span>
+<span class="fc" id="L177">		builder.append(name);</span>
+<span class="fc" id="L178">		builder.append(&quot;]&quot;);</span>
+<span class="fc" id="L179">		return builder.toString();</span>
+	}
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.6.2.201302030002</span></div></body></html>

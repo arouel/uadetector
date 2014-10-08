@@ -1,0 +1,451 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>UserAgent.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="right"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">UADetector :: Core</a> &gt; <a href="index.html" class="el_package">net.sf.uadetector</a> &gt; <span class="el_source">UserAgent.java</span></div><h1>UserAgent.java</h1><pre class="source lang-java linenums">/*******************************************************************************
+ * Copyright 2012 André Rouél
+ * 
+ * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ ******************************************************************************/
+package net.sf.uadetector;
+
+import java.io.Serializable;
+
+import javax.annotation.Nonnull;
+
+import net.sf.qualitycheck.Check;
+
+/**
+ * {@code UserAgent} is an immutable entity that represents the informations about web-based client applications like
+ * Web browsers, search engines or crawlers (spiders) as well as mobile phones, screen readers and braille browsers.
+ * 
+ * @author André Rouél
+ */
+public final class UserAgent implements ReadableUserAgent, Serializable {
+
+	public static final class Builder implements ReadableUserAgent {
+
+<span class="fc" id="L34">		private DeviceCategory deviceCategory = EMPTY.deviceCategory;</span>
+
+<span class="fc" id="L36">		private UserAgentFamily family = EMPTY.family;</span>
+
+<span class="fc" id="L38">		private String icon = EMPTY.icon;</span>
+
+<span class="fc" id="L40">		private String name = EMPTY.name;</span>
+
+<span class="fc" id="L42">		private OperatingSystem operatingSystem = OperatingSystem.EMPTY;</span>
+
+<span class="fc" id="L44">		private String producer = EMPTY.producer;</span>
+
+<span class="fc" id="L46">		private String producerUrl = EMPTY.producerUrl;</span>
+
+<span class="fc" id="L48">		private UserAgentType type = EMPTY.type;</span>
+
+<span class="fc" id="L50">		private String typeName = EMPTY.typeName;</span>
+
+<span class="fc" id="L52">		private String url = EMPTY.url;</span>
+
+<span class="fc" id="L54">		private String userAgentString = &quot;&quot;;</span>
+
+<span class="fc" id="L56">		private VersionNumber versionNumber = VersionNumber.UNKNOWN;</span>
+
+<span class="fc" id="L58">		public Builder() {</span>
+			// default constructor
+<span class="fc" id="L60">		}</span>
+
+<span class="fc" id="L62">		public Builder(@Nonnull final String userAgentString) {</span>
+<span class="fc" id="L63">			Check.notNull(userAgentString, &quot;userAgentString&quot;);</span>
+<span class="fc" id="L64">			this.userAgentString = userAgentString;</span>
+<span class="fc" id="L65">		}</span>
+
+		@Nonnull
+		public UserAgent build() {
+<span class="fc" id="L69">			return new UserAgent(deviceCategory, family, icon, name, operatingSystem, producer, producerUrl, type, typeName, url,</span>
+					versionNumber);
+		}
+
+		@Override
+		public DeviceCategory getDeviceCategory() {
+<span class="nc" id="L75">			return deviceCategory;</span>
+		}
+
+		@Override
+		public UserAgentFamily getFamily() {
+<span class="fc" id="L80">			return family;</span>
+		}
+
+		@Override
+		public String getIcon() {
+<span class="fc" id="L85">			return icon;</span>
+		}
+
+		@Override
+		public String getName() {
+<span class="fc" id="L90">			return name;</span>
+		}
+
+		@Override
+		public OperatingSystem getOperatingSystem() {
+<span class="fc" id="L95">			return operatingSystem;</span>
+		}
+
+		@Override
+		public String getProducer() {
+<span class="fc" id="L100">			return producer;</span>
+		}
+
+		@Override
+		public String getProducerUrl() {
+<span class="fc" id="L105">			return producerUrl;</span>
+		}
+
+		@Override
+		public UserAgentType getType() {
+<span class="fc" id="L110">			return type;</span>
+		}
+
+		@Override
+		public String getTypeName() {
+<span class="fc" id="L115">			return typeName;</span>
+		}
+
+		@Override
+		public String getUrl() {
+<span class="fc" id="L120">			return url;</span>
+		}
+
+		public String getUserAgentString() {
+<span class="fc" id="L124">			return userAgentString;</span>
+		}
+
+		@Override
+		public VersionNumber getVersionNumber() {
+<span class="fc" id="L129">			return versionNumber;</span>
+		}
+
+		@Nonnull
+		public Builder setDeviceCategory(@Nonnull final DeviceCategory deviceCategory) {
+<span class="fc" id="L134">			Check.notNull(deviceCategory, &quot;deviceCategory&quot;);</span>
+<span class="fc" id="L135">			this.deviceCategory = deviceCategory;</span>
+<span class="fc" id="L136">			return this;</span>
+		}
+
+		@Nonnull
+		public Builder setFamily(@Nonnull final UserAgentFamily family) {
+<span class="fc" id="L141">			Check.notNull(family, &quot;family&quot;);</span>
+<span class="fc" id="L142">			this.family = family;</span>
+<span class="fc" id="L143">			return this;</span>
+		}
+
+		@Nonnull
+		public Builder setIcon(@Nonnull final String icon) {
+<span class="fc" id="L148">			Check.notNull(icon, &quot;icon&quot;);</span>
+<span class="fc" id="L149">			this.icon = icon;</span>
+<span class="fc" id="L150">			return this;</span>
+		}
+
+		@Nonnull
+		public Builder setName(@Nonnull final String name) {
+<span class="fc" id="L155">			Check.notNull(name, &quot;name&quot;);</span>
+<span class="fc" id="L156">			this.name = name;</span>
+<span class="fc" id="L157">			return this;</span>
+		}
+
+		@Nonnull
+		public Builder setOperatingSystem(@Nonnull final OperatingSystem operatingSystem) {
+<span class="fc" id="L162">			Check.notNull(operatingSystem, &quot;operatingSystem&quot;);</span>
+<span class="fc" id="L163">			this.operatingSystem = operatingSystem;</span>
+<span class="fc" id="L164">			return this;</span>
+		}
+
+		@Nonnull
+		public Builder setOperatingSystem(@Nonnull final ReadableOperatingSystem os) {
+<span class="fc" id="L169">			Check.notNull(os, &quot;os&quot;);</span>
+<span class="fc" id="L170">			this.operatingSystem = new OperatingSystem(os.getFamily(), os.getFamilyName(), os.getIcon(), os.getName(), os.getProducer(),</span>
+					os.getProducerUrl(), os.getUrl(), os.getVersionNumber());
+<span class="fc" id="L172">			return this;</span>
+		}
+
+		@Nonnull
+		public Builder setProducer(@Nonnull final String producer) {
+<span class="fc" id="L177">			Check.notNull(producer, &quot;producer&quot;);</span>
+<span class="fc" id="L178">			this.producer = producer;</span>
+<span class="fc" id="L179">			return this;</span>
+		}
+
+		@Nonnull
+		public Builder setProducerUrl(@Nonnull final String producerUrl) {
+<span class="fc" id="L184">			Check.notNull(producerUrl, &quot;producerUrl&quot;);</span>
+<span class="fc" id="L185">			this.producerUrl = producerUrl;</span>
+<span class="fc" id="L186">			return this;</span>
+		}
+
+		@Nonnull
+		public Builder setType(@Nonnull final UserAgentType type) {
+<span class="fc" id="L191">			Check.notNull(type, &quot;type&quot;);</span>
+<span class="fc" id="L192">			this.type = type;</span>
+<span class="fc" id="L193">			this.typeName = type.getName();</span>
+<span class="fc" id="L194">			return this;</span>
+		}
+
+		@Nonnull
+		public Builder setTypeName(@Nonnull final String typeName) {
+<span class="fc" id="L199">			Check.notNull(typeName, &quot;typeName&quot;);</span>
+<span class="fc" id="L200">			this.type = UserAgentType.evaluateByTypeName(typeName);</span>
+<span class="fc" id="L201">			this.typeName = typeName;</span>
+<span class="fc" id="L202">			return this;</span>
+		}
+
+		@Nonnull
+		public Builder setUrl(@Nonnull final String url) {
+<span class="fc" id="L207">			Check.notNull(url, &quot;url&quot;);</span>
+<span class="fc" id="L208">			this.url = url;</span>
+<span class="fc" id="L209">			return this;</span>
+		}
+
+		@Nonnull
+		public Builder setUserAgentString(@Nonnull final String userAgentString) {
+<span class="fc" id="L214">			Check.notNull(userAgentString, &quot;userAgentString&quot;);</span>
+<span class="fc" id="L215">			this.userAgentString = userAgentString;</span>
+<span class="fc" id="L216">			return this;</span>
+		}
+
+		@Nonnull
+		public Builder setVersionNumber(@Nonnull final VersionNumber versionNumber) {
+<span class="fc" id="L221">			Check.notNull(versionNumber, &quot;versionNumber&quot;);</span>
+<span class="fc" id="L222">			this.versionNumber = versionNumber;</span>
+<span class="fc" id="L223">			return this;</span>
+		}
+
+	}
+
+<span class="fc" id="L228">	public static final UserAgent EMPTY = new UserAgent(DeviceCategory.EMPTY, UserAgentFamily.UNKNOWN, &quot;&quot;, &quot;unknown&quot;,</span>
+			OperatingSystem.EMPTY, &quot;&quot;, &quot;&quot;, UserAgentType.UNKNOWN, &quot;&quot;, &quot;&quot;, VersionNumber.UNKNOWN);
+
+	/**
+	 * Serialization version
+	 */
+	private static final long serialVersionUID = 1L;
+
+	@Nonnull
+	private final DeviceCategory deviceCategory;
+
+	@Nonnull
+	private final UserAgentFamily family;
+
+	@Nonnull
+	private final String icon;
+
+	@Nonnull
+	private final String name;
+
+	@Nonnull
+	private final OperatingSystem operatingSystem;
+
+	@Nonnull
+	private final String producer;
+
+	@Nonnull
+	private final String producerUrl;
+
+	@Nonnull
+	private final UserAgentType type;
+
+	@Nonnull
+	private final String typeName;
+
+	@Nonnull
+	private final String url;
+
+	@Nonnull
+	private final VersionNumber versionNumber;
+
+	public UserAgent(@Nonnull final DeviceCategory deviceType, @Nonnull final UserAgentFamily family, @Nonnull final String icon,
+			@Nonnull final String name, @Nonnull final OperatingSystem operatingSystem, @Nonnull final String producer,
+			@Nonnull final String producerUrl, @Nonnull final UserAgentType type, @Nonnull final String typeName,
+<span class="fc" id="L272">			@Nonnull final String url, @Nonnull final VersionNumber versionNumber) {</span>
+<span class="fc" id="L273">		Check.notNull(deviceType, &quot;deviceType&quot;);</span>
+<span class="fc" id="L274">		Check.notNull(family, &quot;family&quot;);</span>
+<span class="fc" id="L275">		Check.notNull(icon, &quot;icon&quot;);</span>
+<span class="fc" id="L276">		Check.notNull(name, &quot;name&quot;);</span>
+<span class="fc" id="L277">		Check.notNull(operatingSystem, &quot;operatingSystem&quot;);</span>
+<span class="fc" id="L278">		Check.notNull(producer, &quot;producer&quot;);</span>
+<span class="fc" id="L279">		Check.notNull(producerUrl, &quot;producerUrl&quot;);</span>
+<span class="fc" id="L280">		Check.notNull(type, &quot;type&quot;);</span>
+<span class="fc" id="L281">		Check.notNull(typeName, &quot;typeName&quot;);</span>
+<span class="fc" id="L282">		Check.notNull(url, &quot;url&quot;);</span>
+<span class="fc" id="L283">		Check.notNull(versionNumber, &quot;versionNumber&quot;);</span>
+
+<span class="fc" id="L285">		this.deviceCategory = deviceType;</span>
+<span class="fc" id="L286">		this.family = family;</span>
+<span class="fc" id="L287">		this.icon = icon;</span>
+<span class="fc" id="L288">		this.name = name;</span>
+<span class="fc" id="L289">		this.operatingSystem = operatingSystem;</span>
+<span class="fc" id="L290">		this.producer = producer;</span>
+<span class="fc" id="L291">		this.producerUrl = producerUrl;</span>
+<span class="fc" id="L292">		this.type = type;</span>
+<span class="fc" id="L293">		this.typeName = typeName;</span>
+<span class="fc" id="L294">		this.url = url;</span>
+<span class="fc" id="L295">		this.versionNumber = versionNumber;</span>
+<span class="fc" id="L296">	}</span>
+
+	@Override
+	public boolean equals(final Object obj) {
+<span class="fc bfc" id="L300" title="All 2 branches covered.">		if (this == obj) {</span>
+<span class="fc" id="L301">			return true;</span>
+		}
+<span class="fc bfc" id="L303" title="All 2 branches covered.">		if (obj == null) {</span>
+<span class="fc" id="L304">			return false;</span>
+		}
+<span class="fc bfc" id="L306" title="All 2 branches covered.">		if (getClass() != obj.getClass()) {</span>
+<span class="fc" id="L307">			return false;</span>
+		}
+<span class="fc" id="L309">		final UserAgent other = (UserAgent) obj;</span>
+<span class="fc bfc" id="L310" title="All 2 branches covered.">		if (deviceCategory != other.deviceCategory) {</span>
+<span class="fc" id="L311">			return false;</span>
+		}
+<span class="fc bfc" id="L313" title="All 2 branches covered.">		if (!family.equals(other.family)) {</span>
+<span class="fc" id="L314">			return false;</span>
+		}
+<span class="fc bfc" id="L316" title="All 2 branches covered.">		if (!icon.equals(other.icon)) {</span>
+<span class="fc" id="L317">			return false;</span>
+		}
+<span class="fc bfc" id="L319" title="All 2 branches covered.">		if (!name.equals(other.name)) {</span>
+<span class="fc" id="L320">			return false;</span>
+		}
+<span class="fc bfc" id="L322" title="All 2 branches covered.">		if (!operatingSystem.equals(other.operatingSystem)) {</span>
+<span class="fc" id="L323">			return false;</span>
+		}
+<span class="fc bfc" id="L325" title="All 2 branches covered.">		if (!producer.equals(other.producer)) {</span>
+<span class="fc" id="L326">			return false;</span>
+		}
+<span class="fc bfc" id="L328" title="All 2 branches covered.">		if (!producerUrl.equals(other.producerUrl)) {</span>
+<span class="fc" id="L329">			return false;</span>
+		}
+<span class="fc bfc" id="L331" title="All 2 branches covered.">		if (!type.equals(other.type)) {</span>
+<span class="fc" id="L332">			return false;</span>
+		}
+<span class="fc bfc" id="L334" title="All 2 branches covered.">		if (!typeName.equals(other.typeName)) {</span>
+<span class="fc" id="L335">			return false;</span>
+		}
+<span class="fc bfc" id="L337" title="All 2 branches covered.">		if (!url.equals(other.url)) {</span>
+<span class="fc" id="L338">			return false;</span>
+		}
+<span class="fc bfc" id="L340" title="All 2 branches covered.">		if (!versionNumber.equals(other.versionNumber)) {</span>
+<span class="fc" id="L341">			return false;</span>
+		}
+<span class="fc" id="L343">		return true;</span>
+	}
+
+	@Nonnull
+	@Override
+	public DeviceCategory getDeviceCategory() {
+<span class="fc" id="L349">		return deviceCategory;</span>
+	}
+
+	@Override
+	public UserAgentFamily getFamily() {
+<span class="fc" id="L354">		return family;</span>
+	}
+
+	@Override
+	public String getIcon() {
+<span class="fc" id="L359">		return icon;</span>
+	}
+
+	@Override
+	public String getName() {
+<span class="fc" id="L364">		return name;</span>
+	}
+
+	@Override
+	public OperatingSystem getOperatingSystem() {
+<span class="fc" id="L369">		return operatingSystem;</span>
+	}
+
+	@Override
+	public String getProducer() {
+<span class="fc" id="L374">		return producer;</span>
+	}
+
+	@Override
+	public String getProducerUrl() {
+<span class="fc" id="L379">		return producerUrl;</span>
+	}
+
+	@Override
+	public UserAgentType getType() {
+<span class="fc" id="L384">		return type;</span>
+	}
+
+	@Override
+	public String getTypeName() {
+<span class="fc" id="L389">		return typeName;</span>
+	}
+
+	@Override
+	public String getUrl() {
+<span class="fc" id="L394">		return url;</span>
+	}
+
+	@Override
+	public VersionNumber getVersionNumber() {
+<span class="fc" id="L399">		return versionNumber;</span>
+	}
+
+	@Override
+	public int hashCode() {
+<span class="fc" id="L404">		final int prime = 31;</span>
+<span class="fc" id="L405">		int result = 1;</span>
+<span class="fc" id="L406">		result = prime * result + deviceCategory.hashCode();</span>
+<span class="fc" id="L407">		result = prime * result + family.hashCode();</span>
+<span class="fc" id="L408">		result = prime * result + icon.hashCode();</span>
+<span class="fc" id="L409">		result = prime * result + name.hashCode();</span>
+<span class="fc" id="L410">		result = prime * result + operatingSystem.hashCode();</span>
+<span class="fc" id="L411">		result = prime * result + producer.hashCode();</span>
+<span class="fc" id="L412">		result = prime * result + producerUrl.hashCode();</span>
+<span class="fc" id="L413">		result = prime * result + type.hashCode();</span>
+<span class="fc" id="L414">		result = prime * result + typeName.hashCode();</span>
+<span class="fc" id="L415">		result = prime * result + url.hashCode();</span>
+<span class="fc" id="L416">		result = prime * result + versionNumber.hashCode();</span>
+<span class="fc" id="L417">		return result;</span>
+	}
+
+	@Nonnull
+	@Override
+	public String toString() {
+<span class="fc" id="L423">		final StringBuilder builder = new StringBuilder();</span>
+<span class="fc" id="L424">		builder.append(&quot;UserAgent [deviceCategory=&quot;);</span>
+<span class="fc" id="L425">		builder.append(deviceCategory);</span>
+<span class="fc" id="L426">		builder.append(&quot;, family=&quot;);</span>
+<span class="fc" id="L427">		builder.append(family);</span>
+<span class="fc" id="L428">		builder.append(&quot;, icon=&quot;);</span>
+<span class="fc" id="L429">		builder.append(icon);</span>
+<span class="fc" id="L430">		builder.append(&quot;, name=&quot;);</span>
+<span class="fc" id="L431">		builder.append(name);</span>
+<span class="fc" id="L432">		builder.append(&quot;, operatingSystem=&quot;);</span>
+<span class="fc" id="L433">		builder.append(operatingSystem);</span>
+<span class="fc" id="L434">		builder.append(&quot;, producer=&quot;);</span>
+<span class="fc" id="L435">		builder.append(producer);</span>
+<span class="fc" id="L436">		builder.append(&quot;, producerUrl=&quot;);</span>
+<span class="fc" id="L437">		builder.append(producerUrl);</span>
+<span class="fc" id="L438">		builder.append(&quot;, type=&quot;);</span>
+<span class="fc" id="L439">		builder.append(type);</span>
+<span class="fc" id="L440">		builder.append(&quot;, typeName=&quot;);</span>
+<span class="fc" id="L441">		builder.append(typeName);</span>
+<span class="fc" id="L442">		builder.append(&quot;, url=&quot;);</span>
+<span class="fc" id="L443">		builder.append(url);</span>
+<span class="fc" id="L444">		builder.append(&quot;, versionNumber=&quot;);</span>
+<span class="fc" id="L445">		builder.append(versionNumber);</span>
+<span class="fc" id="L446">		builder.append(&quot;]&quot;);</span>
+<span class="fc" id="L447">		return builder.toString();</span>
+	}
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.6.2.201302030002</span></div></body></html>

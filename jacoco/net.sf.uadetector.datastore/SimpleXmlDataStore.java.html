@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>SimpleXmlDataStore.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="right"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">UADetector :: Core</a> &gt; <a href="index.html" class="el_package">net.sf.uadetector.datastore</a> &gt; <span class="el_source">SimpleXmlDataStore.java</span></div><h1>SimpleXmlDataStore.java</h1><pre class="source lang-java linenums">/*******************************************************************************
+ * Copyright 2013 André Rouél
+ * 
+ * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ ******************************************************************************/
+package net.sf.uadetector.datastore;
+
+import java.net.URL;
+
+import net.sf.uadetector.datareader.DataReader;
+import net.sf.uadetector.datareader.XmlDataReader;
+
+/**
+ * This is the simplest implementation of a {@link DataStore}. It initialize the store by reading the &lt;em&gt;UAS data&lt;/em&gt;
+ * via the passed URL and store it only in the Java heap space.
+ * 
+ * &lt;p&gt;
+ * The given resource must have a valid XML format with UTF-8 charset that validates against specified schema under &lt;a
+ * href=&quot;http://user-agent-string.info/rpc/uasxmldata.dtd&quot;&gt;http://user-agent-string.info/rpc/uasxmldata.dtd&lt;/a&gt;.
+ * 
+ * @author André Rouél
+ */
+public final class SimpleXmlDataStore extends AbstractDataStore implements DataStore {
+
+	/**
+	 * The default data reader to read in &lt;em&gt;UAS data&lt;/em&gt; in XML format
+	 */
+<span class="fc" id="L38">	private static final DataReader DEFAULT_DATA_READER = new XmlDataReader();</span>
+
+	/**
+	 * Constructs an {@code SimpleXmlDataStore} by reading &lt;em&gt;UAS data&lt;/em&gt; by the specified default URL
+	 * {@link DataStore#DEFAULT_DATA_URL} (in XML format).
+	 * 
+	 * @param dataUrl
+	 *            URL to &lt;em&gt;UAS data&lt;/em&gt;
+	 * @param versionUrl
+	 *            URL to version information about the given &lt;em&gt;UAS data&lt;/em&gt;
+	 */
+	public SimpleXmlDataStore(final URL dataUrl, final URL versionUrl) {
+<span class="fc" id="L50">		super(DEFAULT_DATA_READER, dataUrl, versionUrl, DEFAULT_CHARSET);</span>
+<span class="fc" id="L51">	}</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.6.2.201302030002</span></div></body></html>

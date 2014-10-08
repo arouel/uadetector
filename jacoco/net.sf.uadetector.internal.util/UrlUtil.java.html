@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>UrlUtil.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="right"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">UADetector :: Core</a> &gt; <a href="index.html" class="el_package">net.sf.uadetector.internal.util</a> &gt; <span class="el_source">UrlUtil.java</span></div><h1>UrlUtil.java</h1><pre class="source lang-java linenums">/*******************************************************************************
+ * Copyright 2012 André Rouél
+ * 
+ * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ ******************************************************************************/
+package net.sf.uadetector.internal.util;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.nio.charset.Charset;
+
+import javax.annotation.Nonnull;
+
+import net.sf.qualitycheck.Check;
+import net.sf.qualitycheck.exception.IllegalStateOfArgumentException;
+import net.sf.uadetector.exception.CanNotOpenStreamException;
+
+/**
+ * This class is intended to provide URL utility functions that encapsulate the checked exceptions like
+ * {@link MalformedURLException} during the construction of an URL or the {@link IOException} while opening a stream to
+ * an {@code URL}.
+ * 
+ * @author André Rouél
+ */
+public final class UrlUtil {
+
+	/**
+	 * Creates an {@code URL} instance from the given {@code String} representation.&lt;br&gt;
+	 * &lt;br&gt;
+	 * This method tunnels a {@link MalformedURLException} by an {@link IllegalStateOfArgumentException}.
+	 * 
+	 * @param url
+	 *            {@code String} representation of an {@code URL}
+	 * @return new {@code URL} instance
+	 * @throws net.sf.qualitycheck.exception.IllegalNullArgumentException
+	 *             if the given argument is {@code null}
+	 * @throws IllegalStateOfArgumentException
+	 *             if the string representation of the given URL is invalid and a {@link MalformedURLException} occurs
+	 */
+	public static URL build(@Nonnull final String url) {
+<span class="fc" id="L57">		Check.notNull(url, &quot;url&quot;);</span>
+
+<span class="fc" id="L59">		URL ret = null;</span>
+		try {
+<span class="fc" id="L61">			ret = new URL(url);</span>
+<span class="fc" id="L62">		} catch (final MalformedURLException e) {</span>
+<span class="fc" id="L63">			throw new IllegalStateOfArgumentException(&quot;The given string is not a valid URL: &quot; + url, e);</span>
+<span class="fc" id="L64">		}</span>
+<span class="fc" id="L65">		return ret;</span>
+	}
+
+	/**
+	 * Tries to open an {@link InputStream} to the given {@link URL}.
+	 * 
+	 * @param url
+	 *            URL which should be opened
+	 * @return opened stream
+	 * @throws net.sf.qualitycheck.exception.IllegalNullArgumentException
+	 *             if the given argument is {@code null}
+	 * @throws CanNotOpenStreamException
+	 *             if no stream to the given {@code URL} can be established
+	 */
+	public static InputStream open(@Nonnull final URL url) {
+<span class="fc" id="L80">		Check.notNull(url, &quot;url&quot;);</span>
+
+		final InputStream ret;
+		try {
+<span class="fc" id="L84">			ret = url.openStream();</span>
+<span class="fc" id="L85">		} catch (final IOException e) {</span>
+<span class="fc" id="L86">			throw new CanNotOpenStreamException(url.toString(), e);</span>
+<span class="fc" id="L87">		}</span>
+<span class="fc" id="L88">		return ret;</span>
+	}
+
+	/**
+	 * Reads the content of the passed {@link URL} as string representation.
+	 * 
+	 * @param url
+	 *            URL to &lt;em&gt;UAS data&lt;/em&gt;
+	 * @param charset
+	 *            the character set in which the data should be read
+	 * @return content as {@code String}
+	 * @throws net.sf.qualitycheck.exception.IllegalNullArgumentException
+	 *             if any of the given arguments is {@code null}
+	 * @throws CanNotOpenStreamException
+	 *             if no stream to the given {@code URL} can be established
+	 * @throws IOException
+	 *             if an I/O error occurs
+	 */
+	public static String read(@Nonnull final URL url, @Nonnull final Charset charset) throws IOException {
+<span class="fc" id="L107">		Check.notNull(url, &quot;url&quot;);</span>
+<span class="fc" id="L108">		Check.notNull(charset, &quot;charset&quot;);</span>
+
+<span class="fc" id="L110">		final InputStream inputStream = open(url);</span>
+<span class="fc" id="L111">		BufferedReader reader = null;</span>
+<span class="fc" id="L112">		final StringBuilder buffer = new StringBuilder();</span>
+<span class="fc" id="L113">		boolean threw = true;</span>
+		try {
+<span class="fc" id="L115">			reader = new BufferedReader(new InputStreamReader(inputStream, charset));</span>
+<span class="fc" id="L116">			buffer.append(readAll(reader));</span>
+<span class="fc" id="L117">			threw = false;</span>
+		} finally {
+<span class="pc" id="L119">			Closeables.close(reader, threw);</span>
+<span class="pc" id="L120">			Closeables.close(inputStream, false);</span>
+<span class="fc" id="L121">		}</span>
+<span class="fc" id="L122">		return buffer.toString();</span>
+	}
+
+	/**
+	 * Reads the entire contents via the given {@link Reader} as string.
+	 * 
+	 * @param reader
+	 *            {@code Reader} to read the entire contents
+	 * @return the read contents as string
+	 * @throws IOException
+	 *             If an I/O error occurs
+	 */
+	private static String readAll(@Nonnull final Reader reader) throws IOException {
+<span class="fc" id="L135">		final StringBuilder buffer = new StringBuilder();</span>
+		int cp;
+<span class="fc bfc" id="L137" title="All 2 branches covered.">		while ((cp = reader.read()) != -1) {</span>
+<span class="fc" id="L138">			buffer.append((char) cp);</span>
+		}
+<span class="fc" id="L140">		return buffer.toString();</span>
+	}
+
+	/**
+	 * Gets the URL to a given {@code File}.
+	 * 
+	 * @param file
+	 *            file to be converted to a URL
+	 * @return an URL to the passed file
+	 * @throws IllegalStateException
+	 *             if no URL can be resolved to the given file
+	 */
+	public static URL toUrl(@Nonnull final File file) {
+<span class="fc" id="L153">		Check.notNull(file, &quot;file&quot;);</span>
+
+<span class="fc" id="L155">		URL url = null;</span>
+		try {
+<span class="fc" id="L157">			url = file.toURI().toURL();</span>
+<span class="nc" id="L158">		} catch (final MalformedURLException e) {</span>
+<span class="nc" id="L159">			throw new IllegalStateException(&quot;Can not construct an URL for passed file.&quot;, e);</span>
+<span class="fc" id="L160">		}</span>
+<span class="fc" id="L161">		return url;</span>
+	}
+
+	/**
+	 * &lt;strong&gt;Attention:&lt;/strong&gt; This class is not intended to create objects from it.
+	 */
+<span class="fc" id="L167">	private UrlUtil() {</span>
+		// This class is not intended to create objects from it.
+<span class="fc" id="L169">	}</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.6.2.201302030002</span></div></body></html>

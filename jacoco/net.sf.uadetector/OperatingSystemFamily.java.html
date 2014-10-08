@@ -1,0 +1,385 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>OperatingSystemFamily.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="right"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">UADetector :: Core</a> &gt; <a href="index.html" class="el_package">net.sf.uadetector</a> &gt; <span class="el_source">OperatingSystemFamily.java</span></div><h1>OperatingSystemFamily.java</h1><pre class="source lang-java linenums">/*******************************************************************************
+ * Copyright 2012 André Rouél
+ * 
+ * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ ******************************************************************************/
+package net.sf.uadetector;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import javax.annotation.Nonnull;
+
+import net.sf.qualitycheck.Check;
+
+/**
+ * This enum represents the more commonly used operating system families. It will never be complete, but can assist in
+ * identifying the version of an operating system.
+ * 
+ * @author André Rouél
+ */
+<span class="pc" id="L31">public enum OperatingSystemFamily {</span>
+
+	/**
+	 * AIX (Advanced Interactive eXecutive) is a Unix operating system from IBM.
+	 */
+<span class="fc" id="L36">	AIX(&quot;AIX&quot;, Pattern.compile(&quot;AIX&quot;)),</span>
+
+	/**
+	 * AROS is a free operating system aiming at being compatible with AmigaOS at the API level.
+	 */
+<span class="fc" id="L41">	AROS(&quot;AROS&quot;, Pattern.compile(&quot;AROS&quot;)),</span>
+
+	/**
+	 * AmigaOS is the native operating system for the Commodore Amiga, consisting of the components of Workbench,
+	 * AmigaDOS with the command line interpreter CLI (later renamed to shell) and for many Amiga models in the ROM
+	 * included kernel &lt;i&gt;kickstart&lt;/i&gt;.
+	 */
+<span class="fc" id="L48">	AMIGA_OS(&quot;Amiga OS&quot;, Pattern.compile(&quot;Amiga OS&quot;)),</span>
+
+	/**
+	 * Android is both an operating system and a software platform for mobile devices like smart phones, mobile phones,
+	 * netbooks and tablets, which is developed by the Open Handset Alliance.
+	 */
+<span class="fc" id="L54">	ANDROID(&quot;Android&quot;, Pattern.compile(&quot;Android&quot;)),</span>
+
+	/**
+	 * The Berkeley Software Distribution (BSD) is a version of the Unix operating system, which was created at the
+	 * University of California at Berkeley in 1977.
+	 */
+<span class="fc" id="L60">	BSD(&quot;BSD&quot;, Pattern.compile(&quot;BSD&quot;)),</span>
+
+	/**
+	 * Bada is a service-oriented operating system that is developed by Samsung Electronics and is designed for use in
+	 * smartphones.
+	 */
+<span class="fc" id="L66">	BADA(&quot;Bada&quot;, Pattern.compile(&quot;Bada&quot;)),</span>
+
+	/**
+	 * Be Operating System (BeOS) was an operating system of the company &lt;i&gt;Be Incorporated&lt;/i&gt; and was called in later
+	 * versions Be. Due to its multimedia capabilities it is also commonly called &quot;Media OS&quot;.
+	 */
+<span class="fc" id="L72">	BEOS(&quot;BeOS&quot;, Pattern.compile(&quot;BeOS&quot;)),</span>
+
+	/**
+	 * Danger OS is a smartphone operating system. It is used on Sidekick devices, which are sold in Germany by
+	 * T-Mobile.
+	 */
+<span class="fc" id="L78">	DANGEROS(&quot;DangerOS&quot;, Pattern.compile(&quot;DangerOS&quot;)),</span>
+
+	/**
+	 * Firefox OS is an open source operating system for smartphones and tablet computers being developed by Mozilla.
+	 */
+<span class="fc" id="L83">	FIREFOX_OS(&quot;Firefox OS&quot;, Pattern.compile(&quot;Firefox OS&quot;)),</span>
+
+	/**
+	 * HP-UX (Hewlett Packard UniX) is a commercial Unix operating system from Hewlett-Packard and is based on UNIX
+	 * System V.
+	 */
+<span class="fc" id="L89">	HPUX(&quot;HP-UX&quot;, Pattern.compile(&quot;HP-UX&quot;)),</span>
+
+	/**
+	 * Haiku (formerly OpenBeOS) is an open-source project with the aim, to reprogram and expand that in 2001 abandoned
+	 * operating system BeOS.
+	 */
+<span class="fc" id="L95">	HAIKU(&quot;Haiku OS&quot;, Pattern.compile(&quot;Haiku OS&quot;)),</span>
+
+	/**
+	 * IRIX is a commercial Unix operating system of the company Silicon Graphics (SGI).
+	 */
+<span class="fc" id="L100">	IRIX(&quot;IRIX&quot;, Pattern.compile(&quot;IRIX&quot;)),</span>
+
+	/**
+	 * Inferno is a distributed computer operating system that comes from Bell Laboratories.
+	 */
+<span class="fc" id="L105">	INFERNO_OS(&quot;Inferno OS&quot;, Pattern.compile(&quot;Inferno OS&quot;)),</span>
+
+	/**
+	 * The Java Virtual Machine (abbreviated Java VM or JVM) is the part of the Java Runtime Environment (JRE) for Java
+	 * programs, which is responsible for the execution of Java bytecode.&lt;br&gt;
+	 * &lt;br&gt;
+	 * This value is not an operating system family.
+	 */
+<span class="fc" id="L113">	JVM(&quot;JVM&quot;, Pattern.compile(&quot;JVM&quot;)),</span>
+
+	/**
+	 * Linux or GNU/Linux are usually called free, unix-like multi-user operating systems running based on the Linux
+	 * kernel and other GNU software.
+	 */
+<span class="fc" id="L119">	LINUX(&quot;Linux&quot;, Pattern.compile(&quot;Linux&quot;)),</span>
+
+	/**
+	 * Mac OS is the name of the classic operating system (1984-2001) by Apple for Macintosh computers.
+	 */
+<span class="fc" id="L124">	MAC_OS(&quot;Mac OS&quot;, Pattern.compile(&quot;Mac OS&quot;)),</span>
+
+	/**
+	 * MeeGo was a Linux kernel-based free mobile operating system project resulting from the fusion of Intel's Moblin
+	 * and Nokia's Maemo operating systems.
+	 */
+<span class="fc" id="L130">	MEEGO(&quot;MeeGo&quot;, Pattern.compile(&quot;MeeGo&quot;)),</span>
+
+	/**
+	 * Minix is a free unixoides operating system that was developed by Andrew S. Tanenbaum at the Free University of
+	 * Amsterdam as a teaching tool.
+	 */
+<span class="fc" id="L136">	MINIX(&quot;MINIX&quot;, Pattern.compile(&quot;MINIX&quot;)),</span>
+
+	/**
+	 * OpenVMS (Open Virtual Memory System), previously known as VAX-11/VMS, VAX/VMS or (informally) VMS, is a computer
+	 * server operating system that runs on VAX, Alpha and Itanium-based families of computers.
+	 */
+<span class="fc" id="L142">	OPENVMS(&quot;OpenVMS&quot;, Pattern.compile(&quot;OpenVMS&quot;)),</span>
+
+	/**
+	 * OS X, formerly Mac OS X, is a Unix-based operating systems developed by Apple. It is a proprietary distribution
+	 * of the free Darwin operating system from Apple.
+	 */
+<span class="fc" id="L148">	OS_X(&quot;OS X&quot;, Pattern.compile(&quot;(Mac OS X|OS X)&quot;)),</span>
+
+	/**
+	 * MorphOS is an Amiga-compatible computer operating system. It is a mixed proprietary and open source OS produced
+	 * for the Pegasos PowerPC processor based computer.
+	 */
+<span class="fc" id="L154">	MORPHOS(&quot;MorphOS&quot;, Pattern.compile(&quot;MorphOS&quot;)),</span>
+
+	/**
+	 * This value indicates the operating systems from Nintendo, which they developed for their devices.&lt;br&gt;
+	 * &lt;br&gt;
+	 * This value is not an operating system family.
+	 */
+<span class="fc" id="L161">	NINTENDO(&quot;Nintendo&quot;, Pattern.compile(&quot;Nintendo&quot;)),</span>
+
+	/**
+	 * OS/2 is a multitasking operating system for PCs. It was originally developed by IBM and Microsoft together with
+	 * the aim to replace DOS.
+	 */
+<span class="fc" id="L167">	OS_2(&quot;OS/2&quot;, Pattern.compile(&quot;OS/2&quot;)),</span>
+
+	/**
+	 * Palm OS was the operating system for organizer of the Palm series (known as PDAs) and smartphones.
+	 */
+<span class="fc" id="L172">	PALM_OS(&quot;Palm OS&quot;, Pattern.compile(&quot;Palm OS&quot;)),</span>
+
+	/**
+	 * The PlayStation Vita system software is the official, updatable firmware and operating system for the PlayStation
+	 * Vita.
+	 */
+<span class="fc" id="L178">	PLAYSTATION_VITA(&quot;LiveArea&quot;, Pattern.compile(&quot;LiveArea&quot;)),</span>
+
+	/**
+	 * QNX is a POSIX-compatible proprietary Unix-like real-time operating system that focused primarily at the embedded
+	 * market.
+	 */
+<span class="fc" id="L184">	QNX(&quot;QNX&quot;, Pattern.compile(&quot;QNX&quot;)),</span>
+
+	/**
+	 * RISC OS is a computer operating system originally designed by Acorn Computers Ltd. It was specifically designed
+	 * to run on the ARM chipset, which Acorn had designed concurrently for use in its new line of Archimedes personal
+	 * computers.
+	 */
+<span class="fc" id="L191">	RISC_OS(&quot;RISC OS&quot;, Pattern.compile(&quot;RISC OS|RISK OS&quot;)),</span>
+
+	/**
+	 * Binary Runtime Environment for Wireless (Brew MP, Brew, or BREW) is an application development platform created
+	 * by Qualcomm.
+	 */
+<span class="fc" id="L197">	BREW(&quot;Brew&quot;, Pattern.compile(&quot;Brew&quot;)),</span>
+
+	/**
+	 * BlackBerry OS (up to the fifth edition known as the &lt;i&gt;BlackBerry Device Software&lt;/i&gt;, also known as &lt;i&gt;Research
+	 * In Motion OS&lt;/i&gt;) is a proprietary mobile operating system developed by BlackBerry Ltd for its BlackBerry line of
+	 * smartphone handheld devices.
+	 */
+<span class="fc" id="L204">	BLACKBERRY_OS(&quot;BlackBerry OS&quot;, Pattern.compile(&quot;(RIM OS|BlackBerry OS)&quot;)),</span>
+
+	/**
+	 * Sailfish is a Linux-based mobile operating system developed by Jolla in cooperation with the Mer project and
+	 * supported by the Sailfish Alliance.
+	 */
+<span class="fc" id="L210">	SAILFISH_OS(&quot;Sailfish&quot;, Pattern.compile(&quot;Sailfish&quot;)),</span>
+
+	/**
+	 * Solaris is the name of an operating system distribution based on SunOS and is a Unix operating system. Since the
+	 * takeover of Sun Microsystems in 2010 Solaris is part of Oracle.
+	 */
+<span class="fc" id="L216">	SOLARIS(&quot;Solaris&quot;, Pattern.compile(&quot;Solaris&quot;)),</span>
+
+	/**
+	 * Syllable is a slim and fast desktop Unix-like operating system for x86 processors.
+	 */
+<span class="fc" id="L221">	SYLLABLE(&quot;Syllable&quot;, Pattern.compile(&quot;Syllable&quot;)),</span>
+
+	/**
+	 * The Symbian platform, simply called Symbian, is an operating system for smartphones and PDAs. The Symbian
+	 * platform is the successor to Symbian OS
+	 */
+<span class="fc" id="L227">	SYMBIAN(&quot;Symbian OS&quot;, Pattern.compile(&quot;Symbian OS&quot;)),</span>
+
+	/**
+	 * Tizen is a free operating system based on Linux respectively Debian and was launched by the Linux Foundation and
+	 * LiMo Foundation.
+	 */
+<span class="fc" id="L233">	TIZEN(&quot;Tizen&quot;, Pattern.compile(&quot;Tizen&quot;)),</span>
+
+	/**
+	 * The Wii Operating System is based on Nintendo’s proprietary software and runs on the Wii video game console.
+	 */
+<span class="fc" id="L238">	WII_OS(&quot;Wii OS&quot;, Pattern.compile(&quot;Nintendo Wii|Wii OS&quot;)),</span>
+
+	/**
+	 * Microsoft Windows is a trademark for operating systems of the Microsoft Corporation. Microsoft Windows was
+	 * originally a graphical extension of the operating system MS-DOS.
+	 */
+<span class="fc" id="L244">	WINDOWS(&quot;Windows&quot;, Pattern.compile(&quot;Windows&quot;)),</span>
+
+	/**
+	 * XrossMediaBar (XMB) is the name of the graphical user interface, which are used on PlayStation 3, PlayStation
+	 * Portable, Sony Blu-Ray players and Sony Bravia TVs. Also some special versions of the PlayStation 2, PSX, already
+	 * using the XMB.
+	 */
+<span class="fc" id="L251">	XROSSMEDIABAR(&quot;XrossMediaBar (XMB)&quot;, Pattern.compile(&quot;XrossMediaBar (XMB)&quot;)),</span>
+
+	/**
+	 * iOS (until June 2010 iPhone OS) is the standard operating system of Apple products like iPhone, iPod touch, iPad,
+	 * and the second generation of Apple TV. iOS is based on Mac OS X.
+	 */
+<span class="fc" id="L257">	IOS(&quot;iOS&quot;, Pattern.compile(&quot;iOS|iPhone OS&quot;)),</span>
+
+	/**
+	 * webOS is a smartphone and tablet operating system from Hewlett-Packard (formerly HP Palm). It represents the
+	 * follower of Palm OS.
+	 */
+<span class="fc" id="L263">	WEBOS(&quot;webOS&quot;, Pattern.compile(&quot;webOS&quot;)),</span>
+
+	/**
+	 * Unknown operating system family&lt;br&gt;
+	 * &lt;br&gt;
+	 * This value will be returned if the operating system family cannot be determined.
+	 */
+<span class="fc" id="L270">	UNKNOWN(&quot;&quot;, Pattern.compile(&quot;^$&quot;));</span>
+
+	/**
+	 * This method try to find by the given family name a matching enum value. The family name must match against an
+	 * operating system entry in UAS data file.
+	 * 
+	 * @param family
+	 *            name of an operating system family
+	 * @return the matching enum value or {@code OperatingSystemFamily#UNKNOWN}
+	 * @throws net.sf.qualitycheck.exception.IllegalNullArgumentException
+	 *             if the given argument is {@code null}
+	 */
+	public static OperatingSystemFamily evaluate(@Nonnull final String family) {
+<span class="fc" id="L283">		Check.notNull(family, &quot;family&quot;);</span>
+
+<span class="fc" id="L285">		OperatingSystemFamily result = UNKNOWN;</span>
+
+		// search by name
+<span class="fc" id="L288">		result = evaluateByName(family);</span>
+
+		// search by pattern
+<span class="fc bfc" id="L291" title="All 2 branches covered.">		if (result == UNKNOWN) {</span>
+<span class="fc" id="L292">			result = evaluateByPattern(family);</span>
+		}
+
+<span class="fc" id="L295">		return result;</span>
+	}
+
+	/**
+	 * This method try to find by the given family name a matching enum value. The family name will be evaluated against
+	 * the stored name of an operating system entry.
+	 * 
+	 * @param family
+	 *            name of an operating system family
+	 * @return the matching enum value or {@code OperatingSystemFamily#UNKNOWN}
+	 * @throws net.sf.qualitycheck.exception.IllegalNullArgumentException
+	 *             if the given argument is {@code null}
+	 */
+	protected static OperatingSystemFamily evaluateByName(@Nonnull final String family) {
+<span class="fc" id="L309">		Check.notNull(family, &quot;family&quot;);</span>
+
+<span class="fc" id="L311">		OperatingSystemFamily result = UNKNOWN;</span>
+<span class="fc bfc" id="L312" title="All 2 branches covered.">		for (final OperatingSystemFamily value : values()) {</span>
+<span class="fc bfc" id="L313" title="All 2 branches covered.">			if (value.getName().equals(family)) {</span>
+<span class="fc" id="L314">				result = value;</span>
+<span class="fc" id="L315">				break;</span>
+			}
+		}
+
+<span class="fc" id="L319">		return result;</span>
+	}
+
+	/**
+	 * This method try to find by the given family name a matching enum value. The family name will be evaluated against
+	 * the stored regular expression of an operating system entry.
+	 * 
+	 * @param family
+	 *            name of an operating system family
+	 * @return the matching enum value or {@code OperatingSystemFamily#UNKNOWN}
+	 * @throws net.sf.qualitycheck.exception.IllegalNullArgumentException
+	 *             if the given argument is {@code null}
+	 */
+	protected static OperatingSystemFamily evaluateByPattern(@Nonnull final String family) {
+<span class="fc" id="L333">		Check.notNull(family, &quot;family&quot;);</span>
+
+<span class="fc" id="L335">		OperatingSystemFamily result = UNKNOWN;</span>
+<span class="fc bfc" id="L336" title="All 2 branches covered.">		for (final OperatingSystemFamily value : values()) {</span>
+<span class="fc" id="L337">			final Matcher m = value.getPattern().matcher(family);</span>
+<span class="fc bfc" id="L338" title="All 2 branches covered.">			if (m.matches()) {</span>
+<span class="fc" id="L339">				result = value;</span>
+<span class="fc" id="L340">				break;</span>
+			}
+		}
+
+<span class="fc" id="L344">		return result;</span>
+	}
+
+	/**
+	 * The internal family name in the UAS database.
+	 */
+	@Nonnull
+	private final String name;
+
+	/**
+	 * The regular expression which a family name must be match.
+	 */
+	@Nonnull
+	private final Pattern pattern;
+
+<span class="fc" id="L359">	private OperatingSystemFamily(@Nonnull final String name, @Nonnull final Pattern pattern) {</span>
+<span class="fc" id="L360">		this.name = name;</span>
+<span class="fc" id="L361">		this.pattern = pattern;</span>
+<span class="fc" id="L362">	}</span>
+
+	/**
+	 * Gets the internal family name in the UAS database.
+	 * 
+	 * @return the internal family name
+	 */
+	@Nonnull
+	public String getName() {
+<span class="fc" id="L371">		return this.name;</span>
+	}
+
+	/**
+	 * Gets the regular expression which a family name must be match with.
+	 * 
+	 * @return regular expression
+	 */
+	@Nonnull
+	public Pattern getPattern() {
+<span class="fc" id="L381">		return pattern;</span>
+	}
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.6.2.201302030002</span></div></body></html>

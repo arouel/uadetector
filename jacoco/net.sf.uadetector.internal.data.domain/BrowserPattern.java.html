@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>BrowserPattern.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="right"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">UADetector :: Core</a> &gt; <a href="index.html" class="el_package">net.sf.uadetector.internal.data.domain</a> &gt; <span class="el_source">BrowserPattern.java</span></div><h1>BrowserPattern.java</h1><pre class="source lang-java linenums">/*******************************************************************************
+ * Copyright 2012 André Rouél
+ * 
+ * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ ******************************************************************************/
+package net.sf.uadetector.internal.data.domain;
+
+import java.io.Serializable;
+import java.util.regex.Pattern;
+
+import javax.annotation.Nonnegative;
+import javax.annotation.Nonnull;
+import javax.annotation.concurrent.Immutable;
+import javax.annotation.concurrent.NotThreadSafe;
+
+import net.sf.qualitycheck.Check;
+import net.sf.uadetector.internal.util.RegularExpressionConverter;
+
+/**
+ * The {@code BrowserPattern} class represents the detection information for a browser specific item.&lt;br&gt;
+ * &lt;br&gt;
+ * A {@code BrowserPattern} object is immutable, their values cannot be changed after creation.
+ * 
+ * @author André Rouél
+ */
+@Immutable
+public final class BrowserPattern implements Identifiable, OrderedPattern&lt;BrowserPattern&gt;, Serializable {
+
+	/**
+	 * Factory that creates instances of {@code BrowserPattern} via method calls.
+	 * 
+	 * @author André Rouél
+	 */
+	@NotThreadSafe
+<span class="fc" id="L45">	public static final class Builder {</span>
+
+		/**
+		 * Identification number (ID) of a browser pattern
+		 */
+<span class="fc" id="L50">		private int id = Integer.MIN_VALUE;</span>
+
+		/**
+		 * A compiled representation of a regular expression to detect a browser
+		 */
+		private Pattern pattern;
+
+		/**
+		 * Position of a {@code BrowserPattern} (only relevant if there are multiple patterns for a browser in a
+		 * {@code SortedSet})
+		 */
+<span class="fc" id="L61">		private int position = Integer.MIN_VALUE;</span>
+
+		/**
+		 * Builds a new instance of {@code BrowserPattern} and returns it.
+		 * 
+		 * @return a new instance of {@code BrowserPattern}
+		 * @throws net.sf.qualitycheck.exception.IllegalNegativeArgumentException
+		 *             if one of the needed arguments to build an instance of {@code BrowserPattern} is invalid
+		 * @throws net.sf.qualitycheck.exception.IllegalNullArgumentException
+		 *             if one of the needed arguments to build an instance of {@code BrowserPattern} is invalid
+		 */
+		@Nonnull
+		public BrowserPattern build() {
+<span class="fc" id="L74">			return new BrowserPattern(id, pattern, position);</span>
+		}
+
+		/**
+		 * Sets the identification number of a browser pattern entry.
+		 * 
+		 * @param id
+		 *            identification number
+		 * @return this {@code Builder}, for chaining
+		 * @throws net.sf.qualitycheck.exception.IllegalNegativeArgumentException
+		 *             if the given integer is smaller than {@code 0}
+		 */
+		@Nonnull
+		public Builder setId(@Nonnegative final int id) {
+<span class="fc" id="L88">			Check.notNegative(id, &quot;id&quot;);</span>
+
+<span class="fc" id="L90">			this.id = id;</span>
+<span class="fc" id="L91">			return this;</span>
+		}
+
+		/**
+		 * Sets the identification number (ID) of a browser pattern. The given {@code String} is parsed as a decimal
+		 * number.
+		 * 
+		 * @param id
+		 *            ID of a browser pattern as string
+		 * @return this {@code Builder}, for chaining
+		 * @throws net.sf.qualitycheck.exception.IllegalNullArgumentException
+		 *             if the given argument is {@code null}
+		 * @throws NumberFormatException
+		 *             if the given string is not parsable as integer
+		 * @throws net.sf.qualitycheck.exception.IllegalNegativeArgumentException
+		 *             if the parsed integer is smaller than {@code 0}
+		 */
+		@Nonnull
+		public Builder setId(@Nonnull final String id) {
+<span class="fc" id="L110">			Check.notEmpty(id, &quot;id&quot;);</span>
+
+<span class="fc" id="L112">			this.setId(Integer.parseInt(id.trim()));</span>
+<span class="fc" id="L113">			return this;</span>
+		}
+
+		/**
+		 * Sets a regular expression for a browser pattern.
+		 * 
+		 * @param pattern
+		 *            compiled representation of a regular expression
+		 * @return this {@code Builder}, for chaining
+		 */
+		@Nonnull
+		public Builder setPattern(@Nonnull final Pattern pattern) {
+<span class="fc" id="L125">			Check.notNull(pattern, &quot;pattern&quot;);</span>
+
+<span class="fc" id="L127">			this.pattern = pattern;</span>
+<span class="fc" id="L128">			return this;</span>
+		}
+
+		/**
+		 * Converts a PERL regular expression in a Java regular expression and sets it in the {@code Builder}.
+		 * 
+		 * @param regex
+		 *            PERL style regular expression to be converted
+		 * @return this {@code Builder}, for chaining
+		 */
+		@Nonnull
+		public Builder setPerlRegularExpression(@Nonnull final String regex) {
+<span class="fc" id="L140">			Check.notEmpty(regex, &quot;regex&quot;);</span>
+
+<span class="fc" id="L142">			setPattern(RegularExpressionConverter.convertPerlRegexToPattern(regex));</span>
+<span class="fc" id="L143">			return this;</span>
+		}
+
+		/**
+		 * Sets the position of a browser pattern in a set of patterns.
+		 * 
+		 * @param position
+		 *            position of a browser pattern
+		 * @return this {@code Builder}, for chaining
+		 * @throws net.sf.qualitycheck.exception.IllegalNegativeArgumentException
+		 *             if the given integer is smaller than {@code 0}
+		 */
+		@Nonnull
+		public Builder setPosition(@Nonnegative final int position) {
+<span class="fc" id="L157">			Check.notNegative(position, &quot;position&quot;);</span>
+
+<span class="fc" id="L159">			this.position = position;</span>
+<span class="fc" id="L160">			return this;</span>
+		}
+
+		/**
+		 * Sets the position of a browser pattern in a set of patterns. The given {@code String} is parsed as a decimal
+		 * number.
+		 * 
+		 * @param position
+		 *            position of a browser pattern as string
+		 * @return this {@code Builder}, for chaining
+		 * @throws net.sf.qualitycheck.exception.IllegalNullArgumentException
+		 *             if the given argument is {@code null}
+		 * @throws NumberFormatException
+		 *             if the given string is not parsable as integer
+		 * @throws net.sf.qualitycheck.exception.IllegalNegativeArgumentException
+		 *             if the parsed integer is smaller than {@code 0}
+		 */
+		@Nonnull
+		public Builder setPosition(@Nonnull final String position) {
+<span class="fc" id="L179">			Check.notEmpty(position, &quot;position&quot;);</span>
+
+<span class="fc" id="L181">			this.setPosition(Integer.parseInt(position.trim()));</span>
+<span class="fc" id="L182">			return this;</span>
+		}
+
+	}
+
+	private static final long serialVersionUID = 2845531314485836348L;
+
+	/**
+	 * Compares to integers.
+	 * 
+	 * @param a
+	 *            first integer
+	 * @param b
+	 *            second integer
+	 * @return {@code -1} if {@code a} is less, {@code 0} if equal, or {@code 1} if greater than {@code b}
+	 */
+	private static int compareInt(final int a, final int b) {
+<span class="fc" id="L199">		int result = 0;</span>
+<span class="fc bfc" id="L200" title="All 2 branches covered.">		if (a &gt; b) {</span>
+<span class="fc" id="L201">			result = 1;</span>
+<span class="fc bfc" id="L202" title="All 2 branches covered.">		} else if (a &lt; b) {</span>
+<span class="fc" id="L203">			result = -1;</span>
+		}
+<span class="fc" id="L205">		return result;</span>
+	}
+
+	/**
+	 * Identification number (ID) of a browser pattern
+	 */
+	@Nonnegative
+	private final int id;
+
+	/**
+	 * A compiled representation of a regular expression to detect a browser
+	 */
+	@Nonnull
+	private final Pattern pattern;
+
+	/**
+	 * Position of a {@code BrowserPattern} (only relevant if there are multiple patterns for a browser in a
+	 * {@code SortedSet})
+	 */
+	@Nonnegative
+	private final int position;
+
+<span class="fc" id="L227">	public BrowserPattern(@Nonnegative final int id, @Nonnull final Pattern pattern, @Nonnegative final int position) {</span>
+<span class="fc" id="L228">		Check.notNegative(id, &quot;id&quot;);</span>
+<span class="fc" id="L229">		Check.notNull(pattern, &quot;pattern&quot;);</span>
+<span class="fc" id="L230">		Check.notNegative(position, &quot;position&quot;);</span>
+
+<span class="fc" id="L232">		this.id = id;</span>
+<span class="fc" id="L233">		this.pattern = pattern;</span>
+<span class="fc" id="L234">		this.position = position;</span>
+<span class="fc" id="L235">	}</span>
+
+	/**
+	 * Compares all attributes of this instance with the given instance of a {@code BrowserPattern}.
+	 * 
+	 * &lt;p&gt;
+	 * This method is &lt;em&gt;consistent with equals&lt;/em&gt;.
+	 * 
+	 * @param other
+	 *            another instance of {@code OperatingSystemPattern}
+	 * @return negative value if one of the attributes of this instance is less, 0 if equal, or positive value if
+	 *         greater than the other one
+	 */
+	@Override
+	public int compareTo(final BrowserPattern other) {
+<span class="fc bfc" id="L250" title="All 2 branches covered.">		int result = other == null ? -1 : 0;</span>
+<span class="fc bfc" id="L251" title="All 2 branches covered.">		if (result == 0) {</span>
+<span class="fc" id="L252">			result = compareInt(getPosition(), other.getPosition());</span>
+<span class="fc bfc" id="L253" title="All 2 branches covered.">			if (result == 0) {</span>
+<span class="fc" id="L254">				result = compareInt(getId(), other.getId());</span>
+			}
+<span class="fc bfc" id="L256" title="All 2 branches covered.">			if (result == 0) {</span>
+<span class="fc" id="L257">				result = getPattern().pattern().compareTo(other.getPattern().pattern());</span>
+			}
+<span class="fc bfc" id="L259" title="All 2 branches covered.">			if (result == 0) {</span>
+<span class="fc" id="L260">				result = compareInt(getPattern().flags(), other.getPattern().flags());</span>
+			}
+		}
+<span class="fc" id="L263">		return result;</span>
+	}
+
+	@Override
+	public boolean equals(final Object obj) {
+<span class="fc bfc" id="L268" title="All 2 branches covered.">		if (this == obj) {</span>
+<span class="fc" id="L269">			return true;</span>
+		}
+<span class="fc bfc" id="L271" title="All 2 branches covered.">		if (obj == null) {</span>
+<span class="fc" id="L272">			return false;</span>
+		}
+<span class="fc bfc" id="L274" title="All 2 branches covered.">		if (getClass() != obj.getClass()) {</span>
+<span class="fc" id="L275">			return false;</span>
+		}
+<span class="fc" id="L277">		final BrowserPattern other = (BrowserPattern) obj;</span>
+<span class="fc bfc" id="L278" title="All 2 branches covered.">		if (id != other.id) {</span>
+<span class="fc" id="L279">			return false;</span>
+		}
+<span class="fc bfc" id="L281" title="All 2 branches covered.">		if (position != other.position) {</span>
+<span class="fc" id="L282">			return false;</span>
+		}
+<span class="fc bfc" id="L284" title="All 2 branches covered.">		if (!pattern.pattern().equals(other.pattern.pattern())) {</span>
+<span class="fc" id="L285">			return false;</span>
+		}
+<span class="fc bfc" id="L287" title="All 2 branches covered.">		if (pattern.flags() != other.pattern.flags()) {</span>
+<span class="fc" id="L288">			return false;</span>
+		}
+<span class="fc" id="L290">		return true;</span>
+	}
+
+	/**
+	 * Gets the identification number (ID) of a browser pattern.
+	 * 
+	 * @return identification number (ID) of a browser pattern
+	 */
+	@Override
+	public int getId() {
+<span class="fc" id="L300">		return id;</span>
+	}
+
+	@Override
+	public Pattern getPattern() {
+<span class="fc" id="L305">		return pattern;</span>
+	}
+
+	@Override
+	public int getPosition() {
+<span class="fc" id="L310">		return position;</span>
+	}
+
+	@Override
+	public int hashCode() {
+<span class="fc" id="L315">		final int prime = 31;</span>
+<span class="fc" id="L316">		int result = 1;</span>
+<span class="fc" id="L317">		result = prime * result + id;</span>
+<span class="fc" id="L318">		result = prime * result + position;</span>
+<span class="fc" id="L319">		result = prime * result + pattern.pattern().hashCode();</span>
+<span class="fc" id="L320">		result = prime * result + pattern.flags();</span>
+<span class="fc" id="L321">		return result;</span>
+	}
+
+	@Override
+	public String toString() {
+<span class="fc" id="L326">		final StringBuilder builder = new StringBuilder();</span>
+<span class="fc" id="L327">		builder.append(&quot;BrowserPattern [id=&quot;);</span>
+<span class="fc" id="L328">		builder.append(id);</span>
+<span class="fc" id="L329">		builder.append(&quot;, pattern=&quot;);</span>
+<span class="fc" id="L330">		builder.append(pattern);</span>
+<span class="fc" id="L331">		builder.append(&quot;, position=&quot;);</span>
+<span class="fc" id="L332">		builder.append(position);</span>
+<span class="fc" id="L333">		builder.append(&quot;]&quot;);</span>
+<span class="fc" id="L334">		return builder.toString();</span>
+	}
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.6.2.201302030002</span></div></body></html>

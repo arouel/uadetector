@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>BrowserOperatingSystemMapping.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="right"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">UADetector :: Core</a> &gt; <a href="index.html" class="el_package">net.sf.uadetector.internal.data.domain</a> &gt; <span class="el_source">BrowserOperatingSystemMapping.java</span></div><h1>BrowserOperatingSystemMapping.java</h1><pre class="source lang-java linenums">/*******************************************************************************
+ * Copyright 2012 André Rouél
+ * 
+ * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ ******************************************************************************/
+package net.sf.uadetector.internal.data.domain;
+
+import java.io.Serializable;
+
+import javax.annotation.Nonnegative;
+import javax.annotation.Nonnull;
+import javax.annotation.concurrent.Immutable;
+import javax.annotation.concurrent.NotThreadSafe;
+
+import net.sf.qualitycheck.Check;
+
+@Immutable
+public final class BrowserOperatingSystemMapping implements Serializable {
+
+	@NotThreadSafe
+<span class="fc" id="L31">	public static final class Builder {</span>
+
+		/**
+		 * ID of a browser entry
+		 */
+<span class="fc" id="L36">		private int browserId = Integer.MIN_VALUE;</span>
+
+		/**
+		 * ID of a operating system entry
+		 */
+<span class="fc" id="L41">		private int operatingSystemId = Integer.MIN_VALUE;</span>
+
+		/**
+		 * Build an instance of {@code BrowserOperatingSystemMapping}.
+		 * 
+		 * @return a new instance of {@code BrowserOperatingSystemMapping}
+		 * @throws net.sf.qualitycheck.exception.IllegalNegativeArgumentException
+		 *             if one of the needed arguments to build an instance of {@code BrowserOperatingSystemMapping} is
+		 *             invalid
+		 * @throws net.sf.qualitycheck.exception.IllegalNullArgumentException
+		 *             if one of the needed arguments to build an instance of {@code BrowserOperatingSystemMapping} is
+		 *             invalid
+		 */
+		@Nonnull
+		public BrowserOperatingSystemMapping build() {
+<span class="fc" id="L56">			return new BrowserOperatingSystemMapping(browserId, operatingSystemId);</span>
+		}
+
+		/**
+		 * Gets the identification number of a browser entry.
+		 * 
+		 * @return identification number of a browser entry
+		 */
+		public int getBrowserId() {
+<span class="fc" id="L65">			return browserId;</span>
+		}
+
+		/**
+		 * Gets the identification number of an operating system entry.
+		 * 
+		 * @return identification number of an operating system entry
+		 */
+		public int getOperatingSystemId() {
+<span class="fc" id="L74">			return operatingSystemId;</span>
+		}
+
+		/**
+		 * Sets the identification number of a browser entry.
+		 * 
+		 * @param browserId
+		 *            identification number
+		 * @throws net.sf.qualitycheck.exception.IllegalNegativeArgumentException
+		 *             if the given number is smaller than {@code 0}
+		 */
+		@Nonnull
+		public Builder setBrowserId(@Nonnegative final int browserId) {
+<span class="fc" id="L87">			Check.notNegative(browserId, &quot;browserId&quot;);</span>
+
+<span class="fc" id="L89">			this.browserId = browserId;</span>
+<span class="fc" id="L90">			return this;</span>
+		}
+
+		/**
+		 * Sets the identification number of a browser entry via a string.
+		 * 
+		 * @param browserId
+		 *            identification number (as a {@code String)}
+		 * @throws net.sf.qualitycheck.exception.IllegalNullArgumentException
+		 *             if the given argument is {@code null}
+		 * @throws NumberFormatException
+		 *             if the string can not be interpreted as a number
+		 * @throws net.sf.qualitycheck.exception.IllegalNegativeArgumentException
+		 *             if the interpreted number is smaller than {@code 0}
+		 */
+		@Nonnull
+		public Builder setBrowserId(@Nonnull final String browserId) {
+<span class="fc" id="L107">			Check.notNull(browserId, &quot;browserId&quot;);</span>
+
+<span class="fc" id="L109">			this.setBrowserId(Integer.parseInt(browserId.trim()));</span>
+<span class="fc" id="L110">			return this;</span>
+		}
+
+		/**
+		 * Sets the identification number of an operating system entry.
+		 * 
+		 * @param operatingSystemId
+		 *            identification number
+		 * @throws net.sf.qualitycheck.exception.IllegalNegativeArgumentException
+		 *             if the given number is smaller than {@code 0}
+		 */
+		@Nonnull
+		public Builder setOperatingSystemId(@Nonnegative final int operatingSystemId) {
+<span class="fc" id="L123">			Check.notNegative(operatingSystemId, &quot;operatingSystemId&quot;);</span>
+
+<span class="fc" id="L125">			this.operatingSystemId = operatingSystemId;</span>
+<span class="fc" id="L126">			return this;</span>
+		}
+
+		/**
+		 * Sets the identification number of an operating system entry via a string.
+		 * 
+		 * @param operatingSystemId
+		 *            identification number (as a {@code String)}
+		 * @throws net.sf.qualitycheck.exception.IllegalNullArgumentException
+		 *             if the given argument is {@code null}
+		 * @throws NumberFormatException
+		 *             if the string can not be interpreted as a number
+		 * @throws net.sf.qualitycheck.exception.IllegalNegativeArgumentException
+		 *             if the interpreted number is smaller than {@code 0}
+		 */
+		@Nonnull
+		public Builder setOperatingSystemId(@Nonnull final String operatingSystemId) {
+<span class="fc" id="L143">			Check.notNull(operatingSystemId, &quot;operatingSystemId&quot;);</span>
+
+<span class="fc" id="L145">			this.setOperatingSystemId(Integer.parseInt(operatingSystemId.trim()));</span>
+<span class="fc" id="L146">			return this;</span>
+		}
+
+	}
+
+	private static final long serialVersionUID = 6074931648810031757L;
+
+	/**
+	 * ID of a browser entry
+	 */
+	@Nonnegative
+	private final int browserId;
+
+	/**
+	 * ID of a operating system entry
+	 */
+	@Nonnegative
+	private final int operatingSystemId;
+
+	/**
+	 * Constructs an instance of {@code BrowserOperatingSystemMapping}.
+	 * 
+	 * @throws net.sf.qualitycheck.exception.IllegalNegativeArgumentException
+	 *             if one of the given arguments is smaller than {@code 0}
+	 */
+<span class="fc" id="L171">	public BrowserOperatingSystemMapping(@Nonnegative final int browserId, @Nonnegative final int operatingSystemId) {</span>
+<span class="fc" id="L172">		Check.notNegative(browserId, &quot;browserId&quot;);</span>
+<span class="fc" id="L173">		Check.notNegative(operatingSystemId, &quot;operatingSystemId&quot;);</span>
+
+<span class="fc" id="L175">		this.browserId = browserId;</span>
+<span class="fc" id="L176">		this.operatingSystemId = operatingSystemId;</span>
+<span class="fc" id="L177">	}</span>
+
+	@Override
+	public boolean equals(final Object obj) {
+<span class="fc bfc" id="L181" title="All 2 branches covered.">		if (this == obj) {</span>
+<span class="fc" id="L182">			return true;</span>
+		}
+<span class="fc bfc" id="L184" title="All 2 branches covered.">		if (obj == null) {</span>
+<span class="fc" id="L185">			return false;</span>
+		}
+<span class="fc bfc" id="L187" title="All 2 branches covered.">		if (getClass() != obj.getClass()) {</span>
+<span class="fc" id="L188">			return false;</span>
+		}
+<span class="fc" id="L190">		final BrowserOperatingSystemMapping other = (BrowserOperatingSystemMapping) obj;</span>
+<span class="fc bfc" id="L191" title="All 2 branches covered.">		if (browserId != other.browserId) {</span>
+<span class="fc" id="L192">			return false;</span>
+		}
+<span class="fc bfc" id="L194" title="All 2 branches covered.">		if (operatingSystemId != other.operatingSystemId) {</span>
+<span class="fc" id="L195">			return false;</span>
+		}
+<span class="fc" id="L197">		return true;</span>
+	}
+
+	@Nonnegative
+	public int getBrowserId() {
+<span class="fc" id="L202">		return browserId;</span>
+	}
+
+	@Nonnegative
+	public int getOperatingSystemId() {
+<span class="fc" id="L207">		return operatingSystemId;</span>
+	}
+
+	@Override
+	public int hashCode() {
+<span class="fc" id="L212">		final int prime = 31;</span>
+<span class="fc" id="L213">		int result = 1;</span>
+<span class="fc" id="L214">		result = prime * result + browserId;</span>
+<span class="fc" id="L215">		result = prime * result + operatingSystemId;</span>
+<span class="fc" id="L216">		return result;</span>
+	}
+
+	@Override
+	public String toString() {
+<span class="fc" id="L221">		final StringBuilder builder = new StringBuilder();</span>
+<span class="fc" id="L222">		builder.append(&quot;BrowserOperatingSystemMapping [browserId=&quot;);</span>
+<span class="fc" id="L223">		builder.append(browserId);</span>
+<span class="fc" id="L224">		builder.append(&quot;, operatingSystemId=&quot;);</span>
+<span class="fc" id="L225">		builder.append(operatingSystemId);</span>
+<span class="fc" id="L226">		builder.append(&quot;]&quot;);</span>
+<span class="fc" id="L227">		return builder.toString();</span>
+	}
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.6.2.201302030002</span></div></body></html>

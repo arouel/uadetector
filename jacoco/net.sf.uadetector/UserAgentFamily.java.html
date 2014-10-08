@@ -1,0 +1,4489 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>UserAgentFamily.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="right"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">UADetector :: Core</a> &gt; <a href="index.html" class="el_package">net.sf.uadetector</a> &gt; <span class="el_source">UserAgentFamily.java</span></div><h1>UserAgentFamily.java</h1><pre class="source lang-java linenums">/*******************************************************************************
+ * Copyright 2012 André Rouél
+ * 
+ * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ ******************************************************************************/
+package net.sf.uadetector;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import javax.annotation.Nonnull;
+
+import net.sf.qualitycheck.Check;
+
+/**
+ * This enum represents the more commonly used user agent families. It will never be complete, but can assist in
+ * identifying an user agent.
+ * 
+ * @author André Rouél
+ */
+<span class="pc" id="L31">public enum UserAgentFamily {</span>
+
+	/**
+	 * Representation of an unknown User-Agent
+	 * 
+	 * &lt;p&gt;
+	 * &lt;strong&gt;Attention&lt;/strong&gt;: This is not a known User-Agent family, but only a placeholder.
+	 */
+<span class="fc" id="L39">	UNKNOWN(&quot;unknown&quot;, Pattern.compile(&quot;^$&quot;)),</span>
+
+	/**
+	 * 192.comAgent
+	 */
+<span class="fc" id="L44">	_192_COMAGENT(&quot;192.comAgent&quot;, Pattern.compile(&quot;192.comAgent&quot;)),</span>
+
+	/**
+	 * 2Bone LinkChecker
+	 */
+<span class="fc" id="L49">	_2BONE_LINKCHECKER(&quot;2Bone LinkChecker&quot;, Pattern.compile(&quot;2Bone LinkChecker&quot;)),</span>
+
+	/**
+	 * 50.nu
+	 */
+<span class="fc" id="L54">	_50_NU(&quot;50.nu&quot;, Pattern.compile(&quot;50.nu&quot;)),</span>
+
+	/**
+	 * 80legs
+	 */
+<span class="fc" id="L59">	_80LEGS(&quot;80legs&quot;, Pattern.compile(&quot;80legs&quot;)),</span>
+
+	/**
+	 * A1 Sitemap Generator
+	 */
+<span class="fc" id="L64">	A1_SITEMAP_GENERATOR(&quot;A1 Sitemap Generator&quot;, Pattern.compile(&quot;A1 Sitemap Generator&quot;)),</span>
+
+	/**
+	 * AB (Apache Bench)
+	 */
+<span class="fc" id="L69">	AB_APACHE_BENCH(&quot;AB (Apache Bench)&quot;, Pattern.compile(&quot;AB \\(Apache Bench\\)&quot;)),</span>
+
+	/**
+	 * abby
+	 */
+<span class="fc" id="L74">	ABBY(&quot;abby&quot;, Pattern.compile(&quot;abby&quot;)),</span>
+
+	/**
+	 * Abilon
+	 */
+<span class="fc" id="L79">	ABILON(&quot;Abilon&quot;, Pattern.compile(&quot;Abilon&quot;)),</span>
+
+	/**
+	 * Abolimba
+	 */
+<span class="fc" id="L84">	ABOLIMBA(&quot;Abolimba&quot;, Pattern.compile(&quot;Abolimba&quot;)),</span>
+
+	/**
+	 * Aboundexbot
+	 */
+<span class="fc" id="L89">	ABOUNDEXBOT(&quot;Aboundexbot&quot;, Pattern.compile(&quot;Aboundexbot&quot;)),</span>
+
+	/**
+	 * AboutUsBot
+	 */
+<span class="fc" id="L94">	ABOUTUSBOT(&quot;AboutUsBot&quot;, Pattern.compile(&quot;AboutUsBot&quot;)),</span>
+
+	/**
+	 * Abrave Spider
+	 */
+<span class="fc" id="L99">	ABRAVE_SPIDER(&quot;Abrave Spider&quot;, Pattern.compile(&quot;Abrave Spider&quot;)),</span>
+
+	/**
+	 * ABrowse
+	 */
+<span class="fc" id="L104">	ABROWSE(&quot;ABrowse&quot;, Pattern.compile(&quot;ABrowse&quot;)),</span>
+
+	/**
+	 * Accelobot
+	 */
+<span class="fc" id="L109">	ACCELOBOT(&quot;Accelobot&quot;, Pattern.compile(&quot;Accelobot&quot;)),</span>
+
+	/**
+	 * Accoona-AI-Agent
+	 */
+<span class="fc" id="L114">	ACCOONA_AI_AGENT(&quot;Accoona-AI-Agent&quot;, Pattern.compile(&quot;Accoona-AI-Agent&quot;)),</span>
+
+	/**
+	 * Acoo Browser
+	 */
+<span class="fc" id="L119">	ACOO_BROWSER(&quot;Acoo Browser&quot;, Pattern.compile(&quot;Acoo Browser&quot;)),</span>
+
+	/**
+	 * AcoonBot
+	 */
+<span class="fc" id="L124">	ACOONBOT(&quot;AcoonBot&quot;, Pattern.compile(&quot;AcoonBot&quot;)),</span>
+
+	/**
+	 * Acorn
+	 */
+<span class="fc" id="L129">	ACORN(&quot;Acorn&quot;, Pattern.compile(&quot;Acorn&quot;)),</span>
+
+	/**
+	 * ActiveXperts Network Monitor
+	 */
+<span class="fc" id="L134">	ACTIVEXPERTS_NETWORK_MONITOR(&quot;ActiveXperts Network Monitor&quot;, Pattern.compile(&quot;ActiveXperts Network Monitor&quot;)),</span>
+
+	/**
+	 * AddThis.com
+	 */
+<span class="fc" id="L139">	ADDTHIS_COM(&quot;AddThis.com&quot;, Pattern.compile(&quot;AddThis.com&quot;)),</span>
+
+	/**
+	 * Adobe AIR runtime
+	 */
+<span class="fc" id="L144">	ADOBE_AIR_RUNTIME(&quot;Adobe AIR runtime&quot;, Pattern.compile(&quot;Adobe AIR runtime&quot;)),</span>
+
+	/**
+	 * adressendeutschland.de
+	 */
+<span class="fc" id="L149">	ADRESSENDEUTSCHLAND_DE(&quot;adressendeutschland.de&quot;, Pattern.compile(&quot;adressendeutschland.de&quot;)),</span>
+
+	/**
+	 * AdsBot-Google
+	 */
+<span class="fc" id="L154">	ADSBOT_GOOGLE(&quot;AdsBot-Google&quot;, Pattern.compile(&quot;AdsBot-Google&quot;)),</span>
+
+	/**
+	 * AhrefsBot
+	 */
+<span class="fc" id="L159">	AHREFSBOT(&quot;AhrefsBot&quot;, Pattern.compile(&quot;AhrefsBot&quot;)),</span>
+
+	/**
+	 * aiHitBot
+	 */
+<span class="fc" id="L164">	AIHITBOT(&quot;aiHitBot&quot;, Pattern.compile(&quot;aiHitBot&quot;)),</span>
+
+	/**
+	 * aippie
+	 */
+<span class="fc" id="L169">	AIPPIE(&quot;aippie&quot;, Pattern.compile(&quot;aippie&quot;)),</span>
+
+	/**
+	 * Akregator
+	 */
+<span class="fc" id="L174">	AKREGATOR(&quot;Akregator&quot;, Pattern.compile(&quot;Akregator&quot;)),</span>
+
+	/**
+	 * akula
+	 */
+<span class="fc" id="L179">	AKULA(&quot;akula&quot;, Pattern.compile(&quot;akula&quot;)),</span>
+
+	/**
+	 * Alienforce
+	 */
+<span class="fc" id="L184">	ALIENFORCE(&quot;Alienforce&quot;, Pattern.compile(&quot;Alienforce&quot;)),</span>
+
+	/**
+	 * Almaden
+	 */
+<span class="fc" id="L189">	ALMADEN(&quot;Almaden&quot;, Pattern.compile(&quot;Almaden&quot;)),</span>
+
+	/**
+	 * Amagit.COM
+	 */
+<span class="fc" id="L194">	AMAGIT_COM(&quot;Amagit.COM&quot;, Pattern.compile(&quot;Amagit.COM&quot;)),</span>
+
+	/**
+	 * Amaya
+	 */
+<span class="fc" id="L199">	AMAYA(&quot;Amaya&quot;, Pattern.compile(&quot;Amaya&quot;)),</span>
+
+	/**
+	 * Amazon Silk
+	 */
+<span class="fc" id="L204">	AMAZON_SILK(&quot;Amazon Silk&quot;, Pattern.compile(&quot;(Amazon Silk|Mobile Silk)&quot;)),</span>
+
+	/**
+	 * Amfibibot
+	 */
+<span class="fc" id="L209">	AMFIBIBOT(&quot;Amfibibot&quot;, Pattern.compile(&quot;Amfibibot&quot;)),</span>
+
+	/**
+	 * amibot
+	 */
+<span class="fc" id="L214">	AMIBOT(&quot;amibot&quot;, Pattern.compile(&quot;amibot&quot;)),</span>
+
+	/**
+	 * Amiga Aweb
+	 */
+<span class="fc" id="L219">	AMIGA_AWEB(&quot;Amiga Aweb&quot;, Pattern.compile(&quot;Amiga Aweb&quot;)),</span>
+
+	/**
+	 * Amiga Voyager
+	 */
+<span class="fc" id="L224">	AMIGA_VOYAGER(&quot;Amiga Voyager&quot;, Pattern.compile(&quot;Amiga Voyager&quot;)),</span>
+
+	/**
+	 * Android Browser
+	 */
+<span class="fc" id="L229">	ANDROID_BROWSER(&quot;Android Browser&quot;, Pattern.compile(&quot;(Android Browser|Android Webkit)&quot;, Pattern.CASE_INSENSITIVE)),</span>
+
+	/**
+	 * Anemone
+	 */
+<span class="fc" id="L234">	ANEMONE(&quot;Anemone&quot;, Pattern.compile(&quot;Anemone&quot;)),</span>
+
+	/**
+	 * Anonymouse.org
+	 */
+<span class="fc" id="L239">	ANONYMOUSE_ORG(&quot;Anonymouse.org&quot;, Pattern.compile(&quot;Anonymouse.org&quot;)),</span>
+
+	/**
+	 * AntBot
+	 */
+<span class="fc" id="L244">	ANTBOT(&quot;AntBot&quot;, Pattern.compile(&quot;AntBot&quot;)),</span>
+
+	/**
+	 * anw HTMLChecker
+	 */
+<span class="fc" id="L249">	ANW_HTMLCHECKER(&quot;anw HTMLChecker&quot;, Pattern.compile(&quot;anw HTMLChecker&quot;)),</span>
+
+	/**
+	 * anw LoadControl
+	 */
+<span class="fc" id="L254">	ANW_LOADCONTROL(&quot;anw LoadControl&quot;, Pattern.compile(&quot;anw LoadControl&quot;)),</span>
+
+	/**
+	 * AOL Explorer
+	 */
+<span class="fc" id="L259">	AOL_EXPLORER(&quot;AOL Explorer&quot;, Pattern.compile(&quot;AOL Explorer&quot;)),</span>
+
+	/**
+	 * Apache internal dummy connection
+	 */
+<span class="fc" id="L264">	APACHE_INTERNAL_DUMMY_CONNECTION(&quot;Apache internal dummy connection&quot;, Pattern.compile(&quot;Apache internal dummy connection&quot;)),</span>
+
+	/**
+	 * Apache Synapse
+	 */
+<span class="fc" id="L269">	APACHE_SYNAPSE(&quot;Apache Synapse&quot;, Pattern.compile(&quot;Apache Synapse&quot;)),</span>
+
+	/**
+	 * Apercite
+	 */
+<span class="fc" id="L274">	APERCITE(&quot;Apercite&quot;, Pattern.compile(&quot;Apercite&quot;)),</span>
+
+	/**
+	 * AportWorm
+	 */
+<span class="fc" id="L279">	APORTWORM(&quot;AportWorm&quot;, Pattern.compile(&quot;AportWorm&quot;)),</span>
+
+	/**
+	 * Apple-PubSub
+	 */
+<span class="fc" id="L284">	APPLE_MAIL(&quot;Apple Mail&quot;, Pattern.compile(&quot;Apple Mail&quot;)),</span>
+
+	/**
+	 * Apple-PubSub
+	 */
+<span class="fc" id="L289">	APPLE_PUBSUB(&quot;Apple-PubSub&quot;, Pattern.compile(&quot;Apple-PubSub&quot;)),</span>
+
+	/**
+	 * arachnode.net
+	 */
+<span class="fc" id="L294">	ARACHNODE_NET(&quot;arachnode.net&quot;, Pattern.compile(&quot;arachnode.net&quot;)),</span>
+
+	/**
+	 * archive.org_bot
+	 */
+<span class="fc" id="L299">	ARCHIVE_ORG_BOT(&quot;archive.org_bot&quot;, Pattern.compile(&quot;archive.org_bot&quot;)),</span>
+
+	/**
+	 * Arora
+	 */
+<span class="fc" id="L304">	ARORA(&quot;Arora&quot;, Pattern.compile(&quot;Arora&quot;)),</span>
+
+	/**
+	 * ASAHA Search Engine Turkey
+	 */
+<span class="fc" id="L309">	ASAHA_SEARCH_ENGINE_TURKEY(&quot;ASAHA Search Engine Turkey&quot;, Pattern.compile(&quot;ASAHA Search Engine Turkey&quot;)),</span>
+
+	/**
+	 * Ask Jeeves/Teoma
+	 */
+<span class="fc" id="L314">	ASK_JEEVES_TEOMA(&quot;Ask Jeeves/Teoma&quot;, Pattern.compile(&quot;Ask Jeeves/Teoma&quot;)),</span>
+
+	/**
+	 * Atomic Email Hunter
+	 */
+<span class="fc" id="L319">	ATOMIC_EMAIL_HUNTER(&quot;Atomic Email Hunter&quot;, Pattern.compile(&quot;Atomic Email Hunter&quot;)),</span>
+
+	/**
+	 * Atomic Web Browser
+	 */
+<span class="fc" id="L324">	ATOMIC_WEB_BROWSER(&quot;Atomic Web Browser&quot;, Pattern.compile(&quot;Atomic Web Browser&quot;)),</span>
+
+	/**
+	 * Avant Browser
+	 */
+<span class="fc" id="L329">	AVANT_BROWSER(&quot;Avant Browser&quot;, Pattern.compile(&quot;Avant Browser&quot;)),</span>
+
+	/**
+	 * AvantGo
+	 */
+<span class="fc" id="L334">	AVANTGO(&quot;AvantGo&quot;, Pattern.compile(&quot;AvantGo&quot;)),</span>
+
+	/**
+	 * Awasu
+	 */
+<span class="fc" id="L339">	AWASU(&quot;Awasu&quot;, Pattern.compile(&quot;Awasu&quot;)),</span>
+
+	/**
+	 * Axel
+	 */
+<span class="fc" id="L344">	AXEL(&quot;Axel&quot;, Pattern.compile(&quot;Axel&quot;)),</span>
+
+	/**
+	 * BabalooSpider
+	 */
+<span class="fc" id="L349">	BABALOOSPIDER(&quot;BabalooSpider&quot;, Pattern.compile(&quot;BabalooSpider&quot;)),</span>
+
+	/**
+	 * BacklinkCrawler
+	 */
+<span class="fc" id="L354">	BACKLINKCRAWLER(&quot;BacklinkCrawler&quot;, Pattern.compile(&quot;BacklinkCrawler&quot;)),</span>
+
+	/**
+	 * Bad-Neighborhood
+	 */
+<span class="fc" id="L359">	BAD_NEIGHBORHOOD(&quot;Bad-Neighborhood&quot;, Pattern.compile(&quot;Bad-Neighborhood&quot;)),</span>
+
+	/**
+	 * Baidu Browser
+	 */
+<span class="fc" id="L364">	BAIDU_BROWSER(&quot;Baidu Browser&quot;, Pattern.compile(&quot;Baidu Browser&quot;)),</span>
+
+	/**
+	 * Baiduspider
+	 */
+<span class="fc" id="L369">	BAIDUSPIDER(&quot;Baiduspider&quot;, Pattern.compile(&quot;Baiduspider&quot;)),</span>
+
+	/**
+	 * Banshee
+	 */
+<span class="fc" id="L374">	BANSHEE(&quot;Banshee&quot;, Pattern.compile(&quot;Banshee&quot;)),</span>
+
+	/**
+	 * Barca
+	 */
+<span class="fc" id="L379">	BARCA(&quot;Barca&quot;, Pattern.compile(&quot;Barca&quot;)),</span>
+
+	/**
+	 * baypup
+	 */
+<span class="fc" id="L384">	BAYPUP(&quot;baypup&quot;, Pattern.compile(&quot;baypup&quot;)),</span>
+
+	/**
+	 * BDFetch
+	 */
+<span class="fc" id="L389">	BDFETCH(&quot;BDFetch&quot;, Pattern.compile(&quot;BDFetch&quot;)),</span>
+
+	/**
+	 * Beamrise
+	 */
+<span class="fc" id="L394">	BEAMRISE(&quot;Beamrise&quot;, Pattern.compile(&quot;Beamrise&quot;)),</span>
+
+	/**
+	 * BecomeBot
+	 */
+<span class="fc" id="L399">	BECOMEBOT(&quot;BecomeBot&quot;, Pattern.compile(&quot;BecomeBot&quot;)),</span>
+
+	/**
+	 * Beonex
+	 */
+<span class="fc" id="L404">	BEONEX(&quot;Beonex&quot;, Pattern.compile(&quot;Beonex&quot;)),</span>
+
+	/**
+	 * Bigsearch.ca
+	 */
+<span class="fc" id="L409">	BIGSEARCH_CA(&quot;Bigsearch.ca&quot;, Pattern.compile(&quot;Bigsearch.ca&quot;)),</span>
+
+	/**
+	 * bingbot
+	 */
+<span class="fc" id="L414">	BINGBOT(&quot;bingbot&quot;, Pattern.compile(&quot;bingbot&quot;)),</span>
+
+	/**
+	 * BinGet
+	 */
+<span class="fc" id="L419">	BINGET(&quot;BinGet&quot;, Pattern.compile(&quot;BinGet&quot;)),</span>
+
+	/**
+	 * bitlybot
+	 */
+<span class="fc" id="L424">	BITLYBOT(&quot;bitlybot&quot;, Pattern.compile(&quot;bitlybot&quot;)),</span>
+
+	/**
+	 * biwec
+	 */
+<span class="fc" id="L429">	BIWEC(&quot;biwec&quot;, Pattern.compile(&quot;biwec&quot;)),</span>
+
+	/**
+	 * bixo
+	 */
+<span class="fc" id="L434">	BIXO(&quot;bixo&quot;, Pattern.compile(&quot;bixo&quot;)),</span>
+
+	/**
+	 * bixolabs
+	 */
+<span class="fc" id="L439">	BIXOLABS(&quot;bixocrawler&quot;, Pattern.compile(&quot;(bixocrawler|bixolabs)&quot;)),</span>
+
+	/**
+	 * BlackBerry Browser
+	 */
+<span class="fc" id="L444">	BLACKBERRY_BROWSER(&quot;BlackBerry Browser&quot;, Pattern.compile(&quot;BlackBerry Browser&quot;)),</span>
+
+	/**
+	 * Blackbird
+	 */
+<span class="fc" id="L449">	BLACKBIRD(&quot;Blackbird&quot;, Pattern.compile(&quot;Blackbird&quot;)),</span>
+
+	/**
+	 * BlackHawk
+	 */
+<span class="fc" id="L454">	BLACKHAWK(&quot;BlackHawk&quot;, Pattern.compile(&quot;BlackHawk&quot;)),</span>
+
+	/**
+	 * Blaiz-Bee
+	 */
+<span class="fc" id="L459">	BLAIZ_BEE(&quot;Blaiz-Bee&quot;, Pattern.compile(&quot;Blaiz-Bee&quot;)),</span>
+
+	/**
+	 * Blazer
+	 */
+<span class="fc" id="L464">	BLAZER(&quot;Blazer&quot;, Pattern.compile(&quot;Blazer&quot;)),</span>
+
+	/**
+	 * Blekkobot
+	 */
+<span class="fc" id="L469">	BLEKKOBOT(&quot;Blekkobot&quot;, Pattern.compile(&quot;Blekkobot&quot;)),</span>
+
+	/**
+	 * BlinkaCrawler
+	 */
+<span class="fc" id="L474">	BLINKACRAWLER(&quot;BlinkaCrawler&quot;, Pattern.compile(&quot;BlinkaCrawler&quot;)),</span>
+
+	/**
+	 * BlogBridge
+	 */
+<span class="fc" id="L479">	BLOGBRIDGE(&quot;BlogBridge&quot;, Pattern.compile(&quot;BlogBridge&quot;)),</span>
+
+	/**
+	 * Bloggsi
+	 */
+<span class="fc" id="L484">	BLOGGSI(&quot;Bloggsi&quot;, Pattern.compile(&quot;Bloggsi&quot;)),</span>
+
+	/**
+	 * Bloglines
+	 */
+<span class="fc" id="L489">	BLOGLINES(&quot;Bloglines&quot;, Pattern.compile(&quot;Bloglines&quot;)),</span>
+
+	/**
+	 * BlogPulse
+	 */
+<span class="fc" id="L494">	BLOGPULSE(&quot;BlogPulse&quot;, Pattern.compile(&quot;BlogPulse&quot;)),</span>
+
+	/**
+	 * bnf.fr_bot
+	 */
+<span class="fc" id="L499">	BNF_FR_BOT(&quot;bnf.fr_bot&quot;, Pattern.compile(&quot;bnf.fr_bot&quot;)),</span>
+
+	/**
+	 * boitho.com-dc
+	 */
+<span class="fc" id="L504">	BOITHO_COM_DC(&quot;boitho.com-dc&quot;, Pattern.compile(&quot;boitho.com-dc&quot;)),</span>
+
+	/**
+	 * Bolt
+	 */
+<span class="fc" id="L509">	BOLT(&quot;Bolt&quot;, Pattern.compile(&quot;Bolt&quot;)),</span>
+
+	/**
+	 * Bookdog
+	 */
+<span class="fc" id="L514">	BOOKDOG(&quot;Bookdog&quot;, Pattern.compile(&quot;Bookdog&quot;)),</span>
+
+	/**
+	 * BookmarkTracker
+	 */
+<span class="fc" id="L519">	BOOKMARKTRACKER(&quot;BookmarkTracker&quot;, Pattern.compile(&quot;BookmarkTracker&quot;)),</span>
+
+	/**
+	 * bot-pge.chlooe.com
+	 */
+<span class="fc" id="L524">	BOT_PGE_CHLOOE_COM(&quot;bot-pge.chlooe.com&quot;, Pattern.compile(&quot;bot-pge.chlooe.com&quot;)),</span>
+
+	/**
+	 * botmobi
+	 */
+<span class="fc" id="L529">	BOTMOBI(&quot;botmobi&quot;, Pattern.compile(&quot;botmobi&quot;)),</span>
+
+	/**
+	 * BotOnParade
+	 */
+<span class="fc" id="L534">	BOTONPARADE(&quot;BotOnParade&quot;, Pattern.compile(&quot;BotOnParade&quot;)),</span>
+
+	/**
+	 * Boxxe
+	 */
+<span class="fc" id="L539">	BOXXE(&quot;Boxxe&quot;, Pattern.compile(&quot;Boxxe&quot;)),</span>
+
+	/**
+	 * BrownRecluse
+	 */
+<span class="fc" id="L544">	BROWNRECLUSE(&quot;BrownRecluse&quot;, Pattern.compile(&quot;BrownRecluse&quot;)),</span>
+
+	/**
+	 * Browsershots
+	 */
+<span class="fc" id="L549">	BROWSERSHOTS(&quot;Browsershots&quot;, Pattern.compile(&quot;Browsershots&quot;)),</span>
+
+	/**
+	 * BrowseX
+	 */
+<span class="fc" id="L554">	BROWSEX(&quot;BrowseX&quot;, Pattern.compile(&quot;BrowseX&quot;)),</span>
+
+	/**
+	 * Browzar
+	 */
+<span class="fc" id="L559">	BROWZAR(&quot;Browzar&quot;, Pattern.compile(&quot;Browzar&quot;)),</span>
+
+	/**
+	 * btbot
+	 */
+<span class="fc" id="L564">	BTBOT(&quot;btbot&quot;, Pattern.compile(&quot;btbot&quot;)),</span>
+
+	/**
+	 * Bunjalloo
+	 */
+<span class="fc" id="L569">	BUNJALLOO(&quot;Bunjalloo&quot;, Pattern.compile(&quot;Bunjalloo&quot;)),</span>
+
+	/**
+	 * Butterfly
+	 */
+<span class="fc" id="L574">	BUTTERFLY(&quot;Butterfly&quot;, Pattern.compile(&quot;Butterfly&quot;)),</span>
+
+	/**
+	 * BuzzRankingBot
+	 */
+<span class="fc" id="L579">	BUZZRANKINGBOT(&quot;BuzzRankingBot&quot;, Pattern.compile(&quot;BuzzRankingBot&quot;)),</span>
+
+	/**
+	 * Camino
+	 */
+<span class="fc" id="L584">	CAMINO(&quot;Camino&quot;, Pattern.compile(&quot;Camino&quot;)),</span>
+
+	/**
+	 * CamontSpider
+	 */
+<span class="fc" id="L589">	CAMONTSPIDER(&quot;CamontSpider&quot;, Pattern.compile(&quot;CamontSpider&quot;)),</span>
+
+	/**
+	 * CareerBot
+	 */
+<span class="fc" id="L594">	CAREERBOT(&quot;CareerBot&quot;, Pattern.compile(&quot;CareerBot&quot;)),</span>
+
+	/**
+	 * ^Nail
+	 */
+<span class="fc" id="L599">	CARET_NAIL(&quot;^Nail&quot;, Pattern.compile(&quot;^Nail&quot;)),</span>
+
+	/**
+	 * Castabot
+	 */
+<span class="fc" id="L604">	CASTABOT(&quot;Castabot&quot;, Pattern.compile(&quot;Castabot&quot;)),</span>
+
+	/**
+	 * CatchBot
+	 */
+<span class="fc" id="L609">	CATCHBOT(&quot;CatchBot&quot;, Pattern.compile(&quot;CatchBot&quot;)),</span>
+
+	/**
+	 * CazoodleBot
+	 */
+<span class="fc" id="L614">	CAZOODLEBOT(&quot;CazoodleBot&quot;, Pattern.compile(&quot;CazoodleBot&quot;)),</span>
+
+	/**
+	 * CCBot
+	 */
+<span class="fc" id="L619">	CCBOT(&quot;CCBot&quot;, Pattern.compile(&quot;CCBot&quot;)),</span>
+
+	/**
+	 * ccubee
+	 */
+<span class="fc" id="L624">	CCUBEE(&quot;ccubee&quot;, Pattern.compile(&quot;ccubee&quot;)),</span>
+
+	/**
+	 * ChangeDetection
+	 */
+<span class="fc" id="L629">	CHANGEDETECTION(&quot;ChangeDetection&quot;, Pattern.compile(&quot;ChangeDetection(/\\d+(\\.\\d+)*)?&quot;, Pattern.CASE_INSENSITIVE)),</span>
+
+	/**
+	 * Charlotte
+	 */
+<span class="fc" id="L634">	CHARLOTTE(&quot;Charlotte&quot;, Pattern.compile(&quot;Charlotte&quot;)),</span>
+
+	/**
+	 * Charon
+	 */
+<span class="fc" id="L639">	CHARON(&quot;Charon&quot;, Pattern.compile(&quot;Charon&quot;)),</span>
+
+	/**
+	 * Checkbot
+	 */
+<span class="fc" id="L644">	CHECKBOT(&quot;Checkbot&quot;, Pattern.compile(&quot;Checkbot&quot;)),</span>
+
+	/**
+	 * Cheshire
+	 */
+<span class="fc" id="L649">	CHESHIRE(&quot;Cheshire&quot;, Pattern.compile(&quot;Cheshire&quot;)),</span>
+
+	/**
+	 * Chilkat HTTP .NET
+	 */
+<span class="fc" id="L654">	CHILKAT_HTTP_NET(&quot;Chilkat HTTP .NET&quot;, Pattern.compile(&quot;Chilkat HTTP .NET&quot;)),</span>
+
+	/**
+	 * Chrome
+	 */
+<span class="fc" id="L659">	CHROME(&quot;Chrome&quot;, Pattern.compile(&quot;Chrome&quot;)),</span>
+
+	/**
+	 * Chrome Mobile
+	 */
+<span class="fc" id="L664">	CHROME_MOBILE(&quot;Chrome Mobile&quot;, Pattern.compile(&quot;Chrome Mobile&quot;)),</span>
+
+	/**
+	 * Chromium
+	 */
+<span class="fc" id="L669">	CHROMIUM(&quot;Chromium&quot;, Pattern.compile(&quot;Chromium&quot;)),</span>
+
+	/**
+	 * City4you
+	 */
+<span class="fc" id="L674">	CITY4YOU(&quot;City4you&quot;, Pattern.compile(&quot;City4you&quot;)),</span>
+
+	/**
+	 * cityreview
+	 */
+<span class="fc" id="L679">	CITYREVIEW(&quot;cityreview&quot;, Pattern.compile(&quot;cityreview&quot;)),</span>
+
+	/**
+	 * CJB.NET Proxy
+	 */
+<span class="fc" id="L684">	CJB_NET_PROXY(&quot;CJB.NET Proxy&quot;, Pattern.compile(&quot;CJB.NET Proxy&quot;)),</span>
+
+	/**
+	 * Claws Mail GtkHtml2 plugin
+	 */
+<span class="fc" id="L689">	CLAWS_MAIL_GTKHTML2_PLUGIN(&quot;Claws Mail GtkHtml2 plugin&quot;, Pattern.compile(&quot;Claws Mail GtkHtml2 plugin&quot;)),</span>
+
+	/**
+	 * CligooRobot
+	 */
+<span class="fc" id="L694">	CLIGOOROBOT(&quot;CligooRobot&quot;, Pattern.compile(&quot;CligooRobot&quot;)),</span>
+
+	/**
+	 * coccoc
+	 */
+<span class="fc" id="L699">	COCCOC(&quot;coccoc&quot;, Pattern.compile(&quot;coccoc&quot;)),</span>
+
+	/**
+	 * Columbus
+	 */
+<span class="fc" id="L704">	COLUMBUS(&quot;Columbus&quot;, Pattern.compile(&quot;Columbus&quot;)),</span>
+
+	/**
+	 * Combine
+	 */
+<span class="fc" id="L709">	COMBINE(&quot;Combine&quot;, Pattern.compile(&quot;Combine&quot;)),</span>
+
+	/**
+	 * CometBird
+	 */
+<span class="fc" id="L714">	COMETBIRD(&quot;CometBird&quot;, Pattern.compile(&quot;CometBird&quot;)),</span>
+
+	/**
+	 * Comodo Dragon
+	 */
+<span class="fc" id="L719">	COMODO_DRAGON(&quot;Comodo Dragon&quot;, Pattern.compile(&quot;Comodo Dragon&quot;)),</span>
+
+	/**
+	 * CompSpyBot - Competitive Spying and Scraping
+	 */
+<span class="fc" id="L724">	COMPSPYBOT(&quot;CompSpyBot/1.0&quot;, Pattern.compile(&quot;CompSpyBot(/\\d+(\\.\\d+)*)?&quot;)),</span>
+
+	/**
+	 * Conkeror
+	 */
+<span class="fc" id="L729">	CONKEROR(&quot;Conkeror&quot;, Pattern.compile(&quot;Conkeror&quot;)),</span>
+
+	/**
+	 * ConveraCrawler
+	 */
+<span class="fc" id="L734">	CONVERACRAWLER(&quot;ConveraCrawler&quot;, Pattern.compile(&quot;ConveraCrawler&quot;)),</span>
+
+	/**
+	 * CoolNovo
+	 */
+<span class="fc" id="L739">	COOLNOVO(&quot;CoolNovo&quot;, Pattern.compile(&quot;CoolNovo&quot;)),</span>
+
+	/**
+	 * copyright sheriff
+	 */
+<span class="fc" id="L744">	COPYRIGHT_SHERIFF(&quot;copyright sheriff&quot;, Pattern.compile(&quot;copyright sheriff&quot;)),</span>
+
+	/**
+	 * CorePlayer
+	 */
+<span class="fc" id="L749">	COREPLAYER(&quot;CorePlayer&quot;, Pattern.compile(&quot;CorePlayer&quot;)),</span>
+
+	/**
+	 * CorpusCrawler
+	 */
+<span class="fc" id="L754">	CORPUSCRAWLER(&quot;CorpusCrawler&quot;, Pattern.compile(&quot;CorpusCrawler&quot;)),</span>
+
+	/**
+	 * Covario-IDS
+	 */
+<span class="fc" id="L759">	COVARIO_IDS(&quot;Covario-IDS&quot;, Pattern.compile(&quot;Covario-IDS&quot;)),</span>
+
+	/**
+	 * CPG Dragonfly RSS Module
+	 */
+<span class="fc" id="L764">	CPG_DRAGONFLY_RSS_MODULE(&quot;CPG Dragonfly RSS Module&quot;, Pattern.compile(&quot;CPG Dragonfly RSS Module&quot;)),</span>
+
+	/**
+	 * Crawler4j
+	 */
+<span class="fc" id="L769">	CRAWLER4J(&quot;Crawler4j&quot;, Pattern.compile(&quot;Crawler4j&quot;)),</span>
+
+	/**
+	 * Crazy Browser
+	 */
+<span class="fc" id="L774">	CRAZY_BROWSER(&quot;Crazy Browser&quot;, Pattern.compile(&quot;Crazy Browser&quot;)),</span>
+
+	/**
+	 * csci_b659
+	 */
+<span class="fc" id="L779">	CSCI_B659(&quot;csci_b659&quot;, Pattern.compile(&quot;csci_b659&quot;)),</span>
+
+	/**
+	 * CSE HTML Validator
+	 */
+<span class="fc" id="L784">	CSE_HTML_VALIDATOR(&quot;CSE HTML Validator&quot;, Pattern.compile(&quot;CSE HTML Validator&quot;)),</span>
+
+	/**
+	 * cURL
+	 */
+<span class="fc" id="L789">	CURL(&quot;cURL&quot;, Pattern.compile(&quot;cURL&quot;)),</span>
+
+	/**
+	 * Cyberduck
+	 */
+<span class="fc" id="L794">	CYBERDUCK(&quot;Cyberduck&quot;, Pattern.compile(&quot;Cyberduck&quot;)),</span>
+
+	/**
+	 * Cynthia
+	 */
+<span class="fc" id="L799">	CYNTHIA(&quot;Cynthia&quot;, Pattern.compile(&quot;Cynthia&quot;)),</span>
+
+	/**
+	 * D+
+	 */
+<span class="fc" id="L804">	D_PLUS(&quot;D+&quot;, Pattern.compile(&quot;D+&quot;)),</span>
+
+	/**
+	 * DataFountains
+	 */
+<span class="fc" id="L809">	DATAFOUNTAINS(&quot;DataFountains&quot;, Pattern.compile(&quot;DataFountains&quot;)),</span>
+
+	/**
+	 * DataparkSearch
+	 */
+<span class="fc" id="L814">	DATAPARKSEARCH(&quot;DataparkSearch&quot;, Pattern.compile(&quot;DataparkSearch&quot;)),</span>
+
+	/**
+	 * Daumoa
+	 */
+<span class="fc" id="L819">	DAUMOA(&quot;Daumoa&quot;, Pattern.compile(&quot;Daumoa&quot;)),</span>
+
+	/**
+	 * DBLBot
+	 */
+<span class="fc" id="L824">	DBLBOT(&quot;DBLBot&quot;, Pattern.compile(&quot;DBLBot&quot;)),</span>
+
+	/**
+	 * DCPbot
+	 */
+<span class="fc" id="L829">	DCPBOT(&quot;DCPbot&quot;, Pattern.compile(&quot;DCPbot&quot;)),</span>
+
+	/**
+	 * DealGates Bot
+	 */
+<span class="fc" id="L834">	DEALGATES_BOT(&quot;DealGates Bot&quot;, Pattern.compile(&quot;DealGates Bot&quot;)),</span>
+
+	/**
+	 * Deepnet Explorer
+	 */
+<span class="fc" id="L839">	DEEPNET_EXPLORER(&quot;Deepnet Explorer&quot;, Pattern.compile(&quot;Deepnet Explorer&quot;)),</span>
+
+	/**
+	 * del.icio.us-thumbnails
+	 */
+<span class="fc" id="L844">	DEL_ICIO_US_THUMBNAILS(&quot;del.icio.us-thumbnails&quot;, Pattern.compile(&quot;del.icio.us-thumbnails&quot;)),</span>
+
+	/**
+	 * Dell Web Monitor
+	 */
+<span class="fc" id="L849">	DELL_WEB_MONITOR(&quot;Dell Web Monitor&quot;, Pattern.compile(&quot;Dell Web Monitor&quot;)),</span>
+
+	/**
+	 * Demeter
+	 */
+<span class="fc" id="L854">	DEMETER(&quot;Demeter&quot;, Pattern.compile(&quot;Demeter&quot;)),</span>
+
+	/**
+	 * DepSpid
+	 */
+<span class="fc" id="L859">	DEPSPID(&quot;DepSpid&quot;, Pattern.compile(&quot;DepSpid&quot;)),</span>
+
+	/**
+	 * DeskBrowse
+	 */
+<span class="fc" id="L864">	DESKBROWSE(&quot;DeskBrowse&quot;, Pattern.compile(&quot;DeskBrowse&quot;)),</span>
+
+	/**
+	 * Dillo
+	 */
+<span class="fc" id="L869">	DILLO(&quot;Dillo&quot;, Pattern.compile(&quot;Dillo&quot;)),</span>
+
+	/**
+	 * Discoverybot is Discovery Engine's web crawler. It downloads text/html documents for use in building our full web
+	 * search engine.
+	 */
+<span class="fc" id="L875">	DISCOBOT(&quot;discobot&quot;, Pattern.compile(&quot;(discobot|discoverybot)(/\\d+(\\.\\d+))?&quot;)),</span>
+
+	/**
+	 * DKIMRepBot
+	 */
+<span class="fc" id="L880">	DKIMREPBOT(&quot;DKIMRepBot&quot;, Pattern.compile(&quot;DKIMRepBot&quot;)),</span>
+
+	/**
+	 * DNS-Digger-Explorer
+	 */
+<span class="fc" id="L885">	DNS_DIGGER_EXPLORER(&quot;DNS-Digger-Explorer&quot;, Pattern.compile(&quot;DNS-Digger-Explorer&quot;)),</span>
+
+	/**
+	 * DocZilla
+	 */
+<span class="fc" id="L890">	DOCZILLA(&quot;DocZilla&quot;, Pattern.compile(&quot;DocZilla&quot;)),</span>
+
+	/**
+	 * Dolphin
+	 */
+<span class="fc" id="L895">	DOLPHIN(&quot;Dolphin&quot;, Pattern.compile(&quot;Dolphin&quot;)),</span>
+
+	/**
+	 * DomainDB
+	 */
+<span class="fc" id="L900">	DOMAINDB(&quot;DomainDB&quot;, Pattern.compile(&quot;DomainDB&quot;)),</span>
+
+	/**
+	 * Dooble
+	 */
+<span class="fc" id="L905">	DOOBLE(&quot;Dooble&quot;, Pattern.compile(&quot;Dooble&quot;)),</span>
+
+	/**
+	 * Doris
+	 */
+<span class="fc" id="L910">	DORIS(&quot;Doris&quot;, Pattern.compile(&quot;Doris&quot;)),</span>
+
+	/**
+	 * Dot TK - spider
+	 */
+<span class="fc" id="L915">	DOT_TK_SPIDER(&quot;Dot TK - spider&quot;, Pattern.compile(&quot;Dot TK - spider&quot;)),</span>
+
+	/**
+	 * DotBot
+	 */
+<span class="fc" id="L920">	DOTBOT(&quot;DotBot&quot;, Pattern.compile(&quot;DotBot&quot;)),</span>
+
+	/**
+	 * dotSemantic
+	 */
+<span class="fc" id="L925">	DOTSEMANTIC(&quot;dotSemantic&quot;, Pattern.compile(&quot;dotSemantic&quot;)),</span>
+
+	/**
+	 * DownloadStudio
+	 */
+<span class="fc" id="L930">	DOWNLOADSTUDIO(&quot;DownloadStudio&quot;, Pattern.compile(&quot;DownloadStudio&quot;)),</span>
+
+	/**
+	 * DripfeedBot
+	 */
+<span class="fc" id="L935">	DRIPFEEDBOT(&quot;DripfeedBot&quot;, Pattern.compile(&quot;DripfeedBot&quot;)),</span>
+
+	/**
+	 * DuckDuckBot
+	 */
+<span class="fc" id="L940">	DUCKDUCKBOT(&quot;DuckDuckBot&quot;, Pattern.compile(&quot;DuckDuckBot&quot;)),</span>
+
+	/**
+	 * DuckDuckPreview
+	 */
+<span class="fc" id="L945">	DUCKDUCKPREVIEW(&quot;DuckDuckPreview&quot;, Pattern.compile(&quot;DuckDuckPreview&quot;)),</span>
+
+	/**
+	 * e-SocietyRobot
+	 */
+<span class="fc" id="L950">	E_SOCIETYROBOT(&quot;e-SocietyRobot&quot;, Pattern.compile(&quot;e-SocietyRobot&quot;)),</span>
+
+	/**
+	 * EasyBib AutoCite
+	 */
+<span class="fc" id="L955">	EASYBIB_AUTOCITE(&quot;EasyBib AutoCite&quot;, Pattern.compile(&quot;EasyBib AutoCite&quot;)),</span>
+
+	/**
+	 * eCairn-Grabber
+	 */
+<span class="fc" id="L960">	ECAIRN_GRABBER(&quot;eCairn-Grabber&quot;, Pattern.compile(&quot;eCairn-Grabber&quot;)),</span>
+
+	/**
+	 * Edbrowse
+	 */
+<span class="fc" id="L965">	EDBROWSE(&quot;Edbrowse&quot;, Pattern.compile(&quot;Edbrowse&quot;)),</span>
+
+	/**
+	 * EDI
+	 */
+<span class="fc" id="L970">	EDI(&quot;EDI&quot;, Pattern.compile(&quot;EDI&quot;)),</span>
+
+	/**
+	 * EdisterBot
+	 */
+<span class="fc" id="L975">	EDISTERBOT(&quot;EdisterBot&quot;, Pattern.compile(&quot;EdisterBot&quot;)),</span>
+
+	/**
+	 * egothor
+	 */
+<span class="fc" id="L980">	EGOTHOR(&quot;egothor&quot;, Pattern.compile(&quot;egothor&quot;)),</span>
+
+	/**
+	 * ejupiter.com
+	 */
+<span class="fc" id="L985">	EJUPITER_COM(&quot;ejupiter.com&quot;, Pattern.compile(&quot;ejupiter.com&quot;)),</span>
+
+	/**
+	 * Element Browser
+	 */
+<span class="fc" id="L990">	ELEMENT_BROWSER(&quot;Element Browser&quot;, Pattern.compile(&quot;Element Browser&quot;)),</span>
+
+	/**
+	 * Elinks
+	 */
+<span class="fc" id="L995">	ELINKS(&quot;Elinks&quot;, Pattern.compile(&quot;Elinks&quot;)),</span>
+
+	/**
+	 * EnaBot
+	 */
+<span class="fc" id="L1000">	ENABOT(&quot;EnaBot&quot;, Pattern.compile(&quot;EnaBot&quot;)),</span>
+
+	/**
+	 * Enigma browser
+	 */
+<span class="fc" id="L1005">	ENIGMA_BROWSER(&quot;Enigma browser&quot;, Pattern.compile(&quot;Enigma browser&quot;)),</span>
+
+	/**
+	 * Enterprise_Search
+	 */
+<span class="fc" id="L1010">	ENTERPRISE_SEARCH(&quot;Enterprise_Search&quot;, Pattern.compile(&quot;Enterprise_Search&quot;)),</span>
+
+	/**
+	 * envolk
+	 */
+<span class="fc" id="L1015">	ENVOLK(&quot;envolk&quot;, Pattern.compile(&quot;envolk&quot;)),</span>
+
+	/**
+	 * Epic
+	 */
+<span class="fc" id="L1020">	EPIC(&quot;Epic&quot;, Pattern.compile(&quot;Epic&quot;)),</span>
+
+	/**
+	 * Epiphany
+	 */
+<span class="fc" id="L1025">	EPIPHANY(&quot;Epiphany&quot;, Pattern.compile(&quot;Epiphany&quot;)),</span>
+
+	/**
+	 * Espial TV Browser
+	 */
+<span class="fc" id="L1030">	ESPIAL_TV_BROWSER(&quot;Espial TV Browser&quot;, Pattern.compile(&quot;Espial TV Browser&quot;)),</span>
+
+	/**
+	 * Eudora
+	 */
+<span class="fc" id="L1035">	EUDORA(&quot;Eudora&quot;, Pattern.compile(&quot;Eudora&quot;)),</span>
+
+	/**
+	 * EuripBot
+	 */
+<span class="fc" id="L1040">	EURIPBOT(&quot;EuripBot&quot;, Pattern.compile(&quot;EuripBot&quot;)),</span>
+
+	/**
+	 * Eurobot
+	 */
+<span class="fc" id="L1045">	EUROBOT(&quot;Eurobot&quot;, Pattern.compile(&quot;Eurobot&quot;)),</span>
+
+	/**
+	 * EventGuruBot
+	 */
+<span class="fc" id="L1050">	EVENTGURUBOT(&quot;EventGuruBot&quot;, Pattern.compile(&quot;EventGuruBot&quot;)),</span>
+
+	/**
+	 * EventMachine
+	 */
+<span class="fc" id="L1055">	EVENTMACHINE(&quot;EventMachine&quot;, Pattern.compile(&quot;EventMachine&quot;)),</span>
+
+	/**
+	 * Evolution/Camel.Stream
+	 */
+<span class="fc" id="L1060">	EVOLUTION_CAMEL_STREAM(&quot;Evolution/Camel.Stream&quot;, Pattern.compile(&quot;Evolution/Camel.Stream&quot;)),</span>
+
+	/**
+	 * EvriNid
+	 */
+<span class="fc" id="L1065">	EVRINID(&quot;EvriNid&quot;, Pattern.compile(&quot;EvriNid&quot;)),</span>
+
+	/**
+	 * Exabot
+	 */
+<span class="fc" id="L1070">	EXABOT(&quot;Exabot&quot;, Pattern.compile(&quot;Exabot&quot;)),</span>
+
+	/**
+	 * ExactSEEK
+	 */
+<span class="fc" id="L1075">	EXACTSEEK(&quot;ExactSEEK&quot;, Pattern.compile(&quot;ExactSEEK&quot;)),</span>
+
+	/**
+	 * Ezooms
+	 */
+<span class="fc" id="L1080">	EZOOMS(&quot;Ezooms&quot;, Pattern.compile(&quot;Ezooms&quot;)),</span>
+
+	/**
+	 * FacebookExternalHit
+	 */
+<span class="fc" id="L1085">	FACEBOOKEXTERNALHIT(&quot;FacebookExternalHit&quot;, Pattern.compile(&quot;FacebookExternalHit&quot;)),</span>
+
+	/**
+	 * factbot
+	 */
+<span class="fc" id="L1090">	FACTBOT(&quot;factbot&quot;, Pattern.compile(&quot;factbot&quot;)),</span>
+
+	/**
+	 * FairShare
+	 */
+<span class="fc" id="L1095">	FAIRSHARE(&quot;FairShare&quot;, Pattern.compile(&quot;FairShare&quot;)),</span>
+
+	/**
+	 * Falconsbot
+	 */
+<span class="fc" id="L1100">	FALCONSBOT(&quot;Falconsbot&quot;, Pattern.compile(&quot;Falconsbot&quot;)),</span>
+
+	/**
+	 * FAST Enterprise Crawler
+	 */
+<span class="fc" id="L1105">	FAST_ENTERPRISE_CRAWLER(&quot;FAST Enterprise Crawler&quot;, Pattern.compile(&quot;FAST Enterprise Crawler&quot;)),</span>
+
+	/**
+	 * FAST MetaWeb Crawler
+	 */
+<span class="fc" id="L1110">	FAST_METAWEB_CRAWLER(&quot;FAST MetaWeb Crawler&quot;, Pattern.compile(&quot;FAST MetaWeb Crawler&quot;)),</span>
+
+	/**
+	 * Fastladder FeedFetcher
+	 */
+<span class="fc" id="L1115">	FASTLADDER_FEEDFETCHER(&quot;Fastladder FeedFetcher&quot;, Pattern.compile(&quot;Fastladder FeedFetcher&quot;)),</span>
+
+	/**
+	 * FauBot
+	 */
+<span class="fc" id="L1120">	FAUBOT(&quot;FauBot&quot;, Pattern.compile(&quot;FauBot&quot;)),</span>
+
+	/**
+	 * favorstarbot
+	 */
+<span class="fc" id="L1125">	FAVORSTARBOT(&quot;favorstarbot&quot;, Pattern.compile(&quot;favorstarbot&quot;)),</span>
+
+	/**
+	 * Feed::Find
+	 */
+<span class="fc" id="L1130">	FEED_FIND(&quot;Feed::Find&quot;, Pattern.compile(&quot;Feed::Find&quot;)),</span>
+
+	/**
+	 * Feed Viewer
+	 */
+<span class="fc" id="L1135">	FEED_VIEWER(&quot;Feed Viewer&quot;, Pattern.compile(&quot;Feed Viewer&quot;)),</span>
+
+	/**
+	 * FeedCatBot
+	 */
+<span class="fc" id="L1140">	FEEDCATBOT(&quot;FeedCatBot&quot;, Pattern.compile(&quot;FeedCatBot&quot;)),</span>
+
+	/**
+	 * FeedDemon
+	 */
+<span class="fc" id="L1145">	FEEDDEMON(&quot;FeedDemon&quot;, Pattern.compile(&quot;FeedDemon&quot;)),</span>
+
+	/**
+	 * Feedfetcher-Google
+	 */
+<span class="fc" id="L1150">	FEEDFETCHER_GOOGLE(&quot;Feedfetcher-Google&quot;, Pattern.compile(&quot;Feedfetcher-Google&quot;)),</span>
+
+	/**
+	 * FeedFinder/bloggz.se
+	 */
+<span class="fc" id="L1155">	FEEDFINDER_BLOGGZ_SE(&quot;FeedFinder/bloggz.se&quot;, Pattern.compile(&quot;FeedFinder/bloggz.se&quot;)),</span>
+
+	/**
+	 * FeedParser
+	 */
+<span class="fc" id="L1160">	FEEDPARSER(&quot;FeedParser&quot;, Pattern.compile(&quot;FeedParser&quot;)),</span>
+
+	/**
+	 * FeedValidator
+	 */
+<span class="fc" id="L1165">	FEEDVALIDATOR(&quot;FeedValidator&quot;, Pattern.compile(&quot;FeedValidator&quot;)),</span>
+
+	/**
+	 * Findexa Crawler
+	 */
+<span class="fc" id="L1170">	FINDEXA_CRAWLER(&quot;Findexa Crawler&quot;, Pattern.compile(&quot;Findexa Crawler&quot;)),</span>
+
+	/**
+	 * findlinks
+	 */
+<span class="fc" id="L1175">	FINDLINKS(&quot;findlinks&quot;, Pattern.compile(&quot;findlinks&quot;)),</span>
+
+	/**
+	 * Firebird (old name for Firefox)
+	 */
+<span class="fc" id="L1180">	FIREBIRD(&quot;Firebird (old name for Firefox)&quot;, Pattern.compile(&quot;Firebird \\(old name for Firefox\\)&quot;)),</span>
+
+	/**
+	 * Firefox
+	 */
+<span class="fc" id="L1185">	FIREFOX(&quot;Firefox&quot;, Pattern.compile(&quot;Firefox&quot;)),</span>
+
+	/**
+	 * Firefox (BonEcho)
+	 */
+<span class="fc" id="L1190">	FIREFOX_BONECHO(&quot;Firefox (BonEcho)&quot;, Pattern.compile(&quot;Firefox \\(BonEcho\\)&quot;)),</span>
+
+	/**
+	 * Firefox (GranParadiso)
+	 */
+<span class="fc" id="L1195">	FIREFOX_GRANPARADISO(&quot;Firefox (GranParadiso)&quot;, Pattern.compile(&quot;Firefox \\(GranParadiso\\)&quot;)),</span>
+
+	/**
+	 * Firefox (Lorentz)
+	 */
+<span class="fc" id="L1200">	FIREFOX_LORENTZ(&quot;Firefox (Lorentz)&quot;, Pattern.compile(&quot;Firefox \\(Lorentz\\)&quot;)),</span>
+
+	/**
+	 * Firefox (Minefield)
+	 */
+<span class="fc" id="L1205">	FIREFOX_MINEFIELD(&quot;Firefox (Minefield)&quot;, Pattern.compile(&quot;Firefox \\(Minefield\\)&quot;)),</span>
+
+	/**
+	 * Firefox (Namoroka)
+	 */
+<span class="fc" id="L1210">	FIREFOX_NAMOROKA(&quot;Firefox (Namoroka)&quot;, Pattern.compile(&quot;Firefox \\(Namoroka\\)&quot;)),</span>
+
+	/**
+	 * Firefox (Shiretoko)
+	 */
+<span class="fc" id="L1215">	FIREFOX_SHIRETOKO(&quot;Firefox (Shiretoko)&quot;, Pattern.compile(&quot;Firefox \\(Shiretoko\\)&quot;)),</span>
+
+	/**
+	 * Fireweb Navigator
+	 */
+<span class="fc" id="L1220">	FIREWEB_NAVIGATOR(&quot;Fireweb Navigator&quot;, Pattern.compile(&quot;Fireweb Navigator&quot;)),</span>
+
+	/**
+	 * Flatland Industries Web Spider
+	 */
+<span class="fc" id="L1225">	FLATLAND_INDUSTRIES_WEB_SPIDER(&quot;Flatland Industries Web Spider&quot;, Pattern.compile(&quot;Flatland Industries Web Spider&quot;)),</span>
+
+	/**
+	 * flatlandbot
+	 */
+<span class="fc" id="L1230">	FLATLANDBOT(&quot;flatlandbot&quot;, Pattern.compile(&quot;flatlandbot&quot;)),</span>
+
+	/**
+	 * FlightDeckReportsBot
+	 */
+<span class="fc" id="L1235">	FLIGHTDECKREPORTSBOT(&quot;FlightDeckReportsBot&quot;, Pattern.compile(&quot;FlightDeckReportsBot&quot;)),</span>
+
+	/**
+	 * FlipboardProxy
+	 */
+<span class="fc" id="L1240">	FLIPBOARDPROXY(&quot;FlipboardProxy&quot;, Pattern.compile(&quot;FlipboardProxy&quot;)),</span>
+
+	/**
+	 * Flock
+	 */
+<span class="fc" id="L1245">	FLOCK(&quot;Flock&quot;, Pattern.compile(&quot;Flock&quot;)),</span>
+
+	/**
+	 * Flocke bot
+	 */
+<span class="fc" id="L1250">	FLOCKE_BOT(&quot;Flocke bot&quot;, Pattern.compile(&quot;Flocke bot&quot;)),</span>
+
+	/**
+	 * Fluid
+	 */
+<span class="fc" id="L1255">	FLUID(&quot;Fluid&quot;, Pattern.compile(&quot;Fluid&quot;)),</span>
+
+	/**
+	 * FlyCast
+	 */
+<span class="fc" id="L1260">	FLYCAST(&quot;FlyCast&quot;, Pattern.compile(&quot;FlyCast&quot;)),</span>
+
+	/**
+	 * FollowSite Bot
+	 */
+<span class="fc" id="L1265">	FOLLOWSITE_BOT(&quot;FollowSite Bot&quot;, Pattern.compile(&quot;FollowSite Bot&quot;)),</span>
+
+	/**
+	 * foobar2000
+	 */
+<span class="fc" id="L1270">	FOOBAR2000(&quot;foobar2000&quot;, Pattern.compile(&quot;foobar2000&quot;)),</span>
+
+	/**
+	 * Fooooo_Web_Video_Crawl
+	 */
+<span class="fc" id="L1275">	FOOOOO_WEB_VIDEO_CRAWL(&quot;Fooooo_Web_Video_Crawl&quot;, Pattern.compile(&quot;Fooooo_Web_Video_Crawl&quot;)),</span>
+
+	/**
+	 * Forschungsportal
+	 */
+<span class="fc" id="L1280">	FORSCHUNGSPORTAL(&quot;Forschungsportal&quot;, Pattern.compile(&quot;Forschungsportal&quot;)),</span>
+
+	/**
+	 * Francis
+	 */
+<span class="fc" id="L1285">	FRANCIS(&quot;Francis&quot;, Pattern.compile(&quot;Francis&quot;)),</span>
+
+	/**
+	 * Funambol Mozilla Sync Client
+	 */
+<span class="fc" id="L1290">	FUNAMBOL_MOZILLA_SYNC_CLIENT(&quot;Funambol Mozilla Sync Client&quot;, Pattern.compile(&quot;Funambol Mozilla Sync Client&quot;)),</span>
+
+	/**
+	 * Funambol Outlook Sync Client
+	 */
+<span class="fc" id="L1295">	FUNAMBOL_OUTLOOK_SYNC_CLIENT(&quot;Funambol Outlook Sync Client&quot;, Pattern.compile(&quot;Funambol Outlook Sync Client&quot;)),</span>
+
+	/**
+	 * FunnelBack
+	 */
+<span class="fc" id="L1300">	FUNNELBACK(&quot;FunnelBack&quot;, Pattern.compile(&quot;FunnelBack&quot;)),</span>
+
+	/**
+	 * FurlBot
+	 */
+<span class="fc" id="L1305">	FURLBOT(&quot;FurlBot&quot;, Pattern.compile(&quot;FurlBot&quot;)),</span>
+
+	/**
+	 * FyberSpider
+	 */
+<span class="fc" id="L1310">	FYBERSPIDER(&quot;FyberSpider&quot;, Pattern.compile(&quot;FyberSpider&quot;)),</span>
+
+	/**
+	 * g2crawler
+	 */
+<span class="fc" id="L1315">	G2CRAWLER(&quot;g2crawler&quot;, Pattern.compile(&quot;g2crawler&quot;)),</span>
+
+	/**
+	 * Gaisbot
+	 */
+<span class="fc" id="L1320">	GAISBOT(&quot;Gaisbot&quot;, Pattern.compile(&quot;Gaisbot&quot;)),</span>
+
+	/**
+	 * Galeon
+	 */
+<span class="fc" id="L1325">	GALEON(&quot;Galeon&quot;, Pattern.compile(&quot;Galeon&quot;)),</span>
+
+	/**
+	 * Gallent Search Spider
+	 */
+<span class="fc" id="L1330">	GALLENT_SEARCH_SPIDER(&quot;Gallent Search Spider&quot;, Pattern.compile(&quot;Gallent Search Spider&quot;)),</span>
+
+	/**
+	 * GarlikCrawler
+	 */
+<span class="fc" id="L1335">	GARLIKCRAWLER(&quot;GarlikCrawler&quot;, Pattern.compile(&quot;GarlikCrawler&quot;)),</span>
+
+	/**
+	 * GcMail
+	 */
+<span class="fc" id="L1340">	GCMAIL(&quot;GcMail&quot;, Pattern.compile(&quot;GcMail&quot;)),</span>
+
+	/**
+	 * genieBot
+	 */
+<span class="fc" id="L1345">	GENIEBOT(&quot;genieBot&quot;, Pattern.compile(&quot;genieBot&quot;)),</span>
+
+	/**
+	 * GeonaBot
+	 */
+<span class="fc" id="L1350">	GEONABOT(&quot;GeonaBot&quot;, Pattern.compile(&quot;GeonaBot&quot;)),</span>
+
+	/**
+	 * GetRight
+	 */
+<span class="fc" id="L1355">	GETRIGHT(&quot;GetRight&quot;, Pattern.compile(&quot;GetRight&quot;)),</span>
+
+	/**
+	 * Giant/1.0
+	 */
+<span class="fc" id="L1360">	GIANT(&quot;Giant&quot;, Pattern.compile(&quot;Giant/(\\d+(\\.\\d+)*)&quot;)),</span>
+
+	/**
+	 * Gigabot
+	 */
+<span class="fc" id="L1365">	GIGABOT(&quot;Gigabot&quot;, Pattern.compile(&quot;Gigabot&quot;)),</span>
+
+	/**
+	 * GingerCrawler
+	 */
+<span class="fc" id="L1370">	GINGERCRAWLER(&quot;GingerCrawler&quot;, Pattern.compile(&quot;GingerCrawler&quot;)),</span>
+
+	/**
+	 * Girafabot
+	 */
+<span class="fc" id="L1375">	GIRAFABOT(&quot;Girafabot&quot;, Pattern.compile(&quot;Girafabot&quot;)),</span>
+
+	/**
+	 * GlobalMojo
+	 */
+<span class="fc" id="L1380">	GLOBALMOJO(&quot;GlobalMojo&quot;, Pattern.compile(&quot;GlobalMojo&quot;)),</span>
+
+	/**
+	 * GnomeVFS
+	 */
+<span class="fc" id="L1385">	GNOMEVFS(&quot;GnomeVFS&quot;, Pattern.compile(&quot;GnomeVFS&quot;)),</span>
+
+	/**
+	 * GO Browser
+	 */
+<span class="fc" id="L1390">	GO_BROWSER(&quot;GO Browser&quot;, Pattern.compile(&quot;GO Browser&quot;)),</span>
+
+	/**
+	 * GOFORITBOT
+	 */
+<span class="fc" id="L1395">	GOFORITBOT(&quot;GOFORITBOT&quot;, Pattern.compile(&quot;GOFORITBOT&quot;)),</span>
+
+	/**
+	 * GoldenPod
+	 */
+<span class="fc" id="L1400">	GOLDENPOD(&quot;GoldenPod&quot;, Pattern.compile(&quot;GoldenPod&quot;)),</span>
+
+	/**
+	 * GOM Player
+	 */
+<span class="fc" id="L1405">	GOM_PLAYER(&quot;GOM Player&quot;, Pattern.compile(&quot;GOM Player&quot;)),</span>
+
+	/**
+	 * gonzo
+	 */
+<span class="fc" id="L1410">	GONZO(&quot;gonzo&quot;, Pattern.compile(&quot;gonzo&quot;)),</span>
+
+	/**
+	 * Google App Engine
+	 */
+<span class="fc" id="L1415">	GOOGLE_APP_ENGINE(&quot;Google App Engine&quot;, Pattern.compile(&quot;Google App Engine&quot;)),</span>
+
+	/**
+	 * Google Earth
+	 */
+<span class="fc" id="L1420">	GOOGLE_EARTH(&quot;Google Earth&quot;, Pattern.compile(&quot;Google Earth&quot;)),</span>
+
+	/**
+	 * Google Friend Connect
+	 */
+<span class="fc" id="L1425">	GOOGLE_FRIEND_CONNECT(&quot;Google Friend Connect&quot;, Pattern.compile(&quot;Google Friend Connect&quot;)),</span>
+
+	/**
+	 * Google Listen
+	 */
+<span class="fc" id="L1430">	GOOGLE_LISTEN(&quot;Google Listen&quot;, Pattern.compile(&quot;Google Listen&quot;)),</span>
+
+	/**
+	 * Google Rich Snippets Testing Tool
+	 */
+<span class="fc" id="L1435">	GOOGLE_RICH_SNIPPETS_TESTING_TOOL(&quot;Google Rich Snippets Testing Tool&quot;, Pattern.compile(&quot;Google Rich Snippets Testing Tool&quot;)),</span>
+
+	/**
+	 * Google Wireless Transcoder
+	 */
+<span class="fc" id="L1440">	GOOGLE_WIRELESS_TRANSCODER(&quot;Google Wireless Transcoder&quot;, Pattern.compile(&quot;Google Wireless Transcoder&quot;)),</span>
+
+	/**
+	 * Googlebot
+	 */
+<span class="fc" id="L1445">	GOOGLEBOT(&quot;Googlebot&quot;, Pattern.compile(&quot;Googlebot&quot;)),</span>
+
+	/**
+	 * Googlebot-Mobile
+	 */
+<span class="fc" id="L1450">	GOOGLEBOT_MOBILE(&quot;Googlebot-Mobile&quot;, Pattern.compile(&quot;Googlebot-Mobile&quot;)),</span>
+
+	/**
+	 * gPodder
+	 */
+<span class="fc" id="L1455">	GPODDER(&quot;gPodder&quot;, Pattern.compile(&quot;gPodder&quot;)),</span>
+
+	/**
+	 * GrapeshotCrawler
+	 */
+<span class="fc" id="L1460">	GRAPESHOTCRAWLER(&quot;GrapeshotCrawler&quot;, Pattern.compile(&quot;GrapeshotCrawler&quot;)),</span>
+
+	/**
+	 * GreatNews
+	 */
+<span class="fc" id="L1465">	GREATNEWS(&quot;GreatNews&quot;, Pattern.compile(&quot;GreatNews&quot;)),</span>
+
+	/**
+	 * GreenBrowser
+	 */
+<span class="fc" id="L1470">	GREENBROWSER(&quot;GreenBrowser&quot;, Pattern.compile(&quot;GreenBrowser&quot;)),</span>
+
+	/**
+	 * Gregarius
+	 */
+<span class="fc" id="L1475">	GREGARIUS(&quot;Gregarius&quot;, Pattern.compile(&quot;Gregarius&quot;)),</span>
+
+	/**
+	 * GSiteCrawler
+	 */
+<span class="fc" id="L1480">	GSITECRAWLER(&quot;GSiteCrawler&quot;, Pattern.compile(&quot;GSiteCrawler&quot;)),</span>
+
+	/**
+	 * GStreamer
+	 */
+<span class="fc" id="L1485">	GSTREAMER(&quot;GStreamer&quot;, Pattern.compile(&quot;GStreamer&quot;)),</span>
+
+	/**
+	 * GurujiBot
+	 */
+<span class="fc" id="L1490">	GURUJIBOT(&quot;GurujiBot&quot;, Pattern.compile(&quot;GurujiBot&quot;)),</span>
+
+	/**
+	 * Hailoobot
+	 */
+<span class="fc" id="L1495">	HAILOOBOT(&quot;Hailoobot&quot;, Pattern.compile(&quot;Hailoobot&quot;)),</span>
+
+	/**
+	 * HatenaScreenshot
+	 */
+<span class="fc" id="L1500">	HATENASCREENSHOT(&quot;HatenaScreenshot&quot;, Pattern.compile(&quot;HatenaScreenshot&quot;)),</span>
+
+	/**
+	 * HeartRails_Capture
+	 */
+<span class="fc" id="L1505">	HEARTRAILS_CAPTURE(&quot;HeartRails_Capture&quot;, Pattern.compile(&quot;HeartRails_Capture&quot;)),</span>
+
+	/**
+	 * heritrix
+	 */
+<span class="fc" id="L1510">	HERITRIX(&quot;heritrix&quot;, Pattern.compile(&quot;heritrix&quot;)),</span>
+
+	/**
+	 * HiddenMarket
+	 */
+<span class="fc" id="L1515">	HIDDENMARKET(&quot;HiddenMarket&quot;, Pattern.compile(&quot;HiddenMarket&quot;)),</span>
+
+	/**
+	 * Holmes
+	 */
+<span class="fc" id="L1520">	HOLMES(&quot;Holmes&quot;, Pattern.compile(&quot;Holmes&quot;)),</span>
+
+	/**
+	 * HolmesBot
+	 */
+<span class="fc" id="L1525">	HOLMESBOT(&quot;HolmesBot&quot;, Pattern.compile(&quot;HolmesBot&quot;)),</span>
+
+	/**
+	 * HomeTags
+	 */
+<span class="fc" id="L1530">	HOMETAGS(&quot;HomeTags&quot;, Pattern.compile(&quot;HomeTags&quot;)),</span>
+
+	/**
+	 * HooWWWer
+	 */
+<span class="fc" id="L1535">	HOOWWWER(&quot;HooWWWer&quot;, Pattern.compile(&quot;HooWWWer&quot;)),</span>
+
+	/**
+	 * HostTracker.com
+	 */
+<span class="fc" id="L1540">	HOSTTRACKER_COM(&quot;HostTracker.com&quot;, Pattern.compile(&quot;HostTracker.com&quot;)),</span>
+
+	/**
+	 * HotJava
+	 */
+<span class="fc" id="L1545">	HOTJAVA(&quot;HotJava&quot;, Pattern.compile(&quot;HotJava&quot;)),</span>
+
+	/**
+	 * ht://Dig
+	 */
+<span class="fc" id="L1550">	HT_DIG(&quot;ht://Dig&quot;, Pattern.compile(&quot;ht://Dig&quot;)),</span>
+
+	/**
+	 * HTML2JPG
+	 */
+<span class="fc" id="L1555">	HTML2JPG(&quot;HTML2JPG&quot;, Pattern.compile(&quot;HTML2JPG&quot;)),</span>
+
+	/**
+	 * HTMLayout
+	 */
+<span class="fc" id="L1560">	HTMLAYOUT(&quot;HTMLayout&quot;, Pattern.compile(&quot;HTMLayout&quot;)),</span>
+
+	/**
+	 * HTMLParser
+	 */
+<span class="fc" id="L1565">	HTMLPARSER(&quot;HTMLParser&quot;, Pattern.compile(&quot;HTMLParser&quot;)),</span>
+
+	/**
+	 * HTTP nagios plugin
+	 */
+<span class="fc" id="L1570">	HTTP_NAGIOS_PLUGIN(&quot;HTTP nagios plugin&quot;, Pattern.compile(&quot;HTTP nagios plugin&quot;)),</span>
+
+	/**
+	 * HTTP_Request2
+	 */
+<span class="fc" id="L1575">	HTTP_REQUEST2(&quot;HTTP_Request2&quot;, Pattern.compile(&quot;HTTP_Request2&quot;)),</span>
+
+	/**
+	 * HTTrack
+	 */
+<span class="fc" id="L1580">	HTTRACK(&quot;HTTrack&quot;, Pattern.compile(&quot;HTTrack&quot;)),</span>
+
+	/**
+	 * HuaweiSymantecSpider
+	 */
+<span class="fc" id="L1585">	HUAWEISYMANTECSPIDER(&quot;HuaweiSymantecSpider&quot;, Pattern.compile(&quot;HuaweiSymantecSpider&quot;)),</span>
+
+	/**
+	 * Hv3
+	 */
+<span class="fc" id="L1590">	HV3(&quot;Hv3&quot;, Pattern.compile(&quot;Hv3&quot;)),</span>
+
+	/**
+	 * Hydra Browser
+	 */
+<span class="fc" id="L1595">	HYDRA_BROWSER(&quot;Hydra Browser&quot;, Pattern.compile(&quot;Hydra Browser&quot;)),</span>
+
+	/**
+	 * ia_archiver
+	 */
+<span class="fc" id="L1600">	IA_ARCHIVER(&quot;ia_archiver&quot;, Pattern.compile(&quot;ia_archiver&quot;)),</span>
+
+	/**
+	 * iaskspider
+	 */
+<span class="fc" id="L1605">	IASKSPIDER(&quot;iaskspider&quot;, Pattern.compile(&quot;iaskspider&quot;)),</span>
+
+	/**
+	 * IBrowse
+	 */
+<span class="fc" id="L1610">	IBROWSE(&quot;IBrowse&quot;, Pattern.compile(&quot;IBrowse&quot;)),</span>
+
+	/**
+	 * iCab
+	 */
+<span class="fc" id="L1615">	ICAB(&quot;iCab&quot;, Pattern.compile(&quot;iCab&quot;)),</span>
+
+	/**
+	 * iCatcher!
+	 */
+<span class="fc" id="L1620">	ICATCHER(&quot;iCatcher!&quot;, Pattern.compile(&quot;iCatcher!&quot;)),</span>
+
+	/**
+	 * ICC-Crawler
+	 */
+<span class="fc" id="L1625">	ICC_CRAWLER(&quot;ICC-Crawler&quot;, Pattern.compile(&quot;ICC-Crawler&quot;)),</span>
+
+	/**
+	 * ICE browser
+	 */
+<span class="fc" id="L1630">	ICE_BROWSER(&quot;ICE browser&quot;, Pattern.compile(&quot;ICE browser&quot;)),</span>
+
+	/**
+	 * IceApe
+	 */
+<span class="fc" id="L1635">	ICEAPE(&quot;IceApe&quot;, Pattern.compile(&quot;IceApe&quot;)),</span>
+
+	/**
+	 * IceCat
+	 */
+<span class="fc" id="L1640">	ICECAT(&quot;IceCat&quot;, Pattern.compile(&quot;IceCat&quot;)),</span>
+
+	/**
+	 * IceDragon: A faster, more secure version of Firefox
+	 */
+<span class="fc" id="L1645">	ICEDRAGON(&quot;IceDragon&quot;, Pattern.compile(&quot;IceDragon&quot;)),</span>
+
+	/**
+	 * IceWeasel
+	 */
+<span class="fc" id="L1650">	ICEWEASEL(&quot;IceWeasel&quot;, Pattern.compile(&quot;IceWeasel&quot;)),</span>
+
+	/**
+	 * ICF_Site_Crawler
+	 */
+<span class="fc" id="L1655">	ICF_SITE_CRAWLER(&quot;ICF_Site_Crawler&quot;, Pattern.compile(&quot;ICF_Site_Crawler&quot;)),</span>
+
+	/**
+	 * ichiro
+	 */
+<span class="fc" id="L1660">	ICHIRO(&quot;ichiro&quot;, Pattern.compile(&quot;ichiro&quot;)),</span>
+
+	/**
+	 * iCjobs
+	 */
+<span class="fc" id="L1665">	ICJOBS(&quot;iCjobs&quot;, Pattern.compile(&quot;iCjobs&quot;)),</span>
+
+	/**
+	 * Internet Explorer
+	 */
+<span class="fc" id="L1670">	IE(&quot;IE&quot;, Pattern.compile(&quot;IE&quot;)),</span>
+
+	/**
+	 * Internet Explorer Mobile
+	 */
+<span class="fc" id="L1675">	IE_MOBILE(&quot;IE Mobile&quot;, Pattern.compile(&quot;IE Mobile&quot;)),</span>
+
+	/**
+	 * Internet Explorer RSS reader
+	 */
+<span class="fc" id="L1680">	IE_RSS_READER(&quot;IE RSS reader&quot;, Pattern.compile(&quot;IE RSS reader&quot;)),</span>
+
+	/**
+	 * iGetter
+	 */
+<span class="fc" id="L1685">	IGETTER(&quot;iGetter&quot;, Pattern.compile(&quot;iGetter&quot;)),</span>
+
+	/**
+	 * iGooMap
+	 */
+<span class="fc" id="L1690">	IGOOMAP(&quot;iGooMap&quot;, Pattern.compile(&quot;iGooMap&quot;)),</span>
+
+	/**
+	 * IlseBot
+	 */
+<span class="fc" id="L1695">	ILSEBOT(&quot;IlseBot&quot;, Pattern.compile(&quot;IlseBot&quot;)),</span>
+
+	/**
+	 * IlTrovatore
+	 */
+<span class="fc" id="L1700">	ILTROVATORE(&quot;IlTrovatore&quot;, Pattern.compile(&quot;IlTrovatore&quot;)),</span>
+
+	/**
+	 * IlTrovatore-Setaccio
+	 */
+<span class="fc" id="L1705">	ILTROVATORE_SETACCIO(&quot;IlTrovatore-Setaccio&quot;, Pattern.compile(&quot;IlTrovatore-Setaccio&quot;)),</span>
+
+	/**
+	 * imbot
+	 */
+<span class="fc" id="L1710">	IMBOT(&quot;imbot&quot;, Pattern.compile(&quot;imbot&quot;)),</span>
+
+	/**
+	 * Indy Library
+	 */
+<span class="fc" id="L1715">	INDY_LIBRARY(&quot;Indy Library&quot;, Pattern.compile(&quot;Indy Library&quot;)),</span>
+
+	/**
+	 * Influencebot
+	 */
+<span class="fc" id="L1720">	INFLUENCEBOT(&quot;Influencebot&quot;, Pattern.compile(&quot;Influencebot&quot;)),</span>
+
+	/**
+	 * InfociousBot
+	 */
+<span class="fc" id="L1725">	INFOCIOUSBOT(&quot;InfociousBot&quot;, Pattern.compile(&quot;InfociousBot&quot;)),</span>
+
+	/**
+	 * Infohelfer
+	 */
+<span class="fc" id="L1730">	INFOHELFER(&quot;Infohelfer&quot;, Pattern.compile(&quot;Infohelfer&quot;)),</span>
+
+	/**
+	 * InternetSeer
+	 */
+<span class="fc" id="L1735">	INTERNETSEER(&quot;InternetSeer&quot;, Pattern.compile(&quot;InternetSeer&quot;)),</span>
+
+	/**
+	 * InternetSurfboard
+	 */
+<span class="fc" id="L1740">	INTERNETSURFBOARD(&quot;InternetSurfboard&quot;, Pattern.compile(&quot;InternetSurfboard&quot;)),</span>
+
+	/**
+	 * Ipselonbot
+	 */
+<span class="fc" id="L1745">	IPSELONBOT(&quot;Ipselonbot&quot;, Pattern.compile(&quot;Ipselonbot&quot;)),</span>
+
+	/**
+	 * iRider
+	 */
+<span class="fc" id="L1750">	IRIDER(&quot;iRider&quot;, Pattern.compile(&quot;iRider&quot;)),</span>
+
+	/**
+	 * IRLbot
+	 */
+<span class="fc" id="L1755">	IRLBOT(&quot;IRLbot&quot;, Pattern.compile(&quot;IRLbot&quot;)),</span>
+
+	/**
+	 * Iron
+	 */
+<span class="fc" id="L1760">	IRON(&quot;Iron&quot;, Pattern.compile(&quot;Iron&quot;)),</span>
+
+	/**
+	 * iSiloX
+	 */
+<span class="fc" id="L1765">	ISILOX(&quot;iSiloX&quot;, Pattern.compile(&quot;iSiloX&quot;)),</span>
+
+	/**
+	 * iSiloXC
+	 */
+<span class="fc" id="L1770">	ISILOXC(&quot;iSiloXC&quot;, Pattern.compile(&quot;iSiloXC&quot;)),</span>
+
+	/**
+	 * iTunes
+	 */
+<span class="fc" id="L1775">	ITUNES(&quot;iTunes&quot;, Pattern.compile(&quot;iTunes&quot;)),</span>
+
+	/**
+	 * iVideo
+	 */
+<span class="fc" id="L1780">	IVIDEO(&quot;iVideo&quot;, Pattern.compile(&quot;iVideo&quot;)),</span>
+
+	/**
+	 * IXR lib
+	 */
+<span class="fc" id="L1785">	IXR_LIB(&quot;IXR lib&quot;, Pattern.compile(&quot;IXR lib&quot;)),</span>
+
+	/**
+	 * JadynAve
+	 */
+<span class="fc" id="L1790">	JADYNAVE(&quot;JadynAve&quot;, Pattern.compile(&quot;JadynAve&quot;)),</span>
+
+	/**
+	 * JadynAveBot
+	 */
+<span class="fc" id="L1795">	JADYNAVEBOT(&quot;JadynAveBot&quot;, Pattern.compile(&quot;JadynAveBot&quot;)),</span>
+
+	/**
+	 * Jakarta Commons-HttpClient
+	 */
+<span class="fc" id="L1800">	JAKARTA_COMMONS_HTTPCLIENT(&quot;Jakarta Commons-HttpClient&quot;, Pattern.compile(&quot;(Apache-HttpClient|Jakarta Commons-HttpClient)&quot;)),</span>
+
+	/**
+	 * Jambot
+	 */
+<span class="fc" id="L1805">	JAMBOT(&quot;Jambot&quot;, Pattern.compile(&quot;Jambot&quot;)),</span>
+
+	/**
+	 * Jamcast
+	 */
+<span class="fc" id="L1810">	JAMCAST(&quot;Jamcast&quot;, Pattern.compile(&quot;Jamcast&quot;)),</span>
+
+	/**
+	 * Jasmine
+	 */
+<span class="fc" id="L1815">	JASMINE(&quot;Jasmine&quot;, Pattern.compile(&quot;Jasmine&quot;)),</span>
+
+	/**
+	 * Java
+	 */
+<span class="fc" id="L1820">	JAVA(&quot;Java&quot;, Pattern.compile(&quot;Java&quot;)),</span>
+
+	/**
+	 * JikeSpider
+	 */
+<span class="fc" id="L1825">	JIKESPIDER(&quot;JikeSpider&quot;, Pattern.compile(&quot;JikeSpider&quot;)),</span>
+
+	/**
+	 * Job Roboter Spider
+	 */
+<span class="fc" id="L1830">	JOB_ROBOTER_SPIDER(&quot;Job Roboter Spider&quot;, Pattern.compile(&quot;Job Roboter Spider&quot;)),</span>
+
+	/**
+	 * JoBo
+	 */
+<span class="fc" id="L1835">	JOBO(&quot;JoBo&quot;, Pattern.compile(&quot;JoBo&quot;)),</span>
+
+	/**
+	 * JS-Kit/Echo
+	 */
+<span class="fc" id="L1840">	JS_KIT_ECHO(&quot;JS-Kit/Echo&quot;, Pattern.compile(&quot;JS-Kit/Echo&quot;)),</span>
+
+	/**
+	 * JUST-CRAWLER
+	 */
+<span class="fc" id="L1845">	JUST_CRAWLER(&quot;JUST-CRAWLER&quot;, Pattern.compile(&quot;JUST-CRAWLER&quot;)),</span>
+
+	/**
+	 * Jyxobot
+	 */
+<span class="fc" id="L1850">	JYXOBOT(&quot;Jyxobot&quot;, Pattern.compile(&quot;Jyxobot&quot;)),</span>
+
+	/**
+	 * K-Meleon
+	 */
+<span class="fc" id="L1855">	K_MELEON(&quot;K-Meleon&quot;, Pattern.compile(&quot;K-Meleon&quot;)),</span>
+
+	/**
+	 * K-Ninja
+	 */
+<span class="fc" id="L1860">	K_NINJA(&quot;K-Ninja&quot;, Pattern.compile(&quot;K-Ninja&quot;)),</span>
+
+	/**
+	 * Kakle Bot
+	 */
+<span class="fc" id="L1865">	KAKLE_BOT(&quot;Kakle Bot&quot;, Pattern.compile(&quot;Kakle Bot&quot;)),</span>
+
+	/**
+	 * Kalooga
+	 */
+<span class="fc" id="L1870">	KALOOGA(&quot;Kalooga&quot;, Pattern.compile(&quot;Kalooga&quot;)),</span>
+
+	/**
+	 * Kapiko
+	 */
+<span class="fc" id="L1875">	KAPIKO(&quot;Kapiko&quot;, Pattern.compile(&quot;Kapiko&quot;)),</span>
+
+	/**
+	 * Karneval-Bot
+	 */
+<span class="fc" id="L1880">	KARNEVAL_BOT(&quot;Karneval-Bot&quot;, Pattern.compile(&quot;Karneval-Bot&quot;)),</span>
+
+	/**
+	 * Kazehakase
+	 */
+<span class="fc" id="L1885">	KAZEHAKASE(&quot;Kazehakase&quot;, Pattern.compile(&quot;Kazehakase&quot;)),</span>
+
+	/**
+	 * KeywenBot
+	 */
+<span class="fc" id="L1890">	KEYWENBOT(&quot;KeywenBot&quot;, Pattern.compile(&quot;KeywenBot&quot;)),</span>
+
+	/**
+	 * KeywordDensityRobot
+	 */
+<span class="fc" id="L1895">	KEYWORDDENSITYROBOT(&quot;KeywordDensityRobot&quot;, Pattern.compile(&quot;KeywordDensityRobot&quot;)),</span>
+
+	/**
+	 * Kindle Browser
+	 */
+<span class="fc" id="L1900">	KINDLE_BROWSER(&quot;Kindle Browser&quot;, Pattern.compile(&quot;Kindle Browser&quot;)),</span>
+
+	/**
+	 * Kirix Strata
+	 */
+<span class="fc" id="L1905">	KIRIX_STRATA(&quot;Kirix Strata&quot;, Pattern.compile(&quot;Kirix Strata&quot;)),</span>
+
+	/**
+	 * KKman
+	 */
+<span class="fc" id="L1910">	KKMAN(&quot;KKman&quot;, Pattern.compile(&quot;KKman&quot;)),</span>
+
+	/**
+	 * Klondike
+	 */
+<span class="fc" id="L1915">	KLONDIKE(&quot;Klondike&quot;, Pattern.compile(&quot;Klondike&quot;)),</span>
+
+	/**
+	 * Kongulo
+	 */
+<span class="fc" id="L1920">	KONGULO(&quot;Kongulo&quot;, Pattern.compile(&quot;Kongulo&quot;)),</span>
+
+	/**
+	 * Konqueror
+	 */
+<span class="fc" id="L1925">	KONQUEROR(&quot;Konqueror&quot;, Pattern.compile(&quot;Konqueror&quot;)),</span>
+
+	/**
+	 * KRetrieve
+	 */
+<span class="fc" id="L1930">	KRETRIEVE(&quot;KRetrieve&quot;, Pattern.compile(&quot;KRetrieve&quot;)),</span>
+
+	/**
+	 * Krugle
+	 */
+<span class="fc" id="L1935">	KRUGLE(&quot;Krugle&quot;, Pattern.compile(&quot;Krugle&quot;)),</span>
+
+	/**
+	 * ksibot
+	 */
+<span class="fc" id="L1940">	KSIBOT(&quot;ksibot&quot;, Pattern.compile(&quot;ksibot&quot;)),</span>
+
+	/**
+	 * Kylo
+	 */
+<span class="fc" id="L1945">	KYLO(&quot;Kylo&quot;, Pattern.compile(&quot;Kylo&quot;)),</span>
+
+	/**
+	 * L.webis
+	 */
+<span class="fc" id="L1950">	L_WEBIS(&quot;L.webis&quot;, Pattern.compile(&quot;L.webis&quot;)),</span>
+
+	/**
+	 * LapozzBot
+	 */
+<span class="fc" id="L1955">	LAPOZZBOT(&quot;LapozzBot&quot;, Pattern.compile(&quot;LapozzBot&quot;)),</span>
+
+	/**
+	 * Larbin
+	 */
+<span class="fc" id="L1960">	LARBIN(&quot;Larbin&quot;, Pattern.compile(&quot;Larbin&quot;)),</span>
+
+	/**
+	 * LBrowser
+	 */
+<span class="fc" id="L1965">	LBROWSER(&quot;LBrowser&quot;, Pattern.compile(&quot;LBrowser&quot;)),</span>
+
+	/**
+	 * LeechCraft
+	 */
+<span class="fc" id="L1970">	LEECHCRAFT(&quot;LeechCraft&quot;, Pattern.compile(&quot;LeechCraft&quot;)),</span>
+
+	/**
+	 * LemurWebCrawler
+	 */
+<span class="fc" id="L1975">	LEMURWEBCRAWLER(&quot;LemurWebCrawler&quot;, Pattern.compile(&quot;LemurWebCrawler&quot;)),</span>
+
+	/**
+	 * LexxeBot
+	 */
+<span class="fc" id="L1980">	LEXXEBOT(&quot;LexxeBot&quot;, Pattern.compile(&quot;LexxeBot&quot;)),</span>
+
+	/**
+	 * LFTP
+	 */
+<span class="fc" id="L1985">	LFTP(&quot;LFTP&quot;, Pattern.compile(&quot;LFTP&quot;)),</span>
+
+	/**
+	 * LibSoup
+	 */
+<span class="fc" id="L1990">	LIBSOUP(&quot;LibSoup&quot;, Pattern.compile(&quot;LibSoup&quot;)),</span>
+
+	/**
+	 * libwww-perl
+	 */
+<span class="fc" id="L1995">	LIBWWW_PERL(&quot;libwww-perl&quot;, Pattern.compile(&quot;libwww-perl&quot;)),</span>
+
+	/**
+	 * Liferea
+	 */
+<span class="fc" id="L2000">	LIFEREA(&quot;Liferea&quot;, Pattern.compile(&quot;Liferea&quot;)),</span>
+
+	/**
+	 * Lijit
+	 */
+<span class="fc" id="L2005">	LIJIT(&quot;Lijit&quot;, Pattern.compile(&quot;Lijit&quot;)),</span>
+
+	/**
+	 * LinguaBot
+	 */
+<span class="fc" id="L2010">	LINGUABOT(&quot;LinguaBot&quot;, Pattern.compile(&quot;LinguaBot&quot;)),</span>
+
+	/**
+	 * Linguee Bot
+	 */
+<span class="fc" id="L2015">	LINGUEE_BOT(&quot;Linguee Bot&quot;, Pattern.compile(&quot;Linguee Bot&quot;)),</span>
+
+	/**
+	 * Link Valet Online
+	 */
+<span class="fc" id="L2020">	LINK_VALET_ONLINE(&quot;Link Valet Online&quot;, Pattern.compile(&quot;Link Valet Online&quot;)),</span>
+
+	/**
+	 * LinkAider
+	 */
+<span class="fc" id="L2025">	LINKAIDER(&quot;LinkAider&quot;, Pattern.compile(&quot;LinkAider&quot;)),</span>
+
+	/**
+	 * LinkbackPlugin for Laconica
+	 */
+<span class="fc" id="L2030">	LINKBACKPLUGIN_FOR_LACONICA(&quot;LinkbackPlugin for Laconica&quot;, Pattern.compile(&quot;LinkbackPlugin for Laconica&quot;)),</span>
+
+	/**
+	 * LinkChecker
+	 */
+<span class="fc" id="L2035">	LINKCHECKER(&quot;LinkChecker&quot;, Pattern.compile(&quot;LinkChecker&quot;)),</span>
+
+	/**
+	 * linkdex.com
+	 */
+<span class="fc" id="L2040">	LINKDEX_COM(&quot;linkdex.com&quot;, Pattern.compile(&quot;linkdex.com&quot;)),</span>
+
+	/**
+	 * LinkExaminer
+	 */
+<span class="fc" id="L2045">	LINKEXAMINER(&quot;LinkExaminer&quot;, Pattern.compile(&quot;LinkExaminer&quot;)),</span>
+
+	/**
+	 * Links
+	 */
+<span class="fc" id="L2050">	LINKS(&quot;Links&quot;, Pattern.compile(&quot;Links&quot;)),</span>
+
+	/**
+	 * linksmanager_bot
+	 */
+<span class="fc" id="L2055">	LINKSMANAGER_BOT(&quot;linksmanager_bot&quot;, Pattern.compile(&quot;linksmanager_bot&quot;)),</span>
+
+	/**
+	 * LinkWalker
+	 */
+<span class="fc" id="L2060">	LINKWALKER(&quot;LinkWalker&quot;, Pattern.compile(&quot;LinkWalker&quot;)),</span>
+
+	/**
+	 * livedoor ScreenShot
+	 */
+<span class="fc" id="L2065">	LIVEDOOR_SCREENSHOT(&quot;livedoor ScreenShot&quot;, Pattern.compile(&quot;livedoor ScreenShot&quot;)),</span>
+
+	/**
+	 * lmspider
+	 */
+<span class="fc" id="L2070">	LMSPIDER(&quot;lmspider&quot;, Pattern.compile(&quot;lmspider&quot;)),</span>
+
+	/**
+	 * Lobo
+	 */
+<span class="fc" id="L2075">	LOBO(&quot;Lobo&quot;, Pattern.compile(&quot;Lobo&quot;)),</span>
+
+	/**
+	 * lolifox
+	 */
+<span class="fc" id="L2080">	LOLIFOX(&quot;lolifox&quot;, Pattern.compile(&quot;lolifox&quot;)),</span>
+
+	/**
+	 * Lotus Notes
+	 */
+<span class="fc" id="L2085">	LOTUS_NOTES(&quot;Lotus Notes&quot;, Pattern.compile(&quot;Lotus Notes&quot;)),</span>
+
+	/**
+	 * Lunascape
+	 */
+<span class="fc" id="L2090">	LUNASCAPE(&quot;Lunascape&quot;, Pattern.compile(&quot;Lunascape&quot;)),</span>
+
+	/**
+	 * LWP::Simple
+	 */
+<span class="fc" id="L2095">	LWP_SIMPLE(&quot;LWP::Simple&quot;, Pattern.compile(&quot;LWP::Simple&quot;)),</span>
+
+	/**
+	 * Lynx
+	 */
+<span class="fc" id="L2100">	LYNX(&quot;Lynx&quot;, Pattern.compile(&quot;Lynx&quot;)),</span>
+
+	/**
+	 * Madfox
+	 */
+<span class="fc" id="L2105">	MADFOX(&quot;Madfox&quot;, Pattern.compile(&quot;Madfox&quot;)),</span>
+
+	/**
+	 * magpie-crawler
+	 */
+<span class="fc" id="L2110">	MAGPIE_CRAWLER(&quot;magpie-crawler&quot;, Pattern.compile(&quot;magpie-crawler&quot;)),</span>
+
+	/**
+	 * MagpieRSS
+	 */
+<span class="fc" id="L2115">	MAGPIERSS(&quot;MagpieRSS&quot;, Pattern.compile(&quot;MagpieRSS&quot;)),</span>
+
+	/**
+	 * Mahiti Crawler
+	 */
+<span class="fc" id="L2120">	MAHITI_CRAWLER(&quot;Mahiti Crawler&quot;, Pattern.compile(&quot;Mahiti Crawler&quot;)),</span>
+
+	/**
+	 * Mail.RU
+	 */
+<span class="fc" id="L2125">	MAIL_RU(&quot;Mail.Ru&quot;, Pattern.compile(&quot;Mail.RU(_Bot)?(/\\d+(\\.\\d+)*)?&quot;, Pattern.CASE_INSENSITIVE)),</span>
+
+	/**
+	 * Maple browser
+	 */
+<span class="fc" id="L2130">	MAPLE_BROWSER(&quot;Maple browser&quot;, Pattern.compile(&quot;Maple browser&quot;)),</span>
+
+	/**
+	 * Maxthon
+	 */
+<span class="fc" id="L2135">	MAXTHON(&quot;Maxthon&quot;, Pattern.compile(&quot;Maxthon&quot;)),</span>
+
+	/**
+	 * Mechanize
+	 */
+<span class="fc" id="L2140">	MECHANIZE(&quot;Mechanize&quot;, Pattern.compile(&quot;Mechanize&quot;)),</span>
+
+	/**
+	 * Megatext
+	 */
+<span class="fc" id="L2145">	MEGATEXT(&quot;Megatext&quot;, Pattern.compile(&quot;Megatext&quot;)),</span>
+
+	/**
+	 * MetaGeneratorCrawler
+	 */
+<span class="fc" id="L2150">	METAGENERATORCRAWLER(&quot;MetaGeneratorCrawler&quot;, Pattern.compile(&quot;MetaGeneratorCrawler&quot;)),</span>
+
+	/**
+	 * MetaJobBot
+	 */
+<span class="fc" id="L2155">	METAJOBBOT(&quot;MetaJobBot&quot;, Pattern.compile(&quot;MetaJobBot&quot;)),</span>
+
+	/**
+	 * MetamojiCrawler
+	 */
+<span class="fc" id="L2160">	METAMOJICRAWLER(&quot;MetamojiCrawler&quot;, Pattern.compile(&quot;MetamojiCrawler&quot;)),</span>
+
+	/**
+	 * Metaspinner/0.01
+	 */
+<span class="fc" id="L2165">	METASPINNER(&quot;Metaspinner&quot;, Pattern.compile(&quot;Metaspinner(/\\d+(\\.\\d+)*)?&quot;)),</span>
+
+	/**
+	 * MetaTagRobot
+	 */
+<span class="fc" id="L2170">	METATAGROBOT(&quot;MetaTagRobot&quot;, Pattern.compile(&quot;MetaTagRobot&quot;)),</span>
+
+	/**
+	 * MetaURI
+	 */
+<span class="fc" id="L2175">	METAURI(&quot;MetaURI&quot;, Pattern.compile(&quot;MetaURI&quot;)),</span>
+
+	/**
+	 * MIA Bot
+	 */
+<span class="fc" id="L2180">	MIA_BOT(&quot;MIA Bot&quot;, Pattern.compile(&quot;MIA Bot&quot;)),</span>
+
+	/**
+	 * MicroB
+	 */
+<span class="fc" id="L2185">	MICROB(&quot;MicroB&quot;, Pattern.compile(&quot;MicroB&quot;)),</span>
+
+	/**
+	 * Microsoft Office Existence Discovery
+	 */
+<span class="fc" id="L2190">	MICROSOFT_OFFICE_EXISTENCE_DISCOVERY(&quot;Microsoft Office Existence Discovery&quot;, Pattern.compile(&quot;Microsoft Office Existence Discovery&quot;)),</span>
+
+	/**
+	 * Microsoft WebDAV client
+	 */
+<span class="fc" id="L2195">	MICROSOFT_WEBDAV_CLIENT(&quot;Microsoft WebDAV client&quot;, Pattern.compile(&quot;Microsoft WebDAV client&quot;)),</span>
+
+	/**
+	 * Midori
+	 */
+<span class="fc" id="L2200">	MIDORI(&quot;Midori&quot;, Pattern.compile(&quot;Midori&quot;)),</span>
+
+	/**
+	 * Mini Browser
+	 */
+<span class="fc" id="L2205">	MINI_BROWSER(&quot;Mini Browser&quot;, Pattern.compile(&quot;Mini Browser&quot;)),</span>
+
+	/**
+	 * Minimo
+	 */
+<span class="fc" id="L2210">	MINIMO(&quot;Minimo&quot;, Pattern.compile(&quot;Minimo&quot;)),</span>
+
+	/**
+	 * miniRank
+	 */
+<span class="fc" id="L2215">	MINIRANK(&quot;miniRank&quot;, Pattern.compile(&quot;miniRank&quot;)),</span>
+
+	/**
+	 * Miro
+	 */
+<span class="fc" id="L2220">	MIRO(&quot;Miro&quot;, Pattern.compile(&quot;Miro&quot;)),</span>
+
+	/**
+	 * MJ12bot
+	 */
+<span class="fc" id="L2225">	MJ12BOT(&quot;MJ12bot&quot;, Pattern.compile(&quot;MJ12bot&quot;)),</span>
+
+	/**
+	 * MLBot
+	 */
+<span class="fc" id="L2230">	MLBOT(&quot;MLBot&quot;, Pattern.compile(&quot;MLBot&quot;)),</span>
+
+	/**
+	 * MnoGoSearch
+	 */
+<span class="fc" id="L2235">	MNOGOSEARCH(&quot;MnoGoSearch&quot;, Pattern.compile(&quot;MnoGoSearch&quot;)),</span>
+
+	/**
+	 * Moatbot
+	 */
+<span class="fc" id="L2240">	MOATBOT(&quot;Moatbot&quot;, Pattern.compile(&quot;Moatbot&quot;)),</span>
+
+	/**
+	 * moba-crawler
+	 */
+<span class="fc" id="L2245">	MOBA_CRAWLER(&quot;moba-crawler&quot;, Pattern.compile(&quot;moba-crawler&quot;)),</span>
+
+	/**
+	 * Mobile Firefox
+	 */
+<span class="fc" id="L2250">	MOBILE_FIREFOX(&quot;Mobile Firefox&quot;, Pattern.compile(&quot;Mobile Firefox&quot;)),</span>
+
+	/**
+	 * Mobile Safari
+	 */
+<span class="fc" id="L2255">	MOBILE_SAFARI(&quot;Mobile Safari&quot;, Pattern.compile(&quot;Mobile Safari&quot;)),</span>
+
+	/**
+	 * MojeekBot
+	 */
+<span class="fc" id="L2260">	MOJEEKBOT(&quot;MojeekBot&quot;, Pattern.compile(&quot;MojeekBot&quot;)),</span>
+
+	/**
+	 * Motoricerca-Robots.txt-Checker
+	 */
+<span class="fc" id="L2265">	MOTORICERCA_ROBOTS_TXT_CHECKER(&quot;Motoricerca-Robots.txt-Checker&quot;, Pattern.compile(&quot;Motoricerca-Robots.txt-Checker&quot;)),</span>
+
+	/**
+	 * Motorola Internet Browser
+	 */
+<span class="fc" id="L2270">	MOTOROLA_INTERNET_BROWSER(&quot;Motorola Internet Browser&quot;, Pattern.compile(&quot;Motorola Internet Browser&quot;)),</span>
+
+	/**
+	 * mozDex
+	 */
+<span class="fc" id="L2275">	MOZDEX(&quot;mozDex&quot;, Pattern.compile(&quot;mozDex&quot;)),</span>
+
+	/**
+	 * Mozilla
+	 */
+<span class="fc" id="L2280">	MOZILLA(&quot;Mozilla&quot;, Pattern.compile(&quot;Mozilla&quot;)),</span>
+
+	/**
+	 * Mp3Bot
+	 */
+<span class="fc" id="L2285">	MP3BOT(&quot;Mp3Bot&quot;, Pattern.compile(&quot;Mp3Bot&quot;)),</span>
+
+	/**
+	 * MPlayer
+	 */
+<span class="fc" id="L2290">	MPLAYER(&quot;MPlayer&quot;, Pattern.compile(&quot;MPlayer&quot;)),</span>
+
+	/**
+	 * MPlayer2
+	 */
+<span class="fc" id="L2295">	MPLAYER2(&quot;MPlayer2&quot;, Pattern.compile(&quot;MPlayer2&quot;)),</span>
+
+	/**
+	 * MQbot
+	 */
+<span class="fc" id="L2300">	MQBOT(&quot;MQbot&quot;, Pattern.compile(&quot;MQbot&quot;)),</span>
+
+	/**
+	 * MSNBot
+	 */
+<span class="fc" id="L2305">	MSNBOT(&quot;MSNBot&quot;, Pattern.compile(&quot;MSNBot&quot;)),</span>
+
+	/**
+	 * MSRBOT
+	 */
+<span class="fc" id="L2310">	MSRBOT(&quot;MSRBOT&quot;, Pattern.compile(&quot;MSRBOT&quot;)),</span>
+
+	/**
+	 * muCommander
+	 */
+<span class="fc" id="L2315">	MUCOMMANDER(&quot;muCommander&quot;, Pattern.compile(&quot;muCommander&quot;)),</span>
+
+	/**
+	 * Multi-Browser XP
+	 */
+<span class="fc" id="L2320">	MULTI_BROWSER_XP(&quot;Multi-Browser XP&quot;, Pattern.compile(&quot;Multi-Browser XP&quot;)),</span>
+
+	/**
+	 * MultiCrawler
+	 */
+<span class="fc" id="L2325">	MULTICRAWLER(&quot;MultiCrawler&quot;, Pattern.compile(&quot;MultiCrawler&quot;)),</span>
+
+	/**
+	 * Multipage Validator
+	 */
+<span class="fc" id="L2330">	MULTIPAGE_VALIDATOR(&quot;Multipage Validator&quot;, Pattern.compile(&quot;Multipage Validator&quot;)),</span>
+
+	/**
+	 * MultiZilla
+	 */
+<span class="fc" id="L2335">	MULTIZILLA(&quot;MultiZilla&quot;, Pattern.compile(&quot;MultiZilla&quot;)),</span>
+
+	/**
+	 * My Internet Browser
+	 */
+<span class="fc" id="L2340">	MY_INTERNET_BROWSER(&quot;My Internet Browser&quot;, Pattern.compile(&quot;My Internet Browser&quot;)),</span>
+
+	/**
+	 * MyFamilyBot
+	 */
+<span class="fc" id="L2345">	MYFAMILYBOT(&quot;MyFamilyBot&quot;, Pattern.compile(&quot;MyFamilyBot&quot;)),</span>
+
+	/**
+	 * Najdi.si
+	 */
+<span class="fc" id="L2350">	NAJDI_SI(&quot;Najdi.si&quot;, Pattern.compile(&quot;Najdi.si&quot;)),</span>
+
+	/**
+	 * NaverBot
+	 */
+<span class="fc" id="L2355">	NAVERBOT(&quot;NaverBot&quot;, Pattern.compile(&quot;NaverBot&quot;)),</span>
+
+	/**
+	 * navissobot
+	 */
+<span class="fc" id="L2360">	NAVISSOBOT(&quot;navissobot&quot;, Pattern.compile(&quot;navissobot&quot;)),</span>
+
+	/**
+	 * NCSA Mosaic
+	 */
+<span class="fc" id="L2365">	NCSA_MOSAIC(&quot;NCSA Mosaic&quot;, Pattern.compile(&quot;NCSA Mosaic&quot;)),</span>
+
+	/**
+	 * NerdByNature.Bot
+	 */
+<span class="fc" id="L2370">	NERDBYNATURE_BOT(&quot;NerdByNature.Bot&quot;, Pattern.compile(&quot;NerdByNature.Bot&quot;)),</span>
+
+	/**
+	 * nestReader
+	 */
+<span class="fc" id="L2375">	NESTREADER(&quot;nestReader&quot;, Pattern.compile(&quot;nestReader&quot;)),</span>
+
+	/**
+	 * NetBox
+	 */
+<span class="fc" id="L2380">	NETBOX(&quot;NetBox&quot;, Pattern.compile(&quot;NetBox&quot;)),</span>
+
+	/**
+	 * NetCaptor
+	 */
+<span class="fc" id="L2385">	NETCAPTOR(&quot;NetCaptor&quot;, Pattern.compile(&quot;NetCaptor&quot;)),</span>
+
+	/**
+	 * NetcraftSurveyAgent
+	 */
+<span class="fc" id="L2390">	NETCRAFTSURVEYAGENT(&quot;NetcraftSurveyAgent&quot;, Pattern.compile(&quot;NetcraftSurveyAgent&quot;)),</span>
+
+	/**
+	 * netEstate Crawler
+	 */
+<span class="fc" id="L2395">	NETESTATE_CRAWLER(&quot;netEstate Crawler&quot;, Pattern.compile(&quot;netEstate Crawler&quot;)),</span>
+
+	/**
+	 * NetFront
+	 */
+<span class="fc" id="L2400">	NETFRONT(&quot;NetFront&quot;, Pattern.compile(&quot;NetFront&quot;)),</span>
+
+	/**
+	 * NetFront Mobile Content Viewer
+	 */
+<span class="fc" id="L2405">	NETFRONT_MOBILE_CONTENT_VIEWER(&quot;NetFront Mobile Content Viewer&quot;, Pattern.compile(&quot;NetFront Mobile Content Viewer&quot;)),</span>
+
+	/**
+	 * Netintelligence LiveAssessment
+	 */
+<span class="fc" id="L2410">	NETINTELLIGENCE_LIVEASSESSMENT(&quot;Netintelligence LiveAssessment&quot;, Pattern.compile(&quot;Netintelligence LiveAssessment&quot;)),</span>
+
+	/**
+	 * NetNewsWire
+	 */
+<span class="fc" id="L2415">	NETNEWSWIRE(&quot;NetNewsWire&quot;, Pattern.compile(&quot;NetNewsWire&quot;)),</span>
+
+	/**
+	 * NetPositive
+	 */
+<span class="fc" id="L2420">	NETPOSITIVE(&quot;NetPositive&quot;, Pattern.compile(&quot;NetPositive&quot;)),</span>
+
+	/**
+	 * NetResearchServer
+	 */
+<span class="fc" id="L2425">	NETRESEARCHSERVER(&quot;NetResearchServer&quot;, Pattern.compile(&quot;NetResearchServer&quot;)),</span>
+
+	/**
+	 * Netscape Navigator
+	 */
+<span class="fc" id="L2430">	NETSCAPE_NAVIGATOR(&quot;Netscape Navigator&quot;, Pattern.compile(&quot;Netscape Navigator&quot;)),</span>
+
+	/**
+	 * Netseer
+	 */
+<span class="fc" id="L2435">	NETSEER(&quot;Netseer&quot;, Pattern.compile(&quot;Netseer&quot;)),</span>
+
+	/**
+	 * NetSurf
+	 */
+<span class="fc" id="L2440">	NETSURF(&quot;NetSurf&quot;, Pattern.compile(&quot;NetSurf&quot;)),</span>
+
+	/**
+	 * Netvibes feed reader
+	 */
+<span class="fc" id="L2445">	NETVIBES_FEED_READER(&quot;Netvibes feed reader&quot;, Pattern.compile(&quot;Netvibes feed reader&quot;)),</span>
+
+	/**
+	 * NetWhatCrawler
+	 */
+<span class="fc" id="L2450">	NETWHATCRAWLER(&quot;NetWhatCrawler&quot;, Pattern.compile(&quot;NetWhatCrawler&quot;)),</span>
+
+	/**
+	 * Newsbeuter
+	 */
+<span class="fc" id="L2455">	NEWSBEUTER(&quot;Newsbeuter&quot;, Pattern.compile(&quot;Newsbeuter&quot;)),</span>
+
+	/**
+	 * NewsBreak
+	 */
+<span class="fc" id="L2460">	NEWSBREAK(&quot;NewsBreak&quot;, Pattern.compile(&quot;NewsBreak&quot;)),</span>
+
+	/**
+	 * NewsFox
+	 */
+<span class="fc" id="L2465">	NEWSFOX(&quot;NewsFox&quot;, Pattern.compile(&quot;NewsFox&quot;)),</span>
+
+	/**
+	 * NewsGatorOnline
+	 */
+<span class="fc" id="L2470">	NEWSGATORONLINE(&quot;NewsGatorOnline&quot;, Pattern.compile(&quot;NewsGatorOnline&quot;)),</span>
+
+	/**
+	 * NextGenSearchBot
+	 */
+<span class="fc" id="L2475">	NEXTGENSEARCHBOT(&quot;NextGenSearchBot&quot;, Pattern.compile(&quot;NextGenSearchBot&quot;)),</span>
+
+	/**
+	 * nextthing.org
+	 */
+<span class="fc" id="L2480">	NEXTTHING_ORG(&quot;nextthing.org&quot;, Pattern.compile(&quot;nextthing.org&quot;)),</span>
+
+	/**
+	 * NFReader
+	 */
+<span class="fc" id="L2485">	NFREADER(&quot;NFReader&quot;, Pattern.compile(&quot;NFReader&quot;)),</span>
+
+	/**
+	 * NG
+	 */
+<span class="fc" id="L2490">	NG(&quot;NG&quot;, Pattern.compile(&quot;NG&quot;)),</span>
+
+	/**
+	 * NG-Search
+	 */
+<span class="fc" id="L2495">	NG_SEARCH(&quot;NG-Search&quot;, Pattern.compile(&quot;NG-Search&quot;)),</span>
+
+	/**
+	 * Nigma.ru
+	 */
+<span class="fc" id="L2500">	NIGMA_RU(&quot;Nigma.ru&quot;, Pattern.compile(&quot;Nigma.ru&quot;)),</span>
+
+	/**
+	 * NimbleCrawler
+	 */
+<span class="fc" id="L2505">	NIMBLECRAWLER(&quot;NimbleCrawler&quot;, Pattern.compile(&quot;NimbleCrawler&quot;)),</span>
+
+	/**
+	 * NineSky
+	 */
+<span class="fc" id="L2510">	NINESKY(&quot;NineSky&quot;, Pattern.compile(&quot;NineSky&quot;)),</span>
+
+	/**
+	 * Nintendo Browser
+	 */
+<span class="fc" id="L2515">	NINTENDO(&quot;Nintendo Browser&quot;, Pattern.compile(&quot;Nintendo Browser&quot;)),</span>
+
+	/**
+	 * nodestackbot
+	 */
+<span class="fc" id="L2520">	NODESTACKBOT(&quot;nodestackbot&quot;, Pattern.compile(&quot;nodestackbot&quot;)),</span>
+
+	/**
+	 * Nokia SyncML Client
+	 */
+<span class="fc" id="L2525">	NOKIA_SYNCML_CLIENT(&quot;Nokia SyncML Client&quot;, Pattern.compile(&quot;Nokia SyncML Client&quot;)),</span>
+
+	/**
+	 * Nokia Web Browser
+	 */
+<span class="fc" id="L2530">	NOKIA_WEB_BROWSER(&quot;Nokia Web Browser&quot;, Pattern.compile(&quot;Nokia Web Browser&quot;)),</span>
+
+	/**
+	 * Novell BorderManager
+	 */
+<span class="fc" id="L2535">	NOVELL_BORDERMANAGER(&quot;Novell BorderManager&quot;, Pattern.compile(&quot;Novell BorderManager&quot;)),</span>
+
+	/**
+	 * noyona
+	 */
+<span class="fc" id="L2540">	NOYONA(&quot;noyona&quot;, Pattern.compile(&quot;noyona&quot;)),</span>
+
+	/**
+	 * NPBot
+	 */
+<span class="fc" id="L2545">	NPBOT(&quot;NPBot&quot;, Pattern.compile(&quot;NPBot&quot;)),</span>
+
+	/**
+	 * Nuhk
+	 */
+<span class="fc" id="L2550">	NUHK(&quot;Nuhk&quot;, Pattern.compile(&quot;Nuhk&quot;)),</span>
+
+	/**
+	 * NuSearch Spider
+	 */
+<span class="fc" id="L2555">	NUSEARCH_SPIDER(&quot;NuSearch Spider&quot;, Pattern.compile(&quot;NuSearch Spider&quot;)),</span>
+
+	/**
+	 * Nutch
+	 */
+<span class="fc" id="L2560">	NUTCH(&quot;Nutch&quot;, Pattern.compile(&quot;Nutch&quot;)),</span>
+
+	/**
+	 * nworm
+	 */
+<span class="fc" id="L2565">	NWORM(&quot;nworm&quot;, Pattern.compile(&quot;nworm&quot;)),</span>
+
+	/**
+	 * Nymesis
+	 */
+<span class="fc" id="L2570">	NYMESIS(&quot;Nymesis&quot;, Pattern.compile(&quot;Nymesis&quot;)),</span>
+
+	/**
+	 * Obigo
+	 */
+<span class="fc" id="L2575">	OBIGO(&quot;Obigo&quot;, Pattern.compile(&quot;Obigo&quot;)),</span>
+
+	/**
+	 * oBot
+	 */
+<span class="fc" id="L2580">	OBOT(&quot;oBot&quot;, Pattern.compile(&quot;oBot&quot;)),</span>
+
+	/**
+	 * Ocelli
+	 */
+<span class="fc" id="L2585">	OCELLI(&quot;Ocelli&quot;, Pattern.compile(&quot;Ocelli&quot;)),</span>
+
+	/**
+	 * Off By One
+	 */
+<span class="fc" id="L2590">	OFF_BY_ONE(&quot;Off By One&quot;, Pattern.compile(&quot;Off By One&quot;)),</span>
+
+	/**
+	 * Offline Explorer
+	 */
+<span class="fc" id="L2595">	OFFLINE_EXPLORER(&quot;Offline Explorer&quot;, Pattern.compile(&quot;Offline Explorer&quot;)),</span>
+
+	/**
+	 * Omea Reader
+	 */
+<span class="fc" id="L2600">	OMEA_READER(&quot;Omea Reader&quot;, Pattern.compile(&quot;Omea Reader&quot;)),</span>
+
+	/**
+	 * OmniExplorer_Bot
+	 */
+<span class="fc" id="L2605">	OMNIEXPLORER_BOT(&quot;OmniExplorer_Bot&quot;, Pattern.compile(&quot;OmniExplorer_Bot&quot;)),</span>
+
+	/**
+	 * OmniWeb
+	 */
+<span class="fc" id="L2610">	OMNIWEB(&quot;OmniWeb&quot;, Pattern.compile(&quot;OmniWeb&quot;)),</span>
+
+	/**
+	 * OnetSzukaj
+	 */
+<span class="fc" id="L2615">	ONETSZUKAJ(&quot;OnetSzukaj&quot;, Pattern.compile(&quot;OnetSzukaj&quot;)),</span>
+
+	/**
+	 * Openbot
+	 */
+<span class="fc" id="L2620">	OPENBOT(&quot;Openbot&quot;, Pattern.compile(&quot;Openbot&quot;)),</span>
+
+	/**
+	 * OpenCalaisSemanticProxy
+	 */
+<span class="fc" id="L2625">	OPENCALAISSEMANTICPROXY(&quot;OpenCalaisSemanticProxy&quot;, Pattern.compile(&quot;OpenCalaisSemanticProxy&quot;)),</span>
+
+	/**
+	 * OpenindexSpider
+	 */
+<span class="fc" id="L2630">	OPENINDEXSPIDER(&quot;OpenindexSpider&quot;, Pattern.compile(&quot;OpenindexSpider&quot;)),</span>
+
+	/**
+	 * Openwave Mobile Browser
+	 */
+<span class="fc" id="L2635">	OPENWAVE_MOBILE_BROWSER(&quot;Openwave Mobile Browser&quot;, Pattern.compile(&quot;Openwave Mobile Browser&quot;)),</span>
+
+	/**
+	 * Opera
+	 */
+<span class="fc" id="L2640">	OPERA(&quot;Opera&quot;, Pattern.compile(&quot;Opera&quot;)),</span>
+
+	/**
+	 * Opera Mini
+	 */
+<span class="fc" id="L2645">	OPERA_MINI(&quot;Opera Mini&quot;, Pattern.compile(&quot;Opera Mini&quot;)),</span>
+
+	/**
+	 * Opera Mobile
+	 */
+<span class="fc" id="L2650">	OPERA_MOBILE(&quot;Opera Mobile&quot;, Pattern.compile(&quot;Opera Mobile&quot;)),</span>
+
+	/**
+	 * Orbiter
+	 */
+<span class="fc" id="L2655">	ORBITER(&quot;Orbiter&quot;, Pattern.compile(&quot;Orbiter&quot;)),</span>
+
+	/**
+	 * Orca
+	 */
+<span class="fc" id="L2660">	ORCA(&quot;Orca&quot;, Pattern.compile(&quot;Orca&quot;)),</span>
+
+	/**
+	 * Oregano
+	 */
+<span class="fc" id="L2665">	OREGANO(&quot;Oregano&quot;, Pattern.compile(&quot;Oregano&quot;)),</span>
+
+	/**
+	 * OrgbyBot
+	 */
+<span class="fc" id="L2670">	ORGBYBOT(&quot;OrgbyBot&quot;, Pattern.compile(&quot;OrgbyBot&quot;)),</span>
+
+	/**
+	 * OsObot
+	 */
+<span class="fc" id="L2675">	OSOBOT(&quot;OsObot&quot;, Pattern.compile(&quot;OsObot&quot;)),</span>
+
+	/**
+	 * Outlook 2007
+	 */
+<span class="fc" id="L2680">	OUTLOOK_2007(&quot;Outlook 2007&quot;, Pattern.compile(&quot;Outlook 2007&quot;)),</span>
+
+	/**
+	 * Outlook 2010
+	 */
+<span class="fc" id="L2685">	OUTLOOK_2010(&quot;Outlook 2010&quot;, Pattern.compile(&quot;Outlook 2010&quot;)),</span>
+
+	/**
+	 * Outlook 2013
+	 */
+<span class="fc" id="L2690">	OUTLOOK_2013(&quot;Outlook 2013&quot;, Pattern.compile(&quot;Outlook 2013&quot;)),</span>
+
+	/**
+	 * OWB
+	 */
+<span class="fc" id="L2695">	OWB(&quot;OWB&quot;, Pattern.compile(&quot;OWB&quot;)),</span>
+
+	/**
+	 * owsBot
+	 */
+<span class="fc" id="L2700">	OWSBOT(&quot;owsBot&quot;, Pattern.compile(&quot;owsBot&quot;)),</span>
+
+	/**
+	 * P3P Validator
+	 */
+<span class="fc" id="L2705">	P3P_VALIDATOR(&quot;P3P Validator&quot;, Pattern.compile(&quot;P3P Validator&quot;)),</span>
+
+	/**
+	 * page_verifier
+	 */
+<span class="fc" id="L2710">	PAGE_VERIFIER(&quot;page_verifier&quot;, Pattern.compile(&quot;page_verifier&quot;)),</span>
+
+	/**
+	 * Page2RSS
+	 */
+<span class="fc" id="L2715">	PAGE2RSS(&quot;Page2RSS&quot;, Pattern.compile(&quot;Page2RSS&quot;)),</span>
+
+	/**
+	 * PageBitesHyperBot
+	 */
+<span class="fc" id="L2720">	PAGEBITESHYPERBOT(&quot;PageBitesHyperBot&quot;, Pattern.compile(&quot;PageBitesHyperBot&quot;)),</span>
+
+	/**
+	 * PagePeeker
+	 */
+<span class="fc" id="L2725">	PAGEPEEKER(&quot;PagePeeker&quot;, Pattern.compile(&quot;PagePeeker&quot;)),</span>
+
+	/**
+	 * Pale Moon
+	 */
+<span class="fc" id="L2730">	PALE_MOON(&quot;Pale Moon&quot;, Pattern.compile(&quot;Pale Moon&quot;)),</span>
+
+	/**
+	 * Palm Pre web browser
+	 */
+<span class="fc" id="L2735">	PALM_PRE_WEB_BROWSER(&quot;Palm Pre web browser&quot;, Pattern.compile(&quot;Palm Pre web browser&quot;)),</span>
+
+	/**
+	 * Panscient web crawler
+	 */
+<span class="fc" id="L2740">	PANSCIENT_WEB_CRAWLER(&quot;Panscient web crawler&quot;, Pattern.compile(&quot;Panscient web crawler&quot;)),</span>
+
+	/**
+	 * Paparazzi!
+	 */
+<span class="fc" id="L2745">	PAPARAZZI(&quot;Paparazzi!&quot;, Pattern.compile(&quot;Paparazzi!&quot;)),</span>
+
+	/**
+	 * PaperLiBot
+	 */
+<span class="fc" id="L2750">	PAPERLIBOT(&quot;PaperLiBot&quot;, Pattern.compile(&quot;PaperLiBot&quot;)),</span>
+
+	/**
+	 * ParchBot
+	 */
+<span class="fc" id="L2755">	PARCHBOT(&quot;ParchBot&quot;, Pattern.compile(&quot;ParchBot&quot;)),</span>
+
+	/**
+	 * Patriott
+	 */
+<span class="fc" id="L2760">	PATRIOTT(&quot;Patriott&quot;, Pattern.compile(&quot;Patriott&quot;)),</span>
+
+	/**
+	 * Pattern is a web mining module for the Python programming language.
+	 */
+<span class="fc" id="L2765">	PATTERN(&quot;Pattern&quot;, Pattern.compile(&quot;Pattern&quot;)),</span>
+
+	/**
+	 * PEAR HTTP_Request
+	 */
+<span class="fc" id="L2770">	PEAR_HTTP_REQUEST(&quot;PEAR HTTP_Request&quot;, Pattern.compile(&quot;PEAR HTTP_Request&quot;)),</span>
+
+	/**
+	 * Peew
+	 */
+<span class="fc" id="L2775">	PEEW(&quot;Peew&quot;, Pattern.compile(&quot;Peew&quot;)),</span>
+
+	/**
+	 * percbotspider
+	 */
+<span class="fc" id="L2780">	PERCBOTSPIDER(&quot;percbotspider&quot;, Pattern.compile(&quot;percbotspider&quot;)),</span>
+
+	/**
+	 * Phaseout
+	 */
+<span class="fc" id="L2785">	PHASEOUT(&quot;Phaseout&quot;, Pattern.compile(&quot;Phaseout&quot;)),</span>
+
+	/**
+	 * Phoenix (old name for Firefox)
+	 */
+<span class="fc" id="L2790">	PHOENIX(&quot;Phoenix (old name for Firefox)&quot;, Pattern.compile(&quot;Phoenix \\(old name for Firefox\\)&quot;)),</span>
+
+	/**
+	 * PHP
+	 */
+<span class="fc" id="L2795">	PHP(&quot;PHP&quot;, Pattern.compile(&quot;PHP&quot;)),</span>
+
+	/**
+	 * PHP link checker
+	 */
+<span class="fc" id="L2800">	PHP_LINK_CHECKER(&quot;PHP link checker&quot;, Pattern.compile(&quot;PHP link checker&quot;)),</span>
+
+	/**
+	 * PHP OpenID library
+	 */
+<span class="fc" id="L2805">	PHP_OPENID_LIBRARY(&quot;PHP OpenID library&quot;, Pattern.compile(&quot;PHP OpenID library&quot;)),</span>
+
+	/**
+	 * PHPcrawl
+	 */
+<span class="fc" id="L2810">	PHPCRAWL(&quot;PHPcrawl&quot;, Pattern.compile(&quot;PHPcrawl&quot;)),</span>
+
+	/**
+	 * pingdom.com_bot
+	 */
+<span class="fc" id="L2815">	PINGDOM_COM_BOT(&quot;pingdom.com_bot&quot;, Pattern.compile(&quot;pingdom.com_bot&quot;)),</span>
+
+	/**
+	 * Pixray-Seeker
+	 */
+<span class="fc" id="L2820">	PIXRAY_SEEKER(&quot;Pixray-Seeker&quot;, Pattern.compile(&quot;Pixray-Seeker&quot;)),</span>
+
+	/**
+	 * Plex Media Center
+	 */
+<span class="fc" id="L2825">	PLEX_MEDIA_CENTER(&quot;Plex Media Center&quot;, Pattern.compile(&quot;Plex Media Center&quot;)),</span>
+
+	/**
+	 * Plukkie
+	 */
+<span class="fc" id="L2830">	PLUKKIE(&quot;Plukkie&quot;, Pattern.compile(&quot;Plukkie&quot;)),</span>
+
+	/**
+	 * Pocket Tunes
+	 */
+<span class="fc" id="L2835">	POCKET_TUNES(&quot;Pocket Tunes&quot;, Pattern.compile(&quot;Pocket Tunes&quot;)),</span>
+
+	/**
+	 * PocoMail
+	 */
+<span class="fc" id="L2840">	POCOMAIL(&quot;PocoMail&quot;, Pattern.compile(&quot;PocoMail&quot;)),</span>
+
+	/**
+	 * Podkicker
+	 */
+<span class="fc" id="L2845">	PODKICKER(&quot;Podkicker&quot;, Pattern.compile(&quot;Podkicker&quot;)),</span>
+
+	/**
+	 * POE-Component-Client-HTTP
+	 */
+<span class="fc" id="L2850">	POE_COMPONENT_CLIENT_HTTP(&quot;POE-Component-Client-HTTP&quot;, Pattern.compile(&quot;POE-Component-Client-HTTP&quot;)),</span>
+
+	/**
+	 * Pogodak.co.yu
+	 */
+<span class="fc" id="L2855">	POGODAK_CO_YU(&quot;Pogodak.co.yu&quot;, Pattern.compile(&quot;Pogodak.co.yu&quot;)),</span>
+
+	/**
+	 * Polaris
+	 */
+<span class="fc" id="L2860">	POLARIS(&quot;Polaris&quot;, Pattern.compile(&quot;Polaris&quot;)),</span>
+
+	/**
+	 * polixea.de
+	 */
+<span class="fc" id="L2865">	POLIXEA_DE(&quot;polixea.de&quot;, Pattern.compile(&quot;polixea.de&quot;)),</span>
+
+	/**
+	 * Pompos
+	 */
+<span class="fc" id="L2870">	POMPOS(&quot;Pompos&quot;, Pattern.compile(&quot;Pompos&quot;)),</span>
+
+	/**
+	 * Postbox
+	 */
+<span class="fc" id="L2875">	POSTBOX(&quot;Postbox&quot;, Pattern.compile(&quot;Postbox&quot;)),</span>
+
+	/**
+	 * posterus
+	 */
+<span class="fc" id="L2880">	POSTERUS(&quot;posterus&quot;, Pattern.compile(&quot;posterus&quot;)),</span>
+
+	/**
+	 * PostPost
+	 */
+<span class="fc" id="L2885">	POSTPOST(&quot;PostPost&quot;, Pattern.compile(&quot;PostPost&quot;)),</span>
+
+	/**
+	 * Powermarks
+	 */
+<span class="fc" id="L2890">	POWERMARKS(&quot;Powermarks&quot;, Pattern.compile(&quot;Powermarks&quot;)),</span>
+
+	/**
+	 * Prism
+	 */
+<span class="fc" id="L2895">	PRISM(&quot;Prism&quot;, Pattern.compile(&quot;Prism&quot;)),</span>
+
+	/**
+	 * ProCogBot
+	 */
+<span class="fc" id="L2900">	PROCOGBOT(&quot;ProCogBot&quot;, Pattern.compile(&quot;ProCogBot&quot;)),</span>
+
+	/**
+	 * proximic
+	 */
+<span class="fc" id="L2905">	PROXIMIC(&quot;proximic&quot;, Pattern.compile(&quot;proximic&quot;)),</span>
+
+	/**
+	 * PRTG Network Monitor
+	 */
+<span class="fc" id="L2910">	PRTG_NETWORK_MONITOR(&quot;PRTG Network Monitor&quot;, Pattern.compile(&quot;PRTG Network Monitor&quot;)),</span>
+
+	/**
+	 * PS Vita browser
+	 */
+<span class="fc" id="L2915">	PS_VITA_BROWSER(&quot;PS Vita browser&quot;, Pattern.compile(&quot;PS Vita browser&quot;)),</span>
+
+	/**
+	 * psbot
+	 */
+<span class="fc" id="L2920">	PSBOT(&quot;psbot&quot;, Pattern.compile(&quot;psbot&quot;)),</span>
+
+	/**
+	 * ptd-crawler
+	 */
+<span class="fc" id="L2925">	PTD_CRAWLER(&quot;ptd-crawler&quot;, Pattern.compile(&quot;ptd-crawler&quot;)),</span>
+
+	/**
+	 * Public Radio Player
+	 */
+<span class="fc" id="L2930">	PUBLIC_RADIO_PLAYER(&quot;Public Radio Player&quot;, Pattern.compile(&quot;Public Radio Player&quot;)),</span>
+
+	/**
+	 * PycURL
+	 */
+<span class="fc" id="L2935">	PYCURL(&quot;PycURL&quot;, Pattern.compile(&quot;PycURL&quot;)),</span>
+
+	/**
+	 * Python-requests
+	 */
+<span class="fc" id="L2940">	PYTHON_REQUESTS(&quot;Python-requests&quot;, Pattern.compile(&quot;Python-requests&quot;)),</span>
+
+	/**
+	 * Python-urllib
+	 */
+<span class="fc" id="L2945">	PYTHON_URLLIB(&quot;Python-urllib&quot;, Pattern.compile(&quot;Python-urllib&quot;)),</span>
+
+	/**
+	 * Python-webchecker
+	 */
+<span class="fc" id="L2950">	PYTHON_WEBCHECKER(&quot;Python-webchecker&quot;, Pattern.compile(&quot;Python-webchecker&quot;)),</span>
+
+	/**
+	 * Qirina Hurdler
+	 */
+<span class="fc" id="L2955">	QIRINA_HURDLER(&quot;Qirina Hurdler&quot;, Pattern.compile(&quot;Qirina Hurdler&quot;)),</span>
+
+	/**
+	 * QQbrowser
+	 */
+<span class="fc" id="L2960">	QQBROWSER(&quot;QQbrowser&quot;, Pattern.compile(&quot;QQbrowser&quot;)),</span>
+
+	/**
+	 * Qseero
+	 */
+<span class="fc" id="L2965">	QSEERO(&quot;Qseero&quot;, Pattern.compile(&quot;Qseero&quot;)),</span>
+
+	/**
+	 * QtWeb
+	 */
+<span class="fc" id="L2970">	QTWEB(&quot;QtWeb&quot;, Pattern.compile(&quot;QtWeb&quot;)),</span>
+
+	/**
+	 * Qualidator.com Bot
+	 */
+<span class="fc" id="L2975">	QUALIDATOR_COM_BOT(&quot;Qualidator.com Bot&quot;, Pattern.compile(&quot;Qualidator.com Bot&quot;)),</span>
+
+	/**
+	 * Quantcastbot
+	 */
+<span class="fc" id="L2980">	QUANTCASTBOT(&quot;Quantcastbot&quot;, Pattern.compile(&quot;Quantcastbot&quot;)),</span>
+
+	/**
+	 * quickobot
+	 */
+<span class="fc" id="L2985">	QUICKOBOT(&quot;quickobot&quot;, Pattern.compile(&quot;quickobot&quot;)),</span>
+
+	/**
+	 * QuickTime
+	 */
+<span class="fc" id="L2990">	QUICKTIME(&quot;QuickTime&quot;, Pattern.compile(&quot;QuickTime&quot;)),</span>
+
+	/**
+	 * QupZilla
+	 */
+<span class="fc" id="L2995">	QUPZILLA(&quot;QupZilla&quot;, Pattern.compile(&quot;QupZilla&quot;)),</span>
+
+	/**
+	 * R6 bot
+	 */
+<span class="fc" id="L3000">	R6_BOT(&quot;R6 bot&quot;, Pattern.compile(&quot;R6 bot&quot;)),</span>
+
+	/**
+	 * RADaR-Bot
+	 */
+<span class="fc" id="L3005">	RADAR_BOT(&quot;RADaR-Bot&quot;, Pattern.compile(&quot;RADaR-Bot&quot;)),</span>
+
+	/**
+	 * Radio Downloader
+	 */
+<span class="fc" id="L3010">	RADIO_DOWNLOADER(&quot;Radio Downloader&quot;, Pattern.compile(&quot;Radio Downloader&quot;)),</span>
+
+	/**
+	 * RankurBot
+	 */
+<span class="fc" id="L3015">	RANKURBOT(&quot;RankurBot&quot;, Pattern.compile(&quot;RankurBot&quot;)),</span>
+
+	/**
+	 * RedBot
+	 */
+<span class="fc" id="L3020">	REDBOT(&quot;RedBot&quot;, Pattern.compile(&quot;RedBot&quot;)),</span>
+
+	/**
+	 * Reeder
+	 */
+<span class="fc" id="L3025">	REEDER(&quot;Reeder&quot;, Pattern.compile(&quot;Reeder&quot;)),</span>
+
+	/**
+	 * Rekonq
+	 */
+<span class="fc" id="L3030">	REKONQ(&quot;Rekonq&quot;, Pattern.compile(&quot;Rekonq&quot;)),</span>
+
+	/**
+	 * REL Link Checker Lite
+	 */
+<span class="fc" id="L3035">	REL_LINK_CHECKER_LITE(&quot;REL Link Checker Lite&quot;, Pattern.compile(&quot;REL Link Checker Lite&quot;)),</span>
+
+	/**
+	 * retawq
+	 */
+<span class="fc" id="L3040">	RETAWQ(&quot;retawq&quot;, Pattern.compile(&quot;retawq&quot;)),</span>
+
+	/**
+	 * Robo Crawler
+	 */
+<span class="fc" id="L3045">	ROBO_CRAWLER(&quot;Robo Crawler&quot;, Pattern.compile(&quot;Robo Crawler&quot;)),</span>
+
+	/**
+	 * Robots_Tester
+	 */
+<span class="fc" id="L3050">	ROBOTS_TESTER(&quot;Robots_Tester&quot;, Pattern.compile(&quot;Robots_Tester&quot;)),</span>
+
+	/**
+	 * Robozilla
+	 */
+<span class="fc" id="L3055">	ROBOZILLA(&quot;Robozilla&quot;, Pattern.compile(&quot;Robozilla&quot;)),</span>
+
+	/**
+	 * RockMelt
+	 */
+<span class="fc" id="L3060">	ROCKMELT(&quot;RockMelt&quot;, Pattern.compile(&quot;RockMelt&quot;)),</span>
+
+	/**
+	 * ROME library
+	 */
+<span class="fc" id="L3065">	ROME_LIBRARY(&quot;ROME library&quot;, Pattern.compile(&quot;ROME library&quot;)),</span>
+
+	/**
+	 * Ronzoobot
+	 */
+<span class="fc" id="L3070">	RONZOOBOT(&quot;Ronzoobot&quot;, Pattern.compile(&quot;Ronzoobot&quot;)),</span>
+
+	/**
+	 * Rss Bandit
+	 */
+<span class="fc" id="L3075">	RSS_BANDIT(&quot;Rss Bandit&quot;, Pattern.compile(&quot;Rss Bandit&quot;)),</span>
+
+	/**
+	 * RSS Menu
+	 */
+<span class="fc" id="L3080">	RSS_MENU(&quot;RSS Menu&quot;, Pattern.compile(&quot;RSS Menu&quot;)),</span>
+
+	/**
+	 * RSS Popper
+	 */
+<span class="fc" id="L3085">	RSS_POPPER(&quot;RSS Popper&quot;, Pattern.compile(&quot;RSS Popper&quot;)),</span>
+
+	/**
+	 * RSS Radio
+	 */
+<span class="fc" id="L3090">	RSS_RADIO(&quot;RSS Radio&quot;, Pattern.compile(&quot;RSS Radio&quot;)),</span>
+
+	/**
+	 * RSSMicro.com RSS/Atom Feed Robot
+	 */
+<span class="fc" id="L3095">	RSSMICRO_COM(&quot;RSSMicro.com RSS/Atom Feed Robot&quot;, Pattern.compile(&quot;RSSMicro.com RSS/Atom Feed Robot&quot;)),</span>
+
+	/**
+	 * RSSOwl
+	 */
+<span class="fc" id="L3100">	RSSOWL(&quot;RSSOwl&quot;, Pattern.compile(&quot;RSSOwl&quot;)),</span>
+
+	/**
+	 * Ruky-Roboter
+	 */
+<span class="fc" id="L3105">	RUKY_ROBOTER(&quot;Ruky-Roboter&quot;, Pattern.compile(&quot;Ruky-Roboter&quot;)),</span>
+
+	/**
+	 * Ryouko
+	 */
+<span class="fc" id="L3110">	RYOUKO(&quot;Ryouko&quot;, Pattern.compile(&quot;Ryouko&quot;)),</span>
+
+	/**
+	 * RyzeCrawler
+	 */
+<span class="fc" id="L3115">	RYZECRAWLER(&quot;RyzeCrawler&quot;, Pattern.compile(&quot;RyzeCrawler&quot;)),</span>
+
+	/**
+	 * SaaYaa Explorer
+	 */
+<span class="fc" id="L3120">	SAAYAA_EXPLORER(&quot;SaaYaa Explorer&quot;, Pattern.compile(&quot;SaaYaa Explorer&quot;)),</span>
+
+	/**
+	 * Safari
+	 */
+<span class="fc" id="L3125">	SAFARI(&quot;Safari&quot;, Pattern.compile(&quot;Safari&quot;)),</span>
+
+	/**
+	 * Safari RSS reader
+	 */
+<span class="fc" id="L3130">	SAFARI_RSS_READER(&quot;Safari RSS reader&quot;, Pattern.compile(&quot;Safari RSS reader&quot;)),</span>
+
+	/**
+	 * Sage
+	 */
+<span class="fc" id="L3135">	SAGE(&quot;Sage&quot;, Pattern.compile(&quot;Sage&quot;)),</span>
+
+	/**
+	 * SAI Crawler
+	 */
+<span class="fc" id="L3140">	SAI_CRAWLER(&quot;SAI Crawler&quot;, Pattern.compile(&quot;SAI Crawler&quot;)),</span>
+
+	/**
+	 * SanszBot
+	 */
+<span class="fc" id="L3145">	SANSZBOT(&quot;SanszBot&quot;, Pattern.compile(&quot;SanszBot&quot;)),</span>
+
+	/**
+	 * SBIder
+	 */
+<span class="fc" id="L3150">	SBIDER(&quot;SBIder&quot;, Pattern.compile(&quot;SBIder&quot;)),</span>
+
+	/**
+	 * SBSearch
+	 */
+<span class="fc" id="L3155">	SBSEARCH(&quot;SBSearch&quot;, Pattern.compile(&quot;SBSearch&quot;)),</span>
+
+	/**
+	 * Scarlett
+	 */
+<span class="fc" id="L3160">	SCARLETT(&quot;Scarlett&quot;, Pattern.compile(&quot;Scarlett&quot;)),</span>
+
+	/**
+	 * schibstedsokbot
+	 */
+<span class="fc" id="L3165">	SCHIBSTEDSOKBOT(&quot;schibstedsokbot&quot;, Pattern.compile(&quot;schibstedsokbot&quot;)),</span>
+
+	/**
+	 * ScollSpider
+	 */
+<span class="fc" id="L3170">	SCOLLSPIDER(&quot;ScollSpider&quot;, Pattern.compile(&quot;ScollSpider&quot;)),</span>
+
+	/**
+	 * Scooter
+	 */
+<span class="fc" id="L3175">	SCOOTER(&quot;Scooter&quot;, Pattern.compile(&quot;Scooter&quot;)),</span>
+
+	/**
+	 * ScoutJet
+	 */
+<span class="fc" id="L3180">	SCOUTJET(&quot;ScoutJet&quot;, Pattern.compile(&quot;ScoutJet&quot;)),</span>
+
+	/**
+	 * SeaMonkey
+	 */
+<span class="fc" id="L3185">	SEAMONKEY(&quot;SeaMonkey&quot;, Pattern.compile(&quot;SeaMonkey&quot;)),</span>
+
+	/**
+	 * Search Engine World Robots.txt Validator
+	 */
+<span class="fc" id="L3190">	SEARCH_ENGINE_WORLD_ROBOTS_TXT_VALIDATOR(&quot;Search Engine World Robots.txt Validator&quot;, Pattern</span>
+			.compile(&quot;Search Engine World Robots.txt Validator&quot;)),
+
+	/**
+	 * search.KumKie.com
+	 */
+<span class="fc" id="L3196">	SEARCH_KUMKIE_COM(&quot;search.KumKie.com&quot;, Pattern.compile(&quot;search.KumKie.com&quot;)),</span>
+
+	/**
+	 * Search17Bot
+	 */
+<span class="fc" id="L3201">	SEARCH17BOT(&quot;Search17Bot&quot;, Pattern.compile(&quot;Search17Bot&quot;)),</span>
+
+	/**
+	 * Semager
+	 */
+<span class="fc" id="L3206">	SEMAGER(&quot;Semager&quot;, Pattern.compile(&quot;Semager&quot;)),</span>
+
+	/**
+	 * SEMC Browser
+	 */
+<span class="fc" id="L3211">	SEMC_BROWSER(&quot;SEMC Browser&quot;, Pattern.compile(&quot;SEMC Browser&quot;)),</span>
+
+	/**
+	 * SemrushBot
+	 */
+<span class="fc" id="L3216">	SEMRUSHBOT(&quot;SemrushBot&quot;, Pattern.compile(&quot;SemrushBot&quot;)),</span>
+
+	/**
+	 * Sensis Web Crawler
+	 */
+<span class="fc" id="L3221">	SENSIS_WEB_CRAWLER(&quot;Sensis Web Crawler&quot;, Pattern.compile(&quot;Sensis Web Crawler&quot;)),</span>
+
+	/**
+	 * SEODat
+	 */
+<span class="fc" id="L3226">	SEODAT(&quot;SEODat&quot;, Pattern.compile(&quot;SEODat&quot;)),</span>
+
+	/**
+	 * SEOENGBot
+	 */
+<span class="fc" id="L3231">	SEOENGBOT(&quot;SEOENGBot&quot;, Pattern.compile(&quot;SEOENGBot&quot;)),</span>
+
+	/**
+	 * SEOkicks-Robot
+	 */
+<span class="fc" id="L3236">	SEOKICKS_ROBOT(&quot;SEOkicks-Robot&quot;, Pattern.compile(&quot;SEOkicks-Robot&quot;)),</span>
+
+	/**
+	 * Setoozbot
+	 */
+<span class="fc" id="L3241">	SETOOZBOT(&quot;Setoozbot&quot;, Pattern.compile(&quot;Setoozbot&quot;)),</span>
+
+	/**
+	 * Seznam RSS reader
+	 */
+<span class="fc" id="L3246">	SEZNAM_RSS_READER(&quot;Seznam RSS reader&quot;, Pattern.compile(&quot;Seznam RSS reader&quot;)),</span>
+
+	/**
+	 * Seznam WAP Proxy
+	 */
+<span class="fc" id="L3251">	SEZNAM_WAP_PROXY(&quot;Seznam WAP Proxy&quot;, Pattern.compile(&quot;Seznam WAP Proxy&quot;)),</span>
+
+	/**
+	 * SeznamBot
+	 */
+<span class="fc" id="L3256">	SEZNAMBOT(&quot;SeznamBot&quot;, Pattern.compile(&quot;SeznamBot&quot;)),</span>
+
+	/**
+	 * SharpReader
+	 */
+<span class="fc" id="L3261">	SHARPREADER(&quot;SharpReader&quot;, Pattern.compile(&quot;SharpReader&quot;)),</span>
+
+	/**
+	 * Shelob
+	 */
+<span class="fc" id="L3266">	SHELOB(&quot;Shelob&quot;, Pattern.compile(&quot;Shelob&quot;)),</span>
+
+	/**
+	 * Shiira
+	 */
+<span class="fc" id="L3271">	SHIIRA(&quot;Shiira&quot;, Pattern.compile(&quot;Shiira&quot;)),</span>
+
+	/**
+	 * Shim-Crawler
+	 */
+<span class="fc" id="L3276">	SHIM_CRAWLER(&quot;Shim-Crawler&quot;, Pattern.compile(&quot;Shim-Crawler&quot;)),</span>
+
+	/**
+	 * ShopWiki
+	 */
+<span class="fc" id="L3281">	SHOPWIKI(&quot;ShopWiki&quot;, Pattern.compile(&quot;ShopWiki&quot;)),</span>
+
+	/**
+	 * ShowyouBot
+	 */
+<span class="fc" id="L3286">	SHOWYOUBOT(&quot;ShowyouBot&quot;, Pattern.compile(&quot;ShowyouBot&quot;)),</span>
+
+	/**
+	 * Shredder
+	 */
+<span class="fc" id="L3291">	SHREDDER(&quot;Shredder&quot;, Pattern.compile(&quot;Shredder&quot;)),</span>
+
+	/**
+	 * Siege
+	 */
+<span class="fc" id="L3296">	SIEGE(&quot;Siege&quot;, Pattern.compile(&quot;Siege&quot;)),</span>
+
+	/**
+	 * silk
+	 */
+<span class="fc" id="L3301">	SILK(&quot;Silk&quot;, Pattern.compile(&quot;silk&quot;, Pattern.CASE_INSENSITIVE)),</span>
+
+	/**
+	 * SimplePie
+	 */
+<span class="fc" id="L3306">	SIMPLEPIE(&quot;SimplePie&quot;, Pattern.compile(&quot;SimplePie&quot;)),</span>
+
+	/**
+	 * Sirketce/Busiverse
+	 */
+<span class="fc" id="L3311">	SIRKETCE_BUSIVERSE(&quot;Sirketce/Busiverse&quot;, Pattern.compile(&quot;Sirketce/Busiverse&quot;)),</span>
+
+	/**
+	 * sistrix
+	 */
+<span class="fc" id="L3316">	SISTRIX(&quot;sistrix&quot;, Pattern.compile(&quot;sistrix&quot;)),</span>
+
+	/**
+	 * Sitedomain-Bot
+	 */
+<span class="fc" id="L3321">	SITEDOMAIN_BOT(&quot;Sitedomain-Bot&quot;, Pattern.compile(&quot;Sitedomain-Bot&quot;)),</span>
+
+	/**
+	 * SiteKiosk
+	 */
+<span class="fc" id="L3326">	SITEKIOSK(&quot;SiteKiosk&quot;, Pattern.compile(&quot;SiteKiosk&quot;)),</span>
+
+	/**
+	 * SiteSucker
+	 */
+<span class="fc" id="L3331">	SITESUCKER(&quot;SiteSucker&quot;, Pattern.compile(&quot;SiteSucker&quot;)),</span>
+
+	/**
+	 * SkipStone
+	 */
+<span class="fc" id="L3336">	SKIPSTONE(&quot;SkipStone&quot;, Pattern.compile(&quot;SkipStone&quot;)),</span>
+
+	/**
+	 * SkreemRBot
+	 */
+<span class="fc" id="L3341">	SKREEMRBOT(&quot;SkreemRBot&quot;, Pattern.compile(&quot;SkreemRBot&quot;)),</span>
+
+	/**
+	 * Skyfire
+	 */
+<span class="fc" id="L3346">	SKYFIRE(&quot;Skyfire&quot;, Pattern.compile(&quot;Skyfire&quot;)),</span>
+
+	/**
+	 * Sleipnir
+	 */
+<span class="fc" id="L3351">	SLEIPNIR(&quot;Sleipnir&quot;, Pattern.compile(&quot;Sleipnir&quot;)),</span>
+
+	/**
+	 * SlimBoat
+	 */
+<span class="fc" id="L3356">	SLIMBOAT(&quot;SlimBoat&quot;, Pattern.compile(&quot;SlimBoat&quot;)),</span>
+
+	/**
+	 * SlimBrowser
+	 */
+<span class="fc" id="L3361">	SLIMBROWSER(&quot;SlimBrowser&quot;, Pattern.compile(&quot;SlimBrowser&quot;)),</span>
+
+	/**
+	 * smart.apnoti.com Robot
+	 */
+<span class="fc" id="L3366">	SMART_APNOTI_COM_ROBOT(&quot;smart.apnoti.com Robot&quot;, Pattern.compile(&quot;smart.apnoti.com Robot&quot;)),</span>
+
+	/**
+	 * snap.com
+	 */
+<span class="fc" id="L3371">	SNAP_COM(&quot;snap.com&quot;, Pattern.compile(&quot;snap.com&quot;)),</span>
+
+	/**
+	 * SnapBot
+	 */
+<span class="fc" id="L3376">	SNAPBOT(&quot;SnapBot&quot;, Pattern.compile(&quot;SnapBot&quot;)),</span>
+
+	/**
+	 * Snappy
+	 */
+<span class="fc" id="L3381">	SNAPPY(&quot;Snappy&quot;, Pattern.compile(&quot;Snappy&quot;)),</span>
+
+	/**
+	 * SniffRSS
+	 */
+<span class="fc" id="L3386">	SNIFFRSS(&quot;SniffRSS&quot;, Pattern.compile(&quot;SniffRSS&quot;)),</span>
+
+	/**
+	 * Snoopy
+	 */
+<span class="fc" id="L3391">	SNOOPY(&quot;Snoopy&quot;, Pattern.compile(&quot;Snoopy&quot;)),</span>
+
+	/**
+	 * Sogou
+	 */
+<span class="fc" id="L3396">	SOGOU(&quot;Sogou&quot;, Pattern.compile(&quot;Sogou&quot;)),</span>
+
+	/**
+	 * Sogou Explorer
+	 */
+<span class="fc" id="L3401">	SOGOU_EXPLORER(&quot;Sogou Explorer&quot;, Pattern.compile(&quot;Sogou Explorer&quot;)),</span>
+
+	/**
+	 * sogou spider
+	 */
+<span class="fc" id="L3406">	SOGOU_SPIDER(&quot;sogou spider&quot;, Pattern.compile(&quot;sogou spider&quot;)),</span>
+
+	/**
+	 * Songbird
+	 */
+<span class="fc" id="L3411">	SONGBIRD(&quot;Songbird&quot;, Pattern.compile(&quot;Songbird&quot;)),</span>
+
+	/**
+	 * Sosospider
+	 */
+<span class="fc" id="L3416">	SOSOSPIDER(&quot;Sosospider&quot;, Pattern.compile(&quot;Sosospider&quot;)),</span>
+
+	/**
+	 * Sparrow
+	 */
+<span class="fc" id="L3421">	SPARROW(&quot;Sparrow&quot;, Pattern.compile(&quot;Sparrow&quot;)),</span>
+
+	/**
+	 * spbot
+	 */
+<span class="fc" id="L3426">	SPBOT(&quot;spbot&quot;, Pattern.compile(&quot;spbot&quot;)),</span>
+
+	/**
+	 * Speedy
+	 */
+<span class="fc" id="L3431">	SPEEDY(&quot;Speedy&quot;, Pattern.compile(&quot;Speedy&quot;)),</span>
+
+	/**
+	 * Spicebird
+	 */
+<span class="fc" id="L3436">	SPICEBIRD(&quot;Spicebird&quot;, Pattern.compile(&quot;Spicebird&quot;)),</span>
+
+	/**
+	 * SpiderLing
+	 */
+<span class="fc" id="L3441">	SPIDERLING(&quot;SpiderLing&quot;, Pattern.compile(&quot;SpiderLing&quot;)),</span>
+
+	/**
+	 * Spinn3r
+	 */
+<span class="fc" id="L3446">	SPINN3R(&quot;Spinn3r&quot;, Pattern.compile(&quot;Spinn3r&quot;)),</span>
+
+	/**
+	 * Spock Crawler
+	 */
+<span class="fc" id="L3451">	SPOCK_CRAWLER(&quot;Spock Crawler&quot;, Pattern.compile(&quot;Spock Crawler&quot;)),</span>
+
+	/**
+	 * SpokeSpider
+	 */
+<span class="fc" id="L3456">	SPOKESPIDER(&quot;SpokeSpider&quot;, Pattern.compile(&quot;SpokeSpider&quot;)),</span>
+
+	/**
+	 * Sproose
+	 */
+<span class="fc" id="L3461">	SPROOSE(&quot;Sproose&quot;, Pattern.compile(&quot;Sproose&quot;)),</span>
+
+	/**
+	 * SrevBot
+	 */
+<span class="fc" id="L3466">	SREVBOT(&quot;SrevBot&quot;, Pattern.compile(&quot;SrevBot&quot;)),</span>
+
+	/**
+	 * SSLBot
+	 */
+<span class="fc" id="L3471">	SSLBOT(&quot;SSLBot&quot;, Pattern.compile(&quot;SSLBot&quot;)),</span>
+
+	/**
+	 * StackRambler
+	 */
+<span class="fc" id="L3476">	STACKRAMBLER(&quot;StackRambler&quot;, Pattern.compile(&quot;StackRambler&quot;)),</span>
+
+	/**
+	 * Stainless
+	 */
+<span class="fc" id="L3481">	STAINLESS(&quot;Stainless&quot;, Pattern.compile(&quot;Stainless&quot;)),</span>
+
+	/**
+	 * StatoolsBot
+	 */
+<span class="fc" id="L3486">	STATOOLSBOT(&quot;StatoolsBot&quot;, Pattern.compile(&quot;StatoolsBot&quot;)),</span>
+
+	/**
+	 * Steeler
+	 */
+<span class="fc" id="L3491">	STEELER(&quot;Steeler&quot;, Pattern.compile(&quot;Steeler&quot;)),</span>
+
+	/**
+	 * Strokebot
+	 */
+<span class="fc" id="L3496">	STROKEBOT(&quot;Strokebot&quot;, Pattern.compile(&quot;Strokebot&quot;)),</span>
+
+	/**
+	 * SubStream
+	 */
+<span class="fc" id="L3501">	SUBSTREAM(&quot;SubStream&quot;, Pattern.compile(&quot;SubStream&quot;)),</span>
+
+	/**
+	 * suggybot
+	 */
+<span class="fc" id="L3506">	SUGGYBOT(&quot;suggybot&quot;, Pattern.compile(&quot;suggybot&quot;)),</span>
+
+	/**
+	 * Summer
+	 */
+<span class="fc" id="L3511">	SUMMER(&quot;Summer&quot;, Pattern.compile(&quot;Summer&quot;)),</span>
+
+	/**
+	 * Sundance
+	 */
+<span class="fc" id="L3516">	SUNDANCE(&quot;Sundance&quot;, Pattern.compile(&quot;Sundance&quot;)),</span>
+
+	/**
+	 * Sundial
+	 */
+<span class="fc" id="L3521">	SUNDIAL(&quot;Sundial&quot;, Pattern.compile(&quot;Sundial&quot;)),</span>
+
+	/**
+	 * Sunrise
+	 */
+<span class="fc" id="L3526">	SUNRISE(&quot;Sunrise&quot;, Pattern.compile(&quot;Sunrise&quot;)),</span>
+
+	/**
+	 * SuperBot
+	 */
+<span class="fc" id="L3531">	SUPERBOT(&quot;SuperBot&quot;, Pattern.compile(&quot;SuperBot&quot;)),</span>
+
+	/**
+	 * Surf
+	 */
+<span class="fc" id="L3536">	SURF(&quot;Surf&quot;, Pattern.compile(&quot;Surf&quot;)),</span>
+
+	/**
+	 * Surphace Scout
+	 */
+<span class="fc" id="L3541">	SURPHACE_SCOUT(&quot;Surphace Scout&quot;, Pattern.compile(&quot;Surphace Scout&quot;)),</span>
+
+	/**
+	 * SurveyBot
+	 */
+<span class="fc" id="L3546">	SURVEYBOT(&quot;SurveyBot&quot;, Pattern.compile(&quot;SurveyBot&quot;)),</span>
+
+	/**
+	 * SWEBot
+	 */
+<span class="fc" id="L3551">	SWEBOT(&quot;SWEBot&quot;, Pattern.compile(&quot;SWEBot&quot;)),</span>
+
+	/**
+	 * Swiftfox
+	 */
+<span class="fc" id="L3556">	SWIFTFOX(&quot;Swiftfox&quot;, Pattern.compile(&quot;Swiftfox&quot;)),</span>
+
+	/**
+	 * Swiftweasel
+	 */
+<span class="fc" id="L3561">	SWIFTWEASEL(&quot;Swiftweasel&quot;, Pattern.compile(&quot;Swiftweasel&quot;)),</span>
+
+	/**
+	 * SygolBot
+	 */
+<span class="fc" id="L3566">	SYGOLBOT(&quot;SygolBot&quot;, Pattern.compile(&quot;SygolBot&quot;)),</span>
+
+	/**
+	 * SynooBot
+	 */
+<span class="fc" id="L3571">	SYNOOBOT(&quot;SynooBot&quot;, Pattern.compile(&quot;SynooBot&quot;)),</span>
+
+	/**
+	 * Szukacz
+	 */
+<span class="fc" id="L3576">	SZUKACZ(&quot;Szukacz&quot;, Pattern.compile(&quot;Szukacz&quot;)),</span>
+
+	/**
+	 * Szukankobot
+	 */
+<span class="fc" id="L3581">	SZUKANKOBOT(&quot;Szukankobot&quot;, Pattern.compile(&quot;Szukankobot&quot;)),</span>
+
+	/**
+	 * Tagoobot
+	 */
+<span class="fc" id="L3586">	TAGOOBOT(&quot;Tagoobot&quot;, Pattern.compile(&quot;Tagoobot&quot;)),</span>
+
+	/**
+	 * taptubot
+	 */
+<span class="fc" id="L3591">	TAPTUBOT(&quot;taptubot&quot;, Pattern.compile(&quot;taptubot&quot;)),</span>
+
+	/**
+	 * Tear
+	 */
+<span class="fc" id="L3596">	TEAR(&quot;Tear&quot;, Pattern.compile(&quot;Tear&quot;)),</span>
+
+	/**
+	 * TeaShark
+	 */
+<span class="fc" id="L3601">	TEASHARK(&quot;TeaShark&quot;, Pattern.compile(&quot;TeaShark&quot;)),</span>
+
+	/**
+	 * Technoratibot
+	 */
+<span class="fc" id="L3606">	TECHNORATIBOT(&quot;Technoratibot&quot;, Pattern.compile(&quot;Technoratibot&quot;)),</span>
+
+	/**
+	 * Teleport Pro
+	 */
+<span class="fc" id="L3611">	TELEPORT_PRO(&quot;Teleport Pro&quot;, Pattern.compile(&quot;Teleport Pro&quot;)),</span>
+
+	/**
+	 * TenFourFox
+	 */
+<span class="fc" id="L3616">	TENFOURFOX(&quot;TenFourFox&quot;, Pattern.compile(&quot;TenFourFox&quot;)),</span>
+
+	/**
+	 * TeragramCrawler
+	 */
+<span class="fc" id="L3621">	TERAGRAMCRAWLER(&quot;TeragramCrawler&quot;, Pattern.compile(&quot;TeragramCrawler&quot;)),</span>
+
+	/**
+	 * textractor
+	 */
+<span class="fc" id="L3626">	TEXTRACTOR(&quot;textractor&quot;, Pattern.compile(&quot;textractor&quot;)),</span>
+
+	/**
+	 * The Bat!
+	 */
+<span class="fc" id="L3631">	THE_BAT(&quot;The Bat!&quot;, Pattern.compile(&quot;The Bat!&quot;)),</span>
+
+	/**
+	 * Theophrastus
+	 */
+<span class="fc" id="L3636">	THEOPHRASTUS(&quot;Theophrastus&quot;, Pattern.compile(&quot;Theophrastus&quot;)),</span>
+
+	/**
+	 * TheWorld Browser
+	 */
+<span class="fc" id="L3641">	THEWORLD_BROWSER(&quot;TheWorld Browser&quot;, Pattern.compile(&quot;TheWorld Browser&quot;)),</span>
+
+	/**
+	 * Thumbnail.CZ robot
+	 */
+<span class="fc" id="L3646">	THUMBNAIL_CZ_ROBOT(&quot;Thumbnail.CZ robot&quot;, Pattern.compile(&quot;Thumbnail.CZ robot&quot;)),</span>
+
+	/**
+	 * ThumbShots-Bot
+	 */
+<span class="fc" id="L3651">	THUMBSHOTS_BOT(&quot;ThumbShots-Bot&quot;, Pattern.compile(&quot;ThumbShots-Bot&quot;)),</span>
+
+	/**
+	 * thumbshots-de-Bot
+	 */
+<span class="fc" id="L3656">	THUMBSHOTS_DE_BOT(&quot;thumbshots-de-Bot&quot;, Pattern.compile(&quot;thumbshots-de-Bot&quot;)),</span>
+
+	/**
+	 * Thumbshots.ru
+	 */
+<span class="fc" id="L3661">	THUMBSHOTS_RU(&quot;Thumbshots.ru&quot;, Pattern.compile(&quot;Thumbshots.ru&quot;)),</span>
+
+	/**
+	 * Thunderbird
+	 */
+<span class="fc" id="L3666">	THUNDERBIRD(&quot;Thunderbird&quot;, Pattern.compile(&quot;Thunderbird&quot;)),</span>
+
+	/**
+	 * TinEye
+	 */
+<span class="fc" id="L3671">	TINEYE(&quot;TinEye&quot;, Pattern.compile(&quot;TinEye&quot;)),</span>
+
+	/**
+	 * Tizen Browser
+	 */
+<span class="fc" id="L3676">	TIZEN_BROWSER(&quot;Tizen Browser&quot;, Pattern.compile(&quot;Tizen Browser&quot;)),</span>
+
+	/**
+	 * Tjusig
+	 */
+<span class="fc" id="L3681">	TJUSIG(&quot;Tjusig&quot;, Pattern.compile(&quot;Tjusig&quot;)),</span>
+
+	/**
+	 * Topicbot
+	 */
+<span class="fc" id="L3686">	TOPICBOT(&quot;Topicbot&quot;, Pattern.compile(&quot;Topicbot&quot;)),</span>
+
+	/**
+	 * Toread-Crawler
+	 */
+<span class="fc" id="L3691">	TOREAD_CRAWLER(&quot;Toread-Crawler&quot;, Pattern.compile(&quot;Toread-Crawler&quot;)),</span>
+
+	/**
+	 * Touche
+	 */
+<span class="fc" id="L3696">	TOUCHE(&quot;Touche&quot;, Pattern.compile(&quot;Touche&quot;)),</span>
+
+	/**
+	 * trendictionbot
+	 */
+<span class="fc" id="L3701">	TRENDICTIONBOT(&quot;trendictionbot&quot;, Pattern.compile(&quot;trendictionbot&quot;)),</span>
+
+	/**
+	 * Trileet NewsRoom
+	 */
+<span class="fc" id="L3706">	TRILEET_NEWSROOM(&quot;Trileet NewsRoom&quot;, Pattern.compile(&quot;Trileet NewsRoom&quot;)),</span>
+
+	/**
+	 * TT Explorer
+	 */
+<span class="fc" id="L3711">	TT_EXPLORER(&quot;TT Explorer&quot;, Pattern.compile(&quot;TT Explorer&quot;)),</span>
+
+	/**
+	 * Tulip Chain
+	 */
+<span class="fc" id="L3716">	TULIP_CHAIN(&quot;Tulip Chain&quot;, Pattern.compile(&quot;Tulip Chain&quot;)),</span>
+
+	/**
+	 * TurnitinBot
+	 */
+<span class="fc" id="L3721">	TURNITINBOT(&quot;TurnitinBot&quot;, Pattern.compile(&quot;TurnitinBot&quot;)),</span>
+
+	/**
+	 * TutorGigBot
+	 */
+<span class="fc" id="L3726">	TUTORGIGBOT(&quot;TutorGigBot&quot;, Pattern.compile(&quot;TutorGigBot&quot;)),</span>
+
+	/**
+	 * TwengaBot
+	 */
+<span class="fc" id="L3731">	TWENGABOT(&quot;TwengaBot&quot;, Pattern.compile(&quot;TwengaBot&quot;)),</span>
+
+	/**
+	 * Twiceler
+	 */
+<span class="fc" id="L3736">	TWICELER(&quot;Twiceler&quot;, Pattern.compile(&quot;Twiceler&quot;)),</span>
+
+	/**
+	 * Twikle
+	 */
+<span class="fc" id="L3741">	TWIKLE(&quot;Twikle&quot;, Pattern.compile(&quot;Twikle&quot;)),</span>
+
+	/**
+	 * Typhoeus
+	 */
+<span class="fc" id="L3746">	TYPHOEUS(&quot;Typhoeus&quot;, Pattern.compile(&quot;Typhoeus&quot;)),</span>
+
+	/**
+	 * UASlinkChecker
+	 */
+<span class="fc" id="L3751">	UASLINKCHECKER(&quot;UASlinkChecker&quot;, Pattern.compile(&quot;UASlinkChecker&quot;)),</span>
+
+	/**
+	 * UC Browser
+	 */
+<span class="fc" id="L3756">	UC_BROWSER(&quot;UC Browser&quot;, Pattern.compile(&quot;UC Browser&quot;)),</span>
+
+	/**
+	 * UltraBrowser
+	 */
+<span class="fc" id="L3761">	ULTRABROWSER(&quot;UltraBrowser &quot;, Pattern.compile(&quot;UltraBrowser &quot;)),</span>
+
+	/**
+	 * UnisterBot
+	 */
+<span class="fc" id="L3766">	UNISTERBOT(&quot;UnisterBot&quot;, Pattern.compile(&quot;UnisterBot&quot;)),</span>
+
+	/**
+	 * UnwindFetchor
+	 */
+<span class="fc" id="L3771">	UNWINDFETCHOR(&quot;UnwindFetchor&quot;, Pattern.compile(&quot;UnwindFetchor&quot;)),</span>
+
+	/**
+	 * updated
+	 */
+<span class="fc" id="L3776">	UPDATED(&quot;updated&quot;, Pattern.compile(&quot;updated&quot;)),</span>
+
+	/**
+	 * Updownerbot
+	 */
+<span class="fc" id="L3781">	UPDOWNERBOT(&quot;Updownerbot&quot;, Pattern.compile(&quot;Updownerbot&quot;)),</span>
+
+	/**
+	 * UptimeDog
+	 */
+<span class="fc" id="L3786">	UPTIMEDOG(&quot;UptimeDog&quot;, Pattern.compile(&quot;UptimeDog&quot;)),</span>
+
+	/**
+	 * UptimeRobot
+	 */
+<span class="fc" id="L3791">	UPTIMEROBOT(&quot;UptimeRobot&quot;, Pattern.compile(&quot;UptimeRobot&quot;)),</span>
+
+	/**
+	 * urlfan-bot
+	 */
+<span class="fc" id="L3796">	URLFAN_BOT(&quot;urlfan-bot&quot;, Pattern.compile(&quot;urlfan-bot&quot;)),</span>
+
+	/**
+	 * Urlfilebot (Urlbot)
+	 */
+<span class="fc" id="L3801">	URLFILEBOT(&quot;Urlfilebot (Urlbot)&quot;, Pattern.compile(&quot;Urlfilebot \\(Urlbot\\)&quot;)),</span>
+
+	/**
+	 * urlgrabber
+	 */
+<span class="fc" id="L3806">	URLGRABBER(&quot;urlgrabber&quot;, Pattern.compile(&quot;urlgrabber&quot;)),</span>
+
+	/**
+	 * Usejump
+	 */
+<span class="fc" id="L3811">	USEJUMP(&quot;Usejump&quot;, Pattern.compile(&quot;Usejump&quot;)),</span>
+
+	/**
+	 * uZard Web
+	 */
+<span class="fc" id="L3816">	UZARD_WEB(&quot;uZard Web&quot;, Pattern.compile(&quot;uZard Web&quot;)),</span>
+
+	/**
+	 * Uzbl
+	 */
+<span class="fc" id="L3821">	UZBL(&quot;Uzbl&quot;, Pattern.compile(&quot;Uzbl&quot;)),</span>
+
+	/**
+	 * Vagabondo
+	 */
+<span class="fc" id="L3826">	VAGABONDO(&quot;Vagabondo&quot;, Pattern.compile(&quot;Vagabondo&quot;)),</span>
+
+	/**
+	 * Validator.nu
+	 */
+<span class="fc" id="L3831">	VALIDATOR_NU(&quot;Validator.nu&quot;, Pattern.compile(&quot;Validator.nu&quot;)),</span>
+
+	/**
+	 * VERASYS 2k
+	 */
+<span class="fc" id="L3836">	VERASYS_2K(&quot;VERASYS 2k&quot;, Pattern.compile(&quot;VERASYS 2k&quot;)),</span>
+
+	/**
+	 * Vermut
+	 */
+<span class="fc" id="L3841">	VERMUT(&quot;Vermut&quot;, Pattern.compile(&quot;Vermut&quot;)),</span>
+
+	/**
+	 * Vespa Crawler
+	 */
+<span class="fc" id="L3846">	VESPA_CRAWLER(&quot;Vespa Crawler&quot;, Pattern.compile(&quot;Vespa Crawler&quot;)),</span>
+
+	/**
+	 * VideoSurf_bot
+	 */
+<span class="fc" id="L3851">	VIDEOSURF_BOT(&quot;VideoSurf_bot&quot;, Pattern.compile(&quot;VideoSurf_bot&quot;)),</span>
+
+	/**
+	 * virus_detector
+	 */
+<span class="fc" id="L3856">	VIRUS_DETECTOR(&quot;virus_detector&quot;, Pattern.compile(&quot;virus_detector&quot;)),</span>
+
+	/**
+	 * Visbot
+	 */
+<span class="fc" id="L3861">	VISBOT(&quot;Visbot&quot;, Pattern.compile(&quot;Visbot&quot;)),</span>
+
+	/**
+	 * VLC media player
+	 */
+<span class="fc" id="L3866">	VLC_MEDIA_PLAYER(&quot;VLC media player&quot;, Pattern.compile(&quot;VLC media player&quot;)),</span>
+
+	/**
+	 * VMBot
+	 */
+<span class="fc" id="L3871">	VMBOT(&quot;VMBot&quot;, Pattern.compile(&quot;VMBot&quot;)),</span>
+
+	/**
+	 * void-bot
+	 */
+<span class="fc" id="L3876">	VOID_BOT(&quot;void-bot&quot;, Pattern.compile(&quot;void-bot&quot;)),</span>
+
+	/**
+	 * VoilaBot
+	 */
+<span class="fc" id="L3881">	VOILABOT(&quot;VoilaBot&quot;, Pattern.compile(&quot;VoilaBot&quot;)),</span>
+
+	/**
+	 * Vonkeror
+	 */
+<span class="fc" id="L3886">	VONKEROR(&quot;Vonkeror&quot;, Pattern.compile(&quot;Vonkeror&quot;)),</span>
+
+	/**
+	 * VORTEX
+	 */
+<span class="fc" id="L3891">	VORTEX(&quot;VORTEX&quot;, Pattern.compile(&quot;VORTEX&quot;)),</span>
+
+	/**
+	 * voyager
+	 */
+<span class="fc" id="L3896">	VOYAGER(&quot;voyager&quot;, Pattern.compile(&quot;voyager&quot;)),</span>
+
+	/**
+	 * Vuze
+	 */
+<span class="fc" id="L3901">	VUZE(&quot;Vuze&quot;, Pattern.compile(&quot;Vuze&quot;)),</span>
+
+	/**
+	 * VWBot
+	 */
+<span class="fc" id="L3906">	VWBOT(&quot;VWBot&quot;, Pattern.compile(&quot;VWBot&quot;)),</span>
+
+	/**
+	 * W3C Checklink
+	 */
+<span class="fc" id="L3911">	W3C_CHECKLINK(&quot;W3C Checklink&quot;, Pattern.compile(&quot;W3C Checklink&quot;)),</span>
+
+	/**
+	 * W3C CSS Validator
+	 */
+<span class="fc" id="L3916">	W3C_CSS_VALIDATOR(&quot;W3C CSS Validator&quot;, Pattern.compile(&quot;W3C CSS Validator&quot;)),</span>
+
+	/**
+	 * W3C mobileOK Checker
+	 */
+<span class="fc" id="L3921">	W3C_MOBILEOK_CHECKER(&quot;W3C mobileOK Checker&quot;, Pattern.compile(&quot;W3C mobileOK Checker&quot;)),</span>
+
+	/**
+	 * W3C Validator
+	 */
+<span class="fc" id="L3926">	W3C_VALIDATOR(&quot;W3C Validator&quot;, Pattern.compile(&quot;W3C Validator&quot;)),</span>
+
+	/**
+	 * w3m
+	 */
+<span class="fc" id="L3931">	W3M(&quot;w3m&quot;, Pattern.compile(&quot;w3m&quot;)),</span>
+
+	/**
+	 * WapTiger
+	 */
+<span class="fc" id="L3936">	WAPTIGER(&quot;WapTiger&quot;, Pattern.compile(&quot;WapTiger&quot;)),</span>
+
+	/**
+	 * WASALive-Bot
+	 */
+<span class="fc" id="L3941">	WASALIVE_BOT(&quot;WASALive-Bot&quot;, Pattern.compile(&quot;WASALive-Bot&quot;)),</span>
+
+	/**
+	 * WatchMouse
+	 */
+<span class="fc" id="L3946">	WATCHMOUSE(&quot;WatchMouse&quot;, Pattern.compile(&quot;WatchMouse&quot;)),</span>
+
+	/**
+	 * WBSearchBot
+	 */
+<span class="fc" id="L3951">	WBSEARCHBOT(&quot;WBSearchBot&quot;, Pattern.compile(&quot;WBSearchBot&quot;)),</span>
+
+	/**
+	 * WDG CSSCheck
+	 */
+<span class="fc" id="L3956">	WDG_CSSCHECK(&quot;WDG CSSCheck&quot;, Pattern.compile(&quot;WDG CSSCheck&quot;)),</span>
+
+	/**
+	 * WDG Page Valet
+	 */
+<span class="fc" id="L3961">	WDG_PAGE_VALET(&quot;WDG Page Valet&quot;, Pattern.compile(&quot;WDG Page Valet&quot;)),</span>
+
+	/**
+	 * WDG Validator
+	 */
+<span class="fc" id="L3966">	WDG_VALIDATOR(&quot;WDG Validator&quot;, Pattern.compile(&quot;WDG Validator&quot;)),</span>
+
+	/**
+	 * Web-sniffer
+	 */
+<span class="fc" id="L3971">	WEB_SNIFFER(&quot;Web-sniffer&quot;, Pattern.compile(&quot;Web-sniffer&quot;)),</span>
+
+	/**
+	 * WebAlta Crawler
+	 */
+<span class="fc" id="L3976">	WEBALTA_CRAWLER(&quot;WebAlta Crawler&quot;, Pattern.compile(&quot;WebAlta Crawler&quot;)),</span>
+
+	/**
+	 * WebarooBot
+	 */
+<span class="fc" id="L3981">	WEBAROOBOT(&quot;WebarooBot&quot;, Pattern.compile(&quot;WebarooBot&quot;)),</span>
+
+	/**
+	 * WebCollage
+	 */
+<span class="fc" id="L3986">	WEBCOLLAGE(&quot;WebCollage&quot;, Pattern.compile(&quot;WebCollage&quot;)),</span>
+
+	/**
+	 * WebCopier
+	 */
+<span class="fc" id="L3991">	WEBCOPIER(&quot;WebCopier&quot;, Pattern.compile(&quot;WebCopier&quot;)),</span>
+
+	/**
+	 * webfetch
+	 */
+<span class="fc" id="L3996">	WEBFETCH(&quot;webfetch&quot;, Pattern.compile(&quot;webfetch&quot;)),</span>
+
+	/**
+	 * webfs
+	 */
+<span class="fc" id="L4001">	WEBFS(&quot;webfs&quot;, Pattern.compile(&quot;webfs&quot;)),</span>
+
+	/**
+	 * Webian Shell
+	 */
+<span class="fc" id="L4006">	WEBIAN_SHELL(&quot;Webian Shell&quot;, Pattern.compile(&quot;Webian Shell&quot;)),</span>
+
+	/**
+	 * WebImages
+	 */
+<span class="fc" id="L4011">	WEBIMAGES(&quot;WebImages&quot;, Pattern.compile(&quot;WebImages&quot;)),</span>
+
+	/**
+	 * webinatorbot
+	 */
+<span class="fc" id="L4016">	WEBINATORBOT(&quot;webinatorbot&quot;, Pattern.compile(&quot;webinatorbot&quot;)),</span>
+
+	/**
+	 * webmastercoffee
+	 */
+<span class="fc" id="L4021">	WEBMASTERCOFFEE(&quot;webmastercoffee&quot;, Pattern.compile(&quot;webmastercoffee&quot;)),</span>
+
+	/**
+	 * WebNL
+	 */
+<span class="fc" id="L4026">	WEBNL(&quot;WebNL&quot;, Pattern.compile(&quot;WebNL&quot;)),</span>
+
+	/**
+	 * WebRankSpider
+	 */
+<span class="fc" id="L4031">	WEBRANKSPIDER(&quot;WebRankSpider&quot;, Pattern.compile(&quot;WebRankSpider&quot;)),</span>
+
+	/**
+	 * WebRender
+	 */
+<span class="fc" id="L4036">	WEBRENDER(&quot;WebRender&quot;, Pattern.compile(&quot;WebRender&quot;)),</span>
+
+	/**
+	 * Webscope Crawler
+	 */
+<span class="fc" id="L4041">	WEBSCOPE_CRAWLER(&quot;Webscope Crawler&quot;, Pattern.compile(&quot;Webscope Crawler&quot;)),</span>
+
+	/**
+	 * WebStripper
+	 */
+<span class="fc" id="L4046">	WEBSTRIPPER(&quot;WebStripper&quot;, Pattern.compile(&quot;WebStripper&quot;)),</span>
+
+	/**
+	 * WebWatch/Robot_txtChecker
+	 */
+<span class="fc" id="L4051">	WEBWATCH_ROBOT_TXT_CHECKER(&quot;WebWatch/Robot_txtChecker&quot;, Pattern.compile(&quot;WebWatch/Robot_txtChecker&quot;)),</span>
+
+	/**
+	 * WebZIP
+	 */
+<span class="fc" id="L4056">	WEBZIP(&quot;WebZIP&quot;, Pattern.compile(&quot;WebZIP&quot;)),</span>
+
+	/**
+	 * wectar
+	 */
+<span class="fc" id="L4061">	WECTAR(&quot;wectar&quot;, Pattern.compile(&quot;wectar&quot;)),</span>
+
+	/**
+	 * Weltweitimnetz Browser
+	 */
+<span class="fc" id="L4066">	WELTWEITIMNETZ_BROWSER(&quot;Weltweitimnetz Browser&quot;, Pattern.compile(&quot;Weltweitimnetz Browser&quot;)),</span>
+
+	/**
+	 * WeSEE:Search
+	 */
+<span class="fc" id="L4071">	WESEE_SEARCH(&quot;WeSEE:Search&quot;, Pattern.compile(&quot;WeSEE:Search&quot;)),</span>
+
+	/**
+	 * Wget
+	 */
+<span class="fc" id="L4076">	WGET(&quot;Wget&quot;, Pattern.compile(&quot;Wget&quot;)),</span>
+
+	/**
+	 * Whoismindbot
+	 */
+<span class="fc" id="L4081">	WHOISMINDBOT(&quot;Whoismindbot&quot;, Pattern.compile(&quot;Whoismindbot&quot;)),</span>
+
+	/**
+	 * WikioFeedBot
+	 */
+<span class="fc" id="L4086">	WIKIOFEEDBOT(&quot;WikioFeedBot&quot;, Pattern.compile(&quot;WikioFeedBot&quot;)),</span>
+
+	/**
+	 * wikiwix-bot
+	 */
+<span class="fc" id="L4091">	WIKIWIX_BOT(&quot;wikiwix-bot&quot;, Pattern.compile(&quot;wikiwix-bot&quot;)),</span>
+
+	/**
+	 * Willow Internet Crawler
+	 */
+<span class="fc" id="L4096">	WILLOW_INTERNET_CRAWLER(&quot;Willow Internet Crawler&quot;, Pattern.compile(&quot;Willow Internet Crawler&quot;)),</span>
+
+	/**
+	 * Winamp for Android
+	 */
+<span class="fc" id="L4101">	WINAMP_FOR_ANDROID(&quot;Winamp for Android&quot;, Pattern.compile(&quot;Winamp for Android&quot;)),</span>
+
+	/**
+	 * Windows Live Mail
+	 */
+<span class="fc" id="L4106">	WINDOWS_LIVE_MAIL(&quot;Windows Live Mail&quot;, Pattern.compile(&quot;Windows Live Mail&quot;)),</span>
+
+	/**
+	 * Windows Media Player
+	 */
+<span class="fc" id="L4111">	WINDOWS_MEDIA_PLAYER(&quot;Windows Media Player&quot;, Pattern.compile(&quot;Windows Media Player&quot;)),</span>
+
+	/**
+	 * WinHTTP
+	 */
+<span class="fc" id="L4116">	WINHTTP(&quot;WinHTTP&quot;, Pattern.compile(&quot;WinHTTP&quot;)),</span>
+
+	/**
+	 * WinkBot
+	 */
+<span class="fc" id="L4121">	WINKBOT(&quot;WinkBot&quot;, Pattern.compile(&quot;WinkBot&quot;)),</span>
+
+	/**
+	 * WinPodder
+	 */
+<span class="fc" id="L4126">	WINPODDER(&quot;WinPodder&quot;, Pattern.compile(&quot;WinPodder&quot;)),</span>
+
+	/**
+	 * WinWap
+	 */
+<span class="fc" id="L4131">	WINWAP(&quot;WinWap&quot;, Pattern.compile(&quot;WinWap&quot;)),</span>
+
+	/**
+	 * WinWebBot
+	 */
+<span class="fc" id="L4136">	WINWEBBOT(&quot;WinWebBot&quot;, Pattern.compile(&quot;WinWebBot&quot;)),</span>
+
+	/**
+	 * WIRE
+	 */
+<span class="fc" id="L4141">	WIRE(&quot;WIRE&quot;, Pattern.compile(&quot;WIRE&quot;)),</span>
+
+	/**
+	 * wKiosk
+	 */
+<span class="fc" id="L4146">	WKIOSK(&quot;wKiosk&quot;, Pattern.compile(&quot;wKiosk&quot;)),</span>
+
+	/**
+	 * WMCAI_robot
+	 */
+<span class="fc" id="L4151">	WMCAI_ROBOT(&quot;WMCAI_robot&quot;, Pattern.compile(&quot;WMCAI_robot&quot;)),</span>
+
+	/**
+	 * Woko
+	 */
+<span class="fc" id="L4156">	WOKO(&quot;Woko&quot;, Pattern.compile(&quot;Woko&quot;)),</span>
+
+	/**
+	 * WordPress pingback
+	 */
+<span class="fc" id="L4161">	WORDPRESS_PINGBACK(&quot;WordPress pingback&quot;, Pattern.compile(&quot;WordPress pingback&quot;)),</span>
+
+	/**
+	 * woriobot
+	 */
+<span class="fc" id="L4166">	WORIOBOT(&quot;woriobot&quot;, Pattern.compile(&quot;woriobot&quot;)),</span>
+
+	/**
+	 * WorldWideWeb
+	 */
+<span class="fc" id="L4171">	WORLDWIDEWEB(&quot;WorldWideWeb&quot;, Pattern.compile(&quot;WorldWideWeb&quot;)),</span>
+
+	/**
+	 * wOSBrowser
+	 */
+<span class="fc" id="L4176">	WOSBROWSER(&quot;wOSBrowser&quot;, Pattern.compile(&quot;wOSBrowser&quot;)),</span>
+
+	/**
+	 * Wotbox
+	 */
+<span class="fc" id="L4181">	WOTBOX(&quot;Wotbox&quot;, Pattern.compile(&quot;Wotbox&quot;)),</span>
+
+	/**
+	 * wsAnalyzer
+	 */
+<span class="fc" id="L4186">	WSANALYZER(&quot;wsAnalyzer&quot;, Pattern.compile(&quot;wsAnalyzer&quot;)),</span>
+
+	/**
+	 * www.fi crawler
+	 */
+<span class="fc" id="L4191">	WWW_FI_CRAWLER(&quot;www.fi crawler&quot;, Pattern.compile(&quot;www.fi crawler&quot;)),</span>
+
+	/**
+	 * WWW::Mechanize
+	 */
+<span class="fc" id="L4196">	WWW_MECHANIZE(&quot;WWW::Mechanize&quot;, Pattern.compile(&quot;WWW::Mechanize&quot;)),</span>
+
+	/**
+	 * wwwster
+	 */
+<span class="fc" id="L4201">	WWWSTER(&quot;wwwster&quot;, Pattern.compile(&quot;wwwster&quot;)),</span>
+
+	/**
+	 * Wyzo
+	 */
+<span class="fc" id="L4206">	WYZO(&quot;Wyzo&quot;, Pattern.compile(&quot;Wyzo&quot;)),</span>
+
+	/**
+	 * X-Smiles
+	 */
+<span class="fc" id="L4211">	X_SMILES(&quot;X-Smiles&quot;, Pattern.compile(&quot;X-Smiles&quot;)),</span>
+
+	/**
+	 * Xaldon WebSpider
+	 */
+<span class="fc" id="L4216">	XALDON_WEBSPIDER(&quot;Xaldon WebSpider&quot;, Pattern.compile(&quot;Xaldon WebSpider&quot;)),</span>
+
+	/**
+	 * XBMC
+	 */
+<span class="fc" id="L4221">	XBMC(&quot;XBMC&quot;, Pattern.compile(&quot;XBMC&quot;)),</span>
+
+	/**
+	 * Xenu
+	 */
+<span class="fc" id="L4226">	XENU(&quot;Xenu&quot;, Pattern.compile(&quot;Xenu&quot;)),</span>
+
+	/**
+	 * xine
+	 */
+<span class="fc" id="L4231">	XINE(&quot;xine&quot;, Pattern.compile(&quot;xine&quot;)),</span>
+
+	/**
+	 * XmarksFetch
+	 */
+<span class="fc" id="L4236">	XMARKSFETCH(&quot;XmarksFetch&quot;, Pattern.compile(&quot;XmarksFetch&quot;)),</span>
+
+	/**
+	 * XML-RPC for PHP
+	 */
+<span class="fc" id="L4241">	XML_RPC_FOR_PHP(&quot;XML-RPC for PHP&quot;, Pattern.compile(&quot;XML-RPC for PHP&quot;)),</span>
+
+	/**
+	 * XML-RPC for Ruby
+	 */
+<span class="fc" id="L4246">	XML_RPC_FOR_RUBY(&quot;XML-RPC for Ruby&quot;, Pattern.compile(&quot;XML-RPC for Ruby&quot;)),</span>
+
+	/**
+	 * XML Sitemaps Generator
+	 */
+<span class="fc" id="L4251">	XML_SITEMAPS_GENERATOR(&quot;XML Sitemaps Generator&quot;, Pattern.compile(&quot;XML Sitemaps Generator&quot;)),</span>
+
+	/**
+	 * XMPlay
+	 */
+<span class="fc" id="L4256">	XMPLAY(&quot;XMPlay&quot;, Pattern.compile(&quot;XMPlay&quot;)),</span>
+
+	/**
+	 * Yaanb
+	 */
+<span class="fc" id="L4261">	YAANB(&quot;Yaanb&quot;, Pattern.compile(&quot;Yaanb&quot;)),</span>
+
+	/**
+	 * yacybot
+	 */
+<span class="fc" id="L4266">	YACYBOT(&quot;yacybot&quot;, Pattern.compile(&quot;yacybot&quot;)),</span>
+
+	/**
+	 * Yahoo!
+	 */
+<span class="fc" id="L4271">	YAHOO(&quot;Yahoo!&quot;, Pattern.compile(&quot;Yahoo!&quot;)),</span>
+
+	/**
+	 * Yahoo! JAPAN
+	 */
+<span class="fc" id="L4276">	YAHOO_JAPAN(&quot;Yahoo! JAPAN&quot;, Pattern.compile(&quot;Yahoo! JAPAN&quot;)),</span>
+
+	/**
+	 * YahooFeedSeeker
+	 */
+<span class="fc" id="L4281">	YAHOOFEEDSEEKER(&quot;YahooFeedSeeker&quot;, Pattern.compile(&quot;YahooFeedSeeker&quot;)),</span>
+
+	/**
+	 * Yandex.Browser
+	 */
+<span class="fc" id="L4286">	YANDEX_BROWSER(&quot;Yandex.Browser&quot;, Pattern.compile(&quot;Yandex\\.Browser&quot;)),</span>
+
+	/**
+	 * YandexBot
+	 */
+<span class="fc" id="L4291">	YANDEXBOT(&quot;YandexBot&quot;, Pattern.compile(&quot;YandexBot&quot;)),</span>
+
+	/**
+	 * Yanga
+	 */
+<span class="fc" id="L4296">	YANGA(&quot;Yanga&quot;, Pattern.compile(&quot;Yanga&quot;)),</span>
+
+	/**
+	 * YeahReader
+	 */
+<span class="fc" id="L4301">	YEAHREADER(&quot;YeahReader&quot;, Pattern.compile(&quot;YeahReader&quot;)),</span>
+
+	/**
+	 * YioopBot
+	 */
+<span class="fc" id="L4306">	YIOOPBOT(&quot;YioopBot&quot;, Pattern.compile(&quot;YioopBot&quot;)),</span>
+
+	/**
+	 * YodaoBot
+	 */
+<span class="fc" id="L4311">	YODAOBOT(&quot;YodaoBot&quot;, Pattern.compile(&quot;YodaoBot&quot;)),</span>
+
+	/**
+	 * Yoono Bot
+	 */
+<span class="fc" id="L4316">	YOONO_BOT(&quot;Yoono Bot&quot;, Pattern.compile(&quot;Yoono Bot&quot;)),</span>
+
+	/**
+	 * YoudaoBot
+	 */
+<span class="fc" id="L4321">	YOUDAOBOT(&quot;YoudaoBot&quot;, Pattern.compile(&quot;YoudaoBot&quot;)),</span>
+
+	/**
+	 * YowedoBot
+	 */
+<span class="fc" id="L4326">	YOWEDOBOT(&quot;YowedoBot&quot;, Pattern.compile(&quot;YowedoBot&quot;)),</span>
+
+	/**
+	 * YRSpider
+	 */
+<span class="fc" id="L4331">	YRSPIDER(&quot;YRSpider&quot;, Pattern.compile(&quot;YRSpider&quot;)),</span>
+
+	/**
+	 * ZACATEK_CZ
+	 */
+<span class="fc" id="L4336">	ZACATEK_CZ(&quot;ZACATEK_CZ&quot;, Pattern.compile(&quot;ZACATEK_CZ&quot;)),</span>
+
+	/**
+	 * zBrowser
+	 */
+<span class="fc" id="L4341">	ZBROWSER(&quot;zBrowser&quot;, Pattern.compile(&quot;zBrowser&quot;)),</span>
+
+	/**
+	 * Zend_Http_Client
+	 */
+<span class="fc" id="L4346">	ZEND_HTTP_CLIENT(&quot;Zend_Http_Client&quot;, Pattern.compile(&quot;Zend_Http_Client&quot;)),</span>
+
+	/**
+	 * Zeusbot
+	 */
+<span class="fc" id="L4351">	ZEUSBOT(&quot;Zeusbot&quot;, Pattern.compile(&quot;Zeusbot&quot;)),</span>
+
+	/**
+	 * ZipZap
+	 */
+<span class="fc" id="L4356">	ZIPZAP(&quot;ZipZap&quot;, Pattern.compile(&quot;ZipZap&quot;)),</span>
+
+	/**
+	 * ZookaBot
+	 */
+<span class="fc" id="L4361">	ZOOKABOT(&quot;ZookaBot&quot;, Pattern.compile(&quot;ZookaBot(/\\d+(\\.\\d+)*)?&quot;, Pattern.CASE_INSENSITIVE)),</span>
+
+	/**
+	 * ZoomSpider (ZSEBOT)
+	 */
+<span class="fc" id="L4366">	ZOOMSPIDER(&quot;ZoomSpider (ZSEBOT)&quot;, Pattern.compile(&quot;ZoomSpider \\(ZSEBOT\\)&quot;)),</span>
+
+	/**
+	 * ZyBorg
+	 */
+<span class="fc" id="L4371">	ZYBORG(&quot;ZyBorg&quot;, Pattern.compile(&quot;ZyBorg&quot;));</span>
+
+	/**
+	 * This method try to find by the given family name a matching enum value. The family name must match against an
+	 * user agent entry in UAS data file.
+	 * 
+	 * @param family
+	 *            name of an user agent family
+	 * @return the matching enum value or {@code UserAgentFamily#UNKNOWN}
+	 * @throws net.sf.qualitycheck.exception.IllegalNullArgumentException
+	 *             if the given argument is {@code null}
+	 */
+	@Nonnull
+	public static UserAgentFamily evaluate(@Nonnull final String family) {
+<span class="fc" id="L4385">		Check.notNull(family, &quot;family&quot;);</span>
+
+<span class="fc" id="L4387">		UserAgentFamily result = UNKNOWN;</span>
+
+		// search by name
+<span class="fc" id="L4390">		result = evaluateByName(family);</span>
+
+		// search by pattern
+<span class="fc bfc" id="L4393" title="All 2 branches covered.">		if (result == UNKNOWN) {</span>
+<span class="fc" id="L4394">			result = evaluateByPattern(family);</span>
+		}
+
+<span class="fc" id="L4397">		return result;</span>
+	}
+
+	/**
+	 * This method try to find by the given family name a matching enum value. The family name will be evaluated against
+	 * the stored name of an user agent entry.
+	 * 
+	 * @param family
+	 *            name of an user agent family
+	 * @return the matching enum value or {@code UserAgentFamily#UNKNOWN}
+	 * @throws net.sf.qualitycheck.exception.IllegalNullArgumentException
+	 *             if the given argument is {@code null}
+	 */
+	@Nonnull
+	protected static UserAgentFamily evaluateByName(@Nonnull final String family) {
+<span class="fc" id="L4412">		Check.notNull(family, &quot;family&quot;);</span>
+
+<span class="fc" id="L4414">		UserAgentFamily result = UNKNOWN;</span>
+<span class="fc bfc" id="L4415" title="All 2 branches covered.">		for (final UserAgentFamily value : values()) {</span>
+<span class="fc bfc" id="L4416" title="All 2 branches covered.">			if (value.getName().equalsIgnoreCase(family)) {</span>
+<span class="fc" id="L4417">				result = value;</span>
+<span class="fc" id="L4418">				break;</span>
+			}
+		}
+
+<span class="fc" id="L4422">		return result;</span>
+	}
+
+	/**
+	 * This method try to find by the given family name a matching enum value. The family name will be evaluated against
+	 * the stored regular expression of an user agent entry.
+	 * 
+	 * @param family
+	 *            name of an user agent family
+	 * @return the matching enum value or {@code UserAgentFamily#UNKNOWN}
+	 * @throws net.sf.qualitycheck.exception.IllegalNullArgumentException
+	 *             if the given argument is {@code null}
+	 */
+	@Nonnull
+	protected static UserAgentFamily evaluateByPattern(@Nonnull final String family) {
+<span class="fc" id="L4437">		Check.notNull(family, &quot;family&quot;);</span>
+
+<span class="fc" id="L4439">		UserAgentFamily result = UNKNOWN;</span>
+<span class="fc bfc" id="L4440" title="All 2 branches covered.">		for (final UserAgentFamily value : values()) {</span>
+<span class="fc" id="L4441">			final Matcher m = value.getPattern().matcher(family);</span>
+<span class="fc bfc" id="L4442" title="All 2 branches covered.">			if (m.matches()) {</span>
+<span class="fc" id="L4443">				result = value;</span>
+<span class="fc" id="L4444">				break;</span>
+			}
+		}
+
+<span class="fc" id="L4448">		return result;</span>
+	}
+
+	/**
+	 * The internal family name in the UAS database.
+	 */
+	@Nonnull
+	private final String name;
+
+	/**
+	 * The regular expression which a family name must be match.
+	 */
+	@Nonnull
+	private final Pattern pattern;
+
+<span class="fc" id="L4463">	private UserAgentFamily(@Nonnull final String name, @Nonnull final Pattern pattern) {</span>
+<span class="fc" id="L4464">		this.name = name;</span>
+<span class="fc" id="L4465">		this.pattern = pattern;</span>
+<span class="fc" id="L4466">	}</span>
+
+	/**
+	 * Gets the internal family name in the UAS database.
+	 * 
+	 * @return the internal family name
+	 */
+	@Nonnull
+	public String getName() {
+<span class="fc" id="L4475">		return this.name;</span>
+	}
+
+	/**
+	 * Gets the regular expression which a family name must be match with.
+	 * 
+	 * @return regular expression
+	 */
+	@Nonnull
+	public Pattern getPattern() {
+<span class="fc" id="L4485">		return pattern;</span>
+	}
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.6.2.201302030002</span></div></body></html>

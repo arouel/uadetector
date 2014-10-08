@@ -1,0 +1,456 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>XmlDataWriter.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="right"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">UADetector :: Core</a> &gt; <a href="index.html" class="el_package">net.sf.uadetector.writer</a> &gt; <span class="el_source">XmlDataWriter.java</span></div><h1>XmlDataWriter.java</h1><pre class="source lang-java linenums">/*******************************************************************************
+ * Copyright 2013 André Rouél
+ * 
+ * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ ******************************************************************************/
+package net.sf.uadetector.writer;
+
+import java.io.OutputStream;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map.Entry;
+import java.util.SortedSet;
+
+import javax.annotation.Nonnull;
+import javax.annotation.concurrent.ThreadSafe;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.OutputKeys;
+import javax.xml.transform.Result;
+import javax.xml.transform.Source;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
+
+import net.sf.qualitycheck.Check;
+import net.sf.uadetector.internal.data.BrowserOperatingSystemMappingComparator;
+import net.sf.uadetector.internal.data.Data;
+import net.sf.uadetector.internal.data.IdentifiableComparator;
+import net.sf.uadetector.internal.data.OrderedPatternComparator;
+import net.sf.uadetector.internal.data.domain.Browser;
+import net.sf.uadetector.internal.data.domain.BrowserOperatingSystemMapping;
+import net.sf.uadetector.internal.data.domain.BrowserPattern;
+import net.sf.uadetector.internal.data.domain.BrowserType;
+import net.sf.uadetector.internal.data.domain.Device;
+import net.sf.uadetector.internal.data.domain.DevicePattern;
+import net.sf.uadetector.internal.data.domain.OperatingSystem;
+import net.sf.uadetector.internal.data.domain.OperatingSystemPattern;
+import net.sf.uadetector.internal.data.domain.Robot;
+import net.sf.uadetector.internal.util.RegularExpressionConverter;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+
+/**
+ * This utility is intended to transform an instance of {@code Data} into an &lt;i&gt;UAS data&lt;/i&gt; conform XML document and
+ * allows us to recreate an &lt;code&gt;uas.xml&lt;/code&gt;.
+ * 
+ * @author André Rouél
+ */
+@ThreadSafe
+public final class XmlDataWriter {
+
+	interface Tag {
+		String BOT_INFO_URL = &quot;bot_info_url&quot;;
+		String BROWSER = &quot;browser&quot;;
+		String BROWSER_ID = &quot;browser_id&quot;;
+		String BROWSER_INFO_URL = &quot;browser_info_url&quot;;
+		String BROWSER_OS = &quot;browser_os&quot;;
+		String BROWSER_REG = &quot;browser_reg&quot;;
+		String BROWSER_TYPE = &quot;browser_type&quot;;
+		String BROWSER_TYPES = &quot;browser_types&quot;;
+		String BROWSERS = &quot;browsers&quot;;
+		String BROWSERS_OS = &quot;browsers_os&quot;;
+		String BROWSERS_REG = &quot;browsers_reg&quot;;
+		String COMPANY = &quot;company&quot;;
+		String DATA = &quot;data&quot;;
+		String DESCRIPTION = &quot;description&quot;;
+		String DEVICE = &quot;device&quot;;
+		String DEVICE_ID = &quot;device_id&quot;;
+		String DEVICE_INFO_URL = &quot;device_info_url&quot;;
+		String DEVICE_REG = &quot;device_reg&quot;;
+		String DEVICES = &quot;devices&quot;;
+		String DEVICES_REG = &quot;devices_reg&quot;;
+		String FAMILY = &quot;family&quot;;
+		String ICON = &quot;icon&quot;;
+		String ID = &quot;id&quot;;
+		String LABEL = &quot;label&quot;;
+		String NAME = &quot;name&quot;;
+		String OPERATING_SYSTEM_REG = &quot;operating_system_reg&quot;;
+		String OPERATING_SYSTEMS = &quot;operating_systems&quot;;
+		String OPERATING_SYSTEMS_REG = &quot;operating_systems_reg&quot;;
+		String ORDER = &quot;order&quot;;
+		String OS = &quot;os&quot;;
+		String OS_ID = &quot;os_id&quot;;
+		String OS_INFO_URL = &quot;os_info_url&quot;;
+		String REGSTRING = &quot;regstring&quot;;
+		String ROBOT = &quot;robot&quot;;
+		String ROBOTS = &quot;robots&quot;;
+		String TYPE = &quot;type&quot;;
+		String UASDATA = &quot;uasdata&quot;;
+		String URL = &quot;url&quot;;
+		String URL_COMPANY = &quot;url_company&quot;;
+		String USERAGENT = &quot;useragent&quot;;
+	}
+
+	private static final String INDENT_AMOUNT = &quot;4&quot;;
+
+	private static final String INDENT_OPTION = &quot;yes&quot;;
+
+	private static final String SCHEMA_URL = &quot;http://user-agent-string.info/rpc/uasxmldata.dtd&quot;;
+
+	private static Element createBrowser(final Browser browser, final Document doc) {
+<span class="fc" id="L117">		final Element b = doc.createElement(Tag.BROWSER);</span>
+<span class="fc" id="L118">		final Element id = doc.createElement(Tag.ID);</span>
+<span class="fc" id="L119">		id.appendChild(doc.createTextNode(String.valueOf(browser.getId())));</span>
+<span class="fc" id="L120">		b.appendChild(id);</span>
+<span class="fc" id="L121">		final Element family = doc.createElement(Tag.TYPE);</span>
+<span class="fc" id="L122">		family.appendChild(doc.createTextNode(String.valueOf(browser.getType().getId())));</span>
+<span class="fc" id="L123">		b.appendChild(family);</span>
+<span class="fc" id="L124">		final Element name = doc.createElement(Tag.NAME);</span>
+<span class="fc" id="L125">		name.appendChild(doc.createTextNode(browser.getFamilyName()));</span>
+<span class="fc" id="L126">		b.appendChild(name);</span>
+<span class="fc" id="L127">		final Element url = doc.createElement(Tag.URL);</span>
+<span class="fc" id="L128">		url.appendChild(doc.createCDATASection(browser.getUrl()));</span>
+<span class="fc" id="L129">		b.appendChild(url);</span>
+<span class="fc" id="L130">		final Element company = doc.createElement(Tag.COMPANY);</span>
+<span class="fc" id="L131">		company.appendChild(doc.createCDATASection(browser.getProducer()));</span>
+<span class="fc" id="L132">		b.appendChild(company);</span>
+<span class="fc" id="L133">		final Element companyUrl = doc.createElement(Tag.URL_COMPANY);</span>
+<span class="fc" id="L134">		companyUrl.appendChild(doc.createCDATASection(browser.getProducerUrl()));</span>
+<span class="fc" id="L135">		b.appendChild(companyUrl);</span>
+<span class="fc" id="L136">		final Element icon = doc.createElement(Tag.ICON);</span>
+<span class="fc" id="L137">		icon.appendChild(doc.createTextNode(browser.getIcon()));</span>
+<span class="fc" id="L138">		b.appendChild(icon);</span>
+<span class="fc" id="L139">		final Element botInfoUrl = doc.createElement(Tag.BROWSER_INFO_URL);</span>
+<span class="fc" id="L140">		botInfoUrl.appendChild(doc.createTextNode(browser.getInfoUrl()));</span>
+<span class="fc" id="L141">		b.appendChild(botInfoUrl);</span>
+<span class="fc" id="L142">		return b;</span>
+	}
+
+	private static Element createBrowserOperatingSystemMappings(final Data data, final Document doc) {
+<span class="fc" id="L146">		final List&lt;BrowserOperatingSystemMapping&gt; mappings = new ArrayList&lt;BrowserOperatingSystemMapping&gt;(</span>
+				data.getBrowserToOperatingSystemMappings());
+<span class="fc" id="L148">		Collections.sort(mappings, BrowserOperatingSystemMappingComparator.INSTANCE);</span>
+
+<span class="fc" id="L150">		final Element browserTypesElement = doc.createElement(Tag.BROWSERS_OS);</span>
+<span class="fc bfc" id="L151" title="All 2 branches covered.">		for (final BrowserOperatingSystemMapping mapping : mappings) {</span>
+<span class="fc" id="L152">			final Element t = doc.createElement(Tag.BROWSER_OS);</span>
+<span class="fc" id="L153">			final Element browserId = doc.createElement(Tag.BROWSER_ID);</span>
+<span class="fc" id="L154">			browserId.appendChild(doc.createTextNode(String.valueOf(mapping.getBrowserId())));</span>
+<span class="fc" id="L155">			t.appendChild(browserId);</span>
+<span class="fc" id="L156">			final Element osId = doc.createElement(Tag.OS_ID);</span>
+<span class="fc" id="L157">			osId.appendChild(doc.createTextNode(String.valueOf(mapping.getOperatingSystemId())));</span>
+<span class="fc" id="L158">			t.appendChild(osId);</span>
+<span class="fc" id="L159">			browserTypesElement.appendChild(t);</span>
+<span class="fc" id="L160">		}</span>
+<span class="fc" id="L161">		return browserTypesElement;</span>
+	}
+
+	private static Element createBrowserPatterns(final Data data, final Document doc) {
+<span class="fc" id="L165">		final List&lt;BrowserPattern&gt; patterns = new ArrayList&lt;BrowserPattern&gt;(data.getBrowserPatterns().size());</span>
+<span class="fc bfc" id="L166" title="All 2 branches covered.">		for (final Entry&lt;Integer, SortedSet&lt;BrowserPattern&gt;&gt; entry : data.getBrowserPatterns().entrySet()) {</span>
+<span class="fc" id="L167">			patterns.addAll(entry.getValue());</span>
+		}
+<span class="fc" id="L169">		Collections.sort(patterns, new OrderedPatternComparator&lt;BrowserPattern&gt;());</span>
+
+<span class="fc" id="L171">		final Element browserTypesElement = doc.createElement(Tag.BROWSERS_REG);</span>
+<span class="fc bfc" id="L172" title="All 2 branches covered.">		for (final BrowserPattern pattern : patterns) {</span>
+<span class="fc" id="L173">			final Element t = doc.createElement(Tag.BROWSER_REG);</span>
+<span class="fc" id="L174">			final Element order = doc.createElement(Tag.ORDER);</span>
+<span class="fc" id="L175">			order.appendChild(doc.createTextNode(String.valueOf(pattern.getPosition())));</span>
+<span class="fc" id="L176">			t.appendChild(order);</span>
+<span class="fc" id="L177">			final Element id = doc.createElement(Tag.BROWSER_ID);</span>
+<span class="fc" id="L178">			id.appendChild(doc.createTextNode(String.valueOf(pattern.getId())));</span>
+<span class="fc" id="L179">			t.appendChild(id);</span>
+<span class="fc" id="L180">			final Element family = doc.createElement(Tag.REGSTRING);</span>
+<span class="fc" id="L181">			family.appendChild(doc.createTextNode(RegularExpressionConverter.convertPatternToPerlRegex(pattern.getPattern())));</span>
+<span class="fc" id="L182">			t.appendChild(family);</span>
+<span class="fc" id="L183">			browserTypesElement.appendChild(t);</span>
+<span class="fc" id="L184">		}</span>
+<span class="fc" id="L185">		return browserTypesElement;</span>
+	}
+
+	private static Element createBrowsers(final Data data, final Document doc) {
+<span class="fc" id="L189">		final Element browsersElement = doc.createElement(Tag.BROWSERS);</span>
+<span class="fc" id="L190">		final List&lt;Browser&gt; browsers = new ArrayList&lt;Browser&gt;(data.getBrowsers());</span>
+<span class="fc" id="L191">		Collections.sort(browsers, IdentifiableComparator.INSTANCE);</span>
+<span class="fc bfc" id="L192" title="All 2 branches covered.">		for (final Browser browser : browsers) {</span>
+<span class="fc" id="L193">			browsersElement.appendChild(createBrowser(browser, doc));</span>
+		}
+<span class="fc" id="L195">		return browsersElement;</span>
+	}
+
+	private static Element createBrowserTypes(final Data data, final Document doc) {
+<span class="fc" id="L199">		final Element browserTypesElement = doc.createElement(Tag.BROWSER_TYPES);</span>
+<span class="fc" id="L200">		final List&lt;BrowserType&gt; browserTypes = new ArrayList&lt;BrowserType&gt;(data.getBrowserTypes().values());</span>
+<span class="fc" id="L201">		Collections.sort(browserTypes, IdentifiableComparator.INSTANCE);</span>
+<span class="fc bfc" id="L202" title="All 2 branches covered.">		for (final BrowserType browserType : browserTypes) {</span>
+<span class="fc" id="L203">			final Element t = doc.createElement(Tag.BROWSER_TYPE);</span>
+<span class="fc" id="L204">			final Element id = doc.createElement(Tag.ID);</span>
+<span class="fc" id="L205">			id.appendChild(doc.createTextNode(String.valueOf(browserType.getId())));</span>
+<span class="fc" id="L206">			t.appendChild(id);</span>
+<span class="fc" id="L207">			final Element family = doc.createElement(Tag.TYPE);</span>
+<span class="fc" id="L208">			family.appendChild(doc.createTextNode(String.valueOf(browserType.getName())));</span>
+<span class="fc" id="L209">			t.appendChild(family);</span>
+<span class="fc" id="L210">			browserTypesElement.appendChild(t);</span>
+<span class="fc" id="L211">		}</span>
+<span class="fc" id="L212">		return browserTypesElement;</span>
+	}
+
+	private static Element createDescription(@Nonnull final Data data, @Nonnull final Document doc) {
+<span class="fc" id="L216">		final Element description = doc.createElement(Tag.DESCRIPTION);</span>
+<span class="fc" id="L217">		final Element label = doc.createElement(Tag.LABEL);</span>
+<span class="fc" id="L218">		description.appendChild(label).appendChild(</span>
+				doc.createTextNode(&quot;Data (format xml) for UASparser - http://user-agent-string.info/download/UASparser&quot;));
+<span class="fc" id="L220">		final Element version = doc.createElement(&quot;version&quot;);</span>
+<span class="fc" id="L221">		description.appendChild(version).appendChild(doc.createTextNode(data.getVersion()));</span>
+<span class="fc" id="L222">		final Element md5Checksum = doc.createElement(&quot;checksum&quot;);</span>
+<span class="fc" id="L223">		md5Checksum.setAttribute(Tag.TYPE, &quot;MD5&quot;);</span>
+<span class="fc" id="L224">		description.appendChild(md5Checksum).appendChild(</span>
+				doc.createTextNode(&quot;http://user-agent-string.info/rpc/get_data.php?format=xml&amp;md5=y&quot;));
+<span class="fc" id="L226">		final Element shaChecksum = doc.createElement(&quot;checksum&quot;);</span>
+<span class="fc" id="L227">		shaChecksum.setAttribute(Tag.TYPE, &quot;SHA1&quot;);</span>
+<span class="fc" id="L228">		description.appendChild(shaChecksum).appendChild(</span>
+				doc.createTextNode(&quot;http://user-agent-string.info/rpc/get_data.php?format=xml&amp;sha1=y&quot;));
+<span class="fc" id="L230">		return description;</span>
+	}
+
+	private static Element createDevice(final Device device, final Document doc) {
+<span class="fc" id="L234">		final Element b = doc.createElement(Tag.DEVICE);</span>
+<span class="fc" id="L235">		final Element id = doc.createElement(Tag.ID);</span>
+<span class="fc" id="L236">		id.appendChild(doc.createTextNode(String.valueOf(device.getId())));</span>
+<span class="fc" id="L237">		b.appendChild(id);</span>
+<span class="fc" id="L238">		final Element name = doc.createElement(Tag.NAME);</span>
+<span class="fc" id="L239">		name.appendChild(doc.createTextNode(device.getName()));</span>
+<span class="fc" id="L240">		b.appendChild(name);</span>
+<span class="fc" id="L241">		final Element icon = doc.createElement(Tag.ICON);</span>
+<span class="fc" id="L242">		icon.appendChild(doc.createTextNode(device.getIcon()));</span>
+<span class="fc" id="L243">		b.appendChild(icon);</span>
+<span class="fc" id="L244">		final Element botInfoUrl = doc.createElement(Tag.DEVICE_INFO_URL);</span>
+<span class="fc" id="L245">		botInfoUrl.appendChild(doc.createTextNode(device.getInfoUrl()));</span>
+<span class="fc" id="L246">		b.appendChild(botInfoUrl);</span>
+<span class="fc" id="L247">		return b;</span>
+	}
+
+	private static Element createDevicePatterns(final Data data, final Document doc) {
+<span class="fc" id="L251">		final List&lt;DevicePattern&gt; patterns = new ArrayList&lt;DevicePattern&gt;(data.getDevicePatterns().size());</span>
+<span class="fc bfc" id="L252" title="All 2 branches covered.">		for (final Entry&lt;Integer, SortedSet&lt;DevicePattern&gt;&gt; entry : data.getDevicePatterns().entrySet()) {</span>
+<span class="fc" id="L253">			patterns.addAll(entry.getValue());</span>
+		}
+<span class="fc" id="L255">		Collections.sort(patterns, new OrderedPatternComparator&lt;DevicePattern&gt;());</span>
+
+<span class="fc" id="L257">		final Element deviceTypesElement = doc.createElement(Tag.DEVICES_REG);</span>
+<span class="fc bfc" id="L258" title="All 2 branches covered.">		for (final DevicePattern pattern : patterns) {</span>
+<span class="fc" id="L259">			final Element t = doc.createElement(Tag.DEVICE_REG);</span>
+<span class="fc" id="L260">			final Element order = doc.createElement(Tag.ORDER);</span>
+<span class="fc" id="L261">			order.appendChild(doc.createTextNode(String.valueOf(pattern.getPosition())));</span>
+<span class="fc" id="L262">			t.appendChild(order);</span>
+<span class="fc" id="L263">			final Element id = doc.createElement(Tag.DEVICE_ID);</span>
+<span class="fc" id="L264">			id.appendChild(doc.createTextNode(String.valueOf(pattern.getId())));</span>
+<span class="fc" id="L265">			t.appendChild(id);</span>
+<span class="fc" id="L266">			final Element family = doc.createElement(Tag.REGSTRING);</span>
+<span class="fc" id="L267">			family.appendChild(doc.createTextNode(RegularExpressionConverter.convertPatternToPerlRegex(pattern.getPattern())));</span>
+<span class="fc" id="L268">			t.appendChild(family);</span>
+<span class="fc" id="L269">			deviceTypesElement.appendChild(t);</span>
+<span class="fc" id="L270">		}</span>
+<span class="fc" id="L271">		return deviceTypesElement;</span>
+	}
+
+	private static Element createDevices(final Data data, final Document doc) {
+<span class="fc" id="L275">		final Element devicesElement = doc.createElement(Tag.DEVICES);</span>
+<span class="fc" id="L276">		final List&lt;Device&gt; devices = new ArrayList&lt;Device&gt;(data.getDevices());</span>
+<span class="fc" id="L277">		Collections.sort(devices, IdentifiableComparator.INSTANCE);</span>
+<span class="fc bfc" id="L278" title="All 2 branches covered.">		for (final Device device : devices) {</span>
+<span class="fc" id="L279">			devicesElement.appendChild(createDevice(device, doc));</span>
+		}
+<span class="fc" id="L281">		return devicesElement;</span>
+	}
+
+	private static Element createOperatingSystem(final OperatingSystem operatingSystem, final Document doc) {
+<span class="fc" id="L285">		final Element os = doc.createElement(Tag.OS);</span>
+<span class="fc" id="L286">		final Element id = doc.createElement(&quot;id&quot;);</span>
+<span class="fc" id="L287">		id.appendChild(doc.createTextNode(String.valueOf(operatingSystem.getId())));</span>
+<span class="fc" id="L288">		os.appendChild(id);</span>
+<span class="fc" id="L289">		final Element family = doc.createElement(Tag.FAMILY);</span>
+<span class="fc" id="L290">		family.appendChild(doc.createTextNode(operatingSystem.getFamily()));</span>
+<span class="fc" id="L291">		os.appendChild(family);</span>
+<span class="fc" id="L292">		final Element name = doc.createElement(Tag.NAME);</span>
+<span class="fc" id="L293">		name.appendChild(doc.createTextNode(operatingSystem.getName()));</span>
+<span class="fc" id="L294">		os.appendChild(name);</span>
+<span class="fc" id="L295">		final Element url = doc.createElement(Tag.URL);</span>
+<span class="fc" id="L296">		url.appendChild(doc.createCDATASection(operatingSystem.getUrl()));</span>
+<span class="fc" id="L297">		os.appendChild(url);</span>
+<span class="fc" id="L298">		final Element company = doc.createElement(Tag.COMPANY);</span>
+<span class="fc" id="L299">		company.appendChild(doc.createCDATASection(operatingSystem.getProducer()));</span>
+<span class="fc" id="L300">		os.appendChild(company);</span>
+<span class="fc" id="L301">		final Element companyUrl = doc.createElement(Tag.URL_COMPANY);</span>
+<span class="fc" id="L302">		companyUrl.appendChild(doc.createCDATASection(operatingSystem.getProducerUrl()));</span>
+<span class="fc" id="L303">		os.appendChild(companyUrl);</span>
+<span class="fc" id="L304">		final Element icon = doc.createElement(Tag.ICON);</span>
+<span class="fc" id="L305">		icon.appendChild(doc.createTextNode(operatingSystem.getIcon()));</span>
+<span class="fc" id="L306">		os.appendChild(icon);</span>
+<span class="fc" id="L307">		final Element botInfoUrl = doc.createElement(Tag.OS_INFO_URL);</span>
+<span class="fc" id="L308">		botInfoUrl.appendChild(doc.createTextNode(operatingSystem.getInfoUrl()));</span>
+<span class="fc" id="L309">		os.appendChild(botInfoUrl);</span>
+<span class="fc" id="L310">		return os;</span>
+	}
+
+	private static Element createOperatingSystemPatterns(final Data data, final Document doc) {
+<span class="fc" id="L314">		final List&lt;OperatingSystemPattern&gt; patterns = new ArrayList&lt;OperatingSystemPattern&gt;(data.getOperatingSystemPatterns().size());</span>
+<span class="fc bfc" id="L315" title="All 2 branches covered.">		for (final Entry&lt;Integer, SortedSet&lt;OperatingSystemPattern&gt;&gt; entry : data.getOperatingSystemPatterns().entrySet()) {</span>
+<span class="fc" id="L316">			patterns.addAll(entry.getValue());</span>
+		}
+<span class="fc" id="L318">		Collections.sort(patterns, new OrderedPatternComparator&lt;OperatingSystemPattern&gt;());</span>
+
+<span class="fc" id="L320">		final Element browserTypesElement = doc.createElement(Tag.OPERATING_SYSTEMS_REG);</span>
+<span class="fc bfc" id="L321" title="All 2 branches covered.">		for (final OperatingSystemPattern pattern : patterns) {</span>
+<span class="fc" id="L322">			final Element t = doc.createElement(Tag.OPERATING_SYSTEM_REG);</span>
+<span class="fc" id="L323">			final Element order = doc.createElement(Tag.ORDER);</span>
+<span class="fc" id="L324">			order.appendChild(doc.createTextNode(String.valueOf(pattern.getPosition())));</span>
+<span class="fc" id="L325">			t.appendChild(order);</span>
+<span class="fc" id="L326">			final Element id = doc.createElement(Tag.OS_ID);</span>
+<span class="fc" id="L327">			id.appendChild(doc.createTextNode(String.valueOf(pattern.getId())));</span>
+<span class="fc" id="L328">			t.appendChild(id);</span>
+<span class="fc" id="L329">			final Element family = doc.createElement(Tag.REGSTRING);</span>
+<span class="fc" id="L330">			family.appendChild(doc.createTextNode(RegularExpressionConverter.convertPatternToPerlRegex(pattern.getPattern())));</span>
+<span class="fc" id="L331">			t.appendChild(family);</span>
+<span class="fc" id="L332">			browserTypesElement.appendChild(t);</span>
+<span class="fc" id="L333">		}</span>
+<span class="fc" id="L334">		return browserTypesElement;</span>
+	}
+
+	private static Element createOperatingSystems(final Data data, final Document doc) {
+<span class="fc" id="L338">		final Element operatingSystemsElement = doc.createElement(Tag.OPERATING_SYSTEMS);</span>
+<span class="fc" id="L339">		final List&lt;OperatingSystem&gt; operatingSystems = new ArrayList&lt;OperatingSystem&gt;(data.getOperatingSystems());</span>
+<span class="fc" id="L340">		Collections.sort(operatingSystems, IdentifiableComparator.INSTANCE);</span>
+<span class="fc bfc" id="L341" title="All 2 branches covered.">		for (final OperatingSystem operatingSystem : operatingSystems) {</span>
+<span class="fc" id="L342">			operatingSystemsElement.appendChild(createOperatingSystem(operatingSystem, doc));</span>
+		}
+<span class="fc" id="L344">		return operatingSystemsElement;</span>
+	}
+
+	private static Element createRobots(final Data data, final Document doc) {
+<span class="fc" id="L348">		final Element robotsElement = doc.createElement(Tag.ROBOTS);</span>
+<span class="fc bfc" id="L349" title="All 2 branches covered.">		for (final Robot robot : data.getRobots()) {</span>
+<span class="fc" id="L350">			robotsElement.appendChild(createRobots(robot, doc));</span>
+		}
+<span class="fc" id="L352">		return robotsElement;</span>
+	}
+
+	private static Element createRobots(final Robot robot, final Document doc) {
+<span class="fc" id="L356">		final Element r = doc.createElement(Tag.ROBOT);</span>
+<span class="fc" id="L357">		final Element id = doc.createElement(Tag.ID);</span>
+<span class="fc" id="L358">		id.appendChild(doc.createTextNode(String.valueOf(robot.getId())));</span>
+<span class="fc" id="L359">		r.appendChild(id);</span>
+<span class="fc" id="L360">		final Element useragent = doc.createElement(Tag.USERAGENT);</span>
+<span class="fc" id="L361">		useragent.appendChild(doc.createCDATASection(robot.getUserAgentString()));</span>
+<span class="fc" id="L362">		r.appendChild(useragent);</span>
+<span class="fc" id="L363">		final Element family = doc.createElement(Tag.FAMILY);</span>
+<span class="fc" id="L364">		family.appendChild(doc.createTextNode(robot.getFamilyName()));</span>
+<span class="fc" id="L365">		r.appendChild(family);</span>
+<span class="fc" id="L366">		final Element name = doc.createElement(Tag.NAME);</span>
+<span class="fc" id="L367">		name.appendChild(doc.createTextNode(robot.getName()));</span>
+<span class="fc" id="L368">		r.appendChild(name);</span>
+<span class="fc" id="L369">		final Element company = doc.createElement(Tag.COMPANY);</span>
+<span class="fc" id="L370">		company.appendChild(doc.createCDATASection(robot.getProducer()));</span>
+<span class="fc" id="L371">		r.appendChild(company);</span>
+<span class="fc" id="L372">		final Element companyUrl = doc.createElement(Tag.URL_COMPANY);</span>
+<span class="fc" id="L373">		companyUrl.appendChild(doc.createCDATASection(robot.getProducerUrl()));</span>
+<span class="fc" id="L374">		r.appendChild(companyUrl);</span>
+<span class="fc" id="L375">		final Element icon = doc.createElement(Tag.ICON);</span>
+<span class="fc" id="L376">		icon.appendChild(doc.createTextNode(robot.getIcon()));</span>
+<span class="fc" id="L377">		r.appendChild(icon);</span>
+<span class="fc" id="L378">		final Element botInfoUrl = doc.createElement(Tag.BOT_INFO_URL);</span>
+<span class="fc" id="L379">		botInfoUrl.appendChild(doc.createTextNode(robot.getInfoUrl()));</span>
+<span class="fc" id="L380">		r.appendChild(botInfoUrl);</span>
+<span class="fc" id="L381">		return r;</span>
+	}
+
+	@Nonnull
+	static DocumentBuilder newDocumentBuilder() throws ParserConfigurationException {
+<span class="fc" id="L386">		final DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();</span>
+<span class="fc" id="L387">		return docFactory.newDocumentBuilder();</span>
+	}
+
+	static void transform(@Nonnull final Source xmlInput, @Nonnull final Result xmlOutput) throws TransformerException {
+<span class="fc" id="L391">		Check.notNull(xmlInput, &quot;xmlInput&quot;);</span>
+<span class="fc" id="L392">		Check.notNull(xmlOutput, &quot;xmlOutput&quot;);</span>
+
+<span class="fc" id="L394">		final TransformerFactory transformerFactory = TransformerFactory.newInstance();</span>
+<span class="fc" id="L395">		final Transformer transformer = transformerFactory.newTransformer();</span>
+<span class="fc" id="L396">		transformer.setOutputProperty(OutputKeys.INDENT, INDENT_OPTION);</span>
+<span class="fc" id="L397">		transformer.setOutputProperty(OutputKeys.DOCTYPE_SYSTEM, SCHEMA_URL);</span>
+<span class="fc" id="L398">		transformer.setOutputProperty(&quot;{http://xml.apache.org/xslt}indent-amount&quot;, INDENT_AMOUNT);</span>
+<span class="fc" id="L399">		transformer.transform(xmlInput, xmlOutput);</span>
+<span class="fc" id="L400">	}</span>
+
+	/**
+	 * Transforms a given {@code Data} instance into XML and writes it to the passed in {@code OutputStream}.
+	 * 
+	 * @param data
+	 *            {@code Data} to transform into XML
+	 * @param outputStream
+	 *            output stream to write
+	 * @throws ParserConfigurationException
+	 *             If a DocumentBuilder cannot be created which satisfies the configuration requested.
+	 * @throws TransformerException
+	 *             If an unrecoverable error occurs during the course of the transformation.
+	 */
+	public static void write(@Nonnull final Data data, @Nonnull final OutputStream outputStream) throws ParserConfigurationException,
+			TransformerException {
+<span class="fc" id="L416">		Check.notNull(data, &quot;data&quot;);</span>
+<span class="fc" id="L417">		Check.notNull(outputStream, &quot;outputStream&quot;);</span>
+
+<span class="fc" id="L419">		final Document doc = newDocumentBuilder().newDocument();</span>
+
+		// root element
+<span class="fc" id="L422">		final Element uasdataElement = doc.createElement(Tag.UASDATA);</span>
+<span class="fc" id="L423">		doc.appendChild(uasdataElement);</span>
+
+		// description element
+<span class="fc" id="L426">		uasdataElement.appendChild(createDescription(data, doc));</span>
+
+		// data element
+<span class="fc" id="L429">		final Element dataElement = doc.createElement(Tag.DATA);</span>
+<span class="fc" id="L430">		uasdataElement.appendChild(dataElement);</span>
+
+<span class="fc" id="L432">		dataElement.appendChild(createRobots(data, doc));</span>
+<span class="fc" id="L433">		dataElement.appendChild(createOperatingSystems(data, doc));</span>
+<span class="fc" id="L434">		dataElement.appendChild(createBrowsers(data, doc));</span>
+<span class="fc" id="L435">		dataElement.appendChild(createBrowserTypes(data, doc));</span>
+<span class="fc" id="L436">		dataElement.appendChild(createBrowserPatterns(data, doc));</span>
+<span class="fc" id="L437">		dataElement.appendChild(createBrowserOperatingSystemMappings(data, doc));</span>
+<span class="fc" id="L438">		dataElement.appendChild(createOperatingSystemPatterns(data, doc));</span>
+<span class="fc" id="L439">		dataElement.appendChild(createDevices(data, doc));</span>
+<span class="fc" id="L440">		dataElement.appendChild(createDevicePatterns(data, doc));</span>
+
+		// write the content to output stream
+<span class="fc" id="L443">		final DOMSource source = new DOMSource(doc);</span>
+<span class="fc" id="L444">		final StreamResult result = new StreamResult(outputStream);</span>
+<span class="fc" id="L445">		transform(source, result);</span>
+<span class="fc" id="L446">	}</span>
+
+	/**
+	 * &lt;strong&gt;Attention:&lt;/strong&gt; This class is not intended to create objects from it.
+	 */
+<span class="nc" id="L451">	private XmlDataWriter() {</span>
+		// This class is not intended to create objects from it.
+<span class="nc" id="L453">	}</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.6.2.201302030002</span></div></body></html>

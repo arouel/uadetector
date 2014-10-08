@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>UpdateOperationWithCacheFileTask.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="right"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">UADetector :: Core</a> &gt; <a href="index.html" class="el_package">net.sf.uadetector.datastore</a> &gt; <span class="el_source">UpdateOperationWithCacheFileTask.java</span></div><h1>UpdateOperationWithCacheFileTask.java</h1><pre class="source lang-java linenums">/*******************************************************************************
+ * Copyright 2013 André Rouél
+ * 
+ * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ ******************************************************************************/
+package net.sf.uadetector.datastore;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.net.URL;
+import java.nio.charset.Charset;
+
+import javax.annotation.Nonnull;
+
+import net.sf.qualitycheck.Check;
+import net.sf.uadetector.exception.CanNotOpenStreamException;
+import net.sf.uadetector.internal.data.Data;
+import net.sf.uadetector.internal.util.Closeables;
+import net.sf.uadetector.internal.util.FileUtil;
+import net.sf.uadetector.internal.util.UrlUtil;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+final class UpdateOperationWithCacheFileTask extends AbstractUpdateOperation {
+
+	/**
+	 * Corresponding default logger of this class
+	 */
+<span class="fc" id="L41">	private static final Logger LOG = LoggerFactory.getLogger(UpdateOperationWithCacheFileTask.class);</span>
+
+	/**
+	 * Message for the log when issues occur during reading of or writing to the cache file.
+	 */
+	private static final String MSG_CACHE_FILE_ISSUES = &quot;Issues occured during reading of or writing to the cache file: %s&quot;;
+
+	/**
+	 * Message for the log if the passed resources are the same and an update makes no sense
+	 */
+	private static final String MSG_SAME_RESOURCES = &quot;The passed URL and file resources are the same. An update was not performed.&quot;;
+
+	/**
+	 * Creates a temporary file near the passed file. The name of the given one will be used and the suffix &quot;.temp&quot; will
+	 * be added.
+	 * 
+	 * @param file
+	 *            file in which the entire contents from the given URL can be saved
+	 * @throws IllegalStateException
+	 *             if the file can not be deleted
+	 */
+	protected static File createTemporaryFile(@Nonnull final File file) {
+<span class="fc" id="L63">		Check.notNull(file, &quot;file&quot;);</span>
+
+<span class="fc" id="L65">		final File tempFile = new File(file.getParent(), file.getName() + &quot;.temp&quot;);</span>
+
+		// remove orphaned temporary file
+<span class="fc" id="L68">		deleteFile(tempFile);</span>
+
+<span class="fc" id="L70">		return tempFile;</span>
+	}
+
+	/**
+	 * Removes the given file.
+	 * 
+	 * @param file
+	 *            a file which should be deleted
+	 * 
+	 * @throws net.sf.qualitycheck.exception.IllegalNullArgumentException
+	 *             if the given argument is {@code null}
+	 * @throws net.sf.qualitycheck.exception.IllegalStateOfArgumentException
+	 *             if the file can not be deleted
+	 */
+	protected static void deleteFile(@Nonnull final File file) {
+<span class="fc" id="L85">		Check.notNull(file, &quot;file&quot;);</span>
+<span class="fc bfc" id="L86" title="All 4 branches covered.">		Check.stateIsTrue(!file.exists() || file.delete(), &quot;Cannot delete file '%s'.&quot;, file.getPath());</span>
+<span class="fc" id="L87">	}</span>
+
+	/**
+	 * Checks if the given file is empty.
+	 * 
+	 * @param file
+	 *            the file that could be empty
+	 * @return {@code true} when the file is accessible and empty otherwise {@code false}
+	 * @throws IllegalStateException
+	 *             if an I/O error occurs
+	 */
+	private static boolean isEmpty(@Nonnull final File file, @Nonnull final Charset charset) {
+		try {
+<span class="fc" id="L100">			return FileUtil.isEmpty(file, charset);</span>
+<span class="fc" id="L101">		} catch (final IOException e) {</span>
+<span class="fc" id="L102">			throw new IllegalStateException(&quot;The given file could not be read.&quot;);</span>
+		}
+	}
+
+	/**
+	 * Checks that {@code older} {@link Data} has a lower version number than the {@code newer} one.
+	 * 
+	 * @param older
+	 *            possibly older {@code Data}
+	 * @param newer
+	 *            possibly newer {@code Data}
+	 * @return {@code true} if the {@code newer} Data is really newer, otherwise {@code false}
+	 */
+	protected static boolean isNewerData(@Nonnull final Data older, @Nonnull final Data newer) {
+<span class="fc bfc" id="L116" title="All 2 branches covered.">		return newer.getVersion().compareTo(older.getVersion()) &gt; 0;</span>
+	}
+
+	/**
+	 * Reads the content from the given {@link URL} and saves it to the passed file.
+	 * 
+	 * @param file
+	 *            file in which the entire contents from the given URL can be saved
+	 * @param store
+	 *            a data store for &lt;em&gt;UAS data&lt;/em&gt;
+	 * @throws net.sf.qualitycheck.exception.IllegalNullArgumentException
+	 *             if any of the passed arguments is {@code null}
+	 * @throws IOException
+	 *             if an I/O error occurs
+	 */
+	protected static void readAndSave(@Nonnull final File file, @Nonnull final DataStore store) throws IOException {
+<span class="fc" id="L132">		Check.notNull(file, &quot;file&quot;);</span>
+<span class="fc" id="L133">		Check.notNull(store, &quot;store&quot;);</span>
+
+<span class="fc" id="L135">		final URL url = store.getDataUrl();</span>
+<span class="fc" id="L136">		final Charset charset = store.getCharset();</span>
+
+<span class="fc" id="L138">		final boolean isEqual = url.toExternalForm().equals(UrlUtil.toUrl(file).toExternalForm());</span>
+<span class="fc bfc" id="L139" title="All 2 branches covered.">		if (!isEqual) {</span>
+
+			// check if the data can be read in successfully
+<span class="fc" id="L142">			final String data = UrlUtil.read(url, charset);</span>
+<span class="fc bfc" id="L143" title="All 2 branches covered.">			if (Data.EMPTY.equals(store.getDataReader().read(data))) {</span>
+<span class="fc" id="L144">				throw new IllegalStateException(&quot;The read in content can not be transformed to an instance of 'Data'.&quot;);</span>
+			}
+
+<span class="fc" id="L147">			final File tempFile = createTemporaryFile(file);</span>
+
+<span class="fc" id="L149">			FileOutputStream outputStream = null;</span>
+<span class="fc" id="L150">			boolean threw = true;</span>
+			try {
+				// write data to temporary file
+<span class="fc" id="L153">				outputStream = new FileOutputStream(tempFile);</span>
+<span class="fc" id="L154">				outputStream.write(data.getBytes(charset));</span>
+
+				// delete the original file
+<span class="fc" id="L157">				deleteFile(file);</span>
+
+<span class="fc" id="L159">				threw = false;</span>
+			} finally {
+<span class="pc" id="L161">				Closeables.close(outputStream, threw);</span>
+<span class="fc" id="L162">			}</span>
+
+			// rename the new file to the original one
+<span class="fc" id="L165">			renameFile(tempFile, file);</span>
+<span class="fc" id="L166">		} else {</span>
+<span class="fc" id="L167">			LOG.debug(MSG_SAME_RESOURCES);</span>
+		}
+<span class="fc" id="L169">	}</span>
+
+	/**
+	 * Renames the given file {@code from} to the new file {@code to}.
+	 * 
+	 * @param from
+	 *            an existing file
+	 * @param to
+	 *            a new file
+	 * 
+	 * @throws net.sf.qualitycheck.exception.IllegalNullArgumentException
+	 *             if one of the given arguments is {@code null}
+	 * @throws net.sf.qualitycheck.exception.IllegalStateOfArgumentException
+	 *             if the file can not be renamed
+	 */
+	protected static void renameFile(@Nonnull final File from, @Nonnull final File to) {
+<span class="fc" id="L185">		Check.notNull(from, &quot;from&quot;);</span>
+<span class="fc" id="L186">		Check.stateIsTrue(from.exists(), &quot;Argument 'from' must not be an existing file.&quot;);</span>
+<span class="fc" id="L187">		Check.notNull(to, &quot;to&quot;);</span>
+<span class="fc" id="L188">		Check.stateIsTrue(from.renameTo(to), &quot;Renaming file from '%s' to '%s' failed.&quot;, from.getAbsolutePath(), to.getAbsolutePath());</span>
+<span class="fc" id="L189">	}</span>
+
+	/**
+	 * File to cache read in &lt;em&gt;UAS data&lt;/em&gt;
+	 */
+	private final File cacheFile;
+
+	/**
+	 * The data store for instances that implements {@link net.sf.uadetector.internal.data.Data}
+	 */
+	private final AbstractRefreshableDataStore store;
+
+	public UpdateOperationWithCacheFileTask(@Nonnull final AbstractRefreshableDataStore dataStore, @Nonnull final File cacheFile) {
+<span class="fc" id="L202">		super(dataStore);</span>
+<span class="fc" id="L203">		Check.notNull(dataStore, &quot;dataStore&quot;);</span>
+<span class="fc" id="L204">		Check.notNull(cacheFile, &quot;cacheFile&quot;);</span>
+<span class="fc" id="L205">		store = dataStore;</span>
+<span class="fc" id="L206">		this.cacheFile = cacheFile;</span>
+<span class="fc" id="L207">	}</span>
+
+	@Override
+	public void call() {
+<span class="fc" id="L211">		readDataIfNewerAvailable();</span>
+<span class="fc" id="L212">	}</span>
+
+	private boolean isCacheFileEmpty() {
+<span class="fc" id="L215">		return isEmpty(cacheFile, store.getCharset());</span>
+	}
+
+	private void readDataIfNewerAvailable() {
+		try {
+<span class="fc bfc" id="L220" title="All 4 branches covered.">			if (isUpdateAvailable() || isCacheFileEmpty()) {</span>
+<span class="fc" id="L221">				readAndSave(cacheFile, store);</span>
+<span class="fc" id="L222">				store.setData(store.getDataReader().read(cacheFile.toURI().toURL(), store.getCharset()));</span>
+			}
+<span class="fc" id="L224">		} catch (final CanNotOpenStreamException e) {</span>
+<span class="fc" id="L225">			LOG.warn(String.format(RefreshableDataStore.MSG_URL_NOT_READABLE, e.getLocalizedMessage()));</span>
+<span class="fc" id="L226">			readFallbackData();</span>
+<span class="fc" id="L227">		} catch (final RuntimeException e) {</span>
+<span class="fc" id="L228">			LOG.warn(RefreshableDataStore.MSG_FAULTY_CONTENT, e);</span>
+<span class="fc" id="L229">			readFallbackData();</span>
+<span class="nc" id="L230">		} catch (final IOException e) {</span>
+<span class="nc" id="L231">			LOG.warn(String.format(MSG_CACHE_FILE_ISSUES, e.getLocalizedMessage()), e);</span>
+<span class="nc" id="L232">			readFallbackData();</span>
+<span class="fc" id="L233">		}</span>
+<span class="fc" id="L234">	}</span>
+
+	private void readFallbackData() {
+<span class="fc" id="L237">		LOG.info(&quot;Reading fallback data...&quot;);</span>
+		try {
+<span class="pc bpc" id="L239" title="1 of 2 branches missed.">			if (isCacheFileEmpty()) {</span>
+<span class="fc" id="L240">				readAndSave(cacheFile, store.getFallback());</span>
+<span class="fc" id="L241">				final Data data = store.getDataReader().read(cacheFile.toURI().toURL(), store.getCharset());</span>
+<span class="fc bfc" id="L242" title="All 2 branches covered.">				if (isNewerData(store.getData(), data)) {</span>
+<span class="fc" id="L243">					store.setData(data);</span>
+				}
+			}
+<span class="nc" id="L246">		} catch (final CanNotOpenStreamException e) {</span>
+<span class="nc" id="L247">			LOG.warn(String.format(RefreshableDataStore.MSG_URL_NOT_READABLE, e.getLocalizedMessage()));</span>
+<span class="fc" id="L248">		} catch (final RuntimeException e) {</span>
+<span class="fc" id="L249">			LOG.warn(RefreshableDataStore.MSG_FAULTY_CONTENT, e);</span>
+<span class="nc" id="L250">		} catch (final IOException e) {</span>
+<span class="nc" id="L251">			LOG.warn(String.format(MSG_CACHE_FILE_ISSUES, e.getLocalizedMessage()), e);</span>
+<span class="pc" id="L252">		}</span>
+<span class="fc" id="L253">	}</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.6.2.201302030002</span></div></body></html>

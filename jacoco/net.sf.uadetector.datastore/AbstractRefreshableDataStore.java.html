@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>AbstractRefreshableDataStore.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="right"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">UADetector :: Core</a> &gt; <a href="index.html" class="el_package">net.sf.uadetector.datastore</a> &gt; <span class="el_source">AbstractRefreshableDataStore.java</span></div><h1>AbstractRefreshableDataStore.java</h1><pre class="source lang-java linenums">/*******************************************************************************
+ * Copyright 2013 André Rouél
+ * 
+ * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ ******************************************************************************/
+package net.sf.uadetector.datastore;
+
+import java.net.URL;
+import java.nio.charset.Charset;
+
+import javax.annotation.Nonnull;
+
+import net.sf.qualitycheck.Check;
+import net.sf.qualitycheck.exception.IllegalStateOfArgumentException;
+import net.sf.uadetector.datareader.DataReader;
+import net.sf.uadetector.exception.CanNotOpenStreamException;
+import net.sf.uadetector.internal.data.Data;
+import net.sf.uadetector.internal.util.UrlUtil;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+/**
+ * This abstract implementation provides basic update functionality to be able to update the &lt;em&gt;UAS data&lt;/em&gt; in your
+ * data store. During initialization the passed in fallback data store will be used and an update process will be
+ * triggered. The update operation itself works as background task to avoid blocking (for example when reading data by a
+ * network connection and the remote host is not available or really slow).
+ * &lt;p&gt;
+ * Such a store must always have an usable instance of {@link Data} and should be initialized with the supplied UAS file
+ * in the &lt;em&gt;uadetector-resources&lt;/em&gt; module.
+ * 
+ * @author André Rouél
+ */
+public abstract class AbstractRefreshableDataStore implements RefreshableDataStore {
+
+	/**
+	 * Corresponding default logger for this class
+	 */
+<span class="fc" id="L49">	private static final Logger LOG = LoggerFactory.getLogger(AbstractRefreshableDataStore.class);</span>
+
+	/**
+	 * Runtime check that the passed instance of {@link Data} is not empty (respectively {@link Data#EMPTY}).
+	 * 
+	 * @param data
+	 *            instance of {@code Data}
+	 * @throws net.sf.qualitycheck.exception.IllegalStateOfArgumentException
+	 *             if the passed instance is empty
+	 */
+	private static Data checkData(final Data data) {
+<span class="fc bfc" id="L60" title="All 2 branches covered.">		if (Data.EMPTY.equals(data)) {</span>
+<span class="fc" id="L61">			throw new IllegalStateOfArgumentException(&quot;Argument 'data' must not be empty.&quot;);</span>
+		}
+<span class="fc" id="L63">		return data;</span>
+	}
+
+	/**
+	 * Current the character set in which the &lt;em&gt;UAS data&lt;/em&gt; will be read
+	 */
+	private final Charset charset;
+
+	/**
+	 * Current &lt;em&gt;UAS data&lt;/em&gt;
+	 */
+	private Data data;
+
+	/**
+	 * The {@code URL} to get &lt;em&gt;UAS data&lt;/em&gt;
+	 */
+	private final URL dataUrl;
+
+	/**
+	 * Default data store which will be used during initialization of a {@code DataStore} and can be used in emergency
+	 * cases.
+	 */
+	private final DataStore fallback;
+
+	/**
+	 * The data reader to read in &lt;em&gt;UAS data&lt;/em&gt;
+	 */
+	private final DataReader reader;
+
+	/**
+	 * Update operation which runs itself in background (non-blocking)
+	 */
+<span class="fc" id="L95">	private UpdateOperation updateOperation = new UpdateOperationTask(this);</span>
+
+	/**
+	 * The {@code URL} to get the latest version information of &lt;em&gt;UAS data&lt;/em&gt;
+	 */
+	private final URL versionUrl;
+
+	/**
+	 * Constructs an {@code AbstractDataStore} by reading the given {@code dataUrl} as &lt;em&gt;UAS data&lt;/em&gt;.
+	 * 
+	 * @param reader
+	 *            data reader to read the given {@code dataUrl}
+	 * @param dataUrl
+	 *            URL to &lt;em&gt;UAS data&lt;/em&gt;
+	 * @param versionUrl
+	 *            URL to version information about the given &lt;em&gt;UAS data&lt;/em&gt;
+	 * @param charset
+	 *            the character set in which the data should be read
+	 * @param fallback
+	 *            &lt;em&gt;UAS data&lt;/em&gt; as fallback in case the data on the specified resource can not be read correctly
+	 * @throws net.sf.qualitycheck.exception.IllegalNullArgumentException
+	 *             if one of the given arguments is {@code null}
+	 * @throws net.sf.qualitycheck.exception.IllegalStateOfArgumentException
+	 *             if the given strings are not valid URLs
+	 */
+	protected AbstractRefreshableDataStore(@Nonnull final DataReader reader, @Nonnull final String dataUrl,
+			@Nonnull final String versionUrl, @Nonnull final Charset charset, @Nonnull final DataStore fallback) {
+<span class="fc" id="L122">		this(reader, UrlUtil.build(dataUrl), UrlUtil.build(versionUrl), charset, fallback);</span>
+<span class="fc" id="L123">	}</span>
+
+	/**
+	 * Constructs an {@code AbstractDataStore} by reading the given {@code dataUrl} as &lt;em&gt;UAS data&lt;/em&gt;.
+	 * 
+	 * @param reader
+	 *            data reader to read the given {@code dataUrl}
+	 * @param dataUrl
+	 *            URL to &lt;em&gt;UAS data&lt;/em&gt;
+	 * @param versionUrl
+	 *            URL to version information about the given &lt;em&gt;UAS data&lt;/em&gt;
+	 * @param charset
+	 *            the character set in which the data should be read
+	 * @param fallback
+	 *            &lt;em&gt;UAS data&lt;/em&gt; as fallback in case the data on the specified resource can not be read correctly
+	 * @throws net.sf.qualitycheck.exception.IllegalNullArgumentException
+	 *             if the given argument is {@code null}
+	 * @throws net.sf.qualitycheck.exception.IllegalStateOfArgumentException
+	 *             if the created instance of {@link Data} is empty
+	 */
+	protected AbstractRefreshableDataStore(@Nonnull final DataReader reader, @Nonnull final URL dataUrl, @Nonnull final URL versionUrl,
+<span class="fc" id="L144">			@Nonnull final Charset charset, final DataStore fallback) {</span>
+<span class="fc" id="L145">		Check.notNull(reader, &quot;reader&quot;);</span>
+<span class="fc" id="L146">		Check.notNull(charset, &quot;charset&quot;);</span>
+<span class="fc" id="L147">		Check.notNull(dataUrl, &quot;dataUrl&quot;);</span>
+<span class="fc" id="L148">		Check.notNull(versionUrl, &quot;versionUrl&quot;);</span>
+<span class="fc" id="L149">		Check.notNull(fallback, &quot;fallback&quot;);</span>
+
+<span class="fc" id="L151">		this.reader = reader;</span>
+<span class="fc" id="L152">		this.dataUrl = dataUrl;</span>
+<span class="fc" id="L153">		this.versionUrl = versionUrl;</span>
+<span class="fc" id="L154">		this.charset = charset;</span>
+<span class="fc" id="L155">		this.fallback = fallback;</span>
+
+<span class="fc" id="L157">		data = checkData(fallback.getData());</span>
+<span class="fc" id="L158">	}</span>
+
+	@Override
+	public Charset getCharset() {
+<span class="fc" id="L162">		return charset;</span>
+	}
+
+	@Override
+	public Data getData() {
+<span class="fc" id="L167">		return data;</span>
+	}
+
+	@Override
+	public DataReader getDataReader() {
+<span class="fc" id="L172">		return reader;</span>
+	}
+
+	@Override
+	public URL getDataUrl() {
+<span class="fc" id="L177">		return dataUrl;</span>
+	}
+
+	@Override
+	public DataStore getFallback() {
+<span class="fc" id="L182">		return fallback;</span>
+	}
+
+	@Override
+	public UpdateOperation getUpdateOperation() {
+<span class="fc" id="L187">		return updateOperation;</span>
+	}
+
+	@Override
+	public URL getVersionUrl() {
+<span class="fc" id="L192">		return versionUrl;</span>
+	}
+
+	/**
+	 * Triggers the update of the &lt;code&gt;DataStore&lt;/code&gt;. When this action is executed, the current data URL will be
+	 * read in and the &lt;code&gt;DataReader&lt;/code&gt; parses and builds a new Data instance. Finally, the currently set
+	 * &lt;code&gt;Data&lt;/code&gt; reference will be replaced by the new one.
+	 * &lt;p&gt;
+	 * &lt;b&gt;Attention&lt;/b&gt;: This method is implemented as background task. You can not assume that you immediately get an
+	 * updated data store.
+	 */
+	@Override
+	public void refresh() {
+		try {
+<span class="fc" id="L206">			updateOperation.run();</span>
+<span class="nc" id="L207">		} catch (final CanNotOpenStreamException e) {</span>
+<span class="nc" id="L208">			LOG.warn(String.format(MSG_URL_NOT_READABLE, e.getLocalizedMessage()));</span>
+<span class="nc" id="L209">		} catch (final IllegalArgumentException e) {</span>
+<span class="nc" id="L210">			LOG.warn(MSG_FAULTY_CONTENT + &quot; &quot; + e.getLocalizedMessage());</span>
+<span class="nc" id="L211">		} catch (final RuntimeException e) {</span>
+<span class="nc" id="L212">			LOG.warn(MSG_FAULTY_CONTENT, e);</span>
+<span class="pc" id="L213">		}</span>
+<span class="fc" id="L214">	}</span>
+
+	/**
+	 * Sets new &lt;em&gt;UAS data&lt;/em&gt; in the store.
+	 * 
+	 * @param data
+	 *            &lt;em&gt;UAS data&lt;/em&gt; to override the current ({@code null} is not allowed)
+	 * @throws net.sf.qualitycheck.exception.IllegalNullArgumentException
+	 *             if the given argument is {@code null}
+	 * @throws net.sf.qualitycheck.exception.IllegalStateOfArgumentException
+	 *             if the given instance of {@code Data} is empty
+	 */
+	protected void setData(@Nonnull final Data data) {
+<span class="fc" id="L227">		Check.notNull(data, &quot;data&quot;);</span>
+
+<span class="fc" id="L229">		this.data = checkData(data);</span>
+
+		// add some useful UAS data informations to the log
+<span class="fc bfc" id="L232" title="All 2 branches covered.">		if (LOG.isDebugEnabled()) {</span>
+<span class="fc" id="L233">			LOG.debug(data.toStats());</span>
+		}
+<span class="fc" id="L235">	}</span>
+
+	/**
+	 * Sets a new update operation.
+	 * 
+	 * @param updateOperation
+	 *            operation to override the current ({@code null} is not allowed)
+	 * @throws net.sf.qualitycheck.exception.IllegalNullArgumentException
+	 *             if the given argument is {@code null}
+	 */
+	protected void setUpdateOperation(@Nonnull final UpdateOperation updateOperation) {
+<span class="fc" id="L246">		Check.notNull(updateOperation, &quot;updateOperation&quot;);</span>
+<span class="fc" id="L247">		this.updateOperation = updateOperation;</span>
+<span class="fc" id="L248">	}</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.6.2.201302030002</span></div></body></html>

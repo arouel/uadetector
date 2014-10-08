@@ -1,0 +1,340 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>Robot.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="right"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">UADetector :: Core</a> &gt; <a href="index.html" class="el_package">net.sf.uadetector.internal.data.domain</a> &gt; <span class="el_source">Robot.java</span></div><h1>Robot.java</h1><pre class="source lang-java linenums">/*******************************************************************************
+ * Copyright 2012 André Rouél
+ * 
+ * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ ******************************************************************************/
+package net.sf.uadetector.internal.data.domain;
+
+import java.io.Serializable;
+
+import javax.annotation.Nonnegative;
+import javax.annotation.Nonnull;
+import javax.annotation.concurrent.Immutable;
+import javax.annotation.concurrent.NotThreadSafe;
+
+import net.sf.qualitycheck.Check;
+import net.sf.uadetector.UserAgent;
+import net.sf.uadetector.UserAgentFamily;
+import net.sf.uadetector.UserAgentType;
+
+@Immutable
+public final class Robot implements Identifiable, Serializable {
+
+	@NotThreadSafe
+	public static final class Builder {
+
+		private static final String EMPTY = &quot;&quot;;
+
+<span class="fc" id="L38">		@Nonnull</span>
+		private UserAgentFamily family = UserAgentFamily.UNKNOWN;
+
+<span class="fc" id="L41">		@Nonnull</span>
+		private String familyName = EMPTY;
+
+<span class="fc" id="L44">		@Nonnull</span>
+		private String icon = EMPTY;
+
+<span class="fc" id="L47">		private int id = Integer.MIN_VALUE;</span>
+
+<span class="fc" id="L49">		@Nonnull</span>
+		private String infoUrl = EMPTY;
+
+<span class="fc" id="L52">		@Nonnull</span>
+		private String name = EMPTY;
+
+<span class="fc" id="L55">		@Nonnull</span>
+		private String producer = EMPTY;
+
+<span class="fc" id="L58">		@Nonnull</span>
+		private String producerUrl = EMPTY;
+
+<span class="fc" id="L61">		@Nonnull</span>
+		private String userAgentString = EMPTY;
+
+<span class="fc" id="L64">		public Builder() {</span>
+			// default constructor
+<span class="fc" id="L66">		}</span>
+
+<span class="fc" id="L68">		public Builder(@Nonnull final Robot robot) {</span>
+<span class="fc" id="L69">			Check.notNull(robot, &quot;robot&quot;);</span>
+<span class="fc" id="L70">			id = Check.notNegative(robot.getId(), &quot;robot.getId()&quot;);</span>
+<span class="fc" id="L71">			name = Check.notNull(robot.getName(), &quot;robot.getName()&quot;);</span>
+<span class="fc" id="L72">			family = Check.notNull(robot.getFamily(), &quot;robot.getFamily()&quot;);</span>
+<span class="fc" id="L73">			familyName = Check.notNull(robot.getFamilyName(), &quot;robot.getFamilyName()&quot;);</span>
+<span class="fc" id="L74">			infoUrl = Check.notNull(robot.getInfoUrl(), &quot;robot.getInfoUrl()&quot;);</span>
+<span class="fc" id="L75">			producer = Check.notNull(robot.getProducer(), &quot;robot.getProducer()&quot;);</span>
+<span class="fc" id="L76">			producerUrl = Check.notNull(robot.getProducerUrl(), &quot;robot.getProducerUrl()&quot;);</span>
+<span class="fc" id="L77">			userAgentString = Check.notNull(robot.getUserAgentString(), &quot;robot.getUserAgentString()&quot;);</span>
+<span class="fc" id="L78">			icon = Check.notNull(robot.getIcon(), &quot;robot.getIcon()&quot;);</span>
+<span class="fc" id="L79">		}</span>
+
+		@Nonnull
+		public Robot build() {
+<span class="fc" id="L83">			return new Robot(id, name, family, familyName, infoUrl, producer, producerUrl, userAgentString, icon);</span>
+		}
+
+		@Nonnull
+		public Builder setFamilyName(@Nonnull final String familyName) {
+<span class="fc" id="L88">			this.familyName = Check.notNull(familyName, &quot;familyName&quot;);</span>
+<span class="fc" id="L89">			family = UserAgentFamily.evaluate(familyName);</span>
+<span class="fc" id="L90">			return this;</span>
+		}
+
+		@Nonnull
+		public Builder setIcon(@Nonnull final String icon) {
+<span class="fc" id="L95">			this.icon = Check.notNull(icon, &quot;icon&quot;);</span>
+<span class="fc" id="L96">			return this;</span>
+		}
+
+		@Nonnull
+		public Builder setId(@Nonnegative final int id) {
+<span class="fc" id="L101">			this.id = Check.notNegative(id, &quot;id&quot;);</span>
+<span class="fc" id="L102">			return this;</span>
+		}
+
+		@Nonnull
+		public Builder setId(@Nonnull final String id) {
+<span class="fc" id="L107">			this.id = Integer.parseInt(Check.notEmpty(id, &quot;id&quot;));</span>
+<span class="fc" id="L108">			return this;</span>
+		}
+
+		@Nonnull
+		public Builder setInfoUrl(@Nonnull final String infoUrl) {
+<span class="fc" id="L113">			this.infoUrl = Check.notNull(infoUrl, &quot;infoUrl&quot;);</span>
+<span class="fc" id="L114">			return this;</span>
+		}
+
+		@Nonnull
+		public Builder setName(@Nonnull final String name) {
+<span class="fc" id="L119">			this.name = Check.notNull(name, &quot;name&quot;);</span>
+<span class="fc" id="L120">			return this;</span>
+		}
+
+		@Nonnull
+		public Builder setProducer(@Nonnull final String producer) {
+<span class="fc" id="L125">			this.producer = Check.notNull(producer, &quot;producer&quot;);</span>
+<span class="fc" id="L126">			return this;</span>
+		}
+
+		@Nonnull
+		public Builder setProducerUrl(@Nonnull final String producerUrl) {
+<span class="fc" id="L131">			this.producerUrl = Check.notNull(producerUrl, &quot;producerUrl&quot;);</span>
+<span class="fc" id="L132">			return this;</span>
+		}
+
+		@Nonnull
+		public Builder setUserAgentString(@Nonnull final String userAgentString) {
+<span class="fc" id="L137">			this.userAgentString = Check.notNull(userAgentString, &quot;userAgentString&quot;);</span>
+<span class="fc" id="L138">			return this;</span>
+		}
+
+	}
+
+	private static final long serialVersionUID = -605392434061575985L;
+
+	/**
+	 * Default type name to support the classification against corresponding enum later
+	 */
+	public static final String TYPENAME = &quot;Robot&quot;;
+
+	private static int buildHashCode(@Nonnegative final int id, @Nonnull final String name, @Nonnull final UserAgentFamily family,
+			@Nonnull final String familyName, @Nonnull final String infoUrl, @Nonnull final String producer,
+			@Nonnull final String producerUrl, @Nonnull final String userAgentString, @Nonnull final String icon) {
+<span class="fc" id="L153">		final int prime = 31;</span>
+<span class="fc" id="L154">		int result = 1;</span>
+<span class="fc" id="L155">		result = prime * result + id;</span>
+<span class="fc" id="L156">		result = prime * result + name.hashCode();</span>
+<span class="fc" id="L157">		result = prime * result + family.hashCode();</span>
+<span class="fc" id="L158">		result = prime * result + familyName.hashCode();</span>
+<span class="fc" id="L159">		result = prime * result + infoUrl.hashCode();</span>
+<span class="fc" id="L160">		result = prime * result + producer.hashCode();</span>
+<span class="fc" id="L161">		result = prime * result + producerUrl.hashCode();</span>
+<span class="fc" id="L162">		result = prime * result + userAgentString.hashCode();</span>
+<span class="fc" id="L163">		result = prime * result + icon.hashCode();</span>
+<span class="fc" id="L164">		return result;</span>
+	}
+
+	@Nonnull
+	private final UserAgentFamily family;
+
+	@Nonnull
+	private final String familyName;
+
+	private final int hash;
+
+	@Nonnull
+	private final String icon;
+
+	@Nonnegative
+	private final int id;
+
+	@Nonnull
+	private final String infoUrl;
+
+	@Nonnull
+	private final String name;
+
+	@Nonnull
+	private final String producer;
+
+	@Nonnull
+	private final String producerUrl;
+
+	@Nonnull
+	private final String userAgentString;
+
+	public Robot(@Nonnegative final int id, @Nonnull final String name, @Nonnull final UserAgentFamily family,
+			@Nonnull final String familyName, @Nonnull final String infoUrl, @Nonnull final String producer,
+<span class="fc" id="L198">			@Nonnull final String producerUrl, @Nonnull final String userAgentString, @Nonnull final String icon) {</span>
+<span class="fc" id="L199">		this.id = Check.notNegative(id, &quot;id&quot;);</span>
+<span class="fc" id="L200">		this.name = Check.notNull(name, &quot;name&quot;);</span>
+<span class="fc" id="L201">		this.family = Check.notNull(family, &quot;family&quot;);</span>
+<span class="fc" id="L202">		this.familyName = Check.notNull(familyName, &quot;familyName&quot;);</span>
+<span class="fc" id="L203">		this.infoUrl = Check.notNull(infoUrl, &quot;infoUrl&quot;);</span>
+<span class="fc" id="L204">		this.producer = Check.notNull(producer, &quot;producer&quot;);</span>
+<span class="fc" id="L205">		this.producerUrl = Check.notNull(producerUrl, &quot;producerUrl&quot;);</span>
+<span class="fc" id="L206">		this.userAgentString = Check.notNull(userAgentString, &quot;userAgentString&quot;);</span>
+<span class="fc" id="L207">		this.icon = Check.notNull(icon, &quot;icon&quot;);</span>
+<span class="fc" id="L208">		hash = buildHashCode(id, name, family, familyName, infoUrl, producer, producerUrl, userAgentString, icon);</span>
+<span class="fc" id="L209">	}</span>
+
+	public void copyTo(@Nonnull final UserAgent.Builder builder) {
+<span class="fc" id="L212">		builder.setFamily(family);</span>
+<span class="fc" id="L213">		builder.setIcon(icon);</span>
+<span class="fc" id="L214">		builder.setName(name);</span>
+<span class="fc" id="L215">		builder.setProducer(producer);</span>
+<span class="fc" id="L216">		builder.setProducerUrl(producerUrl);</span>
+<span class="fc" id="L217">		builder.setUrl(infoUrl);</span>
+<span class="fc" id="L218">		builder.setType(UserAgentType.ROBOT);</span>
+<span class="fc" id="L219">	}</span>
+
+	@Override
+	public boolean equals(final Object obj) {
+<span class="fc bfc" id="L223" title="All 2 branches covered.">		if (this == obj) {</span>
+<span class="fc" id="L224">			return true;</span>
+		}
+<span class="fc bfc" id="L226" title="All 2 branches covered.">		if (obj == null) {</span>
+<span class="fc" id="L227">			return false;</span>
+		}
+<span class="fc bfc" id="L229" title="All 2 branches covered.">		if (getClass() != obj.getClass()) {</span>
+<span class="fc" id="L230">			return false;</span>
+		}
+<span class="fc" id="L232">		final Robot other = (Robot) obj;</span>
+<span class="fc bfc" id="L233" title="All 2 branches covered.">		if (id != other.id) {</span>
+<span class="fc" id="L234">			return false;</span>
+		}
+<span class="fc bfc" id="L236" title="All 2 branches covered.">		if (!name.equals(other.name)) {</span>
+<span class="fc" id="L237">			return false;</span>
+		}
+<span class="fc bfc" id="L239" title="All 2 branches covered.">		if (!family.equals(other.family)) {</span>
+<span class="fc" id="L240">			return false;</span>
+		}
+<span class="fc bfc" id="L242" title="All 2 branches covered.">		if (!familyName.equals(other.familyName)) {</span>
+<span class="fc" id="L243">			return false;</span>
+		}
+<span class="fc bfc" id="L245" title="All 2 branches covered.">		if (!infoUrl.equals(other.infoUrl)) {</span>
+<span class="fc" id="L246">			return false;</span>
+		}
+<span class="fc bfc" id="L248" title="All 2 branches covered.">		if (!producer.equals(other.producer)) {</span>
+<span class="fc" id="L249">			return false;</span>
+		}
+<span class="fc bfc" id="L251" title="All 2 branches covered.">		if (!producerUrl.equals(other.producerUrl)) {</span>
+<span class="fc" id="L252">			return false;</span>
+		}
+<span class="fc bfc" id="L254" title="All 2 branches covered.">		if (!userAgentString.equals(other.userAgentString)) {</span>
+<span class="fc" id="L255">			return false;</span>
+		}
+<span class="fc bfc" id="L257" title="All 2 branches covered.">		if (!icon.equals(other.icon)) {</span>
+<span class="fc" id="L258">			return false;</span>
+		}
+<span class="fc" id="L260">		return true;</span>
+	}
+
+	@Nonnull
+	public UserAgentFamily getFamily() {
+<span class="fc" id="L265">		return family;</span>
+	}
+
+	@Nonnull
+	public String getFamilyName() {
+<span class="fc" id="L270">		return familyName;</span>
+	}
+
+	@Nonnull
+	public String getIcon() {
+<span class="fc" id="L275">		return icon;</span>
+	}
+
+	@Override
+	@Nonnegative
+	public int getId() {
+<span class="fc" id="L281">		return id;</span>
+	}
+
+	@Nonnull
+	public String getInfoUrl() {
+<span class="fc" id="L286">		return infoUrl;</span>
+	}
+
+	@Nonnull
+	public String getName() {
+<span class="fc" id="L291">		return name;</span>
+	}
+
+	@Nonnull
+	public String getProducer() {
+<span class="fc" id="L296">		return producer;</span>
+	}
+
+	@Nonnull
+	public String getProducerUrl() {
+<span class="fc" id="L301">		return producerUrl;</span>
+	}
+
+	@Nonnull
+	public String getUserAgentString() {
+<span class="fc" id="L306">		return userAgentString;</span>
+	}
+
+	@Override
+	public int hashCode() {
+<span class="fc" id="L311">		return hash;</span>
+	}
+
+	@Override
+	public String toString() {
+<span class="fc" id="L316">		final StringBuilder builder = new StringBuilder();</span>
+<span class="fc" id="L317">		builder.append(&quot;ReadableRobot [id=&quot;);</span>
+<span class="fc" id="L318">		builder.append(id);</span>
+<span class="fc" id="L319">		builder.append(&quot;, name=&quot;);</span>
+<span class="fc" id="L320">		builder.append(name);</span>
+<span class="fc" id="L321">		builder.append(&quot;, family=&quot;);</span>
+<span class="fc" id="L322">		builder.append(family);</span>
+<span class="fc" id="L323">		builder.append(&quot;, familyName=&quot;);</span>
+<span class="fc" id="L324">		builder.append(familyName);</span>
+<span class="fc" id="L325">		builder.append(&quot;, infoUrl=&quot;);</span>
+<span class="fc" id="L326">		builder.append(infoUrl);</span>
+<span class="fc" id="L327">		builder.append(&quot;, producer=&quot;);</span>
+<span class="fc" id="L328">		builder.append(producer);</span>
+<span class="fc" id="L329">		builder.append(&quot;, producerUrl=&quot;);</span>
+<span class="fc" id="L330">		builder.append(producerUrl);</span>
+<span class="fc" id="L331">		builder.append(&quot;, userAgentString=&quot;);</span>
+<span class="fc" id="L332">		builder.append(userAgentString);</span>
+<span class="fc" id="L333">		builder.append(&quot;, icon=&quot;);</span>
+<span class="fc" id="L334">		builder.append(icon);</span>
+<span class="fc" id="L335">		builder.append(&quot;]&quot;);</span>
+<span class="fc" id="L336">		return builder.toString();</span>
+	}
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.6.2.201302030002</span></div></body></html>

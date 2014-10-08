@@ -1,0 +1,10 @@
+net.sf.uadetector
+net.sf.uadetector.datareader
+net.sf.uadetector.datastore
+net.sf.uadetector.exception
+net.sf.uadetector.internal.data
+net.sf.uadetector.internal.data.domain
+net.sf.uadetector.internal.util
+net.sf.uadetector.parser
+net.sf.uadetector.util
+net.sf.uadetector.writer

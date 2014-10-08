@@ -1,0 +1,326 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>RegularExpressionConverter.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="right"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">UADetector :: Core</a> &gt; <a href="index.html" class="el_package">net.sf.uadetector.internal.util</a> &gt; <span class="el_source">RegularExpressionConverter.java</span></div><h1>RegularExpressionConverter.java</h1><pre class="source lang-java linenums">/*******************************************************************************
+ * Copyright 2012 André Rouél
+ * 
+ * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ ******************************************************************************/
+package net.sf.uadetector.internal.util;
+
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.TreeSet;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import javax.annotation.Nonnegative;
+import javax.annotation.Nonnull;
+
+import net.sf.qualitycheck.Check;
+
+public final class RegularExpressionConverter {
+
+<span class="pc" id="L33">	public enum Flag {</span>
+
+		/**
+		 * Enables canonical equivalence.
+		 */
+<span class="fc" id="L38">		CANON_EQ(Pattern.CANON_EQ, 'c'),</span>
+
+		/**
+		 * Enables case-insensitive matching.
+		 */
+<span class="fc" id="L43">		CASE_INSENSITIVE(Pattern.CASE_INSENSITIVE, 'i'),</span>
+
+		/**
+		 * Permits whitespace and comments in pattern.
+		 */
+<span class="fc" id="L48">		COMMENTS(Pattern.COMMENTS, 'x'),</span>
+
+		/**
+		 * Enables dotall mode.
+		 */
+<span class="fc" id="L53">		DOTALL(Pattern.DOTALL, 's'),</span>
+
+		/**
+		 * Enables literal parsing of the pattern.
+		 */
+<span class="fc" id="L58">		LITERAL(Pattern.LITERAL, 'l'),</span>
+
+		/**
+		 * Enables multiline mode.
+		 */
+<span class="fc" id="L63">		MULTILINE(Pattern.MULTILINE, 'm'),</span>
+
+		/**
+		 * Enables Unicode-aware case folding.
+		 */
+<span class="fc" id="L68">		UNICODE_CASE(Pattern.UNICODE_CASE, 'u'),</span>
+
+		/**
+		 * Enables Unix lines mode.
+		 */
+<span class="fc" id="L73">		UNIX_LINES(Pattern.UNIX_LINES, 'e');</span>
+
+<span class="fc" id="L75">		private static class FlagByCharacterComparator extends CompareNullSafe&lt;Flag&gt; {</span>
+			private static final long serialVersionUID = 1L;
+
+			@Override
+			public int compareType(@Nonnull final Flag f1, @Nonnull final Flag f2) {
+<span class="fc" id="L80">				final Character c1 = Character.valueOf(f1.getCharacter());</span>
+<span class="fc" id="L81">				final Character c2 = Character.valueOf(f2.getCharacter());</span>
+<span class="fc" id="L82">				return c1.compareTo(c2);</span>
+			}
+		}
+
+<span class="fc" id="L86">		private static final FlagByCharacterComparator FLAG_COMPARATOR = new FlagByCharacterComparator();</span>
+
+		/**
+		 * Converts a set of flags as to a bitmask (sum of numerical values).
+		 * 
+		 * @param flags
+		 *            a set of flags
+		 * @return sum of numerical values of passed flags or 0
+		 */
+		public static int convertToBitmask(@Nonnull final Collection&lt;Flag&gt; flags) {
+<span class="fc" id="L96">			Check.notNull(flags, &quot;flags&quot;);</span>
+
+<span class="fc" id="L98">			int bitmask = 0;</span>
+<span class="fc bfc" id="L99" title="All 2 branches covered.">			for (final Flag flag : flags) {</span>
+<span class="fc" id="L100">				bitmask = bitmask | flag.getNumber();</span>
+			}
+<span class="fc" id="L102">			return bitmask;</span>
+		}
+
+		/**
+		 * Converts a set of flags as to a string representation. The flags {@link Flag#CASE_INSENSITIVE},
+		 * {@link Flag#DOTALL}, {@link Flag#MULTILINE} and {@link Flag#COMMENTS} are identical to the PERL regular
+		 * expression modifiers.
+		 * 
+		 * @param flags
+		 *            a set of flags
+		 * @return sum of numerical values of passed flags or 0
+		 */
+		public static String convertToModifiers(@Nonnull final Collection&lt;Flag&gt; flags) {
+<span class="fc" id="L115">			Check.notNull(flags, &quot;flags&quot;);</span>
+
+<span class="fc" id="L117">			final StringBuilder modifiers = new StringBuilder(8);</span>
+<span class="fc" id="L118">			final Set&lt;Flag&gt; sortedFlags = new TreeSet&lt;Flag&gt;(Collections.reverseOrder(FLAG_COMPARATOR));</span>
+<span class="fc" id="L119">			sortedFlags.addAll(flags);</span>
+<span class="fc bfc" id="L120" title="All 2 branches covered.">			for (final Flag flag : sortedFlags) {</span>
+<span class="fc" id="L121">				modifiers.append(flag.getCharacter());</span>
+			}
+<span class="fc" id="L123">			return modifiers.toString();</span>
+		}
+
+		/**
+		 * This method try to find a matching enum value by the given character representation. The character will be
+		 * evaluated against the stored character of a flag.
+		 * 
+		 * @param flag
+		 *            representation of a flag as a character
+		 * @return the matching enum value or {@code null}
+		 * @throws net.sf.qualitycheck.exception.IllegalNegativeArgumentException
+		 *             if the given number is smaller than zero
+		 */
+		public static Flag evaluateByCharacter(final char flag) {
+<span class="fc" id="L137">			Check.notNegative(flag, &quot;flag&quot;);</span>
+<span class="fc" id="L138">			Flag result = null;</span>
+<span class="fc bfc" id="L139" title="All 2 branches covered.">			for (final Flag value : values()) {</span>
+<span class="fc bfc" id="L140" title="All 2 branches covered.">				if (value.getCharacter() == flag) {</span>
+<span class="fc" id="L141">					result = value;</span>
+<span class="fc" id="L142">					break;</span>
+				}
+			}
+<span class="fc" id="L145">			return result;</span>
+		}
+
+		/**
+		 * This method try to find a matching enum value by the given numerical representation. The number will be
+		 * evaluated against the stored number of a flag.
+		 * 
+		 * @param flag
+		 *            representation of a flag as a character
+		 * @return the matching enum value or {@code null}
+		 * @throws net.sf.qualitycheck.exception.IllegalNegativeArgumentException
+		 *             if the given number is smaller than zero
+		 */
+		public static Flag evaluateByNumber(final int flag) {
+<span class="fc" id="L159">			Check.notNegative(flag, &quot;flag&quot;);</span>
+<span class="fc" id="L160">			Flag result = null;</span>
+<span class="fc bfc" id="L161" title="All 2 branches covered.">			for (final Flag value : values()) {</span>
+<span class="fc bfc" id="L162" title="All 2 branches covered.">				if (value.getNumber() == flag) {</span>
+<span class="fc" id="L163">					result = value;</span>
+<span class="fc" id="L164">					break;</span>
+				}
+			}
+<span class="fc" id="L167">			return result;</span>
+		}
+
+		/**
+		 * Parses a sum of flags as numerical values (bitmask) and translates it to set of enum values.
+		 * 
+		 * @param bitmask
+		 *            Sum of numerical values of flags
+		 * @return a set of flags
+		 * @throws net.sf.qualitycheck.exception.IllegalNegativeArgumentException
+		 *             if the given number is smaller than zero
+		 */
+		@Nonnull
+		public static Set&lt;Flag&gt; parse(@Nonnegative final int bitmask) {
+<span class="fc" id="L181">			Check.notNegative(bitmask, &quot;bitmask&quot;);</span>
+
+<span class="fc" id="L183">			final Set&lt;Flag&gt; flags = new HashSet&lt;Flag&gt;();</span>
+<span class="fc bfc" id="L184" title="All 2 branches covered.">			for (final Flag flag : values()) {</span>
+<span class="fc bfc" id="L185" title="All 2 branches covered.">				if ((bitmask &amp; flag.getNumber()) != 0) {</span>
+<span class="fc" id="L186">					flags.add(flag);</span>
+				}
+			}
+<span class="fc" id="L189">			return flags;</span>
+		}
+
+		/**
+		 * Translates PERL style modifiers to a set of {@code Pattern} compatible ones.
+		 * 
+		 * @param modifiers
+		 *            modifiers as string of a PERL style regular expression
+		 * @return a set of modifier flags that may include CASE_INSENSITIVE, MULTILINE, DOTALL and COMMENTS
+		 */
+		public static Set&lt;Flag&gt; parse(@Nonnull final String modifiers) {
+<span class="fc" id="L200">			Check.notNull(modifiers, &quot;modifiers&quot;);</span>
+
+<span class="fc" id="L202">			final Set&lt;Flag&gt; flags = new HashSet&lt;Flag&gt;();</span>
+<span class="fc bfc" id="L203" title="All 2 branches covered.">			for (int i = 0; i &lt; modifiers.length(); i++) {</span>
+<span class="fc" id="L204">				final Flag flag = Flag.evaluateByCharacter(modifiers.charAt(i));</span>
+<span class="fc bfc" id="L205" title="All 2 branches covered.">				if (flag != null) {</span>
+<span class="fc" id="L206">					flags.add(flag);</span>
+				}
+			}
+<span class="fc" id="L209">			return flags;</span>
+		}
+
+		/**
+		 * Representation of a flag as a character
+		 */
+		private final char character;
+
+		/**
+		 * Representation of a flag as a number
+		 */
+		private final int number;
+
+<span class="fc" id="L222">		private Flag(final int value, final char character) {</span>
+<span class="fc" id="L223">			number = value;</span>
+<span class="fc" id="L224">			this.character = character;</span>
+<span class="fc" id="L225">		}</span>
+
+		/**
+		 * Returns this flag as character representation.
+		 * 
+		 * @return representation as a character
+		 */
+		public char getCharacter() {
+<span class="fc" id="L233">			return character;</span>
+		}
+
+		/**
+		 * Returns this flag as numerical representation.
+		 * 
+		 * @return representation as a number
+		 */
+		public int getNumber() {
+<span class="fc" id="L242">			return number;</span>
+		}
+
+	}
+
+	/**
+	 * Template to support the conversion into a PERL style regular expression
+	 */
+	private static final String PATTERN_TO_REGEX_TEMPLATE = &quot;/%s/%s&quot;;
+
+	/**
+	 * Pattern for PERL style regular expression strings
+	 */
+<span class="fc" id="L255">	private static final Pattern PERL_STYLE = Pattern.compile(&quot;^/.*/((i|m|s|x)*)?$&quot;);</span>
+
+	/**
+	 * Pattern for PERL style regular expression strings with more fault-tolerance to the modifiers
+	 */
+<span class="fc" id="L260">	private static final Pattern PERL_STYLE_TOLERANT = Pattern.compile(&quot;^/.*/(([A-z])*)?$&quot;);</span>
+
+	/**
+	 * Converts a given {@code Pattern} into a PERL style regular expression.
+	 * 
+	 * @param pattern
+	 *            regular expression pattern
+	 * @return PERL style regular expression as string
+	 */
+	public static String convertPatternToPerlRegex(@Nonnull final Pattern pattern) {
+<span class="fc" id="L270">		Check.notNull(pattern, &quot;pattern&quot;);</span>
+<span class="fc" id="L271">		final String modifiers = Flag.convertToModifiers(Flag.parse(pattern.flags()));</span>
+<span class="fc" id="L272">		return String.format(PATTERN_TO_REGEX_TEMPLATE, pattern.pattern(), modifiers);</span>
+	}
+
+	/**
+	 * Converts a PERL style regular expression into Java style.&lt;br&gt;
+	 * &lt;br&gt;
+	 * The leading and ending slash and the modifiers will be removed. The modifiers will be translated into equivalents
+	 * flags of &lt;code&gt;java.util.Pattern&lt;/code&gt;. If there are modifiers that are not valid an exception will be thrown.
+	 * 
+	 * @param regex
+	 *            A PERL style regular expression
+	 * @return Pattern
+	 */
+	public static Pattern convertPerlRegexToPattern(@Nonnull final String regex) {
+<span class="fc" id="L286">		return convertPerlRegexToPattern(regex, false);</span>
+	}
+
+	/**
+	 * Converts a PERL style regular expression into Java style.&lt;br&gt;
+	 * &lt;br&gt;
+	 * The leading and ending slash and the modifiers will be removed.
+	 * 
+	 * @param regex
+	 *            A PERL style regular expression
+	 * @param faultTolerant
+	 *            Fault-tolerant translating the flags
+	 * @return Pattern
+	 */
+	public static Pattern convertPerlRegexToPattern(@Nonnull final String regex, @Nonnull final boolean faultTolerant) {
+<span class="fc" id="L301">		Check.notNull(regex, &quot;regex&quot;);</span>
+
+<span class="fc" id="L303">		String pattern = regex.trim();</span>
+<span class="fc bfc" id="L304" title="All 2 branches covered.">		final Matcher matcher = faultTolerant ? PERL_STYLE_TOLERANT.matcher(pattern) : PERL_STYLE.matcher(pattern);</span>
+<span class="fc bfc" id="L305" title="All 2 branches covered.">		if (!matcher.matches()) {</span>
+<span class="fc" id="L306">			throw new IllegalArgumentException(&quot;The given regular expression '&quot; + pattern</span>
+					+ &quot;' seems to be not in PERL style or has unsupported modifiers.&quot;);
+		}
+
+<span class="fc" id="L310">		pattern = pattern.substring(1);</span>
+<span class="fc" id="L311">		final int lastIndex = pattern.lastIndexOf('/');</span>
+<span class="fc" id="L312">		pattern = pattern.substring(0, lastIndex);</span>
+
+<span class="fc" id="L314">		final int flags = Flag.convertToBitmask(Flag.parse(matcher.group(1)));</span>
+<span class="fc" id="L315">		return Pattern.compile(pattern, flags);</span>
+	}
+
+	/**
+	 * &lt;strong&gt;Attention:&lt;/strong&gt; This class is not intended to create objects from it.
+	 */
+<span class="fc" id="L321">	private RegularExpressionConverter() {</span>
+		// This class is not intended to create objects from it.
+<span class="fc" id="L323">	}</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.6.2.201302030002</span></div></body></html>

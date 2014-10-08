@@ -1,0 +1,473 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>DataBuilder.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="right"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">UADetector :: Core</a> &gt; <a href="index.html" class="el_package">net.sf.uadetector.internal.data</a> &gt; <span class="el_source">DataBuilder.java</span></div><h1>DataBuilder.java</h1><pre class="source lang-java linenums">/*******************************************************************************
+ * Copyright 2013 André Rouél
+ * 
+ * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ ******************************************************************************/
+package net.sf.uadetector.internal.data;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
+import java.util.SortedMap;
+import java.util.SortedSet;
+import java.util.TreeMap;
+import java.util.TreeSet;
+
+import javax.annotation.Nonnull;
+import javax.annotation.concurrent.NotThreadSafe;
+
+import net.sf.qualitycheck.Check;
+import net.sf.qualitycheck.exception.IllegalStateOfArgumentException;
+import net.sf.uadetector.internal.data.domain.Browser;
+import net.sf.uadetector.internal.data.domain.BrowserOperatingSystemMapping;
+import net.sf.uadetector.internal.data.domain.BrowserPattern;
+import net.sf.uadetector.internal.data.domain.BrowserType;
+import net.sf.uadetector.internal.data.domain.Device;
+import net.sf.uadetector.internal.data.domain.DevicePattern;
+import net.sf.uadetector.internal.data.domain.OperatingSystem;
+import net.sf.uadetector.internal.data.domain.OperatingSystemPattern;
+import net.sf.uadetector.internal.data.domain.Robot;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+/**
+ * This class is intended to create instances of {@code Data}.
+ * 
+ * @author André Rouél
+ */
+@NotThreadSafe
+<span class="fc" id="L54">public class DataBuilder {</span>
+
+<span class="fc" id="L56">	private static final Logger LOG = LoggerFactory.getLogger(DataBuilder.class);</span>
+
+	private static void addOperatingSystemToBrowser(final Map&lt;Integer, Browser.Builder&gt; browserBuilders,
+			final Map&lt;Integer, OperatingSystem&gt; operatingSystems, final Map&lt;Integer, Integer&gt; browserOsMap) {
+		Browser.Builder browserBuilder;
+<span class="fc bfc" id="L61" title="All 2 branches covered.">		for (final Map.Entry&lt;Integer, Integer&gt; entry : browserOsMap.entrySet()) {</span>
+<span class="fc bfc" id="L62" title="All 2 branches covered.">			if (browserBuilders.containsKey(entry.getKey())) {</span>
+<span class="fc" id="L63">				browserBuilder = browserBuilders.get(entry.getKey());</span>
+<span class="fc bfc" id="L64" title="All 2 branches covered.">				if (operatingSystems.containsKey(entry.getValue())) {</span>
+<span class="fc" id="L65">					browserBuilder.setOperatingSystem(operatingSystems.get(entry.getValue()));</span>
+				} else {
+<span class="fc" id="L67">					LOG.warn(&quot;Can not find an operating system with ID '&quot; + entry.getValue() + &quot;' for browser '&quot;</span>
+							+ browserBuilder.getProducer() + &quot; &quot; + browserBuilder.getFamily() + &quot;'.&quot;);
+				}
+			} else {
+<span class="fc" id="L71">				LOG.warn(&quot;Can not find a browser with ID '&quot; + entry.getKey() + &quot;'.&quot;);</span>
+			}
+		}
+<span class="fc" id="L74">	}</span>
+
+	private static void addPatternToBrowser(final Map&lt;Integer, Browser.Builder&gt; builders,
+			final Map&lt;Integer, SortedSet&lt;BrowserPattern&gt;&gt; patterns) {
+<span class="fc bfc" id="L78" title="All 2 branches covered.">		for (final Map.Entry&lt;Integer, Browser.Builder&gt; entry : builders.entrySet()) {</span>
+<span class="fc bfc" id="L79" title="All 2 branches covered.">			if (patterns.containsKey(entry.getKey())) {</span>
+<span class="fc" id="L80">				entry.getValue().setPatterns(patterns.get(entry.getKey()));</span>
+			} else {
+<span class="fc" id="L82">				LOG.warn(&quot;No pattern available for '&quot; + entry.getValue().getProducer() + &quot; &quot; + entry.getValue().getFamily() + &quot;'.&quot;);</span>
+			}
+		}
+<span class="fc" id="L85">	}</span>
+
+	private static void addPatternToDevice(final Map&lt;Integer, Device.Builder&gt; builders,
+			final Map&lt;Integer, SortedSet&lt;DevicePattern&gt;&gt; patterns) {
+<span class="fc bfc" id="L89" title="All 2 branches covered.">		for (final Map.Entry&lt;Integer, Device.Builder&gt; entry : builders.entrySet()) {</span>
+<span class="fc bfc" id="L90" title="All 2 branches covered.">			if (patterns.containsKey(entry.getKey())) {</span>
+<span class="fc" id="L91">				entry.getValue().setPatterns(patterns.get(entry.getKey()));</span>
+			} else {
+<span class="fc" id="L93">				LOG.debug(&quot;No pattern available for '&quot; + entry.getValue().getName() + &quot;'.&quot;);</span>
+			}
+		}
+<span class="fc" id="L96">	}</span>
+
+	private static void addPatternToOperatingSystem(final Map&lt;Integer, OperatingSystem.Builder&gt; builders,
+			final Map&lt;Integer, SortedSet&lt;OperatingSystemPattern&gt;&gt; patterns) {
+<span class="fc bfc" id="L100" title="All 2 branches covered.">		for (final Map.Entry&lt;Integer, OperatingSystem.Builder&gt; entry : builders.entrySet()) {</span>
+<span class="fc" id="L101">			final SortedSet&lt;OperatingSystemPattern&gt; patternSet = patterns.get(entry.getKey());</span>
+<span class="fc bfc" id="L102" title="All 2 branches covered.">			if (patternSet != null) {</span>
+<span class="fc" id="L103">				entry.getValue().addPatterns(patternSet);</span>
+			} else {
+<span class="fc" id="L105">				LOG.debug(&quot;No patterns for operating system entry (with id '&quot; + entry.getKey() + &quot;') available.&quot;);</span>
+			}
+<span class="fc" id="L107">		}</span>
+<span class="fc" id="L108">	}</span>
+
+	private static void addTypeToBrowser(final Map&lt;Integer, Browser.Builder&gt; builders, final Map&lt;Integer, BrowserType&gt; types) {
+		int typeId;
+<span class="fc bfc" id="L112" title="All 2 branches covered.">		for (final Map.Entry&lt;Integer, Browser.Builder&gt; entry : builders.entrySet()) {</span>
+<span class="fc" id="L113">			typeId = entry.getValue().getTypeId();</span>
+<span class="fc bfc" id="L114" title="All 2 branches covered.">			if (types.containsKey(typeId)) {</span>
+<span class="fc" id="L115">				entry.getValue().setType(types.get(typeId));</span>
+			} else {
+<span class="fc" id="L117">				LOG.warn(&quot;No type available for '&quot; + entry.getValue().getProducer() + &quot; &quot; + entry.getValue().getFamily() + &quot;'.&quot;);</span>
+			}
+		}
+<span class="fc" id="L120">	}</span>
+
+	private static Set&lt;Browser&gt; buildBrowsers(final Map&lt;Integer, Browser.Builder&gt; browserBuilders) {
+<span class="fc" id="L123">		final Set&lt;Browser&gt; browsers = new HashSet&lt;Browser&gt;();</span>
+<span class="fc bfc" id="L124" title="All 2 branches covered.">		for (final Map.Entry&lt;Integer, Browser.Builder&gt; entry : browserBuilders.entrySet()) {</span>
+			try {
+<span class="fc" id="L126">				browsers.add(entry.getValue().build());</span>
+<span class="fc" id="L127">			} catch (final Exception e) {</span>
+<span class="fc" id="L128">				LOG.warn(&quot;Can not build browser: &quot; + e.getLocalizedMessage());</span>
+<span class="fc" id="L129">			}</span>
+		}
+<span class="fc" id="L131">		return browsers;</span>
+	}
+
+	private static Set&lt;Device&gt; buildDevices(final Map&lt;Integer, Device.Builder&gt; deviceBuilders) {
+<span class="fc" id="L135">		final Set&lt;Device&gt; devices = new HashSet&lt;Device&gt;();</span>
+<span class="fc bfc" id="L136" title="All 2 branches covered.">		for (final Map.Entry&lt;Integer, Device.Builder&gt; entry : deviceBuilders.entrySet()) {</span>
+			try {
+<span class="fc" id="L138">				devices.add(entry.getValue().build());</span>
+<span class="nc" id="L139">			} catch (final Exception e) {</span>
+<span class="nc" id="L140">				LOG.warn(&quot;Can not build device '&quot; + entry.getValue().getName() + &quot;': &quot; + e.getLocalizedMessage());</span>
+<span class="fc" id="L141">			}</span>
+		}
+<span class="fc" id="L143">		return devices;</span>
+	}
+
+	private static Map&lt;Integer, OperatingSystem&gt; buildOperatingSystems(final Map&lt;Integer, OperatingSystem.Builder&gt; osBuilders) {
+<span class="fc" id="L147">		final Map&lt;Integer, OperatingSystem&gt; operatingSystems = new HashMap&lt;Integer, OperatingSystem&gt;();</span>
+<span class="fc bfc" id="L148" title="All 2 branches covered.">		for (final Map.Entry&lt;Integer, OperatingSystem.Builder&gt; entry : osBuilders.entrySet()) {</span>
+			try {
+<span class="fc" id="L150">				operatingSystems.put(entry.getKey(), entry.getValue().build());</span>
+<span class="nc" id="L151">			} catch (final Exception e) {</span>
+<span class="nc" id="L152">				LOG.warn(&quot;Can not build operating system: &quot; + e.getLocalizedMessage());</span>
+<span class="fc" id="L153">			}</span>
+		}
+<span class="fc" id="L155">		return operatingSystems;</span>
+	}
+
+	private static SortedMap&lt;BrowserPattern, Browser&gt; buildPatternToBrowserMap(final Set&lt;Browser&gt; browserSet) {
+<span class="fc" id="L159">		final SortedMap&lt;BrowserPattern, Browser&gt; patternBrowser = new TreeMap&lt;BrowserPattern, Browser&gt;(BROWSER_PATTERN_COMPARATOR);</span>
+<span class="fc bfc" id="L160" title="All 2 branches covered.">		for (final Browser browser : browserSet) {</span>
+<span class="fc bfc" id="L161" title="All 2 branches covered.">			for (final BrowserPattern pattern : browser.getPatterns()) {</span>
+<span class="fc" id="L162">				patternBrowser.put(pattern, browser);</span>
+			}
+		}
+<span class="fc" id="L165">		return patternBrowser;</span>
+	}
+
+	private static SortedMap&lt;DevicePattern, Device&gt; buildPatternToDeviceMap(final Set&lt;Device&gt; devices) {
+<span class="fc" id="L169">		final SortedMap&lt;DevicePattern, Device&gt; patternDevice = new TreeMap&lt;DevicePattern, Device&gt;(DEVICE_PATTERN_COMPARATOR);</span>
+<span class="fc bfc" id="L170" title="All 2 branches covered.">		for (final Device device : devices) {</span>
+<span class="fc bfc" id="L171" title="All 2 branches covered.">			for (final DevicePattern pattern : device.getPatterns()) {</span>
+<span class="fc" id="L172">				patternDevice.put(pattern, device);</span>
+			}
+		}
+<span class="fc" id="L175">		return patternDevice;</span>
+	}
+
+	private static SortedMap&lt;OperatingSystemPattern, OperatingSystem&gt; buildPatternToOperatingSystemMap(final Set&lt;OperatingSystem&gt; osSet) {
+<span class="fc" id="L179">		final SortedMap&lt;OperatingSystemPattern, OperatingSystem&gt; map = new TreeMap&lt;OperatingSystemPattern, OperatingSystem&gt;(</span>
+				OS_PATTERN_COMPARATOR);
+<span class="fc bfc" id="L181" title="All 2 branches covered.">		for (final OperatingSystem os : osSet) {</span>
+<span class="fc bfc" id="L182" title="All 2 branches covered.">			for (final OperatingSystemPattern pattern : os.getPatterns()) {</span>
+<span class="fc" id="L183">				map.put(pattern, os);</span>
+			}
+		}
+<span class="fc" id="L186">		return map;</span>
+	}
+
+	private static Map&lt;Integer, Integer&gt; convertBrowserOsMapping(final Set&lt;BrowserOperatingSystemMapping&gt; browserOperatingSystemMappings) {
+<span class="fc" id="L190">		final Map&lt;Integer, Integer&gt; result = new HashMap&lt;Integer, Integer&gt;();</span>
+<span class="fc bfc" id="L191" title="All 2 branches covered.">		for (final BrowserOperatingSystemMapping mapping : browserOperatingSystemMappings) {</span>
+<span class="fc" id="L192">			result.put(mapping.getBrowserId(), mapping.getOperatingSystemId());</span>
+		}
+<span class="fc" id="L194">		return result;</span>
+	}
+
+	private static Set&lt;OperatingSystem&gt; convertOperatingSystems(final Map&lt;Integer, OperatingSystem&gt; operatingSystems) {
+<span class="fc" id="L198">		final Set&lt;OperatingSystem&gt; result = new HashSet&lt;OperatingSystem&gt;();</span>
+<span class="fc bfc" id="L199" title="All 2 branches covered.">		for (final Entry&lt;Integer, OperatingSystem&gt; entry : operatingSystems.entrySet()) {</span>
+<span class="fc" id="L200">			result.add(entry.getValue());</span>
+		}
+<span class="fc" id="L202">		return result;</span>
+	}
+
+<span class="fc" id="L205">	@Nonnull</span>
+	private final Map&lt;Integer, BrowserType&gt; browserTypes = new HashMap&lt;Integer, BrowserType&gt;();
+
+<span class="fc" id="L208">	@Nonnull</span>
+	private final Map&lt;Integer, SortedSet&lt;BrowserPattern&gt;&gt; browserPatterns = new HashMap&lt;Integer, SortedSet&lt;BrowserPattern&gt;&gt;();
+
+<span class="fc" id="L211">	@Nonnull</span>
+	private final Map&lt;Integer, SortedSet&lt;OperatingSystemPattern&gt;&gt; operatingSystemPatterns = new HashMap&lt;Integer, SortedSet&lt;OperatingSystemPattern&gt;&gt;();
+
+<span class="fc" id="L214">	@Nonnull</span>
+	private final Map&lt;Integer, Browser.Builder&gt; browserBuilders = new HashMap&lt;Integer, Browser.Builder&gt;();
+
+<span class="fc" id="L217">	@Nonnull</span>
+	private final Set&lt;Browser&gt; browsers = new HashSet&lt;Browser&gt;();
+
+<span class="fc" id="L220">	@Nonnull</span>
+	private final Set&lt;Device&gt; devices = new HashSet&lt;Device&gt;();
+
+<span class="fc" id="L223">	@Nonnull</span>
+	private final Map&lt;Integer, Device.Builder&gt; deviceBuilders = new HashMap&lt;Integer, Device.Builder&gt;();
+
+<span class="fc" id="L226">	@Nonnull</span>
+	private final Map&lt;Integer, SortedSet&lt;DevicePattern&gt;&gt; devicePatterns = new HashMap&lt;Integer, SortedSet&lt;DevicePattern&gt;&gt;();
+
+<span class="fc" id="L229">	@Nonnull</span>
+	private final Map&lt;Integer, OperatingSystem.Builder&gt; operatingSystemBuilders = new HashMap&lt;Integer, OperatingSystem.Builder&gt;();
+
+<span class="fc" id="L232">	@Nonnull</span>
+	private final Set&lt;OperatingSystem&gt; operatingSystems = new HashSet&lt;OperatingSystem&gt;();
+
+<span class="fc" id="L235">	@Nonnull</span>
+	private final List&lt;Robot&gt; robots = new ArrayList&lt;Robot&gt;();
+
+	private String version;
+
+<span class="fc" id="L240">	@Nonnull</span>
+	private final Set&lt;BrowserOperatingSystemMapping&gt; browserToOperatingSystemMap = new HashSet&lt;BrowserOperatingSystemMapping&gt;();
+
+<span class="fc" id="L243">	private static final OrderedPatternComparator&lt;BrowserPattern&gt; BROWSER_PATTERN_COMPARATOR = new OrderedPatternComparator&lt;BrowserPattern&gt;();</span>
+
+<span class="fc" id="L245">	private static final OrderedPatternComparator&lt;DevicePattern&gt; DEVICE_PATTERN_COMPARATOR = new OrderedPatternComparator&lt;DevicePattern&gt;();</span>
+
+<span class="fc" id="L247">	private static final OrderedPatternComparator&lt;OperatingSystemPattern&gt; OS_PATTERN_COMPARATOR = new OrderedPatternComparator&lt;OperatingSystemPattern&gt;();</span>
+
+	public DataBuilder appendBrowser(@Nonnull final Browser browser) {
+<span class="fc" id="L250">		Check.notNull(browser, &quot;browser&quot;);</span>
+
+<span class="fc" id="L252">		browsers.add(browser);</span>
+<span class="fc" id="L253">		return this;</span>
+	}
+
+	/**
+	 * Appends a copy of the given {@code Browser.Builder} to the internal data structure.
+	 * 
+	 * @param browserBuilder
+	 *            {@code Browser.Builder} to be copied and appended
+	 * @return this {@code Builder}, for chaining
+	 * @throws net.sf.qualitycheck.exception.IllegalNullArgumentException
+	 *             if the given argument is {@code null}
+	 * @throws net.sf.qualitycheck.exception.IllegalStateOfArgumentException
+	 *             if the ID of the given builder is invalid
+	 * @throws net.sf.qualitycheck.exception.IllegalStateOfArgumentException
+	 *             if a builder with the same ID already exists
+	 */
+	@Nonnull
+	public DataBuilder appendBrowserBuilder(@Nonnull final Browser.Builder browserBuilder) {
+<span class="fc" id="L271">		Check.notNull(browserBuilder, &quot;browserBuilder&quot;);</span>
+<span class="fc" id="L272">		Check.notNegative(browserBuilder.getId(), &quot;browserBuilder.getId()&quot;);</span>
+<span class="fc bfc" id="L273" title="All 4 branches covered.">		if (browserBuilder.getType() == null &amp;&amp; browserBuilder.getTypeId() &lt; 0) {</span>
+<span class="fc" id="L274">			throw new IllegalStateOfArgumentException(&quot;A Type or Type-ID of argument 'browserBuilder' must be set.&quot;);</span>
+		}
+<span class="fc bfc" id="L276" title="All 2 branches covered.">		if (browserBuilders.containsKey(browserBuilder.getId())) {</span>
+<span class="fc" id="L277">			throw new IllegalStateOfArgumentException(&quot;The browser builder '&quot; + browserBuilder.getProducer() + &quot; &quot;</span>
+					+ browserBuilder.getFamily() + &quot;' is already in the map.&quot;);
+		}
+
+<span class="fc" id="L281">		final Browser.Builder builder = browserBuilder.copy();</span>
+<span class="fc" id="L282">		browserBuilders.put(builder.getId(), builder);</span>
+<span class="fc" id="L283">		return this;</span>
+	}
+
+	@Nonnull
+	public DataBuilder appendBrowserOperatingSystemMapping(@Nonnull final BrowserOperatingSystemMapping browserOsMapping) {
+<span class="fc" id="L288">		Check.notNull(browserOsMapping, &quot;browserOsMapping&quot;);</span>
+
+<span class="fc" id="L290">		browserToOperatingSystemMap.add(browserOsMapping);</span>
+<span class="fc" id="L291">		return this;</span>
+	}
+
+	/**
+	 * Appends a browser pattern to the map of pattern sorted by ID.
+	 * 
+	 * @param pattern
+	 *            a pattern for a browser
+	 * @return itself
+	 * @throws net.sf.qualitycheck.exception.IllegalNullArgumentException
+	 *             if the given argument is {@code null}
+	 */
+	@Nonnull
+	public DataBuilder appendBrowserPattern(@Nonnull final BrowserPattern pattern) {
+<span class="fc" id="L305">		Check.notNull(pattern, &quot;pattern&quot;);</span>
+<span class="fc bfc" id="L306" title="All 2 branches covered.">		if (!browserPatterns.containsKey(pattern.getId())) {</span>
+<span class="fc" id="L307">			browserPatterns.put(pattern.getId(), new TreeSet&lt;BrowserPattern&gt;(BROWSER_PATTERN_COMPARATOR));</span>
+		}
+
+<span class="fc" id="L310">		browserPatterns.get(pattern.getId()).add(pattern);</span>
+<span class="fc" id="L311">		return this;</span>
+	}
+
+	@Nonnull
+	public DataBuilder appendBrowserType(@Nonnull final BrowserType type) {
+<span class="fc" id="L316">		Check.notNull(type, &quot;type&quot;);</span>
+
+<span class="fc" id="L318">		browserTypes.put(type.getId(), type);</span>
+<span class="fc" id="L319">		return this;</span>
+	}
+
+	public DataBuilder appendDevice(@Nonnull final Device device) {
+<span class="nc" id="L323">		Check.notNull(device, &quot;device&quot;);</span>
+
+<span class="nc" id="L325">		devices.add(device);</span>
+<span class="nc" id="L326">		return this;</span>
+	}
+
+	/**
+	 * Appends a copy of the given {@code Device.Builder} to the internal data structure.
+	 * 
+	 * @param deviceBuilder
+	 *            {@code Device.Builder} to be copied and appended
+	 * @return this {@code Builder}, for chaining
+	 * @throws net.sf.qualitycheck.exception.IllegalNullArgumentException
+	 *             if the given argument is {@code null}
+	 * @throws net.sf.qualitycheck.exception.IllegalStateOfArgumentException
+	 *             if the ID of the given builder is invalid
+	 * @throws net.sf.qualitycheck.exception.IllegalStateOfArgumentException
+	 *             if a builder with the same ID already exists
+	 */
+	@Nonnull
+	public DataBuilder appendDeviceBuilder(@Nonnull final Device.Builder deviceBuilder) {
+<span class="fc" id="L344">		Check.notNull(deviceBuilder, &quot;deviceBuilder&quot;);</span>
+<span class="fc" id="L345">		Check.notNegative(deviceBuilder.getId(), &quot;deviceBuilder.getId()&quot;);</span>
+<span class="fc bfc" id="L346" title="All 2 branches covered.">		if (deviceBuilders.containsKey(deviceBuilder.getId())) {</span>
+<span class="fc" id="L347">			throw new IllegalStateOfArgumentException(&quot;The device builder '&quot; + deviceBuilder.getName() + &quot;' is already in the map.&quot;);</span>
+		}
+
+<span class="fc" id="L350">		final Device.Builder builder = deviceBuilder.copy();</span>
+<span class="fc" id="L351">		deviceBuilders.put(builder.getId(), builder);</span>
+<span class="fc" id="L352">		return this;</span>
+	}
+
+	/**
+	 * Appends a device pattern to the map of pattern sorted by ID.
+	 * 
+	 * @param pattern
+	 *            a pattern for a device
+	 * @return itself
+	 * @throws net.sf.qualitycheck.exception.IllegalNullArgumentException
+	 *             if the given argument is {@code null}
+	 */
+	@Nonnull
+	public DataBuilder appendDevicePattern(@Nonnull final DevicePattern pattern) {
+<span class="fc" id="L366">		Check.notNull(pattern, &quot;pattern&quot;);</span>
+<span class="fc bfc" id="L367" title="All 2 branches covered.">		if (!devicePatterns.containsKey(pattern.getId())) {</span>
+<span class="fc" id="L368">			devicePatterns.put(pattern.getId(), new TreeSet&lt;DevicePattern&gt;(DEVICE_PATTERN_COMPARATOR));</span>
+		}
+
+<span class="fc" id="L371">		devicePatterns.get(pattern.getId()).add(pattern);</span>
+<span class="fc" id="L372">		return this;</span>
+	}
+
+	@Nonnull
+	public DataBuilder appendOperatingSystem(@Nonnull final OperatingSystem operatingSystem) {
+<span class="fc" id="L377">		Check.notNull(operatingSystem, &quot;operatingSystem&quot;);</span>
+
+<span class="fc" id="L379">		operatingSystems.add(operatingSystem);</span>
+<span class="fc" id="L380">		return this;</span>
+	}
+
+	/**
+	 * Appends a copy of the given {@code OperatingSystem.Builder} to the internal data structure.
+	 * 
+	 * @param operatingSystemBuilder
+	 *            {@code OperatingSystem.Builder} to be copied and appended
+	 * @return this {@code Builder}, for chaining
+	 * @throws net.sf.qualitycheck.exception.IllegalNullArgumentException
+	 *             if the given argument is {@code null}
+	 * @throws net.sf.qualitycheck.exception.IllegalNegativeArgumentException
+	 *             if the ID of the given builder is negative
+	 * @throws net.sf.qualitycheck.exception.IllegalStateOfArgumentException
+	 *             if a builder with the same ID already exists
+	 */
+	@Nonnull
+	public DataBuilder appendOperatingSystemBuilder(@Nonnull final OperatingSystem.Builder operatingSystemBuilder) {
+<span class="fc" id="L398">		Check.notNull(operatingSystemBuilder, &quot;operatingSystemBuilder&quot;);</span>
+<span class="fc" id="L399">		Check.notNegative(operatingSystemBuilder.getId(), &quot;operatingSystemBuilder.getId()&quot;);</span>
+<span class="fc bfc" id="L400" title="All 2 branches covered.">		Check.stateIsTrue(!operatingSystemBuilders.containsKey(operatingSystemBuilder.getId()),</span>
+				&quot;Operating system builder with ID '%s' already exists.&quot;, operatingSystemBuilder.getId());
+
+<span class="fc" id="L403">		final OperatingSystem.Builder builder = operatingSystemBuilder.copy();</span>
+<span class="fc" id="L404">		operatingSystemBuilders.put(builder.getId(), builder);</span>
+<span class="fc" id="L405">		return this;</span>
+	}
+
+	/**
+	 * Appends an operating system pattern to the map of pattern sorted by ID.
+	 * 
+	 * @param pattern
+	 *            a pattern for a browser
+	 * @throws net.sf.qualitycheck.exception.IllegalNullArgumentException
+	 *             if the pattern is {@code null}
+	 * @return itself
+	 */
+	@Nonnull
+	public DataBuilder appendOperatingSystemPattern(@Nonnull final OperatingSystemPattern pattern) {
+<span class="fc" id="L419">		Check.notNull(pattern, &quot;pattern&quot;);</span>
+
+<span class="fc bfc" id="L421" title="All 2 branches covered.">		if (!operatingSystemPatterns.containsKey(pattern.getId())) {</span>
+<span class="fc" id="L422">			operatingSystemPatterns.put(pattern.getId(), new TreeSet&lt;OperatingSystemPattern&gt;(OS_PATTERN_COMPARATOR));</span>
+		}
+
+<span class="fc" id="L425">		operatingSystemPatterns.get(pattern.getId()).add(pattern);</span>
+<span class="fc" id="L426">		return this;</span>
+	}
+
+	@Nonnull
+	public DataBuilder appendRobot(@Nonnull final Robot robot) {
+<span class="fc" id="L431">		Check.notNull(robot, &quot;robot&quot;);</span>
+
+<span class="fc" id="L433">		robots.add(robot);</span>
+<span class="fc" id="L434">		return this;</span>
+	}
+
+	@Nonnull
+	public Data build() {
+<span class="fc" id="L439">		addTypeToBrowser(browserBuilders, browserTypes);</span>
+<span class="fc" id="L440">		addPatternToBrowser(browserBuilders, browserPatterns);</span>
+<span class="fc" id="L441">		addPatternToOperatingSystem(operatingSystemBuilders, operatingSystemPatterns);</span>
+<span class="fc" id="L442">		addPatternToDevice(deviceBuilders, devicePatterns);</span>
+
+<span class="fc" id="L444">		final Map&lt;Integer, OperatingSystem&gt; systems = buildOperatingSystems(operatingSystemBuilders);</span>
+<span class="fc" id="L445">		addOperatingSystemToBrowser(browserBuilders, systems, convertBrowserOsMapping(browserToOperatingSystemMap));</span>
+
+<span class="fc" id="L447">		final Set&lt;OperatingSystem&gt; osSet = convertOperatingSystems(systems);</span>
+<span class="fc" id="L448">		osSet.addAll(operatingSystems);</span>
+
+<span class="fc" id="L450">		final Set&lt;Browser&gt; browserSet = buildBrowsers(browserBuilders);</span>
+<span class="fc" id="L451">		browserSet.addAll(browsers);</span>
+
+<span class="fc" id="L453">		final Set&lt;Device&gt; deviceSet = buildDevices(deviceBuilders);</span>
+<span class="fc" id="L454">		deviceSet.addAll(devices);</span>
+
+<span class="fc" id="L456">		final SortedMap&lt;BrowserPattern, Browser&gt; patternToBrowserMap = buildPatternToBrowserMap(browserSet);</span>
+<span class="fc" id="L457">		final SortedMap&lt;OperatingSystemPattern, OperatingSystem&gt; patternToOperatingSystemMap = buildPatternToOperatingSystemMap(osSet);</span>
+<span class="fc" id="L458">		final SortedMap&lt;DevicePattern, Device&gt; patternToDeviceMap = buildPatternToDeviceMap(deviceSet);</span>
+
+<span class="fc" id="L460">		return new Data(browserSet, browserPatterns, browserTypes, patternToBrowserMap, browserToOperatingSystemMap, osSet,</span>
+				operatingSystemPatterns, patternToOperatingSystemMap, robots, deviceSet, devicePatterns, patternToDeviceMap, version);
+	}
+
+	@Nonnull
+	public DataBuilder setVersion(@Nonnull final String version) {
+<span class="fc" id="L466">		Check.notNull(version, &quot;version&quot;);</span>
+
+<span class="fc" id="L468">		this.version = version;</span>
+<span class="fc" id="L469">		return this;</span>
+	}
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.6.2.201302030002</span></div></body></html>

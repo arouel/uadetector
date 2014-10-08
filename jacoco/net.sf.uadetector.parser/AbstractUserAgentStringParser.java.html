@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>AbstractUserAgentStringParser.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="right"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">UADetector :: Core</a> &gt; <a href="index.html" class="el_package">net.sf.uadetector.parser</a> &gt; <span class="el_source">AbstractUserAgentStringParser.java</span></div><h1>AbstractUserAgentStringParser.java</h1><pre class="source lang-java linenums">/*******************************************************************************
+ * Copyright 2012 André Rouél
+ * 
+ * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ ******************************************************************************/
+package net.sf.uadetector.parser;
+
+import java.util.Map.Entry;
+import java.util.regex.Matcher;
+
+import javax.annotation.Nonnull;
+
+import net.sf.uadetector.DeviceCategory;
+import net.sf.uadetector.ReadableDeviceCategory.Category;
+import net.sf.uadetector.UserAgent;
+import net.sf.uadetector.UserAgentStringParser;
+import net.sf.uadetector.UserAgentType;
+import net.sf.uadetector.VersionNumber;
+import net.sf.uadetector.datastore.DataStore;
+import net.sf.uadetector.internal.data.Data;
+import net.sf.uadetector.internal.data.domain.Browser;
+import net.sf.uadetector.internal.data.domain.BrowserPattern;
+import net.sf.uadetector.internal.data.domain.Device;
+import net.sf.uadetector.internal.data.domain.DevicePattern;
+import net.sf.uadetector.internal.data.domain.OperatingSystem;
+import net.sf.uadetector.internal.data.domain.OperatingSystemPattern;
+import net.sf.uadetector.internal.data.domain.Robot;
+
+<span class="fc" id="L39">public abstract class AbstractUserAgentStringParser implements UserAgentStringParser {</span>
+
+	/**
+	 * The number of capturing groups if nothing matches
+	 */
+	private static final int ZERO_MATCHING_GROUPS = 0;
+
+	/**
+	 * Examines the user agent string whether it is a browser.
+	 * 
+	 * @param userAgent
+	 *            String of an user agent
+	 * @param builder
+	 *            Builder for an user agent information
+	 */
+	private static void examineAsBrowser(final UserAgent.Builder builder, final Data data) {
+		Matcher matcher;
+<span class="fc" id="L56">		VersionNumber version = VersionNumber.UNKNOWN;</span>
+<span class="fc bfc" id="L57" title="All 2 branches covered.">		for (final Entry&lt;BrowserPattern, Browser&gt; entry : data.getPatternToBrowserMap().entrySet()) {</span>
+<span class="fc" id="L58">			matcher = entry.getKey().getPattern().matcher(builder.getUserAgentString());</span>
+<span class="fc bfc" id="L59" title="All 2 branches covered.">			if (matcher.find()) {</span>
+
+<span class="fc" id="L61">				entry.getValue().copyTo(builder);</span>
+
+				// try to get the browser version from the first subgroup
+<span class="fc bfc" id="L64" title="All 2 branches covered.">				if (matcher.groupCount() &gt; ZERO_MATCHING_GROUPS) {</span>
+<span class="fc bfc" id="L65" title="All 2 branches covered.">					version = VersionNumber.parseVersion(matcher.group(1) != null ? matcher.group(1) : &quot;&quot;);</span>
+				}
+<span class="fc" id="L67">				builder.setVersionNumber(version);</span>
+
+<span class="fc" id="L69">				break;</span>
+			}
+		}
+<span class="fc" id="L72">	}</span>
+
+	/**
+	 * Examines the user agent string whether it is a robot.
+	 * 
+	 * @param userAgent
+	 *            String of an user agent
+	 * @param builder
+	 *            Builder for an user agent information
+	 * @return {@code true} if it is a robot, otherwise {@code false}
+	 */
+	private static boolean examineAsRobot(final UserAgent.Builder builder, final Data data) {
+<span class="fc" id="L84">		boolean isRobot = false;</span>
+		VersionNumber version;
+<span class="fc bfc" id="L86" title="All 2 branches covered.">		for (final Robot robot : data.getRobots()) {</span>
+<span class="fc bfc" id="L87" title="All 2 branches covered.">			if (robot.getUserAgentString().equals(builder.getUserAgentString())) {</span>
+<span class="fc" id="L88">				isRobot = true;</span>
+<span class="fc" id="L89">				robot.copyTo(builder);</span>
+
+				// try to get the version from the last found group
+<span class="fc" id="L92">				version = VersionNumber.parseLastVersionNumber(robot.getName());</span>
+<span class="fc" id="L93">				builder.setVersionNumber(version);</span>
+
+<span class="fc" id="L95">				break;</span>
+			}
+		}
+<span class="fc" id="L98">		return isRobot;</span>
+	}
+
+	/**
+	 * Examines the user agent string whether has a specific device category.
+	 * 
+	 * @param userAgent
+	 *            String of an user agent
+	 * @param builder
+	 *            Builder for an user agent information
+	 */
+	private static void examineDeviceCategory(final UserAgent.Builder builder, final Data data) {
+
+		// a robot will be classified as 'Other'
+<span class="fc bfc" id="L112" title="All 2 branches covered.">		if (UserAgentType.ROBOT == builder.getType()) {</span>
+<span class="fc" id="L113">			final DeviceCategory category = findDeviceCategoryByValue(Category.OTHER, data);</span>
+<span class="fc" id="L114">			builder.setDeviceCategory(category);</span>
+<span class="fc" id="L115">			return;</span>
+		}
+
+		// classification depends on matching order
+<span class="fc bfc" id="L119" title="All 2 branches covered.">		for (final Entry&lt;DevicePattern, Device&gt; entry : data.getPatternToDeviceMap().entrySet()) {</span>
+<span class="fc" id="L120">			final Matcher matcher = entry.getKey().getPattern().matcher(builder.getUserAgentString());</span>
+<span class="fc bfc" id="L121" title="All 2 branches covered.">			if (matcher.find()) {</span>
+<span class="fc" id="L122">				final Category category = Category.evaluate(entry.getValue().getName());</span>
+<span class="fc" id="L123">				final DeviceCategory deviceCategory = findDeviceCategoryByValue(category, data);</span>
+<span class="fc" id="L124">				builder.setDeviceCategory(deviceCategory);</span>
+<span class="fc" id="L125">				return;</span>
+			}
+<span class="fc" id="L127">		}</span>
+
+		// an unknown user agent type should lead to an unknown device
+<span class="fc bfc" id="L130" title="All 2 branches covered.">		if (UserAgentType.UNKNOWN == builder.getType()) {</span>
+<span class="fc" id="L131">			builder.setDeviceCategory(DeviceCategory.EMPTY);</span>
+<span class="fc" id="L132">			return;</span>
+		}
+
+		// if no pattern is available but the type is Other, Library, Validator or UA Anonymizer
+		// than classify it as 'Other'
+<span class="fc bfc" id="L137" title="All 8 branches covered.">		if (UserAgentType.OTHER == builder.getType() || UserAgentType.LIBRARY == builder.getType()</span>
+				|| UserAgentType.VALIDATOR == builder.getType() || UserAgentType.USERAGENT_ANONYMIZER == builder.getType()) {
+<span class="fc" id="L139">			final DeviceCategory category = findDeviceCategoryByValue(Category.OTHER, data);</span>
+<span class="fc" id="L140">			builder.setDeviceCategory(category);</span>
+<span class="fc" id="L141">			return;</span>
+		}
+
+		// if no pattern is available but the type is a mobile or WAP browser than classify it as 'Smartphone'
+<span class="fc bfc" id="L145" title="All 4 branches covered.">		if (UserAgentType.MOBILE_BROWSER == builder.getType() || UserAgentType.WAP_BROWSER == builder.getType()) {</span>
+<span class="fc" id="L146">			final DeviceCategory category = findDeviceCategoryByValue(Category.SMARTPHONE, data);</span>
+<span class="fc" id="L147">			builder.setDeviceCategory(category);</span>
+<span class="fc" id="L148">			return;</span>
+		}
+
+<span class="fc" id="L151">		final DeviceCategory category = findDeviceCategoryByValue(Category.PERSONAL_COMPUTER, data);</span>
+<span class="fc" id="L152">		builder.setDeviceCategory(category);</span>
+<span class="fc" id="L153">	}</span>
+
+	/**
+	 * Examines the operating system of the user agent string, if not available.
+	 * 
+	 * @param userAgent
+	 *            String of an user agent
+	 * @param builder
+	 *            Builder for an user agent information
+	 */
+	private static void examineOperatingSystem(final UserAgent.Builder builder, final Data data) {
+<span class="fc bfc" id="L164" title="All 2 branches covered.">		if (net.sf.uadetector.OperatingSystem.EMPTY.equals(builder.getOperatingSystem())) {</span>
+<span class="fc bfc" id="L165" title="All 2 branches covered.">			for (final Entry&lt;OperatingSystemPattern, OperatingSystem&gt; entry : data.getPatternToOperatingSystemMap().entrySet()) {</span>
+<span class="fc" id="L166">				final Matcher matcher = entry.getKey().getPattern().matcher(builder.getUserAgentString());</span>
+<span class="fc bfc" id="L167" title="All 2 branches covered.">				if (matcher.find()) {</span>
+<span class="fc" id="L168">					entry.getValue().copyTo(builder);</span>
+<span class="fc" id="L169">					break;</span>
+				}
+<span class="fc" id="L171">			}</span>
+		}
+<span class="fc" id="L173">	}</span>
+
+	private static DeviceCategory findDeviceCategoryByValue(@Nonnull final Category category, @Nonnull final Data data) {
+<span class="fc bfc" id="L176" title="All 2 branches covered.">		for (final Device device : data.getDevices()) {</span>
+<span class="fc bfc" id="L177" title="All 2 branches covered.">			if (category == device.getCategory()) {</span>
+<span class="fc" id="L178">				return new DeviceCategory(category, device.getIcon(), device.getInfoUrl(), device.getName());</span>
+			}
+		}
+<span class="fc" id="L181">		return DeviceCategory.EMPTY;</span>
+	}
+
+	/**
+	 * Gets the data store of this parser.
+	 * 
+	 * @return data store of this parser
+	 */
+	protected abstract DataStore getDataStore();
+
+	@Override
+	public String getDataVersion() {
+<span class="fc" id="L193">		return getDataStore().getData().getVersion();</span>
+	}
+
+	@Override
+	public UserAgent parse(final String userAgent) {
+<span class="fc" id="L198">		final UserAgent.Builder builder = new UserAgent.Builder(userAgent);</span>
+
+		// work during the analysis always with the same reference of data
+<span class="fc" id="L201">		final Data data = getDataStore().getData();</span>
+
+<span class="fc bfc" id="L203" title="All 2 branches covered.">		if (!examineAsRobot(builder, data)) {</span>
+<span class="fc" id="L204">			examineAsBrowser(builder, data);</span>
+<span class="fc" id="L205">			examineOperatingSystem(builder, data);</span>
+		}
+<span class="fc" id="L207">		examineDeviceCategory(builder, data);</span>
+<span class="fc" id="L208">		return builder.build();</span>
+	}
+
+	@Override
+	public void shutdown() {
+		// nothing to shutdown
+<span class="fc" id="L214">	}</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.6.2.201302030002</span></div></body></html>

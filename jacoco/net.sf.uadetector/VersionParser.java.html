@@ -1,0 +1,380 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>VersionParser.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="right"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">UADetector :: Core</a> &gt; <a href="index.html" class="el_package">net.sf.uadetector</a> &gt; <span class="el_source">VersionParser.java</span></div><h1>VersionParser.java</h1><pre class="source lang-java linenums">/*******************************************************************************
+ * Copyright 2012 André Rouél
+ * 
+ * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ ******************************************************************************/
+package net.sf.uadetector;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import javax.annotation.Nonnull;
+
+import net.sf.qualitycheck.Check;
+
+/**
+ * This class is used to detect version information within &lt;i&gt;User-Agent&lt;/i&gt; strings.
+ * 
+ * @author André Rouél
+ */
+final class VersionParser {
+
+	/**
+	 * Index number of the group in a matching {@link Pattern} which contains the extension/suffix of a version string
+	 */
+	private static final int EXTENSION_INDEX = 5;
+
+	/**
+	 * Index number of the group in a matching {@link Pattern} which contains the first/major number of a version string
+	 */
+	private static final int MAJOR_INDEX = 1;
+
+	/**
+	 * Regular expression to analyze a version number separated by a dot
+	 */
+<span class="fc" id="L48">	private static final Pattern VERSIONNUMBER = Pattern.compile(&quot;((\\d+)((\\.\\d+)+)?)&quot;);</span>
+
+	/**
+	 * Regular expression to analyze a version number separated by a dot with suffix
+	 */
+<span class="fc" id="L53">	private static final Pattern VERSIONNUMBER_WITH_SUFFIX = Pattern.compile(VERSIONNUMBER.pattern() + &quot;((\\s|\\-|\\.|\\[|\\]|\\w+)+)?&quot;);</span>
+
+	/**
+	 * Regular expression to analyze segments of a version string, consisting of prefix, numeric groups and suffix
+	 */
+<span class="fc" id="L58">	private static final Pattern VERSIONSTRING = Pattern.compile(&quot;^&quot; + VERSIONNUMBER_WITH_SUFFIX.pattern());</span>
+
+	/**
+	 * This method try to determine the version number of the operating system &lt;i&gt;Android&lt;/i&gt; more accurately.
+	 * 
+	 * @param userAgent
+	 *            user agent string
+	 * @return more accurately identified version number or {@code null}
+	 */
+	static VersionNumber identifyAndroidVersion(@Nonnull final String userAgent) {
+<span class="fc" id="L68">		VersionNumber version = VersionNumber.UNKNOWN;</span>
+<span class="fc" id="L69">		final List&lt;Pattern&gt; patterns = new ArrayList&lt;Pattern&gt;();</span>
+<span class="fc" id="L70">		patterns.add(Pattern.compile(&quot;Android\\s?((\\d+)((\\.\\d+)+)?(\\-(\\w|\\d)+)?);&quot;));</span>
+<span class="fc" id="L71">		patterns.add(Pattern.compile(&quot;Android\\-((\\d+)((\\.\\d+)+)?(\\-(\\w|\\d)+)?);&quot;));</span>
+<span class="fc bfc" id="L72" title="All 2 branches covered.">		for (final Pattern pattern : patterns) {</span>
+<span class="fc" id="L73">			final Matcher m = pattern.matcher(userAgent);</span>
+<span class="fc bfc" id="L74" title="All 2 branches covered.">			if (m.find()) {</span>
+<span class="fc" id="L75">				version = parseFirstVersionNumber(m.group(MAJOR_INDEX));</span>
+<span class="fc" id="L76">				break;</span>
+			}
+<span class="fc" id="L78">		}</span>
+<span class="fc" id="L79">		return version;</span>
+	}
+
+	/**
+	 * This method try to determine the version number of the operating system &lt;i&gt;Bada&lt;/i&gt; more accurately.
+	 * 
+	 * @param userAgent
+	 *            user agent string
+	 * @return more accurately identified version number or {@code null}
+	 */
+	static VersionNumber identifyBadaVersion(final String userAgent) {
+<span class="fc" id="L90">		VersionNumber version = VersionNumber.UNKNOWN;</span>
+<span class="fc" id="L91">		final Pattern pattern = Pattern.compile(&quot;Bada/((\\d+)((\\.\\d+)+)?)&quot;);</span>
+<span class="fc" id="L92">		final Matcher m = pattern.matcher(userAgent);</span>
+<span class="fc bfc" id="L93" title="All 2 branches covered.">		if (m.find()) {</span>
+<span class="fc" id="L94">			version = parseFirstVersionNumber(m.group(MAJOR_INDEX));</span>
+		}
+<span class="fc" id="L96">		return version;</span>
+	}
+
+	/**
+	 * This method try to determine the version number of an operating system of a &lt;i&gt;BSD&lt;/i&gt; platform more accurately.
+	 * 
+	 * @param userAgent
+	 *            user agent string
+	 * @return more accurately identified version number or {@code null}
+	 */
+	static VersionNumber identifyBSDVersion(final String userAgent) {
+<span class="fc" id="L107">		VersionNumber version = VersionNumber.UNKNOWN;</span>
+<span class="fc" id="L108">		final Pattern pattern = Pattern.compile(&quot;\\w+bsd\\s?((\\d+)((\\.\\d+)+)?((\\-|_)[\\w\\d\\-]+)?)&quot;, Pattern.CASE_INSENSITIVE);</span>
+<span class="fc" id="L109">		final Matcher m = pattern.matcher(userAgent);</span>
+<span class="fc bfc" id="L110" title="All 2 branches covered.">		if (m.find()) {</span>
+<span class="fc" id="L111">			version = parseFirstVersionNumber(m.group(MAJOR_INDEX));</span>
+		}
+<span class="fc" id="L113">		return version;</span>
+	}
+
+	/**
+	 * This method try to determine the version number of the operating system &lt;i&gt;iOS&lt;/i&gt; more accurately.
+	 * 
+	 * @param userAgent
+	 *            user agent string
+	 * @return more accurately identified version number or {@code null}
+	 */
+	static VersionNumber identifyIOSVersion(final String userAgent) {
+<span class="fc" id="L124">		VersionNumber version = VersionNumber.UNKNOWN;</span>
+<span class="fc" id="L125">		final List&lt;Pattern&gt; patterns = new ArrayList&lt;Pattern&gt;();</span>
+<span class="fc" id="L126">		patterns.add(Pattern.compile(&quot;iPhone OS\\s?((\\d+)((\\_\\d+)+)?) like Mac OS X&quot;));</span>
+<span class="fc" id="L127">		patterns.add(Pattern.compile(&quot;CPU OS\\s?((\\d+)((\\_\\d+)+)?) like Mac OS X&quot;));</span>
+<span class="fc" id="L128">		patterns.add(Pattern.compile(&quot;iPhone OS\\s?((\\d+)((\\.\\d+)+)?);&quot;));</span>
+<span class="fc bfc" id="L129" title="All 2 branches covered.">		for (final Pattern pattern : patterns) {</span>
+<span class="fc" id="L130">			final Matcher m = pattern.matcher(userAgent);</span>
+<span class="fc bfc" id="L131" title="All 2 branches covered.">			if (m.find()) {</span>
+<span class="fc" id="L132">				version = parseFirstVersionNumber(m.group(MAJOR_INDEX).replaceAll(&quot;_&quot;, &quot;.&quot;));</span>
+<span class="fc" id="L133">				break;</span>
+			}
+<span class="fc" id="L135">		}</span>
+<span class="fc" id="L136">		return version;</span>
+	}
+
+	/**
+	 * This method try to determine the version number of the running &lt;i&gt;JVM&lt;/i&gt; more accurately.
+	 * 
+	 * @param userAgent
+	 *            user agent string
+	 * @return more accurately identified version number or {@code null}
+	 */
+	static VersionNumber identifyJavaVersion(final String userAgent) {
+<span class="fc" id="L147">		VersionNumber version = VersionNumber.UNKNOWN;</span>
+<span class="fc" id="L148">		final List&lt;Pattern&gt; patterns = new ArrayList&lt;Pattern&gt;();</span>
+<span class="fc" id="L149">		patterns.add(Pattern.compile(&quot;Java/((\\d+)((\\.\\d+)+)?((\\-|_)[\\w\\d\\-]+)?)&quot;));</span>
+<span class="fc" id="L150">		patterns.add(Pattern.compile(&quot;Java((\\d+)((\\.\\d+)+)?((\\-|_)[\\w\\d\\-]+)?)&quot;));</span>
+<span class="fc bfc" id="L151" title="All 2 branches covered.">		for (final Pattern pattern : patterns) {</span>
+<span class="fc" id="L152">			final Matcher m = pattern.matcher(userAgent);</span>
+<span class="fc bfc" id="L153" title="All 2 branches covered.">			if (m.find()) {</span>
+<span class="fc" id="L154">				version = parseFirstVersionNumber(m.group(MAJOR_INDEX));</span>
+<span class="fc" id="L155">				break;</span>
+			}
+<span class="fc" id="L157">		}</span>
+<span class="fc" id="L158">		return version;</span>
+	}
+
+	/**
+	 * This method try to determine the version number of the operating system &lt;i&gt;OS X&lt;/i&gt; more accurately.
+	 * 
+	 * @param userAgent
+	 *            user agent string
+	 * @return more accurately identified version number or {@code null}
+	 */
+	static VersionNumber identifyOSXVersion(final String userAgent) {
+<span class="fc" id="L169">		VersionNumber version = VersionNumber.UNKNOWN;</span>
+<span class="fc" id="L170">		final List&lt;Pattern&gt; patterns = new ArrayList&lt;Pattern&gt;();</span>
+<span class="fc" id="L171">		patterns.add(Pattern.compile(&quot;Mac OS X\\s?((\\d+)((\\.\\d+)+)?);&quot;));</span>
+<span class="fc" id="L172">		patterns.add(Pattern.compile(&quot;Mac OS X\\s?((\\d+)((\\_\\d+)+)?);&quot;));</span>
+<span class="fc" id="L173">		patterns.add(Pattern.compile(&quot;Mac OS X\\s?((\\d+)((\\_\\d+)+)?)\\)&quot;));</span>
+<span class="fc bfc" id="L174" title="All 2 branches covered.">		for (final Pattern pattern : patterns) {</span>
+<span class="fc" id="L175">			final Matcher m = pattern.matcher(userAgent);</span>
+<span class="fc bfc" id="L176" title="All 2 branches covered.">			if (m.find()) {</span>
+<span class="fc" id="L177">				version = parseFirstVersionNumber(m.group(MAJOR_INDEX).replaceAll(&quot;_&quot;, &quot;.&quot;));</span>
+<span class="fc" id="L178">				break;</span>
+			}
+<span class="fc" id="L180">		}</span>
+<span class="fc" id="L181">		return version;</span>
+	}
+
+	/**
+	 * This method try to determine the version number of the operating system &lt;i&gt;Symbian&lt;/i&gt; more accurately.
+	 * 
+	 * @param userAgent
+	 *            user agent string
+	 * @return more accurately identified version number or {@code null}
+	 */
+	static VersionNumber identifySymbianVersion(final String userAgent) {
+<span class="fc" id="L192">		VersionNumber version = VersionNumber.UNKNOWN;</span>
+<span class="fc" id="L193">		final Pattern pattern = Pattern.compile(&quot;SymbianOS/((\\d+)((\\.\\d+)+)?s?)&quot;);</span>
+<span class="fc" id="L194">		final Matcher m = pattern.matcher(userAgent);</span>
+<span class="fc bfc" id="L195" title="All 2 branches covered.">		if (m.find()) {</span>
+<span class="fc" id="L196">			version = parseFirstVersionNumber(m.group(MAJOR_INDEX));</span>
+		}
+<span class="fc" id="L198">		return version;</span>
+	}
+
+	/**
+	 * This method try to determine the version number of the operating system &lt;i&gt;webOS&lt;/i&gt; more accurately.
+	 * 
+	 * @param userAgent
+	 *            user agent string
+	 * @return more accurately identified version number or {@code null}
+	 */
+	static VersionNumber identifyWebOSVersion(final String userAgent) {
+<span class="fc" id="L209">		VersionNumber version = VersionNumber.UNKNOWN;</span>
+<span class="fc" id="L210">		final List&lt;Pattern&gt; patterns = new ArrayList&lt;Pattern&gt;();</span>
+<span class="fc" id="L211">		patterns.add(Pattern.compile(&quot;hpwOS/((\\d+)((\\.\\d+)+)?);&quot;));</span>
+<span class="fc" id="L212">		patterns.add(Pattern.compile(&quot;webOS/((\\d+)((\\.\\d+)+)?);&quot;));</span>
+<span class="fc bfc" id="L213" title="All 2 branches covered.">		for (final Pattern pattern : patterns) {</span>
+<span class="fc" id="L214">			final Matcher m = pattern.matcher(userAgent);</span>
+<span class="fc bfc" id="L215" title="All 2 branches covered.">			if (m.find()) {</span>
+<span class="fc" id="L216">				version = parseFirstVersionNumber(m.group(MAJOR_INDEX));</span>
+<span class="fc" id="L217">				break;</span>
+			}
+<span class="fc" id="L219">		}</span>
+<span class="fc" id="L220">		return version;</span>
+	}
+
+	/**
+	 * This method try to determine the version number of the operating system &lt;i&gt;Windows&lt;/i&gt; more accurately.
+	 * 
+	 * @param userAgent
+	 *            user agent string
+	 * @return more accurately identified version number or {@code null}
+	 */
+	static VersionNumber identifyWindowsVersion(final String userAgent) {
+<span class="fc" id="L231">		VersionNumber version = VersionNumber.UNKNOWN;</span>
+<span class="fc" id="L232">		final List&lt;Pattern&gt; patterns = new ArrayList&lt;Pattern&gt;();</span>
+<span class="fc" id="L233">		patterns.add(Pattern.compile(&quot;Windows NT\\s?((\\d+)((\\.\\d+)+)?)&quot;));</span>
+<span class="fc" id="L234">		patterns.add(Pattern.compile(&quot;Windows Phone OS ((\\d+)((\\.\\d+)+)?)&quot;));</span>
+<span class="fc" id="L235">		patterns.add(Pattern.compile(&quot;Windows CE ((\\d+)((\\.\\d+)+)?)&quot;));</span>
+<span class="fc" id="L236">		patterns.add(Pattern.compile(&quot;Windows 2000\\s?((\\d+)((\\.\\d+)+)?)&quot;));</span>
+<span class="fc" id="L237">		patterns.add(Pattern.compile(&quot;Windows XP\\s?((\\d+)((\\.\\d+)+)?)&quot;));</span>
+<span class="fc" id="L238">		patterns.add(Pattern.compile(&quot;Windows 7\\s?((\\d+)((\\.\\d+)+)?)&quot;));</span>
+<span class="fc" id="L239">		patterns.add(Pattern.compile(&quot;Win 9x ((\\d+)((\\.\\d+)+)?)&quot;));</span>
+<span class="fc" id="L240">		patterns.add(Pattern.compile(&quot;Windows ((\\d+)((\\.\\d+)+)?)&quot;));</span>
+<span class="fc" id="L241">		patterns.add(Pattern.compile(&quot;WebTV/((\\d+)((\\.\\d+)+)?)&quot;));</span>
+<span class="fc bfc" id="L242" title="All 2 branches covered.">		for (final Pattern pattern : patterns) {</span>
+<span class="fc" id="L243">			final Matcher m = pattern.matcher(userAgent);</span>
+<span class="fc bfc" id="L244" title="All 2 branches covered.">			if (m.find()) {</span>
+<span class="fc" id="L245">				version = parseFirstVersionNumber(m.group(MAJOR_INDEX));</span>
+<span class="fc" id="L246">				break;</span>
+			}
+<span class="fc" id="L248">		}</span>
+<span class="fc" id="L249">		return version;</span>
+	}
+
+	/**
+	 * Interprets a string with version information. The first occurrence of a version number in the string will be
+	 * searched and processed.
+	 * 
+	 * @param text
+	 *            string with version information
+	 * @return an object of {@code VersionNumber}, never {@code null}
+	 */
+	static VersionNumber parseFirstVersionNumber(@Nonnull final String text) {
+<span class="fc" id="L261">		Check.notNull(text, &quot;text&quot;);</span>
+
+<span class="fc" id="L263">		final Matcher matcher = VERSIONNUMBER_WITH_SUFFIX.matcher(text);</span>
+<span class="fc" id="L264">		String[] split = null;</span>
+<span class="fc" id="L265">		String ext = null;</span>
+<span class="fc bfc" id="L266" title="All 2 branches covered.">		if (matcher.find()) {</span>
+<span class="fc" id="L267">			split = matcher.group(MAJOR_INDEX).split(&quot;\\.&quot;);</span>
+<span class="fc" id="L268">			ext = matcher.group(EXTENSION_INDEX);</span>
+		}
+
+<span class="fc bfc" id="L271" title="All 2 branches covered.">		final String extension = ext == null ? VersionNumber.EMPTY_EXTENSION : trimRight(ext);</span>
+
+<span class="fc bfc" id="L273" title="All 2 branches covered.">		return split == null ? VersionNumber.UNKNOWN : new VersionNumber(Arrays.asList(split), extension);</span>
+	}
+
+	/**
+	 * Interprets a string with version information. The last version number in the string will be searched and
+	 * processed.
+	 * 
+	 * @param text
+	 *            string with version information
+	 * @return an object of {@code VersionNumber}, never {@code null}
+	 */
+	public static VersionNumber parseLastVersionNumber(@Nonnull final String text) {
+<span class="fc" id="L285">		Check.notNull(text, &quot;text&quot;);</span>
+
+<span class="fc" id="L287">		final Matcher matcher = VERSIONNUMBER_WITH_SUFFIX.matcher(text);</span>
+<span class="fc" id="L288">		String[] split = null;</span>
+<span class="fc" id="L289">		String ext = null;</span>
+<span class="fc bfc" id="L290" title="All 2 branches covered.">		while (matcher.find()) {</span>
+<span class="fc" id="L291">			split = matcher.group(MAJOR_INDEX).split(&quot;\\.&quot;);</span>
+<span class="fc" id="L292">			ext = matcher.group(EXTENSION_INDEX);</span>
+		}
+
+<span class="fc bfc" id="L295" title="All 2 branches covered.">		final String extension = ext == null ? VersionNumber.EMPTY_EXTENSION : trimRight(ext);</span>
+
+<span class="fc bfc" id="L297" title="All 2 branches covered.">		return split == null ? VersionNumber.UNKNOWN : new VersionNumber(Arrays.asList(split), extension);</span>
+	}
+
+	/**
+	 * Try to determine the version number of the operating system by parsing the user agent string.
+	 * 
+	 * 
+	 * @param family
+	 *            family of the operating system
+	 * @param userAgent
+	 *            user agent string
+	 * @return extracted version number
+	 */
+	public static VersionNumber parseOperatingSystemVersion(@Nonnull final OperatingSystemFamily family, @Nonnull final String userAgent) {
+<span class="fc" id="L311">		Check.notNull(family, &quot;family&quot;);</span>
+<span class="fc" id="L312">		Check.notNull(userAgent, &quot;userAgent&quot;);</span>
+
+		final VersionNumber v;
+<span class="fc bfc" id="L315" title="All 2 branches covered.">		if (OperatingSystemFamily.ANDROID == family) {</span>
+<span class="fc" id="L316">			v = identifyAndroidVersion(userAgent);</span>
+<span class="fc bfc" id="L317" title="All 2 branches covered.">		} else if (OperatingSystemFamily.BADA == family) {</span>
+<span class="fc" id="L318">			v = identifyBadaVersion(userAgent);</span>
+<span class="fc bfc" id="L319" title="All 2 branches covered.">		} else if (OperatingSystemFamily.BSD == family) {</span>
+<span class="fc" id="L320">			v = identifyBSDVersion(userAgent);</span>
+<span class="fc bfc" id="L321" title="All 2 branches covered.">		} else if (OperatingSystemFamily.IOS == family) {</span>
+<span class="fc" id="L322">			v = identifyIOSVersion(userAgent);</span>
+<span class="fc bfc" id="L323" title="All 2 branches covered.">		} else if (OperatingSystemFamily.JVM == family) {</span>
+<span class="fc" id="L324">			v = identifyJavaVersion(userAgent);</span>
+<span class="fc bfc" id="L325" title="All 2 branches covered.">		} else if (OperatingSystemFamily.OS_X == family) {</span>
+<span class="fc" id="L326">			v = identifyOSXVersion(userAgent);</span>
+<span class="fc bfc" id="L327" title="All 2 branches covered.">		} else if (OperatingSystemFamily.SYMBIAN == family) {</span>
+<span class="fc" id="L328">			v = identifySymbianVersion(userAgent);</span>
+<span class="fc bfc" id="L329" title="All 2 branches covered.">		} else if (OperatingSystemFamily.WEBOS == family) {</span>
+<span class="fc" id="L330">			v = identifyWebOSVersion(userAgent);</span>
+<span class="fc bfc" id="L331" title="All 2 branches covered.">		} else if (OperatingSystemFamily.WINDOWS == family) {</span>
+<span class="fc" id="L332">			v = identifyWindowsVersion(userAgent);</span>
+		} else {
+<span class="fc" id="L334">			v = VersionNumber.UNKNOWN;</span>
+		}
+<span class="fc" id="L336">		return v;</span>
+	}
+
+	/**
+	 * Interprets a string with version information. The first found group will be taken and processed.
+	 * 
+	 * @param version
+	 *            version as string
+	 * @return an object of {@code VersionNumber}, never {@code null}
+	 */
+	public static VersionNumber parseVersion(@Nonnull final String version) {
+<span class="fc" id="L347">		Check.notNull(version, &quot;version&quot;);</span>
+
+<span class="fc" id="L349">		VersionNumber result = new VersionNumber(new ArrayList&lt;String&gt;(0), version);</span>
+<span class="fc" id="L350">		final Matcher matcher = VERSIONSTRING.matcher(version);</span>
+<span class="fc bfc" id="L351" title="All 2 branches covered.">		if (matcher.find()) {</span>
+<span class="fc" id="L352">			final List&lt;String&gt; groups = Arrays.asList(matcher.group(MAJOR_INDEX).split(&quot;\\.&quot;));</span>
+<span class="fc bfc" id="L353" title="All 2 branches covered.">			final String extension = matcher.group(EXTENSION_INDEX) == null ? VersionNumber.EMPTY_EXTENSION : trimRight(matcher</span>
+					.group(EXTENSION_INDEX));
+<span class="fc" id="L355">			result = new VersionNumber(groups, extension);</span>
+		}
+
+<span class="fc" id="L358">		return result;</span>
+	}
+
+	/**
+	 * Trims the whitespace at the end of the given string.
+	 * 
+	 * @param text
+	 *            string to trim
+	 * @return trimmed string
+	 */
+	private static String trimRight(@Nonnull final String text) {
+<span class="fc" id="L369">		return text.replaceAll(&quot;\\s+$&quot;, &quot;&quot;);</span>
+	}
+
+	/**
+	 * &lt;strong&gt;Attention:&lt;/strong&gt; This class is not intended to create objects from it.
+	 */
+<span class="fc" id="L375">	private VersionParser() {</span>
+		// This class is not intended to create objects from it.
+<span class="fc" id="L377">	}</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.6.2.201302030002</span></div></body></html>

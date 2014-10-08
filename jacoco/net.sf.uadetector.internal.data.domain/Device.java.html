@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>Device.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="right"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">UADetector :: Core</a> &gt; <a href="index.html" class="el_package">net.sf.uadetector.internal.data.domain</a> &gt; <span class="el_source">Device.java</span></div><h1>Device.java</h1><pre class="source lang-java linenums">/*******************************************************************************
+ * Copyright 2013 André Rouél
+ * 
+ * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ ******************************************************************************/
+package net.sf.uadetector.internal.data.domain;
+
+import java.io.Serializable;
+import java.util.Collections;
+import java.util.SortedSet;
+import java.util.TreeSet;
+
+import javax.annotation.Nonnegative;
+import javax.annotation.Nonnull;
+import javax.annotation.concurrent.Immutable;
+import javax.annotation.concurrent.NotThreadSafe;
+
+import net.sf.qualitycheck.Check;
+import net.sf.uadetector.ReadableDeviceCategory.Category;
+
+@Immutable
+public final class Device implements Identifiable, Serializable {
+
+	@NotThreadSafe
+	public static final class Builder {
+
+		private static final String EMPTY = &quot;&quot;;
+
+<span class="fc" id="L39">		@Nonnull</span>
+		private String icon = EMPTY;
+
+<span class="fc" id="L42">		private int id = Integer.MIN_VALUE;</span>
+
+<span class="fc" id="L44">		@Nonnull</span>
+		private String infoUrl = EMPTY;
+
+		private String name;
+
+<span class="fc" id="L49">		@Nonnull</span>
+		private SortedSet&lt;DevicePattern&gt; patterns = new TreeSet&lt;DevicePattern&gt;();
+
+<span class="fc" id="L52">		public Builder() {</span>
+			// default constructor
+<span class="fc" id="L54">		}</span>
+
+		/**
+		 * Creates a new instance of a builder with the data of the passed builder.
+		 * 
+		 * @param builder
+		 *            builder containing the data to be copied
+		 * @throws net.sf.qualitycheck.exception.IllegalNullArgumentException
+		 *             if the given argument is {@code null}
+		 */
+<span class="fc" id="L64">		private Builder(@Nonnull final Builder builder) {</span>
+<span class="fc" id="L65">			Check.notNull(builder, &quot;builder&quot;);</span>
+
+<span class="fc" id="L67">			icon = builder.icon;</span>
+<span class="fc" id="L68">			id = builder.id;</span>
+<span class="fc" id="L69">			infoUrl = builder.infoUrl;</span>
+<span class="fc" id="L70">			name = builder.name;</span>
+<span class="fc" id="L71">		}</span>
+
+<span class="fc" id="L73">		public Builder(@Nonnull final Device device) {</span>
+<span class="fc" id="L74">			Check.notNull(device, &quot;device&quot;);</span>
+<span class="fc" id="L75">			icon = Check.notNull(device.getIcon(), &quot;device.getIcon()&quot;);</span>
+<span class="fc" id="L76">			id = Check.notNegative(device.getId(), &quot;device.getId()&quot;);</span>
+<span class="fc" id="L77">			infoUrl = Check.notNull(device.getInfoUrl(), &quot;device.getInfoUrl()&quot;);</span>
+<span class="fc" id="L78">			name = Check.notNull(device.getName(), &quot;device.getName()&quot;);</span>
+<span class="fc" id="L79">			patterns = new TreeSet&lt;DevicePattern&gt;(Check.notNull(device.getPatterns(), &quot;device.getPatterns()&quot;));</span>
+<span class="fc" id="L80">		}</span>
+
+		@Nonnull
+		public Device build() {
+<span class="fc" id="L84">			return new Device(name, id, Category.evaluate(name), icon, infoUrl, patterns);</span>
+		}
+
+		/**
+		 * Creates a copy (with all its data) of the current builder.
+		 * 
+		 * @return a new instance of the current builder, never {@code null}
+		 */
+		@Nonnull
+		public Builder copy() {
+<span class="fc" id="L94">			return new Builder(this);</span>
+		}
+
+		public String getIcon() {
+<span class="fc" id="L98">			return icon;</span>
+		}
+
+		public int getId() {
+<span class="fc" id="L102">			return id;</span>
+		}
+
+		public String getInfoUrl() {
+<span class="fc" id="L106">			return infoUrl;</span>
+		}
+
+		public String getName() {
+<span class="fc" id="L110">			return name;</span>
+		}
+
+		public SortedSet&lt;DevicePattern&gt; getPatterns() {
+<span class="fc" id="L114">			return patterns;</span>
+		}
+
+		@Nonnull
+		public Builder setIcon(@Nonnull final String icon) {
+<span class="fc" id="L119">			this.icon = Check.notNull(icon, &quot;icon&quot;);</span>
+<span class="fc" id="L120">			return this;</span>
+		}
+
+		@Nonnull
+		public Builder setId(@Nonnegative final int id) {
+<span class="fc" id="L125">			this.id = Check.notNegative(id, &quot;id&quot;);</span>
+<span class="fc" id="L126">			return this;</span>
+		}
+
+		@Nonnull
+		public Builder setId(@Nonnull final String id) {
+<span class="fc" id="L131">			setId(Integer.parseInt(Check.notEmpty(id, &quot;id&quot;)));</span>
+<span class="fc" id="L132">			return this;</span>
+		}
+
+		@Nonnull
+		public Builder setInfoUrl(@Nonnull final String infoUrl) {
+<span class="fc" id="L137">			this.infoUrl = Check.notNull(infoUrl, &quot;infoUrl&quot;);</span>
+<span class="fc" id="L138">			return this;</span>
+		}
+
+		@Nonnull
+		public Builder setName(@Nonnull final String name) {
+<span class="fc" id="L143">			this.name = Check.notNull(name, &quot;name&quot;);</span>
+<span class="fc" id="L144">			return this;</span>
+		}
+
+		@Nonnull
+		public Builder setPatterns(@Nonnull final SortedSet&lt;DevicePattern&gt; patterns) {
+<span class="fc" id="L149">			this.patterns = new TreeSet&lt;DevicePattern&gt;(Check.notNull(patterns, &quot;patterns&quot;));</span>
+<span class="fc" id="L150">			return this;</span>
+		}
+
+	}
+
+	private static final long serialVersionUID = 1L;
+
+	private static int buildHashCode(@Nonnull final Category category, @Nonnull final String icon, @Nonnegative final int id,
+			@Nonnull final String infoUrl, @Nonnull final String name, @Nonnull final SortedSet&lt;DevicePattern&gt; patterns) {
+<span class="fc" id="L159">		final int prime = 31;</span>
+<span class="fc" id="L160">		int result = 1;</span>
+<span class="fc" id="L161">		result = prime * result + category.hashCode();</span>
+<span class="fc" id="L162">		result = prime * result + icon.hashCode();</span>
+<span class="fc" id="L163">		result = prime * result + id;</span>
+<span class="fc" id="L164">		result = prime * result + infoUrl.hashCode();</span>
+<span class="fc" id="L165">		result = prime * result + name.hashCode();</span>
+<span class="fc" id="L166">		result = prime * result + patterns.hashCode();</span>
+<span class="fc" id="L167">		return result;</span>
+	}
+
+	private final int hash;
+
+	@Nonnull
+	private final String icon;
+
+	@Nonnull
+	private final Category category;
+
+	@Nonnegative
+	private final int id;
+
+	@Nonnull
+	private final String infoUrl;
+
+	@Nonnull
+	private final String name;
+
+	@Nonnull
+	private final SortedSet&lt;DevicePattern&gt; patterns;
+
+	public Device(@Nonnull final String name, @Nonnegative final int id, @Nonnull final Category category, @Nonnull final String icon,
+<span class="fc" id="L191">			@Nonnull final String infoUrl, @Nonnull final SortedSet&lt;DevicePattern&gt; patterns) {</span>
+<span class="fc" id="L192">		this.category = category;</span>
+<span class="fc" id="L193">		this.icon = Check.notNull(icon, &quot;icon&quot;);</span>
+<span class="fc" id="L194">		this.id = Check.notNegative(id, &quot;id&quot;);</span>
+<span class="fc" id="L195">		this.infoUrl = Check.notNull(infoUrl, &quot;infoUrl&quot;);</span>
+<span class="fc" id="L196">		this.name = Check.notNull(name, &quot;name&quot;);</span>
+<span class="fc" id="L197">		this.patterns = Collections.unmodifiableSortedSet(new TreeSet&lt;DevicePattern&gt;(Check.notNull(patterns, &quot;patterns&quot;)));</span>
+<span class="fc" id="L198">		hash = buildHashCode(category, icon, id, infoUrl, name, patterns);</span>
+<span class="fc" id="L199">	}</span>
+
+	@Override
+	public boolean equals(final Object obj) {
+<span class="fc bfc" id="L203" title="All 2 branches covered.">		if (this == obj) {</span>
+<span class="fc" id="L204">			return true;</span>
+		}
+<span class="fc bfc" id="L206" title="All 2 branches covered.">		if (obj == null) {</span>
+<span class="fc" id="L207">			return false;</span>
+		}
+<span class="fc bfc" id="L209" title="All 2 branches covered.">		if (getClass() != obj.getClass()) {</span>
+<span class="fc" id="L210">			return false;</span>
+		}
+<span class="fc" id="L212">		final Device other = (Device) obj;</span>
+<span class="fc bfc" id="L213" title="All 2 branches covered.">		if (category != other.category) {</span>
+<span class="fc" id="L214">			return false;</span>
+		}
+<span class="fc bfc" id="L216" title="All 2 branches covered.">		if (!icon.equals(other.icon)) {</span>
+<span class="fc" id="L217">			return false;</span>
+		}
+<span class="fc bfc" id="L219" title="All 2 branches covered.">		if (id != other.id) {</span>
+<span class="fc" id="L220">			return false;</span>
+		}
+<span class="fc bfc" id="L222" title="All 2 branches covered.">		if (!infoUrl.equals(other.infoUrl)) {</span>
+<span class="fc" id="L223">			return false;</span>
+		}
+<span class="fc bfc" id="L225" title="All 2 branches covered.">		if (!name.equals(other.name)) {</span>
+<span class="fc" id="L226">			return false;</span>
+		}
+<span class="fc bfc" id="L228" title="All 2 branches covered.">		if (!patterns.equals(other.patterns)) {</span>
+<span class="fc" id="L229">			return false;</span>
+		}
+<span class="fc" id="L231">		return true;</span>
+	}
+
+	@Nonnull
+	public Category getCategory() {
+<span class="fc" id="L236">		return category;</span>
+	}
+
+	@Nonnull
+	public String getIcon() {
+<span class="fc" id="L241">		return icon;</span>
+	}
+
+	@Override
+	@Nonnegative
+	public int getId() {
+<span class="fc" id="L247">		return id;</span>
+	}
+
+	@Nonnull
+	public String getInfoUrl() {
+<span class="fc" id="L252">		return infoUrl;</span>
+	}
+
+	@Nonnull
+	public String getName() {
+<span class="fc" id="L257">		return name;</span>
+	}
+
+	@Nonnull
+	public SortedSet&lt;DevicePattern&gt; getPatterns() {
+<span class="fc" id="L262">		return patterns;</span>
+	}
+
+	@Override
+	public int hashCode() {
+<span class="fc" id="L267">		return hash;</span>
+	}
+
+	@Override
+	public String toString() {
+<span class="fc" id="L272">		return &quot;Device [icon=&quot; + icon + &quot;, id=&quot; + id + &quot;, infoUrl=&quot; + infoUrl + &quot;, name=&quot; + name + &quot;, patterns=&quot; + patterns + &quot;]&quot;;</span>
+	}
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.6.2.201302030002</span></div></body></html>

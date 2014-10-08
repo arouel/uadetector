@@ -1,0 +1,430 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>OperatingSystem.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="right"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">UADetector :: Core</a> &gt; <a href="index.html" class="el_package">net.sf.uadetector.internal.data.domain</a> &gt; <span class="el_source">OperatingSystem.java</span></div><h1>OperatingSystem.java</h1><pre class="source lang-java linenums">/*******************************************************************************
+ * Copyright 2012 André Rouél
+ * 
+ * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ ******************************************************************************/
+package net.sf.uadetector.internal.data.domain;
+
+import java.io.Serializable;
+import java.util.Collections;
+import java.util.Set;
+import java.util.SortedSet;
+import java.util.TreeSet;
+
+import javax.annotation.Nonnegative;
+import javax.annotation.Nonnull;
+import javax.annotation.concurrent.Immutable;
+import javax.annotation.concurrent.NotThreadSafe;
+
+import net.sf.qualitycheck.Check;
+import net.sf.uadetector.OperatingSystemFamily;
+import net.sf.uadetector.UserAgent;
+import net.sf.uadetector.VersionNumber;
+
+@Immutable
+public final class OperatingSystem implements Identifiable, Serializable {
+
+	@NotThreadSafe
+	public static final class Builder {
+
+<span class="fc" id="L40">		@Nonnull</span>
+		private String family = &quot;&quot;;
+
+<span class="fc" id="L43">		@Nonnull</span>
+		private String icon = &quot;&quot;;
+
+<span class="fc" id="L46">		private int id = Integer.MIN_VALUE;</span>
+
+<span class="fc" id="L48">		@Nonnull</span>
+		private String infoUrl = &quot;&quot;;
+
+<span class="fc" id="L51">		@Nonnull</span>
+		private String name = &quot;&quot;;
+
+<span class="fc" id="L54">		@Nonnull</span>
+		private SortedSet&lt;OperatingSystemPattern&gt; patterns = new TreeSet&lt;OperatingSystemPattern&gt;();
+
+<span class="fc" id="L57">		@Nonnull</span>
+		private String producer = &quot;&quot;;
+
+<span class="fc" id="L60">		@Nonnull</span>
+		private String producerUrl = &quot;&quot;;
+
+<span class="fc" id="L63">		@Nonnull</span>
+		private String url = &quot;&quot;;
+
+<span class="fc" id="L66">		public Builder() {</span>
+			// default constructor
+<span class="fc" id="L68">		}</span>
+
+		/**
+		 * Creates a new instance of a builder with the data of the passed builder.
+		 * 
+		 * @param builder
+		 *            builder containing the data to be copied
+		 * @throws net.sf.qualitycheck.exception.IllegalNullArgumentException
+		 *             if the given argument is {@code null}
+		 */
+<span class="fc" id="L78">		protected Builder(@Nonnull final Builder builder) {</span>
+<span class="fc" id="L79">			Check.notNull(builder, &quot;builder&quot;);</span>
+
+<span class="fc" id="L81">			family = builder.family;</span>
+<span class="fc" id="L82">			icon = builder.icon;</span>
+<span class="fc" id="L83">			id = builder.id;</span>
+<span class="fc" id="L84">			infoUrl = builder.infoUrl;</span>
+<span class="fc" id="L85">			name = builder.name;</span>
+<span class="fc" id="L86">			patterns.addAll(builder.patterns);</span>
+<span class="fc" id="L87">			producer = builder.producer;</span>
+<span class="fc" id="L88">			producerUrl = builder.producerUrl;</span>
+<span class="fc" id="L89">			url = builder.url;</span>
+<span class="fc" id="L90">		}</span>
+
+<span class="fc" id="L92">		public Builder(@Nonnull final OperatingSystem operatingSystem) {</span>
+<span class="fc" id="L93">			Check.notNull(operatingSystem, &quot;operatingSystem&quot;);</span>
+<span class="fc" id="L94">			id = Check.notNegative(operatingSystem.getId(), &quot;operatingSystem.getId()&quot;);</span>
+<span class="fc" id="L95">			name = Check.notNull(operatingSystem.getName(), &quot;operatingSystem.getName()&quot;);</span>
+<span class="fc" id="L96">			family = Check.notNull(operatingSystem.getFamily(), &quot;operatingSystem.getFamily()&quot;);</span>
+<span class="fc" id="L97">			infoUrl = Check.notNull(operatingSystem.getInfoUrl(), &quot;operatingSystem.getInfoUrl()&quot;);</span>
+<span class="fc" id="L98">			patterns = new TreeSet&lt;OperatingSystemPattern&gt;(Check.notNull(operatingSystem.getPatterns(), &quot;operatingSystem.getPatterns()&quot;));</span>
+<span class="fc" id="L99">			producer = Check.notNull(operatingSystem.getProducer(), &quot;operatingSystem.getProducer()&quot;);</span>
+<span class="fc" id="L100">			producerUrl = Check.notNull(operatingSystem.getProducerUrl(), &quot;operatingSystem.getProducerUrl()&quot;);</span>
+<span class="fc" id="L101">			url = Check.notNull(operatingSystem.getUrl(), &quot;operatingSystem.getUrl()&quot;);</span>
+<span class="fc" id="L102">			icon = Check.notNull(operatingSystem.getIcon(), &quot;operatingSystem.getIcon()&quot;);</span>
+<span class="fc" id="L103">		}</span>
+
+		@Nonnull
+		public Builder addPatterns(@Nonnull final Set&lt;OperatingSystemPattern&gt; patterns) {
+<span class="fc" id="L107">			Check.notNull(patterns, &quot;patterns&quot;);</span>
+
+<span class="fc" id="L109">			this.patterns.addAll(patterns);</span>
+<span class="fc" id="L110">			return this;</span>
+		}
+
+		@Nonnull
+		public OperatingSystem build() {
+<span class="fc" id="L115">			return new OperatingSystem(id, name, family, infoUrl, patterns, producer, producerUrl, url, icon);</span>
+		}
+
+		/**
+		 * Creates a copy (with all its data) of the current builder.
+		 * 
+		 * @return a new instance of the current builder, never {@code null}
+		 */
+		@Nonnull
+		public OperatingSystem.Builder copy() {
+<span class="fc" id="L125">			return new Builder(this);</span>
+		}
+
+		@Nonnull
+		public String getFamily() {
+<span class="fc" id="L130">			return family;</span>
+		}
+
+		@Nonnull
+		public String getIcon() {
+<span class="fc" id="L135">			return icon;</span>
+		}
+
+		public int getId() {
+<span class="fc" id="L139">			return id;</span>
+		}
+
+		@Nonnull
+		public String getInfoUrl() {
+<span class="fc" id="L144">			return infoUrl;</span>
+		}
+
+		@Nonnull
+		public String getName() {
+<span class="fc" id="L149">			return name;</span>
+		}
+
+		@Nonnull
+		public SortedSet&lt;OperatingSystemPattern&gt; getPatterns() {
+<span class="fc" id="L154">			return patterns;</span>
+		}
+
+		@Nonnull
+		public String getProducer() {
+<span class="fc" id="L159">			return producer;</span>
+		}
+
+		@Nonnull
+		public String getProducerUrl() {
+<span class="fc" id="L164">			return producerUrl;</span>
+		}
+
+		@Nonnull
+		public String getUrl() {
+<span class="fc" id="L169">			return url;</span>
+		}
+
+		@Nonnull
+		public Builder setFamily(@Nonnull final String family) {
+<span class="fc" id="L174">			this.family = Check.notNull(family, &quot;family&quot;);</span>
+<span class="fc" id="L175">			return this;</span>
+		}
+
+		@Nonnull
+		public Builder setIcon(@Nonnull final String icon) {
+<span class="fc" id="L180">			this.icon = Check.notNull(icon, &quot;icon&quot;);</span>
+<span class="fc" id="L181">			return this;</span>
+		}
+
+		@Nonnull
+		public Builder setId(@Nonnegative final int id) {
+<span class="fc" id="L186">			this.id = Check.notNegative(id, &quot;id&quot;);</span>
+<span class="fc" id="L187">			return this;</span>
+		}
+
+		@Nonnull
+		public Builder setId(@Nonnull final String id) {
+<span class="fc" id="L192">			Check.notEmpty(id, &quot;id&quot;);</span>
+
+<span class="fc" id="L194">			this.setId(Integer.parseInt(id.trim()));</span>
+<span class="fc" id="L195">			return this;</span>
+		}
+
+		@Nonnull
+		public Builder setInfoUrl(@Nonnull final String infoUrl) {
+<span class="fc" id="L200">			this.infoUrl = Check.notNull(infoUrl, &quot;infoUrl&quot;);</span>
+<span class="fc" id="L201">			return this;</span>
+		}
+
+		@Nonnull
+		public Builder setName(@Nonnull final String name) {
+<span class="fc" id="L206">			this.name = Check.notNull(name, &quot;name&quot;);</span>
+<span class="fc" id="L207">			return this;</span>
+		}
+
+		@Nonnull
+		public Builder setPatterns(@Nonnull final SortedSet&lt;OperatingSystemPattern&gt; patterns) {
+<span class="fc" id="L212">			this.patterns = new TreeSet&lt;OperatingSystemPattern&gt;(Check.notNull(patterns, &quot;patterns&quot;));</span>
+<span class="fc" id="L213">			return this;</span>
+		}
+
+		@Nonnull
+		public Builder setProducer(@Nonnull final String producer) {
+<span class="fc" id="L218">			this.producer = Check.notNull(producer, &quot;producer&quot;);</span>
+<span class="fc" id="L219">			return this;</span>
+		}
+
+		@Nonnull
+		public Builder setProducerUrl(@Nonnull final String producerUrl) {
+<span class="fc" id="L224">			this.producerUrl = Check.notNull(producerUrl, &quot;producerUrl&quot;);</span>
+<span class="fc" id="L225">			return this;</span>
+		}
+
+		@Nonnull
+		public Builder setUrl(@Nonnull final String url) {
+<span class="fc" id="L230">			this.url = Check.notNull(url, &quot;url&quot;);</span>
+<span class="fc" id="L231">			return this;</span>
+		}
+
+	}
+
+	private static final long serialVersionUID = -5330180544816352323L;
+
+	private static int buildHashCode(@Nonnegative final int id, @Nonnull final String name, @Nonnull final String family,
+			@Nonnull final String infoUrl, @Nonnull final SortedSet&lt;OperatingSystemPattern&gt; patterns, @Nonnull final String producer,
+			@Nonnull final String producerUrl, @Nonnull final String url, @Nonnull final String icon) {
+<span class="fc" id="L241">		final int prime = 31;</span>
+<span class="fc" id="L242">		int result = 1;</span>
+<span class="fc" id="L243">		result = prime * result + id;</span>
+<span class="fc" id="L244">		result = prime * result + name.hashCode();</span>
+<span class="fc" id="L245">		result = prime * result + family.hashCode();</span>
+<span class="fc" id="L246">		result = prime * result + infoUrl.hashCode();</span>
+<span class="fc" id="L247">		result = prime * result + patterns.hashCode();</span>
+<span class="fc" id="L248">		result = prime * result + producer.hashCode();</span>
+<span class="fc" id="L249">		result = prime * result + producerUrl.hashCode();</span>
+<span class="fc" id="L250">		result = prime * result + url.hashCode();</span>
+<span class="fc" id="L251">		result = prime * result + icon.hashCode();</span>
+<span class="fc" id="L252">		return result;</span>
+	}
+
+	@Nonnull
+	private final String family;
+
+	private final int hash;
+
+	@Nonnull
+	private final String icon;
+
+	@Nonnegative
+	private final int id;
+
+	@Nonnull
+	private final String infoUrl;
+
+	@Nonnull
+	private final String name;
+
+	@Nonnull
+	private final SortedSet&lt;OperatingSystemPattern&gt; patterns;
+
+	@Nonnull
+	private final String producer;
+
+	@Nonnull
+	private final String producerUrl;
+
+	@Nonnull
+	private final String url;
+
+	public OperatingSystem(@Nonnegative final int id, @Nonnull final String name, @Nonnull final String family,
+			@Nonnull final String infoUrl, @Nonnull final SortedSet&lt;OperatingSystemPattern&gt; patterns, @Nonnull final String producer,
+<span class="fc" id="L286">			@Nonnull final String producerUrl, @Nonnull final String url, @Nonnull final String icon) {</span>
+<span class="fc" id="L287">		this.id = Check.notNegative(id, &quot;id&quot;);</span>
+<span class="fc" id="L288">		this.name = Check.notNull(name, &quot;name&quot;);</span>
+<span class="fc" id="L289">		this.family = Check.notNull(family, &quot;family&quot;);</span>
+<span class="fc" id="L290">		this.infoUrl = Check.notNull(infoUrl, &quot;infoUrl&quot;);</span>
+<span class="fc" id="L291">		this.patterns = Collections.unmodifiableSortedSet(new TreeSet&lt;OperatingSystemPattern&gt;(Check.notNull(patterns, &quot;patterns&quot;)));</span>
+<span class="fc" id="L292">		this.producer = Check.notNull(producer, &quot;producer&quot;);</span>
+<span class="fc" id="L293">		this.producerUrl = Check.notNull(producerUrl, &quot;producerUrl&quot;);</span>
+<span class="fc" id="L294">		this.url = Check.notNull(url, &quot;url&quot;);</span>
+<span class="fc" id="L295">		this.icon = Check.notNull(icon, &quot;icon&quot;);</span>
+<span class="fc" id="L296">		hash = buildHashCode(id, name, family, infoUrl, patterns, producer, producerUrl, url, icon);</span>
+<span class="fc" id="L297">	}</span>
+
+	/**
+	 * Copies all information of the current operating system entry to the given user agent builder.
+	 * 
+	 * @param builder
+	 *            user agent builder
+	 */
+	public void copyTo(@Nonnull final UserAgent.Builder builder) {
+<span class="fc" id="L306">		final OperatingSystemFamily f = OperatingSystemFamily.evaluate(family);</span>
+<span class="fc" id="L307">		final VersionNumber version = VersionNumber.parseOperatingSystemVersion(f, builder.getUserAgentString());</span>
+<span class="fc" id="L308">		builder.setOperatingSystem(new net.sf.uadetector.OperatingSystem(f, family, icon, name, producer, producerUrl, url, version));</span>
+<span class="fc" id="L309">	}</span>
+
+	@Override
+	public boolean equals(final Object obj) {
+<span class="fc bfc" id="L313" title="All 2 branches covered.">		if (this == obj) {</span>
+<span class="fc" id="L314">			return true;</span>
+		}
+<span class="fc bfc" id="L316" title="All 2 branches covered.">		if (obj == null) {</span>
+<span class="fc" id="L317">			return false;</span>
+		}
+<span class="fc bfc" id="L319" title="All 2 branches covered.">		if (getClass() != obj.getClass()) {</span>
+<span class="fc" id="L320">			return false;</span>
+		}
+<span class="fc" id="L322">		final OperatingSystem other = (OperatingSystem) obj;</span>
+<span class="fc bfc" id="L323" title="All 2 branches covered.">		if (id != other.id) {</span>
+<span class="fc" id="L324">			return false;</span>
+		}
+<span class="fc bfc" id="L326" title="All 2 branches covered.">		if (!name.equals(other.name)) {</span>
+<span class="fc" id="L327">			return false;</span>
+		}
+<span class="fc bfc" id="L329" title="All 2 branches covered.">		if (!family.equals(other.family)) {</span>
+<span class="fc" id="L330">			return false;</span>
+		}
+<span class="fc bfc" id="L332" title="All 2 branches covered.">		if (!infoUrl.equals(other.infoUrl)) {</span>
+<span class="fc" id="L333">			return false;</span>
+		}
+<span class="fc bfc" id="L335" title="All 2 branches covered.">		if (!patterns.equals(other.patterns)) {</span>
+<span class="fc" id="L336">			return false;</span>
+		}
+<span class="fc bfc" id="L338" title="All 2 branches covered.">		if (!producer.equals(other.producer)) {</span>
+<span class="fc" id="L339">			return false;</span>
+		}
+<span class="fc bfc" id="L341" title="All 2 branches covered.">		if (!producerUrl.equals(other.producerUrl)) {</span>
+<span class="fc" id="L342">			return false;</span>
+		}
+<span class="fc bfc" id="L344" title="All 2 branches covered.">		if (!url.equals(other.url)) {</span>
+<span class="fc" id="L345">			return false;</span>
+		}
+<span class="fc bfc" id="L347" title="All 2 branches covered.">		if (!icon.equals(other.icon)) {</span>
+<span class="fc" id="L348">			return false;</span>
+		}
+<span class="fc" id="L350">		return true;</span>
+	}
+
+	@Nonnull
+	public String getFamily() {
+<span class="fc" id="L355">		return family;</span>
+	}
+
+	@Nonnull
+	public String getIcon() {
+<span class="fc" id="L360">		return icon;</span>
+	}
+
+	@Override
+	@Nonnegative
+	public int getId() {
+<span class="fc" id="L366">		return id;</span>
+	}
+
+	@Nonnull
+	public String getInfoUrl() {
+<span class="fc" id="L371">		return infoUrl;</span>
+	}
+
+	@Nonnull
+	public String getName() {
+<span class="fc" id="L376">		return name;</span>
+	}
+
+	@Nonnull
+	public SortedSet&lt;OperatingSystemPattern&gt; getPatterns() {
+<span class="fc" id="L381">		return patterns;</span>
+	}
+
+	@Nonnull
+	public String getProducer() {
+<span class="fc" id="L386">		return producer;</span>
+	}
+
+	@Nonnull
+	public String getProducerUrl() {
+<span class="fc" id="L391">		return producerUrl;</span>
+	}
+
+	@Nonnull
+	public String getUrl() {
+<span class="fc" id="L396">		return url;</span>
+	}
+
+	@Override
+	public int hashCode() {
+<span class="fc" id="L401">		return hash;</span>
+	}
+
+	@Override
+	public String toString() {
+<span class="fc" id="L406">		final StringBuilder builder = new StringBuilder();</span>
+<span class="fc" id="L407">		builder.append(&quot;OperatingSystem [id=&quot;);</span>
+<span class="fc" id="L408">		builder.append(id);</span>
+<span class="fc" id="L409">		builder.append(&quot;, name=&quot;);</span>
+<span class="fc" id="L410">		builder.append(name);</span>
+<span class="fc" id="L411">		builder.append(&quot;, family=&quot;);</span>
+<span class="fc" id="L412">		builder.append(family);</span>
+<span class="fc" id="L413">		builder.append(&quot;, infoUrl=&quot;);</span>
+<span class="fc" id="L414">		builder.append(infoUrl);</span>
+<span class="fc" id="L415">		builder.append(&quot;, patterns=&quot;);</span>
+<span class="fc" id="L416">		builder.append(patterns);</span>
+<span class="fc" id="L417">		builder.append(&quot;, producer=&quot;);</span>
+<span class="fc" id="L418">		builder.append(producer);</span>
+<span class="fc" id="L419">		builder.append(&quot;, producerUrl=&quot;);</span>
+<span class="fc" id="L420">		builder.append(producerUrl);</span>
+<span class="fc" id="L421">		builder.append(&quot;, url=&quot;);</span>
+<span class="fc" id="L422">		builder.append(url);</span>
+<span class="fc" id="L423">		builder.append(&quot;, icon=&quot;);</span>
+<span class="fc" id="L424">		builder.append(icon);</span>
+<span class="fc" id="L425">		builder.append(&quot;]&quot;);</span>
+<span class="fc" id="L426">		return builder.toString();</span>
+	}
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.6.2.201302030002</span></div></body></html>

@@ -1,0 +1,436 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>VersionNumber.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="right"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">UADetector :: Core</a> &gt; <a href="index.html" class="el_package">net.sf.uadetector</a> &gt; <span class="el_source">VersionNumber.java</span></div><h1>VersionNumber.java</h1><pre class="source lang-java linenums">/*******************************************************************************
+ * Copyright 2012 André Rouél
+ * 
+ * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ ******************************************************************************/
+package net.sf.uadetector;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.regex.Pattern;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
+import net.sf.qualitycheck.Check;
+import net.sf.qualitycheck.exception.IllegalStateOfArgumentException;
+import net.sf.uadetector.internal.util.AlphanumComparator;
+
+/**
+ * The {@code VersionNumber} class represents the version number of an operating system or User-Agent.&lt;br&gt;
+ * &lt;br&gt;
+ * A {@code VersionNumber} object is immutable, their values cannot be changed after creation.
+ * 
+ * @author André Rouél
+ */
+public final class VersionNumber implements ReadableVersionNumber, Serializable {
+
+	/**
+	 * Empty extension or addition of a version number
+	 */
+	public static final String EMPTY_EXTENSION = &quot;&quot;;
+
+	/**
+	 * Empty group or category of a version number
+	 */
+	public static final String EMPTY_GROUP = &quot;&quot;;
+
+	/**
+	 * Minimum number of numeric group a version number
+	 */
+	private static final int MIN_GROUP_SIZE = 3;
+
+	/**
+	 * Regular expression to find only numerical values ​​in strings
+	 */
+<span class="fc" id="L59">	private static final Pattern NUMERIC = Pattern.compile(&quot;\\d+&quot;);</span>
+
+	/**
+	 * Separator between numeric groups of a version number
+	 */
+	private static final char SEPARATOR = '.';
+
+	/**
+	 * Serialization version
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/**
+	 * Defines an empty or not set version number
+	 */
+<span class="fc" id="L74">	public static final VersionNumber UNKNOWN = new VersionNumber(EMPTY_GROUP);</span>
+
+	/**
+	 * Checks a string that only numerical values ​​are present. Negative numbers are not included.
+	 * 
+	 * @param text
+	 *            string to be tested
+	 * @return {@code true} if only numeric characters are present, otherwise {@code false}
+	 */
+	private static boolean isNumeric(final String text) {
+<span class="fc" id="L84">		return NUMERIC.matcher(text).matches();</span>
+	}
+
+	/**
+	 * Interprets a string with version information. The last version number in the string will be searched and
+	 * processed.
+	 * 
+	 * @param text
+	 *            string with version information
+	 * @return an object of {@code VersionNumber}, never {@code null}
+	 */
+	public static VersionNumber parseLastVersionNumber(@Nonnull final String text) {
+<span class="fc" id="L96">		return VersionParser.parseLastVersionNumber(Check.notNull(text, &quot;text&quot;));</span>
+	}
+
+	/**
+	 * Try to determine the version number of the operating system by parsing the user agent string.
+	 * 
+	 * 
+	 * @param family
+	 *            family of the operating system
+	 * @param userAgent
+	 *            user agent string
+	 * @return extracted version number
+	 */
+	public static VersionNumber parseOperatingSystemVersion(@Nonnull final OperatingSystemFamily family, @Nonnull final String userAgent) {
+<span class="fc" id="L110">		Check.notNull(family, &quot;family&quot;);</span>
+<span class="fc" id="L111">		Check.notNull(userAgent, &quot;userAgent&quot;);</span>
+<span class="fc" id="L112">		return VersionParser.parseOperatingSystemVersion(family, userAgent);</span>
+	}
+
+	/**
+	 * Interprets a string with version information. The first found group will be taken and processed.
+	 * 
+	 * @param version
+	 *            version as string
+	 * @return an object of {@code VersionNumber}, never {@code null}
+	 */
+	public static VersionNumber parseVersion(@Nonnull final String version) {
+<span class="fc" id="L123">		return VersionParser.parseVersion(Check.notNull(version, &quot;version&quot;));</span>
+	}
+
+	/**
+	 * Replaces all {@code null} values in the given list of groups with {@code VersionNumber#EMPTY_GROUP}.
+	 * 
+	 * @param groups
+	 *            list of numbers of a version number
+	 * @return a new list of groups without {@code null} values
+	 */
+	public static List&lt;String&gt; replaceNullValueWithEmptyGroup(@Nonnull final List&lt;String&gt; groups) {
+<span class="fc" id="L134">		Check.notNull(groups, &quot;groups&quot;);</span>
+
+<span class="fc" id="L136">		final List&lt;String&gt; result = new ArrayList&lt;String&gt;(groups.size());</span>
+<span class="fc bfc" id="L137" title="All 2 branches covered.">		for (final String group : groups) {</span>
+<span class="fc bfc" id="L138" title="All 2 branches covered.">			if (group == null) {</span>
+<span class="fc" id="L139">				result.add(EMPTY_GROUP);</span>
+			} else {
+<span class="fc" id="L141">				result.add(group);</span>
+			}
+		}
+<span class="fc bfc" id="L144" title="All 2 branches covered.">		for (int i = result.size(); i &lt; MIN_GROUP_SIZE; i++) {</span>
+<span class="fc" id="L145">			result.add(EMPTY_GROUP);</span>
+		}
+<span class="fc" id="L147">		return result;</span>
+	}
+
+	/**
+	 * Converts the given list of numbers in a version string. The groups of the version number will be separated by a
+	 * dot.
+	 * 
+	 * @param groups
+	 *            list of numbers of a version number
+	 * @return a formated version string
+	 */
+	private static String toVersionString(@Nonnull final List&lt;String&gt; groups) {
+<span class="fc" id="L159">		final StringBuilder builder = new StringBuilder(6);</span>
+<span class="fc" id="L160">		int count = 0;</span>
+<span class="fc bfc" id="L161" title="All 2 branches covered.">		for (final String segment : groups) {</span>
+<span class="fc bfc" id="L162" title="All 2 branches covered.">			if (EMPTY_GROUP.equals(segment)) {</span>
+<span class="fc" id="L163">				break;</span>
+			} else {
+<span class="fc bfc" id="L165" title="All 2 branches covered.">				if (count &gt; 0) {</span>
+<span class="fc" id="L166">					builder.append(SEPARATOR);</span>
+				}
+<span class="fc" id="L168">				builder.append(segment);</span>
+			}
+<span class="fc" id="L170">			count++;</span>
+		}
+<span class="fc" id="L172">		return builder.toString();</span>
+	}
+
+	/**
+	 * Extension or suffix of the version number consisting of alphanumeric and special characters
+	 */
+	@Nonnull
+	private final String extension;
+
+	/**
+	 * Groups, segments or categories of the version number
+	 */
+	@Nonnull
+	private final List&lt;String&gt; groups;
+
+	/**
+	 * Constructs a {@code VersionNumber} with the given numeric groups, such as major, minor and bugfix number.
+	 * 
+	 * @param groups
+	 *            list of numbers of a version number
+	 * @throws net.sf.qualitycheck.exception.IllegalNullArgumentException
+	 *             if the given argument is {@code null}
+	 * @throws net.sf.qualitycheck.exception.IllegalStateOfArgumentException
+	 *             if one of the segments of the version number is smaller than 0 and not empty
+	 */
+	public VersionNumber(@Nonnull final List&lt;String&gt; groups) {
+<span class="fc" id="L198">		this(groups, EMPTY_EXTENSION);</span>
+<span class="fc" id="L199">	}</span>
+
+	/**
+	 * Constructs a {@code VersionNumber} with the given numeric groups, such as major, minor and bugfix number and
+	 * extension.
+	 * 
+	 * @param groups
+	 *            list of numbers of a version number
+	 * @param extension
+	 *            extension of a version number
+	 * @throws net.sf.qualitycheck.exception.IllegalNullArgumentException
+	 *             if one of the given arguments is {@code null}
+	 * @throws net.sf.qualitycheck.exception.IllegalStateOfArgumentException
+	 *             if one of the groups of the version number is not empty or a positive number
+	 */
+<span class="fc" id="L214">	public VersionNumber(@Nonnull final List&lt;String&gt; groups, @Nonnull final String extension) {</span>
+<span class="fc" id="L215">		Check.notNull(groups, &quot;groups&quot;);</span>
+<span class="fc" id="L216">		Check.notNull(extension, &quot;extension&quot;);</span>
+
+<span class="fc" id="L218">		final List&lt;String&gt; segments = replaceNullValueWithEmptyGroup(groups);</span>
+<span class="fc" id="L219">		int i = 0;</span>
+<span class="fc bfc" id="L220" title="All 2 branches covered.">		for (final String segment : segments) {</span>
+<span class="fc bfc" id="L221" title="All 4 branches covered.">			if (!EMPTY_GROUP.equals(segment) &amp;&amp; !isNumeric(segment)) {</span>
+<span class="fc" id="L222">				throw new IllegalStateOfArgumentException(&quot;The segment on position &quot; + i + &quot; (&quot; + segment + &quot;) must be a number.&quot;);</span>
+			}
+<span class="fc" id="L224">			i++;</span>
+		}
+
+<span class="fc" id="L227">		this.groups = segments;</span>
+<span class="fc" id="L228">		this.extension = extension;</span>
+<span class="fc" id="L229">	}</span>
+
+	/**
+	 * Constructs a {@code VersionNumber} with the given major number and without a minor and bugfix number.
+	 * 
+	 * @param major
+	 *            major group of the version number
+	 * @throws net.sf.qualitycheck.exception.IllegalNullArgumentException
+	 *             if the given argument is {@code null}
+	 * @throws net.sf.qualitycheck.exception.IllegalStateOfArgumentException
+	 *             if the major segment is smaller than 0 and not empty
+	 */
+	public VersionNumber(@Nonnull final String major) {
+<span class="fc" id="L242">		this(Check.notNull(major, &quot;major&quot;), EMPTY_GROUP);</span>
+<span class="fc" id="L243">	}</span>
+
+	/**
+	 * Constructs a {@code VersionNumber} with the given major, minor number and without a bugfix number.
+	 * 
+	 * @param major
+	 *            major group of the version number
+	 * @param minor
+	 *            minor group of the version number
+	 * @throws net.sf.qualitycheck.exception.IllegalNullArgumentException
+	 *             if one of the given arguments is {@code null}
+	 * @throws net.sf.qualitycheck.exception.IllegalStateOfArgumentException
+	 *             if the major or minor segment is smaller than 0 and not empty
+	 */
+	public VersionNumber(@Nonnull final String major, @Nonnull final String minor) {
+<span class="fc" id="L258">		this(Check.notNull(major, &quot;major&quot;), Check.notNull(minor, &quot;minor&quot;), EMPTY_GROUP);</span>
+<span class="fc" id="L259">	}</span>
+
+	/**
+	 * Constructs a {@code VersionNumber} with the given major, minor and bugfix number.
+	 * 
+	 * @param major
+	 *            major group of the version number
+	 * @param minor
+	 *            minor group of the version number
+	 * @param bugfix
+	 *            bugfix group of the version number
+	 * @throws net.sf.qualitycheck.exception.IllegalNullArgumentException
+	 *             if one of the given arguments is {@code null}
+	 * @throws net.sf.qualitycheck.exception.IllegalStateOfArgumentException
+	 *             if the major, minor or bugfix segment is smaller than 0 and not empty
+	 */
+	public VersionNumber(@Nonnull final String major, @Nonnull final String minor, @Nonnull final String bugfix) {
+<span class="fc" id="L276">		this(Check.notNull(major, &quot;major&quot;), Check.notNull(minor, &quot;minor&quot;), Check.notNull(bugfix, &quot;bugfix&quot;), EMPTY_EXTENSION);</span>
+<span class="fc" id="L277">	}</span>
+
+	/**
+	 * Constructs a {@code VersionNumber} with the given major, minor and bugfix number and extension.
+	 * 
+	 * @param major
+	 *            major group of the version number
+	 * @param minor
+	 *            minor group of the version number
+	 * @param bugfix
+	 *            bugfix group of the version number
+	 * @param extension
+	 *            extension of a version number
+	 * @throws net.sf.qualitycheck.exception.IllegalNullArgumentException
+	 *             if one of the given arguments is {@code null}
+	 * @throws net.sf.qualitycheck.exception.IllegalStateOfArgumentException
+	 *             if the major, minor or bugfix segment is smaller than 0 and not empty
+	 */
+	public VersionNumber(@Nonnull final String major, @Nonnull final String minor, @Nonnull final String bugfix,
+			@Nonnull final String extension) {
+<span class="fc" id="L297">		this(Arrays.asList(Check.notNull(major, &quot;major&quot;), Check.notNull(minor, &quot;minor&quot;), Check.notNull(bugfix, &quot;bugfix&quot;)), Check.notNull(</span>
+				extension, &quot;extension&quot;));
+<span class="fc" id="L299">	}</span>
+
+	/**
+	 * Compares this version number with the specified version number for order. Returns a negative integer, zero, or a
+	 * positive integer as this version number is less than, equal to, or greater than the specified version number.
+	 * 
+	 * @return a negative integer, zero, or a positive integer as this version number is less than, equal to, or greater
+	 *         than the specified version number.
+	 */
+	@Override
+	public int compareTo(@Nullable final ReadableVersionNumber other) {
+<span class="fc" id="L310">		int result = 0;</span>
+<span class="fc bfc" id="L311" title="All 2 branches covered.">		if (other == null) {</span>
+<span class="fc" id="L312">			result = -1;</span>
+		} else {
+<span class="fc" id="L314">			Check.notNull(other.getGroups(), &quot;other.getGroups()&quot;);</span>
+<span class="fc bfc" id="L315" title="All 2 branches covered.">			final int length = groups.size() &lt; other.getGroups().size() ? groups.size() : other.getGroups().size();</span>
+<span class="fc" id="L316">			final AlphanumComparator comparator = new AlphanumComparator();</span>
+<span class="fc" id="L317">			result = comparator.compare(toVersionString(groups.subList(0, length)), toVersionString(other.getGroups().subList(0, length)));</span>
+<span class="fc bfc" id="L318" title="All 2 branches covered.">			if (result == 0) {</span>
+<span class="fc bfc" id="L319" title="All 4 branches covered.">				result = groups.size() &gt; other.getGroups().size() ? 1 : groups.size() &lt; other.getGroups().size() ? -1 : 0;</span>
+			}
+<span class="fc bfc" id="L321" title="All 2 branches covered.">			if (result == 0) {</span>
+<span class="fc" id="L322">				result = extension.compareTo(other.getExtension());</span>
+			}
+<span class="fc bfc" id="L324" title="All 2 branches covered.">			if (result == 0) {</span>
+<span class="fc" id="L325">				result = comparator.compare(toVersionString(), other.toVersionString());</span>
+			}
+		}
+<span class="fc" id="L328">		return result;</span>
+	}
+
+	/**
+	 * Indicates whether some other object is &quot;equal to&quot; this version number.
+	 * 
+	 * @return {@code true} if the given version number is equal to this one
+	 */
+	@Override
+	public boolean equals(final Object obj) {
+<span class="fc bfc" id="L338" title="All 2 branches covered.">		if (this == obj) {</span>
+<span class="fc" id="L339">			return true;</span>
+		}
+<span class="fc bfc" id="L341" title="All 2 branches covered.">		if (obj == null) {</span>
+<span class="fc" id="L342">			return false;</span>
+		}
+<span class="fc bfc" id="L344" title="All 2 branches covered.">		if (getClass() != obj.getClass()) {</span>
+<span class="fc" id="L345">			return false;</span>
+		}
+<span class="fc" id="L347">		final VersionNumber other = (VersionNumber) obj;</span>
+<span class="fc bfc" id="L348" title="All 2 branches covered.">		if (!groups.equals(other.groups)) {</span>
+<span class="fc" id="L349">			return false;</span>
+		}
+<span class="fc bfc" id="L351" title="All 2 branches covered.">		if (!extension.equals(other.extension)) {</span>
+<span class="fc" id="L352">			return false;</span>
+		}
+<span class="fc" id="L354">		return true;</span>
+	}
+
+	/**
+	 * Gets the bugfix category of the version number.
+	 */
+	@Override
+	public String getBugfix() {
+<span class="fc" id="L362">		return groups.get(2);</span>
+	}
+
+	/**
+	 * Gets the addition or extension of the version number.
+	 * 
+	 * @return extension of the version number
+	 */
+	@Override
+	public String getExtension() {
+<span class="fc" id="L372">		return extension;</span>
+	}
+
+	/**
+	 * Get all groups (or categories) of this version number. The first element in the list is the major category,
+	 * followed by the minor and bugfix segment of the version number.&lt;br&gt;
+	 * &lt;br&gt;
+	 * The returned list of the version number segments is immutable.
+	 * 
+	 * @return an unmodifiable view of the of the version number groups
+	 */
+	@Override
+	public List&lt;String&gt; getGroups() {
+<span class="fc" id="L385">		return Collections.unmodifiableList(groups);</span>
+	}
+
+	/**
+	 * Gets the major category of the version number.
+	 */
+	@Override
+	public String getMajor() {
+<span class="fc" id="L393">		return groups.get(0);</span>
+	}
+
+	/**
+	 * Gets the major category of the version number.
+	 */
+	@Override
+	public String getMinor() {
+<span class="fc" id="L401">		return groups.get(1);</span>
+	}
+
+	@Override
+	public int hashCode() {
+<span class="fc" id="L406">		final int prime = 31;</span>
+<span class="fc" id="L407">		int result = 1;</span>
+<span class="fc" id="L408">		result = prime * result + groups.hashCode();</span>
+<span class="fc" id="L409">		result = prime * result + extension.hashCode();</span>
+<span class="fc" id="L410">		return result;</span>
+	}
+
+	/**
+	 * Returns a string representation of the version number.
+	 * 
+	 * @return a string representation of this version number
+	 */
+	@Nonnull
+	@Override
+	public String toString() {
+<span class="fc" id="L421">		return &quot;VersionNumber [groups=&quot; + groups + &quot;, extension=&quot; + extension + &quot;]&quot;;</span>
+	}
+
+	/**
+	 * Gets this version number as string.
+	 * 
+	 * @return numeric groups as dot separated version number string
+	 */
+	@Nonnull
+	@Override
+	public String toVersionString() {
+<span class="fc" id="L432">		return toVersionString(groups) + extension;</span>
+	}
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.6.2.201302030002</span></div></body></html>

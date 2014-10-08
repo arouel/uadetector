@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>CannotCloseException.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="right"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">UADetector :: Core</a> &gt; <a href="index.html" class="el_package">net.sf.uadetector.exception</a> &gt; <span class="el_source">CannotCloseException.java</span></div><h1>CannotCloseException.java</h1><pre class="source lang-java linenums">/*******************************************************************************
+ * Copyright 2012 André Rouél
+ * 
+ * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ ******************************************************************************/
+package net.sf.uadetector.exception;
+
+/**
+ * Thrown to indicate that a {@link java.io.Closeable} cannot be closed.&lt;br&gt;
+ * &lt;br&gt;
+ * This exception is intended to tunnel the checked exception {@link java.io.IOException} during the call
+ * {@link java.io.Closeable#close()}.
+ * 
+ * @author André Rouél
+ */
+public class CannotCloseException extends RuntimeException {
+
+	private static final long serialVersionUID = -8641033043995976022L;
+
+	protected static final String DEFAULT_MESSAGE = &quot;Cannot close the given Closeable.&quot;;
+
+	protected static final String MESSAGE_WITH_INFO = &quot;Cannot close the given Closeable: %s&quot;;
+
+	private static String format(final String url) {
+<span class="fc" id="L35">		return String.format(MESSAGE_WITH_INFO, url);</span>
+	}
+
+	/**
+	 * Constructs an {@code CannotCloseException} with the default message {@link CannotCloseException#DEFAULT_MESSAGE}.
+	 */
+	public CannotCloseException() {
+<span class="fc" id="L42">		super(DEFAULT_MESSAGE);</span>
+<span class="fc" id="L43">	}</span>
+
+	/**
+	 * Constructs an {@code CannotCloseException} with the message {@link CannotCloseException#MESSAGE_WITH_INFO}
+	 * including additional information.
+	 * 
+	 * @param info
+	 *            additional information why a {@link java.io.Closeable} cannot be closed
+	 */
+	public CannotCloseException(final String info) {
+<span class="fc" id="L53">		super(format(info));</span>
+<span class="fc" id="L54">	}</span>
+
+	/**
+	 * Constructs a new exception with the message {@link CannotCloseException#MESSAGE_WITH_INFO} including additional
+	 * information.
+	 * 
+	 * @param info
+	 *            additional information why a {@link java.io.Closeable} cannot be closed
+	 * @param cause
+	 *            the cause (which is saved for later retrieval by the {@link Throwable#getCause()} method). (A
+	 *            {@code null} value is permitted, and indicates that the cause is nonexistent or unknown.)
+	 */
+	public CannotCloseException(final String info, final Throwable cause) {
+<span class="fc" id="L67">		super(format(info), cause);</span>
+<span class="fc" id="L68">	}</span>
+
+	/**
+	 * Constructs a new exception with the default message {@link CannotCloseException#DEFAULT_MESSAGE}.
+	 * 
+	 * @param cause
+	 *            the cause (which is saved for later retrieval by the {@link Throwable#getCause()} method). (A
+	 *            {@code null} value is permitted, and indicates that the cause is nonexistent or unknown.)
+	 */
+	public CannotCloseException(final Throwable cause) {
+<span class="fc" id="L78">		super(DEFAULT_MESSAGE, cause);</span>
+<span class="fc" id="L79">	}</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.6.2.201302030002</span></div></body></html>

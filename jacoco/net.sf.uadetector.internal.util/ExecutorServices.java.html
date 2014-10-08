@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>ExecutorServices.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="right"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">UADetector :: Core</a> &gt; <a href="index.html" class="el_package">net.sf.uadetector.internal.util</a> &gt; <span class="el_source">ExecutorServices.java</span></div><h1>ExecutorServices.java</h1><pre class="source lang-java linenums">/*******************************************************************************
+ * Copyright 2013 André Rouél
+ * 
+ * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ ******************************************************************************/
+package net.sf.uadetector.internal.util;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
+
+import javax.annotation.Nonnegative;
+import javax.annotation.Nonnull;
+
+import net.sf.qualitycheck.Check;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+/**
+ * This utility is intended to provide predefined {@link ExecutorService}s which runs in background and can be easily
+ * shut-downed within {@link #shutdownAll()} if necessary.
+ * 
+ * @author André Rouél
+ */
+public final class ExecutorServices {
+
+	/**
+	 * This synchronized {@link Set} is a registry of all distributed background executors by this utility.
+	 * &lt;p&gt;
+	 * The containing {@link ExecutorService}s will be used to run a concrete update of &lt;i&gt;UAS data&lt;/i&gt; instantly in
+	 * background.
+	 */
+<span class="fc" id="L50">	private static final Set&lt;ExecutorService&gt; BACKGROUND_EXECUTORS = Collections.synchronizedSet(new HashSet&lt;ExecutorService&gt;(3));</span>
+
+	/**
+	 * Default name of a thread which will be used to run a concrete update within a background executor
+	 */
+	private static final String DEFAULT_BACKGROUND_EXECUTOR_NAME = &quot;update-operation&quot;;
+
+	/**
+	 * Default name of a thread which will be created within a scheduler
+	 */
+	private static final String DEFAULT_SCHEDULER_NAME = &quot;update-scheduler&quot;;
+
+	/**
+	 * Corresponding logger for this class
+	 */
+<span class="fc" id="L65">	private static final Logger LOG = LoggerFactory.getLogger(ExecutorServices.class);</span>
+
+	/**
+	 * This synchronized {@link Set} is a registry of all distributed schedulers by this utility.
+	 * &lt;p&gt;
+	 * The containing {@link ScheduledExecutorService}s will be used to schedule commands which updates the &lt;i&gt;UAS
+	 * data&lt;/i&gt; in defined intervals.
+	 */
+<span class="fc" id="L73">	private static final Set&lt;ScheduledExecutorService&gt; SCHEDULERS = Collections.synchronizedSet(new HashSet&lt;ScheduledExecutorService&gt;(3));</span>
+
+	/**
+	 * Timeout (in seconds) to shutdown all available executors at the latest
+	 */
+	public static final long SHUTDOWN_DURATION = 5;
+
+	/**
+	 * Creates a single-threaded executor that is registered by this class in order to shut it down later (when it
+	 * becomes necessary).
+	 * 
+	 * @return a new background executor
+	 */
+	public static ExecutorService createBackgroundExecutor() {
+<span class="fc" id="L87">		final ExecutorService executor = Executors.newSingleThreadExecutor(new DaemonThreadFactory(DEFAULT_BACKGROUND_EXECUTOR_NAME));</span>
+<span class="fc" id="L88">		BACKGROUND_EXECUTORS.add(executor);</span>
+<span class="fc" id="L89">		return executor;</span>
+	}
+
+	/**
+	 * Creates a single-threaded scheduler that is registered by this class in order to shut it down later (when it
+	 * becomes necessary).
+	 * 
+	 * @return a new scheduler
+	 */
+	public static ScheduledExecutorService createScheduler() {
+<span class="fc" id="L99">		final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1, new DaemonThreadFactory(DEFAULT_SCHEDULER_NAME));</span>
+<span class="fc" id="L100">		SCHEDULERS.add(scheduler);</span>
+<span class="fc" id="L101">		return scheduler;</span>
+	}
+
+	/**
+	 * Shutdowns the given {@code ExecutorService} as soon as possible, but not later than the specified default time
+	 * (which is {@value #SHUTDOWN_DURATION} seconds).
+	 * 
+	 * @param executorService
+	 *            executor to stop
+	 */
+	public static void shutdown(@Nonnull final ExecutorService executorService) {
+<span class="fc" id="L112">		Check.notNull(executorService, &quot;executorService&quot;);</span>
+<span class="fc" id="L113">		shutdown(executorService, SHUTDOWN_DURATION, TimeUnit.SECONDS);</span>
+<span class="fc" id="L114">	}</span>
+
+	/**
+	 * Shutdowns the given {@code ExecutorService} as soon as possible, but not later than the specified time.
+	 * 
+	 * @param executorService
+	 *            executor to stop
+	 * @param duration
+	 *            duration as a numerical value
+	 * @param unit
+	 *            duration unit
+	 */
+	public static void shutdown(@Nonnull final ExecutorService executorService, @Nonnegative final long duration,
+			@Nonnull final TimeUnit unit) {
+<span class="fc" id="L128">		Check.notNull(executorService, &quot;executorService&quot;);</span>
+<span class="fc" id="L129">		Check.notNull(duration, &quot;duration&quot;);</span>
+<span class="fc" id="L130">		Check.notNull(unit, &quot;unit&quot;);</span>
+
+<span class="fc" id="L132">		executorService.shutdown();</span>
+		try {
+<span class="fc bfc" id="L134" title="All 2 branches covered.">			if (!executorService.awaitTermination(duration, unit)) {</span>
+<span class="fc" id="L135">				LOG.info(String.format(&quot;Executor did not terminate in %s %s.&quot;, duration, unit.name().toLowerCase()));</span>
+<span class="fc" id="L136">				final List&lt;Runnable&gt; droppedTasks = executorService.shutdownNow();</span>
+<span class="fc" id="L137">				LOG.info(&quot;Executor was abruptly shut down. &quot; + droppedTasks.size() + &quot; tasks will not be executed.&quot;);</span>
+			}
+<span class="fc" id="L139">			unregisterIfPossible(executorService);</span>
+<span class="nc" id="L140">		} catch (final InterruptedException e) {</span>
+<span class="nc" id="L141">			LOG.warn(&quot;Executor termination failed: &quot; + e.getLocalizedMessage(), e);</span>
+<span class="fc" id="L142">		}</span>
+<span class="fc" id="L143">	}</span>
+
+	/**
+	 * Shuts down all registered scheduler and background workers as soon as possible, but at the latest in specified
+	 * {@link #SHUTDOWN_DURATION} seconds.
+	 */
+	public static void shutdownAll() {
+<span class="fc bfc" id="L150" title="All 2 branches covered.">		for (final ExecutorService executor : new ArrayList&lt;ExecutorService&gt;(BACKGROUND_EXECUTORS)) {</span>
+<span class="fc" id="L151">			shutdown(executor);</span>
+<span class="fc" id="L152">			BACKGROUND_EXECUTORS.remove(executor);</span>
+		}
+<span class="fc bfc" id="L154" title="All 2 branches covered.">		for (final ScheduledExecutorService scheduler : new ArrayList&lt;ScheduledExecutorService&gt;(SCHEDULERS)) {</span>
+<span class="fc" id="L155">			shutdown(scheduler);</span>
+<span class="fc" id="L156">			SCHEDULERS.remove(scheduler);</span>
+		}
+<span class="fc" id="L158">	}</span>
+
+	/**
+	 * Unregisters the given {@code ExecutorService} if it is an instance of {@code ScheduledExecutorService} from the
+	 * list of registered schedulers.
+	 * 
+	 * @param executorService
+	 *            a possible scheduler
+	 */
+	private static void unregisterIfPossible(final ExecutorService executorService) {
+<span class="fc bfc" id="L168" title="All 2 branches covered.">		if (executorService instanceof ScheduledExecutorService) {</span>
+<span class="fc" id="L169">			SCHEDULERS.remove(executorService);</span>
+		} else {
+<span class="fc" id="L171">			BACKGROUND_EXECUTORS.remove(executorService);</span>
+		}
+<span class="fc" id="L173">	}</span>
+
+	/**
+	 * &lt;strong&gt;Attention:&lt;/strong&gt; This class is not intended to create objects from it.
+	 */
+<span class="fc" id="L178">	private ExecutorServices() {</span>
+		// This class is not intended to create objects from it.
+<span class="fc" id="L180">	}</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.6.2.201302030002</span></div></body></html>

@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>OperatingSystem.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="right"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">UADetector :: Core</a> &gt; <a href="index.html" class="el_package">net.sf.uadetector</a> &gt; <span class="el_source">OperatingSystem.java</span></div><h1>OperatingSystem.java</h1><pre class="source lang-java linenums">/*******************************************************************************
+ * Copyright 2012 André Rouél
+ * 
+ * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ ******************************************************************************/
+package net.sf.uadetector;
+
+import java.io.Serializable;
+
+import javax.annotation.Nonnull;
+
+import net.sf.qualitycheck.Check;
+
+/**
+ * {@code OperatingSystem} is an immutable entity that represents the informations about an operating system like Linux,
+ * Mac OS X or Windows.
+ * 
+ * @author André Rouél
+ */
+public final class OperatingSystem implements ReadableOperatingSystem, Serializable {
+
+<span class="fc" id="L32">	public static final OperatingSystem EMPTY = new OperatingSystem(OperatingSystemFamily.UNKNOWN, &quot;unknown&quot;, &quot;unknown.png&quot;, &quot;unknown&quot;, &quot;&quot;,</span>
+			&quot;&quot;, &quot;&quot;, VersionNumber.UNKNOWN);
+
+	/**
+	 * Serialization version
+	 */
+	private static final long serialVersionUID = 1L;
+
+	@Nonnull
+	private final OperatingSystemFamily family;
+
+	@Nonnull
+	private final String familyName;
+
+	@Nonnull
+	private final String icon;
+
+	@Nonnull
+	private final String name;
+
+	@Nonnull
+	private final String producer;
+
+	@Nonnull
+	private final String producerUrl;
+
+	@Nonnull
+	private final String url;
+
+	@Nonnull
+	private final VersionNumber versionNumber;
+
+	public OperatingSystem(@Nonnull final OperatingSystemFamily family, @Nonnull final String familyName, @Nonnull final String icon,
+			@Nonnull final String name, @Nonnull final String producer, @Nonnull final String producerUrl, @Nonnull final String url,
+<span class="fc" id="L66">			@Nonnull final VersionNumber versionNumber) {</span>
+<span class="fc" id="L67">		Check.notNull(family, &quot;family&quot;);</span>
+<span class="fc" id="L68">		Check.notNull(familyName, &quot;familyName&quot;);</span>
+<span class="fc" id="L69">		Check.notNull(icon, &quot;icon&quot;);</span>
+<span class="fc" id="L70">		Check.notNull(name, &quot;name&quot;);</span>
+<span class="fc" id="L71">		Check.notNull(producer, &quot;producer&quot;);</span>
+<span class="fc" id="L72">		Check.notNull(producerUrl, &quot;producerUrl&quot;);</span>
+<span class="fc" id="L73">		Check.notNull(url, &quot;url&quot;);</span>
+<span class="fc" id="L74">		Check.notNull(versionNumber, &quot;versionNumber&quot;);</span>
+
+<span class="fc" id="L76">		this.family = family;</span>
+<span class="fc" id="L77">		this.familyName = familyName;</span>
+<span class="fc" id="L78">		this.icon = icon;</span>
+<span class="fc" id="L79">		this.name = name;</span>
+<span class="fc" id="L80">		this.producer = producer;</span>
+<span class="fc" id="L81">		this.producerUrl = producerUrl;</span>
+<span class="fc" id="L82">		this.url = url;</span>
+<span class="fc" id="L83">		this.versionNumber = versionNumber;</span>
+<span class="fc" id="L84">	}</span>
+
+	@Override
+	public boolean equals(final Object obj) {
+<span class="fc bfc" id="L88" title="All 2 branches covered.">		if (this == obj) {</span>
+<span class="fc" id="L89">			return true;</span>
+		}
+<span class="fc bfc" id="L91" title="All 2 branches covered.">		if (obj == null) {</span>
+<span class="fc" id="L92">			return false;</span>
+		}
+<span class="fc bfc" id="L94" title="All 2 branches covered.">		if (getClass() != obj.getClass()) {</span>
+<span class="fc" id="L95">			return false;</span>
+		}
+<span class="fc" id="L97">		final OperatingSystem other = (OperatingSystem) obj;</span>
+<span class="fc bfc" id="L98" title="All 2 branches covered.">		if (family != other.family) {</span>
+<span class="fc" id="L99">			return false;</span>
+		}
+<span class="fc bfc" id="L101" title="All 2 branches covered.">		if (!familyName.equals(other.familyName)) {</span>
+<span class="fc" id="L102">			return false;</span>
+		}
+<span class="fc bfc" id="L104" title="All 2 branches covered.">		if (!icon.equals(other.icon)) {</span>
+<span class="fc" id="L105">			return false;</span>
+		}
+<span class="fc bfc" id="L107" title="All 2 branches covered.">		if (!name.equals(other.name)) {</span>
+<span class="fc" id="L108">			return false;</span>
+		}
+<span class="fc bfc" id="L110" title="All 2 branches covered.">		if (!producer.equals(other.producer)) {</span>
+<span class="fc" id="L111">			return false;</span>
+		}
+<span class="fc bfc" id="L113" title="All 2 branches covered.">		if (!producerUrl.equals(other.producerUrl)) {</span>
+<span class="fc" id="L114">			return false;</span>
+		}
+<span class="fc bfc" id="L116" title="All 2 branches covered.">		if (!url.equals(other.url)) {</span>
+<span class="fc" id="L117">			return false;</span>
+		}
+<span class="fc bfc" id="L119" title="All 2 branches covered.">		if (!versionNumber.equals(other.versionNumber)) {</span>
+<span class="fc" id="L120">			return false;</span>
+		}
+<span class="fc" id="L122">		return true;</span>
+	}
+
+	@Override
+	public OperatingSystemFamily getFamily() {
+<span class="fc" id="L127">		return family;</span>
+	}
+
+	@Override
+	public String getFamilyName() {
+<span class="fc" id="L132">		return familyName;</span>
+	}
+
+	@Override
+	public String getIcon() {
+<span class="fc" id="L137">		return icon;</span>
+	}
+
+	@Override
+	public String getName() {
+<span class="fc" id="L142">		return name;</span>
+	}
+
+	@Override
+	public String getProducer() {
+<span class="fc" id="L147">		return producer;</span>
+	}
+
+	@Override
+	public String getProducerUrl() {
+<span class="fc" id="L152">		return producerUrl;</span>
+	}
+
+	@Override
+	public String getUrl() {
+<span class="fc" id="L157">		return url;</span>
+	}
+
+	@Override
+	public VersionNumber getVersionNumber() {
+<span class="fc" id="L162">		return versionNumber;</span>
+	}
+
+	@Override
+	public int hashCode() {
+<span class="fc" id="L167">		final int prime = 31;</span>
+<span class="fc" id="L168">		int result = 1;</span>
+<span class="fc" id="L169">		result = prime * result + family.hashCode();</span>
+<span class="fc" id="L170">		result = prime * result + familyName.hashCode();</span>
+<span class="fc" id="L171">		result = prime * result + icon.hashCode();</span>
+<span class="fc" id="L172">		result = prime * result + name.hashCode();</span>
+<span class="fc" id="L173">		result = prime * result + producer.hashCode();</span>
+<span class="fc" id="L174">		result = prime * result + producerUrl.hashCode();</span>
+<span class="fc" id="L175">		result = prime * result + url.hashCode();</span>
+<span class="fc" id="L176">		result = prime * result + versionNumber.hashCode();</span>
+<span class="fc" id="L177">		return result;</span>
+	}
+
+	@Override
+	public String toString() {
+<span class="fc" id="L182">		final StringBuilder builder = new StringBuilder();</span>
+<span class="fc" id="L183">		builder.append(&quot;OperatingSystem [family=&quot;);</span>
+<span class="fc" id="L184">		builder.append(family);</span>
+<span class="fc" id="L185">		builder.append(&quot;, familyName=&quot;);</span>
+<span class="fc" id="L186">		builder.append(familyName);</span>
+<span class="fc" id="L187">		builder.append(&quot;, icon=&quot;);</span>
+<span class="fc" id="L188">		builder.append(icon);</span>
+<span class="fc" id="L189">		builder.append(&quot;, name=&quot;);</span>
+<span class="fc" id="L190">		builder.append(name);</span>
+<span class="fc" id="L191">		builder.append(&quot;, producer=&quot;);</span>
+<span class="fc" id="L192">		builder.append(producer);</span>
+<span class="fc" id="L193">		builder.append(&quot;, producerUrl=&quot;);</span>
+<span class="fc" id="L194">		builder.append(producerUrl);</span>
+<span class="fc" id="L195">		builder.append(&quot;, url=&quot;);</span>
+<span class="fc" id="L196">		builder.append(url);</span>
+<span class="fc" id="L197">		builder.append(&quot;, versionNumber=&quot;);</span>
+<span class="fc" id="L198">		builder.append(versionNumber);</span>
+<span class="fc" id="L199">		builder.append(&quot;]&quot;);</span>
+<span class="fc" id="L200">		return builder.toString();</span>
+	}
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.6.2.201302030002</span></div></body></html>

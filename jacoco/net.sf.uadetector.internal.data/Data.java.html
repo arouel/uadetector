@@ -1,0 +1,380 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>Data.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="right"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">UADetector :: Core</a> &gt; <a href="index.html" class="el_package">net.sf.uadetector.internal.data</a> &gt; <span class="el_source">Data.java</span></div><h1>Data.java</h1><pre class="source lang-java linenums">/*******************************************************************************
+ * Copyright 2012 André Rouél
+ * 
+ * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ ******************************************************************************/
+package net.sf.uadetector.internal.data;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
+import java.util.SortedMap;
+import java.util.SortedSet;
+import java.util.TreeMap;
+import java.util.concurrent.atomic.AtomicInteger;
+
+import javax.annotation.Nonnull;
+import javax.annotation.concurrent.Immutable;
+
+import net.sf.qualitycheck.Check;
+import net.sf.uadetector.internal.data.domain.Browser;
+import net.sf.uadetector.internal.data.domain.BrowserOperatingSystemMapping;
+import net.sf.uadetector.internal.data.domain.BrowserPattern;
+import net.sf.uadetector.internal.data.domain.BrowserType;
+import net.sf.uadetector.internal.data.domain.Device;
+import net.sf.uadetector.internal.data.domain.DevicePattern;
+import net.sf.uadetector.internal.data.domain.OperatingSystem;
+import net.sf.uadetector.internal.data.domain.OperatingSystemPattern;
+import net.sf.uadetector.internal.data.domain.Robot;
+
+/**
+ * This class represents the detection information of &lt;i&gt;UADetector&lt;/i&gt;.
+ * &lt;p&gt;
+ * An instance of {@code Data} is immutable, their values cannot be changed after creation.
+ * 
+ * @author André Rouél
+ */
+@Immutable
+public class Data implements Serializable {
+
+	/**
+	 * An &lt;i&gt;immutable&lt;/i&gt; empty {@code Data} object.
+	 */
+<span class="fc" id="L59">	public static final Data EMPTY = new Data(new HashSet&lt;Browser&gt;(0), new HashMap&lt;Integer, SortedSet&lt;BrowserPattern&gt;&gt;(0),</span>
+			new HashMap&lt;Integer, BrowserType&gt;(0), new TreeMap&lt;BrowserPattern, Browser&gt;(), new HashSet&lt;BrowserOperatingSystemMapping&gt;(0),
+			new HashSet&lt;OperatingSystem&gt;(0), new HashMap&lt;Integer, SortedSet&lt;OperatingSystemPattern&gt;&gt;(0),
+			new TreeMap&lt;OperatingSystemPattern, OperatingSystem&gt;(), new ArrayList&lt;Robot&gt;(0), new HashSet&lt;Device&gt;(0),
+			new HashMap&lt;Integer, SortedSet&lt;DevicePattern&gt;&gt;(0), new TreeMap&lt;DevicePattern, Device&gt;(), &quot;&quot;);
+
+	private static final long serialVersionUID = 8522012551928801089L;
+
+	@Nonnull
+	private final Map&lt;Integer, SortedSet&lt;BrowserPattern&gt;&gt; browserPatterns;
+
+	@Nonnull
+	private final Set&lt;Browser&gt; browsers;
+
+	@Nonnull
+	private final Map&lt;Integer, SortedSet&lt;DevicePattern&gt;&gt; devicePatterns;
+
+	@Nonnull
+	private final Set&lt;Device&gt; devices;
+
+	@Nonnull
+	private final SortedMap&lt;DevicePattern, Device&gt; patternToDeviceMap;
+
+	@Nonnull
+	private final Set&lt;BrowserOperatingSystemMapping&gt; browserToOperatingSystemMappings;
+
+	@Nonnull
+	private final Map&lt;Integer, BrowserType&gt; browserTypes;
+
+	@Nonnull
+	private final Map&lt;Integer, SortedSet&lt;OperatingSystemPattern&gt;&gt; operatingSystemPatterns;
+
+	@Nonnull
+	private final Set&lt;OperatingSystem&gt; operatingSystems;
+
+	@Nonnull
+	private final SortedMap&lt;BrowserPattern, Browser&gt; patternToBrowserMap;
+
+	@Nonnull
+	private final SortedMap&lt;OperatingSystemPattern, OperatingSystem&gt; patternToOperatingSystemMap;
+
+	@Nonnull
+	private final List&lt;Robot&gt; robots;
+
+	/**
+	 * Version information of the UAS data
+	 */
+	@Nonnull
+	private final String version;
+
+	public Data(@Nonnull final Set&lt;Browser&gt; browsers, @Nonnull final Map&lt;Integer, SortedSet&lt;BrowserPattern&gt;&gt; browserPatterns,
+			@Nonnull final Map&lt;Integer, BrowserType&gt; browserTypes, @Nonnull final SortedMap&lt;BrowserPattern, Browser&gt; patternToBrowserMap,
+			@Nonnull final Set&lt;BrowserOperatingSystemMapping&gt; browserToOperatingSystemMappings,
+			@Nonnull final Set&lt;OperatingSystem&gt; operatingSystems,
+			@Nonnull final Map&lt;Integer, SortedSet&lt;OperatingSystemPattern&gt;&gt; operatingSystemPatterns,
+			@Nonnull final SortedMap&lt;OperatingSystemPattern, OperatingSystem&gt; patternToOperatingSystemMap,
+			@Nonnull final List&lt;Robot&gt; robots, @Nonnull final Set&lt;Device&gt; devices,
+			@Nonnull final Map&lt;Integer, SortedSet&lt;DevicePattern&gt;&gt; devicePatterns,
+<span class="fc" id="L117">			@Nonnull final SortedMap&lt;DevicePattern, Device&gt; patternToDeviceMap, @Nonnull final String version) {</span>
+<span class="fc" id="L118">		Check.notNull(browsers, &quot;browsers&quot;);</span>
+<span class="fc" id="L119">		Check.notNull(browserPatterns, &quot;browserPatterns&quot;);</span>
+<span class="fc" id="L120">		Check.notNull(browserTypes, &quot;browserTypes&quot;);</span>
+<span class="fc" id="L121">		Check.notNull(patternToBrowserMap, &quot;patternToBrowserMap&quot;);</span>
+<span class="fc" id="L122">		Check.notNull(browserToOperatingSystemMappings, &quot;browserToOperatingSystemMap&quot;);</span>
+<span class="fc" id="L123">		Check.notNull(operatingSystems, &quot;operatingSystems&quot;);</span>
+<span class="fc" id="L124">		Check.notNull(operatingSystemPatterns, &quot;operatingSystemPatterns&quot;);</span>
+<span class="fc" id="L125">		Check.notNull(patternToOperatingSystemMap, &quot;patternToOperatingSystemMap&quot;);</span>
+<span class="fc" id="L126">		Check.notNull(robots, &quot;robots&quot;);</span>
+<span class="fc" id="L127">		Check.notNull(devices, &quot;devices&quot;);</span>
+<span class="fc" id="L128">		Check.notNull(devicePatterns, &quot;devicePatterns&quot;);</span>
+<span class="fc" id="L129">		Check.notNull(patternToDeviceMap, &quot;patternToDeviceMap&quot;);</span>
+<span class="fc" id="L130">		Check.notNull(version, &quot;version&quot;);</span>
+
+<span class="fc" id="L132">		this.browsers = Collections.unmodifiableSet(new HashSet&lt;Browser&gt;(browsers));</span>
+<span class="fc" id="L133">		this.browserPatterns = Collections.unmodifiableMap(new HashMap&lt;Integer, SortedSet&lt;BrowserPattern&gt;&gt;(browserPatterns));</span>
+<span class="fc" id="L134">		this.browserTypes = Collections.unmodifiableMap(new HashMap&lt;Integer, BrowserType&gt;(Check.notNull(browserTypes, &quot;browserTypes&quot;)));</span>
+<span class="fc" id="L135">		this.patternToBrowserMap = Collections.unmodifiableSortedMap(new TreeMap&lt;BrowserPattern, Browser&gt;(patternToBrowserMap));</span>
+<span class="fc" id="L136">		this.browserToOperatingSystemMappings = Collections.unmodifiableSet(new HashSet&lt;BrowserOperatingSystemMapping&gt;(</span>
+				browserToOperatingSystemMappings));
+<span class="fc" id="L138">		this.operatingSystems = Collections.unmodifiableSet(new HashSet&lt;OperatingSystem&gt;(operatingSystems));</span>
+<span class="fc" id="L139">		this.operatingSystemPatterns = Collections.unmodifiableMap(new HashMap&lt;Integer, SortedSet&lt;OperatingSystemPattern&gt;&gt;(</span>
+				operatingSystemPatterns));
+<span class="fc" id="L141">		this.patternToOperatingSystemMap = Collections.unmodifiableSortedMap(new TreeMap&lt;OperatingSystemPattern, OperatingSystem&gt;(</span>
+				patternToOperatingSystemMap));
+<span class="fc" id="L143">		this.robots = Collections.unmodifiableList(new ArrayList&lt;Robot&gt;(robots));</span>
+<span class="fc" id="L144">		this.devices = Collections.unmodifiableSet(new HashSet&lt;Device&gt;(devices));</span>
+<span class="fc" id="L145">		this.devicePatterns = Collections.unmodifiableMap(new HashMap&lt;Integer, SortedSet&lt;DevicePattern&gt;&gt;(devicePatterns));</span>
+<span class="fc" id="L146">		this.patternToDeviceMap = Collections.unmodifiableSortedMap(new TreeMap&lt;DevicePattern, Device&gt;(patternToDeviceMap));</span>
+<span class="fc" id="L147">		this.version = Check.notNull(version, &quot;version&quot;);</span>
+<span class="fc" id="L148">	}</span>
+
+	@Override
+	public boolean equals(final Object obj) {
+<span class="fc bfc" id="L152" title="All 2 branches covered.">		if (this == obj) {</span>
+<span class="fc" id="L153">			return true;</span>
+		}
+<span class="fc bfc" id="L155" title="All 2 branches covered.">		if (obj == null) {</span>
+<span class="fc" id="L156">			return false;</span>
+		}
+<span class="fc bfc" id="L158" title="All 2 branches covered.">		if (getClass() != obj.getClass()) {</span>
+<span class="fc" id="L159">			return false;</span>
+		}
+<span class="fc" id="L161">		final Data other = (Data) obj;</span>
+<span class="fc bfc" id="L162" title="All 2 branches covered.">		if (!browsers.equals(other.browsers)) {</span>
+<span class="fc" id="L163">			return false;</span>
+		}
+<span class="fc bfc" id="L165" title="All 2 branches covered.">		if (!browserPatterns.equals(other.browserPatterns)) {</span>
+<span class="fc" id="L166">			return false;</span>
+		}
+<span class="fc bfc" id="L168" title="All 2 branches covered.">		if (!browserTypes.equals(other.browserTypes)) {</span>
+<span class="fc" id="L169">			return false;</span>
+		}
+<span class="fc bfc" id="L171" title="All 2 branches covered.">		if (!patternToBrowserMap.equals(other.patternToBrowserMap)) {</span>
+<span class="fc" id="L172">			return false;</span>
+		}
+<span class="fc bfc" id="L174" title="All 2 branches covered.">		if (!browserToOperatingSystemMappings.equals(other.browserToOperatingSystemMappings)) {</span>
+<span class="fc" id="L175">			return false;</span>
+		}
+<span class="fc bfc" id="L177" title="All 2 branches covered.">		if (!operatingSystems.equals(other.operatingSystems)) {</span>
+<span class="fc" id="L178">			return false;</span>
+		}
+<span class="fc bfc" id="L180" title="All 2 branches covered.">		if (!operatingSystemPatterns.equals(other.operatingSystemPatterns)) {</span>
+<span class="fc" id="L181">			return false;</span>
+		}
+<span class="fc bfc" id="L183" title="All 2 branches covered.">		if (!patternToOperatingSystemMap.equals(other.patternToOperatingSystemMap)) {</span>
+<span class="fc" id="L184">			return false;</span>
+		}
+<span class="fc bfc" id="L186" title="All 2 branches covered.">		if (!robots.equals(other.robots)) {</span>
+<span class="fc" id="L187">			return false;</span>
+		}
+<span class="fc bfc" id="L189" title="All 2 branches covered.">		if (!devices.equals(other.devices)) {</span>
+<span class="fc" id="L190">			return false;</span>
+		}
+<span class="fc bfc" id="L192" title="All 2 branches covered.">		if (!devicePatterns.equals(other.devicePatterns)) {</span>
+<span class="fc" id="L193">			return false;</span>
+		}
+<span class="fc bfc" id="L195" title="All 2 branches covered.">		if (!patternToDeviceMap.equals(other.patternToDeviceMap)) {</span>
+<span class="fc" id="L196">			return false;</span>
+		}
+<span class="fc bfc" id="L198" title="All 2 branches covered.">		if (!version.equals(other.version)) {</span>
+<span class="fc" id="L199">			return false;</span>
+		}
+<span class="fc" id="L201">		return true;</span>
+	}
+
+	@Nonnull
+	public Map&lt;Integer, SortedSet&lt;BrowserPattern&gt;&gt; getBrowserPatterns() {
+<span class="fc" id="L206">		return browserPatterns;</span>
+	}
+
+	@Nonnull
+	public Set&lt;Browser&gt; getBrowsers() {
+<span class="fc" id="L211">		return browsers;</span>
+	}
+
+	@Nonnull
+	public Set&lt;BrowserOperatingSystemMapping&gt; getBrowserToOperatingSystemMappings() {
+<span class="fc" id="L216">		return browserToOperatingSystemMappings;</span>
+	}
+
+	@Nonnull
+	public Map&lt;Integer, BrowserType&gt; getBrowserTypes() {
+<span class="fc" id="L221">		return browserTypes;</span>
+	}
+
+	@Nonnull
+	public Map&lt;Integer, SortedSet&lt;DevicePattern&gt;&gt; getDevicePatterns() {
+<span class="fc" id="L226">		return devicePatterns;</span>
+	}
+
+	@Nonnull
+	public Set&lt;Device&gt; getDevices() {
+<span class="fc" id="L231">		return devices;</span>
+	}
+
+	@Nonnull
+	public Map&lt;Integer, SortedSet&lt;OperatingSystemPattern&gt;&gt; getOperatingSystemPatterns() {
+<span class="fc" id="L236">		return operatingSystemPatterns;</span>
+	}
+
+	@Nonnull
+	public Set&lt;OperatingSystem&gt; getOperatingSystems() {
+<span class="fc" id="L241">		return operatingSystems;</span>
+	}
+
+	@Nonnull
+	public SortedMap&lt;BrowserPattern, Browser&gt; getPatternToBrowserMap() {
+<span class="fc" id="L246">		return patternToBrowserMap;</span>
+	}
+
+	@Nonnull
+	public SortedMap&lt;DevicePattern, Device&gt; getPatternToDeviceMap() {
+<span class="fc" id="L251">		return patternToDeviceMap;</span>
+	}
+
+	@Nonnull
+	public SortedMap&lt;OperatingSystemPattern, OperatingSystem&gt; getPatternToOperatingSystemMap() {
+<span class="fc" id="L256">		return patternToOperatingSystemMap;</span>
+	}
+
+	@Nonnull
+	public List&lt;Robot&gt; getRobots() {
+<span class="fc" id="L261">		return robots;</span>
+	}
+
+	/**
+	 * Gets the version of the UAS data which are available within this instance.
+	 * 
+	 * @return version of UAS data
+	 */
+	@Nonnull
+	public String getVersion() {
+<span class="fc" id="L271">		return version;</span>
+	}
+
+	@Override
+	public int hashCode() {
+<span class="fc" id="L276">		final int prime = 31;</span>
+<span class="fc" id="L277">		int result = 1;</span>
+<span class="fc" id="L278">		result = prime * result + browsers.hashCode();</span>
+<span class="fc" id="L279">		result = prime * result + browserPatterns.hashCode();</span>
+<span class="fc" id="L280">		result = prime * result + browserTypes.hashCode();</span>
+<span class="fc" id="L281">		result = prime * result + patternToBrowserMap.hashCode();</span>
+<span class="fc" id="L282">		result = prime * result + browserToOperatingSystemMappings.hashCode();</span>
+<span class="fc" id="L283">		result = prime * result + operatingSystems.hashCode();</span>
+<span class="fc" id="L284">		result = prime * result + operatingSystemPatterns.hashCode();</span>
+<span class="fc" id="L285">		result = prime * result + patternToOperatingSystemMap.hashCode();</span>
+<span class="fc" id="L286">		result = prime * result + robots.hashCode();</span>
+<span class="fc" id="L287">		result = prime * result + devices.hashCode();</span>
+<span class="fc" id="L288">		result = prime * result + devicePatterns.hashCode();</span>
+<span class="fc" id="L289">		result = prime * result + patternToDeviceMap.hashCode();</span>
+<span class="fc" id="L290">		result = prime * result + version.hashCode();</span>
+<span class="fc" id="L291">		return result;</span>
+	}
+
+	@Nonnull
+	public String toStats() {
+<span class="fc" id="L296">		final StringBuilder builder = new StringBuilder();</span>
+<span class="fc" id="L297">		builder.append(&quot;UAS data stats\n&quot;);</span>
+<span class="fc" id="L298">		builder.append(&quot;----------------------------------------------------------------&quot;);</span>
+<span class="fc" id="L299">		builder.append('\n');</span>
+<span class="fc" id="L300">		builder.append(&quot;version:\t\t&quot;);</span>
+<span class="fc" id="L301">		builder.append(version);</span>
+<span class="fc" id="L302">		builder.append('\n');</span>
+<span class="fc" id="L303">		builder.append(&quot;browser:\t\t&quot;);</span>
+<span class="fc" id="L304">		builder.append(browsers.size());</span>
+<span class="fc" id="L305">		builder.append('\n');</span>
+<span class="fc" id="L306">		final Map&lt;String, AtomicInteger&gt; browserByType = new HashMap&lt;String, AtomicInteger&gt;();</span>
+<span class="fc bfc" id="L307" title="All 2 branches covered.">		for (final Browser browser : browsers) {</span>
+<span class="fc" id="L308">			final AtomicInteger counter = browserByType.get(browser.getType().getName());</span>
+<span class="fc bfc" id="L309" title="All 2 branches covered.">			if (counter == null) {</span>
+<span class="fc" id="L310">				browserByType.put(browser.getType().getName(), new AtomicInteger(1));</span>
+			} else {
+<span class="fc" id="L312">				counter.incrementAndGet();</span>
+			}
+<span class="fc" id="L314">		}</span>
+<span class="fc bfc" id="L315" title="All 2 branches covered.">		for (final Entry&lt;String, AtomicInteger&gt; entry : browserByType.entrySet()) {</span>
+<span class="fc" id="L316">			builder.append('\t');</span>
+<span class="fc" id="L317">			builder.append('\t');</span>
+<span class="fc" id="L318">			builder.append('\t');</span>
+<span class="fc" id="L319">			builder.append(entry.getKey());</span>
+<span class="fc" id="L320">			builder.append(&quot;:\t&quot;);</span>
+<span class="fc" id="L321">			builder.append(entry.getValue().get());</span>
+<span class="fc" id="L322">			builder.append('\n');</span>
+		}
+<span class="fc" id="L324">		builder.append(&quot;browser patterns:\t&quot;);</span>
+<span class="fc" id="L325">		builder.append(patternToBrowserMap.size());</span>
+<span class="fc" id="L326">		builder.append('\n');</span>
+<span class="fc" id="L327">		builder.append(&quot;operating systems:\t&quot;);</span>
+<span class="fc" id="L328">		builder.append(operatingSystems.size());</span>
+<span class="fc" id="L329">		builder.append('\n');</span>
+<span class="fc" id="L330">		builder.append(&quot;os patterns:\t\t&quot;);</span>
+<span class="fc" id="L331">		builder.append(patternToOperatingSystemMap.size());</span>
+<span class="fc" id="L332">		builder.append('\n');</span>
+<span class="fc" id="L333">		builder.append(&quot;robots:\t\t\t&quot;);</span>
+<span class="fc" id="L334">		builder.append(robots.size());</span>
+<span class="fc" id="L335">		builder.append('\n');</span>
+<span class="fc" id="L336">		builder.append(&quot;devices:\t&quot;);</span>
+<span class="fc" id="L337">		builder.append(devices.size());</span>
+<span class="fc" id="L338">		builder.append('\n');</span>
+<span class="fc" id="L339">		builder.append(&quot;device patterns:\t&quot;);</span>
+<span class="fc" id="L340">		builder.append(patternToDeviceMap.size());</span>
+<span class="fc" id="L341">		builder.append('\n');</span>
+<span class="fc" id="L342">		builder.append(&quot;----------------------------------------------------------------&quot;);</span>
+<span class="fc" id="L343">		return builder.toString();</span>
+	}
+
+	@Override
+	public String toString() {
+<span class="fc" id="L348">		final StringBuilder builder = new StringBuilder();</span>
+<span class="fc" id="L349">		builder.append(&quot;Data [browsers=&quot;);</span>
+<span class="fc" id="L350">		builder.append(browsers);</span>
+<span class="fc" id="L351">		builder.append(&quot;, browserPatterns=&quot;);</span>
+<span class="fc" id="L352">		builder.append(browserPatterns);</span>
+<span class="fc" id="L353">		builder.append(&quot;, browserTypes=&quot;);</span>
+<span class="fc" id="L354">		builder.append(browserTypes);</span>
+<span class="fc" id="L355">		builder.append(&quot;, patternToBrowserMap=&quot;);</span>
+<span class="fc" id="L356">		builder.append(patternToBrowserMap);</span>
+<span class="fc" id="L357">		builder.append(&quot;, browserToOperatingSystemMap=&quot;);</span>
+<span class="fc" id="L358">		builder.append(browserToOperatingSystemMappings);</span>
+<span class="fc" id="L359">		builder.append(&quot;, operatingSystems=&quot;);</span>
+<span class="fc" id="L360">		builder.append(operatingSystems);</span>
+<span class="fc" id="L361">		builder.append(&quot;, operatingSystemPatterns=&quot;);</span>
+<span class="fc" id="L362">		builder.append(operatingSystemPatterns);</span>
+<span class="fc" id="L363">		builder.append(&quot;, patternToOperatingSystemMap=&quot;);</span>
+<span class="fc" id="L364">		builder.append(patternToOperatingSystemMap);</span>
+<span class="fc" id="L365">		builder.append(&quot;, robots=&quot;);</span>
+<span class="fc" id="L366">		builder.append(robots);</span>
+<span class="fc" id="L367">		builder.append(&quot;, devices=&quot;);</span>
+<span class="fc" id="L368">		builder.append(devices);</span>
+<span class="fc" id="L369">		builder.append(&quot;, devicePatterns=&quot;);</span>
+<span class="fc" id="L370">		builder.append(devicePatterns);</span>
+<span class="fc" id="L371">		builder.append(&quot;, patternToDeviceMap=&quot;);</span>
+<span class="fc" id="L372">		builder.append(patternToDeviceMap);</span>
+<span class="fc" id="L373">		builder.append(&quot;, version=&quot;);</span>
+<span class="fc" id="L374">		builder.append(version);</span>
+<span class="fc" id="L375">		builder.append(&quot;]&quot;);</span>
+<span class="fc" id="L376">		return builder.toString();</span>
+	}
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.6.2.201302030002</span></div></body></html>

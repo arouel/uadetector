@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>DataStore.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="right"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">UADetector :: Core</a> &gt; <a href="index.html" class="el_package">net.sf.uadetector.datastore</a> &gt; <span class="el_source">DataStore.java</span></div><h1>DataStore.java</h1><pre class="source lang-java linenums">/*******************************************************************************
+ * Copyright 2012 André Rouél
+ * 
+ * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ ******************************************************************************/
+package net.sf.uadetector.datastore;
+
+import java.net.URL;
+import java.nio.charset.Charset;
+
+import javax.annotation.Nonnull;
+
+import net.sf.uadetector.datareader.DataReader;
+import net.sf.uadetector.internal.data.Data;
+
+/**
+ * Defines an interface to store UAS data where ever you want.
+ * 
+ * @author André Rouél
+ */
+public interface DataStore {
+
+	/**
+	 * Default character set to read UAS data
+	 */
+<span class="fc" id="L36">	Charset DEFAULT_CHARSET = Charset.forName(&quot;UTF-8&quot;);</span>
+
+	/**
+	 * URL to retrieve the current UAS data as XML
+	 */
+	String DEFAULT_DATA_URL = &quot;http://user-agent-string.info/rpc/get_data.php?key=free&amp;format=xml&quot;;
+
+	/**
+	 * URL to retrieve the current version of the UAS data
+	 */
+	String DEFAULT_VERSION_URL = &quot;http://user-agent-string.info/rpc/get_data.php?key=free&amp;format=ini&amp;ver=y&quot;;
+
+	/**
+	 * Gets the character set in which the &lt;em&gt;UAS data&lt;/em&gt; will be read.
+	 * 
+	 * @return current UAS data
+	 */
+	@Nonnull
+	Charset getCharset();
+
+	/**
+	 * Gets the UAS data which are currently set.
+	 * 
+	 * @return current UAS data
+	 */
+	@Nonnull
+	Data getData();
+
+	/**
+	 * Gets the data reader to read in UAS data.
+	 * 
+	 * @return the data reader to read in UAS data
+	 */
+	@Nonnull
+	DataReader getDataReader();
+
+	/**
+	 * Gets the URL from which the UAS data can be read.
+	 * 
+	 * @return URL to UAS data
+	 */
+	@Nonnull
+	URL getDataUrl();
+
+	/**
+	 * Gets the URL from which version information about the UAS data can be read.
+	 * 
+	 * @return URL to version information of UAS data
+	 */
+	@Nonnull
+	URL getVersionUrl();
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.6.2.201302030002</span></div></body></html>

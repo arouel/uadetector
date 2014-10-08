@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>UADetectorServiceFactory.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="right"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">UADetector :: Resources</a> &gt; <a href="index.html" class="el_package">net.sf.uadetector.service</a> &gt; <span class="el_source">UADetectorServiceFactory.java</span></div><h1>UADetectorServiceFactory.java</h1><pre class="source lang-java linenums">/*******************************************************************************
+ * Copyright 2012 André Rouél
+ * 
+ * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ ******************************************************************************/
+package net.sf.uadetector.service;
+
+import java.net.URL;
+
+import net.sf.uadetector.UserAgentStringParser;
+import net.sf.uadetector.datareader.DataReader;
+import net.sf.uadetector.datareader.XmlDataReader;
+import net.sf.uadetector.datastore.AbstractDataStore;
+import net.sf.uadetector.datastore.CachingXmlDataStore;
+import net.sf.uadetector.datastore.OnlineXmlDataStore;
+import net.sf.uadetector.parser.UpdatingUserAgentStringParserImpl;
+import net.sf.uadetector.parser.UserAgentStringParserImpl;
+
+/**
+ * Service factory to get preconfigured instances of {@code UserAgentStringParser} implementations.
+ * 
+ * @author André Rouél
+ */
+public final class UADetectorServiceFactory {
+
+	/**
+	 * Holder to load the parser only when it's needed.
+	 */
+<span class="nc" id="L39">	private static final class CachingAndUpdatingParserHolder {</span>
+<span class="nc" id="L40">		private static final UserAgentStringParser INSTANCE = new UpdatingUserAgentStringParserImpl(</span>
+				CachingXmlDataStore.createCachingXmlDataStore(RESOURCE_MODULE));
+	}
+
+	/**
+	 * Holder to load the parser only when it's needed.
+	 */
+<span class="nc" id="L47">	private static final class OnlineUpdatingParserHolder {</span>
+<span class="nc" id="L48">		private static final UserAgentStringParser INSTANCE = new UpdatingUserAgentStringParserImpl(new OnlineXmlDataStore(RESOURCE_MODULE));</span>
+	}
+
+	/**
+	 * A simple implementation to store &lt;em&gt;UAS data&lt;/em&gt; delivered in this module (called &lt;em&gt;uadetector-resource&lt;/em&gt;)
+	 * only in the heap space.
+	 * 
+	 * @author André Rouél
+	 */
+	public static final class ResourceModuleXmlDataStore extends AbstractDataStore {
+
+		/**
+		 * The default data reader to read in &lt;em&gt;UAS data&lt;/em&gt; in XML format
+		 */
+<span class="fc" id="L62">		private static final DataReader DEFAULT_DATA_READER = new XmlDataReader();</span>
+
+		/**
+		 * Path where the UAS data file is stored for the {@code ClassLoader}
+		 */
+		private static final String PATH = &quot;net/sf/uadetector/resources&quot;;
+
+		/**
+		 * {@link URL} to the UAS data delivered in this module
+		 */
+<span class="fc" id="L72">		public static final URL UAS_DATA = ResourceModuleXmlDataStore.class.getClassLoader().getResource(PATH + &quot;/uas.xml&quot;);</span>
+
+		/**
+		 * {@link URL} to the version information of the delivered UAS data in this module
+		 */
+<span class="fc" id="L77">		public static final URL UAS_VERSION = ResourceModuleXmlDataStore.class.getClassLoader().getResource(PATH + &quot;/uas.version&quot;);</span>
+
+		/**
+		 * Constructs an {@code ResourceModuleXmlDataStore} by reading &lt;em&gt;UAS data&lt;/em&gt; from the specified URL
+		 * {@link #UAS_DATA} (in XML format).
+		 */
+		public ResourceModuleXmlDataStore() {
+<span class="fc" id="L84">			super(DEFAULT_DATA_READER, UAS_DATA, UAS_VERSION, DEFAULT_CHARSET);</span>
+<span class="fc" id="L85">		}</span>
+
+	}
+
+	/**
+	 * Data store filled with the &lt;em&gt;UAS data&lt;/em&gt; that are shipped with this module (JAR)
+	 */
+<span class="fc" id="L92">	private static final ResourceModuleXmlDataStore RESOURCE_MODULE = new ResourceModuleXmlDataStore();</span>
+
+	/**
+	 * {@link UserAgentStringParser} filled with the &lt;em&gt;UAS data&lt;/em&gt; that are shipped with this module (JAR)
+	 */
+<span class="fc" id="L97">	private static final UserAgentStringParser RESOURCE_MODULE_PARSER = new UserAgentStringParserImpl&lt;ResourceModuleXmlDataStore&gt;(</span>
+			RESOURCE_MODULE);
+
+	/**
+	 * Returns an implementation of {@link UserAgentStringParser} which checks at regular intervals for new versions of
+	 * &lt;em&gt;UAS data&lt;/em&gt; (also known as database). When newer data available, it automatically loads and updates it.
+	 * Additionally the loaded data are stored in a cache file.
+	 * 
+	 * &lt;p&gt;
+	 * At initialization time the returned parser will be loaded with the &lt;em&gt;UAS data&lt;/em&gt; of the cache file. If the
+	 * cache file doesn't exist or is empty the data of this module will be loaded. The initialization is started only
+	 * when this method is called the first time.
+	 * 
+	 * &lt;p&gt;
+	 * The update of the data store runs as background task. With this feature we try to reduce the initialization time
+	 * of this &lt;code&gt;UserAgentStringParser&lt;/code&gt;, because a network connection is involved and the remote system can be
+	 * not available or slow.
+	 * 
+	 * &lt;p&gt;
+	 * The static class definition {@code CachingAndUpdatingParserHolder} within this factory class is &lt;em&gt;not&lt;/em&gt;
+	 * initialized until the JVM determines that {@code CachingAndUpdatingParserHolder} must be executed. The static
+	 * class {@code CachingAndUpdatingParserHolder} is only executed when the static method
+	 * {@code getOnlineUserAgentStringParser} is invoked on the class {@code UADetectorServiceFactory}, and the first
+	 * time this happens the JVM will load and initialize the {@code CachingAndUpdatingParserHolder} class.
+	 * 
+	 * &lt;p&gt;
+	 * If during the operation the Internet connection gets lost, then this instance continues to work properly (and
+	 * under correct log level settings you will get an corresponding log messages).
+	 * 
+	 * @return an user agent string parser with updating service
+	 */
+	public static UserAgentStringParser getCachingAndUpdatingParser() {
+<span class="nc" id="L129">		return CachingAndUpdatingParserHolder.INSTANCE;</span>
+	}
+
+	/**
+	 * Returns an implementation of {@link UserAgentStringParser} which checks at regular intervals for new versions of
+	 * &lt;em&gt;UAS data&lt;/em&gt; (also known as database). When newer data available, it automatically loads and updates it.
+	 * 
+	 * &lt;p&gt;
+	 * At initialization time the returned parser will be loaded with the &lt;em&gt;UAS data&lt;/em&gt; of this module (the shipped
+	 * one within the &lt;em&gt;uadetector-resources&lt;/em&gt; JAR) and tries to update it. The initialization is started only when
+	 * this method is called the first time.
+	 * 
+	 * &lt;p&gt;
+	 * The update of the data store runs as background task. With this feature we try to reduce the initialization time
+	 * of this &lt;code&gt;UserAgentStringParser&lt;/code&gt;, because a network connection is involved and the remote system can be
+	 * not available or slow.
+	 * 
+	 * &lt;p&gt;
+	 * The static class definition {@code OnlineUpdatingParserHolder} within this factory class is &lt;em&gt;not&lt;/em&gt;
+	 * initialized until the JVM determines that {@code OnlineUpdatingParserHolder} must be executed. The static class
+	 * {@code OnlineUpdatingParserHolder} is only executed when the static method {@code getOnlineUserAgentStringParser}
+	 * is invoked on the class {@code UADetectorServiceFactory}, and the first time this happens the JVM will load and
+	 * initialize the {@code OnlineUpdatingParserHolder} class.
+	 * 
+	 * &lt;p&gt;
+	 * If during the operation the Internet connection gets lost, then this instance continues to work properly (and
+	 * under correct log level settings you will get an corresponding log messages).
+	 * 
+	 * @return an user agent string parser with updating service
+	 */
+	public static UserAgentStringParser getOnlineUpdatingParser() {
+<span class="nc" id="L160">		return OnlineUpdatingParserHolder.INSTANCE;</span>
+	}
+
+	/**
+	 * Returns an implementation of {@link UserAgentStringParser} with no updating functions. It will be loaded by using
+	 * the shipped &lt;em&gt;UAS data&lt;/em&gt; (also known as database) of this module. The database is loaded once during
+	 * initialization. The initialization is started at class loading of this class ({@code UADetectorServiceFactory}).
+	 * 
+	 * @return an user agent string parser without updating service
+	 */
+	public static UserAgentStringParser getResourceModuleParser() {
+<span class="fc" id="L171">		return RESOURCE_MODULE_PARSER;</span>
+	}
+
+<span class="nc" id="L174">	private UADetectorServiceFactory() {</span>
+		// This class is not intended to create objects from it.
+<span class="nc" id="L176">	}</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.6.2.201302030002</span></div></body></html>

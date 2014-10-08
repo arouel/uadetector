@@ -1,0 +1,83 @@
+.clear {
+	clear: both;
+	margin: 0;
+}
+
+h2 {
+	margin-bottom: 0.5em;
+}
+
+ul.breadcrumb {
+	overflow: hidden;
+}
+
+div.section {
+	margin-bottom: 1.5em;
+	max-width: 60em;
+}
+
+div.feature {
+	clear: none;
+	float: left;
+	height: 200px;
+	margin: 5px;
+	width: 380px;
+}
+
+div.feature .title {
+	color: #08C;
+	display: inline-block;
+	font-weight: bold;
+	height: 25px;
+	margin-left: 7px;
+	margin-right: 7px;
+	width: 366px;
+	font-size: 1.4em;
+}
+
+div.feature img {
+	height: 92px;
+	margin: 7px;
+	width: 366px;
+}
+
+div.feature p {
+	display: inline-block;
+	height: 75px;
+	margin-left: 7px;
+	margin-right: 7px;
+}
+
+#bannerLeft {
+	margin: 0 0 4px 14px;
+	display: inline-block;
+}
+
+a.poweredBy {
+	display: block;
+}
+
+tt {
+	background-color: #F5F5F5;
+}
+
+pre {
+	overflow: auto;
+	white-space: pre;
+	word-wrap: normal;
+}
+
+.log {
+	width: 656px;
+}
+
+.knownIssues th, .knownIssues td {
+	background-color: #fff;
+	border: 0;
+}
+
+h3.knownIssues {
+	color: #08C;
+	margin-left: 7px;
+	font-size: 1.4em;
+}

@@ -1,0 +1,2 @@
+$(".twitter-timeline").attr("data-widget-id", "350335185625182208").attr("height", "300").attr("width", "780");
+!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");

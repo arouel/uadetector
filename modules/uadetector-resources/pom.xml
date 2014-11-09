@@ -6,7 +6,7 @@
 		<relativePath>../../</relativePath>
 		<groupId>net.sf.uadetector</groupId>
 		<artifactId>uadetector-parent</artifactId>
-		<version>2014.10</version>
+		<version>2014.11-SNAPSHOT</version>
 	</parent>
 
 	<properties>
@@ -27,7 +27,7 @@
 		<dependency>
 			<groupId>net.sf.uadetector</groupId>
 			<artifactId>uadetector-core</artifactId>
-			<version>0.9.22</version>
+			<version>0.9.23-SNAPSHOT</version>
 		</dependency>
 
 		<!-- Logging -->

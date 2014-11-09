@@ -89,12 +89,12 @@ public final class UADetectorServiceFactory {
 	/**
 	 * Data store filled with the &lt;em&gt;UAS data&lt;/em&gt; that are shipped with this module (JAR)
 	 */
-<span class="fc" id="L92">	private static final ResourceModuleXmlDataStore RESOURCE_MODULE = new ResourceModuleXmlDataStore();</span>
+<span class="fc" id="L92">	public static final ResourceModuleXmlDataStore RESOURCE_MODULE = new ResourceModuleXmlDataStore();</span>
 
 	/**
 	 * {@link UserAgentStringParser} filled with the &lt;em&gt;UAS data&lt;/em&gt; that are shipped with this module (JAR)
 	 */
-<span class="fc" id="L97">	private static final UserAgentStringParser RESOURCE_MODULE_PARSER = new UserAgentStringParserImpl&lt;ResourceModuleXmlDataStore&gt;(</span>
+<span class="fc" id="L97">	public static final UserAgentStringParser RESOURCE_MODULE_PARSER = new UserAgentStringParserImpl&lt;ResourceModuleXmlDataStore&gt;(</span>
 			RESOURCE_MODULE);
 
 	/**

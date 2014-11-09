@@ -1,6 +1,1 @@
-net.sf.uadetector.json
-net.sf.uadetector.json.datastore
-net.sf.uadetector.json.internal.data
-net.sf.uadetector.json.internal.data.comparator
-net.sf.uadetector.json.internal.data.deserializer
-net.sf.uadetector.json.internal.data.hashcodebuilder
+net.sf.uadetector

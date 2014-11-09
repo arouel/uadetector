@@ -27,6 +27,7 @@ div.feature {
 div.feature .title {
 	color: #08C;
 	display: inline-block;
+	font-size: 1.6em;
 	font-weight: bold;
 	height: 25px;
 	margin-left: 7px;
@@ -58,26 +59,5 @@ a.poweredBy {
 }
 
 tt {
-	background-color: #F5F5F5;
-}
-
-pre {
-	overflow: auto;
-	white-space: pre;
-	word-wrap: normal;
-}
-
-.log {
-	width: 656px;
-}
-
-.knownIssues th, .knownIssues td {
-	background-color: #fff;
-	border: 0;
-}
-
-h3.knownIssues {
-	color: #08C;
-	margin-left: 7px;
-	font-size: 1.4em;
+	background-color: #FFF9D9;
 }

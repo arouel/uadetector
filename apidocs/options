@@ -1,0 +1,28 @@
+-classpath
+'/Users/andre/git/net.sf.uadetector/target/checkout/modules/uadetector-core/target/classes:/Users/andre/.m2/repository/javax/annotation/jsr250-api/1.0/jsr250-api-1.0.jar:/Users/andre/.m2/repository/net/sf/qualitycheck/quality-check/1.3/quality-check-1.3.jar:/Users/andre/.m2/repository/org/slf4j/slf4j-api/1.7.7/slf4j-api-1.7.7.jar:/Users/andre/.m2/repository/com/google/code/findbugs/jsr305/2.0.3/jsr305-2.0.3.jar'
+-encoding
+'UTF-8'
+-protected
+-sourcepath
+'/Users/andre/git/net.sf.uadetector/target/checkout/modules/uadetector-core/src/main/java'
+-author
+-bottom
+'Copyright &#169; 2011-2014. All Rights Reserved.'
+-charset
+'UTF-8'
+-d
+'/Users/andre/git/net.sf.uadetector/target/checkout/modules/uadetector-core/target/site/apidocs'
+-docencoding
+'UTF-8'
+-doctitle
+'UADetector :: Core 0.9.22 API'
+-link
+'http://java.sun.com/javase/6/docs/api'
+-linkoffline
+'http://uadetector.sourceforge.net/modules/uadetector-json/apidocs' '/Users/andre/git/net.sf.uadetector/target/checkout/modules/uadetector-json/target/site/apidocs'
+-linkoffline
+'http://uadetector.sourceforge.net/modules/uadetector-resources/apidocs' '/Users/andre/git/net.sf.uadetector/target/checkout/modules/uadetector-resources/target/site/apidocs'
+-use
+-version
+-windowtitle
+'UADetector :: Core 0.9.22 API'

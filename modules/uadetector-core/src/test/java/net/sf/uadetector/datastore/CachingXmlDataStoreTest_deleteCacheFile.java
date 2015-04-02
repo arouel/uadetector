@@ -27,6 +27,8 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.charset.Charset;
 
+import net.sf.uadetector.internal.util.UrlUtil;
+
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
@@ -40,6 +42,11 @@ public class CachingXmlDataStoreTest_deleteCacheFile {
 	 * The character set to read UAS data
 	 */
 	private static final Charset CHARSET = DataStore.DEFAULT_CHARSET;
+
+	/**
+   * URL to the DTD of the the UAS
+   */
+  private static final URL DATA_DEF_URL = UrlUtil.build(DataStore.DEFAULT_DATA_DEF_URL);
 
 	/**
 	 * URL to retrieve wrong content instead of UAS data as XML
@@ -78,7 +85,7 @@ public class CachingXmlDataStoreTest_deleteCacheFile {
 
 		// create caching data store without a cache file
 		final CachingXmlDataStore store = CachingXmlDataStore.createCachingXmlDataStore(cache, DATA_CONNECTION_ERROR_URL,
-				VERSION_CONNECTION_ERROR_URL, CHARSET, fallback);
+				VERSION_CONNECTION_ERROR_URL, DATA_DEF_URL, CHARSET, fallback);
 
 		assertThat(store.getData().getVersion()).isEqualTo(TestXmlDataStore.VERSION_OLDER);
 

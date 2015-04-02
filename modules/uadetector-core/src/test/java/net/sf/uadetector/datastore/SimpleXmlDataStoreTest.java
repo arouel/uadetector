@@ -24,6 +24,11 @@ import org.junit.Test;
 
 public class SimpleXmlDataStoreTest {
 
+  /**
+   * URL to the DTD of the the UAS
+   */
+  private static final URL DATA_DEF_URL = UrlUtil.build(DataStore.DEFAULT_DATA_DEF_URL);
+
 	/**
 	 * URL to retrieve the UAS data as XML
 	 */
@@ -41,7 +46,7 @@ public class SimpleXmlDataStoreTest {
 
 	@Test
 	public void construct_successful() {
-		final SimpleXmlDataStore store = new SimpleXmlDataStore(DATA_URL, VERSION_URL);
+		final SimpleXmlDataStore store = new SimpleXmlDataStore(DATA_URL, VERSION_URL, DATA_DEF_URL);
 		assertThat(!store.getData().getVersion().isEmpty()).isTrue();
 		assertThat(store.getDataReader()).isNotNull();
 		assertThat(store.getDataUrl()).isNotNull();
@@ -50,7 +55,7 @@ public class SimpleXmlDataStoreTest {
 
 	@Test(expected = IllegalStateException.class)
 	public void readData_fails() {
-		new SimpleXmlDataStore(UNREACHABLE_URL, UNREACHABLE_URL);
+		new SimpleXmlDataStore(UNREACHABLE_URL, UNREACHABLE_URL, DATA_DEF_URL);
 	}
 
 }

@@ -23,10 +23,16 @@ import java.net.URL;
 import net.sf.qualitycheck.Check;
 import net.sf.uadetector.datastore.DataStore;
 import net.sf.uadetector.datastore.SimpleXmlDataStore;
+import net.sf.uadetector.internal.util.UrlUtil;
 import net.sf.uadetector.json.internal.data.JsonConverter;
 import net.sf.uadetector.json.internal.data.serializer.Serialization;
 
 public class JsonDataCreator {
+
+  /**
+   * URL to the DTD of the the UAS
+   */
+  private static final URL DATA_DEF_URL = UrlUtil.build(DataStore.DEFAULT_DATA_DEF_URL);
 
 	/**
 	 * URL to retrieve the UAS data as XML
@@ -71,7 +77,7 @@ public class JsonDataCreator {
 
 	private static final DataStore determineDataStore(final String argument) {
 		final boolean isOffline = argument != null && argument.toLowerCase().equals("offline");
-		final DataStore fallback = new SimpleXmlDataStore(DATA_URL, VERSION_URL);
+		final DataStore fallback = new SimpleXmlDataStore(DATA_URL, VERSION_URL, DATA_DEF_URL);
 		return isOffline ? fallback : new OnlineXmlDataStore();
 	}
 

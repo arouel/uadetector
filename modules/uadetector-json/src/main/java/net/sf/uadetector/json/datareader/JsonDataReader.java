@@ -60,12 +60,12 @@ public final class JsonDataReader implements DataReader {
 	 *             if any of the given arguments is {@code null}
 	 */
 	@Override
-	public Data read(final URL url, final Charset charset) {
+	public Data read(final URL url, final URL dataDefUrl, final Charset charset) {
 		Check.notNull(url, "url");
 		Check.notNull(charset, "charset");
 		try {
 			final String json = UrlUtil.read(url, charset);
-			return read(json);
+			return read(json, dataDefUrl);
 		} catch (Exception e) {
 			LOG.warn(e.getLocalizedMessage(), e);
 		}
@@ -89,7 +89,7 @@ public final class JsonDataReader implements DataReader {
 	 *             if any of the given arguments is {@code null}
 	 */
 	@Override
-	public Data read(final String json) {
+	public Data read(final String json, final URL dataDefUrl) {
 		Check.notNull(json, "json");
 		try {
 			return JsonConverter.deserialize(json, SerDeOption.HASH_VALIDATING).getData();

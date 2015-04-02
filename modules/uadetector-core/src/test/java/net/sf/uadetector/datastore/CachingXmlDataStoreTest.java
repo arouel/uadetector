@@ -65,6 +65,11 @@ public class CachingXmlDataStoreTest {
 	 */
 	private static final URL VERSION_URL = CachingXmlDataStoreTest.class.getClassLoader().getResource("uas_older.version");
 
+  /**
+   * URL to the DTD of the UAS data
+   */
+  public static final URL DATA_DEF_URL = UrlUtil.build(DataStore.DEFAULT_DATA_DEF_URL);
+
 	private static String readFile(final File file) throws IOException {
 		byte[] bytes = Files.toByteArray(file);
 		return new String(bytes, Charset.defaultCharset());
@@ -86,22 +91,27 @@ public class CachingXmlDataStoreTest {
 
 	@Test(expected = IllegalNullArgumentException.class)
 	public void createCachingXmlDataStore_charset_null() throws IOException {
-		CachingXmlDataStore.createCachingXmlDataStore(folder.newFile("uas_test.xml"), DATA_URL, VERSION_URL, null, fallback);
+		CachingXmlDataStore.createCachingXmlDataStore(folder.newFile("uas_test.xml"), DATA_URL, VERSION_URL, DATA_DEF_URL, null, fallback);
 	}
+
+  @Test(expected = IllegalNullArgumentException.class)
+  public void createCachingXmlDataStore_dataDefUrl_null() throws IOException {
+    CachingXmlDataStore.createCachingXmlDataStore(folder.newFile("uas_test.xml"), DATA_URL, VERSION_URL, null, CHARSET, fallback);
+  }
 
 	@Test(expected = IllegalNullArgumentException.class)
 	public void createCachingXmlDataStore_dataUrl_null() throws IOException {
-		CachingXmlDataStore.createCachingXmlDataStore(folder.newFile("uas_test.xml"), null, VERSION_URL, CHARSET, fallback);
+		CachingXmlDataStore.createCachingXmlDataStore(folder.newFile("uas_test.xml"), null, VERSION_URL, DATA_DEF_URL, CHARSET, fallback);
 	}
 
 	@Test(expected = IllegalNullArgumentException.class)
 	public void createCachingXmlDataStore_fallback1_null() throws IOException {
-		CachingXmlDataStore.createCachingXmlDataStore(folder.newFile("uas_test.xml"), DATA_URL, VERSION_URL, CHARSET, null);
+		CachingXmlDataStore.createCachingXmlDataStore(folder.newFile("uas_test.xml"), DATA_URL, VERSION_URL, DATA_DEF_URL, CHARSET, null);
 	}
 
 	@Test(expected = IllegalNullArgumentException.class)
 	public void createCachingXmlDataStore_fallback2_null() throws IOException {
-		CachingXmlDataStore.createCachingXmlDataStore(DATA_URL, VERSION_URL, CHARSET, null);
+		CachingXmlDataStore.createCachingXmlDataStore(DATA_URL, VERSION_URL, DATA_DEF_URL, CHARSET, null);
 	}
 
 	@Test(expected = IllegalNullArgumentException.class)
@@ -139,6 +149,11 @@ public class CachingXmlDataStoreTest {
 				return new DataBlueprint().version(version).build();
 			}
 
+      @Override
+      public URL getDataDefUrl() {
+        return null;
+      }
+
 			@Override
 			public DataReader getDataReader() {
 				return null;
@@ -156,7 +171,7 @@ public class CachingXmlDataStoreTest {
 		};
 
 		// create caching data store
-		final DataStore store = CachingXmlDataStore.createCachingXmlDataStore(cache, UNREACHABLE_URL, UNREACHABLE_URL, CHARSET, fallback);
+		final DataStore store = CachingXmlDataStore.createCachingXmlDataStore(cache, UNREACHABLE_URL, UNREACHABLE_URL, DATA_DEF_URL, CHARSET, fallback);
 		assertThat(store.getData().getVersion()).isEqualTo(version);
 	}
 
@@ -167,7 +182,7 @@ public class CachingXmlDataStoreTest {
 		assertThat(readFile(cache)).isEqualTo("");
 
 		// create caching data store
-		final CachingXmlDataStore store = CachingXmlDataStore.createCachingXmlDataStore(cache, DATA_URL, VERSION_URL, CHARSET, fallback);
+		final CachingXmlDataStore store = CachingXmlDataStore.createCachingXmlDataStore(cache, DATA_URL, VERSION_URL, DATA_DEF_URL, CHARSET, fallback);
 		final UpdatingUserAgentStringParserImpl parser = new UpdatingUserAgentStringParserImpl(store);
 
 		Thread.sleep(1000l);
@@ -193,7 +208,7 @@ public class CachingXmlDataStoreTest {
 
 	@Test(expected = IllegalNullArgumentException.class)
 	public void createCachingXmlDataStore_versionUrl_null() throws IOException {
-		CachingXmlDataStore.createCachingXmlDataStore(folder.newFile("uas_test.xml"), DATA_URL, null, CHARSET, fallback);
+		CachingXmlDataStore.createCachingXmlDataStore(folder.newFile("uas_test.xml"), DATA_URL, null, DATA_DEF_URL, CHARSET, fallback);
 	}
 
 	@Test

@@ -40,7 +40,7 @@ public interface DataReader {
 	 *            the character set in which the data should be read
 	 * @return read in <em>UAS data</em> as new {@code Data} instance or {@link Data#EMPTY}
 	 */
-	Data read(final URL url, final Charset charset);
+	Data read(final URL url, final URL dataDefUrl, final Charset charset);
 
 	/**
 	 * Reads <em>UAS data</em> from the given {@code String}.
@@ -53,6 +53,6 @@ public interface DataReader {
 	 *            a string of <em>UAS data</em>
 	 * @return read in <em>UAS data</em> as new {@code Data} instance or {@link Data#EMPTY}
 	 */
-	Data read(final String data);
+	Data read(final String data, final URL dataDefUrl);
 
 }

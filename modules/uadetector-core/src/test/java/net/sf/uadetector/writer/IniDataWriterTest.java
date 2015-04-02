@@ -21,6 +21,7 @@ import java.net.URL;
 import net.sf.uadetector.datastore.DataStore;
 import net.sf.uadetector.datastore.SimpleXmlDataStore;
 import net.sf.uadetector.datastore.TestXmlDataStore;
+import net.sf.uadetector.internal.util.UrlUtil;
 
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -30,11 +31,13 @@ public final class IniDataWriterTest {
 
 	private static final Logger LOG = LoggerFactory.getLogger(IniDataWriterTest.class);
 
+	private static final URL DATA_DEF_URL = UrlUtil.build(DataStore.DEFAULT_DATA_DEF_URL);
+
 	private static final URL DATA_URL = TestXmlDataStore.class.getClassLoader().getResource("uas_older.xml");
 
-	private static final URL VERSION_URL = TestXmlDataStore.class.getClassLoader().getResource("uas_older.version");
+  private static final URL VERSION_URL = TestXmlDataStore.class.getClassLoader().getResource("uas_older.version");
 
-	private static final DataStore DATA_STORE = new SimpleXmlDataStore(DATA_URL, VERSION_URL);
+	private static final DataStore DATA_STORE = new SimpleXmlDataStore(DATA_URL, VERSION_URL, DATA_DEF_URL);
 
 	@Test
 	public void write() throws Exception {

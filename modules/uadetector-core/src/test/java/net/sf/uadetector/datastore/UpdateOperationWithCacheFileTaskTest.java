@@ -191,6 +191,11 @@ public class UpdateOperationWithCacheFileTaskTest {
 			}
 
 			@Override
+			public URL getDataDefUrl() {
+			  return UrlUtil.build(DEFAULT_DATA_DEF_URL);
+			}
+
+			@Override
 			public DataReader getDataReader() {
 				return new XmlDataReader();
 			}

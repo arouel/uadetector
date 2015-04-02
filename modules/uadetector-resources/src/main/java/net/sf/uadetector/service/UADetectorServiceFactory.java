@@ -22,7 +22,9 @@ import net.sf.uadetector.datareader.DataReader;
 import net.sf.uadetector.datareader.XmlDataReader;
 import net.sf.uadetector.datastore.AbstractDataStore;
 import net.sf.uadetector.datastore.CachingXmlDataStore;
+import net.sf.uadetector.datastore.DataStore;
 import net.sf.uadetector.datastore.OnlineXmlDataStore;
+import net.sf.uadetector.internal.util.UrlUtil;
 import net.sf.uadetector.parser.UpdatingUserAgentStringParserImpl;
 import net.sf.uadetector.parser.UserAgentStringParserImpl;
 
@@ -66,6 +68,11 @@ public final class UADetectorServiceFactory {
 		 */
 		private static final String PATH = "net/sf/uadetector/resources";
 
+    /**
+     * {@link URL} to the UAS data delivered in this module
+     */
+    public static final URL UAS_DATA_DEF = UrlUtil.build(DataStore.DEFAULT_DATA_DEF_URL);
+
 		/**
 		 * {@link URL} to the UAS data delivered in this module
 		 */
@@ -81,7 +88,7 @@ public final class UADetectorServiceFactory {
 		 * {@link #UAS_DATA} (in XML format).
 		 */
 		public ResourceModuleXmlDataStore() {
-			super(DEFAULT_DATA_READER, UAS_DATA, UAS_VERSION, DEFAULT_CHARSET);
+			super(DEFAULT_DATA_READER, UAS_DATA, UAS_VERSION, UAS_DATA_DEF, DEFAULT_CHARSET);
 		}
 
 	}

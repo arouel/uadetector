@@ -18,6 +18,7 @@ package net.sf.uadetector.internal.data;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.URL;
 
 import javax.annotation.Nonnull;
 
@@ -279,7 +280,8 @@ public final class XmlDataHandler extends DefaultHandler {
 	/**
 	 * URL to the Document Type Definition (DTD) of UAS data files
 	 */
-	protected static final String UASDATA_DEF_URL = "http://user-agent-string.info/rpc/uasxmldata.dtd";
+	@Nonnull
+	protected final String uasdataDefUrl;
 
 	/**
 	 * Logs an issue while parsing XML.
@@ -357,10 +359,12 @@ public final class XmlDataHandler extends DefaultHandler {
 	 */
 	private boolean warning = false;
 
-	public XmlDataHandler(@Nonnull final DataBuilder builder) {
+	public XmlDataHandler(@Nonnull final DataBuilder builder, @Nonnull final URL dataDefUrl) {
 		Check.notNull(builder, "builder");
+		Check.notNull(dataDefUrl, "dataDefUrl");
 
 		dataBuilder = builder;
+		uasdataDefUrl = dataDefUrl.toExternalForm();
 	}
 
 	private void addToBrowserBuilder() {
@@ -568,7 +572,7 @@ public final class XmlDataHandler extends DefaultHandler {
 
 	@Override
 	public InputSource resolveEntity(final String publicId, final String systemId) throws IOException, SAXException {
-		if (UASDATA_DEF_URL.equals(systemId)) {
+		if (uasdataDefUrl.equals(systemId)) {
 			final InputStream stream = this.getClass().getClassLoader().getResourceAsStream(UASDATA_DEF);
 			return new InputSource(new InputStreamReader(stream, CHARSET));
 		}

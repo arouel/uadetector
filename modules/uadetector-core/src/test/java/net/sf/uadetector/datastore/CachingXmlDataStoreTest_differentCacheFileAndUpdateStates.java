@@ -23,6 +23,7 @@ import java.net.URL;
 import java.nio.charset.Charset;
 
 import net.sf.uadetector.datareader.XmlDataReaderTest;
+import net.sf.uadetector.internal.util.UrlUtil;
 import net.sf.uadetector.parser.UpdatingUserAgentStringParserImpl;
 
 import org.junit.Rule;
@@ -32,6 +33,11 @@ import org.junit.rules.TemporaryFolder;
 import com.google.common.io.Files;
 
 public class CachingXmlDataStoreTest_differentCacheFileAndUpdateStates {
+
+  /**
+   * URL to the DTD of the the UAS
+   */
+  private static final URL DATA_DEF_URL = UrlUtil.build(DataStore.DEFAULT_DATA_DEF_URL);
 
 	/**
 	 * URL to retrieve the older UAS data as XML
@@ -89,7 +95,7 @@ public class CachingXmlDataStoreTest_differentCacheFileAndUpdateStates {
 		final TestXmlDataStore fallbackDataStore = new TestXmlDataStore();
 
 		// create caching data store without a cache file
-		final CachingXmlDataStore store1 = CachingXmlDataStore.createCachingXmlDataStore(cache, DATA_URL_OLDER, VERSION_URL_OLDER, CHARSET,
+		final CachingXmlDataStore store1 = CachingXmlDataStore.createCachingXmlDataStore(cache, DATA_URL_OLDER, VERSION_URL_OLDER, DATA_DEF_URL, CHARSET,
 				fallbackDataStore);
 		final UpdatingUserAgentStringParserImpl parser1 = new UpdatingUserAgentStringParserImpl(store1);
 		parser1.parse("test");
@@ -100,7 +106,7 @@ public class CachingXmlDataStoreTest_differentCacheFileAndUpdateStates {
 		assertThat(readIn1.length() >= 721915).isTrue();
 
 		// create caching data store with filled cache and available update
-		final CachingXmlDataStore store2 = CachingXmlDataStore.createCachingXmlDataStore(cache, DATA_URL_NEWER, VERSION_URL_NEWER, CHARSET,
+		final CachingXmlDataStore store2 = CachingXmlDataStore.createCachingXmlDataStore(cache, DATA_URL_NEWER, VERSION_URL_NEWER, DATA_DEF_URL, CHARSET,
 				fallbackDataStore);
 		final UpdatingUserAgentStringParserImpl parser2 = new UpdatingUserAgentStringParserImpl(store2);
 		parser2.parse("test");
@@ -111,7 +117,7 @@ public class CachingXmlDataStoreTest_differentCacheFileAndUpdateStates {
 		assertThat(readIn2.length() >= 721915).isTrue();
 
 		// create caching data store with filled cache and without an available update
-		final CachingXmlDataStore store = CachingXmlDataStore.createCachingXmlDataStore(cache, DATA_URL_NEWER, VERSION_URL_NEWER, CHARSET,
+		final CachingXmlDataStore store = CachingXmlDataStore.createCachingXmlDataStore(cache, DATA_URL_NEWER, VERSION_URL_NEWER, DATA_DEF_URL, CHARSET,
 				fallbackDataStore);
 		final UpdatingUserAgentStringParserImpl parser = new UpdatingUserAgentStringParserImpl(store);
 		parser.parse("test");

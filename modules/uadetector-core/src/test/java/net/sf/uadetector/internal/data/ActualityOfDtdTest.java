@@ -23,6 +23,8 @@ import java.io.Reader;
 import java.net.URL;
 
 import static org.fest.assertions.Assertions.assertThat;
+import net.sf.uadetector.datastore.DataStore;
+
 import org.junit.Test;
 
 public class ActualityOfDtdTest {
@@ -30,7 +32,7 @@ public class ActualityOfDtdTest {
 	@Test
 	public void checkDtdActuality() throws IOException {
 		final String currentDefinition = XmlDataHandler.UASDATA_DEF;
-		final URL definitionUrl = new URL(XmlDataHandler.UASDATA_DEF_URL);
+		final URL definitionUrl = new URL(DataStore.DEFAULT_DATA_DEF_URL);
 
 		// read DTD online
 		final InputStream onlineStream = definitionUrl.openStream();

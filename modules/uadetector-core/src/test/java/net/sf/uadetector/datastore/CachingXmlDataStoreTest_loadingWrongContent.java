@@ -69,7 +69,7 @@ public class CachingXmlDataStoreTest_loadingWrongContent {
 
 		// create caching data store without a cache file
 		final CachingXmlDataStore store = CachingXmlDataStore.createCachingXmlDataStore(cache, DATA_CONNECTION_ERROR_URL,
-				VERSION_CONNECTION_ERROR_URL, CHARSET, fallback);
+				VERSION_CONNECTION_ERROR_URL, TestXmlDataStore.DATA_DEF_URL, CHARSET, fallback);
 
 		assertThat(store.getData().getVersion()).isEqualTo(TestXmlDataStore.VERSION_OLDER);
 
@@ -95,11 +95,11 @@ public class CachingXmlDataStoreTest_loadingWrongContent {
 		Files.write(wrongContent, cache);
 
 		// create working fallback data store
-		final DataStore fallback = new SimpleXmlDataStore(TestXmlDataStore.DATA_URL, TestXmlDataStore.VERSION_URL);
+		final DataStore fallback = new SimpleXmlDataStore(TestXmlDataStore.DATA_URL, TestXmlDataStore.VERSION_URL, TestXmlDataStore.DATA_DEF_URL);
 
 		// create caching data store without a cache file
 		final CachingXmlDataStore store = CachingXmlDataStore.createCachingXmlDataStore(cache, TestXmlDataStore.DATA_URL_NEWER,
-				TestXmlDataStore.VERSION_URL_NEWER, CHARSET, fallback);
+				TestXmlDataStore.VERSION_URL_NEWER, TestXmlDataStore.DATA_DEF_URL, CHARSET, fallback);
 
 		assertThat(store.getData().getVersion()).isEqualTo(TestXmlDataStore.VERSION_OLDER);
 
@@ -125,7 +125,7 @@ public class CachingXmlDataStoreTest_loadingWrongContent {
 
 		// create caching data store without a cache file
 		final CachingXmlDataStore store = CachingXmlDataStore.createCachingXmlDataStore(cache, DATA_CONNECTION_ERROR_URL,
-				VERSION_CONNECTION_ERROR_URL, CHARSET, fallback);
+				VERSION_CONNECTION_ERROR_URL, TestXmlDataStore.DATA_DEF_URL, CHARSET, fallback);
 
 		assertThat(store.getData().getVersion()).isEqualTo(TestXmlDataStore.VERSION_OLDER);
 
@@ -153,7 +153,7 @@ public class CachingXmlDataStoreTest_loadingWrongContent {
 
 		// create caching data store without a cache file
 		final CachingXmlDataStore store = CachingXmlDataStore.createCachingXmlDataStore(cache, DATA_CONNECTION_ERROR_URL,
-				VERSION_CONNECTION_ERROR_URL, CHARSET, fallback);
+				VERSION_CONNECTION_ERROR_URL, TestXmlDataStore.DATA_DEF_URL, CHARSET, fallback);
 
 		assertThat(store.getData().getVersion()).isEqualTo(TestXmlDataStore.VERSION_NEWER);
 

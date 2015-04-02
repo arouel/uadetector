@@ -22,6 +22,7 @@ import java.net.URL;
 import net.sf.uadetector.datastore.DataStore;
 import net.sf.uadetector.datastore.SimpleXmlDataStore;
 import net.sf.uadetector.internal.data.Data;
+import net.sf.uadetector.internal.util.UrlUtil;
 import net.sf.uadetector.json.JsonDataCreator;
 import net.sf.uadetector.json.SerDeOption;
 
@@ -29,6 +30,11 @@ import org.junit.Test;
 
 public class SerDeRoundTripTest {
 
+  /**
+   * URL to the DTD of the the UAS
+   */
+  private static final URL DATA_DEF_URL = UrlUtil.build(DataStore.DEFAULT_DATA_DEF_URL);
+  
 	/**
 	 * URL to retrieve the UAS data as XML
 	 */
@@ -49,7 +55,7 @@ public class SerDeRoundTripTest {
 
 	@Test
 	public void test() {
-		final DataStore dataStore = new SimpleXmlDataStore(DATA_URL, VERSION_URL);
+		final DataStore dataStore = new SimpleXmlDataStore(DATA_URL, VERSION_URL, DATA_DEF_URL);
 		final String json = JsonConverter.serialize(dataStore.getData(), SerDeOption.PRETTY_PRINTING).getJson();
 		String redo = json;
 		for (int i = 0; i < 100; i++) {

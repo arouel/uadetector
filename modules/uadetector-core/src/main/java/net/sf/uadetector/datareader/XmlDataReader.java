@@ -52,12 +52,12 @@ public final class XmlDataReader implements DataReader {
 
 		private static final String MSG_NOT_PARSED_AS_EXPECTED = "The UAS data has not been parsed as expected.";
 
-		public static void parse(@Nonnull final InputStream stream, @Nonnull final DataBuilder builder)
+		public static void parse(@Nonnull final InputStream stream, @Nonnull final DataBuilder builder, @Nonnull final URL dataDefUrl)
 				throws ParserConfigurationException, SAXException, IOException {
 			final SAXParserFactory factory = SAXParserFactory.newInstance();
 			factory.setValidating(true);
 			final SAXParser parser = factory.newSAXParser();
-			final XmlDataHandler handler = new XmlDataHandler(builder);
+			final XmlDataHandler handler = new XmlDataHandler(builder, dataDefUrl);
 			parser.parse(stream, handler);
 			validate(handler);
 		}
@@ -101,14 +101,15 @@ public final class XmlDataReader implements DataReader {
 	 * @throws net.sf.uadetector.exception.CanNotOpenStreamException
 	 *             if no stream to the given {@code URL} can be established
 	 */
-	protected static Data readXml(@Nonnull final InputStream inputStream, @Nonnull final Charset charset) {
+	protected static Data readXml(@Nonnull final InputStream inputStream, @Nonnull final URL dataDefUrl, @Nonnull final Charset charset) {
 		Check.notNull(inputStream, "inputStream");
+		Check.notNull(dataDefUrl, "dataDefUrl");
 		Check.notNull(charset, "charset");
 
 		final DataBuilder builder = new DataBuilder();
 		boolean hasErrors = false;
 		try {
-			XmlParser.parse(inputStream, builder);
+			XmlParser.parse(inputStream, builder, dataDefUrl);
 		} catch (final ParserConfigurationException e) {
 			hasErrors = true;
 			LOG.warn(e.getLocalizedMessage());
@@ -142,10 +143,11 @@ public final class XmlDataReader implements DataReader {
 	 *             if any of the given argument is {@code null}
 	 */
 	@Override
-	public Data read(@Nonnull final String data) {
+	public Data read(@Nonnull final String data, @Nonnull final URL dataDefUrl) {
 		Check.notNull(data, "data");
+    Check.notNull(dataDefUrl, "dataDefUrl");
 
-		return readXml(new ByteArrayInputStream(data.getBytes(DEFAULT_CHARSET)), DEFAULT_CHARSET);
+		return readXml(new ByteArrayInputStream(data.getBytes(DEFAULT_CHARSET)), dataDefUrl, DEFAULT_CHARSET);
 	}
 
 	/**
@@ -161,13 +163,14 @@ public final class XmlDataReader implements DataReader {
 	 *             if any of the given arguments is {@code null}
 	 */
 	@Override
-	public Data read(@Nonnull final URL url, @Nonnull final Charset charset) {
+	public Data read(@Nonnull final URL url, @Nonnull final URL dataDefUrl, @Nonnull final Charset charset) {
 		Check.notNull(url, "url");
+		Check.notNull(dataDefUrl, "dataDefUrl");
 		Check.notNull(charset, "charset");
 
 		Data data = Data.EMPTY;
 		try {
-			data = readXml(UrlUtil.open(url), charset);
+			data = readXml(UrlUtil.open(url), dataDefUrl, charset);
 		} catch (final CanNotOpenStreamException e) {
 			LOG.warn(e.getLocalizedMessage());
 		}

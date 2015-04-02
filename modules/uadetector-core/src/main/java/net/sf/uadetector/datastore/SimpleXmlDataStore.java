@@ -46,8 +46,8 @@ public final class SimpleXmlDataStore extends AbstractDataStore implements DataS
 	 * @param versionUrl
 	 *            URL to version information about the given <em>UAS data</em>
 	 */
-	public SimpleXmlDataStore(final URL dataUrl, final URL versionUrl) {
-		super(DEFAULT_DATA_READER, dataUrl, versionUrl, DEFAULT_CHARSET);
+	public SimpleXmlDataStore(final URL dataUrl, final URL versionUrl, final URL dataDefUrl) {
+		super(DEFAULT_DATA_READER, dataUrl, versionUrl, dataDefUrl, DEFAULT_CHARSET);
 	}
 
 }

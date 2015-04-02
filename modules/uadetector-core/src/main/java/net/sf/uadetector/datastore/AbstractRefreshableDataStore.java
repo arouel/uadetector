@@ -73,6 +73,12 @@ public abstract class AbstractRefreshableDataStore implements RefreshableDataSto
 	 */
 	private Data data;
 
+  /**
+   * The {@code URL} to the Document Type Definition (DTD) of <em>UAS data</em>
+   */
+  private final URL dataDefUrl;
+
+
 	/**
 	 * The {@code URL} to get <em>UAS data</em>
 	 */
@@ -98,7 +104,6 @@ public abstract class AbstractRefreshableDataStore implements RefreshableDataSto
 	 * The {@code URL} to get the latest version information of <em>UAS data</em>
 	 */
 	private final URL versionUrl;
-
 	/**
 	 * Constructs an {@code AbstractDataStore} by reading the given {@code dataUrl} as <em>UAS data</em>.
 	 * 
@@ -118,8 +123,8 @@ public abstract class AbstractRefreshableDataStore implements RefreshableDataSto
 	 *             if the given strings are not valid URLs
 	 */
 	protected AbstractRefreshableDataStore(@Nonnull final DataReader reader, @Nonnull final String dataUrl,
-			@Nonnull final String versionUrl, @Nonnull final Charset charset, @Nonnull final DataStore fallback) {
-		this(reader, UrlUtil.build(dataUrl), UrlUtil.build(versionUrl), charset, fallback);
+			@Nonnull final String versionUrl, @Nonnull final String dataDefUrl, @Nonnull final Charset charset, @Nonnull final DataStore fallback) {
+		this(reader, UrlUtil.build(dataUrl), UrlUtil.build(versionUrl), UrlUtil.build(dataDefUrl), charset, fallback);
 	}
 
 	/**
@@ -141,16 +146,18 @@ public abstract class AbstractRefreshableDataStore implements RefreshableDataSto
 	 *             if the created instance of {@link Data} is empty
 	 */
 	protected AbstractRefreshableDataStore(@Nonnull final DataReader reader, @Nonnull final URL dataUrl, @Nonnull final URL versionUrl,
-			@Nonnull final Charset charset, final DataStore fallback) {
+	    @Nonnull final URL dataDefUrl, @Nonnull final Charset charset, final DataStore fallback) {
 		Check.notNull(reader, "reader");
 		Check.notNull(charset, "charset");
 		Check.notNull(dataUrl, "dataUrl");
 		Check.notNull(versionUrl, "versionUrl");
+    Check.notNull(dataDefUrl, "dataDefUrl");
 		Check.notNull(fallback, "fallback");
 
 		this.reader = reader;
 		this.dataUrl = dataUrl;
 		this.versionUrl = versionUrl;
+    this.dataDefUrl = dataDefUrl;
 		this.charset = charset;
 		this.fallback = fallback;
 
@@ -166,6 +173,11 @@ public abstract class AbstractRefreshableDataStore implements RefreshableDataSto
 	public Data getData() {
 		return data;
 	}
+
+  @Override
+  public URL getDataDefUrl() {
+    return dataDefUrl;
+  }
 
 	@Override
 	public DataReader getDataReader() {

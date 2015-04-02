@@ -19,6 +19,7 @@ import java.net.URL;
 
 import net.sf.uadetector.datareader.DataReader;
 import net.sf.uadetector.datareader.XmlDataReader;
+import net.sf.uadetector.internal.util.UrlUtil;
 
 /**
  * This is a very simple implementation of a {@link DataStore} for test cases. It initialize the store by reading the
@@ -27,6 +28,11 @@ import net.sf.uadetector.datareader.XmlDataReader;
  * @author André Rouél
  */
 public class TestXmlDataStore extends AbstractRefreshableDataStore {
+
+  /**
+   * URL to the DTD of the UAS data
+   */
+  public static final URL DATA_DEF_URL = UrlUtil.build(DataStore.DEFAULT_DATA_DEF_URL);
 
 	/**
 	 * URL to retrieve the UAS data as XML
@@ -68,8 +74,13 @@ public class TestXmlDataStore extends AbstractRefreshableDataStore {
 	 * {@link DataStore#DEFAULT_DATA_URL} (in XML format).
 	 */
 	public TestXmlDataStore() {
-		super(DEFAULT_DATA_READER, DATA_URL, VERSION_URL, DEFAULT_CHARSET, new SimpleXmlDataStore(DATA_URL, VERSION_URL));
+		super(DEFAULT_DATA_READER, DATA_URL, VERSION_URL, DATA_DEF_URL, DEFAULT_CHARSET, new SimpleXmlDataStore(DATA_URL, VERSION_URL, DATA_DEF_URL));
 	}
+
+  @Override
+  public URL getDataDefUrl() {
+    return DATA_DEF_URL;
+  }
 
 	@Override
 	public URL getDataUrl() {

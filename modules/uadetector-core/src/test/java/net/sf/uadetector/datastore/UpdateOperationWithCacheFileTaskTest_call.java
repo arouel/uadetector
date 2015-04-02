@@ -23,8 +23,9 @@ import javax.annotation.Nonnull;
 
 import net.sf.uadetector.datareader.DataReader;
 import net.sf.uadetector.datareader.XmlDataReader;
-
+import net.sf.uadetector.internal.util.UrlUtil;
 import static org.fest.assertions.Assertions.assertThat;
+
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
@@ -34,8 +35,8 @@ public class UpdateOperationWithCacheFileTaskTest_call {
 	private static class DataStoreWhichFallsBack extends AbstractRefreshableDataStore {
 
 		DataStoreWhichFallsBack(@Nonnull final DataReader reader, @Nonnull final URL dataUrl, @Nonnull final URL versionUrl,
-				@Nonnull final Charset charset, final DataStore fallback) {
-			super(reader, dataUrl, versionUrl, charset, fallback);
+				@Nonnull final URL dataDefUrl, @Nonnull final Charset charset, final DataStore fallback) {
+			super(reader, dataUrl, versionUrl, dataDefUrl, charset, fallback);
 		}
 
 		@Override
@@ -55,7 +56,7 @@ public class UpdateOperationWithCacheFileTaskTest_call {
 
 		final DataStoreWhichFallsBack store = new DataStoreWhichFallsBack(new XmlDataReader(),
 				NotUpdateableXmlDataStore.DATA_URL_UNREACHABLE, NotUpdateableXmlDataStore.VERSION_URL_UNREACHABLE,
-				DataStore.DEFAULT_CHARSET, fallback);
+				UrlUtil.build(DataStore.DEFAULT_DATA_DEF_URL), DataStore.DEFAULT_CHARSET, fallback);
 
 		final UpdateOperationWithCacheFileTask task = new UpdateOperationWithCacheFileTask(store, folder.newFile("cache_file.tmp"));
 		assertThat(store.getData()).isSameAs(fallback.getData());
@@ -74,11 +75,11 @@ public class UpdateOperationWithCacheFileTaskTest_call {
 
 	@Test
 	public void call_updateFails_fallbackNotNewer_sameVersion() throws IOException {
-		final DataStore fallback = new SimpleXmlDataStore(TestXmlDataStore.DATA_URL, TestXmlDataStore.VERSION_URL);
+		final DataStore fallback = new SimpleXmlDataStore(TestXmlDataStore.DATA_URL, TestXmlDataStore.VERSION_URL, UrlUtil.build(DataStore.DEFAULT_DATA_DEF_URL));
 
 		final DataStoreWhichFallsBack store = new DataStoreWhichFallsBack(new XmlDataReader(),
 				NotUpdateableXmlDataStore.DATA_URL_UNREACHABLE, NotUpdateableXmlDataStore.VERSION_URL_UNREACHABLE,
-				DataStore.DEFAULT_CHARSET, fallback);
+				UrlUtil.build(DataStore.DEFAULT_DATA_DEF_URL), DataStore.DEFAULT_CHARSET, fallback);
 
 		final UpdateOperationWithCacheFileTask task = new UpdateOperationWithCacheFileTask(store, folder.newFile("cache_file.tmp"));
 		assertThat(store.getData()).isSameAs(fallback.getData());

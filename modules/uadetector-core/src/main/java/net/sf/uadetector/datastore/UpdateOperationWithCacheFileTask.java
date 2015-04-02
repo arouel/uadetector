@@ -133,6 +133,7 @@ final class UpdateOperationWithCacheFileTask extends AbstractUpdateOperation {
 		Check.notNull(store, "store");
 
 		final URL url = store.getDataUrl();
+		final URL dataDefUrl = store.getDataDefUrl();
 		final Charset charset = store.getCharset();
 
 		final boolean isEqual = url.toExternalForm().equals(UrlUtil.toUrl(file).toExternalForm());
@@ -140,7 +141,7 @@ final class UpdateOperationWithCacheFileTask extends AbstractUpdateOperation {
 
 			// check if the data can be read in successfully
 			final String data = UrlUtil.read(url, charset);
-			if (Data.EMPTY.equals(store.getDataReader().read(data))) {
+			if (Data.EMPTY.equals(store.getDataReader().read(data, dataDefUrl))) {
 				throw new IllegalStateException("The read in content can not be transformed to an instance of 'Data'.");
 			}
 
@@ -219,7 +220,7 @@ final class UpdateOperationWithCacheFileTask extends AbstractUpdateOperation {
 		try {
 			if (isUpdateAvailable() || isCacheFileEmpty()) {
 				readAndSave(cacheFile, store);
-				store.setData(store.getDataReader().read(cacheFile.toURI().toURL(), store.getCharset()));
+				store.setData(store.getDataReader().read(cacheFile.toURI().toURL(), store.getDataDefUrl(), store.getCharset()));
 			}
 		} catch (final CanNotOpenStreamException e) {
 			LOG.warn(String.format(RefreshableDataStore.MSG_URL_NOT_READABLE, e.getLocalizedMessage()));
@@ -238,7 +239,7 @@ final class UpdateOperationWithCacheFileTask extends AbstractUpdateOperation {
 		try {
 			if (isCacheFileEmpty()) {
 				readAndSave(cacheFile, store.getFallback());
-				final Data data = store.getDataReader().read(cacheFile.toURI().toURL(), store.getCharset());
+				final Data data = store.getDataReader().read(cacheFile.toURI().toURL(), store.getDataDefUrl(), store.getCharset());
 				if (isNewerData(store.getData(), data)) {
 					store.setData(data);
 				}

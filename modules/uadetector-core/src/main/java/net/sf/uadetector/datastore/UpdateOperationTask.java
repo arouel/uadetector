@@ -32,7 +32,7 @@ final class UpdateOperationTask extends AbstractUpdateOperation {
 	@Override
 	public void call() {
 		if (isUpdateAvailable()) {
-			final Data data = store.getDataReader().read(store.getDataUrl(), store.getCharset());
+			final Data data = store.getDataReader().read(store.getDataUrl(), store.getDataDefUrl(), store.getCharset());
 			store.setData(data);
 		}
 	}

@@ -48,6 +48,11 @@ public class CachingXmlDataStoreTest_unreachableRemoteHost {
 	 */
 	private static final URL DATA_URL = TestXmlDataStore.class.getClassLoader().getResource("uas_newer.xml");
 
+  /**
+   * URL to the DTD of the the UAS
+   */
+  private static final URL DATA_DEF_URL = UrlUtil.build(DataStore.DEFAULT_DATA_DEF_URL);
+
 	/**
 	 * Version of the newer UAS data
 	 */
@@ -85,7 +90,7 @@ public class CachingXmlDataStoreTest_unreachableRemoteHost {
 
 		// create caching data store without a cache file
 		final long startTime = System.currentTimeMillis();
-		final CachingXmlDataStore store = CachingXmlDataStore.createCachingXmlDataStore(cache, DATA_URL, VERSION_URL, CHARSET, fallback);
+		final CachingXmlDataStore store = CachingXmlDataStore.createCachingXmlDataStore(cache, DATA_URL, VERSION_URL, DATA_DEF_URL, CHARSET, fallback);
 		assertThat(store.getData().getVersion()).isEqualTo(fallback.getData().getVersion());
 		final long duration = System.currentTimeMillis() - startTime;
 		assertThat(duration < 1000).as("loading unreachable remote data takes too long").isTrue();
@@ -114,7 +119,7 @@ public class CachingXmlDataStoreTest_unreachableRemoteHost {
 
 		// create caching data store without a cache file
 		final long startTime = System.currentTimeMillis();
-		final CachingXmlDataStore store = CachingXmlDataStore.createCachingXmlDataStore(cache, UNREACHABLE_URL, UNREACHABLE_URL, CHARSET,
+		final CachingXmlDataStore store = CachingXmlDataStore.createCachingXmlDataStore(cache, UNREACHABLE_URL, UNREACHABLE_URL, DATA_DEF_URL, CHARSET,
 				fallback);
 		assertThat(store.getData().getVersion()).isEqualTo(fallback.getData().getVersion());
 		final long duration = System.currentTimeMillis() - startTime;
@@ -130,7 +135,7 @@ public class CachingXmlDataStoreTest_unreachableRemoteHost {
 		final TestXmlDataStore fallback = new TestXmlDataStore();
 
 		// create caching data store without a cache file
-		final CachingXmlDataStore store = CachingXmlDataStore.createCachingXmlDataStore(cache, UNREACHABLE_URL, UNREACHABLE_URL, CHARSET,
+		final CachingXmlDataStore store = CachingXmlDataStore.createCachingXmlDataStore(cache, UNREACHABLE_URL, UNREACHABLE_URL, DATA_DEF_URL, CHARSET,
 				fallback);
 		assertThat(store.getData().getVersion()).isEqualTo(fallback.getData().getVersion());
 

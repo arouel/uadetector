@@ -19,15 +19,18 @@ import java.net.URL;
 
 import net.sf.uadetector.datastore.DataStore;
 import net.sf.uadetector.datastore.SimpleXmlDataStore;
+import net.sf.uadetector.internal.util.UrlUtil;
 
 public final class TestDataStoreFactory {
+  
+  private static final URL DATA_DEF_URL = UrlUtil.build(DataStore.DEFAULT_DATA_DEF_URL);
 
 	public static final URL DATA_URL = TestDataStoreFactory.class.getClassLoader().getResource("samples/uas.xml");
 
 	public static final URL VERSION_URL = TestDataStoreFactory.class.getClassLoader().getResource("samples/uas.version");
 
 	public static DataStore produce() {
-		return new SimpleXmlDataStore(DATA_URL, VERSION_URL);
+		return new SimpleXmlDataStore(DATA_URL, VERSION_URL, DATA_DEF_URL);
 	}
 
 }

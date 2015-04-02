@@ -37,23 +37,33 @@ public class OnlineXmlDataStore extends AbstractRefreshableDataStore {
 	 */
 	private static final DataReader DEFAULT_DATA_READER = new XmlDataReader();
 
+  /**
+   * URL to the DTD of the UAS data
+   */
+  public static final URL DATA_DEF_URL = UrlUtil.build(DataStore.DEFAULT_DATA_DEF_URL);
+
 	/**
 	 * URL to retrieve the UAS data as XML
 	 */
 	public static final URL DATA_URL = UrlUtil.build(DataStore.DEFAULT_DATA_URL);
 
-	/**
-	 * URL to retrieve the version information of the UAS data
-	 */
-	public static final URL VERSION_URL = UrlUtil.build(DataStore.DEFAULT_VERSION_URL);
+  /**
+   * URL to retrieve the version information of the UAS data
+   */
+  public static final URL VERSION_URL = UrlUtil.build(DataStore.DEFAULT_VERSION_URL);
 
 	/**
 	 * Constructs an {@code OnlineXmlDataStore} by reading <em>UAS data</em> by the specified default URL
 	 * {@link DataStore#DEFAULT_DATA_URL} (in XML format).
 	 */
 	public OnlineXmlDataStore() {
-		super(DEFAULT_DATA_READER, DATA_URL, VERSION_URL, DEFAULT_CHARSET, new SimpleXmlDataStore(DATA_URL, VERSION_URL));
+		super(DEFAULT_DATA_READER, DATA_URL, VERSION_URL, DATA_DEF_URL, DEFAULT_CHARSET, new SimpleXmlDataStore(DATA_URL, VERSION_URL, DATA_DEF_URL));
 	}
+
+  @Override
+  public URL getDataDefUrl() {
+    return DATA_DEF_URL;
+  }
 
 	@Override
 	public URL getDataUrl() {

@@ -33,8 +33,8 @@ public class AbstractDataStoreTest1 {
 
 	private static class TestDataStore extends AbstractDataStore {
 
-		protected TestDataStore(final Data data, final DataReader reader, final Charset charset, final URL dataUrl, final URL versionUrl) {
-			super(data, reader, dataUrl, versionUrl, charset);
+		protected TestDataStore(final Data data, final DataReader reader, final Charset charset, final URL dataUrl, final URL versionUrl, final URL dataDefUrl) {
+			super(data, reader, dataUrl, versionUrl, dataDefUrl, charset);
 		}
 
 	}
@@ -43,6 +43,11 @@ public class AbstractDataStoreTest1 {
 	 * The character set to read UAS data
 	 */
 	private static final Charset CHARSET = DataStore.DEFAULT_CHARSET;
+
+  /**
+   * URL to the DTD of the the UAS
+   */
+  private static final URL DATA_DEF_URL = UrlUtil.build(DataStore.DEFAULT_DATA_DEF_URL);
 
 	/**
 	 * URL to retrieve the UAS data as XML
@@ -62,76 +67,83 @@ public class AbstractDataStoreTest1 {
 	@Test(expected = IllegalNullArgumentException.class)
 	public void construct_charset_null() throws MalformedURLException {
 		final URL url = new URL("http://localhost");
-		new TestDataStore(Data.EMPTY, new XmlDataReader(), null, url, url);
+		new TestDataStore(Data.EMPTY, new XmlDataReader(), null, url, url, DATA_DEF_URL);
 	}
 
 	@Test(expected = IllegalNullArgumentException.class)
 	public void construct_data_null() throws MalformedURLException {
 		final URL url = new URL("http://localhost");
-		new TestDataStore((Data) null, new XmlDataReader(), CHARSET, url, url);
+		new TestDataStore((Data) null, new XmlDataReader(), CHARSET, url, url, DATA_DEF_URL);
 	}
+
+  @Test(expected = IllegalNullArgumentException.class)
+  public void construct_dataDef_null() throws MalformedURLException {
+    final URL url = new URL("http://localhost");
+    new TestDataStore(Data.EMPTY, new XmlDataReader(), CHARSET, url, url, null);
+  }
 
 	@Test(expected = IllegalNullArgumentException.class)
 	public void construct_dataReader_null() throws MalformedURLException {
 		final URL url = new URL("http://localhost");
-		new TestDataStore(Data.EMPTY, null, CHARSET, url, url);
+		new TestDataStore(Data.EMPTY, null, CHARSET, url, url, DATA_DEF_URL);
 	}
 
 	@Test(expected = IllegalNullArgumentException.class)
 	public void construct_dataUrl_null() throws MalformedURLException {
 		final URL url = new URL("http://localhost");
-		new TestDataStore(Data.EMPTY, new XmlDataReader(), CHARSET, null, url);
+		new TestDataStore(Data.EMPTY, new XmlDataReader(), CHARSET, null, url, DATA_DEF_URL);
 	}
 
 	@Test
 	public void construct_successful() {
 		final Data data = new DataBlueprint().version("test-version").build();
 		final DataReader reader = new XmlDataReader();
-		final TestDataStore store = new TestDataStore(data, reader, CHARSET, DATA_URL, VERSION_URL);
+		final TestDataStore store = new TestDataStore(data, reader, CHARSET, DATA_URL, VERSION_URL, DATA_DEF_URL);
 
 		assertThat(store.getData().getVersion()).isEqualTo("test-version");
 		assertThat(store.getData()).isSameAs(data);
 		assertThat(store.getDataReader()).isEqualTo(reader);
 		assertThat(store.getDataUrl()).isEqualTo(DATA_URL);
 		assertThat(store.getVersionUrl()).isEqualTo(VERSION_URL);
+		assertThat(store.getDataDefUrl()).isEqualTo(DATA_DEF_URL);
 	}
 
 	@Test(expected = IllegalNullArgumentException.class)
 	public void construct_versionUrl_null() throws MalformedURLException {
 		final URL url = new URL("http://localhost");
-		new TestDataStore(Data.EMPTY, new XmlDataReader(), CHARSET, url, null);
+		new TestDataStore(Data.EMPTY, new XmlDataReader(), CHARSET, url, null, DATA_DEF_URL);
 	}
 
 	@Test(expected = IllegalNullArgumentException.class)
 	public void readData_charset_null() {
-		AbstractDataStore.readData(new XmlDataReader(), DATA_URL, null);
+		AbstractDataStore.readData(new XmlDataReader(), DATA_URL, DATA_DEF_URL, null);
 	}
 
 	@Test(expected = IllegalNullArgumentException.class)
 	public void readData_dataUrl_null() {
-		AbstractDataStore.readData(new XmlDataReader(), null, CHARSET);
+		AbstractDataStore.readData(new XmlDataReader(), null, DATA_DEF_URL, CHARSET);
 	}
 
 	@Test
 	public void readData_failsAndReturnsEMPTY() {
-		final Data data = AbstractDataStore.readData(new XmlDataReader(), UNREACHABLE_URL, CHARSET);
+		final Data data = AbstractDataStore.readData(new XmlDataReader(), UNREACHABLE_URL, DATA_DEF_URL, CHARSET);
 		assertThat(data).isEqualTo(Data.EMPTY);
 	}
 
 	@Test(expected = IllegalNullArgumentException.class)
 	public void readData_reader_null() {
-		AbstractDataStore.readData(null, DATA_URL, CHARSET);
+		AbstractDataStore.readData(null, DATA_URL, DATA_DEF_URL, CHARSET);
 	}
 
 	@Test
 	public void readData_successful() {
-		final Data data = AbstractDataStore.readData(new XmlDataReader(), DATA_URL, CHARSET);
+		final Data data = AbstractDataStore.readData(new XmlDataReader(), DATA_URL, DATA_DEF_URL, CHARSET);
 		assertThat(data.getVersion()).isEqualTo(TestXmlDataStore.VERSION_OLDER);
 	}
 
 	@Test(expected = IllegalStateException.class)
 	public void setData_EMPTY() {
-		new TestDataStore(Data.EMPTY, new XmlDataReader(), CHARSET, DATA_URL, VERSION_URL);
+		new TestDataStore(Data.EMPTY, new XmlDataReader(), CHARSET, DATA_URL, VERSION_URL, DATA_DEF_URL);
 	}
 
 }

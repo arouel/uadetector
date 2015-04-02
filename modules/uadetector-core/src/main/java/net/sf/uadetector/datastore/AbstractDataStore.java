@@ -64,12 +64,13 @@ public abstract class AbstractDataStore implements DataStore {
 	 * @throws net.sf.qualitycheck.exception.IllegalNullArgumentException
 	 *             if the given argument is {@code null}
 	 */
-	protected static final Data readData(@Nonnull final DataReader reader, @Nonnull final URL url, @Nonnull final Charset charset) {
+	protected static final Data readData(@Nonnull final DataReader reader, @Nonnull final URL url, @Nonnull final URL dataDefUrl, @Nonnull final Charset charset) {
 		Check.notNull(reader, "reader");
 		Check.notNull(url, "url");
+    Check.notNull(dataDefUrl, "dataDefUrl");
 		Check.notNull(charset, "charset");
 
-		return reader.read(url, charset);
+		return reader.read(url, dataDefUrl, charset);
 	}
 
 	/**
@@ -81,6 +82,11 @@ public abstract class AbstractDataStore implements DataStore {
 	 * Current <em>UAS data</em>
 	 */
 	private final Data data;
+
+	/**
+	 * The {@code URL} to the Document Type Definition (DTD) of <em>UAS data</em>
+	 */
+	private final URL dataDefUrl;
 
 	/**
 	 * The {@code URL} to get <em>UAS data</em>
@@ -114,17 +120,19 @@ public abstract class AbstractDataStore implements DataStore {
 	 *             if one of the given arguments is {@code null}
 	 */
 	protected AbstractDataStore(@Nonnull final Data data, @Nonnull final DataReader reader, @Nonnull final URL dataUrl,
-			@Nonnull final URL versionUrl, @Nonnull final Charset charset) {
+	    @Nonnull final URL versionUrl, @Nonnull final URL dataDefUrl, @Nonnull final Charset charset) {
 		Check.notNull(data, "data");
 		Check.notNull(reader, "reader");
 		Check.notNull(charset, "charset");
 		Check.notNull(dataUrl, "dataUrl");
+		Check.notNull(dataDefUrl, "uasdataDefUrl");
 		Check.notNull(versionUrl, "versionUrl");
 
 		this.data = checkData(data);
 		this.reader = reader;
 		this.dataUrl = dataUrl;
 		this.versionUrl = versionUrl;
+    this.dataDefUrl = dataDefUrl;
 		this.charset = charset;
 	}
 
@@ -144,8 +152,8 @@ public abstract class AbstractDataStore implements DataStore {
 	 * @throws net.sf.qualitycheck.exception.IllegalNullArgumentException
 	 *             if the given strings are not valid URLs
 	 */
-	protected AbstractDataStore(final DataReader reader, final String dataUrl, final String versionUrl, final Charset charset) {
-		this(reader, UrlUtil.build(dataUrl), UrlUtil.build(versionUrl), charset);
+	protected AbstractDataStore(final DataReader reader, final String dataUrl, final String versionUrl, final String dataDefUrl, final Charset charset) {
+		this(reader, UrlUtil.build(dataUrl), UrlUtil.build(versionUrl), UrlUtil.build(dataDefUrl), charset);
 	}
 
 	/**
@@ -164,8 +172,8 @@ public abstract class AbstractDataStore implements DataStore {
 	 * @throws net.sf.qualitycheck.exception.IllegalStateOfArgumentException
 	 *             if the created instance of {@link Data} is empty
 	 */
-	protected AbstractDataStore(final DataReader reader, final URL dataUrl, final URL versionUrl, final Charset charset) {
-		this(checkData(readData(reader, dataUrl, charset)), reader, dataUrl, versionUrl, charset);
+	protected AbstractDataStore(final DataReader reader, final URL dataUrl, final URL versionUrl, final URL dataDefUrl, final Charset charset) {
+		this(checkData(readData(reader, dataUrl, dataDefUrl, charset)), reader, dataUrl, versionUrl, dataDefUrl, charset);
 	}
 
 	@Override
@@ -177,6 +185,11 @@ public abstract class AbstractDataStore implements DataStore {
 	public Data getData() {
 		return data;
 	}
+  
+  @Override
+  public URL getDataDefUrl() {
+    return dataDefUrl;
+  }
 
 	@Override
 	public DataReader getDataReader() {

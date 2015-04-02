@@ -20,6 +20,7 @@ import java.net.URL;
 
 import net.sf.uadetector.datareader.DataReader;
 import net.sf.uadetector.datareader.XmlDataReader;
+import net.sf.uadetector.internal.util.UrlUtil;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -38,6 +39,11 @@ public final class NotUpdateableXmlDataStore extends AbstractRefreshableDataStor
 	 * The default data reader to read in <em>UAS data</em> in XML format
 	 */
 	private static final DataReader DEFAULT_DATA_READER = new XmlDataReader();
+
+  /**
+   * URL to the DTD of the UAS data
+   */
+  public static final URL DATA_DEF_URL = UrlUtil.build(DataStore.DEFAULT_DATA_DEF_URL);
 
 	/**
 	 * URL to retrieve the UAS data as XML
@@ -73,7 +79,7 @@ public final class NotUpdateableXmlDataStore extends AbstractRefreshableDataStor
 	 * {@link DataStore#DEFAULT_DATA_URL} (in XML format).
 	 */
 	public NotUpdateableXmlDataStore() {
-		super(DEFAULT_DATA_READER, DATA_URL, VERSION_URL, DEFAULT_CHARSET, new TestXmlDataStore());
+		super(DEFAULT_DATA_READER, DATA_URL, VERSION_URL, DATA_DEF_URL, DEFAULT_CHARSET, new TestXmlDataStore());
 	}
 
 	@Override

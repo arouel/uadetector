@@ -18,8 +18,10 @@ package net.sf.uadetector.internal.data;
 import java.io.IOException;
 
 import net.sf.qualitycheck.exception.IllegalNullArgumentException;
-
+import net.sf.uadetector.datastore.DataStore;
+import net.sf.uadetector.datastore.TestXmlDataStore;
 import static org.fest.assertions.Assertions.assertThat;
+
 import org.junit.Test;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
@@ -29,7 +31,7 @@ public class XmlDataHandlerTest {
 
 	@Test(expected = IllegalNullArgumentException.class)
 	public void constructor_null() {
-		new XmlDataHandler(null);
+		new XmlDataHandler(null, TestXmlDataStore.DATA_DEF_URL);
 	}
 
 	/**
@@ -49,14 +51,14 @@ public class XmlDataHandlerTest {
 
 	@Test
 	public void resolveEntity_knownUrl() throws IOException, SAXException {
-		final XmlDataHandler handler = new XmlDataHandler(new DataBuilder());
-		final InputSource input = handler.resolveEntity("publicId is irrelevant", XmlDataHandler.UASDATA_DEF_URL);
+		final XmlDataHandler handler = new XmlDataHandler(new DataBuilder(), TestXmlDataStore.DATA_DEF_URL);
+		final InputSource input = handler.resolveEntity("publicId is irrelevant", DataStore.DEFAULT_DATA_DEF_URL);
 		assertThat(input).isNotNull();
 	}
 
 	@Test(expected = SAXException.class)
 	public void resolveEntity_unknownUrl() throws IOException, SAXException {
-		final XmlDataHandler handler = new XmlDataHandler(new DataBuilder());
+		final XmlDataHandler handler = new XmlDataHandler(new DataBuilder(), TestXmlDataStore.DATA_DEF_URL);
 		handler.resolveEntity("publicId unknown", "systemId unknown");
 	}
 

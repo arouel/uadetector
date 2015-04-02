@@ -42,7 +42,7 @@ public final class OnlineXmlDataStore extends AbstractRefreshableDataStore {
 	 *            <em>UAS data</em> as fallback in case the data on the specified resource can not be read correctly
 	 */
 	public OnlineXmlDataStore(final DataStore fallback) {
-		super(DEFAULT_DATA_READER, DEFAULT_DATA_URL, DEFAULT_VERSION_URL, DEFAULT_CHARSET, fallback);
+		super(DEFAULT_DATA_READER, DEFAULT_DATA_URL, DEFAULT_VERSION_URL, DEFAULT_DATA_DEF_URL, DEFAULT_CHARSET, fallback);
 	}
 
 }

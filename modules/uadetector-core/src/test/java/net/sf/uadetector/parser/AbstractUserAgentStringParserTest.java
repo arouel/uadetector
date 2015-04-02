@@ -89,6 +89,11 @@ public class AbstractUserAgentStringParserTest {
 				return data;
 			}
 
+      @Override
+      public URL getDataDefUrl() {
+        return null;
+      }
+
 			@Override
 			public DataReader getDataReader() {
 				return null;

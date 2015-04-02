@@ -49,8 +49,8 @@ public final class SimpleJsonDataStore extends AbstractDataStore implements Data
 	 * @param versionUrl
 	 *            URL to version information about the given <em>UAS data</em>
 	 */
-	public SimpleJsonDataStore(final URL dataUrl, final URL versionUrl) {
-		super(DEFAULT_DATA_READER, Check.notNull(dataUrl), Check.notNull(versionUrl), DEFAULT_CHARSET);
+	public SimpleJsonDataStore(final URL dataUrl, final URL versionUrl, final URL dataDefUrl) {
+		super(DEFAULT_DATA_READER, Check.notNull(dataUrl), Check.notNull(versionUrl), Check.notNull(dataDefUrl), DEFAULT_CHARSET);
 	}
 
 }

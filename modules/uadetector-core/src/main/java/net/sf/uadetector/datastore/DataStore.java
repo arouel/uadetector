@@ -35,6 +35,11 @@ public interface DataStore {
 	 */
 	Charset DEFAULT_CHARSET = Charset.forName("UTF-8");
 
+  /**
+   * URL to the Document Type Definition (DTD) of UAS data
+   */
+  String DEFAULT_DATA_DEF_URL = "http://user-agent-string.info/rpc/uasxmldata.dtd";
+
 	/**
 	 * URL to retrieve the current UAS data as XML
 	 */
@@ -60,6 +65,14 @@ public interface DataStore {
 	 */
 	@Nonnull
 	Data getData();
+
+  /**
+   * Gets the URL to the DTD of the UAS data.
+   * 
+   * @return URL to the DTD of UAS data
+   */
+  @Nonnull
+  URL getDataDefUrl();
 
 	/**
 	 * Gets the data reader to read in UAS data.

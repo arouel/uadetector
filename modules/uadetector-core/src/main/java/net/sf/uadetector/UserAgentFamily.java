@@ -2247,12 +2247,12 @@ public enum UserAgentFamily {
 	/**
 	 * Mobile Firefox
 	 */
-	MOBILE_FIREFOX("Mobile Firefox", Pattern.compile("Mobile Firefox")),
+	MOBILE_FIREFOX("Mobile Firefox", Pattern.compile("Firefox mobile")),
 
 	/**
 	 * Mobile Safari
 	 */
-	MOBILE_SAFARI("Mobile Safari", Pattern.compile("Mobile Safari")),
+	MOBILE_SAFARI("Mobile Safari", Pattern.compile("Safari mobile")),
 
 	/**
 	 * MojeekBot

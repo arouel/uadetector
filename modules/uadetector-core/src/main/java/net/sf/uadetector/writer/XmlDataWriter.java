@@ -111,7 +111,7 @@ public final class XmlDataWriter {
 
 	private static final String INDENT_OPTION = "yes";
 
-	private static final String SCHEMA_URL = "http://user-agent-string.info/rpc/uasxmldata.dtd";
+	private static final String SCHEMA_URL = "http://data.udger.com/uasxmldata_old.dtd";
 
 	private static Element createBrowser(final Browser browser, final Document doc) {
 		final Element b = doc.createElement(Tag.BROWSER);

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE uasdata SYSTEM "http://user-agent-string.info/rpc/uasxmldata.dtd">
+<!DOCTYPE uasdata SYSTEM "http://data.udger.com/uasxmldata_old.dtd">
 <uasdata>
 	<description>
 		<label>Data (format xml) for UASparser - http://user-agent-string.info/download/UASparser</label>

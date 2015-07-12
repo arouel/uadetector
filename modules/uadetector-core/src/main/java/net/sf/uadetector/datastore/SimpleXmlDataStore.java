@@ -26,7 +26,7 @@ import net.sf.uadetector.datareader.XmlDataReader;
  * 
  * <p>
  * The given resource must have a valid XML format with UTF-8 charset that validates against specified schema under <a
- * href="http://user-agent-string.info/rpc/uasxmldata.dtd">http://user-agent-string.info/rpc/uasxmldata.dtd</a>.
+ * href="http://data.udger.com/uasxmldata_old.dtd">http://data.udger.com/uasxmldata_old.dtd</a>.
  * 
  * @author André Rouél
  */

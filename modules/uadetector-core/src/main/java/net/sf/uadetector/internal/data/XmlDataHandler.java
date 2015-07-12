@@ -279,7 +279,7 @@ public final class XmlDataHandler extends DefaultHandler {
 	/**
 	 * URL to the Document Type Definition (DTD) of UAS data files
 	 */
-	protected static final String UASDATA_DEF_URL = "http://user-agent-string.info/rpc/uasxmldata.dtd";
+	protected static final String UASDATA_DEF_URL = "http://data.udger.com/uasxmldata_old.dtd";
 
 	/**
 	 * Logs an issue while parsing XML.

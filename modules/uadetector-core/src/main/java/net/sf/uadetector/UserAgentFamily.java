@@ -1502,7 +1502,7 @@ public enum UserAgentFamily {
 	/**
 	 * HeartRails_Capture
 	 */
-	HEARTRAILS_CAPTURE("HeartRails_Capture", Pattern.compile("HeartRails_Capture")),
+	HEARTRAILS_CAPTURE("HeartRails_Capture", Pattern.compile("HeartRailsBot")),
 
 	/**
 	 * heritrix
@@ -1537,7 +1537,7 @@ public enum UserAgentFamily {
 	/**
 	 * HostTracker.com
 	 */
-	HOSTTRACKER_COM("HostTracker.com", Pattern.compile("HostTracker.com")),
+	HOSTTRACKER_COM("HostTracker", Pattern.compile("HostTracker")),
 
 	/**
 	 * HotJava
@@ -2737,7 +2737,7 @@ public enum UserAgentFamily {
 	/**
 	 * Panscient web crawler
 	 */
-	PANSCIENT_WEB_CRAWLER("Panscient web crawler", Pattern.compile("Panscient web crawler")),
+	PANSCIENT_WEB_CRAWLER("panscient.com", Pattern.compile("panscient.com")),
 
 	/**
 	 * Paparazzi!
@@ -3428,7 +3428,7 @@ public enum UserAgentFamily {
 	/**
 	 * Speedy
 	 */
-	SPEEDY("Speedy", Pattern.compile("Speedy")),
+	SPEEDY("Speedy Spider", Pattern.compile("Speedy Spider")),
 
 	/**
 	 * Spicebird
@@ -3878,7 +3878,7 @@ public enum UserAgentFamily {
 	/**
 	 * VoilaBot
 	 */
-	VOILABOT("VoilaBot", Pattern.compile("VoilaBot")),
+	VOILABOT("OrangeBot", Pattern.compile("OrangeBot")),
 
 	/**
 	 * Vonkeror
@@ -3958,7 +3958,7 @@ public enum UserAgentFamily {
 	/**
 	 * WDG Page Valet
 	 */
-	WDG_PAGE_VALET("WDG Page Valet", Pattern.compile("WDG Page Valet")),
+	WDG_PAGE_VALET("WDG Page Valet", Pattern.compile("Page Valet")),
 
 	/**
 	 * WDG Validator

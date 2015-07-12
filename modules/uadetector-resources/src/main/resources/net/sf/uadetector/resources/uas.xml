@@ -542,7 +542,7 @@
 			<robot>
 				<id>676</id>
 				<useragent><![CDATA[AdsBot-Google (+http://www.google.com/adsbot.html)]]></useragent>
-				<family>AdsBot-Google</family>
+				<family>Googlebot</family>
 				<name>AdsBot-Google</name>
 				<company><![CDATA[Google Inc.]]></company>
 				<url_company><![CDATA[http://www.google.com/]]></url_company>
@@ -552,7 +552,7 @@
 			<robot>
 				<id>715</id>
 				<useragent><![CDATA[AdsBot-Google]]></useragent>
-				<family>AdsBot-Google</family>
+				<family>Googlebot</family>
 				<name>AdsBot-Google b</name>
 				<company><![CDATA[Google Inc.]]></company>
 				<url_company><![CDATA[http://www.google.com/]]></url_company>
@@ -3002,7 +3002,7 @@
 			<robot>
 				<id>7143</id>
 				<useragent><![CDATA[DuckDuckPreview/1.0; (+http://duckduckgo.com/duckduckpreview.html)]]></useragent>
-				<family>DuckDuckPreview</family>
+				<family>DuckDuckBot</family>
 				<name>DuckDuckPreview/1.0</name>
 				<company><![CDATA[DuckDuckGo, Inc.]]></company>
 				<url_company><![CDATA[http://duckduckgo.com/]]></url_company>
@@ -4652,7 +4652,7 @@
 			<robot>
 				<id>1872</id>
 				<useragent><![CDATA[Mozilla/5.0 (X11; U; Linux i686 (x86_64); en-US; rv:1.8.1.20) Gecko/20090429 HeartRails_Capture/0.6 (+http://capture.heartrails.com/) BonEcho/2.0.0.20]]></useragent>
-				<family>HeartRails_Capture</family>
+				<family>HeartRailsBot</family>
 				<name>HeartRails_Capture/0.6</name>
 				<company><![CDATA[HeartRails Inc.]]></company>
 				<url_company><![CDATA[http://www.heartrails.com/]]></url_company>
@@ -4902,7 +4902,7 @@
 			<robot>
 				<id>3235</id>
 				<useragent><![CDATA[Mozilla/4.0 (compatible; HostTracker.com/1.0;+http://host-tracker.com/)]]></useragent>
-				<family>HostTracker.com</family>
+				<family>HostTracker</family>
 				<name>HostTracker.com/1.0</name>
 				<company><![CDATA[host-tracker.com ]]></company>
 				<url_company><![CDATA[]]></url_company>
@@ -8312,8 +8312,8 @@
 			<robot>
 				<id>886</id>
 				<useragent><![CDATA[panscient.com]]></useragent>
-				<family>Panscient web crawler</family>
-				<name>Panscient web crawler</name>
+				<family>panscient.com</family>
+				<name>panscient.com</name>
 				<company><![CDATA[Panscient, Inc.]]></company>
 				<url_company><![CDATA[http://panscient.com/]]></url_company>
 				<icon>bot.png</icon>
@@ -10522,7 +10522,7 @@
 			<robot>
 				<id>999</id>
 				<useragent><![CDATA[Speedy Spider (http://www.entireweb.com/about/search_tech/speedy_spider/)]]></useragent>
-				<family>Speedy</family>
+				<family>Speedy Spider</family>
 				<name>Speedy Spider</name>
 				<company><![CDATA[Entireweb Sweden AB]]></company>
 				<url_company><![CDATA[http://www.entireweb.com/]]></url_company>
@@ -10532,7 +10532,7 @@
 			<robot>
 				<id>1885</id>
 				<useragent><![CDATA[Speedy Spider (Entireweb; Beta/1.2; http://www.entireweb.com/about/search_tech/speedyspider/)]]></useragent>
-				<family>Speedy</family>
+				<family>Speedy Spider</family>
 				<name>Speedy Spider Beta/1.2</name>
 				<company><![CDATA[Entireweb Sweden AB]]></company>
 				<url_company><![CDATA[http://www.entireweb.com/]]></url_company>
@@ -10542,7 +10542,7 @@
 			<robot>
 				<id>4185</id>
 				<useragent><![CDATA[Mozilla/5.0 (compatible; Speedy Spider; http://www.entireweb.com/about/search_tech/speedy_spider/)]]></useragent>
-				<family>Speedy</family>
+				<family>Speedy Spider</family>
 				<name>Speedy Spider</name>
 				<company><![CDATA[Entireweb Sweden AB]]></company>
 				<url_company><![CDATA[http://www.entireweb.com/]]></url_company>
@@ -10552,7 +10552,7 @@
 			<robot>
 				<id>4337</id>
 				<useragent><![CDATA[Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US) Speedy Spider (http://www.entireweb.com/about/search_tech/speedy_spider/)]]></useragent>
-				<family>Speedy</family>
+				<family>Speedy Spider</family>
 				<name>Speedy Spider</name>
 				<company><![CDATA[Entireweb Sweden AB]]></company>
 				<url_company><![CDATA[http://www.entireweb.com/]]></url_company>
@@ -10562,7 +10562,7 @@
 			<robot>
 				<id>6288</id>
 				<useragent><![CDATA[Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US) Speedy Spider for SpeedyAds (http://www.entireweb.com/about/search_tech/speedy_spider/)]]></useragent>
-				<family>Speedy</family>
+				<family>Speedy Spider</family>
 				<name>Speedy Spider</name>
 				<company><![CDATA[Entireweb Sweden AB]]></company>
 				<url_company><![CDATA[http://www.entireweb.com/]]></url_company>
@@ -10572,7 +10572,7 @@
 			<robot>
 				<id>11139</id>
 				<useragent><![CDATA[Speedy Spider (Submit your site at http://www.entireweb.com/free_submission/)]]></useragent>
-				<family>Speedy</family>
+				<family>Speedy Spider</family>
 				<name>Speedy Spider</name>
 				<company><![CDATA[Entireweb Sweden AB]]></company>
 				<url_company><![CDATA[http://www.entireweb.com/]]></url_company>
@@ -11702,7 +11702,7 @@
 			<robot>
 				<id>222</id>
 				<useragent><![CDATA[Mozilla/4.0 (compatible; MSIE 5.0; Windows 95) VoilaBot BETA 1.2 (http://www.voila.com/)]]></useragent>
-				<family>VoilaBot</family>
+				<family>OrangeBot</family>
 				<name>VoilaBot BETA 1.2</name>
 				<company><![CDATA[Orange SA]]></company>
 				<url_company><![CDATA[http://www.orange.fr/]]></url_company>
@@ -11712,7 +11712,7 @@
 			<robot>
 				<id>1567</id>
 				<useragent><![CDATA[Mozilla/5.0 (Windows; U; Windows NT 5.1; fr; rv:1.8.1) VoilaBot BETA 1.2 (support.voilabot@orange-ftgroup.com)]]></useragent>
-				<family>VoilaBot</family>
+				<family>OrangeBot</family>
 				<name>VoilaBot BETA 1.2</name>
 				<company><![CDATA[Orange SA]]></company>
 				<url_company><![CDATA[http://www.orange.fr/]]></url_company>
@@ -11722,7 +11722,7 @@
 			<robot>
 				<id>7220</id>
 				<useragent><![CDATA[Mozilla/5.0 (Windows; U; Windows NT 5.1;fr;rv:1.8.1) VoilaBotCollector BETA 0.1  (http://www.voila.com/)]]></useragent>
-				<family>VoilaBot</family>
+				<family>OrangeBot</family>
 				<name>VoilaBotCollector BETA 0.1</name>
 				<company><![CDATA[Orange SA]]></company>
 				<url_company><![CDATA[http://www.orange.fr/]]></url_company>
@@ -11732,7 +11732,7 @@
 			<robot>
 				<id>13200</id>
 				<useragent><![CDATA[Mozilla/5.0 (Windows NT 5.1; U; Win64; fr; rv:1.8.1) VoilaBot BETA 1.2 (support.voilabot@orange-ftgroup.com)]]></useragent>
-				<family>VoilaBot</family>
+				<family>OrangeBot</family>
 				<name>VoilaBot BETA 1.2</name>
 				<company><![CDATA[Orange SA]]></company>
 				<url_company><![CDATA[http://www.orange.fr/]]></url_company>
@@ -15143,8 +15143,8 @@
 			</os>
 			<os>
 				<id>75</id>
-				<family>Linux</family>
-				<name>Linux (Maemo)</name>
+				<family>Maemo</family>
+				<name>Maemo</name>
 				<url><![CDATA[http://maemo.org/]]></url>
 				<company><![CDATA[Nokia]]></company>
 				<url_company><![CDATA[http://www.nokia.com/]]></url_company>

@@ -16,16 +16,29 @@
 package net.sf.uadetector.datastore;
 
 import static org.fest.assertions.Assertions.assertThat;
+
+import java.net.URL;
+
 import org.junit.Test;
 
 public class OnlineXmlDataStoreTest {
+
+	/**
+	 * URL to retrieve the UAS data as XML
+	 */
+	private static final URL DATA_URL = AbstractDataStoreTest2.class.getClassLoader().getResource("uas_newer.xml");
+
+	/**
+	 * URL to retrieve the version of the UAS data
+	 */
+	private static final URL VERSION_URL = AbstractDataStoreTest2.class.getClassLoader().getResource("uas_newer.version");
 
 	@Test
 	public void construct_successful() {
 		// create fallback data store
 		final TestXmlDataStore fallbackDataStore = new TestXmlDataStore();
 
-		final OnlineXmlDataStore store = new OnlineXmlDataStore(fallbackDataStore);
+		final OnlineXmlDataStore store = new OnlineXmlDataStore(DATA_URL, VERSION_URL, fallbackDataStore);
 		assertThat(!store.getData().getVersion().isEmpty()).isTrue();
 		assertThat(store.getDataReader()).isNotNull();
 		assertThat(store.getDataUrl()).isNotNull();
@@ -38,7 +51,7 @@ public class OnlineXmlDataStoreTest {
 		// create fallback data store
 		final TestXmlDataStore fallbackDataStore = new TestXmlDataStore();
 
-		final OnlineXmlDataStore store = new OnlineXmlDataStore(fallbackDataStore);
+		final OnlineXmlDataStore store = new OnlineXmlDataStore(DATA_URL, VERSION_URL, fallbackDataStore);
 		assertThat(store.getData().getVersion()).isEqualTo(fallbackDataStore.getData().getVersion());
 		assertThat(store.getDataReader()).isNotNull();
 		assertThat(store.getDataUrl()).isNotNull();

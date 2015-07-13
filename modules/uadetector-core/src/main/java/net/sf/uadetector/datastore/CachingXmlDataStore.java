@@ -98,6 +98,10 @@ public final class CachingXmlDataStore extends AbstractRefreshableDataStore {
 	 * can be empty or filled with previously cached data in XML format. The file must be writable otherwise an
 	 * exception will be thrown.
 	 * 
+	 * @param dataUrl
+	 * 			  URL for online version of <em>UAS data</em>
+	 * @param versionURL
+	 *            URL for version information of online <em>UAS data</em>
 	 * @param fallback
 	 *            <em>UAS data</em> as fallback in case the data on the specified resource can not be read correctly
 	 * @return new instance of {@link CachingXmlDataStore}
@@ -109,6 +113,12 @@ public final class CachingXmlDataStore extends AbstractRefreshableDataStore {
 	 *             if no URL can be resolved to the given given file
 	 */
 	@Nonnull
+	public static CachingXmlDataStore createCachingXmlDataStore(@Nonnull final URL dataUrl, @Nonnull final URL versionURL, @Nonnull final DataStore fallback) {
+		return createCachingXmlDataStore(findOrCreateCacheFile(), dataUrl, versionURL, DEFAULT_CHARSET,
+				fallback);
+	}
+	
+	@Deprecated
 	public static CachingXmlDataStore createCachingXmlDataStore(@Nonnull final DataStore fallback) {
 		return createCachingXmlDataStore(findOrCreateCacheFile(), fallback);
 	}
@@ -131,6 +141,7 @@ public final class CachingXmlDataStore extends AbstractRefreshableDataStore {
 	 *             if no URL can be resolved to the given given file
 	 */
 	@Nonnull
+	@Deprecated
 	public static CachingXmlDataStore createCachingXmlDataStore(@Nonnull final File cacheFile, @Nonnull final DataStore fallback) {
 		return createCachingXmlDataStore(cacheFile, UrlUtil.build(DEFAULT_DATA_URL), UrlUtil.build(DEFAULT_VERSION_URL), DEFAULT_CHARSET,
 				fallback);

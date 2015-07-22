@@ -106,7 +106,7 @@ public abstract class AbstractUpdateOperation implements UpdateOperation {
 
 	/**
 	 * Reads the current User-Agent data version from <a
-	 * href="http://user-agent-string.info">http://user-agent-string.info</a>.
+	 * href="http://data.udger.com">http://data.udger.com</a>.
 	 * 
 	 * @param url
 	 *            a URL which the version information can be loaded

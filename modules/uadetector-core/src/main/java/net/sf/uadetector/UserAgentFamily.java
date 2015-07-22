@@ -167,6 +167,11 @@ public enum UserAgentFamily {
 	 * aippie
 	 */
 	AIPPIE("aippie", Pattern.compile("aippie")),
+	
+	/**
+	 * AirMail
+	 */
+	AIRMAIL("AirMail", Pattern.compile("AirMail")),
 
 	/**
 	 * Akregator
@@ -693,6 +698,12 @@ public enum UserAgentFamily {
 	 */
 	CLIGOOROBOT("CligooRobot", Pattern.compile("CligooRobot")),
 
+	
+	/**
+	 * Coast
+	 */
+	COAST("Coast", Pattern.compile("Coast")),
+	
 	/**
 	 * coccoc
 	 */
@@ -1380,6 +1391,11 @@ public enum UserAgentFamily {
 	GLOBALMOJO("GlobalMojo", Pattern.compile("GlobalMojo")),
 
 	/**
+	 * Gmail image proxy
+	 */
+	GMAIL_IMAGE_PROXY("Gmail image proxy", Pattern.compile("Gmail image proxy")),
+	
+	/**
 	 * GnomeVFS
 	 */
 	GNOMEVFS("GnomeVFS", Pattern.compile("GnomeVFS")),
@@ -1502,7 +1518,7 @@ public enum UserAgentFamily {
 	/**
 	 * HeartRails_Capture
 	 */
-	HEARTRAILS_CAPTURE("HeartRails_Capture", Pattern.compile("HeartRails_Capture")),
+	HEARTRAILS_CAPTURE("HeartRails_Capture", Pattern.compile("HeartRailsBot")),
 
 	/**
 	 * heritrix
@@ -1537,7 +1553,7 @@ public enum UserAgentFamily {
 	/**
 	 * HostTracker.com
 	 */
-	HOSTTRACKER_COM("HostTracker.com", Pattern.compile("HostTracker.com")),
+	HOSTTRACKER_COM("HostTracker", Pattern.compile("HostTracker")),
 
 	/**
 	 * HotJava
@@ -1983,6 +1999,11 @@ public enum UserAgentFamily {
 	 * LFTP
 	 */
 	LFTP("LFTP", Pattern.compile("LFTP")),
+	
+	/**
+	 * LG Web Browser
+	 */
+	LG_WEB_BROWSER("LG Web Browser", Pattern.compile("LG Web Browser")),
 
 	/**
 	 * LibSoup
@@ -2185,6 +2206,16 @@ public enum UserAgentFamily {
 	MICROB("MicroB", Pattern.compile("MicroB")),
 
 	/**
+	 * Microsoft Edge
+	 */
+	MICROSOFT_EDGE("Microsoft Edge", Pattern.compile("Microsoft Edge")),
+	
+	/**
+	 * Microsoft Edge
+	 */
+	MICROSOFT_EDGE_MOBILE("Microsoft Edge mobile", Pattern.compile("Microsoft Edge mobile")),
+	
+	/**
 	 * Microsoft Office Existence Discovery
 	 */
 	MICROSOFT_OFFICE_EXISTENCE_DISCOVERY("Microsoft Office Existence Discovery", Pattern.compile("Microsoft Office Existence Discovery")),
@@ -2247,12 +2278,12 @@ public enum UserAgentFamily {
 	/**
 	 * Mobile Firefox
 	 */
-	MOBILE_FIREFOX("Mobile Firefox", Pattern.compile("Mobile Firefox")),
+	MOBILE_FIREFOX("Mobile Firefox", Pattern.compile("Firefox mobile")),
 
 	/**
 	 * Mobile Safari
 	 */
-	MOBILE_SAFARI("Mobile Safari", Pattern.compile("Mobile Safari")),
+	MOBILE_SAFARI("Mobile Safari", Pattern.compile("Safari mobile")),
 
 	/**
 	 * MojeekBot
@@ -2737,7 +2768,7 @@ public enum UserAgentFamily {
 	/**
 	 * Panscient web crawler
 	 */
-	PANSCIENT_WEB_CRAWLER("Panscient web crawler", Pattern.compile("Panscient web crawler")),
+	PANSCIENT_WEB_CRAWLER("panscient.com", Pattern.compile("panscient.com")),
 
 	/**
 	 * Paparazzi!
@@ -3428,7 +3459,7 @@ public enum UserAgentFamily {
 	/**
 	 * Speedy
 	 */
-	SPEEDY("Speedy", Pattern.compile("Speedy")),
+	SPEEDY("Speedy Spider", Pattern.compile("Speedy Spider")),
 
 	/**
 	 * Spicebird
@@ -3856,6 +3887,11 @@ public enum UserAgentFamily {
 	VIRUS_DETECTOR("virus_detector", Pattern.compile("virus_detector")),
 
 	/**
+	 * Vivaldi
+	 */
+	VIVALDI("Vivaldi", Pattern.compile("Vivaldi")),
+	
+	/**
 	 * Visbot
 	 */
 	VISBOT("Visbot", Pattern.compile("Visbot")),
@@ -3878,7 +3914,7 @@ public enum UserAgentFamily {
 	/**
 	 * VoilaBot
 	 */
-	VOILABOT("VoilaBot", Pattern.compile("VoilaBot")),
+	VOILABOT("OrangeBot", Pattern.compile("OrangeBot")),
 
 	/**
 	 * Vonkeror
@@ -3958,7 +3994,7 @@ public enum UserAgentFamily {
 	/**
 	 * WDG Page Valet
 	 */
-	WDG_PAGE_VALET("WDG Page Valet", Pattern.compile("WDG Page Valet")),
+	WDG_PAGE_VALET("WDG Page Valet", Pattern.compile("Page Valet")),
 
 	/**
 	 * WDG Validator
@@ -4270,6 +4306,11 @@ public enum UserAgentFamily {
 	 */
 	YAHOO("Yahoo!", Pattern.compile("Yahoo!")),
 
+	/**
+	 * Yahoo Link Preview
+	 */
+	YAHOO_LINK_PREVIEW("Yahoo Link Preview", Pattern.compile("Yahoo Link Preview")),
+	
 	/**
 	 * Yahoo! JAPAN
 	 */

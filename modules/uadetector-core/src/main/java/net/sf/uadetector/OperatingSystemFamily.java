@@ -70,6 +70,11 @@ public enum OperatingSystemFamily {
 	 * versions Be. Due to its multimedia capabilities it is also commonly called "Media OS".
 	 */
 	BEOS("BeOS", Pattern.compile("BeOS")),
+	
+	/**
+	 * Chrome OS is an operating system based on the Linux kernel and designed by Google to work with web applications and installed applications. 
+	 */
+	CHROME_OS("Chrome OS", Pattern.compile("Chome OS")),
 
 	/**
 	 * Danger OS is a smartphone operating system. It is used on Sidekick devices, which are sold in Germany by
@@ -122,6 +127,12 @@ public enum OperatingSystemFamily {
 	 * Mac OS is the name of the classic operating system (1984-2001) by Apple for Macintosh computers.
 	 */
 	MAC_OS("Mac OS", Pattern.compile("Mac OS")),
+
+	
+	/**
+	 * Maemo is a linux based software platform for smartphones and Internet tablets.
+	 */
+	MAEMO("Maemo", Pattern.compile("Maemo")),	
 
 	/**
 	 * MeeGo was a Linux kernel-based free mobile operating system project resulting from the fusion of Intel's Moblin

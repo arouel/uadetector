@@ -15,6 +15,8 @@
  ******************************************************************************/
 package net.sf.uadetector.datastore;
 
+import java.net.URL;
+
 import net.sf.uadetector.datareader.DataReader;
 import net.sf.uadetector.datareader.XmlDataReader;
 
@@ -41,8 +43,19 @@ public final class OnlineXmlDataStore extends AbstractRefreshableDataStore {
 	 * @param fallback
 	 *            <em>UAS data</em> as fallback in case the data on the specified resource can not be read correctly
 	 */
+	@Deprecated 
 	public OnlineXmlDataStore(final DataStore fallback) {
 		super(DEFAULT_DATA_READER, DEFAULT_DATA_URL, DEFAULT_VERSION_URL, DEFAULT_CHARSET, fallback);
+	}
+	
+	/**
+	 * Constructs an {@code OnlineXmlDataStore} by reading <em>UAS data</em> by the specified URL (in XML format).
+	 * @param dataurl
+	 * @param versionUrl
+	 * @param fallback
+	 */
+	public OnlineXmlDataStore(final URL dataurl, final URL versionUrl, final DataStore fallback) {
+		super(DEFAULT_DATA_READER, dataurl, versionUrl, DEFAULT_CHARSET, fallback);
 	}
 
 }

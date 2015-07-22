@@ -167,6 +167,11 @@ public enum UserAgentFamily {
 	 * aippie
 	 */
 	AIPPIE("aippie", Pattern.compile("aippie")),
+	
+	/**
+	 * AirMail
+	 */
+	AIRMAIL("AirMail", Pattern.compile("AirMail")),
 
 	/**
 	 * Akregator
@@ -693,6 +698,12 @@ public enum UserAgentFamily {
 	 */
 	CLIGOOROBOT("CligooRobot", Pattern.compile("CligooRobot")),
 
+	
+	/**
+	 * Coast
+	 */
+	COAST("Coast", Pattern.compile("Coast")),
+	
 	/**
 	 * coccoc
 	 */
@@ -1380,6 +1391,11 @@ public enum UserAgentFamily {
 	GLOBALMOJO("GlobalMojo", Pattern.compile("GlobalMojo")),
 
 	/**
+	 * Gmail image proxy
+	 */
+	GMAIL_IMAGE_PROXY("Gmail image proxy", Pattern.compile("Gmail image proxy")),
+	
+	/**
 	 * GnomeVFS
 	 */
 	GNOMEVFS("GnomeVFS", Pattern.compile("GnomeVFS")),
@@ -1983,6 +1999,11 @@ public enum UserAgentFamily {
 	 * LFTP
 	 */
 	LFTP("LFTP", Pattern.compile("LFTP")),
+	
+	/**
+	 * LG Web Browser
+	 */
+	LG_WEB_BROWSER("LG Web Browser", Pattern.compile("LG Web Browser")),
 
 	/**
 	 * LibSoup
@@ -2184,6 +2205,16 @@ public enum UserAgentFamily {
 	 */
 	MICROB("MicroB", Pattern.compile("MicroB")),
 
+	/**
+	 * Microsoft Edge
+	 */
+	MICROSOFT_EDGE("Microsoft Edge", Pattern.compile("Microsoft Edge")),
+	
+	/**
+	 * Microsoft Edge
+	 */
+	MICROSOFT_EDGE_MOBILE("Microsoft Edge mobile", Pattern.compile("Microsoft Edge mobile")),
+	
 	/**
 	 * Microsoft Office Existence Discovery
 	 */
@@ -3856,6 +3887,11 @@ public enum UserAgentFamily {
 	VIRUS_DETECTOR("virus_detector", Pattern.compile("virus_detector")),
 
 	/**
+	 * Vivaldi
+	 */
+	VIVALDI("Vivaldi", Pattern.compile("Vivaldi")),
+	
+	/**
 	 * Visbot
 	 */
 	VISBOT("Visbot", Pattern.compile("Visbot")),
@@ -4270,6 +4306,11 @@ public enum UserAgentFamily {
 	 */
 	YAHOO("Yahoo!", Pattern.compile("Yahoo!")),
 
+	/**
+	 * Yahoo Link Preview
+	 */
+	YAHOO_LINK_PREVIEW("Yahoo Link Preview", Pattern.compile("Yahoo Link Preview")),
+	
 	/**
 	 * Yahoo! JAPAN
 	 */

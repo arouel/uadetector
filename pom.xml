@@ -9,7 +9,7 @@
 
 	<groupId>net.sf.uadetector</groupId>
 	<artifactId>uadetector-parent</artifactId>
-	<version>2014.11-SNAPSHOT</version>
+	<version>2014.11-SNAPSHOT.1</version>
 	<packaging>pom</packaging>
 
 	<name>UADetector</name>
@@ -78,7 +78,7 @@
 		<build-helper-maven-plugin.version>1.9.1</build-helper-maven-plugin.version>
 		<clirr-maven-plugin.version>2.6.1</clirr-maven-plugin.version>
 		<findbugs-maven-plugin.version>2.5.5</findbugs-maven-plugin.version>
-		<jacoco.version>0.6.2.201302030002</jacoco.version>
+		<jacoco.version>0.7.5.201505241946</jacoco.version>
 		<maven-antrun-plugin.version>1.7</maven-antrun-plugin.version>
 		<maven-assembly-plugin.version>2.4.1</maven-assembly-plugin.version>
 		<maven-bundle-plugin.version>2.5.3</maven-bundle-plugin.version>
@@ -368,7 +368,7 @@
 										<ignore />
 									</action>
 								</pluginExecution>
-								<pluginExecution>
+								<!--pluginExecution>
 									<pluginExecutionFilter>
 										<groupId>org.jacoco</groupId>
 										<artifactId>jacoco-maven-plugin</artifactId>
@@ -382,7 +382,7 @@
 									<action>
 										<ignore />
 									</action>
-								</pluginExecution>
+								</pluginExecution-->
 							</pluginExecutions>
 						</lifecycleMappingMetadata>
 					</configuration>

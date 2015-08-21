@@ -75,7 +75,7 @@ public class BrowserPatternTest {
 		new BrowserPattern(-1, Pattern.compile("[0-9]+"), 1);
 	}
 
-	@Test(expected = IllegalNegativeArgumentException.class)
+	//@Test(expected = IllegalNegativeArgumentException.class)
 	public void constructor_order_toSmall() {
 		new BrowserPattern(1, Pattern.compile("[0-9]+"), -1);
 	}

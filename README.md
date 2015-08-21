@@ -9,7 +9,7 @@ git clone https://github.com/50onRed/uadetector.git
 cd uadetector/examples/helloworld/
 mvn clean package jetty:run
 ```
-Then connect with a browser to http://localhost:8080/ or mock a UA string with curl:
+Then connect with a browser to [http://localhost:8080](http://localhost:8080) or mock a UA string with curl:
 ```
 curl -A "Mozilla/5.0 (Windows NT 10.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.135 Safari/537.36 Edge/12.10240" http://localhost:8080/
 ```

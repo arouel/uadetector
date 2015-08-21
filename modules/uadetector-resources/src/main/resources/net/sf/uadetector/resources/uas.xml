@@ -23631,7 +23631,7 @@
       <browser_reg>
         <order>100083</order>
         <browser_id>100035</browser_id>
-        <regstring>/Mozilla.*Windows NT 10\..*Chrome.*Safari.*Edge\/([0-9\.]+)/si</regstring>
+        <regstring>/Mozilla.*Windows NT 10\..*Edge\/([0-9\.]+)/si</regstring>
       </browser_reg>
 		</browsers_reg>
 		<browsers_os>

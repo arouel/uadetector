@@ -11,6 +11,20 @@ mvn clean package jetty:run
 ```
 Then connect with a browser to http://localhost:8080/
 
+The UA string datastore is in `/uadetector-resources/src/main/resources/net/sf/uadetector/resources/uas.xml`.  It's structure is:
+```
+uasdata
+  data
+    robots
+    operating_systems
+    browsers
+    browser_types
+    browsers_reg
+    browsers_os
+    operating_systems_reg
+    devices
+    devices_reg
+```
 
 What is UADetector?
 -----

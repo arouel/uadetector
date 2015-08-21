@@ -64,6 +64,18 @@
 			<id>shell.sourceforge.net</id>
 			<url>scp://shell.sourceforge.net/home/project-web/uadetector/htdocs</url>
 		</site>
+    <repository>
+      <id>${release-repo-id}</id>
+      <name>${release-repo-name}</name>
+      <url>${release-repo-url}</url>
+      <uniqueVersion>false</uniqueVersion>
+    </repository>
+    <snapshotRepository>
+      <id>${snapshot-repo-id}</id>
+      <name>${snapshot-repo-name}</name>
+      <url>${snapshot-repo-url}</url>
+      <uniqueVersion>false</uniqueVersion>
+    </snapshotRepository>
 	</distributionManagement>
 
 	<issueManagement>
@@ -73,6 +85,13 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<java.version>1.6</java.version>
+
+    <release-repo-id>local-disk-release-repo</release-repo-id>
+    <release-repo-name>Local Disk Release Repository</release-repo-name>
+    <release-repo-url>file:///var/www/maven2</release-repo-url>
+    <snapshot-repo-id>local-disk-snapshot-repo</snapshot-repo-id>
+    <snapshot-repo-name>Local Disk Snapshot Repository</snapshot-repo-name>
+    <snapshot-repo-url>file:///var/www/maven2</snapshot-repo-url>
 
 		<!-- Maven Plugins -->
 		<build-helper-maven-plugin.version>1.9.1</build-helper-maven-plugin.version>

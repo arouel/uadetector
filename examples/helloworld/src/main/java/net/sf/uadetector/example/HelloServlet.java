@@ -23,6 +23,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.GsonBuilder;
+
 import net.sf.uadetector.ReadableUserAgent;
 import net.sf.uadetector.UserAgentStringParser;
 import net.sf.uadetector.service.UADetectorServiceFactory;
@@ -57,6 +59,10 @@ public class HelloServlet extends HttpServlet {
 		out.append("</em> on <em>");
 		out.append(agent.getOperatingSystem().getName());
 		out.append("</em>!");
+    
+    out.println("<br/><pre>");
+    out.append(new GsonBuilder().setPrettyPrinting().create().toJson(agent));
+    out.println("</pre>");
 	}
 
 }

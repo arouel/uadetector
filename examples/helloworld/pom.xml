@@ -14,9 +14,10 @@
 
 		<!-- dependencies versions -->
 		<guava.version>14.0.1</guava.version>
+		<gson.version>2.3.1</gson.version>
 		<logback.version>1.0.13</logback.version>
 		<slf4j.version>1.7.5</slf4j.version>
-		<uadetector-resources.version>2013.06</uadetector-resources.version>
+		<uadetector-resources.version>2014.11-SNAPSHOT.1</uadetector-resources.version>
 
 		<!-- plugins versions -->
 		<exec-maven-plugin.version>1.2.1</exec-maven-plugin.version>
@@ -36,6 +37,11 @@
 			<artifactId>guava</artifactId>
 			<version>${guava.version}</version>
 		</dependency>
+    <dependency>
+      <groupId>com.google.code.gson</groupId>
+      <artifactId>gson</artifactId>
+      <version>${gson.version}</version>
+    </dependency>
 		<dependency>
 			<groupId>ch.qos.logback</groupId>
 			<artifactId>logback-classic</artifactId>

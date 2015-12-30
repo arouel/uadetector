@@ -11,7 +11,7 @@
 
 	<properties>
 		<bundle.symbolicName>net.sf.uadetector.resources</bundle.symbolicName>
-		<bundle.namespace>net.sf.uadetector.resources</bundle.namespace>
+		<bundle.namespace>net.sf.uadetector.service</bundle.namespace>
 	</properties>
 
 	<artifactId>uadetector-resources</artifactId>

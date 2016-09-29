@@ -27,7 +27,7 @@ import javax.annotation.Nullable;
 
 import net.sf.qualitycheck.Check;
 import net.sf.qualitycheck.exception.IllegalStateOfArgumentException;
-import net.sf.uadetector.internal.util.AlphanumComparator;
+import net.sf.uadetector.internal.util.NaturalOrderComparator;
 
 /**
  * The {@code VersionNumber} class represents the version number of an operating system or User-Agent.<br>
@@ -313,7 +313,7 @@ public final class VersionNumber implements ReadableVersionNumber, Serializable 
 		} else {
 			Check.notNull(other.getGroups(), "other.getGroups()");
 			final int length = groups.size() < other.getGroups().size() ? groups.size() : other.getGroups().size();
-			final AlphanumComparator comparator = new AlphanumComparator();
+			final NaturalOrderComparator comparator = new NaturalOrderComparator();
 			result = comparator.compare(toVersionString(groups.subList(0, length)), toVersionString(other.getGroups().subList(0, length)));
 			if (result == 0) {
 				result = groups.size() > other.getGroups().size() ? 1 : groups.size() < other.getGroups().size() ? -1 : 0;

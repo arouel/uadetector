@@ -4516,7 +4516,7 @@ public enum UserAgentFamily {
 	}
 
 	/**
-	 * Gets the regular expression which a family name must be match with.
+	 * Gets the regular expression which a family name must be matched with.
 	 * 
 	 * @return regular expression
 	 */

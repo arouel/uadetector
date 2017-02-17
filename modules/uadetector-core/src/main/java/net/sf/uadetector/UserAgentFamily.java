@@ -234,6 +234,11 @@ public enum UserAgentFamily {
 	ANDROID_BROWSER("Android Browser", Pattern.compile("(Android Browser|Android Webkit)", Pattern.CASE_INSENSITIVE)),
 
 	/**
+	 * Android Browser
+	 */
+	ANDROID_BROWSER("Android browser", Pattern.compile("Android browser")),
+
+	/**
 	 * Anemone
 	 */
 	ANEMONE("Anemone", Pattern.compile("Anemone")),

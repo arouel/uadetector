@@ -44,6 +44,11 @@ public class UserAgentFamilyTest {
 	}
 
 	@Test
+	public void evaluate_knownString_ANDROID_BROWSER() {
+		assertThat(UserAgentFamily.evaluate("Android browser")).isEqualTo(UserAgentFamily.ANDROID_BROWSER);
+	}
+
+	@Test
 	public void evaluate_MAILRU() {
 		assertThat(UserAgentFamily.evaluate("Mail.Ru/1.0")).isEqualTo(UserAgentFamily.MAIL_RU);
 		assertThat(UserAgentFamily.evaluate("Mail.RU_Bot/2.0")).isEqualTo(UserAgentFamily.MAIL_RU);

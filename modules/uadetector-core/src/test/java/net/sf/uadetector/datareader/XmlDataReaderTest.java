@@ -27,6 +27,7 @@ import net.sf.qualitycheck.exception.IllegalNullArgumentException;
 import net.sf.uadetector.datareader.XmlDataReader.XmlParser;
 import net.sf.uadetector.datastore.DataStore;
 import net.sf.uadetector.datastore.TestXmlDataStore;
+import net.sf.uadetector.filter.Filter;
 import net.sf.uadetector.internal.data.Data;
 
 import static org.fest.assertions.Assertions.assertThat;
@@ -137,12 +138,12 @@ public class XmlDataReaderTest {
 			public int read() throws IOException {
 				return 0;
 			}
-		}, null);
+		}, null, Filter.ALL);
 	}
 
 	@Test(expected = IllegalNullArgumentException.class)
 	public void readXml_url_null() throws IOException {
-		XmlDataReader.readXml(null, CHARSET);
+		XmlDataReader.readXml(null, CHARSET, Filter.ALL);
 	}
 
 }

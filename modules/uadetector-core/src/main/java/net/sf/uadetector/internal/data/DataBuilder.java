@@ -32,6 +32,7 @@ import javax.annotation.concurrent.NotThreadSafe;
 
 import net.sf.qualitycheck.Check;
 import net.sf.qualitycheck.exception.IllegalStateOfArgumentException;
+import net.sf.uadetector.filter.Filter;
 import net.sf.uadetector.internal.data.domain.Browser;
 import net.sf.uadetector.internal.data.domain.BrowserOperatingSystemMapping;
 import net.sf.uadetector.internal.data.domain.BrowserPattern;
@@ -119,11 +120,14 @@ public class DataBuilder {
 		}
 	}
 
-	private static Set<Browser> buildBrowsers(final Map<Integer, Browser.Builder> browserBuilders) {
+	private static Set<Browser> buildBrowsers(final Filter filter, final Map<Integer, Browser.Builder> browserBuilders) {
 		final Set<Browser> browsers = new HashSet<Browser>();
 		for (final Map.Entry<Integer, Browser.Builder> entry : browserBuilders.entrySet()) {
 			try {
-				browsers.add(entry.getValue().build());
+				Browser browser = entry.getValue().build();
+				if (acceptBrowser(filter, browser)) {
+					browsers.add(browser);
+				}
 			} catch (final Exception e) {
 				LOG.warn("Can not build browser: " + e.getLocalizedMessage());
 			}
@@ -238,6 +242,9 @@ public class DataBuilder {
 	private String version;
 
 	@Nonnull
+	private Filter filter = Filter.ALL;
+
+	@Nonnull
 	private final Set<BrowserOperatingSystemMapping> browserToOperatingSystemMap = new HashSet<BrowserOperatingSystemMapping>();
 
 	private static final OrderedPatternComparator<BrowserPattern> BROWSER_PATTERN_COMPARATOR = new OrderedPatternComparator<BrowserPattern>();
@@ -248,9 +255,23 @@ public class DataBuilder {
 
 	public DataBuilder appendBrowser(@Nonnull final Browser browser) {
 		Check.notNull(browser, "browser");
-
-		browsers.add(browser);
+		if (acceptBrowser(filter, browser)) {
+			browsers.add(browser);
+		}
 		return this;
+	}
+
+	private static boolean acceptBrowser(Filter filter, Browser browser) {
+		boolean accept;
+		Filter.Color color = filter.getColorBrowsers();
+		if (color == Filter.Color.BLACK) {
+			accept = !filter.getBrowsers().contains(browser.getFamilyName());
+		} else if (color == Filter.Color.WHITE) {
+			accept = filter.getBrowsers().contains(browser.getFamilyName());
+		} else {
+			throw new NullPointerException("Filter color is null value");
+		}
+		return accept;
 	}
 
 	/**
@@ -447,7 +468,7 @@ public class DataBuilder {
 		final Set<OperatingSystem> osSet = convertOperatingSystems(systems);
 		osSet.addAll(operatingSystems);
 
-		final Set<Browser> browserSet = buildBrowsers(browserBuilders);
+		final Set<Browser> browserSet = buildBrowsers(filter, browserBuilders);
 		browserSet.addAll(browsers);
 
 		final Set<Device> deviceSet = buildDevices(deviceBuilders);
@@ -468,5 +489,14 @@ public class DataBuilder {
 		this.version = version;
 		return this;
 	}
+
+	@Nonnull
+	public DataBuilder setFilter(@Nonnull final Filter filter) {
+		Check.notNull(filter, "filter");
+
+		this.filter = filter;
+		return this;
+	}
+
 
 }

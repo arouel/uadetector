@@ -21,6 +21,9 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
+
+import java.util.concurrent.TimeUnit;
+
 import java.nio.charset.Charset;
 
 import org.junit.Rule;
@@ -78,7 +81,7 @@ public class CachingXmlDataStoreTest_loadingWrongContent {
 
 		// try to update the content
 		store.refresh();
-		Thread.sleep(1000L);
+		store.getUpdateOperation().wait(10, TimeUnit.SECONDS);
 
 		// test that no fallback data will be written to cache file
 		assertThat(store.getData().getVersion()).isEqualTo(TestXmlDataStore.VERSION_OLDER);
@@ -108,7 +111,7 @@ public class CachingXmlDataStoreTest_loadingWrongContent {
 
 		// try to update the content
 		store.refresh();
-		Thread.sleep(1000L);
+		store.getUpdateOperation().wait(10, TimeUnit.SECONDS);
 
 		// test that no corrupt data will be saved into cache file
 		assertThat(store.getData().getVersion()).isEqualTo(TestXmlDataStore.VERSION_NEWER);
@@ -134,7 +137,7 @@ public class CachingXmlDataStoreTest_loadingWrongContent {
 
 		// try to update the content
 		store.refresh();
-		Thread.sleep(1000L);
+		store.getUpdateOperation().wait(10, TimeUnit.SECONDS);
 
 		// test that no corrupt data will be saved into cache file
 		assertThat(store.getData().getVersion()).isEqualTo(TestXmlDataStore.VERSION_NEWER);
@@ -162,7 +165,7 @@ public class CachingXmlDataStoreTest_loadingWrongContent {
 
 		// try to update the content
 		store.refresh();
-		Thread.sleep(1000L);
+		store.getUpdateOperation().wait(10, TimeUnit.SECONDS);
 
 		// test that no corrupt data will be saved into cache file
 		assertThat(store.getData().getVersion()).isEqualTo(TestXmlDataStore.VERSION_NEWER);

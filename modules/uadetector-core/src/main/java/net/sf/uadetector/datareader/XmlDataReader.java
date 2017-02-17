@@ -28,6 +28,7 @@ import javax.xml.parsers.SAXParserFactory;
 
 import net.sf.qualitycheck.Check;
 import net.sf.uadetector.exception.CanNotOpenStreamException;
+import net.sf.uadetector.filter.Filter;
 import net.sf.uadetector.internal.data.Data;
 import net.sf.uadetector.internal.data.DataBuilder;
 import net.sf.uadetector.internal.data.XmlDataHandler;
@@ -74,6 +75,8 @@ public final class XmlDataReader implements DataReader {
 
 	}
 
+	private Filter filter = Filter.ALL;
+
 	/**
 	 * Default character set to read UAS data
 	 */
@@ -95,17 +98,21 @@ public final class XmlDataReader implements DataReader {
 	 *            an input stream for reading <em>UAS data</em>
 	 * @param charset
 	 *            the character set in which the data should be read
+	 * @param  filter
+	 *            optionally select a subset of items for the parser
 	 * @return read in <em>UAS data</em> as {@code Data} instance
 	 * @throws net.sf.qualitycheck.exception.IllegalNullArgumentException
 	 *             if any of the given arguments is {@code null}
 	 * @throws net.sf.uadetector.exception.CanNotOpenStreamException
 	 *             if no stream to the given {@code URL} can be established
 	 */
-	protected static Data readXml(@Nonnull final InputStream inputStream, @Nonnull final Charset charset) {
+	protected static Data readXml(@Nonnull final InputStream inputStream,
+			@Nonnull final Charset charset, @Nonnull final Filter filter) {
 		Check.notNull(inputStream, "inputStream");
 		Check.notNull(charset, "charset");
 
 		final DataBuilder builder = new DataBuilder();
+		builder.setFilter(filter);
 		boolean hasErrors = false;
 		try {
 			XmlParser.parse(inputStream, builder);
@@ -145,7 +152,7 @@ public final class XmlDataReader implements DataReader {
 	public Data read(@Nonnull final String data) {
 		Check.notNull(data, "data");
 
-		return readXml(new ByteArrayInputStream(data.getBytes(DEFAULT_CHARSET)), DEFAULT_CHARSET);
+		return readXml(new ByteArrayInputStream(data.getBytes(DEFAULT_CHARSET)), DEFAULT_CHARSET, filter);
 	}
 
 	/**
@@ -167,12 +174,17 @@ public final class XmlDataReader implements DataReader {
 
 		Data data = Data.EMPTY;
 		try {
-			data = readXml(UrlUtil.open(url), charset);
+			data = readXml(UrlUtil.open(url), charset, filter);
 		} catch (final CanNotOpenStreamException e) {
 			LOG.warn(e.getLocalizedMessage());
 		}
 
 		return data;
+	}
+
+	public XmlDataReader setFilter(@Nonnull final Filter filter) {
+		this.filter = filter;
+		return this;
 	}
 
 }

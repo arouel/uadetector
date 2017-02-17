@@ -24,6 +24,7 @@ import net.sf.uadetector.datastore.AbstractDataStore;
 import net.sf.uadetector.datastore.CachingXmlDataStore;
 import net.sf.uadetector.datastore.DataStore;
 import net.sf.uadetector.datastore.OnlineXmlDataStore;
+import net.sf.uadetector.filter.Filter;
 import net.sf.uadetector.parser.UpdatingUserAgentStringParserImpl;
 import net.sf.uadetector.parser.UserAgentStringParserImpl;
 
@@ -96,6 +97,10 @@ public final class UADetectorServiceFactory {
 		 */
 		public ResourceModuleXmlDataStore() {
 			super(DEFAULT_DATA_READER, UAS_DATA, UAS_VERSION, DEFAULT_CHARSET);
+		}
+
+		public ResourceModuleXmlDataStore(Filter filter) {
+			super(new XmlDataReader().setFilter(filter), UAS_DATA, UAS_VERSION, DEFAULT_CHARSET);
 		}
 
 	}

@@ -23,8 +23,11 @@ import java.io.Reader;
 import java.net.URL;
 
 import static org.fest.assertions.Assertions.assertThat;
+
+import org.junit.Ignore;
 import org.junit.Test;
 
+@Ignore
 public class ActualityOfDtdTest {
 
 	@Test

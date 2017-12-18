@@ -2,10 +2,8 @@
 <!DOCTYPE uasdata SYSTEM "http://data.udger.com/uasxmldata_old.dtd">
 <uasdata>
 	<description>
-		<label>Data (format xml) for UASparser - http://user-agent-string.info/download/UASparser</label>
-		<version>20141024-01</version>
-		<checksum type="MD5">http://user-agent-string.info/rpc/get_data.php?format=xml&amp;md5=y</checksum>
-		<checksum type="SHA1">http://user-agent-string.info/rpc/get_data.php?format=xml&amp;sha1=y</checksum>
+		<label>date initially from http://user-agent-string.info/download/UASparser, now edited manually</label>
+		<version>20171215</version>
 	</description>
 	<data>
 		<robots>
@@ -15761,6 +15759,16 @@
 				<icon>iphone.png</icon>
 				<os_info_url>/list-of-ua/os-detail?os=iOS 3</os_info_url>
 			</os>
+			<os>
+				<id>147</id>
+				<family>Windows</family>
+				<name>Windows 10</name>
+				<url><![CDATA[http://en.wikipedia.org/wiki/Windows_10]]></url>
+				<company><![CDATA[Microsoft Corporation.]]></company>
+				<url_company><![CDATA[http://www.microsoft.com/]]></url_company>
+				<icon/>
+				<os_info_url>/list-of-ua/os-detail?os=Windows 8</os_info_url>
+			</os>
 		</operating_systems>
 		<browsers>
 			<browser>
@@ -25002,6 +25010,11 @@
 				<order>219</order>
 				<os_id>44</os_id>
 				<regstring>/Darwin/si</regstring>
+			</operating_system_reg>
+			<operating_system_reg>
+				<order>143</order>
+				<os_id>147</os_id>
+				<regstring>/Windows NT 10/si</regstring>
 			</operating_system_reg>
 		</operating_systems_reg>
 		<devices>

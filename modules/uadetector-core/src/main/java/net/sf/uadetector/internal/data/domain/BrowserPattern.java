@@ -154,7 +154,7 @@ public final class BrowserPattern implements Identifiable, OrderedPattern<Browse
 		 */
 		@Nonnull
 		public Builder setPosition(@Nonnegative final int position) {
-			Check.notNegative(position, "position");
+			//Check.notNegative(position, "position");
 
 			this.position = position;
 			return this;
@@ -227,7 +227,7 @@ public final class BrowserPattern implements Identifiable, OrderedPattern<Browse
 	public BrowserPattern(@Nonnegative final int id, @Nonnull final Pattern pattern, @Nonnegative final int position) {
 		Check.notNegative(id, "id");
 		Check.notNull(pattern, "pattern");
-		Check.notNegative(position, "position");
+		//Check.notNegative(position, "position");
 
 		this.id = id;
 		this.pattern = pattern;

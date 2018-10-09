@@ -9,7 +9,7 @@
 
 	<groupId>net.sf.uadetector</groupId>
 	<artifactId>uadetector-parent</artifactId>
-	<version>2014.11-SNAPSHOT</version>
+	<version>2014.11-SNAPSHOT.1</version>
 	<packaging>pom</packaging>
 
 	<name>UADetector</name>
@@ -64,6 +64,18 @@
 			<id>shell.sourceforge.net</id>
 			<url>scp://shell.sourceforge.net/home/project-web/uadetector/htdocs</url>
 		</site>
+    <repository>
+      <id>${release-repo-id}</id>
+      <name>${release-repo-name}</name>
+      <url>${release-repo-url}</url>
+      <uniqueVersion>false</uniqueVersion>
+    </repository>
+    <snapshotRepository>
+      <id>${snapshot-repo-id}</id>
+      <name>${snapshot-repo-name}</name>
+      <url>${snapshot-repo-url}</url>
+      <uniqueVersion>false</uniqueVersion>
+    </snapshotRepository>
 	</distributionManagement>
 
 	<issueManagement>
@@ -74,11 +86,18 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<java.version>1.6</java.version>
 
+    <release-repo-id>local-disk-release-repo</release-repo-id>
+    <release-repo-name>Local Disk Release Repository</release-repo-name>
+    <release-repo-url>file:///var/www/maven2</release-repo-url>
+    <snapshot-repo-id>local-disk-snapshot-repo</snapshot-repo-id>
+    <snapshot-repo-name>Local Disk Snapshot Repository</snapshot-repo-name>
+    <snapshot-repo-url>file:///var/www/maven2</snapshot-repo-url>
+
 		<!-- Maven Plugins -->
 		<build-helper-maven-plugin.version>1.9.1</build-helper-maven-plugin.version>
 		<clirr-maven-plugin.version>2.6.1</clirr-maven-plugin.version>
 		<findbugs-maven-plugin.version>2.5.5</findbugs-maven-plugin.version>
-		<jacoco.version>0.6.2.201302030002</jacoco.version>
+		<jacoco.version>0.7.5.201505241946</jacoco.version>
 		<maven-antrun-plugin.version>1.7</maven-antrun-plugin.version>
 		<maven-assembly-plugin.version>2.4.1</maven-assembly-plugin.version>
 		<maven-bundle-plugin.version>2.5.3</maven-bundle-plugin.version>
@@ -368,7 +387,7 @@
 										<ignore />
 									</action>
 								</pluginExecution>
-								<pluginExecution>
+								<!--pluginExecution>
 									<pluginExecutionFilter>
 										<groupId>org.jacoco</groupId>
 										<artifactId>jacoco-maven-plugin</artifactId>
@@ -382,7 +401,7 @@
 									<action>
 										<ignore />
 									</action>
-								</pluginExecution>
+								</pluginExecution-->
 							</pluginExecutions>
 						</lifecycleMappingMetadata>
 					</configuration>

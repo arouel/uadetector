@@ -30,6 +30,8 @@ import org.eclipse.jetty.server.Request;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.handler.AbstractHandler;
 
+import com.google.gson.GsonBuilder;
+
 public class HelloWorld extends AbstractHandler {
 
 	public static void main(final String[] args) throws Exception {
@@ -65,6 +67,10 @@ public class HelloWorld extends AbstractHandler {
 		out.append("</em> on <em>");
 		out.append(agent.getOperatingSystem().getName());
 		out.append("</em>!");
+    
+    out.println("<br/><pre>");
+    out.append(new GsonBuilder().setPrettyPrinting().create().toJson(agent));
+    out.println("</pre>");
 	}
 
 }

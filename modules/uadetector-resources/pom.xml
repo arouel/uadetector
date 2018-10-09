@@ -6,7 +6,7 @@
 		<relativePath>../../</relativePath>
 		<groupId>net.sf.uadetector</groupId>
 		<artifactId>uadetector-parent</artifactId>
-		<version>2014.11-SNAPSHOT</version>
+		<version>2014.11-SNAPSHOT.1</version>
 	</parent>
 
 	<properties>
@@ -27,7 +27,7 @@
 		<dependency>
 			<groupId>net.sf.uadetector</groupId>
 			<artifactId>uadetector-core</artifactId>
-			<version>0.9.23-SNAPSHOT</version>
+			<version>0.9.23-SNAPSHOT.1</version>
 		</dependency>
 
 		<!-- Logging -->
@@ -98,7 +98,7 @@
 					</instructions>
 				</configuration>
 			</plugin>
-			<plugin>
+			<!--plugin>
 				<groupId>org.jacoco</groupId>
 				<artifactId>jacoco-maven-plugin</artifactId>
 				<executions>
@@ -119,7 +119,7 @@
 						</configuration>
 					</execution>
 				</executions>
-			</plugin>
+			</plugin-->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-site-plugin</artifactId>

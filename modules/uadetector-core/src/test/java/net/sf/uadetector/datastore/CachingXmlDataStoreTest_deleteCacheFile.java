@@ -77,7 +77,7 @@ public class CachingXmlDataStoreTest_deleteCacheFile {
 		final TestXmlDataStore fallback = new TestXmlDataStore();
 
 		// create caching data store without a cache file
-		final CachingXmlDataStore store = CachingXmlDataStore.createCachingXmlDataStore(cache, DATA_CONNECTION_ERROR_URL,
+		final CachingXmlDataStore store = CachingXmlDataStore.createCachingXmlDataStore(/*cache*/tmpFile, DATA_CONNECTION_ERROR_URL,
 				VERSION_CONNECTION_ERROR_URL, CHARSET, fallback);
 
 		assertThat(store.getData().getVersion()).isEqualTo(TestXmlDataStore.VERSION_OLDER);

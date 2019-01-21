@@ -27,13 +27,20 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.charset.Charset;
 
+import net.sf.uadetector.internal.util.FileUtil;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 
 import com.google.common.io.ByteStreams;
 import com.google.common.io.Files;
+import org.junit.runner.RunWith;
+import org.powermock.api.easymock.PowerMock;
+import org.powermock.core.classloader.annotations.PrepareForTest;
+import org.powermock.modules.junit4.PowerMockRunner;
 
+@PrepareForTest({FileUtil.class})
+@RunWith(PowerMockRunner.class)
 public class CachingXmlDataStoreTest_deleteCacheFile {
 
 	/**
@@ -61,7 +68,8 @@ public class CachingXmlDataStoreTest_deleteCacheFile {
 		final File cache = createMock(File.class);
 		expect(cache.canRead()).andReturn(true).anyTimes();
 		expect(cache.isFile()).andReturn(true).anyTimes();
-		// expect(cache.isInvalid()).andReturn(false).anyTimes(); // maybe necessary when using JDK7
+		PowerMock.mockStatic(FileUtil.class);
+		expect(FileUtil.isEmpty(cache,CHARSET)).andReturn(false); // to avoid File.isInvalid() NPE on mocked file error > Java 1.6
 		expect(cache.delete()).andReturn(false).anyTimes();
 		expect(cache.exists()).andReturn(true).anyTimes();
 		final File tmpFile = folder.newFile();

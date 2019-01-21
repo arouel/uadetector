@@ -1392,7 +1392,7 @@ public enum UserAgentFamily {
 	/**
 	 * Gmail image proxy
 	 */
-	GMAIL_IMAGE_PROXY("Gmail image proxy", Pattern.compile("Gmail image proxy")),
+	GMAIL_IMAGE_PROXY("Gmail image proxy", Pattern.compile("Google image proxy")),
 
 	/**
 	 * GnomeVFS

@@ -72,13 +72,13 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<java.version>1.6</java.version>
+		<java.version>1.8</java.version>
 
 		<!-- Maven Plugins -->
 		<build-helper-maven-plugin.version>1.9.1</build-helper-maven-plugin.version>
 		<clirr-maven-plugin.version>2.6.1</clirr-maven-plugin.version>
 		<findbugs-maven-plugin.version>2.5.5</findbugs-maven-plugin.version>
-		<jacoco.version>0.6.2.201302030002</jacoco.version>
+		<jacoco.version>0.8.2</jacoco.version>
 		<maven-antrun-plugin.version>1.7</maven-antrun-plugin.version>
 		<maven-assembly-plugin.version>2.4.1</maven-assembly-plugin.version>
 		<maven-bundle-plugin.version>2.5.3</maven-bundle-plugin.version>
@@ -98,17 +98,17 @@
 		<wagon-ssh.version>2.7</wagon-ssh.version>
 
 		<!-- Dependencies -->
-		<commons-logging.version>1.1.1</commons-logging.version>
-		<easymock.version>3.1</easymock.version>
+		<commons-logging.version>1.2</commons-logging.version>
+		<easymock.version>3.6</easymock.version>
 		<fest-assert.version>1.4</fest-assert.version>
 		<findbugs.version>2.0.3</findbugs.version>
 		<guava.version>17.0</guava.version>
 		<jsr250-api.version>1.0</jsr250-api.version>
-		<junit.version>4.11</junit.version>
+		<junit.version>4.12</junit.version>
 		<logback.version>1.1.2</logback.version>
-		<powermock.version>1.5.1</powermock.version>
+		<powermock.version>1.7.4</powermock.version>
 		<quality-check.version>1.3</quality-check.version>
-		<slf4j.version>1.7.7</slf4j.version>
+		<slf4j.version>1.7.25</slf4j.version>
 
 		<!-- GitHub Site Plugin -->
 		<github.global.server>github</github.global.server>

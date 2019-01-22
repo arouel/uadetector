@@ -20135,13 +20135,13 @@
 			</browser>
 			<browser>
 				<id>499</id>
-				<type>20</type>
-				<name>Gmail image proxy</name>
+				<type>4</type>
+				<name>Gmail</name>
 				<url><![CDATA[http://gmailblog.blogspot.cz/2013/12/images-now-showing.html]]></url>
 				<company><![CDATA[Google Inc.]]></company>
 				<url_company><![CDATA[http://www.google.com/]]></url_company>
 				<icon>feedfetcher-google.png</icon>
-				<browser_info_url>/list-of-ua/browser-detail?browser=Gmail image proxy</browser_info_url>
+				<browser_info_url>/list-of-ua/browser-detail?browser=Gmail</browser_info_url>
 			</browser>
 			<browser>
 				<id>500</id>

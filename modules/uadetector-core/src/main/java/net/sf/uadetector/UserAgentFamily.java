@@ -41,7 +41,7 @@ public enum UserAgentFamily {
 	/**
 	 * 192.comAgent
 	 */
-	_192_COMAGENT("192.comAgent", Pattern.compile("192.comAgent")),
+	_192_COMAGENT("192.comAgent", Pattern.compile("192\\.comAgent")),
 
 	/**
 	 * 2Bone LinkChecker
@@ -51,7 +51,7 @@ public enum UserAgentFamily {
 	/**
 	 * 50.nu
 	 */
-	_50_NU("50.nu", Pattern.compile("50.nu")),
+	_50_NU("50.nu", Pattern.compile("50\\.nu")),
 
 	/**
 	 * 80legs
@@ -136,7 +136,7 @@ public enum UserAgentFamily {
 	/**
 	 * AddThis.com
 	 */
-	ADDTHIS_COM("AddThis.com", Pattern.compile("AddThis.com")),
+	ADDTHIS_COM("AddThis.com", Pattern.compile("AddThis\\.com")),
 
 	/**
 	 * Adobe AIR runtime
@@ -146,7 +146,7 @@ public enum UserAgentFamily {
 	/**
 	 * adressendeutschland.de
 	 */
-	ADRESSENDEUTSCHLAND_DE("adressendeutschland.de", Pattern.compile("adressendeutschland.de")),
+	ADRESSENDEUTSCHLAND_DE("adressendeutschland.de", Pattern.compile("adressendeutschland\\.de")),
 
 	/**
 	 * AdsBot-Google
@@ -196,7 +196,7 @@ public enum UserAgentFamily {
 	/**
 	 * Amagit.COM
 	 */
-	AMAGIT_COM("Amagit.COM", Pattern.compile("Amagit.COM")),
+	AMAGIT_COM("Amagit.COM", Pattern.compile("Amagit\\.COM")),
 
 	/**
 	 * Amaya
@@ -241,7 +241,7 @@ public enum UserAgentFamily {
 	/**
 	 * Anonymouse.org
 	 */
-	ANONYMOUSE_ORG("Anonymouse.org", Pattern.compile("Anonymouse.org")),
+	ANONYMOUSE_ORG("Anonymouse.org", Pattern.compile("Anonymouse\\.org")),
 
 	/**
 	 * AntBot
@@ -296,12 +296,12 @@ public enum UserAgentFamily {
 	/**
 	 * arachnode.net
 	 */
-	ARACHNODE_NET("arachnode.net", Pattern.compile("arachnode.net")),
+	ARACHNODE_NET("arachnode.net", Pattern.compile("arachnode\\.net")),
 
 	/**
 	 * archive.org_bot
 	 */
-	ARCHIVE_ORG_BOT("archive.org_bot", Pattern.compile("archive.org_bot")),
+	ARCHIVE_ORG_BOT("archive.org_bot", Pattern.compile("archive\\.org_bot")),
 
 	/**
 	 * Arora
@@ -411,7 +411,7 @@ public enum UserAgentFamily {
 	/**
 	 * Bigsearch.ca
 	 */
-	BIGSEARCH_CA("Bigsearch.ca", Pattern.compile("Bigsearch.ca")),
+	BIGSEARCH_CA("Bigsearch.ca", Pattern.compile("Bigsearch\\.ca")),
 
 	/**
 	 * bingbot
@@ -501,12 +501,12 @@ public enum UserAgentFamily {
 	/**
 	 * bnf.fr_bot
 	 */
-	BNF_FR_BOT("bnf.fr_bot", Pattern.compile("bnf.fr_bot")),
+	BNF_FR_BOT("bnf.fr_bot", Pattern.compile("bnf\\.fr_bot")),
 
 	/**
 	 * boitho.com-dc
 	 */
-	BOITHO_COM_DC("boitho.com-dc", Pattern.compile("boitho.com-dc")),
+	BOITHO_COM_DC("boitho.com-dc", Pattern.compile("boitho\\.com-dc")),
 
 	/**
 	 * Bolt
@@ -526,7 +526,7 @@ public enum UserAgentFamily {
 	/**
 	 * bot-pge.chlooe.com
 	 */
-	BOT_PGE_CHLOOE_COM("bot-pge.chlooe.com", Pattern.compile("bot-pge.chlooe.com")),
+	BOT_PGE_CHLOOE_COM("bot-pge.chlooe.com", Pattern.compile("bot-pge\\.chlooe\\.com")),
 
 	/**
 	 * botmobi
@@ -656,7 +656,7 @@ public enum UserAgentFamily {
 	/**
 	 * Chilkat HTTP .NET
 	 */
-	CHILKAT_HTTP_NET("Chilkat HTTP .NET", Pattern.compile("Chilkat HTTP .NET")),
+	CHILKAT_HTTP_NET("Chilkat HTTP .NET", Pattern.compile("Chilkat HTTP \\.NET")),
 
 	/**
 	 * Chrome
@@ -686,7 +686,7 @@ public enum UserAgentFamily {
 	/**
 	 * CJB.NET Proxy
 	 */
-	CJB_NET_PROXY("CJB.NET Proxy", Pattern.compile("CJB.NET Proxy")),
+	CJB_NET_PROXY("CJB.NET Proxy", Pattern.compile("CJB\\.NET Proxy")),
 
 	/**
 	 * Claws Mail GtkHtml2 plugin
@@ -851,7 +851,7 @@ public enum UserAgentFamily {
 	/**
 	 * del.icio.us-thumbnails
 	 */
-	DEL_ICIO_US_THUMBNAILS("del.icio.us-thumbnails", Pattern.compile("del.icio.us-thumbnails")),
+	DEL_ICIO_US_THUMBNAILS("del.icio.us-thumbnails", Pattern.compile("del\\.icio\\.us-thumbnails")),
 
 	/**
 	 * Dell Web Monitor
@@ -992,7 +992,7 @@ public enum UserAgentFamily {
 	/**
 	 * ejupiter.com
 	 */
-	EJUPITER_COM("ejupiter.com", Pattern.compile("ejupiter.com")),
+	EJUPITER_COM("ejupiter.com", Pattern.compile("ejupiter\\.com")),
 
 	/**
 	 * Element Browser
@@ -1067,7 +1067,7 @@ public enum UserAgentFamily {
 	/**
 	 * Evolution/Camel.Stream
 	 */
-	EVOLUTION_CAMEL_STREAM("Evolution/Camel.Stream", Pattern.compile("Evolution/Camel.Stream")),
+	EVOLUTION_CAMEL_STREAM("Evolution/Camel.Stream", Pattern.compile("Evolution/Camel\\.Stream")),
 
 	/**
 	 * EvriNid
@@ -1162,7 +1162,7 @@ public enum UserAgentFamily {
 	/**
 	 * FeedFinder/bloggz.se
 	 */
-	FEEDFINDER_BLOGGZ_SE("FeedFinder/bloggz.se", Pattern.compile("FeedFinder/bloggz.se")),
+	FEEDFINDER_BLOGGZ_SE("FeedFinder/bloggz.se", Pattern.compile("FeedFinder/bloggz\\.se")),
 
 	/**
 	 * FeedParser
@@ -1962,7 +1962,7 @@ public enum UserAgentFamily {
 	/**
 	 * L.webis
 	 */
-	L_WEBIS("L.webis", Pattern.compile("L.webis")),
+	L_WEBIS("L.webis", Pattern.compile("L\\.webis")),
 
 	/**
 	 * LapozzBot
@@ -2057,7 +2057,7 @@ public enum UserAgentFamily {
 	/**
 	 * linkdex.com
 	 */
-	LINKDEX_COM("linkdex.com", Pattern.compile("linkdex.com")),
+	LINKDEX_COM("linkdex.com", Pattern.compile("linkdex\\.com")),
 
 	/**
 	 * LinkExaminer
@@ -2142,7 +2142,7 @@ public enum UserAgentFamily {
 	/**
 	 * Mail.RU
 	 */
-	MAIL_RU("Mail.Ru", Pattern.compile("Mail.RU(_Bot)?(/\\d+(\\.\\d+)*)?", Pattern.CASE_INSENSITIVE)),
+	MAIL_RU("Mail.Ru", Pattern.compile("Mail\\.RU(_Bot)?(/\\d+(\\.\\d+)*)?", Pattern.CASE_INSENSITIVE)),
 
 	/**
 	 * Maple browser
@@ -2292,7 +2292,7 @@ public enum UserAgentFamily {
 	/**
 	 * Motoricerca-Robots.txt-Checker
 	 */
-	MOTORICERCA_ROBOTS_TXT_CHECKER("Motoricerca-Robots.txt-Checker", Pattern.compile("Motoricerca-Robots.txt-Checker")),
+	MOTORICERCA_ROBOTS_TXT_CHECKER("Motoricerca-Robots.txt-Checker", Pattern.compile("Motoricerca-Robots\\.txt-Checker")),
 
 	/**
 	 * Motorola Internet Browser
@@ -2377,7 +2377,7 @@ public enum UserAgentFamily {
 	/**
 	 * Najdi.si
 	 */
-	NAJDI_SI("Najdi.si", Pattern.compile("Najdi.si")),
+	NAJDI_SI("Najdi.si", Pattern.compile("Najdi\\.si")),
 
 	/**
 	 * NaverBot
@@ -2397,7 +2397,7 @@ public enum UserAgentFamily {
 	/**
 	 * NerdByNature.Bot
 	 */
-	NERDBYNATURE_BOT("NerdByNature.Bot", Pattern.compile("NerdByNature.Bot")),
+	NERDBYNATURE_BOT("NerdByNature.Bot", Pattern.compile("NerdByNature\\.Bot")),
 
 	/**
 	 * nestReader
@@ -2507,7 +2507,7 @@ public enum UserAgentFamily {
 	/**
 	 * nextthing.org
 	 */
-	NEXTTHING_ORG("nextthing.org", Pattern.compile("nextthing.org")),
+	NEXTTHING_ORG("nextthing.org", Pattern.compile("nextthing\\.org")),
 
 	/**
 	 * NFReader
@@ -2527,7 +2527,7 @@ public enum UserAgentFamily {
 	/**
 	 * Nigma.ru
 	 */
-	NIGMA_RU("Nigma.ru", Pattern.compile("Nigma.ru")),
+	NIGMA_RU("Nigma.ru", Pattern.compile("Nigma\\.ru")),
 
 	/**
 	 * NimbleCrawler
@@ -2767,7 +2767,7 @@ public enum UserAgentFamily {
 	/**
 	 * Panscient web crawler
 	 */
-	PANSCIENT_WEB_CRAWLER("panscient.com", Pattern.compile("panscient.com")),
+	PANSCIENT_WEB_CRAWLER("panscient.com", Pattern.compile("panscient\\.com")),
 
 	/**
 	 * Paparazzi!
@@ -2842,7 +2842,7 @@ public enum UserAgentFamily {
 	/**
 	 * pingdom.com_bot
 	 */
-	PINGDOM_COM_BOT("pingdom.com_bot", Pattern.compile("pingdom.com_bot")),
+	PINGDOM_COM_BOT("pingdom.com_bot", Pattern.compile("pingdom\\.com_bot")),
 
 	/**
 	 * Pixray-Seeker
@@ -2882,7 +2882,7 @@ public enum UserAgentFamily {
 	/**
 	 * Pogodak.co.yu
 	 */
-	POGODAK_CO_YU("Pogodak.co.yu", Pattern.compile("Pogodak.co.yu")),
+	POGODAK_CO_YU("Pogodak.co.yu", Pattern.compile("Pogodak\\.co\\.yu")),
 
 	/**
 	 * Polaris
@@ -2892,7 +2892,7 @@ public enum UserAgentFamily {
 	/**
 	 * polixea.de
 	 */
-	POLIXEA_DE("polixea.de", Pattern.compile("polixea.de")),
+	POLIXEA_DE("polixea.de", Pattern.compile("polixea\\.de")),
 
 	/**
 	 * Pompos
@@ -3002,7 +3002,7 @@ public enum UserAgentFamily {
 	/**
 	 * Qualidator.com Bot
 	 */
-	QUALIDATOR_COM_BOT("Qualidator.com Bot", Pattern.compile("Qualidator.com Bot")),
+	QUALIDATOR_COM_BOT("Qualidator.com Bot", Pattern.compile("Qualidator\\.com Bot")),
 
 	/**
 	 * Quantcastbot
@@ -3122,7 +3122,7 @@ public enum UserAgentFamily {
 	/**
 	 * RSSMicro.com RSS/Atom Feed Robot
 	 */
-	RSSMICRO_COM("RSSMicro.com RSS/Atom Feed Robot", Pattern.compile("RSSMicro.com RSS/Atom Feed Robot")),
+	RSSMICRO_COM("RSSMicro.com RSS/Atom Feed Robot", Pattern.compile("RSSMicro\\.com RSS/Atom Feed Robot")),
 
 	/**
 	 * RSSOwl
@@ -3223,7 +3223,7 @@ public enum UserAgentFamily {
 	/**
 	 * search.KumKie.com
 	 */
-	SEARCH_KUMKIE_COM("search.KumKie.com", Pattern.compile("search.KumKie.com")),
+	SEARCH_KUMKIE_COM("search.KumKie.com", Pattern.compile("search\\.KumKie\\.com")),
 
 	/**
 	 * Search17Bot
@@ -3393,12 +3393,12 @@ public enum UserAgentFamily {
 	/**
 	 * smart.apnoti.com Robot
 	 */
-	SMART_APNOTI_COM_ROBOT("smart.apnoti.com Robot", Pattern.compile("smart.apnoti.com Robot")),
+	SMART_APNOTI_COM_ROBOT("smart.apnoti.com Robot", Pattern.compile("smart\\.apnoti\\.com Robot")),
 
 	/**
 	 * snap.com
 	 */
-	SNAP_COM("snap.com", Pattern.compile("snap.com")),
+	SNAP_COM("snap.com", Pattern.compile("snap\\.com")),
 
 	/**
 	 * SnapBot
@@ -3673,7 +3673,7 @@ public enum UserAgentFamily {
 	/**
 	 * Thumbnail.CZ robot
 	 */
-	THUMBNAIL_CZ_ROBOT("Thumbnail.CZ robot", Pattern.compile("Thumbnail.CZ robot")),
+	THUMBNAIL_CZ_ROBOT("Thumbnail.CZ robot", Pattern.compile("Thumbnail\\.CZ robot")),
 
 	/**
 	 * ThumbShots-Bot
@@ -3688,7 +3688,7 @@ public enum UserAgentFamily {
 	/**
 	 * Thumbshots.ru
 	 */
-	THUMBSHOTS_RU("Thumbshots.ru", Pattern.compile("Thumbshots.ru")),
+	THUMBSHOTS_RU("Thumbshots.ru", Pattern.compile("Thumbshots\\.ru")),
 
 	/**
 	 * Thunderbird
@@ -3858,7 +3858,7 @@ public enum UserAgentFamily {
 	/**
 	 * Validator.nu
 	 */
-	VALIDATOR_NU("Validator.nu", Pattern.compile("Validator.nu")),
+	VALIDATOR_NU("Validator.nu", Pattern.compile("Validator\\.nu")),
 
 	/**
 	 * VERASYS 2k
@@ -4223,7 +4223,7 @@ public enum UserAgentFamily {
 	/**
 	 * www.fi crawler
 	 */
-	WWW_FI_CRAWLER("www.fi crawler", Pattern.compile("www.fi crawler")),
+	WWW_FI_CRAWLER("www.fi crawler", Pattern.compile("www\\.fi crawler")),
 
 	/**
 	 * WWW::Mechanize

@@ -14,7 +14,7 @@
 
 		<!-- dependencies versions -->
 		<guava.version>14.0.1</guava.version>
-		<logback.version>1.0.13</logback.version>
+		<logback.version>1.2.0</logback.version>
 		<slf4j.version>1.7.5</slf4j.version>
 		<uadetector-resources.version>2013.06</uadetector-resources.version>
 

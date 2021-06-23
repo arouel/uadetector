@@ -20,7 +20,7 @@
 
 		<!-- plugins versions -->
 		<exec-maven-plugin.version>1.2.1</exec-maven-plugin.version>
-		<jetty.version>8.1.7.v20120910</jetty.version>
+		<jetty.version>9.4.41.v20210516</jetty.version>
 		<maven-compiler-plugin.version>3.1</maven-compiler-plugin.version>
 
 	</properties>
